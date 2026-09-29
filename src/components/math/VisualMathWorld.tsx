@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
+import { speech, clip } from '../../utils/speech';
+import { useKidTimers, useGreeting } from '../../utils/useKidTimers';
 import { useApp } from '../../context/AppContext';
 import { Volume2, ArrowLeft, RefreshCw, Plus, Minus } from 'lucide-react';
 
@@ -12,6 +13,8 @@ const FOOD_EMOJIS = ['🍎', '🍓', '🍌', '🥕', '🍪', '⭐'];
 
 export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
   const { addStars, ageBracket } = useApp();
+  const { sayThen, clearAll } = useKidTimers();
+  const greeting = useGreeting(clip.phrase('greet_math'));
   const [operation, setOperation] = useState<'add' | 'subtract'>('add');
 
   const [num1, setNum1] = useState(2);
@@ -19,11 +22,19 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
   const [itemEmoji, setItemEmoji] = useState('🍎');
   const [options, setOptions] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'try-again'>('idle');
+  const [wrongPicks, setWrongPicks] = useState<number[]>([]);
 
   const correctAnswer = operation === 'add' ? num1 + num2 : num1 - num2;
+  const opClip = clip.math(operation === 'add' ? 'plus' : 'minus');
+
+  const questionClips = (n1: number, n2: number) => [
+    clip.math('what_is'), clip.number(n1), opClip, clip.number(n2),
+  ];
 
   const generateProblem = () => {
+    clearAll();
     setFeedback('idle');
+    setWrongPicks([]);
     const randomEmoji = FOOD_EMOJIS[Math.floor(Math.random() * FOOD_EMOJIS.length)];
     setItemEmoji(randomEmoji);
 
@@ -51,8 +62,8 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
     }
 
     setOptions(Array.from(opts).sort(() => 0.5 - Math.random()));
-    const opText = operation === 'add' ? 'plus' : 'minus';
-    speech.speak(`What is ${n1} ${opText} ${n2}?`);
+    const intro = greeting();
+    speech.say([...intro, ...questionClips(n1, n2)]);
   };
 
   useEffect(() => {
@@ -60,279 +71,160 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
   }, [operation, ageBracket]);
 
   const handleSelectAnswer = (selected: number) => {
+    if (feedback === 'correct') return;
     if (selected === correctAnswer) {
       sound.playSuccess();
       setFeedback('correct');
       addStars(1);
-      const opWord = operation === 'add' ? 'plus' : 'minus';
-      speech.speak(`That's right! ${num1} ${opWord} ${num2} equals ${correctAnswer}!`);
-      setTimeout(() => {
-        generateProblem();
-      }, 1500);
+      sayThen(
+        [clip.cheer(), clip.number(num1), opClip, clip.number(num2), clip.math('equals'), clip.number(correctAnswer)],
+        generateProblem,
+        1800,
+      );
     } else {
       sound.playGentleTryAgain();
       setFeedback('try-again');
-      speech.speak(`Let's count the items together!`);
+      setWrongPicks((prev) => [...prev, selected]);
+      speech.say([clip.math('math_try_again')]);
     }
   };
 
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '24px 16px' }}>
-      {/* Top Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 12,
-        marginBottom: 24,
-      }}>
-        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white" style={{ padding: '10px 18px', fontSize: '1rem' }}>
-          <ArrowLeft size={20} /> Back to Hub
+    <div className="page" style={{ maxWidth: 860 }}>
+      <div className="world-bar">
+        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white back-btn" aria-label="Back to home">
+          <ArrowLeft size={22} /> <span className="btn-label">Back</span>
         </button>
 
-        {/* Operation Toggles */}
-        <div style={{
-          display: 'flex',
-          gap: 10,
-          background: '#FFFFFF',
-          padding: 6,
-          borderRadius: 999,
-          boxShadow: 'var(--shadow-playful)',
-        }}>
+        <div className="seg">
           <button
             onClick={() => { sound.playPop(); setOperation('add'); }}
             className={`kid-btn ${operation === 'add' ? 'btn-coral' : 'btn-white'}`}
-            style={{ padding: '8px 20px', fontSize: '1rem', borderRadius: 999 }}
+            aria-pressed={operation === 'add'}
           >
-            <Plus size={18} /> Addition (+)
+            <Plus size={18} /> Add
           </button>
           <button
             onClick={() => { sound.playPop(); setOperation('subtract'); }}
             className={`kid-btn ${operation === 'subtract' ? 'btn-sky' : 'btn-white'}`}
-            style={{ padding: '8px 20px', fontSize: '1rem', borderRadius: 999 }}
+            aria-pressed={operation === 'subtract'}
           >
-            <Minus size={18} /> Subtraction (-)
+            <Minus size={18} /> Take Away
           </button>
         </div>
       </div>
 
-      {/* Main Math Workbench */}
       <div style={{
         background: '#FFFFFF',
         borderRadius: 'var(--radius-lg)',
-        border: '6px solid #FB7185',
+        border: '5px solid #FB7185',
         boxShadow: 'var(--shadow-floating)',
-        padding: '36px 24px',
+        padding: '16px 12px 20px',
         textAlign: 'center',
       }}>
         <div style={{
-          display: 'inline-flex',
+          display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
           gap: 10,
-          background: '#FFE4E6',
-          padding: '6px 20px',
-          borderRadius: 999,
-          color: '#BE123C',
-          fontWeight: 700,
-          marginBottom: 24,
+          marginBottom: 14,
         }}>
-          <span>Count the items to find the answer!</span>
+          <span style={{ color: '#BE123C', fontWeight: 700, fontSize: '1.05rem' }}>
+            Count to find the answer!
+          </span>
           <button
-            onClick={() => {
-              const opText = operation === 'add' ? 'plus' : 'minus';
-              speech.speak(`${num1} ${opText} ${num2} equals what?`);
-            }}
+            onClick={() => speech.say(questionClips(num1, num2))}
             className="speaker-bubble"
-            style={{ width: 36, height: 36 }}
+            aria-label="Hear the question again"
           >
-            <Volume2 size={16} />
+            <Volume2 size={22} />
           </button>
         </div>
 
-        {/* Concrete Visual Equation Board */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          gap: 12,
-          marginBottom: 28,
-        }}>
-          {/* First Box */}
-          <div style={{
-            background: '#FFF1F2',
-            border: '4px solid #FDA4AF',
-            borderRadius: 'var(--radius-md)',
-            padding: 12,
-            minWidth: 95,
-            minHeight: 100,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 6,
-              fontSize: '2rem',
-              marginBottom: 6,
-            }}>
+        {/* Equation: one row, shrinks to fit phones */}
+        <div className="eq-row">
+          <div className="eq-box">
+            <div className="eq-items">
               {Array.from({ length: num1 }).map((_, i) => (
-                <span key={i} className="animate-bob">{itemEmoji}</span>
+                <span key={i}>{itemEmoji}</span>
               ))}
             </div>
-            <span style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.8rem',
-              fontWeight: 700,
-              color: '#BE123C',
-            }}>
-              {num1}
-            </span>
+            <span className="eq-num">{num1}</span>
           </div>
 
-          {/* Operation Symbol */}
-          <div style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '2.5rem',
-            fontWeight: 700,
-            color: '#E11D48',
-          }}>
-            {operation === 'add' ? '+' : '−'}
-          </div>
+          <div className="eq-sym">{operation === 'add' ? '+' : '−'}</div>
 
-          {/* Second Box */}
-          <div style={{
-            background: '#FFF1F2',
-            border: '4px solid #FDA4AF',
-            borderRadius: 'var(--radius-md)',
-            padding: 12,
-            minWidth: 95,
-            minHeight: 100,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 6,
-              fontSize: '2rem',
-              marginBottom: 6,
-            }}>
+          <div className="eq-box">
+            <div className="eq-items">
               {Array.from({ length: num2 }).map((_, i) => (
-                <span key={i} className="animate-bob" style={{ opacity: operation === 'subtract' ? 0.6 : 1 }}>
-                  {itemEmoji}
-                </span>
+                <span key={i} style={{ opacity: operation === 'subtract' ? 0.55 : 1 }}>{itemEmoji}</span>
               ))}
             </div>
-            <span style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.8rem',
-              fontWeight: 700,
-              color: '#BE123C',
-            }}>
-              {num2}
-            </span>
+            <span className="eq-num">{num2}</span>
           </div>
 
-          {/* Equals Symbol */}
-          <div style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '2.5rem',
-            fontWeight: 700,
-            color: '#E11D48',
-          }}>
-            =
-          </div>
+          <div className="eq-sym">=</div>
 
-          {/* Result Mystery Box */}
-          <div style={{
-            background: '#FFE4E6',
-            border: '4px dashed #F43F5E',
-            borderRadius: 'var(--radius-md)',
-            minWidth: 85,
-            height: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: 'var(--font-display)',
-            fontSize: '2.5rem',
-            fontWeight: 700,
-            color: '#BE123C',
-          }}>
-            ?
+          <div className="eq-box eq-answer">
+            {feedback === 'correct' ? <span className="animate-pop eq-num" style={{ fontSize: '2.4rem', color: '#16A34A' }}>{correctAnswer}</span> : '?'}
           </div>
         </div>
 
-        {/* Feedback Message */}
-        {feedback === 'correct' && (
-          <div style={{
-            color: '#16A34A',
-            fontSize: '1.6rem',
-            fontWeight: 700,
-            fontFamily: 'var(--font-display)',
-            marginBottom: 24,
-          }} className="animate-pop">
-            🌟 Brilliant! You got it right! +1 Star! 🌟
-          </div>
-        )}
+        {/* Fixed-height feedback so the answer buttons never jump */}
+        <div style={{
+          minHeight: 36,
+          margin: '14px 0 10px',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 700,
+          fontSize: '1.3rem',
+          color: feedback === 'correct' ? '#16A34A' : '#EA580C',
+        }} aria-live="polite">
+          {feedback === 'correct' && <span className="animate-pop" style={{ display: 'inline-block' }}>🌟 You got it! +1 Star!</span>}
+          {feedback === 'try-again' && 'Count each one and try again!'}
+        </div>
 
-        {feedback === 'try-again' && (
-          <div style={{
-            color: '#EA580C',
-            fontSize: '1.3rem',
-            fontWeight: 700,
-            marginBottom: 24,
-          }}>
-            Count each item and try again! 🍎
-          </div>
-        )}
-
-        {/* Answer Options */}
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: 20,
-          marginBottom: 24,
+          gap: 'clamp(12px, 4vw, 20px)',
+          marginBottom: 18,
         }}>
-          {options.map((opt) => (
-            <button
-              key={opt}
-              onClick={() => handleSelectAnswer(opt)}
-              style={{
-                width: 95,
-                height: 95,
-                borderRadius: 'var(--radius-md)',
-                background: '#FFFFFF',
-                border: '4px solid #FB7185',
-                boxShadow: '0 8px 0 #E11D48',
-                fontFamily: 'var(--font-display)',
-                fontSize: '3rem',
-                fontWeight: 700,
-                color: '#BE123C',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'transform 0.1s ease',
-              }}
-              className="animate-wiggle"
-            >
-              {opt}
-            </button>
-          ))}
+          {options.map((opt) => {
+            const isWrong = wrongPicks.includes(opt);
+            const isRight = feedback === 'correct' && opt === correctAnswer;
+            return (
+              <button
+                key={opt}
+                onClick={() => handleSelectAnswer(opt)}
+                disabled={isWrong}
+                style={{
+                  width: 'clamp(80px, 24vw, 96px)',
+                  height: 'clamp(80px, 24vw, 96px)',
+                  borderRadius: 'var(--radius-md)',
+                  background: isRight ? '#DCFCE7' : '#FFFFFF',
+                  border: `4px solid ${isRight ? '#16A34A' : '#FB7185'}`,
+                  boxShadow: isWrong ? 'none' : '0 7px 0 #E11D48',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '2.8rem',
+                  fontWeight: 700,
+                  color: '#BE123C',
+                  cursor: isWrong ? 'default' : 'pointer',
+                  opacity: isWrong ? 0.35 : 1,
+                  transform: isWrong ? 'translateY(5px)' : 'none',
+                  transition: 'all 0.12s ease',
+                }}
+                className={isRight ? 'animate-pop' : undefined}
+              >
+                {opt}
+              </button>
+            );
+          })}
         </div>
 
         <button
           onClick={() => { sound.playPop(); generateProblem(); }}
           className="kid-btn btn-white"
-          style={{ fontSize: '1rem', padding: '10px 20px' }}
+          style={{ fontSize: '1rem' }}
         >
           <RefreshCw size={18} /> New Problem
         </button>

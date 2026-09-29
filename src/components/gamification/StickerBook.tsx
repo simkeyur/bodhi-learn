@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { REWARD_STICKERS, type Sticker } from '../../data/learningData';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
+import { speech, clip } from '../../utils/speech';
+import { useKidTimers } from '../../utils/useKidTimers';
 import { ArrowLeft, Sparkles, Lock } from 'lucide-react';
 
 interface StickerBookProps {
@@ -19,18 +20,23 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
     removePlacedSticker,
   } = useApp();
 
+  useKidTimers();
   const [selectedStickerForPlacement, setSelectedStickerForPlacement] = useState<string>(
     unlockedStickers[0] || 'st1'
   );
 
+  useEffect(() => {
+    speech.say([clip.phrase('greet_stickers')]);
+  }, []);
+
   const handleUnlock = (sticker: Sticker) => {
     const success = unlockSticker(sticker.id, sticker.costStars);
     if (success) {
-      speech.speak(`You unlocked the ${sticker.name}! Awesome!`);
+      speech.say([clip.cheer(), clip.phrase('sticker_unlocked')]);
       setSelectedStickerForPlacement(sticker.id);
     } else {
       sound.playGentleTryAgain();
-      speech.speak(`You need ${sticker.costStars} stars for this sticker. Play more games to earn stars!`);
+      speech.say([clip.phrase('you_need'), clip.number(sticker.costStars), clip.phrase('stars_for_sticker')]);
     }
   };
 
@@ -43,57 +49,51 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
   };
 
   return (
-    <div style={{ maxWidth: 1050, margin: '0 auto', padding: '24px 16px' }}>
-      {/* Top Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 12,
-        marginBottom: 24,
-      }}>
-        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white" style={{ padding: '10px 18px', fontSize: '1rem' }}>
-          <ArrowLeft size={20} /> Back to Hub
+    <div className="page">
+      <div className="world-bar">
+        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white back-btn" aria-label="Back to home">
+          <ArrowLeft size={22} /> <span className="btn-label">Back</span>
         </button>
 
         <div style={{
           background: 'linear-gradient(135deg, #FEF08A, #FDE047)',
           border: '3px solid #F59E0B',
           boxShadow: '0 4px 0 #D97706',
-          padding: '8px 20px',
+          padding: '6px 18px',
           borderRadius: 999,
           display: 'flex',
           alignItems: 'center',
-          gap: 10,
+          gap: 8,
           fontFamily: 'var(--font-display)',
-          fontSize: '1.3rem',
+          fontSize: '1.2rem',
           fontWeight: 700,
           color: '#92400E',
         }}>
           <Sparkles size={22} color="#D97706" />
-          <span>{stars} Stars to spend!</span>
+          <span>{stars} <span className="hide-mobile">stars to spend</span></span>
         </div>
       </div>
 
       {/* Interactive Sticker Play Canvas */}
       <div style={{
-        marginBottom: 32,
+        marginBottom: 24,
         background: '#FFFFFF',
         borderRadius: 'var(--radius-lg)',
-        border: '6px solid #C084FC',
+        border: '5px solid #C084FC',
         boxShadow: 'var(--shadow-floating)',
-        padding: 20,
+        padding: 12,
       }}>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 12,
+          flexWrap: 'wrap',
+          gap: '4px 12px',
+          marginBottom: 10,
         }}>
           <h2 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '1.75rem',
+            fontSize: 'clamp(1.3rem, 5vw, 1.75rem)',
             color: '#7E22CE',
             margin: 0,
             display: 'flex',
@@ -103,7 +103,7 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
             🎨 My Sticker Playground
           </h2>
           <span style={{ fontSize: '0.95rem', color: '#64748B', fontWeight: 600 }}>
-            Tap the board to place your active sticker! Tap a placed sticker to remove it.
+            Tap to stick · tap a sticker to peel it off
           </span>
         </div>
 
@@ -111,7 +111,7 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
         <div
           onClick={handleCanvasClick}
           style={{
-            height: 320,
+            height: 'clamp(240px, 45dvh, 360px)',
             borderRadius: 'var(--radius-md)',
             background: 'linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 55%, #86EFAC 56%, #4ADE80 100%)',
             position: 'relative',
@@ -142,14 +142,13 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
                   left: `${ps.x}%`,
                   top: `${ps.y}%`,
                   transform: 'translate(-50%, -50%)',
-                  fontSize: '3.5rem',
+                  fontSize: 'clamp(2.6rem, 10vw, 3.5rem)',
                   cursor: 'pointer',
                   filter: 'drop-shadow(0 6px 8px rgba(0,0,0,0.2))',
                   transition: 'transform 0.1s ease',
                 }}
-                className="animate-bob"
               >
-                {stickerMeta?.emoji || '⭐'}
+                <span className="animate-pop" style={{ display: 'inline-block' }}>{stickerMeta?.emoji || '⭐'}</span>
               </div>
             );
           })}
@@ -160,25 +159,27 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
       <div>
         <h3 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '1.8rem',
+          fontSize: 'clamp(1.3rem, 5vw, 1.8rem)',
           color: '#0F172A',
-          marginBottom: 16,
+          marginBottom: 12,
         }}>
           🎁 Sticker Collection
         </h3>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-          gap: 16,
+          gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+          gap: 12,
         }}>
           {REWARD_STICKERS.map((sticker) => {
             const isUnlocked = unlockedStickers.includes(sticker.id);
             const isSelected = selectedStickerForPlacement === sticker.id;
 
             return (
-              <div
+              <button
                 key={sticker.id}
+                className="btn-reset"
+                aria-label={isUnlocked ? `Use ${sticker.name}` : `Unlock ${sticker.name} for ${sticker.costStars} stars`}
                 style={{
                   background: '#FFFFFF',
                   borderRadius: 'var(--radius-md)',
@@ -186,7 +187,7 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
                   boxShadow: isSelected ? '0 8px 0 #9333EA' : 'var(--shadow-playful)',
                   padding: 16,
                   textAlign: 'center',
-                  cursor: isUnlocked ? 'pointer' : 'default',
+                  cursor: 'pointer',
                   transition: 'all 0.15s ease',
                   position: 'relative',
                 }}
@@ -194,12 +195,14 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
                   if (isUnlocked) {
                     sound.playPop();
                     setSelectedStickerForPlacement(sticker.id);
+                  } else {
+                    handleUnlock(sticker);
                   }
                 }}
               >
                 <div style={{
-                  fontSize: '3.5rem',
-                  marginBottom: 8,
+                  fontSize: '3rem',
+                  marginBottom: 6,
                   filter: isUnlocked ? 'none' : 'grayscale(100%) opacity(40%)',
                 }}>
                   {sticker.emoji}
@@ -220,28 +223,27 @@ export const StickerBook: React.FC<StickerBookProps> = ({ onBack }) => {
                     display: 'inline-block',
                     background: isSelected ? '#C084FC' : '#F1F5F9',
                     color: isSelected ? '#FFFFFF' : '#64748B',
-                    padding: '4px 10px',
+                    padding: '6px 12px',
                     borderRadius: 999,
-                    fontSize: '0.8rem',
+                    fontSize: '0.85rem',
                     fontWeight: 700,
                   }}>
-                    {isSelected ? 'Ready to place!' : 'Unlocked'}
+                    {isSelected ? '✓ Sticking this' : 'Tap to use'}
                   </span>
                 ) : (
-                  <button
-                    onClick={() => handleUnlock(sticker)}
+                  <span
                     className="kid-btn btn-sun"
                     style={{
-                      padding: '6px 12px',
-                      fontSize: '0.85rem',
+                      padding: '8px 10px',
+                      fontSize: '1rem',
                       borderRadius: 999,
                       width: '100%',
                     }}
                   >
-                    <Lock size={12} /> {sticker.costStars} Stars
-                  </button>
+                    <Lock size={16} /> {sticker.costStars} ⭐
+                  </span>
                 )}
-              </div>
+              </button>
             );
           })}
         </div>

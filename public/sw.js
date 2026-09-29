@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bodhi-learn-v1';
+const CACHE_NAME = 'bodhi-learn-v2';
 const ASSETS = [
   '/',
   '/index.html',
@@ -30,21 +30,36 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+const putInCache = (request, response) => {
+  if (response && response.status === 200 && response.type === 'basic') {
+    const clone = response.clone();
+    caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+  }
+  return response;
+};
+
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
+  const { request } = event;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+
+  // Pages: network first so a new deploy is picked up, cache when offline
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => putInCache(request, response))
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('/')))
+    );
+    return;
+  }
+
+  // Audio clips and hashed build assets never change: cache first
+  // (range requests for media are passed straight to the network)
+  if (request.headers.has('range')) return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return cached || fetch(event.request).then((response) => {
-        if (response && response.status === 200 && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, clone);
-          });
-        }
-        return response;
-      }).catch(() => {
-        return caches.match('/');
-      });
+    caches.match(request).then((cached) => {
+      return cached || fetch(request).then((response) => putInCache(request, response));
     })
   );
 });

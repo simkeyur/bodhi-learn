@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { STORIES, type Story } from '../../data/learningData';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
+import { speech, clip, wordKey } from '../../utils/speech';
+import { useKidTimers } from '../../utils/useKidTimers';
 import { useApp } from '../../context/AppContext';
-import { Volume2, ArrowLeft, ArrowRight, BookOpen, CheckCircle } from 'lucide-react';
+import { Volume2, ArrowLeft, ArrowRight, BookOpen, CheckCircle, Square } from 'lucide-react';
 
 interface StoriesWorldProps {
   onBack: () => void;
@@ -11,289 +12,257 @@ interface StoriesWorldProps {
 
 export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
   const { addStars } = useApp();
+  const { later } = useKidTimers();
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const [isReadingAloud, setIsReadingAloud] = useState(false);
   const [hasCompleted, setHasCompleted] = useState(false);
+  const [tappedWord, setTappedWord] = useState<number | null>(null);
+
+  useEffect(() => {
+    speech.say([clip.phrase('greet_stories')]);
+  }, []);
+
+  const readPage = (story: Story, index: number, withTitle = false) => {
+    setIsReadingAloud(true);
+    const clips = [clip.storyPage(story.id, index)];
+    if (withTitle) clips.unshift(clip.storyTitle(story.id));
+    speech.say(clips, {
+      fallback: story.pages[index].text,
+      onEnd: () => setIsReadingAloud(false),
+    });
+  };
 
   const startStory = (story: Story) => {
     sound.playPop();
     setSelectedStory(story);
     setPageIndex(0);
     setHasCompleted(false);
-    speech.speak(story.title);
+    readPage(story, 0, true);
   };
 
   const currentPage = selectedStory ? selectedStory.pages[pageIndex] : null;
+  const isLastPage = selectedStory ? pageIndex === selectedStory.pages.length - 1 : false;
 
-  const readPageAloud = () => {
-    if (!currentPage) return;
-    setIsReadingAloud(true);
-    sound.playPop(600);
-    speech.speak(currentPage.text, () => {
-      setIsReadingAloud(false);
-    });
-  };
-
-  const handleWordTap = (word: string) => {
-    // Clean punctuation
-    const cleanWord = word.replace(/[.,/#!$%^&*;:{}=\-_`~()"?]/g, '');
-    sound.playPop(700);
-    speech.speak(cleanWord);
-  };
-
-  const nextPage = () => {
+  const toggleReadAloud = () => {
     if (!selectedStory) return;
-    sound.playPop();
-    speech.stop();
-    setIsReadingAloud(false);
-
-    if (pageIndex < selectedStory.pages.length - 1) {
-      setPageIndex((prev) => prev + 1);
-    } else {
-      if (!hasCompleted) {
-        setHasCompleted(true);
-        addStars(2);
-        sound.playStarFanfare();
-        speech.speak('You finished the story! You earned 2 stars!');
-      }
-    }
-  };
-
-  const prevPage = () => {
-    if (pageIndex > 0) {
-      sound.playPop();
+    sound.playPop(600);
+    if (isReadingAloud) {
       speech.stop();
       setIsReadingAloud(false);
-      setPageIndex((prev) => prev - 1);
+    } else {
+      readPage(selectedStory, pageIndex);
     }
+  };
+
+  const handleWordTap = (word: string, index: number) => {
+    sound.playPop(700);
+    setIsReadingAloud(false);
+    setTappedWord(index);
+    later(() => setTappedWord((cur) => (cur === index ? null : cur)), 900);
+
+    const num = parseInt(word, 10);
+    if (!isNaN(num) && num >= 0 && num <= 20) {
+      speech.say([clip.number(num)]);
+    } else if (wordKey(word)) {
+      speech.say([clip.word(word)], { fallback: word.replace(/[^A-Za-z']/g, '') });
+    }
+  };
+
+  const goToPage = (index: number) => {
+    if (!selectedStory) return;
+    sound.playPop();
+    setPageIndex(index);
+    setTappedWord(null);
+    readPage(selectedStory, index);
+  };
+
+  const finishStory = () => {
+    sound.playPop();
+    if (hasCompleted) return;
+    setHasCompleted(true);
+    setIsReadingAloud(false);
+    addStars(2);
+    speech.say([clip.cheer(), clip.phrase('story_finished')]);
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px' }}>
-      {/* Top Bar */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 24,
-      }}>
+    <div className="page" style={{ maxWidth: 860 }}>
+      <div className="world-bar">
         <button
           onClick={() => {
             sound.playPop();
             speech.stop();
-            if (selectedStory) {
-              setSelectedStory(null);
-            } else {
-              onBack();
-            }
+            setIsReadingAloud(false);
+            if (selectedStory) setSelectedStory(null);
+            else onBack();
           }}
-          className="kid-btn btn-white"
-          style={{ padding: '10px 18px', fontSize: '1rem' }}
+          className="kid-btn btn-white back-btn"
+          aria-label={selectedStory ? 'Back to bookshelf' : 'Back to home'}
         >
-          <ArrowLeft size={20} /> {selectedStory ? 'Choose Another Story' : 'Back to Hub'}
+          <ArrowLeft size={22} /> <span className="btn-label">{selectedStory ? 'Bookshelf' : 'Back'}</span>
         </button>
 
         {selectedStory && (
-          <span style={{
-            fontSize: '1.1rem',
-            fontFamily: 'var(--font-display)',
-            fontWeight: 700,
-            color: '#0284C7',
-          }}>
-            Page {pageIndex + 1} of {selectedStory.pages.length}
-          </span>
+          <div style={{ display: 'flex', gap: 6 }} aria-label={`Page ${pageIndex + 1} of ${selectedStory.pages.length}`}>
+            {selectedStory.pages.map((_, i) => (
+              <span
+                key={i}
+                style={{
+                  width: i === pageIndex ? 26 : 12,
+                  height: 12,
+                  borderRadius: 999,
+                  background: i <= pageIndex ? '#0EA5E9' : '#CBD5E1',
+                  transition: 'all 0.2s ease',
+                }}
+              />
+            ))}
+          </div>
         )}
       </div>
 
       {!selectedStory ? (
-        /* Story Shelf Selection */
+        /* Bookshelf */
         <div>
-          <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <h2 style={{
-              fontSize: '2.5rem',
-              color: '#0F172A',
-              fontFamily: 'var(--font-display)',
-              marginBottom: 8,
-            }}>
-              📚 Illustrated Storybooks
+          <div style={{ textAlign: 'center', marginBottom: 18 }}>
+            <h2 style={{ fontSize: 'clamp(1.7rem, 6vw, 2.4rem)', color: '#0F172A', marginBottom: 6 }}>
+              📚 Story Time
             </h2>
-            <p style={{ fontSize: '1.2rem', color: '#64748B', fontWeight: 600 }}>
-              Read along with friendly voices, or tap any word to hear it pronounced!
+            <p style={{ fontSize: '1.05rem', color: '#64748B', fontWeight: 600 }}>
+              Pick a book. Tap any word to hear it!
             </p>
           </div>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 24,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: 16,
           }}>
             {STORIES.map((story) => (
-              <div
+              <button
                 key={story.id}
+                className="btn-reset"
                 onClick={() => startStory(story)}
                 style={{
                   background: '#FFFFFF',
                   borderRadius: 'var(--radius-lg)',
                   border: '5px solid #38BDF8',
-                  padding: 28,
+                  padding: '22px 16px',
                   textAlign: 'center',
-                  cursor: 'pointer',
-                  boxShadow: 'var(--shadow-playful)',
-                  transition: 'transform 0.15s ease',
+                  boxShadow: '0 6px 0 #BAE6FD, var(--shadow-playful)',
                 }}
-                className="animate-bob"
               >
-                <div style={{
-                  fontSize: '4.5rem',
-                  marginBottom: 16,
-                }}>
-                  {story.coverEmoji}
-                </div>
-                <h3 style={{
-                  fontSize: '1.6rem',
-                  fontFamily: 'var(--font-display)',
-                  color: '#0369A1',
-                  marginBottom: 12,
-                }}>
+                <div style={{ fontSize: '4rem', marginBottom: 8 }} aria-hidden>{story.coverEmoji}</div>
+                <h3 style={{ fontSize: '1.4rem', color: '#0369A1', marginBottom: 10 }}>
                   {story.title}
                 </h3>
                 <span style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 6,
-                  color: '#10B981',
+                  color: '#059669',
                   fontWeight: 700,
-                  fontSize: '1.05rem',
+                  fontSize: '1rem',
                 }}>
-                  <BookOpen size={18} /> {story.pages.length} Pages • Tap to Read
+                  <BookOpen size={18} /> {story.pages.length} pages · Read me!
                 </span>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       ) : (
-        /* Interactive Story Reader Page */
+        /* Reader */
         <div style={{
           background: '#FFFFFF',
           borderRadius: 'var(--radius-lg)',
-          border: '6px solid #38BDF8',
+          border: '5px solid #38BDF8',
           boxShadow: 'var(--shadow-floating)',
           overflow: 'hidden',
         }}>
-          {/* Illustration Stage */}
           <div style={{
             background: currentPage?.bgColor || '#E0F2FE',
-            padding: '48px 24px',
-            textAlign: 'center',
+            padding: '24px 16px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: 220,
-            position: 'relative',
+            minHeight: 'clamp(140px, 26vh, 220px)',
           }}>
-            <div style={{
-              fontSize: '6.5rem',
-              filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.15))',
-            }} className="animate-bob">
+            <div
+              key={pageIndex}
+              style={{ fontSize: 'clamp(4.5rem, 16vw, 6.5rem)', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.15))' }}
+              className="animate-pop"
+              aria-hidden
+            >
               {currentPage?.imageEmoji}
             </div>
-
-            {/* Read to Me Button */}
-            <button
-              onClick={readPageAloud}
-              style={{
-                position: 'absolute',
-                bottom: 16,
-                right: 20,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                background: '#FFFFFF',
-                borderRadius: 999,
-                padding: '8px 18px',
-                border: '3px solid #38BDF8',
-                fontFamily: 'var(--font-display)',
-                fontWeight: 700,
-                color: '#0284C7',
-                cursor: 'pointer',
-                boxShadow: '0 4px 0 #BAE6FD',
-              }}
-            >
-              <Volume2 size={20} color="#0284C7" />
-              <span>{isReadingAloud ? 'Reading...' : 'Read Page'}</span>
-            </button>
           </div>
 
-          {/* Interactive Text Canvas */}
-          <div style={{ padding: '36px 32px' }}>
-            <div style={{
-              fontSize: '1.8rem',
-              lineHeight: 1.7,
+          <div style={{ padding: '18px 14px 16px' }}>
+            <p style={{
+              fontSize: 'clamp(1.35rem, 5.2vw, 1.8rem)',
+              lineHeight: 1.6,
               fontFamily: 'var(--font-display)',
               color: '#1E293B',
-              marginBottom: 32,
+              marginBottom: 14,
               textAlign: 'center',
             }}>
               {currentPage?.text.split(' ').map((word, wIdx) => (
-                <span
-                  key={wIdx}
-                  onClick={() => handleWordTap(word)}
+                <button
+                  key={`${pageIndex}-${wIdx}`}
+                  className="btn-reset"
+                  onClick={() => handleWordTap(word, wIdx)}
                   style={{
                     display: 'inline-block',
-                    margin: '0 5px',
-                    padding: '2px 6px',
+                    margin: '0 1px',
+                    padding: '0 5px',
                     borderRadius: 8,
-                    cursor: 'pointer',
+                    background: tappedWord === wIdx ? '#FEF08A' : 'transparent',
                     transition: 'background 0.15s ease',
+                    font: 'inherit',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = '#FEF08A')}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-                  title="Tap to hear this word!"
                 >
                   {word}
-                </span>
+                </button>
               ))}
+            </p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
+              <button
+                onClick={toggleReadAloud}
+                className={`kid-btn ${isReadingAloud ? 'btn-white' : 'btn-sun'}`}
+                style={{ fontSize: '1.05rem' }}
+              >
+                {isReadingAloud ? <><Square size={18} /> Stop</> : <><Volume2 size={20} /> Read to me</>}
+              </button>
             </div>
 
-            <div style={{
-              textAlign: 'center',
-              color: '#94A3B8',
-              fontSize: '0.95rem',
-              fontWeight: 600,
-              marginBottom: 24,
-            }}>
-              💡 Tip: Tap any word to hear it pronounced!
-            </div>
-
-            {/* Story Navigation Controls */}
             <div style={{
               display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              gap: 10,
               borderTop: '2px solid #F1F5F9',
-              paddingTop: 20,
+              paddingTop: 14,
             }}>
               <button
-                onClick={prevPage}
+                onClick={() => goToPage(pageIndex - 1)}
                 disabled={pageIndex === 0}
                 className="kid-btn btn-white"
-                style={{ opacity: pageIndex === 0 ? 0.4 : 1 }}
+                style={{ flex: 1 }}
+                aria-label="Previous page"
               >
-                <ArrowLeft size={20} /> Previous
+                <ArrowLeft size={22} /> <span className="hide-mobile">Back</span>
               </button>
 
-              {pageIndex < selectedStory.pages.length - 1 ? (
-                <button onClick={nextPage} className="kid-btn btn-sky">
-                  Next Page <ArrowRight size={20} />
+              {!isLastPage ? (
+                <button onClick={() => goToPage(pageIndex + 1)} className="kid-btn btn-sky" style={{ flex: 2 }}>
+                  Next Page <ArrowRight size={22} />
                 </button>
               ) : (
                 <button
-                  onClick={nextPage}
-                  className="kid-btn btn-grass"
-                  style={{ fontSize: '1.15rem' }}
+                  onClick={finishStory}
+                  className={`kid-btn ${hasCompleted ? 'btn-white' : 'btn-grass'}`}
+                  style={{ flex: 2 }}
                 >
-                  <CheckCircle size={20} /> {hasCompleted ? 'Story Finished! ⭐' : 'Finish Story!'}
+                  <CheckCircle size={22} /> {hasCompleted ? 'All done! ⭐' : 'The End!'}
                 </button>
               )}
             </div>
@@ -301,13 +270,13 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
             {hasCompleted && (
               <div style={{
                 textAlign: 'center',
-                marginTop: 20,
+                marginTop: 14,
                 color: '#16A34A',
                 fontWeight: 700,
-                fontSize: '1.4rem',
+                fontSize: '1.3rem',
                 fontFamily: 'var(--font-display)',
               }} className="animate-pop">
-                🎉 Congratulations! You read the whole story! +2 Stars! 🎉
+                🎉 You read the whole story! +2 Stars!
               </div>
             )}
           </div>

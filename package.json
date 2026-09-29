@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
     "db:init": "node scripts/init_db.mjs",
-    "audio:generate": "node scripts/generate_audio.mjs"
+    "audio:generate": "node scripts/generate_audio.mjs",
+    "audio:missing": "node scripts/generate_missing_audio.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

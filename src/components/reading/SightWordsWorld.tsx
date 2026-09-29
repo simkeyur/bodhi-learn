@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { SIGHT_WORDS, type SightWord } from '../../data/learningData';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
+import { speech, clip } from '../../utils/speech';
+import { useKidTimers, useGreeting } from '../../utils/useKidTimers';
 import { useApp } from '../../context/AppContext';
 import { Volume2, ArrowLeft, ArrowRight, Sparkles, RotateCcw } from 'lucide-react';
+
+const LEVELS = [
+  { id: 'pre-k', label: 'Pre-K' },
+  { id: 'kindergarten', label: 'K' },
+  { id: 'grade1', label: '1st' },
+] as const;
 
 interface SightWordsWorldProps {
   onBack: () => void;
@@ -11,6 +18,8 @@ interface SightWordsWorldProps {
 
 export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
   const { addStars, ageBracket } = useApp();
+  const { later, clearAll } = useKidTimers();
+  const greeting = useGreeting(clip.phrase('greet_sight_words'));
   const [activeLevel, setActiveLevel] = useState<'pre-k' | 'kindergarten' | 'grade1'>(ageBracket);
 
   const filteredWords = SIGHT_WORDS.filter((w) => w.level === activeLevel);
@@ -22,10 +31,13 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
   const [scrambledLetters, setScrambledLetters] = useState<{ id: string; char: string; used: boolean }[]>([]);
   const [placedLetters, setPlacedLetters] = useState<{ id: string; char: string }[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
 
   // Initialize or reset current word puzzle
   const setupWordPuzzle = (wordObj: SightWord) => {
+    clearAll();
     setIsCompleted(false);
+    setIsChecking(false);
     setPlacedLetters([]);
 
     const chars = wordObj.word.split('').map((char, index) => ({
@@ -38,7 +50,8 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
     const shuffled = [...chars].sort(() => 0.5 - Math.random());
     setScrambledLetters(shuffled);
 
-    speech.speak(wordObj.word);
+    const intro = greeting();
+    speech.say([...intro, clip.phrase('tap_letters_to_spell'), clip.word(wordObj.word)]);
   };
 
   useEffect(() => {
@@ -48,7 +61,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
   }, [currentIndex, activeLevel]);
 
   const handlePickLetter = (item: { id: string; char: string; used: boolean }) => {
-    if (item.used || isCompleted) return;
+    if (item.used || isCompleted || isChecking) return;
 
     sound.playPop(550);
     const updatedScrambled = scrambledLetters.map((l) => (l.id === item.id ? { ...l, used: true } : l));
@@ -64,21 +77,22 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
         setIsCompleted(true);
         sound.playSuccess();
         addStars(1);
-        speech.speak(`You spelled ${currentWord.word}! Awesome job!`);
+        speech.say([clip.cheer(), clip.spelling(currentWord.word)]);
       } else {
         sound.playGentleTryAgain();
-        speech.speak(`Oops! Let's try spelling ${currentWord.word} again.`);
-        setTimeout(() => {
-          // Reset placed
+        setIsChecking(true);
+        speech.say([clip.phrase('spelling_try_again')]);
+        later(() => {
           setScrambledLetters((prev) => prev.map((l) => ({ ...l, used: false })));
           setPlacedLetters([]);
-        }, 1200);
+          setIsChecking(false);
+        }, 1300);
       }
     }
   };
 
   const handleRemovePlaced = (placedItem: { id: string; char: string }) => {
-    if (isCompleted) return;
+    if (isCompleted || isChecking) return;
     sound.playPop(450);
     setPlacedLetters((prev) => prev.filter((p) => p.id !== placedItem.id));
     setScrambledLetters((prev) => prev.map((l) => (l.id === placedItem.id ? { ...l, used: false } : l)));
@@ -95,46 +109,25 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 16px' }}>
-      {/* Top Nav & Level Selection */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 12,
-        marginBottom: 24,
-      }}>
-        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white" style={{ padding: '10px 18px', fontSize: '1rem' }}>
-          <ArrowLeft size={20} /> Back to Hub
+    <div className="page" style={{ maxWidth: 820 }}>
+      <div className="world-bar">
+        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white back-btn" aria-label="Back to home">
+          <ArrowLeft size={22} /> <span className="btn-label">Back</span>
         </button>
 
-        {/* Level Tabs */}
-        <div style={{
-          display: 'flex',
-          gap: 8,
-          background: '#FFFFFF',
-          padding: 6,
-          borderRadius: 999,
-          boxShadow: 'var(--shadow-playful)',
-        }}>
-          {(['pre-k', 'kindergarten', 'grade1'] as const).map((lvl) => (
+        <div className="seg">
+          {LEVELS.map((lvl) => (
             <button
-              key={lvl}
+              key={lvl.id}
               onClick={() => {
                 sound.playPop();
-                setActiveLevel(lvl);
+                setActiveLevel(lvl.id);
                 setCurrentIndex(0);
               }}
-              className={`kid-btn ${activeLevel === lvl ? 'btn-grape' : 'btn-white'}`}
-              style={{
-                padding: '8px 16px',
-                fontSize: '0.95rem',
-                borderRadius: 999,
-                textTransform: 'capitalize',
-              }}
+              className={`kid-btn ${activeLevel === lvl.id ? 'btn-grape' : 'btn-white'}`}
+              aria-pressed={activeLevel === lvl.id}
             >
-              {lvl.replace('-', ' ')}
+              {lvl.label}
             </button>
           ))}
         </div>
@@ -146,7 +139,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
         borderRadius: 'var(--radius-lg)',
         border: '6px solid #C084FC',
         boxShadow: 'var(--shadow-floating)',
-        padding: '36px 24px',
+        padding: '16px 14px 20px',
         textAlign: 'center',
         position: 'relative',
       }}>
@@ -159,9 +152,8 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
         }}>
           <button
             onClick={prevWord}
-            className="kid-btn btn-white"
-            style={{ width: 48, height: 48, padding: 0, borderRadius: '50%' }}
-            title="Previous word"
+            className="kid-btn btn-white icon-btn"
+            aria-label="Previous word"
           >
             <ArrowLeft size={24} />
           </button>
@@ -177,30 +169,30 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
 
           <button
             onClick={nextWord}
-            className="kid-btn btn-white"
-            style={{ width: 48, height: 48, padding: 0, borderRadius: '50%' }}
-            title="Next word"
+            className="kid-btn btn-white icon-btn"
+            aria-label="Next word"
           >
             <ArrowRight size={24} />
           </button>
         </div>
 
         {/* Word Display & Audio */}
-        <div style={{ fontSize: '4.5rem', marginBottom: 10 }}>{currentWord.emoji}</div>
+        <div style={{ fontSize: '3.6rem', marginBottom: 6 }} aria-hidden>{currentWord.emoji}</div>
         
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: 16,
+          gap: 14,
           background: '#FAF5FF',
           border: '3px solid #E9D5FF',
-          padding: '12px 28px',
+          padding: '8px 10px 8px 24px',
           borderRadius: 999,
-          marginBottom: 20,
+          marginBottom: 12,
+          maxWidth: '100%',
         }}>
           <span style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '2.8rem',
+            fontSize: 'clamp(2rem, 9vw, 2.8rem)',
             fontWeight: 700,
             color: '#6B21A8',
             letterSpacing: '0.12em',
@@ -211,20 +203,20 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
           <button
             onClick={() => {
               sound.playPop(650);
-              speech.speak(`${currentWord.word}. ${currentWord.exampleSentence}`);
+              speech.say([clip.word(currentWord.word), clip.sentence(currentWord.id)]);
             }}
             className="speaker-bubble"
-            title="Hear word & sentence"
+            aria-label="Hear the word and sentence"
           >
             <Volume2 size={24} />
           </button>
         </div>
 
         <p style={{
-          fontSize: '1.25rem',
+          fontSize: '1.15rem',
           color: '#475569',
           fontWeight: 600,
-          marginBottom: 28,
+          marginBottom: 16,
         }}>
           "{currentWord.exampleSentence}"
         </p>
@@ -233,7 +225,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
         <div style={{
           background: '#F8FAFC',
           borderRadius: 'var(--radius-md)',
-          padding: '24px 16px',
+          padding: '16px 10px',
           border: '3px dashed #CBD5E1',
           maxWidth: 620,
           margin: '0 auto',
@@ -245,8 +237,8 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
             gap: 6,
             color: '#64748B',
             fontWeight: 700,
-            fontSize: '1.1rem',
-            marginBottom: 16,
+            fontSize: '1rem',
+            marginBottom: 14,
           }}>
             <Sparkles size={18} color="#9333EA" />
             <span>Tap the letters below to spell the word!</span>
@@ -256,19 +248,23 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
           <div style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: 12,
-            marginBottom: 24,
-            minHeight: 70,
+            gap: 8,
+            marginBottom: 18,
           }}>
             {Array.from({ length: currentWord.word.length }).map((_, idx) => {
               const placed = placedLetters[idx];
               return (
-                <div
+                <button
                   key={idx}
                   onClick={() => placed && handleRemovePlaced(placed)}
+                  disabled={!placed}
+                  aria-label={placed ? `Remove ${placed.char}` : 'Empty slot'}
                   style={{
-                    width: 64,
-                    height: 70,
+                    flex: '1 1 0',
+                    maxWidth: 64,
+                    minWidth: 0,
+                    height: 68,
+                    padding: 0,
                     borderRadius: 16,
                     border: placed ? '3px solid #9333EA' : '3px dashed #94A3B8',
                     background: placed ? '#FAF5FF' : '#FFFFFF',
@@ -285,7 +281,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                   className={placed ? 'animate-pop' : ''}
                 >
                   {placed ? placed.char : ''}
-                </div>
+                </button>
               );
             })}
           </div>
@@ -295,16 +291,16 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
             display: 'flex',
             justifyContent: 'center',
             flexWrap: 'wrap',
-            gap: 12,
+            gap: 10,
           }}>
             {scrambledLetters.map((l) => (
               <button
                 key={l.id}
                 onClick={() => handlePickLetter(l)}
-                disabled={l.used || isCompleted}
+                disabled={l.used || isCompleted || isChecking}
                 style={{
-                  width: 64,
-                  height: 64,
+                  width: 60,
+                  height: 60,
                   borderRadius: 18,
                   border: 'none',
                   background: l.used ? '#E2E8F0' : '#C084FC',
@@ -326,7 +322,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
 
           {/* Completion Celebration / Reset */}
           {isCompleted && (
-            <div style={{ marginTop: 24 }} className="animate-pop">
+            <div style={{ marginTop: 18 }} className="animate-pop">
               <div style={{
                 color: '#16A34A',
                 fontSize: '1.5rem',
@@ -334,7 +330,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                 fontFamily: 'var(--font-display)',
                 marginBottom: 12,
               }}>
-                🎉 Star Earned! Awesome Job! 🎉
+                🎉 You spelled it! +1 Star!
               </div>
               <button
                 onClick={nextWord}
@@ -346,23 +342,13 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
             </div>
           )}
 
-          {!isCompleted && placedLetters.length > 0 && (
+          {!isCompleted && placedLetters.length > 0 && !isChecking && (
             <button
-              onClick={() => setupWordPuzzle(currentWord)}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#64748B',
-                fontSize: '0.9rem',
-                fontWeight: 600,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                marginTop: 18,
-                cursor: 'pointer',
-              }}
+              onClick={() => { sound.playPop(400); setupWordPuzzle(currentWord); }}
+              className="kid-btn btn-white"
+              style={{ marginTop: 16, fontSize: '1rem' }}
             >
-              <RotateCcw size={14} /> Clear & Try Again
+              <RotateCcw size={18} /> Start Over
             </button>
           )}
         </div>

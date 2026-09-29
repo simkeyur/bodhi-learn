@@ -154,3 +154,35 @@ export const TRACING_WORDS: TracingWord[] = [
   { id: 'tw11', word: 'CAKE', emoji: '🎂', hint: 'Sweet birthday treat' },
   { id: 'tw12', word: 'BODHI', emoji: '🌟', hint: 'Super star learner!' },
 ];
+
+// Decodable sentences for Slide & Read: the child slides a finger under each
+// word and hears it. Kept short so a sentence fits on one or two lines on a phone.
+export interface ReadAlongSentence {
+  id: string;
+  level: 'pre-k' | 'kindergarten' | 'grade1';
+  text: string;
+  emoji: string;
+}
+
+export const READ_ALONG_SENTENCES: ReadAlongSentence[] = [
+  // Pre-K: CVC words + a few sight words
+  { id: 'r1', level: 'pre-k', text: 'The cat sat.', emoji: '🐱' },
+  { id: 'r2', level: 'pre-k', text: 'I see a pig.', emoji: '🐷' },
+  { id: 'r3', level: 'pre-k', text: 'The dog can run.', emoji: '🐶' },
+  { id: 'r4', level: 'pre-k', text: 'Sam has a hat.', emoji: '🎩' },
+  { id: 'r5', level: 'pre-k', text: 'A big red bus.', emoji: '🚌' },
+
+  // Kindergarten: short vowels, digraphs, blends
+  { id: 'r6', level: 'kindergarten', text: 'Olive can swim well.', emoji: '🏊' },
+  { id: 'r7', level: 'kindergarten', text: 'Jeff and Ben jump in.', emoji: '💦' },
+  { id: 'r8', level: 'kindergarten', text: 'The fish is in the pond.', emoji: '🐟' },
+  { id: 'r9', level: 'kindergarten', text: 'Mom has a pink cup.', emoji: '🥤' },
+  { id: 'r10', level: 'kindergarten', text: 'We sit on the rug.', emoji: '🧸' },
+
+  // 1st grade: long vowels (magic e, vowel teams)
+  { id: 'r11', level: 'grade1', text: 'Amy loves planes.', emoji: '✈️' },
+  { id: 'r12', level: 'grade1', text: 'The kite flies high.', emoji: '🪁' },
+  { id: 'r13', level: 'grade1', text: 'Jake rode his bike home.', emoji: '🚲' },
+  { id: 'r14', level: 'grade1', text: 'The green frog can leap.', emoji: '🐸' },
+  { id: 'r15', level: 'grade1', text: 'We play in the rain.', emoji: '🌧️' },
+];

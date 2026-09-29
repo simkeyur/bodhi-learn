@@ -94,21 +94,29 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
             </div>
             <h3 style={{
               fontFamily: 'var(--font-display)',
-              fontSize: '1.5rem',
+              fontSize: 'clamp(1.2rem, 5vw, 1.5rem)',
               color: '#0F172A',
               margin: 0,
             }}>
-              Parent & Educator Settings
+              Parent Settings
             </h3>
           </div>
 
           <button
             onClick={onClose}
+            aria-label="Close"
             style={{
-              background: 'transparent',
+              background: '#F1F5F9',
               border: 'none',
+              borderRadius: 12,
+              width: 44,
+              height: 44,
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               cursor: 'pointer',
-              color: '#94A3B8',
+              color: '#64748B',
             }}
           >
             <X size={24} />
@@ -140,6 +148,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
 
               <input
                 type="number"
+                inputMode="numeric"
                 value={parentAnswer}
                 onChange={(e) => setParentAnswer(e.target.value)}
                 placeholder="Enter answer"
@@ -217,7 +226,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               }}>
                 Difficulty / Age Group:
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(96px, 1fr))', gap: 8 }}>
                 {[
                   { id: 'pre-k', label: 'Pre-K (3-4)', desc: 'Numbers 1-5, Phonics' },
                   { id: 'kindergarten', label: 'Kindergarten (5-6)', desc: 'Numbers 1-10, Sight Words' },
@@ -255,11 +264,11 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               }}>
                 Voice Pacing / Speed:
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(96px, 1fr))', gap: 8 }}>
                 {[
-                  { speed: 0.75, label: 'Slow (0.75x)', desc: 'Best for Beginners' },
-                  { speed: 0.85, label: 'Gentle (0.85x)', desc: 'Patient Kid Pace' },
-                  { speed: 1.0, label: 'Normal (1.0x)', desc: 'Standard Fluent' },
+                  { speed: 0.75, label: 'Slow', desc: 'Best for beginners' },
+                  { speed: 0.85, label: 'Gentle', desc: 'Recommended' },
+                  { speed: 1.0, label: 'Brisk', desc: 'Confident readers' },
                 ].map((s) => (
                   <button
                     key={s.speed}

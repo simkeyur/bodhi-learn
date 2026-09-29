@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { sound } from '../utils/sound';
-import { speech } from '../utils/speech';
+import { speech, DEFAULT_VOICE_SPEED } from '../utils/speech';
 
 export interface PlacedSticker {
   id: string;
@@ -62,17 +62,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [soundEnabled, setSoundEnabledState] = useState<boolean>(() => {
     const saved = localStorage.getItem('bodhi_sound');
-    return saved !== null ? saved === 'true' : true;
+    const enabled = saved !== null ? saved === 'true' : true;
+    sound.soundEnabled = enabled;
+    speech.muted = !enabled;
+    return enabled;
   });
 
   const [speechEnabled, setSpeechEnabledState] = useState<boolean>(() => {
     const saved = localStorage.getItem('bodhi_speech');
-    return saved !== null ? saved === 'true' : true;
+    const enabled = saved !== null ? saved === 'true' : true;
+    speech.speechEnabled = enabled;
+    return enabled;
   });
 
   const [voiceSpeed, setVoiceSpeedState] = useState<number>(() => {
     const saved = localStorage.getItem('bodhi_voice_speed');
-    const parsed = saved ? parseFloat(saved) : 0.82;
+    const parsed = saved ? parseFloat(saved) : DEFAULT_VOICE_SPEED;
     speech.speechRate = parsed;
     return parsed;
   });
@@ -100,12 +105,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setSoundEnabled = (enabled: boolean) => {
     setSoundEnabledState(enabled);
     sound.soundEnabled = enabled;
+    // The kid-facing mute button silences the voice too
+    speech.muted = !enabled;
+    if (!enabled) speech.stop();
     localStorage.setItem('bodhi_sound', String(enabled));
   };
 
   const setSpeechEnabled = (enabled: boolean) => {
     setSpeechEnabledState(enabled);
     speech.speechEnabled = enabled;
+    if (!enabled) speech.stop();
     localStorage.setItem('bodhi_speech', String(enabled));
   };
 

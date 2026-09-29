@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
+import { speech, clip } from '../../utils/speech';
+import { useKidTimers, useGreeting } from '../../utils/useKidTimers';
 import { useApp } from '../../context/AppContext';
 import { Volume2, ArrowLeft, RefreshCw, Sparkles } from 'lucide-react';
 
@@ -19,6 +20,8 @@ const ITEMS_POOL = ['⭐', '🍎', '🎈', '🧁', '🐶', '🍓', '🚀', '🐬
 
 export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
   const { addStars, ageBracket } = useApp();
+  const { sayThen, clearAll } = useKidTimers();
+  const greeting = useGreeting(clip.phrase('greet_counting'));
   const [mode, setMode] = useState<'tap-count' | 'quiz'>('tap-count');
 
   // Max items based on age
@@ -35,6 +38,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
   const [quizEmoji, setQuizEmoji] = useState<string>('⭐');
   const [quizOptions, setQuizOptions] = useState<number[]>([]);
   const [quizFeedback, setQuizFeedback] = useState<'idle' | 'correct' | 'try-again'>('idle');
+  const [wrongPicks, setWrongPicks] = useState<number[]>([]);
 
   // Initialize Tap & Count round
   const startTapCountRound = () => {
@@ -51,7 +55,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
       counted: false,
     }));
     setItems(generated);
-    speech.speak(`Tap and count the items!`);
+    speech.say([...greeting(), clip.phrase('tap_and_count_prompt')]);
   };
 
   // Initialize Quiz round
@@ -62,6 +66,8 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
     setQuizCount(num);
     setQuizEmoji(randomEmoji);
     setQuizFeedback('idle');
+    setWrongPicks([]);
+    clearAll();
 
     // Create 3 options including correct
     const opts = new Set<number>([num]);
@@ -71,7 +77,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
       opts.add(val);
     }
     setQuizOptions(Array.from(opts).sort(() => 0.5 - Math.random()));
-    speech.speak(`How many are there?`);
+    speech.say([...greeting(), clip.phrase('how_many_quiz')]);
   };
 
   useEffect(() => {
@@ -88,7 +94,6 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
     const nextCount = currentTappedCount + 1;
     setCurrentTappedCount(nextCount);
     sound.playCountChime(nextCount);
-    speech.speak(`${nextCount}`);
 
     setItems((prev) =>
       prev.map((i) => (i.id === item.id ? { ...i, counted: true, countNumber: nextCount } : i))
@@ -96,71 +101,52 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
 
     if (nextCount === targetCount) {
       setIsAllCounted(true);
-      setTimeout(() => {
-        addStars(1);
-        speech.speak(`Great job! You counted all ${targetCount}!`);
-      }, 500);
+      addStars(1);
+      speech.say([clip.number(nextCount), clip.cheer(), clip.phrase('great_job_counting')]);
+    } else {
+      speech.say([clip.number(nextCount)]);
     }
   };
 
   const handleQuizAnswer = (num: number) => {
+    if (quizFeedback === 'correct') return;
     if (num === quizCount) {
       sound.playSuccess();
       setQuizFeedback('correct');
       addStars(1);
-      speech.speak(`Yes! There are ${quizCount}! You got a star!`);
-      setTimeout(() => {
-        startQuizRound();
-      }, 1500);
+      sayThen(
+        [clip.cheer(), clip.phrase('there_are'), clip.number(quizCount), clip.phrase('star_earned')],
+        startQuizRound,
+      );
     } else {
       sound.playGentleTryAgain();
       setQuizFeedback('try-again');
-      speech.speak(`Let's count them again!`);
+      setWrongPicks((prev) => [...prev, num]);
+      speech.say([clip.phrase('count_again')]);
     }
   };
 
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '24px 16px' }}>
-      {/* Top Bar with Mode Switch */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 12,
-        marginBottom: 24,
-      }}>
-        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white" style={{ padding: '10px 18px', fontSize: '1rem' }}>
-          <ArrowLeft size={20} /> Back to Hub
+    <div className="page" style={{ maxWidth: 900 }}>
+      <div className="world-bar">
+        <button onClick={() => { sound.playPop(); onBack(); }} className="kid-btn btn-white back-btn" aria-label="Back to home">
+          <ArrowLeft size={22} /> <span className="btn-label">Back</span>
         </button>
 
-        <div style={{
-          display: 'flex',
-          gap: 10,
-          background: '#FFFFFF',
-          padding: 6,
-          borderRadius: 999,
-          boxShadow: 'var(--shadow-playful)',
-        }}>
+        <div className="seg">
           <button
-            onClick={() => {
-              sound.playPop();
-              setMode('tap-count');
-            }}
+            onClick={() => { sound.playPop(); setMode('tap-count'); }}
             className={`kid-btn ${mode === 'tap-count' ? 'btn-grass' : 'btn-white'}`}
-            style={{ padding: '8px 20px', fontSize: '1rem', borderRadius: 999 }}
+            aria-pressed={mode === 'tap-count'}
           >
-            👆 Tap & Count
+            👆 Count
           </button>
           <button
-            onClick={() => {
-              sound.playPop();
-              setMode('quiz');
-            }}
+            onClick={() => { sound.playPop(); setMode('quiz'); }}
             className={`kid-btn ${mode === 'quiz' ? 'btn-sun' : 'btn-white'}`}
-            style={{ padding: '8px 20px', fontSize: '1rem', borderRadius: 999 }}
+            aria-pressed={mode === 'quiz'}
           >
-            ❓ "How Many?" Quiz
+            ❓ How Many?
           </button>
         </div>
       </div>
@@ -172,9 +158,9 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
           borderRadius: 'var(--radius-lg)',
           border: '6px solid #4ADE80',
           boxShadow: 'var(--shadow-floating)',
-          padding: '32px 24px',
+          padding: '16px 12px',
           textAlign: 'center',
-          minHeight: 460,
+          minHeight: 'min(460px, 62dvh)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -186,25 +172,24 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
               gap: 10,
               background: '#FFFFFF',
               border: '3px solid #86EFAC',
-              padding: '8px 24px',
+              padding: '4px 6px 4px 20px',
               borderRadius: 999,
-              marginBottom: 16,
               boxShadow: '0 4px 0 #BBF7D0',
             }}>
               <span style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '1.8rem',
+                fontSize: '1.6rem',
                 fontWeight: 700,
                 color: '#065F46',
               }}>
-                Counted: {currentTappedCount} / {targetCount}
+                {currentTappedCount} / {targetCount}
               </span>
               <button
-                onClick={() => speech.speak(`Count to ${targetCount}!`)}
+                onClick={() => speech.say([clip.phrase('count_to'), clip.number(targetCount)])}
                 className="speaker-bubble"
-                style={{ width: 40, height: 40 }}
+                aria-label={`Hear: count to ${targetCount}`}
               >
-                <Volume2 size={18} />
+                <Volume2 size={22} />
               </button>
             </div>
           </div>
@@ -215,16 +200,18 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
             flexWrap: 'wrap',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: 20,
-            margin: '28px 0',
+            gap: 'clamp(12px, 3vw, 20px)',
+            margin: '20px 0',
           }}>
             {items.map((item) => (
-              <div
+              <button
                 key={item.id}
                 onClick={() => handleItemTap(item)}
+                aria-label={item.counted ? `Counted ${item.countNumber}` : 'Tap to count'}
                 style={{
-                  width: 90,
-                  height: 90,
+                  width: 'clamp(68px, 20vw, 90px)',
+                  height: 'clamp(68px, 20vw, 90px)',
+                  padding: 0,
                   borderRadius: '50%',
                   background: item.counted ? '#FEF08A' : '#FFFFFF',
                   border: item.counted ? '4px solid #F59E0B' : '4px solid #34D399',
@@ -234,12 +221,12 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: item.counted ? 'default' : 'pointer',
-                  fontSize: '3.2rem',
+                  fontSize: 'clamp(2.4rem, 8vw, 3.2rem)',
                   position: 'relative',
-                  transform: item.counted ? 'scale(0.96)' : 'scale(1)',
+                  transform: item.counted ? 'translateY(4px)' : 'none',
                   transition: 'all 0.15s ease',
                 }}
-                className={item.counted ? 'animate-pop' : 'animate-bob'}
+                className={item.counted ? 'animate-pop' : undefined}
               >
                 {item.emoji}
                 {item.counted && (
@@ -263,7 +250,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                     {item.countNumber}
                   </span>
                 )}
-              </div>
+              </button>
             ))}
           </div>
 
@@ -273,26 +260,26 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
               <div className="animate-pop">
                 <div style={{
                   color: '#065F46',
-                  fontSize: '1.8rem',
+                  fontSize: '1.5rem',
                   fontWeight: 700,
                   fontFamily: 'var(--font-display)',
                   marginBottom: 12,
                 }}>
-                  🌟 Woohoo! You counted all {targetCount}! +1 Star! 🌟
+                  🌟 You counted all {targetCount}! +1 Star!
                 </div>
                 <button
-                  onClick={startTapCountRound}
+                  onClick={() => { sound.playPop(); startTapCountRound(); }}
                   className="kid-btn btn-sun"
-                  style={{ padding: '14px 32px', fontSize: '1.25rem' }}
+                  style={{ fontSize: '1.25rem' }}
                 >
                   Count Again! <Sparkles size={20} />
                 </button>
               </div>
             ) : (
               <button
-                onClick={startTapCountRound}
+                onClick={() => { sound.playPop(); startTapCountRound(); }}
                 className="kid-btn btn-white"
-                style={{ fontSize: '1rem', padding: '10px 18px' }}
+                style={{ fontSize: '1rem' }}
               >
                 <RefreshCw size={16} /> New Set
               </button>
@@ -306,14 +293,14 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
           borderRadius: 'var(--radius-lg)',
           border: '6px solid #F59E0B',
           boxShadow: 'var(--shadow-floating)',
-          padding: '36px 24px',
+          padding: '18px 12px',
           textAlign: 'center',
         }}>
           <h2 style={{
-            fontSize: '2.4rem',
+            fontSize: 'clamp(1.6rem, 6vw, 2.4rem)',
             color: '#0F172A',
             fontFamily: 'var(--font-display)',
-            marginBottom: 20,
+            marginBottom: 14,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -321,11 +308,11 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
           }}>
             How many are there?
             <button
-              onClick={() => speech.speak(`How many are there?`)}
+              onClick={() => speech.say([clip.phrase('how_many_quiz')])}
               className="speaker-bubble"
-              style={{ width: 44, height: 44 }}
+              aria-label="Hear the question again"
             >
-              <Volume2 size={20} />
+              <Volume2 size={22} />
             </button>
           </h2>
 
@@ -333,79 +320,71 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
           <div style={{
             background: '#FEF3C7',
             borderRadius: 'var(--radius-md)',
-            padding: '28px 16px',
+            padding: '18px 12px',
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'center',
-            gap: 20,
+            gap: 'clamp(8px, 3vw, 20px)',
             maxWidth: 600,
-            margin: '0 auto 32px',
-            minHeight: 140,
+            margin: '0 auto 14px',
+            minHeight: 120,
             alignItems: 'center',
           }}>
             {Array.from({ length: quizCount }).map((_, i) => (
-              <span key={i} style={{ fontSize: '3.6rem' }} className="animate-bob">
+              <span key={i} style={{ fontSize: 'clamp(2.4rem, 10vw, 3.6rem)' }} aria-hidden>
                 {quizEmoji}
               </span>
             ))}
           </div>
 
-          {/* Feedback */}
-          {quizFeedback === 'correct' && (
-            <div style={{
-              color: '#16A34A',
-              fontSize: '1.6rem',
-              fontWeight: 700,
-              fontFamily: 'var(--font-display)',
-              marginBottom: 20,
-            }} className="animate-pop">
-              🌟 That's right! There are {quizCount}! +1 Star! 🌟
-            </div>
-          )}
+          {/* Fixed-height feedback so the answer buttons never jump */}
+          <div style={{
+            minHeight: 36,
+            marginBottom: 12,
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            fontSize: '1.3rem',
+            color: quizFeedback === 'correct' ? '#16A34A' : '#EA580C',
+          }} aria-live="polite">
+            {quizFeedback === 'correct' && <span className="animate-pop" style={{ display: 'inline-block' }}>🌟 Yes, {quizCount}! +1 Star!</span>}
+            {quizFeedback === 'try-again' && 'Count again, slowly 🎈'}
+          </div>
 
-          {quizFeedback === 'try-again' && (
-            <div style={{
-              color: '#EA580C',
-              fontSize: '1.3rem',
-              fontWeight: 700,
-              marginBottom: 20,
-            }}>
-              Count carefully and try again! 🎈
-            </div>
-          )}
-
-          {/* 3 Large Choice Buttons */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: 20,
+            gap: 'clamp(12px, 4vw, 20px)',
           }}>
-            {quizOptions.map((opt) => (
-              <button
-                key={opt}
-                onClick={() => handleQuizAnswer(opt)}
-                style={{
-                  width: 90,
-                  height: 90,
-                  borderRadius: 'var(--radius-md)',
-                  background: '#FFFFFF',
-                  border: '4px solid #F59E0B',
-                  boxShadow: '0 8px 0 #D97706',
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '3rem',
-                  fontWeight: 700,
-                  color: '#92400E',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'transform 0.1s ease',
-                }}
-                className="animate-wiggle"
-              >
-                {opt}
-              </button>
-            ))}
+            {quizOptions.map((opt) => {
+              const isWrong = wrongPicks.includes(opt);
+              const isRight = quizFeedback === 'correct' && opt === quizCount;
+              return (
+                <button
+                  key={opt}
+                  onClick={() => handleQuizAnswer(opt)}
+                  disabled={isWrong}
+                  style={{
+                    width: 'clamp(80px, 24vw, 96px)',
+                    height: 'clamp(80px, 24vw, 96px)',
+                    borderRadius: 'var(--radius-md)',
+                    background: isRight ? '#DCFCE7' : '#FFFFFF',
+                    border: `4px solid ${isRight ? '#16A34A' : '#F59E0B'}`,
+                    boxShadow: isWrong ? 'none' : '0 7px 0 #D97706',
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '2.8rem',
+                    fontWeight: 700,
+                    color: '#92400E',
+                    cursor: isWrong ? 'default' : 'pointer',
+                    opacity: isWrong ? 0.35 : 1,
+                    transform: isWrong ? 'translateY(5px)' : 'none',
+                    transition: 'all 0.12s ease',
+                  }}
+                  className={isRight ? 'animate-pop' : undefined}
+                >
+                  {opt}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}

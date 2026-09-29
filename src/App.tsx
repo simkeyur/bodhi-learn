@@ -5,16 +5,24 @@ import { HomeHub } from './components/home/HomeHub';
 import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
 import { StoriesWorld } from './components/reading/StoriesWorld';
+import { SlideReadWorld } from './components/reading/SlideReadWorld';
 import { CountingWorld } from './components/math/CountingWorld';
 import { VisualMathWorld } from './components/math/VisualMathWorld';
 import { StickerBook } from './components/gamification/StickerBook';
 import { ParentGateModal } from './components/parent/ParentGateModal';
 import { AbcTracingJourney } from './components/tracing/AbcTracingJourney';
 import { WordTracingWorld } from './components/tracing/WordTracingWorld';
+import { speech } from './utils/speech';
 
 export const BodhiApp: React.FC = () => {
-  const [currentView, setCurrentView] = useState<string>('home');
+  const [currentView, setCurrentViewState] = useState<string>('home');
   const [isParentGateOpen, setIsParentGateOpen] = useState<boolean>(false);
+
+  const setCurrentView = (view: string) => {
+    speech.stop();
+    setCurrentViewState(view);
+    window.scrollTo({ top: 0 });
+  };
 
   const renderCurrentView = () => {
     switch (currentView) {
@@ -36,6 +44,8 @@ export const BodhiApp: React.FC = () => {
         return <PhonicsWorld onBack={() => setCurrentView('home')} />;
       case 'sight-words':
         return <SightWordsWorld onBack={() => setCurrentView('home')} />;
+      case 'slide-read':
+        return <SlideReadWorld onBack={() => setCurrentView('home')} />;
       case 'stories':
         return <StoriesWorld onBack={() => setCurrentView('home')} />;
       case 'counting':
@@ -53,7 +63,7 @@ export const BodhiApp: React.FC = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
       {/* Background Animated Clouds */}
       <div className="ambient-bg">
         <div className="cloud cloud-1" />

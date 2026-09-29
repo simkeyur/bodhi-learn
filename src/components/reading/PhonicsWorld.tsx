@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ALPHABET_DATA, type PhonicLetter } from '../../data/learningData';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
+import { speech, clip } from '../../utils/speech';
+import { useKidTimers } from '../../utils/useKidTimers';
 import { useApp } from '../../context/AppContext';
 import { Volume2, Sparkles, RefreshCw, ArrowLeft } from 'lucide-react';
 
@@ -11,6 +12,7 @@ interface PhonicsWorldProps {
 
 export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
   const { addStars } = useApp();
+  const { sayThen } = useKidTimers();
   const [selectedLetter, setSelectedLetter] = useState<PhonicLetter>(ALPHABET_DATA[0]);
   const [gameMode, setGameMode] = useState<'explore' | 'quest'>('explore');
 
@@ -18,343 +20,282 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
   const [questTarget, setQuestTarget] = useState<PhonicLetter>(ALPHABET_DATA[0]);
   const [questOptions, setQuestOptions] = useState<PhonicLetter[]>([]);
   const [questFeedback, setQuestFeedback] = useState<'idle' | 'correct' | 'try-again'>('idle');
+  const [wrongPicks, setWrongPicks] = useState<string[]>([]);
 
   const startNewQuest = () => {
-    const randomIndex = Math.floor(Math.random() * ALPHABET_DATA.length);
-    const target = ALPHABET_DATA[randomIndex];
+    const target = ALPHABET_DATA[Math.floor(Math.random() * ALPHABET_DATA.length)];
     setQuestTarget(target);
     setQuestFeedback('idle');
+    setWrongPicks([]);
 
-    // Pick 3 distractors
     const others = ALPHABET_DATA.filter((l) => l.letter !== target.letter);
     const shuffledOthers = [...others].sort(() => 0.5 - Math.random()).slice(0, 3);
-    const options = [target, ...shuffledOthers].sort(() => 0.5 - Math.random());
-    setQuestOptions(options);
+    setQuestOptions([target, ...shuffledOthers].sort(() => 0.5 - Math.random()));
 
-    speech.speak(`Can you find the letter ${target.letter}?`);
+    speech.say([clip.phrase('can_you_find'), clip.letter(target.letter)]);
   };
 
   useEffect(() => {
     if (gameMode === 'quest') {
       startNewQuest();
+    } else {
+      speech.say([clip.phrase('greet_phonics')]);
     }
   }, [gameMode]);
 
   const handleLetterClick = (item: PhonicLetter) => {
     setSelectedLetter(item);
     sound.playPop();
-    speech.speakPhonics(item.letter, item.word);
+    speech.say([clip.phonics(item.letter)]);
   };
 
   const handleQuestSelect = (item: PhonicLetter) => {
+    if (questFeedback === 'correct') return;
     if (item.letter === questTarget.letter) {
       sound.playSuccess();
       setQuestFeedback('correct');
       addStars(1);
-      speech.speak(`Awesome! ${item.letter} is for ${item.word}!`);
-      setTimeout(() => {
-        startNewQuest();
-      }, 1500);
+      sayThen([clip.cheer(), clip.phonics(item.letter)], startNewQuest);
     } else {
       sound.playGentleTryAgain();
       setQuestFeedback('try-again');
-      speech.speak(`That's ${item.letter}. Let's find ${questTarget.letter}!`);
+      setWrongPicks((prev) => [...prev, item.letter]);
+      speech.say([
+        clip.phrase('thats'),
+        clip.letter(item.letter),
+        clip.phrase('lets_find'),
+        clip.letter(questTarget.letter),
+      ]);
     }
   };
 
   return (
-    <div style={{ maxWidth: 1050, margin: '0 auto', padding: '24px 16px' }}>
-      {/* Top Bar with Mode Switch */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 12,
-        marginBottom: 24,
-      }}>
+    <div className="page">
+      <div className="world-bar">
         <button
           onClick={() => { sound.playPop(); onBack(); }}
-          className="kid-btn btn-white"
-          style={{ padding: '10px 18px', fontSize: '1rem' }}
+          className="kid-btn btn-white back-btn"
+          aria-label="Back to home"
         >
-          <ArrowLeft size={20} /> Back to Hub
+          <ArrowLeft size={22} /> <span className="btn-label">Back</span>
         </button>
 
-        <div style={{
-          display: 'flex',
-          gap: 10,
-          background: '#FFFFFF',
-          padding: 6,
-          borderRadius: 999,
-          boxShadow: 'var(--shadow-playful)',
-        }}>
+        <div className="seg">
           <button
-            onClick={() => {
-              sound.playPop();
-              setGameMode('explore');
-            }}
+            onClick={() => { sound.playPop(); setGameMode('explore'); }}
             className={`kid-btn ${gameMode === 'explore' ? 'btn-sky' : 'btn-white'}`}
-            style={{ padding: '8px 20px', fontSize: '1.05rem', borderRadius: 999 }}
+            aria-pressed={gameMode === 'explore'}
           >
-            🔤 Alphabet Board
+            🔤 ABC
           </button>
           <button
-            onClick={() => {
-              sound.playPop();
-              setGameMode('quest');
-            }}
+            onClick={() => { sound.playPop(); setGameMode('quest'); }}
             className={`kid-btn ${gameMode === 'quest' ? 'btn-sun' : 'btn-white'}`}
-            style={{ padding: '8px 20px', fontSize: '1.05rem', borderRadius: 999 }}
+            aria-pressed={gameMode === 'quest'}
           >
-            🎯 Letter Quest
+            🎯 Quest
           </button>
         </div>
       </div>
 
       {gameMode === 'explore' ? (
         <div>
-          {/* Spotlight Hero Card */}
+          {/* Spotlight card */}
           <div style={{
             background: 'linear-gradient(135deg, #FFFFFF, #F0F9FF)',
             borderRadius: 'var(--radius-lg)',
             border: `5px solid ${selectedLetter.color}`,
             boxShadow: 'var(--shadow-floating)',
-            padding: '20px 16px',
-            marginBottom: 24,
+            padding: '14px 14px',
+            marginBottom: 16,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: 16,
+            gap: 14,
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-              <div 
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: 'var(--radius-md)',
-                  background: selectedLetter.color,
-                  color: '#FFFFFF',
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '3.6rem',
-                  fontWeight: 700,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: `0 8px 0 rgba(0, 0, 0, 0.15)`,
-                }}
-                className="animate-pop"
-              >
-                {selectedLetter.letter}
-              </div>
+            <div
+              key={selectedLetter.letter}
+              style={{
+                width: 76,
+                height: 76,
+                flexShrink: 0,
+                borderRadius: 'var(--radius-md)',
+                background: selectedLetter.color,
+                color: '#FFFFFF',
+                fontFamily: 'var(--font-display)',
+                fontSize: '2.8rem',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 6px 0 rgba(0, 0, 0, 0.15)',
+              }}
+              className="animate-pop"
+            >
+              {selectedLetter.letter}{selectedLetter.letter.toLowerCase()}
+            </div>
 
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ fontSize: '2.5rem' }}>{selectedLetter.emoji}</span>
-                  <h2 style={{
-                    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-                    color: '#0F172A',
-                    fontFamily: 'var(--font-display)',
-                    margin: 0,
-                  }}>
-                    {selectedLetter.word}
-                  </h2>
-                </div>
-                <p style={{
-                  fontSize: '1.1rem',
-                  color: '#475569',
-                  fontWeight: 600,
-                  marginTop: 4,
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: '2rem' }} aria-hidden>{selectedLetter.emoji}</span>
+                <h2 style={{
+                  fontSize: 'clamp(1.5rem, 5vw, 2.4rem)',
+                  color: '#0F172A',
+                  margin: 0,
+                  lineHeight: 1.1,
                 }}>
-                  {selectedLetter.sentence}
-                </p>
+                  {selectedLetter.word}
+                </h2>
               </div>
+              <p style={{ fontSize: '1rem', color: '#475569', fontWeight: 600, marginTop: 4 }}>
+                {selectedLetter.sentence}
+              </p>
             </div>
 
             <button
               onClick={() => {
                 sound.playPop(600);
-                speech.speakPhonics(selectedLetter.letter, selectedLetter.word);
+                speech.say([clip.phonics(selectedLetter.letter)]);
               }}
               className="speaker-bubble"
-              title="Hear pronunciation again"
-              style={{ width: 52, height: 52 }}
+              aria-label={`Hear ${selectedLetter.letter} is for ${selectedLetter.word}`}
             >
               <Volume2 size={26} />
             </button>
           </div>
 
-          {/* 26 Letter Tiles Grid */}
+          {/* A–Z tiles */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(75px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(68px, 1fr))',
             gap: 10,
           }}>
             {ALPHABET_DATA.map((item) => {
               const isSelected = selectedLetter.letter === item.letter;
               return (
-                <div
+                <button
                   key={item.letter}
                   onClick={() => handleLetterClick(item)}
+                  aria-label={`${item.letter} for ${item.word}`}
+                  aria-pressed={isSelected}
                   style={{
                     background: isSelected ? item.color : '#FFFFFF',
                     color: isSelected ? '#FFFFFF' : '#1E293B',
                     borderRadius: 'var(--radius-md)',
                     border: `3px solid ${item.color}`,
-                    boxShadow: isSelected ? `0 6px 0 #CBD5E1` : '0 6px 0 #E2E8F0',
-                    padding: '12px 6px',
+                    boxShadow: isSelected ? '0 3px 0 #CBD5E1' : '0 5px 0 #E2E8F0',
+                    padding: '8px 4px',
                     textAlign: 'center',
                     cursor: 'pointer',
                     transition: 'all 0.12s ease',
-                    transform: isSelected ? 'scale(1.05)' : 'none',
+                    transform: isSelected ? 'translateY(2px)' : 'none',
+                    minHeight: 80,
                   }}
-                  className="animate-wiggle"
                 >
-                  <div style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '2.2rem',
-                    fontWeight: 700,
-                    lineHeight: 1,
-                  }}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, lineHeight: 1 }}>
                     {item.letter}
                   </div>
-                  <div style={{ fontSize: '1.8rem', marginTop: 4 }}>
+                  <div style={{ fontSize: '1.6rem', marginTop: 4 }} aria-hidden>
                     {item.emoji}
                   </div>
-                  <div style={{
-                    fontSize: '0.85rem',
-                    fontWeight: 700,
-                    marginTop: 2,
-                    textTransform: 'uppercase',
-                    opacity: isSelected ? 0.95 : 0.7,
-                  }}>
-                    {item.word}
-                  </div>
-                </div>
+                </button>
               );
             })}
           </div>
         </div>
       ) : (
-        /* Letter Quest Challenge Mode */
+        /* Letter Quest */
         <div style={{
           background: '#FFFFFF',
           borderRadius: 'var(--radius-lg)',
           border: '5px solid #F59E0B',
-          padding: '36px 24px',
+          padding: '24px 16px',
           textAlign: 'center',
           boxShadow: 'var(--shadow-floating)',
-          maxWidth: 680,
+          maxWidth: 560,
           margin: '0 auto',
         }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            background: '#FEF3C7',
-            padding: '6px 18px',
-            borderRadius: 999,
-            color: '#B45309',
-            fontWeight: 700,
-            marginBottom: 16,
-          }}>
-            <Sparkles size={18} /> Can you find this letter?
-          </div>
-
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 16,
-            marginBottom: 28,
+            gap: 14,
+            marginBottom: 18,
           }}>
-            <h2 style={{
-              fontSize: '3rem',
-              color: '#0F172A',
-              fontFamily: 'var(--font-display)',
-              margin: 0,
-            }}>
-              Find Letter <span style={{ color: '#D97706' }}>"{questTarget.letter}"</span>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 7vw, 2.6rem)', color: '#0F172A', margin: 0 }}>
+              Find <span style={{ color: '#D97706' }}>{questTarget.letter}</span>
             </h2>
-
             <button
-              onClick={() => speech.speak(`Find the letter ${questTarget.letter}!`)}
+              onClick={() => speech.say([clip.phrase('find_the_letter'), clip.letter(questTarget.letter)])}
               className="speaker-bubble"
-              style={{ width: 52, height: 52 }}
+              aria-label="Hear the letter again"
             >
               <Volume2 size={24} />
             </button>
           </div>
 
-          {/* Feedback message */}
-          {questFeedback === 'correct' && (
-            <div style={{
-              color: '#16A34A',
-              fontSize: '1.6rem',
-              fontWeight: 700,
-              fontFamily: 'var(--font-display)',
-              marginBottom: 20,
-            }} className="animate-pop">
-              🌟 You found it! +1 Star! 🌟
-            </div>
-          )}
+          {/* Fixed-height feedback so the buttons below never jump */}
+          <div style={{
+            minHeight: 36,
+            marginBottom: 12,
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            fontSize: '1.3rem',
+            color: questFeedback === 'correct' ? '#16A34A' : '#EA580C',
+          }} aria-live="polite">
+            {questFeedback === 'correct' && <span className="animate-pop" style={{ display: 'inline-block' }}>🌟 You found it! +1 Star!</span>}
+            {questFeedback === 'try-again' && 'Almost! Try another one 🎈'}
+            {questFeedback === 'idle' && (
+              <span style={{ color: '#B45309', display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '1.05rem' }}>
+                <Sparkles size={18} /> Tap the matching letter
+              </span>
+            )}
+          </div>
 
-          {questFeedback === 'try-again' && (
-            <div style={{
-              color: '#EA580C',
-              fontSize: '1.3rem',
-              fontWeight: 700,
-              marginBottom: 20,
-            }}>
-              Almost! Try another one! 🎈
-            </div>
-          )}
-
-          {/* Choice Tiles */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 18,
-            maxWidth: 420,
-            margin: '0 auto 28px',
+            gap: 14,
+            maxWidth: 380,
+            margin: '0 auto 20px',
           }}>
-            {questOptions.map((opt) => (
-              <button
-                key={opt.letter}
-                onClick={() => handleQuestSelect(opt)}
-                style={{
-                  height: 110,
-                  borderRadius: 'var(--radius-lg)',
-                  border: `4px solid ${opt.color}`,
-                  background: '#F8FAFC',
-                  fontSize: '3.6rem',
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 700,
-                  color: opt.color,
-                  boxShadow: `0 8px 0 #CBD5E1`,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'transform 0.1s ease',
-                }}
-                className="animate-bob"
-              >
-                {opt.letter}
-              </button>
-            ))}
+            {questOptions.map((opt) => {
+              const isWrong = wrongPicks.includes(opt.letter);
+              const isRight = questFeedback === 'correct' && opt.letter === questTarget.letter;
+              return (
+                <button
+                  key={opt.letter}
+                  onClick={() => handleQuestSelect(opt)}
+                  disabled={isWrong}
+                  aria-label={`Letter ${opt.letter}`}
+                  style={{
+                    height: 104,
+                    borderRadius: 'var(--radius-lg)',
+                    border: `4px solid ${isRight ? '#16A34A' : opt.color}`,
+                    background: isRight ? '#DCFCE7' : '#F8FAFC',
+                    fontSize: '3.4rem',
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 700,
+                    color: opt.color,
+                    boxShadow: isWrong ? 'none' : '0 7px 0 #CBD5E1',
+                    cursor: isWrong ? 'default' : 'pointer',
+                    opacity: isWrong ? 0.35 : 1,
+                    transform: isWrong ? 'translateY(5px)' : 'none',
+                    transition: 'all 0.12s ease',
+                  }}
+                  className={isRight ? 'animate-pop' : undefined}
+                >
+                  {opt.letter}
+                </button>
+              );
+            })}
           </div>
 
           <button
-            onClick={() => {
-              sound.playPop();
-              startNewQuest();
-            }}
+            onClick={() => { sound.playPop(); startNewQuest(); }}
             className="kid-btn btn-white"
-            style={{ fontSize: '1rem', padding: '10px 20px' }}
+            style={{ fontSize: '1rem' }}
           >
-            <RefreshCw size={18} /> Next Letter
+            <RefreshCw size={18} /> New Letter
           </button>
         </div>
       )}
