@@ -56,6 +56,39 @@ npm run build
 
 ---
 
+## 🎙️ Narration Audio
+
+All narration is recorded with **Gemini TTS** (voice *Sulafat*) into `public/audio/`. Every clip is
+listed in `scripts/audio/manifest.mjs`, built from `src/data/learningData.ts`, so new words,
+stories and sentences get audio automatically.
+
+Needs `GEMINI_API_KEY` in `src/.env` and `ffmpeg`:
+
+```bash
+# Render anything new or changed (resumable; re-run to continue or retry failures)
+npm run audio
+
+# Check every clip the app uses is in the manifest (no API calls)
+npm run audio -- --check
+
+# Compare voices, then open http://localhost:5188/_audition/
+npm run audio -- --audition
+
+# Switch the whole app to another voice
+npm run audio -- --voice Achird --force
+
+# Remove clips the app no longer uses
+npm run audio -- --prune
+```
+
+Use `--only words` or `--match "phonics_B"` to redo specific clips. Raw API audio is cached in
+`.audio-cache/`, so re-encoding never costs extra API calls. After regenerating, bump
+`CACHE_NAME` in `public/sw.js` so installed apps pick up the new recordings.
+
+The earlier OpenAI recordings are archived locally in `audio-archive/` (git-ignored).
+
+---
+
 ## ☁️ Cloudflare Deployment
 
 ### Deploy via Wrangler:

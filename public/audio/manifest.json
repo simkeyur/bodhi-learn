@@ -1,0 +1,641 @@
+{
+  "clips": {
+    "exclamations/woohoo.mp3": {
+      "text": "Woohoo!",
+      "style": "Very excited and joyful, celebrating a young child's success. Big smile, bright and energetic, short and punchy.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_A.mp3": {
+      "text": "A is for Apple. Sweet and crunchy!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/A.mp3": {
+      "text": "A",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/B.mp3": {
+      "text": "B",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_B.mp3": {
+      "text": "B is for Ball. Bounce, catch, and play!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/C.mp3": {
+      "text": "C",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_C.mp3": {
+      "text": "C is for Cat. Purr and meow!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/D.mp3": {
+      "text": "D",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_D.mp3": {
+      "text": "D is for Dolphin. Jumping in waves!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/G.mp3": {
+      "text": "G",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/E.mp3": {
+      "text": "E",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/F.mp3": {
+      "text": "F",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_E.mp3": {
+      "text": "E is for Elephant with a long trunk!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/H.mp3": {
+      "text": "H",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_F.mp3": {
+      "text": "F is for Frog. Ribbit, hop hop!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_G.mp3": {
+      "text": "G is for Giraffe reaching the tall trees!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/I.mp3": {
+      "text": "I",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_H.mp3": {
+      "text": "H is for Heart. Full of love and joy!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/J.mp3": {
+      "text": "J",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_I.mp3": {
+      "text": "I is for Ice Cream. Yummy and cool!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_L.mp3": {
+      "text": "L is for Lion. King of the jungle!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_J.mp3": {
+      "text": "J is for Jellyfish glowing in the ocean!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/K.mp3": {
+      "text": "K",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_K.mp3": {
+      "text": "K is for Kangaroo hopping high!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_M.mp3": {
+      "text": "M is for Monkey swinging on branches!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/L.mp3": {
+      "text": "L",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/M.mp3": {
+      "text": "M",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/N.mp3": {
+      "text": "N",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_N.mp3": {
+      "text": "N is for Nest where baby birds sleep!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/O.mp3": {
+      "text": "O",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_O.mp3": {
+      "text": "O is for Owl. Wise in the night!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/P.mp3": {
+      "text": "P",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_P.mp3": {
+      "text": "P is for Penguin waddling on ice!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/Q.mp3": {
+      "text": "Q",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_Q.mp3": {
+      "text": "Q is for Queen wearing a shining crown!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/R.mp3": {
+      "text": "R",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_R.mp3": {
+      "text": "R is for Rocket zooming to the stars!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/S.mp3": {
+      "text": "S",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_S.mp3": {
+      "text": "S is for Sun shining warm and bright!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/T.mp3": {
+      "text": "T",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_T.mp3": {
+      "text": "T is for Tiger with colorful stripes!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/U.mp3": {
+      "text": "U",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_U.mp3": {
+      "text": "U is for Unicorn sparkling with magic!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/V.mp3": {
+      "text": "V",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_V.mp3": {
+      "text": "V is for Volcano tall and mighty!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/W.mp3": {
+      "text": "W",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_W.mp3": {
+      "text": "W is for Whale singing in the sea!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/X.mp3": {
+      "text": "X",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_X.mp3": {
+      "text": "X is for Xylophone playing musical notes!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/Y.mp3": {
+      "text": "Y",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_Y.mp3": {
+      "text": "Y is for Yacht sailing on the water!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/Z.mp3": {
+      "text": "Z",
+      "style": "Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "letters/phonics_Z.mp3": {
+      "text": "Z is for Zebra with black and white stripes!",
+      "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/0.mp3": {
+      "text": "Zero",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/1.mp3": {
+      "text": "One",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/2.mp3": {
+      "text": "Two",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/3.mp3": {
+      "text": "Three",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/4.mp3": {
+      "text": "Four",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/5.mp3": {
+      "text": "Five",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/6.mp3": {
+      "text": "Six",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/7.mp3": {
+      "text": "Seven",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/8.mp3": {
+      "text": "Eight",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/9.mp3": {
+      "text": "Nine",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/10.mp3": {
+      "text": "Ten",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/11.mp3": {
+      "text": "Eleven",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/12.mp3": {
+      "text": "Twelve",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/13.mp3": {
+      "text": "Thirteen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/14.mp3": {
+      "text": "Fourteen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/15.mp3": {
+      "text": "Fifteen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/16.mp3": {
+      "text": "Sixteen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/17.mp3": {
+      "text": "Seventeen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/18.mp3": {
+      "text": "Eighteen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/19.mp3": {
+      "text": "Nineteen",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "numbers/20.mp3": {
+      "text": "Twenty",
+      "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/A.mp3": {
+      "text": "A",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/ADVENTURE.mp3": {
+      "text": "Adventure",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/AMY.mp3": {
+      "text": "Amy",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/AND.mp3": {
+      "text": "And",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/APPLE.mp3": {
+      "text": "Apple",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/AS.mp3": {
+      "text": "As",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/AT.mp3": {
+      "text": "At",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BALL.mp3": {
+      "text": "Ball",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BARNABY.mp3": {
+      "text": "Barnaby",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BEE.mp3": {
+      "text": "Bee",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BEN.mp3": {
+      "text": "Ben",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BIG.mp3": {
+      "text": "Big",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BIKE.mp3": {
+      "text": "Bike",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BIRD.mp3": {
+      "text": "Bird",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BLAST.mp3": {
+      "text": "Blast",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BLUE.mp3": {
+      "text": "Blue",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BODHI.mp3": {
+      "text": "Bodhi",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BONES.mp3": {
+      "text": "Bones",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BREEZE.mp3": {
+      "text": "Breeze",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BRIGHT.mp3": {
+      "text": "Bright",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BUS.mp3": {
+      "text": "Bus",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BUSY.mp3": {
+      "text": "Busy",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BUTTERFLIES.mp3": {
+      "text": "Butterflies",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/BUZZING.mp3": {
+      "text": "Buzzing",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/CAKE.mp3": {
+      "text": "Cake",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/CAN.mp3": {
+      "text": "Can",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/CAT.mp3": {
+      "text": "Cat",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/COLLECTED.mp3": {
+      "text": "Collected",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/COUNTING.mp3": {
+      "text": "Counting",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/CUP.mp3": {
+      "text": "Cup",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/DANCING.mp3": {
+      "text": "Dancing",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    },
+    "words/DOG.mp3": {
+      "text": "Dog",
+      "style": "Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.",
+      "voice": "Sulafat",
+      "model": "gemini-3.8-flash-tts"
+    }
+  },
+  "updatedAt": "2026-09-29T22:41:36.438Z"
+}
