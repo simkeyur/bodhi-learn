@@ -1,0 +1,18 @@
+{
+  "name": "Bodhi Learn - Kid Friendly Reading & Math",
+  "short_name": "Bodhi Learn",
+  "description": "Fun, tactile, and rewarding reading, math, and phonics learning app for kids.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0F9FF",
+  "theme_color": "#38BDF8",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

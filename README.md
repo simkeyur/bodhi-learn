@@ -1,0 +1,65 @@
+# Bodhi Learn 🌟
+
+A playful, kid-friendly learning web application and offline-capable PWA designed for children (Ages 3–8) to learn reading, phonics, sight words, counting, and visual mathematics.
+
+Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Web Speech API**. Deploys seamlessly to **Cloudflare Workers** (with Static Assets) or **Cloudflare Pages**.
+
+---
+
+## 🚀 Features
+
+### 🔤 1. Reading & Phonics
+- **Alphabet Phonics Board**: Complete A–Z interactive cards with letter sounds, sample vocabulary, and crystal-clear pronunciation.
+- **Letter Quest Challenge**: Interactive game asking kids to find specific letters, rewarding correct answers with stars and celebrations.
+- **Sight Words Safari**: High-frequency word builder with letter scrambling, flashcards, and voice playback across Pre-K, Kindergarten, and 1st Grade.
+- **Illustrated Read-Along Stories**: Engaging storybooks with synchronized voice narration and **tap-to-read words** so kids can click any individual word to hear it pronounced.
+
+### 🔢 2. Mathematics & Logic
+- **Counting Meadow**: Floating items (balloons, stars, apples) that pop with ascending musical pentatonic chimes and spoken numbers.
+- **"How Many?" Quiz**: Visual counting challenges with large kid-friendly choices.
+- **Visual Math Kitchen**: Concrete visual addition and subtraction equations with real tangible counters.
+
+### 🎨 3. Gamification & Rewards
+- **Sticker Playground**: Kids earn stars for completing learning activities, which they can spend to unlock collectible animated stickers.
+- **Interactive Sticker Board**: Children can place and reposition their unlocked stickers on a scenic play canvas.
+- **Celebration Effects**: Confetti bursts and cheering audio fanfares.
+
+### 🛡️ 4. Parental Controls & Settings (Gated)
+- **Math Security Gate**: Settings are protected by an adult math challenge (e.g., `8 + 7 = ?`) to avoid accidental taps.
+- **Learner Profile**: Customize the child's name and learning difficulty bracket (Pre-K, Kindergarten, or 1st Grade).
+- **Sound & Voice Controls**: Toggle sound effects and voice narration.
+- **Reward Gifts**: Parents can gift stars for offline chores or real-world milestones.
+
+### 📱 5. Progressive Web App (PWA) & Offline Ready
+- Complete `manifest.json` and `sw.js` (Service Worker) for standalone home-screen installation on iPads, tablets, and phones.
+- Zero-latency Web Audio API synthesizers that work 100% offline without needing external audio downloads.
+
+---
+
+## 🛠️ Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server
+npm run dev
+
+# Run production build
+npm run build
+```
+
+---
+
+## ☁️ Cloudflare Deployment
+
+### Deploy via Wrangler:
+```bash
+npm run deploy
+```
+
+### Deploy via Cloudflare Pages:
+1. Connect this GitHub repository (`simkeyur/bodhi-learn`) in the Cloudflare Dashboard.
+2. Select **Framework preset**: `Vite` (or `None`).
+3. Set **Build command**: `npm run build`
+4. Set **Build output directory**: `dist`
