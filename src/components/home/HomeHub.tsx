@@ -19,6 +19,28 @@ export const HomeHub: React.FC<HomeHubProps> = ({ onSelectView }) => {
 
   const CARDS = [
     {
+      id: 'tracing-abc',
+      title: 'ABC Tracing Journey',
+      subtitle: 'Big screen: A for Apple, B for Ball & magic brush!',
+      icon: '✏️',
+      color: '#FB7185',
+      darkColor: '#E11D48',
+      bgGradient: 'linear-gradient(135deg, #FFE4E6 0%, #FECDD3 100%)',
+      starsBonus: '+1 Star',
+      greeting: 'Welcome to the ABC Tracing Journey! Let us trace letters!',
+    },
+    {
+      id: 'tracing-words',
+      title: 'Word Spelling Tracing',
+      subtitle: 'Trace whole words on kindergarten handwriting lines',
+      icon: '✍️',
+      color: '#8B5CF6',
+      darkColor: '#6D28D9',
+      bgGradient: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%)',
+      starsBonus: '+1 Star',
+      greeting: 'Let us practice spelling and tracing words!',
+    },
+    {
       id: 'phonics',
       title: 'Phonics & Letters',
       subtitle: 'A-Z sound board and Letter Quest',

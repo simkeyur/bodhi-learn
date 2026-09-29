@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
-import { Volume2, VolumeX, Lock, Sparkles, BookOpen, Calculator, Award } from 'lucide-react';
+import { Volume2, VolumeX, Lock, Sparkles, BookOpen, Calculator, Award, Pencil } from 'lucide-react';
 
 interface HeaderProps {
   currentView: string;
@@ -91,6 +91,27 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
           padding: '6px 10px',
           borderRadius: 999,
         }}>
+          <button
+            onClick={() => { sound.playPop(); onSelectView('tracing-abc'); }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '6px 14px',
+              borderRadius: 999,
+              border: 'none',
+              background: currentView.startsWith('tracing') ? '#FB7185' : 'transparent',
+              color: currentView.startsWith('tracing') ? '#FFFFFF' : '#475569',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 600,
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            <Pencil size={16} /> Tracing
+          </button>
+
           <button
             onClick={() => { sound.playPop(); onSelectView('reading'); }}
             style={{

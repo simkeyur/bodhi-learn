@@ -9,6 +9,8 @@ import { CountingWorld } from './components/math/CountingWorld';
 import { VisualMathWorld } from './components/math/VisualMathWorld';
 import { StickerBook } from './components/gamification/StickerBook';
 import { ParentGateModal } from './components/parent/ParentGateModal';
+import { AbcTracingJourney } from './components/tracing/AbcTracingJourney';
+import { WordTracingWorld } from './components/tracing/WordTracingWorld';
 
 export const BodhiApp: React.FC = () => {
   const [currentView, setCurrentView] = useState<string>('home');
@@ -16,6 +18,20 @@ export const BodhiApp: React.FC = () => {
 
   const renderCurrentView = () => {
     switch (currentView) {
+      case 'tracing-abc':
+        return (
+          <AbcTracingJourney
+            onBack={() => setCurrentView('home')}
+            onGoToWordTracing={() => setCurrentView('tracing-words')}
+          />
+        );
+      case 'tracing-words':
+        return (
+          <WordTracingWorld
+            onBack={() => setCurrentView('home')}
+            onGoToAbcJourney={() => setCurrentView('tracing-abc')}
+          />
+        );
       case 'phonics':
         return <PhonicsWorld onBack={() => setCurrentView('home')} />;
       case 'sight-words':

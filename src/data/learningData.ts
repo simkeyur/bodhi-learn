@@ -38,9 +38,16 @@ export interface Sticker {
   costStars: number;
 }
 
+export interface TracingWord {
+  id: string;
+  word: string;
+  emoji: string;
+  hint: string;
+}
+
 export const ALPHABET_DATA: PhonicLetter[] = [
   { letter: 'A', word: 'Apple', emoji: '🍎', color: '#F87171', phonicsSound: 'ah', sentence: 'A is for Apple. Sweet and crunchy!' },
-  { letter: 'B', word: 'Bear', emoji: '🐻', color: '#FB923C', phonicsSound: 'buh', sentence: 'B is for Bear. Big and cuddly!' },
+  { letter: 'B', word: 'Ball', emoji: '⚽', color: '#3B82F6', phonicsSound: 'buh', sentence: 'B is for Ball. Bounce, catch, and play!' },
   { letter: 'C', word: 'Cat', emoji: '🐱', color: '#FBBF24', phonicsSound: 'kuh', sentence: 'C is for Cat. Purr and meow!' },
   { letter: 'D', word: 'Dolphin', emoji: '🐬', color: '#38BDF8', phonicsSound: 'duh', sentence: 'D is for Dolphin. Jumping in waves!' },
   { letter: 'E', word: 'Elephant', emoji: '🐘', color: '#818CF8', phonicsSound: 'eh', sentence: 'E is for Elephant with a long trunk!' },
@@ -131,4 +138,19 @@ export const REWARD_STICKERS: Sticker[] = [
   { id: 'st10', name: 'Space Alien', emoji: '👾', costStars: 6 },
   { id: 'st11', name: 'Crown of Glory', emoji: '👑', costStars: 8 },
   { id: 'st12', name: 'Heart Balloon', emoji: '🎈', costStars: 4 },
+];
+
+export const TRACING_WORDS: TracingWord[] = [
+  { id: 'tw1', word: 'APPLE', emoji: '🍎', hint: 'Sweet and crunchy fruit' },
+  { id: 'tw2', word: 'BALL', emoji: '⚽', hint: 'Bouncy round toy' },
+  { id: 'tw3', word: 'CAT', emoji: '🐱', hint: 'Playful furry friend' },
+  { id: 'tw4', word: 'DOG', emoji: '🐶', hint: 'Loyal puppy friend' },
+  { id: 'tw5', word: 'STAR', emoji: '⭐', hint: 'Twinkling night light' },
+  { id: 'tw6', word: 'SUN', emoji: '☀️', hint: 'Warm and bright' },
+  { id: 'tw7', word: 'MOON', emoji: '🌙', hint: 'Glows in the dark sky' },
+  { id: 'tw8', word: 'FISH', emoji: '🐟', hint: 'Swims in the clear water' },
+  { id: 'tw9', word: 'BIRD', emoji: '🐦', hint: 'Flies high in the sky' },
+  { id: 'tw10', word: 'TREE', emoji: '🌳', hint: 'Tall and green' },
+  { id: 'tw11', word: 'CAKE', emoji: '🎂', hint: 'Sweet birthday treat' },
+  { id: 'tw12', word: 'BODHI', emoji: '🌟', hint: 'Super star learner!' },
 ];

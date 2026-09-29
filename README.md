@@ -8,7 +8,12 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Web Spe
 
 ## 🚀 Features
 
-### 🔤 1. Reading & Phonics
+### ✏️ 1. ABC Journey & Letter / Spelling Tracing
+- **ABC Tracing Journey**: Big-screen tactile letter tracing for A–Z (e.g. *A for Apple 🍎*, *B for Ball ⚽*). Features standard kindergarten handwriting lines (sky line, plane line, grass line), capital & small letter toggles, and magic rainbow glowing brush strokes.
+- **Word & Spelling Tracing**: Practice tracing and spelling complete high-frequency words (e.g., *APPLE*, *BALL*, *CAT*, *STAR*, *SUN*, *BODHI*) with letter-by-letter audio pronunciation and tactile ruled guidelines.
+- **Celebratory Feedback**: Confetti explosions, star fanfares, and speech praise whenever kids complete tracing tasks.
+
+### 🔤 2. Reading & Phonics
 - **Alphabet Phonics Board**: Complete A–Z interactive cards with letter sounds, sample vocabulary, and crystal-clear pronunciation.
 - **Letter Quest Challenge**: Interactive game asking kids to find specific letters, rewarding correct answers with stars and celebrations.
 - **Sight Words Safari**: High-frequency word builder with letter scrambling, flashcards, and voice playback across Pre-K, Kindergarten, and 1st Grade.
