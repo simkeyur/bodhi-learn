@@ -92,19 +92,36 @@ export const WordTracingWorld: React.FC<WordTracingWorldProps> = ({ onBack, onGo
     ctx.restore();
   };
 
-  useEffect(() => {
+  const updateCanvasSizeAndGuide = () => {
     const canvas = canvasRef.current;
-    if (canvas) {
-      canvas.width = 680;
-      canvas.height = 300;
-      renderBackgroundGuide();
-      setHasDrawn(false);
-      setIsCompleted(false);
-    }
+    if (!canvas) return;
+    const parentWidth = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+    const availableWidth = Math.min(parentWidth - 10, 680);
+    const targetHeight = Math.min(Math.round(availableWidth * 0.48), 300);
+
+    canvas.width = Math.max(availableWidth, 290);
+    canvas.height = Math.max(targetHeight, 180);
+    renderBackgroundGuide();
+  };
+
+  useEffect(() => {
+    updateCanvasSizeAndGuide();
+    setHasDrawn(false);
+    setIsCompleted(false);
+
+    const handleResize = () => {
+      updateCanvasSizeAndGuide();
+    };
+
+    window.addEventListener('resize', handleResize);
 
     // Spell word aloud
     const spell = currentWord.word.split('').join('... ');
     speech.speak(`Let us trace ${currentWord.word}! ${spell}! ${currentWord.word}!`);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [wordIndex]);
 
   const clearCanvas = () => {
@@ -136,6 +153,9 @@ export const WordTracingWorld: React.FC<WordTracingWorldProps> = ({ onBack, onGo
   };
 
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if ('touches' in e && e.cancelable) {
+      e.preventDefault();
+    }
     isDrawingRef.current = true;
     lastPointRef.current = getCanvasCoords(e);
     sound.playPop(600);
@@ -143,6 +163,9 @@ export const WordTracingWorld: React.FC<WordTracingWorldProps> = ({ onBack, onGo
   };
 
   const drawMove = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if ('touches' in e && e.cancelable) {
+      e.preventDefault();
+    }
     if (!isDrawingRef.current || !canvasRef.current) return;
     const ctx = canvasRef.current.getContext('2d');
     if (!ctx) return;
@@ -387,7 +410,9 @@ export const WordTracingWorld: React.FC<WordTracingWorldProps> = ({ onBack, onGo
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+          gap: 8,
           maxWidth: 680,
           margin: '0 auto',
         }}>

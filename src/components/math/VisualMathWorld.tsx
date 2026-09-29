@@ -156,17 +156,17 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
           alignItems: 'center',
           justifyContent: 'center',
           flexWrap: 'wrap',
-          gap: 20,
-          marginBottom: 36,
+          gap: 12,
+          marginBottom: 28,
         }}>
           {/* First Box */}
           <div style={{
             background: '#FFF1F2',
             border: '4px solid #FDA4AF',
             borderRadius: 'var(--radius-md)',
-            padding: 16,
-            minWidth: 140,
-            minHeight: 120,
+            padding: 12,
+            minWidth: 95,
+            minHeight: 100,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -176,9 +176,9 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'center',
-              gap: 8,
-              fontSize: '2.5rem',
-              marginBottom: 8,
+              gap: 6,
+              fontSize: '2rem',
+              marginBottom: 6,
             }}>
               {Array.from({ length: num1 }).map((_, i) => (
                 <span key={i} className="animate-bob">{itemEmoji}</span>
@@ -186,7 +186,7 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
             </div>
             <span style={{
               fontFamily: 'var(--font-display)',
-              fontSize: '2rem',
+              fontSize: '1.8rem',
               fontWeight: 700,
               color: '#BE123C',
             }}>
@@ -197,7 +197,7 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
           {/* Operation Symbol */}
           <div style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '3.5rem',
+            fontSize: '2.5rem',
             fontWeight: 700,
             color: '#E11D48',
           }}>
@@ -209,9 +209,9 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
             background: '#FFF1F2',
             border: '4px solid #FDA4AF',
             borderRadius: 'var(--radius-md)',
-            padding: 16,
-            minWidth: 140,
-            minHeight: 120,
+            padding: 12,
+            minWidth: 95,
+            minHeight: 100,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -221,9 +221,9 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'center',
-              gap: 8,
-              fontSize: '2.5rem',
-              marginBottom: 8,
+              gap: 6,
+              fontSize: '2rem',
+              marginBottom: 6,
             }}>
               {Array.from({ length: num2 }).map((_, i) => (
                 <span key={i} className="animate-bob" style={{ opacity: operation === 'subtract' ? 0.6 : 1 }}>
@@ -233,7 +233,7 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
             </div>
             <span style={{
               fontFamily: 'var(--font-display)',
-              fontSize: '2rem',
+              fontSize: '1.8rem',
               fontWeight: 700,
               color: '#BE123C',
             }}>
@@ -244,7 +244,7 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
           {/* Equals Symbol */}
           <div style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '3.5rem',
+            fontSize: '2.5rem',
             fontWeight: 700,
             color: '#E11D48',
           }}>
@@ -256,13 +256,13 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
             background: '#FFE4E6',
             border: '4px dashed #F43F5E',
             borderRadius: 'var(--radius-md)',
-            minWidth: 120,
-            height: 120,
+            minWidth: 85,
+            height: 100,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontFamily: 'var(--font-display)',
-            fontSize: '3.5rem',
+            fontSize: '2.5rem',
             fontWeight: 700,
             color: '#BE123C',
           }}>

@@ -120,24 +120,24 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
             borderRadius: 'var(--radius-lg)',
             border: `5px solid ${selectedLetter.color}`,
             boxShadow: 'var(--shadow-floating)',
-            padding: '24px 32px',
-            marginBottom: 28,
+            padding: '20px 16px',
+            marginBottom: 24,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: 20,
+            gap: 16,
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
               <div 
                 style={{
-                  width: 100,
-                  height: 100,
+                  width: 80,
+                  height: 80,
                   borderRadius: 'var(--radius-md)',
                   background: selectedLetter.color,
                   color: '#FFFFFF',
                   fontFamily: 'var(--font-display)',
-                  fontSize: '4.5rem',
+                  fontSize: '3.6rem',
                   fontWeight: 700,
                   display: 'flex',
                   alignItems: 'center',
@@ -150,10 +150,10 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
               </div>
 
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ fontSize: '3rem' }}>{selectedLetter.emoji}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ fontSize: '2.5rem' }}>{selectedLetter.emoji}</span>
                   <h2 style={{
-                    fontSize: '2.5rem',
+                    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
                     color: '#0F172A',
                     fontFamily: 'var(--font-display)',
                     margin: 0,
@@ -162,10 +162,10 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
                   </h2>
                 </div>
                 <p style={{
-                  fontSize: '1.25rem',
+                  fontSize: '1.1rem',
                   color: '#475569',
                   fontWeight: 600,
-                  marginTop: 6,
+                  marginTop: 4,
                 }}>
                   {selectedLetter.sentence}
                 </p>
@@ -179,17 +179,17 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
               }}
               className="speaker-bubble"
               title="Hear pronunciation again"
-              style={{ width: 64, height: 64 }}
+              style={{ width: 52, height: 52 }}
             >
-              <Volume2 size={32} />
+              <Volume2 size={26} />
             </button>
           </div>
 
           {/* 26 Letter Tiles Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(95px, 1fr))',
-            gap: 14,
+            gridTemplateColumns: 'repeat(auto-fill, minmax(75px, 1fr))',
+            gap: 10,
           }}>
             {ALPHABET_DATA.map((item) => {
               const isSelected = selectedLetter.letter === item.letter;

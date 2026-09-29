@@ -93,18 +93,33 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
     ctx.restore();
   };
 
-  useEffect(() => {
+  const updateCanvasSizeAndGuide = () => {
     const canvas = canvasRef.current;
-    if (canvas) {
-      // Set high-DPI resolution
-      canvas.width = 620;
-      canvas.height = 380;
-      renderBackgroundGuide();
-      setHasDrawn(false);
-      setIsCompleted(false);
-    }
-    // Speak letter when changed
+    if (!canvas) return;
+    const parentWidth = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+    const availableWidth = Math.min(parentWidth - 10, 620);
+    const targetHeight = Math.min(Math.round(availableWidth * 0.65), 380);
+
+    canvas.width = Math.max(availableWidth, 290);
+    canvas.height = Math.max(targetHeight, 230);
+    renderBackgroundGuide();
+  };
+
+  useEffect(() => {
+    updateCanvasSizeAndGuide();
+    setHasDrawn(false);
+    setIsCompleted(false);
+
+    const handleResize = () => {
+      updateCanvasSizeAndGuide();
+    };
+
+    window.addEventListener('resize', handleResize);
     speech.speak(`${currentItem.letter} is for ${currentItem.word}! Trace the letter ${displayChar}!`);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [letterIndex, isUppercase]);
 
   const clearCanvas = () => {
@@ -136,6 +151,9 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
   };
 
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if ('touches' in e && e.cancelable) {
+      e.preventDefault();
+    }
     isDrawingRef.current = true;
     const pt = getCanvasCoords(e);
     lastPointRef.current = pt;
@@ -144,6 +162,9 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
   };
 
   const drawMove = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if ('touches' in e && e.cancelable) {
+      e.preventDefault();
+    }
     if (!isDrawingRef.current || !canvasRef.current) return;
     const ctx = canvasRef.current.getContext('2d');
     if (!ctx) return;
@@ -493,7 +514,9 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: 8,
             width: '100%',
             maxWidth: 620,
             marginTop: 8,

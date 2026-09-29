@@ -270,3 +270,41 @@ h1, h2, h3, h4, .font-display {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+/* Responsive Mobile Optimizations */
+@media (max-width: 640px) {
+  :root {
+    --radius-lg: 20px;
+    --radius-md: 16px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .kid-btn {
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    gap: 6px;
+  }
+
+  .kid-modal-content {
+    padding: 20px 16px;
+    border-width: 4px;
+    margin: 8px;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .speaker-bubble {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Touch drawing canvas container */
+.canvas-touch-wrapper {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}

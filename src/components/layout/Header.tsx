@@ -86,30 +86,36 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
         <nav style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 6,
           background: '#F1F5F9',
-          padding: '6px 10px',
+          padding: '4px 6px',
           borderRadius: 999,
+          maxWidth: '100%',
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
         }}>
           <button
             onClick={() => { sound.playPop(); onSelectView('tracing-abc'); }}
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
+              gap: 5,
+              padding: '6px 12px',
               borderRadius: 999,
               border: 'none',
               background: currentView.startsWith('tracing') ? '#FB7185' : 'transparent',
               color: currentView.startsWith('tracing') ? '#FFFFFF' : '#475569',
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 0.15s ease',
             }}
           >
-            <Pencil size={16} /> Tracing
+            <Pencil size={15} /> Tracing
           </button>
 
           <button
@@ -117,20 +123,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
+              gap: 5,
+              padding: '6px 12px',
               borderRadius: 999,
               border: 'none',
               background: currentView.startsWith('reading') ? '#38BDF8' : 'transparent',
               color: currentView.startsWith('reading') ? '#FFFFFF' : '#475569',
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 0.15s ease',
             }}
           >
-            <BookOpen size={16} /> Reading
+            <BookOpen size={15} /> Reading
           </button>
 
           <button
@@ -138,20 +146,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
+              gap: 5,
+              padding: '6px 12px',
               borderRadius: 999,
               border: 'none',
               background: currentView.startsWith('math') ? '#4ADE80' : 'transparent',
               color: currentView.startsWith('math') ? '#064E3B' : '#475569',
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 0.15s ease',
             }}
           >
-            <Calculator size={16} /> Math
+            <Calculator size={15} /> Math
           </button>
 
           <button
@@ -159,20 +169,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
+              gap: 5,
+              padding: '6px 12px',
               borderRadius: 999,
               border: 'none',
               background: currentView === 'stickers' ? '#C084FC' : 'transparent',
               color: currentView === 'stickers' ? '#FFFFFF' : '#475569',
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 0.15s ease',
             }}
           >
-            <Award size={16} /> Stickers
+            <Award size={15} /> Stickers
           </button>
         </nav>
 

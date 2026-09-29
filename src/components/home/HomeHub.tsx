@@ -206,8 +206,8 @@ export const HomeHub: React.FC<HomeHubProps> = ({ onSelectView }) => {
       {/* Grid of Learning Worlds */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
-        gap: 24,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+        gap: 16,
       }}>
         {CARDS.map((card) => (
           <div
