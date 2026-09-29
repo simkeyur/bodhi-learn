@@ -28,6 +28,8 @@ interface AppContextType {
   setSoundEnabled: (enabled: boolean) => void;
   speechEnabled: boolean;
   setSpeechEnabled: (enabled: boolean) => void;
+  voiceSpeed: number;
+  setVoiceSpeed: (speed: number) => void;
   triggerCelebration: () => void;
 }
 
@@ -68,6 +70,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved !== null ? saved === 'true' : true;
   });
 
+  const [voiceSpeed, setVoiceSpeedState] = useState<number>(() => {
+    const saved = localStorage.getItem('bodhi_voice_speed');
+    const parsed = saved ? parseFloat(saved) : 0.82;
+    speech.speechRate = parsed;
+    return parsed;
+  });
+
   useEffect(() => {
     localStorage.setItem('bodhi_stars', stars.toString());
   }, [stars]);
@@ -98,6 +107,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setSpeechEnabledState(enabled);
     speech.speechEnabled = enabled;
     localStorage.setItem('bodhi_speech', String(enabled));
+  };
+
+  const setVoiceSpeed = (speed: number) => {
+    setVoiceSpeedState(speed);
+    speech.speechRate = speed;
+    localStorage.setItem('bodhi_voice_speed', String(speed));
   };
 
   const setAgeBracket = (level: AgeBracket) => {
@@ -167,6 +182,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSoundEnabled,
         speechEnabled,
         setSpeechEnabled,
+        voiceSpeed,
+        setVoiceSpeed,
         triggerCelebration,
       }}
     >

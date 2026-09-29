@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "db:init": "node scripts/init_db.mjs",
+    "audio:generate": "node scripts/generate_audio.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

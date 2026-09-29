@@ -16,6 +16,8 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
     setAgeBracket,
     speechEnabled,
     setSpeechEnabled,
+    voiceSpeed,
+    setVoiceSpeed,
     stars,
     addStars,
   } = useApp();
@@ -237,6 +239,44 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                   >
                     <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tier.label}</div>
                     <div style={{ fontSize: '0.75rem', opacity: 0.85, marginTop: 4 }}>{tier.desc}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Voice Speed Controls */}
+            <div style={{ marginBottom: 20 }}>
+              <label style={{
+                display: 'block',
+                fontWeight: 700,
+                fontSize: '0.95rem',
+                color: '#334155',
+                marginBottom: 8,
+              }}>
+                Voice Pacing / Speed:
+              </label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+                {[
+                  { speed: 0.75, label: 'Slow (0.75x)', desc: 'Best for Beginners' },
+                  { speed: 0.85, label: 'Gentle (0.85x)', desc: 'Patient Kid Pace' },
+                  { speed: 1.0, label: 'Normal (1.0x)', desc: 'Standard Fluent' },
+                ].map((s) => (
+                  <button
+                    key={s.speed}
+                    onClick={() => setVoiceSpeed(s.speed)}
+                    style={{
+                      background: Math.abs(voiceSpeed - s.speed) < 0.05 ? '#8B5CF6' : '#F8FAFC',
+                      color: Math.abs(voiceSpeed - s.speed) < 0.05 ? '#FFFFFF' : '#334155',
+                      border: Math.abs(voiceSpeed - s.speed) < 0.05 ? '2px solid #7C3AED' : '2px solid #E2E8F0',
+                      borderRadius: 14,
+                      padding: '8px 4px',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                      fontFamily: 'var(--font-display)',
+                    }}
+                  >
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{s.label}</div>
+                    <div style={{ fontSize: '0.72rem', opacity: 0.85, marginTop: 2 }}>{s.desc}</div>
                   </button>
                 ))}
               </div>
