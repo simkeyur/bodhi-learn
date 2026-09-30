@@ -58,7 +58,7 @@ npm run build
 
 ## 🎙️ Narration Audio
 
-All narration is recorded with **Gemini TTS** (voice *Sulafat*) into `public/audio/`. Every clip is
+All narration is recorded with **Gemini 3.8 Flash Lite TTS** (voice *Sulafat*) into `public/audio/`. Every clip is
 listed in `scripts/audio/manifest.mjs`, built from `src/data/learningData.ts`, so new words,
 stories and sentences get audio automatically.
 
@@ -81,7 +81,9 @@ npm run audio -- --voice Achird --force
 npm run audio -- --prune
 ```
 
-Use `--only words` or `--match "phonics_B"` to redo specific clips. Raw API audio is cached in
+If Flash Lite's daily quota runs out mid-run, the script switches to `gemini-3.1-flash-tts-preview`
+for the rest (`--no-fallback` to just stop); the next run re-renders those clips with Flash Lite
+so the voice stays consistent. Use `--only words` or `--match "phonics_B"` to redo specific clips. Raw API audio is cached in
 `.audio-cache/`, so re-encoding never costs extra API calls. After regenerating, bump
 `CACHE_NAME` in `public/sw.js` so installed apps pick up the new recordings.
 

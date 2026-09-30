@@ -8,7 +8,10 @@
 //
 // Options:
 //   --voice <name>      Gemini prebuilt voice (default: Sulafat)
-//   --model <id>        TTS model (default: gemini-3.8-flash-tts)
+//   --model <id>        TTS model (default: gemini-3.8-flash-lite-tts)
+//   --fallback-model <id> model to switch to when --model's daily quota runs out
+//                       (default: gemini-3.1-flash-tts-preview; --no-fallback to just stop).
+//                       Clips made by the fallback are re-rendered with --model on later runs.
 //   --only <list>       only these folders or kinds, comma separated (e.g. letters,words or cheer,prompt)
 //   --match <regex>     only paths matching this regex (e.g. "phonics_A|readalong/r6")
 //   --force             re-render even if the clip is up to date (still reuses the raw-audio cache)
@@ -52,7 +55,8 @@ const AUDITION_PATHS = [
 function parseArgs(argv) {
   const opts = {
     voice: 'Sulafat',
-    model: 'gemini-3.8-flash-tts',
+    model: 'gemini-3.8-flash-lite-tts',
+    fallbackModel: 'gemini-3.1-flash-tts-preview',
     concurrency: 3,
     rpm: 9,
     limit: Infinity,
@@ -63,6 +67,8 @@ function parseArgs(argv) {
     switch (arg) {
       case '--voice': opts.voice = next(); break;
       case '--model': opts.model = next(); break;
+      case '--fallback-model': opts.fallbackModel = next(); break;
+      case '--no-fallback': opts.fallbackModel = null; break;
       case '--only': opts.only = next().split(',').map((s) => s.trim()); break;
       case '--match': opts.match = new RegExp(next()); break;
       case '--force': opts.force = true; break;
@@ -209,22 +215,28 @@ function makeRateLimiter(rpm) {
   };
 }
 
-async function synthesize({ apiKey, model, voice, text, style }, throttle) {
-  const body = {
+// Models that reject speech_metadata annotations (e.g. gemini-3.1-flash-tts-preview)
+// get the style as a spoken-style prefix instead, which they don't read aloud
+const noAnnotationModels = new Set();
+
+function requestBody({ model, voice, text, style }) {
+  const content = noAnnotationModels.has(model)
+    ? { type: 'text', text: `${style} Say: ${text}` }
+    : { type: 'text', text, annotations: [{ type: 'speech_metadata', style }] };
+  return {
     model,
-    input: [{
-      type: 'user_input',
-      content: [{
-        type: 'text',
-        text,
-        annotations: [{ type: 'speech_metadata', style }],
-      }],
-    }],
+    input: [{ type: 'user_input', content: [content] }],
     response_format: { type: 'audio' },
     generation_config: { speech_config: [{ voice }] },
   };
+}
 
+class DailyQuotaError extends Error {}
+
+async function synthesize({ apiKey, model, voice, text, style }, throttle) {
   for (let attempt = 1; ; attempt++) {
+    const sentAnnotations = !noAnnotationModels.has(model);
+    const body = requestBody({ model, voice, text, style });
     await throttle();
     let res;
     try {
@@ -249,8 +261,7 @@ async function synthesize({ apiKey, model, voice, text, style }, throttle) {
         }
         // A used-up daily quota won't recover by waiting a few seconds
         if (/per\s*day|PerDay|daily/i.test(errText)) {
-          dailyQuotaHit = true;
-          throw new Error(`Daily quota reached: ${message}`);
+          throw new DailyQuotaError(`Daily quota reached for ${model}: ${message}`);
         }
       }
       if (attempt >= 10) throw new Error(`HTTP ${res.status} after ${attempt} attempts: ${errText.slice(0, 300)}`);
@@ -261,7 +272,15 @@ async function synthesize({ apiKey, model, voice, text, style }, throttle) {
       continue;
     }
     if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${(await res.text()).slice(0, 500)}`);
+      const errText = await res.text();
+      // Wording varies: "Speech annotations are not supported" / "Speech metadata is not supported"
+      // (decided by what this request sent: parallel requests can race the first one here)
+      if (res.status === 400 && /(annotations?|metadata) (are|is) not supported/i.test(errText) && sentAnnotations) {
+        noAnnotationModels.add(model);
+        attempt--;
+        continue;
+      }
+      throw new Error(`HTTP ${res.status}: ${errText.slice(0, 500)}`);
     }
 
     const json = await res.json();
@@ -329,6 +348,12 @@ function encodeMp3(wavPath, outPath) {
 
 // ---------- Rendering ----------
 
+const RENDER_ORDER = ['phrases', 'math', 'exclamations', 'letters', 'numbers', 'readalong', 'sentences', 'stories', 'words'];
+const renderPriority = (clipPath) => {
+  const i = RENDER_ORDER.indexOf(clipPath.split('/')[0]);
+  return i === -1 ? RENDER_ORDER.length : i;
+};
+
 const cacheKey = (e) =>
   crypto.createHash('sha1').update(JSON.stringify([e.model, e.voice, e.style, e.text])).digest('hex');
 
@@ -341,9 +366,16 @@ async function renderAll(jobs, opts, apiKey) {
   const failures = [];
   const queue = [...jobs];
 
+  let activeModel = opts.model;
+
   const worker = async () => {
     while (queue.length && !dailyQuotaHit) {
       const job = queue.shift();
+      // Reuse audio already cached for the requested model; otherwise use whichever
+      // model is active (the fallback, once the primary's daily quota is gone)
+      if (job.model !== activeModel && !fs.existsSync(path.join(CACHE_DIR, `${cacheKey(job)}.wav`))) {
+        job.model = activeModel;
+      }
       const wavPath = path.join(CACHE_DIR, `${cacheKey(job)}.wav`);
       try {
         if (opts.fresh || !fs.existsSync(wavPath)) {
@@ -353,10 +385,25 @@ async function renderAll(jobs, opts, apiKey) {
           fs.writeFileSync(wavPath, wav);
         }
         await encodeMp3(wavPath, job.outPath);
-        job.onDone?.();
+        job.onDone?.(job);
         done++;
-        console.log(`[${done + failures.length}/${jobs.length}] ${job.label} "${job.text.slice(0, 60)}"`);
+        const via = job.model !== opts.model ? ` (${job.model})` : '';
+        console.log(`[${done + failures.length}/${jobs.length}] ${job.label} "${job.text.slice(0, 60)}"${via}`);
       } catch (err) {
+        if (err instanceof DailyQuotaError) {
+          if (opts.fallbackModel && job.model !== opts.fallbackModel) {
+            if (activeModel !== opts.fallbackModel) {
+              activeModel = opts.fallbackModel;
+              console.log(`↪ ${err.message.split(':')[0]}; switching to ${activeModel}`);
+            }
+            queue.unshift(job); // retry this clip with the fallback
+            continue;
+          }
+          dailyQuotaHit = true;
+          queue.unshift(job);
+          console.log(`⏸ ${err.message}`);
+          continue;
+        }
         failures.push({ job, err });
         console.log(`✗ ${job.label}: ${err.message.split('\n')[0]}`);
       }
@@ -380,6 +427,11 @@ async function runSet(manifest, opts, apiKey) {
 
   const jobs = selected
     .map((e) => ({ ...e, voice: opts.voice, model: opts.model }))
+    // Clips with no Gemini version yet come first (then re-renders of clips made by
+    // another model), and within each, what a child hears most comes first
+    .sort((a, b) =>
+      Number(Boolean(record.clips[a.path])) - Number(Boolean(record.clips[b.path])) ||
+      renderPriority(a.path) - renderPriority(b.path))
     .filter((e) => {
       if (opts.force) return true;
       const prev = record.clips[e.path];
@@ -390,8 +442,8 @@ async function runSet(manifest, opts, apiKey) {
       ...e,
       label: e.path,
       outPath: path.join(setDir, e.path),
-      onDone: () => {
-        record.clips[e.path] = { text: e.text, style: e.style, voice: e.voice, model: e.model };
+      onDone: (job) => {
+        record.clips[e.path] = { text: e.text, style: e.style, voice: e.voice, model: job.model };
       },
     }));
 
