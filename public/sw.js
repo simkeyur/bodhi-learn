@@ -1,5 +1,5 @@
 // Bump when narration audio is regenerated: clips are cached forever under the same URLs
-const CACHE_NAME = 'bodhi-learn-v3';
+const CACHE_NAME = 'bodhi-learn-v4';
 const ASSETS = [
   '/',
   '/index.html',
