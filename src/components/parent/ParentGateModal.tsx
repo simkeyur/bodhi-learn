@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp, type AgeBracket } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
+import { AccountSection } from './AccountSection';
 import { X, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface ParentGateModalProps {
@@ -31,6 +32,13 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
   // Local settings draft
   const [nameInput, setNameInput] = useState(kidName);
 
+  // Re-lock and pick a fresh sum each time the modal opens. This must not depend on
+  // kidName: the name can change while open (sign-out, or another device syncing), and
+  // that must not kick a parent out of the settings.
+  const kidNameRef = useRef(kidName);
+  useEffect(() => {
+    kidNameRef.current = kidName;
+  });
   useEffect(() => {
     if (isOpen) {
       setIsUnlocked(false);
@@ -40,9 +48,16 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
       setNum2(n2);
       setParentAnswer('');
       setErrorMsg('');
-      setNameInput(kidName);
+      setNameInput(kidNameRef.current);
     }
-  }, [isOpen, kidName]);
+  }, [isOpen]);
+
+  // If the name changes underneath an untouched field (e.g. synced from another device), follow it
+  const lastSeenNameRef = useRef(kidName);
+  useEffect(() => {
+    setNameInput((current) => (current === lastSeenNameRef.current ? kidName : current));
+    lastSeenNameRef.current = kidName;
+  }, [kidName]);
 
   if (!isOpen) return null;
 
@@ -186,6 +201,8 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
         ) : (
           /* Unlocked Settings Form */
           <div>
+            <AccountSection />
+
             {/* Kid Name Input */}
             <div style={{ marginBottom: 20 }}>
               <label style={{

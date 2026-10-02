@@ -897,3 +897,12 @@ h1, h2, h3, h4, .font-display {
   80% { transform: translateX(120%); opacity: 1; }
   100% { transform: translateX(140%); opacity: 0; }
 }
+
+/* Spinner for loading states */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}

@@ -1,16 +1,29 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { sound } from '../utils/sound';
-import { speech, DEFAULT_VOICE_SPEED } from '../utils/speech';
+import { speech } from '../utils/speech';
+import { useCloudSync, type SyncStatus } from '../firebase/useCloudSync';
+import type { CloudUser } from '../firebase/cloud';
+import {
+  DEFAULT_STATE,
+  MAX_PLACED_STICKERS,
+  type AgeBracket,
+  type PlacedSticker,
+  type SyncedState,
+} from '../firebase/schema';
 
-export interface PlacedSticker {
-  id: string;
-  stickerId: string;
-  x: number;
-  y: number;
+export type { AgeBracket, PlacedSticker };
+
+interface CloudAccount {
+  user: CloudUser | null;
+  authReady: boolean;
+  status: SyncStatus;
+  error: string | null;
+  preload: () => void;
+  signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
+  deleteAccount: () => Promise<boolean>;
 }
-
-export type AgeBracket = 'pre-k' | 'kindergarten' | 'grade1';
 
 interface AppContextType {
   stars: number;
@@ -31,76 +44,80 @@ interface AppContextType {
   voiceSpeed: number;
   setVoiceSpeed: (speed: number) => void;
   triggerCelebration: () => void;
+  cloud: CloudAccount;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+// localStorage is the working copy on this device (and the whole story for guests)
+const readStored = <T,>(key: string, parse: (raw: string) => T | undefined, fallback: T): T => {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    const value = parse(raw);
+    return value === undefined ? fallback : value;
+  } catch {
+    return fallback;
+  }
+};
+
+const parseJson = <T,>(raw: string, ok: (v: unknown) => v is T): T | undefined => {
+  const v: unknown = JSON.parse(raw);
+  return ok(v) ? v : undefined;
+};
+
+const isStringArray = (v: unknown): v is string[] => Array.isArray(v) && v.every((x) => typeof x === 'string');
+const isStickerArray = (v: unknown): v is PlacedSticker[] =>
+  Array.isArray(v) && v.every((s) => s && typeof s.id === 'string' && typeof s.stickerId === 'string' && typeof s.x === 'number' && typeof s.y === 'number');
+
+const store = (key: string, value: string) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // storage full or unavailable: the app still works for this session
+  }
+};
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [stars, setStars] = useState<number>(() => {
-    const saved = localStorage.getItem('bodhi_stars');
-    return saved ? parseInt(saved, 10) : 5; // Start with 5 welcome stars!
-  });
+  const [stars, setStars] = useState<number>(() =>
+    readStored('bodhi_stars', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) && n >= 0 ? n : undefined; }, DEFAULT_STATE.stars));
 
-  const [unlockedStickers, setUnlockedStickers] = useState<string[]>(() => {
-    const saved = localStorage.getItem('bodhi_stickers');
-    return saved ? JSON.parse(saved) : ['st1']; // Start with Super Star unlocked
-  });
+  const [unlockedStickers, setUnlockedStickers] = useState<string[]>(() =>
+    readStored('bodhi_stickers', (r) => parseJson(r, isStringArray), DEFAULT_STATE.unlockedStickers));
 
-  const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>(() => {
-    const saved = localStorage.getItem('bodhi_placed_stickers');
-    return saved ? JSON.parse(saved) : [{ id: 'init-1', stickerId: 'st1', x: 50, y: 50 }];
-  });
+  const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>(() =>
+    readStored('bodhi_placed_stickers', (r) => parseJson(r, isStickerArray), DEFAULT_STATE.placedStickers));
 
-  const [ageBracket, setAgeBracketState] = useState<AgeBracket>(() => {
-    const saved = localStorage.getItem('bodhi_age') as AgeBracket;
-    return saved || 'kindergarten';
-  });
+  const [ageBracket, setAgeBracketState] = useState<AgeBracket>(() =>
+    readStored<AgeBracket>('bodhi_age', (r) => (['pre-k', 'kindergarten', 'grade1'].includes(r) ? (r as AgeBracket) : undefined), DEFAULT_STATE.ageBracket));
 
-  const [kidName, setKidNameState] = useState<string>(() => {
-    return localStorage.getItem('bodhi_kid_name') || 'Bodhi';
-  });
+  const [kidName, setKidNameState] = useState<string>(() =>
+    readStored('bodhi_kid_name', (r) => r.trim() || undefined, DEFAULT_STATE.kidName));
 
   const [soundEnabled, setSoundEnabledState] = useState<boolean>(() => {
-    const saved = localStorage.getItem('bodhi_sound');
-    const enabled = saved !== null ? saved === 'true' : true;
+    const enabled = readStored('bodhi_sound', (r) => r === 'true', true);
     sound.soundEnabled = enabled;
     speech.muted = !enabled;
     return enabled;
   });
 
   const [speechEnabled, setSpeechEnabledState] = useState<boolean>(() => {
-    const saved = localStorage.getItem('bodhi_speech');
-    const enabled = saved !== null ? saved === 'true' : true;
+    const enabled = readStored('bodhi_speech', (r) => r === 'true', DEFAULT_STATE.speechEnabled);
     speech.speechEnabled = enabled;
     return enabled;
   });
 
   const [voiceSpeed, setVoiceSpeedState] = useState<number>(() => {
-    const saved = localStorage.getItem('bodhi_voice_speed');
-    const parsed = saved ? parseFloat(saved) : DEFAULT_VOICE_SPEED;
-    speech.speechRate = parsed;
-    return parsed;
+    const speed = readStored('bodhi_voice_speed', (r) => { const n = parseFloat(r); return n >= 0.5 && n <= 1.5 ? n : undefined; }, DEFAULT_STATE.voiceSpeed);
+    speech.speechRate = speed;
+    return speed;
   });
 
-  useEffect(() => {
-    localStorage.setItem('bodhi_stars', stars.toString());
-  }, [stars]);
-
-  useEffect(() => {
-    localStorage.setItem('bodhi_stickers', JSON.stringify(unlockedStickers));
-  }, [unlockedStickers]);
-
-  useEffect(() => {
-    localStorage.setItem('bodhi_placed_stickers', JSON.stringify(placedStickers));
-  }, [placedStickers]);
-
-  useEffect(() => {
-    localStorage.setItem('bodhi_age', ageBracket);
-  }, [ageBracket]);
-
-  useEffect(() => {
-    localStorage.setItem('bodhi_kid_name', kidName);
-  }, [kidName]);
+  useEffect(() => store('bodhi_stars', stars.toString()), [stars]);
+  useEffect(() => store('bodhi_stickers', JSON.stringify(unlockedStickers)), [unlockedStickers]);
+  useEffect(() => store('bodhi_placed_stickers', JSON.stringify(placedStickers)), [placedStickers]);
+  useEffect(() => store('bodhi_age', ageBracket), [ageBracket]);
+  useEffect(() => store('bodhi_kid_name', kidName), [kidName]);
 
   const setSoundEnabled = (enabled: boolean) => {
     setSoundEnabledState(enabled);
@@ -108,29 +125,42 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     // The kid-facing mute button silences the voice too
     speech.muted = !enabled;
     if (!enabled) speech.stop();
-    localStorage.setItem('bodhi_sound', String(enabled));
+    store('bodhi_sound', String(enabled));
   };
 
   const setSpeechEnabled = (enabled: boolean) => {
     setSpeechEnabledState(enabled);
     speech.speechEnabled = enabled;
     if (!enabled) speech.stop();
-    localStorage.setItem('bodhi_speech', String(enabled));
+    store('bodhi_speech', String(enabled));
   };
 
   const setVoiceSpeed = (speed: number) => {
     setVoiceSpeedState(speed);
     speech.speechRate = speed;
-    localStorage.setItem('bodhi_voice_speed', String(speed));
+    store('bodhi_voice_speed', String(speed));
   };
 
-  const setAgeBracket = (level: AgeBracket) => {
-    setAgeBracketState(level);
+  const setAgeBracket = (level: AgeBracket) => setAgeBracketState(level);
+  const setKidName = (name: string) => setKidNameState(name);
+
+  // Cloud sync (Firestore) for signed-in parents; guests just use this device
+  const synced = useMemo<SyncedState>(
+    () => ({ kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers }),
+    [kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers],
+  );
+
+  const applyCloudState = (next: SyncedState) => {
+    setKidNameState(next.kidName);
+    setAgeBracketState(next.ageBracket);
+    setSpeechEnabled(next.speechEnabled);
+    setVoiceSpeed(next.voiceSpeed);
+    setStars(next.stars);
+    setUnlockedStickers(next.unlockedStickers);
+    setPlacedStickers(next.placedStickers);
   };
 
-  const setKidName = (name: string) => {
-    setKidNameState(name);
-  };
+  const cloud = useCloudSync(synced, applyCloudState);
 
   const triggerCelebration = () => {
     sound.playStarFanfare();
@@ -159,12 +189,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const placeSticker = (stickerId: string, x: number, y: number) => {
     const newPlaced: PlacedSticker = {
-      id: 'pl-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+      id: 'pl-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
       stickerId,
       x,
       y,
     };
-    setPlacedStickers((prev) => [...prev, newPlaced]);
+    // The board keeps the most recent stickers so the saved progress stays small
+    setPlacedStickers((prev) => [...prev, newPlaced].slice(-MAX_PLACED_STICKERS));
     sound.playPop(650);
   };
 
@@ -194,6 +225,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         voiceSpeed,
         setVoiceSpeed,
         triggerCelebration,
+        cloud,
       }}
     >
       {children}

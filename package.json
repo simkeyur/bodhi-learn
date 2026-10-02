@@ -8,22 +8,28 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "npm run build && firebase deploy --project bodhi-learn --only hosting,firestore:rules",
     "db:init": "node scripts/init_db.mjs",
-    "audio": "node scripts/audio/generate.mjs"
+    "audio": "node scripts/audio/generate.mjs",
+    "test:rules": "firebase emulators:exec --only firestore --project bodhi-learn-rules-test \"node --test tests/firestore-rules.test.mjs\"",
+    "emulators": "firebase emulators:start --only auth,firestore --project bodhi-learn-emulator",
+    "dev:emulators": "VITE_FIREBASE_EMULATORS=true vite --port 5190"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
+    "firebase": "^12.19.0",
     "lucide-react": "^1.48.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "firebase-tools": "^15.32.1",
     "oxlint": "^1.81.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"

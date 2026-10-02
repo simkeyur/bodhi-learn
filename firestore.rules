@@ -1,0 +1,55 @@
+rules_version = '2';
+
+// Each signed-in parent can read and write only their own document, users/{uid}.
+// The document holds the learner profile, settings and progress (stars, stickers).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    function validSettings(s) {
+      return s is map
+        && s.keys().hasOnly(['speechEnabled', 'voiceSpeed'])
+        && s.speechEnabled is bool
+        && s.voiceSpeed is number
+        && s.voiceSpeed >= 0.5 && s.voiceSpeed <= 1.5;
+    }
+
+    function validProfile(p) {
+      return p is map
+        && p.keys().hasOnly(['kidName', 'ageBracket'])
+        && p.kidName is string && p.kidName.size() >= 1 && p.kidName.size() <= 40
+        && p.ageBracket in ['pre-k', 'kindergarten', 'grade1'];
+    }
+
+    function validProgress(p) {
+      return p is map
+        && p.keys().hasOnly(['stars', 'unlockedStickers', 'placedStickers'])
+        && p.stars is int && p.stars >= 0 && p.stars <= 1000000
+        && p.unlockedStickers is list && p.unlockedStickers.size() <= 50
+        && p.placedStickers is list && p.placedStickers.size() <= 300;
+    }
+
+    function validUserDoc(d) {
+      return d.keys().hasOnly(['schemaVersion', 'profile', 'settings', 'progress', 'updatedAt'])
+        && d.schemaVersion == 1
+        && validProfile(d.profile)
+        && validSettings(d.settings)
+        && validProgress(d.progress)
+        && d.updatedAt == request.time;
+    }
+
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && validUserDoc(request.resource.data);
+      allow delete: if isOwner(uid);
+    }
+
+    // Everything else is closed
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
