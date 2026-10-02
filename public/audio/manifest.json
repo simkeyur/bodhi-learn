@@ -4,7 +4,7 @@
       "text": "Woo hoo!",
       "style": "Very excited and joyful, celebrating a young child's success. Big smile, bright and energetic, short and punchy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/phonics_A.mp3": {
       "text": "A is for Apple. Sweet and crunchy!",
@@ -136,157 +136,157 @@
       "text": "V is for Volcano tall and mighty!",
       "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/phonics_W.mp3": {
       "text": "W is for Whale singing in the sea!",
       "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/phonics_X.mp3": {
       "text": "X is for Xylophone playing musical notes!",
       "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/phonics_Y.mp3": {
       "text": "Y is for Yacht sailing on the water!",
       "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/phonics_Z.mp3": {
       "text": "Z is for Zebra with black and white stripes!",
       "style": "Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/0.mp3": {
       "text": "Zero",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/1.mp3": {
       "text": "One",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/2.mp3": {
       "text": "Two",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/3.mp3": {
       "text": "Three",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/4.mp3": {
       "text": "Four",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/5.mp3": {
       "text": "Five",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/6.mp3": {
       "text": "Six",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/7.mp3": {
       "text": "Seven",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/8.mp3": {
       "text": "Eight",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/9.mp3": {
       "text": "Nine",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/10.mp3": {
       "text": "Ten",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/11.mp3": {
       "text": "Eleven",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/12.mp3": {
       "text": "Twelve",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/13.mp3": {
       "text": "Thirteen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/14.mp3": {
       "text": "Fourteen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/15.mp3": {
       "text": "Fifteen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/16.mp3": {
       "text": "Sixteen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/17.mp3": {
       "text": "Seventeen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/18.mp3": {
       "text": "Eighteen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/19.mp3": {
       "text": "Nineteen",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "numbers/20.mp3": {
       "text": "Twenty",
       "style": "Say only this number, clearly and cheerfully, like counting objects together with a young child.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "words/A.mp3": {
       "text": "A",
@@ -760,37 +760,37 @@
       "text": "The cat sat.",
       "style": "Read this sentence naturally and clearly for a beginning reader. Gentle pace, friendly tone, every word distinct.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "readalong/r2.mp3": {
       "text": "I see a pig.",
       "style": "Read this sentence naturally and clearly for a beginning reader. Gentle pace, friendly tone, every word distinct.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "readalong/r3.mp3": {
       "text": "The dog can run.",
       "style": "Read this sentence naturally and clearly for a beginning reader. Gentle pace, friendly tone, every word distinct.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "readalong/r4.mp3": {
       "text": "Sam has a hat.",
       "style": "Read this sentence naturally and clearly for a beginning reader. Gentle pace, friendly tone, every word distinct.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "readalong/r5.mp3": {
       "text": "A big red bus.",
       "style": "Read this sentence naturally and clearly for a beginning reader. Gentle pace, friendly tone, every word distinct.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "readalong/r6.mp3": {
       "text": "Olive can swim well.",
       "style": "Read this sentence naturally and clearly for a beginning reader. Gentle pace, friendly tone, every word distinct.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "readalong/r7.mp3": {
       "text": "Jeff and Ben jump in.",
@@ -1840,79 +1840,79 @@
       "text": "The repeat block does the steps inside it again and again!",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/whats_missing.mp3": {
       "text": "What is missing?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/what_comes_next.mp3": {
       "text": "What comes next?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/pattern_yes.mp3": {
       "text": "Yes! That's the pattern!",
       "style": "Very excited and joyful, celebrating a young child's success. Big smile, bright and energetic, short and punchy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/look_again.mp3": {
       "text": "Look at the pattern again. You can do it!",
       "style": "Gentle, kind and reassuring teacher helping a young child who made a mistake. Never disappointed. Warm and patient.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/greet_machine.mp3": {
       "text": "Welcome to the Magic Machine! Can you find the secret rule?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_what_out.mp3": {
       "text": "What comes out of the machine?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_goes_in.mp3": {
       "text": "Goes in.",
       "style": "Calm, friendly teacher voice. This is the end of a sentence that began with other words: natural, warm finish.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_comes_out.mp3": {
       "text": "Comes out.",
       "style": "Calm, friendly teacher voice. This is the end of a sentence that began with other words: natural, warm finish.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_adds.mp3": {
       "text": "The machine adds",
       "style": "Calm, friendly teacher voice. This is the start of a sentence that continues with another word: keep the pitch level at the end, no final falling tone, no pause.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_takes.mp3": {
       "text": "The machine takes away",
       "style": "Calm, friendly teacher voice. This is the start of a sentence that continues with another word: keep the pitch level at the end, no final falling tone, no pause.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_doubles.mp3": {
       "text": "The machine doubles the number!",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "phrases/machine_triples.mp3": {
       "text": "The machine makes the number three times bigger!",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "words/DOWN.mp3": {
       "text": "Down",
@@ -1936,223 +1936,223 @@
       "text": "Almost! Let's try another one.",
       "style": "Gentle, kind and reassuring teacher helping a young child who made a mistake. Never disappointed. Warm and patient.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_A.mp3": {
       "text": "Can you find the letter A?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_A.mp3": {
       "text": "Trace the letter A.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_B.mp3": {
       "text": "Can you find the letter B?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_B.mp3": {
       "text": "Trace the letter B.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_C.mp3": {
       "text": "Can you find the letter C?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_D.mp3": {
       "text": "Trace the letter D.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_C.mp3": {
       "text": "Trace the letter C.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_D.mp3": {
       "text": "Can you find the letter D?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_E.mp3": {
       "text": "Can you find the letter E?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_E.mp3": {
       "text": "Trace the letter E.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_F.mp3": {
       "text": "Can you find the letter F?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_F.mp3": {
       "text": "Trace the letter F.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_G.mp3": {
       "text": "Can you find the letter G?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_G.mp3": {
       "text": "Trace the letter G.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_H.mp3": {
       "text": "Can you find the letter H?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_H.mp3": {
       "text": "Trace the letter H.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_I.mp3": {
       "text": "Can you find the letter I?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_I.mp3": {
       "text": "Trace the letter I.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_J.mp3": {
       "text": "Can you find the letter J?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_J.mp3": {
       "text": "Trace the letter J.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_K.mp3": {
       "text": "Can you find the letter K?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_K.mp3": {
       "text": "Trace the letter K.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_L.mp3": {
       "text": "Can you find the letter L?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_L.mp3": {
       "text": "Trace the letter L.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_M.mp3": {
       "text": "Can you find the letter M?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_M.mp3": {
       "text": "Trace the letter M.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_N.mp3": {
       "text": "Can you find the letter N?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_N.mp3": {
       "text": "Trace the letter N.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_O.mp3": {
       "text": "Can you find the letter O?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_O.mp3": {
       "text": "Trace the letter O.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_P.mp3": {
       "text": "Trace the letter P.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_Q.mp3": {
       "text": "Can you find the letter Q?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_Q.mp3": {
       "text": "Trace the letter Q.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_R.mp3": {
       "text": "Trace the letter R.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_P.mp3": {
       "text": "Can you find the letter P?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.1-flash-tts-preview"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_R.mp3": {
       "text": "Can you find the letter R?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_S.mp3": {
       "text": "Can you find the letter S?",
@@ -2164,92 +2164,92 @@
       "text": "Trace the letter T.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-3.8-flash-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_S.mp3": {
       "text": "Trace the letter S.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_T.mp3": {
       "text": "Can you find the letter T?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_U.mp3": {
       "text": "Can you find the letter U?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_U.mp3": {
       "text": "Trace the letter U.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_V.mp3": {
       "text": "Can you find the letter V?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_V.mp3": {
       "text": "Trace the letter V.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_W.mp3": {
       "text": "Can you find the letter W?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_W.mp3": {
       "text": "Trace the letter W.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_X.mp3": {
       "text": "Can you find the letter X?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_X.mp3": {
       "text": "Trace the letter X.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_Y.mp3": {
       "text": "Can you find the letter Y?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_Y.mp3": {
       "text": "Trace the letter Y.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/find_Z.mp3": {
       "text": "Can you find the letter Z?",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     },
     "letters/trace_Z.mp3": {
       "text": "Trace the letter Z.",
       "style": "Warm, friendly kindergarten teacher talking to a young child. Clear, gentle pace, inviting and happy.",
       "voice": "Sulafat",
-      "model": "gemini-2.5-flash-preview-tts"
+      "model": "gemini-3.8-flash-lite-tts"
     }
   },
-  "updatedAt": "2026-10-02T03:36:44.058Z"
+  "updatedAt": "2026-10-02T16:15:40.797Z"
 }
