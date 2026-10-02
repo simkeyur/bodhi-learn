@@ -26,3 +26,24 @@ export interface ContentMeta {
   version: number; // highest pack version
   packs: Record<string, number>; // subject -> pack version
 }
+
+// Order It: put the items in the right order. `items` is stored in the CORRECT order; the game shuffles them.
+export interface OrderPuzzle {
+  id: string;
+  topic: string;
+  level: number; // 1..10
+  prompt: string;
+  from: string; // label for the first item, e.g. "Smallest"
+  to: string; // label for the last item, e.g. "Biggest"
+  items: string[]; // 3 to 7, in the correct order
+  explain?: string;
+}
+
+// Stored at content_packs/order and bundled as src/content/packs/order.json
+export interface OrderPack {
+  id: 'order';
+  kind: 'order';
+  version: number;
+  title: string;
+  puzzles: OrderPuzzle[];
+}

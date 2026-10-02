@@ -49,12 +49,14 @@ export interface SyncedState {
   unlockedStickers: string[];
   placedStickers: PlacedSticker[];
   botSolved: string[]; // ids of the Code the Bot levels the child has solved
+  solved: string[]; // ids of solved puzzles in the other puzzle games (logic gates, tower of hanoi, ...)
   skills: Skills; // quiz level and tallies per subject
 }
 
 export const SCHEMA_VERSION = 1; // still 1: age and skills are optional additions
 export const MAX_PLACED_STICKERS = 150;
 export const MAX_BOT_SOLVED = 60;
+export const MAX_SOLVED = 300;
 
 export const DEFAULT_STATE: SyncedState = {
   kidName: 'Explorer',
@@ -65,6 +67,7 @@ export const DEFAULT_STATE: SyncedState = {
   unlockedStickers: ['st1'],
   placedStickers: [{ id: 'init-1', stickerId: 'st1', x: 50, y: 50 }],
   botSolved: [],
+  solved: [],
   skills: defaultSkills(5),
 };
 
@@ -89,6 +92,7 @@ export function toDocData(state: SyncedState) {
       unlockedStickers: state.unlockedStickers,
       placedStickers: state.placedStickers.slice(-MAX_PLACED_STICKERS),
       botSolved: state.botSolved.slice(0, MAX_BOT_SOLVED),
+      solved: state.solved.slice(0, MAX_SOLVED),
       skills: state.skills,
     },
   };
@@ -139,6 +143,7 @@ export function fromDocData(data: unknown): SyncedState {
     unlockedStickers: unlocked.filter((s): s is string => typeof s === 'string'),
     // Older documents have no botSolved field: that just means nothing solved yet
     botSolved: uniqueStrings(progress.botSolved).slice(0, MAX_BOT_SOLVED),
+    solved: uniqueStrings(progress.solved).slice(0, MAX_SOLVED),
     placedStickers: stickers
       .filter((s): s is PlacedSticker =>
         isRecord(s) && typeof s.id === 'string' && typeof s.stickerId === 'string' && typeof s.x === 'number' && typeof s.y === 'number')

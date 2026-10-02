@@ -211,6 +211,10 @@ import fs from 'fs';
 import { MATH_REGISTRY, makeMathQuestion } from '../src/content/mathGen.ts';
 import { QUIZ_GAMES, gameById, quizGamesFor } from '../src/data/quizGames.ts';
 import { BUDDY_MAX_AGE, STICKER_MAX_AGE, hasBuddy, hasStickers } from '../src/data/subjects.ts';
+import { GATE_CHALLENGES, applyOp, combinations, evaluate, goalTable, isSolved, layout, outputId, truthTable } from '../src/data/gates.ts';
+import { ALPHABET, atbash, checkCipher, lettersOnly, makeCipherPuzzle, makeCipherRound, shiftText } from '../src/data/cipher.ts';
+import { canMove, isSolved as hanoiSolved, move, newGame, optimalMoves, solveFrom } from '../src/data/hanoi.ts';
+import { isOrderPuzzle, pickNear, readOrderPack } from '../src/content/select.ts';
 import { adjustLevel, isQuestion, nextQuestion, pickFromPack, readPack } from '../src/content/select.ts';
 import { bandForAge, bracketForAge, fromDocData, levelForAge, toDocData, DEFAULT_STATE } from '../src/firebase/schema.ts';
 
@@ -325,6 +329,10 @@ test('saved data round-trips and old documents (bracket only) still load', () =>
   const back = fromDocData(toDocData(state));
   assert.equal(back.age, 12);
   assert.deepEqual(back.skills.math, { level: 8, answered: 20, correct: 15 });
+
+  const withSolved = fromDocData(toDocData({ ...DEFAULT_STATE, solved: ['gates-1', 'hanoi-3', 'gates-1'] }));
+  assert.deepEqual(withSolved.solved, ['gates-1', 'hanoi-3']);
+  assert.deepEqual(fromDocData({}).solved, []);
 
   const old = fromDocData({ profile: { kidName: 'Mia', ageBracket: 'grade1' }, settings: {}, progress: { stars: 3, unlockedStickers: ['st1'], placedStickers: [] } });
   assert.equal(old.age, 7);
@@ -496,4 +504,187 @@ test('the sticker book is only for ages 6 and under', () => {
 test("Buddy's voice button is only for ages 5 and under", () => {
   assert.equal(BUDDY_MAX_AGE, 5);
   assert.deepEqual([4, 5, 6, 7, 10, 14].map(hasBuddy), [true, true, false, false, false, false]);
+});
+
+// ---------- Logic Gates Lab ----------
+
+test('gate operations', () => {
+  assert.equal(applyOp('AND', [true, true]), true);
+  assert.equal(applyOp('AND', [true, false]), false);
+  assert.equal(applyOp('OR', [false, false]), false);
+  assert.equal(applyOp('NAND', [true, true]), false);
+  assert.equal(applyOp('NOR', [false, false]), true);
+  assert.equal(applyOp('XOR', [true, true]), false);
+  assert.equal(applyOp('XOR', [true, false]), true);
+  assert.equal(applyOp('NOT', [false]), true);
+  assert.equal(applyOp('WIRE', [true]), true);
+  assert.equal(combinations(['A', 'B']).length, 4);
+  assert.deepEqual(combinations(['A', 'B'])[1], { A: false, B: true });
+});
+
+test('every logic gate challenge is solvable, non-trivial and laid out sensibly', () => {
+  const ids = new Set();
+  for (const ch of GATE_CHALLENGES) {
+    assert.ok(!ids.has(ch.id), `duplicate ${ch.id}`);
+    ids.add(ch.id);
+    assert.ok(ch.level >= 6 && ch.level <= 10, ch.id);
+    assert.ok(isSolved(ch, ch.solution), `${ch.id}: the stored solution does not solve it`);
+    for (const g of ch.gates) {
+      assert.ok(g.options.includes(ch.solution[g.id]), `${ch.id}: ${g.id} solution is not among the options`);
+      for (const input of g.inputs) assert.ok(ch.switches.includes(input) || ch.gates.some((x) => x.id === input), `${ch.id}: unknown input ${input}`);
+      if (g.inputs.length === 1) assert.ok(g.options.every((o) => o === 'NOT' || o === 'WIRE'), `${ch.id}: one-input gate with a two-input option`);
+      if (g.inputs.length === 2) assert.ok(g.options.every((o) => o !== 'NOT' && o !== 'WIRE'), `${ch.id}: two-input gate with a one-input option`);
+    }
+    const goal = goalTable(ch);
+    assert.ok(goal.some(Boolean) && goal.some((v) => !v), `${ch.id}: the bulb never changes`);
+    // Nothing chosen yet: not solved, and the bulb is unknown rather than off
+    assert.equal(isSolved(ch, {}), false);
+    assert.ok(truthTable(ch, {}).every((v) => v === null));
+    // Layout: a gate sits to the right of everything feeding it, and the bulb is last
+    const { nodes, cols } = layout(ch);
+    const colOf = Object.fromEntries(nodes.map((n) => [n.id, n.col]));
+    for (const g of ch.gates) for (const input of g.inputs) assert.ok(colOf[input] < colOf[g.id], `${ch.id}: ${input} is not left of ${g.id}`);
+    assert.equal(colOf.bulb, cols - 1);
+    assert.equal(colOf[outputId(ch)] + 1, colOf.bulb);
+  }
+  assert.ok(GATE_CHALLENGES.length >= 12);
+});
+
+test('logic gates: wrong choices do not solve, and equivalent circuits do', () => {
+  const byId = Object.fromEntries(GATE_CHALLENGES.map((c) => [c.id, c]));
+  assert.equal(isSolved(byId['gates-1'], { g1: 'OR' }), false);
+  assert.equal(isSolved(byId['gates-1'], { g1: 'AND' }), true);
+  // "Make a NOT": NOR also works, because NOR(A, A) is NOT A
+  assert.equal(isSolved(byId['gates-10'], { g1: 'NOR' }), true);
+  assert.equal(isSolved(byId['gates-10'], { g1: 'AND' }), false);
+  // "Build an AND": g2 only has the same value on both inputs, so NAND and NOR both act as NOT there
+  const and = byId['gates-12'];
+  const ops = and.gates[0].options;
+  const solutions = ops.flatMap((a) => ops.map((b) => ({ g1: a, g2: b }))).filter((c) => isSolved(and, c));
+  assert.deepEqual(solutions, [{ g1: 'NAND', g2: 'NAND' }, { g1: 'NAND', g2: 'NOR' }]);
+  // Live values for the UI
+  const v = evaluate(byId['gates-7'], { A: true, B: true, C: false }, { g1: 'AND', g2: 'OR' });
+  assert.equal(v.g1, true);
+  assert.equal(v.g2, true);
+  assert.equal(evaluate(byId['gates-7'], { A: true, B: true, C: false }, { g1: 'AND' }).g2, null);
+});
+
+// ---------- Cipher Desk ----------
+
+test('caesar shift and mirror cipher round-trip', () => {
+  assert.equal(shiftText('HELLO', 3), 'KHOOR');
+  assert.equal(shiftText('KHOOR', -3), 'HELLO');
+  assert.equal(shiftText('XYZ', 3), 'ABC');
+  assert.equal(shiftText('Hi there!', 1), 'IJ UIFSF!');
+  for (let k = 0; k < 26; k++) assert.equal(shiftText(shiftText('SECRET AGENT', k), 26 - k), 'SECRET AGENT');
+  assert.equal(atbash('ABC'), 'ZYX');
+  assert.equal(atbash(atbash('TOP SECRET')), 'TOP SECRET');
+  assert.equal(lettersOnly('a b-c!'), 'ABC');
+  assert.equal(ALPHABET.length, 26);
+});
+
+test('every cipher puzzle is consistent with its answer, at every level', () => {
+  const rng = mulberry32(17);
+  for (let level = 1; level <= 10; level++) {
+    for (let i = 0; i < 150; i++) {
+      const p = makeCipherPuzzle(level, rng);
+      assert.equal(p.level, level);
+      if (p.kind === 'decode' || p.kind === 'crack') {
+        assert.equal(shiftText(p.show, -p.shift), p.answer, `${p.show} / ${p.answer}`);
+        assert.notEqual(p.show, p.answer, 'a shift must change the text');
+      } else if (p.kind === 'encode') {
+        assert.equal(shiftText(p.show, p.shift), p.answer);
+        assert.ok(p.shift > 0 && p.shift < 26);
+      } else {
+        assert.equal(p.shift, null);
+        assert.equal(atbash(p.show), p.answer);
+      }
+      assert.ok(checkCipher(p, p.answer.toLowerCase()), 'case and spacing should not matter');
+      assert.ok(checkCipher(p, p.answer.replace(/ /g, '')));
+      assert.ok(!checkCipher(p, p.answer + 'X'));
+      if (p.kind === 'crack') assert.ok(p.hint.includes(p.answer[0]));
+      // The shift is only given away when the child is meant to use it
+      if (p.kind === 'crack') assert.ok(!p.prompt.includes(String(p.shift)) || p.shift < 10 && !/shift is \d/.test(p.prompt), p.prompt);
+    }
+  }
+  const round = makeCipherRound(9, 5, rng);
+  assert.equal(round.length, 5);
+  assert.equal(new Set(round.map((p) => p.answer)).size, 5);
+});
+
+// ---------- Tower of Hanoi ----------
+
+test('hanoi: rules and the optimal solver', () => {
+  const g = newGame(3);
+  assert.deepEqual(g, [[3, 2, 1], [], []]);
+  assert.equal(canMove(g, 0, 1), true);
+  assert.equal(canMove(g, 1, 0), false); // nothing on the peg
+  const g2 = move(g, 0, 1);
+  assert.equal(canMove(g2, 0, 1), false); // a 2 cannot go on a 1
+  assert.throws(() => move(g2, 0, 1));
+  assert.deepEqual(g, [[3, 2, 1], [], []]); // the original is not changed
+  for (let n = 3; n <= 7; n++) {
+    let state = newGame(n);
+    const plan = solveFrom(state);
+    assert.equal(plan.length, optimalMoves(n));
+    for (const [a, b] of plan) state = move(state, a, b);
+    assert.ok(hanoiSolved(state, n));
+  }
+});
+
+test('hanoi: the solver works from any position the child can reach', () => {
+  const rng = mulberry32(8);
+  for (let round = 0; round < 200; round++) {
+    const n = 3 + Math.floor(rng() * 5);
+    let state = newGame(n);
+    for (let i = 0; i < Math.floor(rng() * 60); i++) {
+      const moves = [];
+      for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) if (canMove(state, a, b)) moves.push([a, b]);
+      const [a, b] = moves[Math.floor(rng() * moves.length)];
+      state = move(state, a, b);
+    }
+    const plan = solveFrom(state);
+    assert.ok(plan.length <= optimalMoves(n));
+    for (const [a, b] of plan) state = move(state, a, b);
+    assert.ok(hanoiSolved(state, n));
+  }
+});
+
+// ---------- Order It ----------
+
+const orderPack = JSON.parse(fs.readFileSync('src/content/packs/order.json', 'utf8'));
+
+test('order puzzles are valid and cover every level', () => {
+  assert.ok(readOrderPack(orderPack));
+  const ids = new Set();
+  for (const p of orderPack.puzzles) {
+    assert.ok(isOrderPuzzle(p), p.id);
+    assert.ok(!ids.has(p.id), `duplicate ${p.id}`);
+    ids.add(p.id);
+  }
+  for (let level = 1; level <= 10; level++) {
+    const near = orderPack.puzzles.filter((p) => Math.abs(p.level - level) <= 1);
+    assert.ok(near.length >= 5, `level ${level} has only ${near.length} puzzles within one level`);
+  }
+  assert.equal(readOrderPack({ ...orderPack, id: 'nope' }), null);
+  assert.equal(readOrderPack({ ...orderPack, puzzles: [{ id: 'x' }] }), null);
+  assert.ok(pickNear(orderPack.puzzles, 5, new Set(), mulberry32(1)));
+});
+
+// ---------- Flags & Capitals, Predict It ----------
+
+test('flags, capitals and predictions are in the science pack with the right ages', () => {
+  const sci = packs.science.questions;
+  const topic = (t) => sci.filter((q) => q.topic === t);
+  assert.ok(topic('flags').length >= 100 && topic('capitals').length >= 100 && topic('countries').length >= 40);
+  assert.ok(topic('predictions').length >= 30);
+  for (const q of topic('flags')) assert.match(q.prompt, /[\u{1F1E6}-\u{1F1FF}]{2}/u, q.id);
+  // Predict It is for ages 9+ (level 6 and up); Flags & Capitals starts around age 7
+  assert.ok(topic('predictions').every((q) => q.level >= 6));
+  const fc = gameById('flags-capitals');
+  const pi = gameById('predict-it');
+  assert.ok(fc.minAge >= 7 && pi.minAge >= 9);
+  assert.ok(!quizGamesFor('science', 8).some((g) => g.id === 'predict-it'));
+  assert.ok(quizGamesFor('science', 9).some((g) => g.id === 'predict-it'));
+  assert.ok(!quizGamesFor('science', 6).some((g) => g.id === 'flags-capitals'));
 });

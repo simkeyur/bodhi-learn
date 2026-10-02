@@ -214,7 +214,9 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
             <span className="quiz-topic">{question.topic}</span>
             {mode === 'sprint' && <span className="quiz-score">{score} right</span>}
           </div>
-          <h2 className="quiz-prompt">{question.prompt}</h2>
+          <h2 className="quiz-prompt">
+            {question.prompt.split('\n').map((line, n) => (n === 0 ? line : <span key={n} className="quiz-prompt-big">{line}</span>))}
+          </h2>
 
           <div className={`quiz-choices ${question.choices.some((c) => c.length > 22) ? 'long' : ''}`}>
             {question.choices.map((choice, i) => {

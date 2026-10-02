@@ -58,13 +58,18 @@ export const SUBJECT_INFO: Record<Subject, SubjectInfo> = {
       { view: 'code-bot', title: 'Code the Bot', blurb: 'Program a robot with arrows to find the star', icon: '🤖', minAge: 5, maxAge: 11, color: '#14B8A6', dark: '#0F766E', tint: '#F0FDFA' },
       { view: 'patterns', title: 'Pattern Parade', blurb: 'What comes next? Spot the pattern', icon: '🎠', minAge: 4, maxAge: 9, color: '#EC4899', dark: '#BE185D', tint: '#FDF2F8' },
       { view: 'machine', title: 'Magic Machine', blurb: 'Find the secret rule inside the machine', icon: '⚙️', minAge: 5, maxAge: 11, color: '#0891B2', dark: '#155E75', tint: '#ECFEFF' },
+      { view: 'hanoi', title: 'Tower of Hanoi', blurb: 'Move the whole tower, one disc at a time', icon: '🗼', minAge: 6, maxAge: 14, color: '#EF4444', dark: '#B91C1C', tint: '#FEF2F2' },
+      { view: 'cipher-desk', title: 'Cipher Desk', blurb: 'Write and crack secret messages', icon: '🔐', minAge: 8, maxAge: 14, color: '#6366F1', dark: '#4338CA', tint: '#EEF2FF' },
+      { view: 'logic-gates', title: 'Logic Gates Lab', blurb: 'Wire up switches to light the bulb', icon: '🔌', minAge: 9, maxAge: 14, color: '#EAB308', dark: '#A16207', tint: '#FEFCE8' },
     ],
   },
   science: {
     id: 'science', title: 'Discover', icon: '🔭', color: '#10B981', dark: '#047857', tint: '#ECFDF5',
     blurb: { little: 'Animals, plants and weather', explorer: 'Space, nature and the human body', pro: 'Science, geography and history' },
     topics: 'Animals, space, the body, chemistry, physics and the world',
-    games: [],
+    games: [
+      { view: 'order-it', title: 'Order It', blurb: 'Put planets, events and animals in order', icon: '🪜', minAge: 4, maxAge: 14, color: '#14B8A6', dark: '#0F766E', tint: '#F0FDFA' },
+    ],
   },
 };
 

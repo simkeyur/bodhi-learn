@@ -61,13 +61,16 @@ let wrote = 0;
 
 for (const file of files) {
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8'));
-  const { subject, version } = pack;
-  if (!subject || !Number.isInteger(version) || !Array.isArray(pack.questions)) throw new Error(`${file} is not a valid pack`);
+  // Question packs are keyed by subject; the Order It pack has an explicit id
+  const subject = pack.id ?? pack.subject;
+  const { version } = pack;
+  const items = pack.questions ?? pack.puzzles;
+  if (!subject || !Number.isInteger(version) || !Array.isArray(items)) throw new Error(`${file} is not a valid pack`);
 
   const remote = await call('GET', `${BASE}/content_packs/${subject}`);
   const online = remote ? decodeVersion(remote) : 0;
   const publish = force || version > online;
-  console.log(`${subject.padEnd(8)} local v${version} · online ${remote ? `v${online}` : 'none'} · ${pack.questions.length} questions · ${publish ? (dryRun ? 'would publish' : 'publishing') : 'skipped'}`);
+  console.log(`${subject.padEnd(8)} local v${version} · online ${remote ? `v${online}` : 'none'} · ${items.length} ${pack.puzzles ? 'puzzles' : 'questions'} · ${publish ? (dryRun ? 'would publish' : 'publishing') : 'skipped'}`);
 
   meta.packs[subject] = publish ? version : online;
   if (publish && !dryRun) {

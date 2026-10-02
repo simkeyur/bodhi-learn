@@ -9,6 +9,7 @@ import {
   DEFAULT_STATE,
   MAX_BOT_SOLVED,
   MAX_PLACED_STICKERS,
+  MAX_SOLVED,
   bandForAge,
   bracketForAge,
   clampAge,
@@ -48,6 +49,8 @@ interface AppContextType {
   removePlacedSticker: (id: string) => void;
   botSolved: string[];
   markBotSolved: (levelId: string) => boolean; // true the first time a level is solved
+  solved: string[];
+  markSolved: (puzzleId: string) => boolean; // true the first time a puzzle is solved
   onboarded: boolean; // the welcome questions (age, name) have been answered
   completeOnboarding: (name: string) => void;
   age: number; // 4..14
@@ -128,6 +131,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [botSolved, setBotSolved] = useState<string[]>(() =>
     readStored('bodhi_bot_solved', (r) => parseJson(r, isStringArray), DEFAULT_STATE.botSolved));
 
+  const [solved, setSolved] = useState<string[]>(() =>
+    readStored('bodhi_solved', (r) => parseJson(r, isStringArray), DEFAULT_STATE.solved));
+
   // Exact age. Devices that stored one of the old three brackets are converted on first read.
   const [age, setAgeState] = useState<number>(() =>
     readStored('bodhi_exact_age', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) ? clampAge(n) : undefined; },
@@ -165,6 +171,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => { if (onboarded) store('bodhi_stickers', JSON.stringify(unlockedStickers)); }, [onboarded, unlockedStickers]);
   useEffect(() => { if (onboarded) store('bodhi_placed_stickers', JSON.stringify(placedStickers)); }, [onboarded, placedStickers]);
   useEffect(() => { if (onboarded) store('bodhi_bot_solved', JSON.stringify(botSolved)); }, [onboarded, botSolved]);
+  useEffect(() => { if (onboarded) store('bodhi_solved', JSON.stringify(solved)); }, [onboarded, solved]);
   useEffect(() => { if (onboarded) store('bodhi_exact_age', String(age)); }, [onboarded, age]);
   useEffect(() => { if (onboarded) store('bodhi_skills', JSON.stringify(skills)); }, [onboarded, skills]);
   useEffect(() => { if (onboarded) store('bodhi_kid_name', kidName); }, [onboarded, kidName]);
@@ -220,8 +227,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Cloud sync (Firestore) for signed-in parents; guests just use this device
   const synced = useMemo<SyncedState>(
-    () => ({ kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, skills }),
-    [kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, skills],
+    () => ({ kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills }),
+    [kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills],
   );
 
   const applyCloudState = (next: SyncedState) => {
@@ -234,13 +241,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setUnlockedStickers(next.unlockedStickers);
     setPlacedStickers(next.placedStickers);
     setBotSolved(next.botSolved);
+    setSolved(next.solved);
   };
 
   // Signing out wipes this device's progress, so the next person is asked who they are again
   const handleSignedOut = () => {
     try {
       // The persistence effects pause while not onboarded, so clear the old family's copy here
-      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
+      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
         .forEach((k) => localStorage.removeItem(k));
     } catch { /* ignore */ }
     setOnboarded(false);
@@ -312,6 +320,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return true;
   };
 
+  // Returns true only the first time, so replaying a solved puzzle doesn't pay out stars again
+  const markSolved = (puzzleId: string): boolean => {
+    if (solved.includes(puzzleId)) return false;
+    setSolved((prev) => unionIds(prev, [puzzleId]).slice(0, MAX_SOLVED));
+    return true;
+  };
+
   const removePlacedSticker = (id: string) => {
     setPlacedStickers((prev) => prev.filter((p) => p.id !== id));
     sound.playPop(400);
@@ -329,6 +344,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         removePlacedSticker,
         botSolved,
         markBotSolved,
+        solved,
+        markSolved,
         onboarded,
         completeOnboarding,
         age,

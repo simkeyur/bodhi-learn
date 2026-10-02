@@ -253,3 +253,6 @@
 .quiz-lives b { margin-left: 8px; font: 700 1.1rem var(--font-display); color: var(--q-dark); }
 
 .quiz-score { font: 700 0.95rem var(--font-display); color: var(--q-dark); }
+
+/* A second line in a prompt (such as a flag) is shown big and on its own */
+.quiz-prompt-big { display: block; font-size: 4.2rem; line-height: 1.2; margin-top: 8px; }

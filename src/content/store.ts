@@ -3,32 +3,53 @@
 //   2. newer packs pulled from Firestore and kept in IndexedDB on this device.
 // On each launch the app asks Firestore whether anything is newer (one tiny read) and downloads
 // only the packs that changed. Offline, it just uses what it already has.
+//
+// Two kinds of pack: question packs (one per subject) and the Order It puzzle pack.
 
 import { useSyncExternalStore } from 'react';
 import { SUBJECTS, type Subject } from '../firebase/schema';
-import { readPack } from './select';
-import type { QuestionPack } from './types';
+import { readOrderPack, readPack } from './select';
+import type { OrderPack, QuestionPack } from './types';
 
 type Packs = Partial<Record<Subject, QuestionPack>>;
+type AnyPack = QuestionPack | OrderPack;
+
+const packId = (p: AnyPack): string => ('kind' in p ? p.id : p.subject);
+const readAny = (v: unknown): AnyPack | null => readOrderPack(v) ?? readPack(v);
+
+const PACK_IDS: string[] = [...SUBJECTS, 'order'];
 
 const modules = import.meta.glob<unknown>('./packs/*.json', { eager: true, import: 'default' });
 
-const bundled: Packs = {};
+let packs: Packs = {};
+let order = null as OrderPack | null;
+const adopt = (pack: AnyPack): boolean => {
+  if ('kind' in pack) {
+    if (order && order.version >= pack.version) return false;
+    order = pack;
+    return true;
+  }
+  const have = packs[pack.subject];
+  if (have && have.version >= pack.version) return false;
+  packs = { ...packs, [pack.subject]: pack };
+  return true;
+};
+const versionOf = (id: string): number => (id === 'order' ? order?.version : packs[id as Subject]?.version) ?? 0;
+
 for (const mod of Object.values(modules)) {
-  const pack = readPack(mod);
-  if (pack) bundled[pack.subject] = pack;
+  const pack = readAny(mod);
+  if (pack) adopt(pack);
 }
 
-let packs: Packs = { ...bundled };
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());
 
 export type ContentStatus = 'bundled' | 'checking' | 'up-to-date' | 'updated' | 'offline';
 let status = 'bundled' as ContentStatus;
-let statusSnapshot = { status, packs };
+let snapshot = { status, packs, order };
 const publish = (next?: ContentStatus) => {
   if (next) status = next;
-  statusSnapshot = { status, packs };
+  snapshot = { status, packs, order };
   emit();
 };
 
@@ -45,31 +66,24 @@ const openDb = (): Promise<IDBDatabase> =>
     req.onerror = () => reject(req.error);
   });
 
-async function readCached(): Promise<QuestionPack[]> {
+async function readCached(): Promise<AnyPack[]> {
   const db = await openDb();
   return new Promise((resolve, reject) => {
     const req = db.transaction(STORE).objectStore(STORE).getAll();
-    req.onsuccess = () => resolve((req.result as unknown[]).map(readPack).filter((p): p is QuestionPack => p !== null));
+    req.onsuccess = () => resolve((req.result as unknown[]).map(readAny).filter((p): p is AnyPack => p !== null));
     req.onerror = () => reject(req.error);
   });
 }
 
-async function writeCached(pack: QuestionPack): Promise<void> {
+async function writeCached(pack: AnyPack): Promise<void> {
   const db = await openDb();
   await new Promise<void>((resolve, reject) => {
     const tx = db.transaction(STORE, 'readwrite');
-    tx.objectStore(STORE).put(pack, pack.subject);
+    tx.objectStore(STORE).put(pack, packId(pack));
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);
   });
 }
-
-const adopt = (pack: QuestionPack): boolean => {
-  const have = packs[pack.subject];
-  if (have && have.version >= pack.version) return false;
-  packs = { ...packs, [pack.subject]: pack };
-  return true;
-};
 
 let started: Promise<void> | null = null;
 
@@ -91,11 +105,11 @@ export function syncContent(): Promise<void> {
       const cloud = await import('../firebase/cloud');
       const meta = await cloud.fetchContentMeta();
       let changed = false;
-      for (const subject of SUBJECTS) {
-        const remoteVersion = meta?.packs?.[subject];
-        if (typeof remoteVersion !== 'number' || remoteVersion <= (packs[subject]?.version ?? 0)) continue;
-        const remote = readPack(await cloud.fetchContentPack(subject));
-        if (remote && adopt(remote)) {
+      for (const id of PACK_IDS) {
+        const remoteVersion = meta?.packs?.[id];
+        if (typeof remoteVersion !== 'number' || remoteVersion <= versionOf(id)) continue;
+        const remote = readAny(await cloud.fetchContentPack(id));
+        if (remote && packId(remote) === id && adopt(remote)) {
           changed = true;
           await writeCached(remote).catch(() => {});
         }
@@ -114,5 +128,5 @@ const subscribe = (l: () => void) => {
 };
 
 export function useContent() {
-  return useSyncExternalStore(subscribe, () => statusSnapshot);
+  return useSyncExternalStore(subscribe, () => snapshot);
 }

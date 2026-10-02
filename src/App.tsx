@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AppProvider } from './context/AppContext';
 import { Header } from './components/layout/Header';
+import { OrderItWorld } from './components/puzzles/OrderItWorld';
+import { CipherWorld } from './components/puzzles/CipherWorld';
+import { LogicGatesWorld } from './components/puzzles/LogicGatesWorld';
+import { HanoiWorld } from './components/puzzles/HanoiWorld';
 import { Welcome } from './components/onboarding/Welcome';
 import { Home } from './components/home/Home';
 import { QuizWorld } from './components/quiz/QuizWorld';
@@ -80,6 +84,14 @@ export const BodhiApp: React.FC = () => {
         return <CountingWorld onBack={backHome} />;
       case 'math':
         return <VisualMathWorld onBack={backHome} />;
+      case 'order-it':
+        return <OrderItWorld onBack={backHome} />;
+      case 'cipher-desk':
+        return <CipherWorld onBack={backHome} />;
+      case 'logic-gates':
+        return <LogicGatesWorld onBack={backHome} />;
+      case 'hanoi':
+        return <HanoiWorld onBack={backHome} />;
       case 'stickers':
         if (!hasStickers(age)) return <Home onSelectView={setCurrentView} />;
         return <StickerBook onBack={backHome} />;

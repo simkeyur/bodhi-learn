@@ -134,3 +134,11 @@ test('learning content is public to read but never writable', async () => {
     await assertFails(deleteDoc(doc(db, 'content_packs/science')));
   }
 });
+
+test('solved puzzle ids are accepted when valid and rejected when oversized or the wrong type', async () => {
+  const ref = doc(asUser('gina'), 'users/gina');
+  const progress = (solved) => ({ stars: 1, unlockedStickers: [], placedStickers: [], solved });
+  await assertSucceeds(setDoc(ref, validDoc({ progress: progress(['gates-1', 'hanoi-3']) })));
+  await assertFails(setDoc(ref, validDoc({ progress: progress(new Array(301).fill('x')) })), 'too many');
+  await assertFails(setDoc(ref, validDoc({ progress: progress('gates-1') })), 'not a list');
+});

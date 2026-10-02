@@ -21,7 +21,13 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
   group and plays one of three ways: a *round* (8 questions), a *sprint* (60 seconds) or *lives* (3 lives).
   Words: Rhyme Time, Grammar Gym, Word Rush, Story Sense. Math: Quick Facts, Word Problems, Shape Up, Fraction Fun,
   Equation Lab. Logic: Pattern Pop, Brain Teasers, Code Breakers, Chance & Counting. Discover: Living World,
-  Space & Earth, Matter & Energy. Games are shown only for the ages they suit.
+  Space & Earth, Flags & Capitals (7+), Predict It (9+), Matter & Energy. Games are shown only for the ages they suit.
+- **Puzzle games** (not quizzes, `src/components/puzzles/`): **Order It** (Discover, all ages: tap cards into the right
+  order; puzzles are a downloadable pack), **Tower of Hanoi** (Logic, 6+: 3 to 7 discs, a hint button that finds the
+  shortest solution from wherever you are), **Cipher Desk** (Logic, 8+: decode, encode, crack a hidden shift, mirror
+  cipher, with an interactive wheel) and **Logic Gates Lab** (Logic, 9+: 14 circuits where you pick what each blank
+  gate does so the bulb behaves as the goal says; any circuit with the right truth table counts). Solved puzzles are saved
+  with the account (`progress.solved`) and pay stars the first time.
 - **Levels** run 1 (about age 4) to 10 (about age 14) and are shared by the games of a subject: four right in a row
   goes up, two wrong in a row goes down, and the child can pick a level. Level and accuracy are saved per subject.
   Math is generated (`src/content/mathGen.ts`, every generator tagged with a topic and level); Words, Logic and
@@ -134,7 +140,7 @@ The earlier OpenAI recordings are archived locally in `audio-archive/` (git-igno
 
 ## 📦 Learning content (Firestore → device)
 
-The question packs (`src/content/packs/{reading,science,logic}.json`) live in two places:
+The packs (`src/content/packs/`: question packs `reading`, `science`, `logic` and the Order It puzzle pack `order`) live in two places:
 
 - **Bundled** in the app, so a first launch works offline.
 - **Firestore** at `content_packs/{subject}` plus `content_meta/current` (public to read, never writable from the app).

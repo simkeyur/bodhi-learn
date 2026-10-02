@@ -1,6 +1,6 @@
 {
  "subject": "science",
- "version": 2,
+ "version": 3,
  "title": "Discover",
  "questions": [
   {
@@ -1458,6 +1458,6830 @@
    ],
    "answer": 2,
    "explain": "Sodium chloride."
+  },
+  {
+   "id": "sc-flag-US",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇺🇸",
+   "choices": [
+    "Mexico",
+    "United States",
+    "Canada",
+    "Germany"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of United States, in North America."
+  },
+  {
+   "id": "sc-cap-US",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of United States?",
+   "choices": [
+    "Ottawa",
+    "Mexico City",
+    "Paris",
+    "Washington, D.C."
+   ],
+   "answer": 3,
+   "explain": "The capital of United States is Washington, D.C.."
+  },
+  {
+   "id": "sc-rev-US",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Washington, D.C. is the capital of which country?",
+   "choices": [
+    "Canada",
+    "Mexico",
+    "United States",
+    "Australia"
+   ],
+   "answer": 2,
+   "explain": "Washington, D.C. is the capital of United States."
+  },
+  {
+   "id": "sc-cont-US",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is United States in?",
+   "choices": [
+    "North America",
+    "Oceania",
+    "Asia",
+    "South America"
+   ],
+   "answer": 0,
+   "explain": "United States is in North America."
+  },
+  {
+   "id": "sc-flag-GB",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇬🇧",
+   "choices": [
+    "Spain",
+    "United Kingdom",
+    "United States",
+    "Germany"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of United Kingdom, in Europe."
+  },
+  {
+   "id": "sc-cap-GB",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of United Kingdom?",
+   "choices": [
+    "Berlin",
+    "London",
+    "Tokyo",
+    "Moscow"
+   ],
+   "answer": 1,
+   "explain": "The capital of United Kingdom is London."
+  },
+  {
+   "id": "sc-rev-GB",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "London is the capital of which country?",
+   "choices": [
+    "Canada",
+    "Russia",
+    "Italy",
+    "United Kingdom"
+   ],
+   "answer": 3,
+   "explain": "London is the capital of United Kingdom."
+  },
+  {
+   "id": "sc-cont-GB",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is United Kingdom in?",
+   "choices": [
+    "Oceania",
+    "North America",
+    "Europe",
+    "South America"
+   ],
+   "answer": 2,
+   "explain": "United Kingdom is in Europe."
+  },
+  {
+   "id": "sc-flag-FR",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇫🇷",
+   "choices": [
+    "Canada",
+    "Italy",
+    "Germany",
+    "France"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of France, in Europe."
+  },
+  {
+   "id": "sc-cap-FR",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of France?",
+   "choices": [
+    "Paris",
+    "London",
+    "Brasília",
+    "Moscow"
+   ],
+   "answer": 0,
+   "explain": "The capital of France is Paris."
+  },
+  {
+   "id": "sc-rev-FR",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Paris is the capital of which country?",
+   "choices": [
+    "France",
+    "United States",
+    "Germany",
+    "United Kingdom"
+   ],
+   "answer": 0,
+   "explain": "Paris is the capital of France."
+  },
+  {
+   "id": "sc-cont-FR",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is France in?",
+   "choices": [
+    "Europe",
+    "Asia",
+    "South America",
+    "North America"
+   ],
+   "answer": 0,
+   "explain": "France is in Europe."
+  },
+  {
+   "id": "sc-flag-JP",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇯🇵",
+   "choices": [
+    "India",
+    "Japan",
+    "Spain",
+    "China"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Japan, in Asia."
+  },
+  {
+   "id": "sc-cap-JP",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Japan?",
+   "choices": [
+    "Tokyo",
+    "Rome",
+    "Beijing",
+    "New Delhi"
+   ],
+   "answer": 0,
+   "explain": "The capital of Japan is Tokyo."
+  },
+  {
+   "id": "sc-rev-JP",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Tokyo is the capital of which country?",
+   "choices": [
+    "India",
+    "Italy",
+    "China",
+    "Japan"
+   ],
+   "answer": 3,
+   "explain": "Tokyo is the capital of Japan."
+  },
+  {
+   "id": "sc-cont-JP",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Japan in?",
+   "choices": [
+    "North America",
+    "South America",
+    "Oceania",
+    "Asia"
+   ],
+   "answer": 3,
+   "explain": "Japan is in Asia."
+  },
+  {
+   "id": "sc-flag-CN",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇨🇳",
+   "choices": [
+    "India",
+    "Canada",
+    "Japan",
+    "China"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of China, in Asia."
+  },
+  {
+   "id": "sc-cap-CN",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of China?",
+   "choices": [
+    "Madrid",
+    "New Delhi",
+    "Tokyo",
+    "Beijing"
+   ],
+   "answer": 3,
+   "explain": "The capital of China is Beijing."
+  },
+  {
+   "id": "sc-rev-CN",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Beijing is the capital of which country?",
+   "choices": [
+    "China",
+    "India",
+    "Japan",
+    "United Kingdom"
+   ],
+   "answer": 0,
+   "explain": "Beijing is the capital of China."
+  },
+  {
+   "id": "sc-cont-CN",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is China in?",
+   "choices": [
+    "Oceania",
+    "Asia",
+    "Africa",
+    "South America"
+   ],
+   "answer": 1,
+   "explain": "China is in Asia."
+  },
+  {
+   "id": "sc-flag-IN",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇮🇳",
+   "choices": [
+    "France",
+    "India",
+    "China",
+    "Japan"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of India, in Asia."
+  },
+  {
+   "id": "sc-cap-IN",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of India?",
+   "choices": [
+    "Madrid",
+    "Beijing",
+    "Tokyo",
+    "New Delhi"
+   ],
+   "answer": 3,
+   "explain": "The capital of India is New Delhi."
+  },
+  {
+   "id": "sc-rev-IN",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "New Delhi is the capital of which country?",
+   "choices": [
+    "Brazil",
+    "China",
+    "Japan",
+    "India"
+   ],
+   "answer": 3,
+   "explain": "New Delhi is the capital of India."
+  },
+  {
+   "id": "sc-cont-IN",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is India in?",
+   "choices": [
+    "Oceania",
+    "Europe",
+    "Asia",
+    "North America"
+   ],
+   "answer": 2,
+   "explain": "India is in Asia."
+  },
+  {
+   "id": "sc-flag-IT",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇮🇹",
+   "choices": [
+    "Spain",
+    "Italy",
+    "Egypt",
+    "Germany"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Italy, in Europe."
+  },
+  {
+   "id": "sc-cap-IT",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Italy?",
+   "choices": [
+    "Rome",
+    "Moscow",
+    "Mexico City",
+    "Madrid"
+   ],
+   "answer": 0,
+   "explain": "The capital of Italy is Rome."
+  },
+  {
+   "id": "sc-rev-IT",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Rome is the capital of which country?",
+   "choices": [
+    "Germany",
+    "Italy",
+    "India",
+    "United Kingdom"
+   ],
+   "answer": 1,
+   "explain": "Rome is the capital of Italy."
+  },
+  {
+   "id": "sc-cont-IT",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Italy in?",
+   "choices": [
+    "Europe",
+    "South America",
+    "Oceania",
+    "North America"
+   ],
+   "answer": 0,
+   "explain": "Italy is in Europe."
+  },
+  {
+   "id": "sc-flag-DE",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇩🇪",
+   "choices": [
+    "Russia",
+    "China",
+    "Germany",
+    "United Kingdom"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Germany, in Europe."
+  },
+  {
+   "id": "sc-cap-DE",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Germany?",
+   "choices": [
+    "London",
+    "Berlin",
+    "Brasília",
+    "Madrid"
+   ],
+   "answer": 1,
+   "explain": "The capital of Germany is Berlin."
+  },
+  {
+   "id": "sc-rev-DE",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Berlin is the capital of which country?",
+   "choices": [
+    "Egypt",
+    "Germany",
+    "United Kingdom",
+    "France"
+   ],
+   "answer": 1,
+   "explain": "Berlin is the capital of Germany."
+  },
+  {
+   "id": "sc-cont-DE",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Germany in?",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania",
+    "Asia"
+   ],
+   "answer": 1,
+   "explain": "Germany is in Europe."
+  },
+  {
+   "id": "sc-flag-ES",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇪🇸",
+   "choices": [
+    "Egypt",
+    "Russia",
+    "United Kingdom",
+    "Spain"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Spain, in Europe."
+  },
+  {
+   "id": "sc-cap-ES",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Spain?",
+   "choices": [
+    "Berlin",
+    "Madrid",
+    "Rome",
+    "Washington, D.C."
+   ],
+   "answer": 1,
+   "explain": "The capital of Spain is Madrid."
+  },
+  {
+   "id": "sc-rev-ES",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Madrid is the capital of which country?",
+   "choices": [
+    "United States",
+    "Russia",
+    "Spain",
+    "Italy"
+   ],
+   "answer": 2,
+   "explain": "Madrid is the capital of Spain."
+  },
+  {
+   "id": "sc-cont-ES",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Spain in?",
+   "choices": [
+    "Oceania",
+    "Europe",
+    "Africa",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Spain is in Europe."
+  },
+  {
+   "id": "sc-flag-CA",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇨🇦",
+   "choices": [
+    "Canada",
+    "United States",
+    "Mexico",
+    "Russia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Canada, in North America."
+  },
+  {
+   "id": "sc-cap-CA",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Canada?",
+   "choices": [
+    "Washington, D.C.",
+    "Mexico City",
+    "London",
+    "Ottawa"
+   ],
+   "answer": 3,
+   "explain": "The capital of Canada is Ottawa."
+  },
+  {
+   "id": "sc-rev-CA",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Ottawa is the capital of which country?",
+   "choices": [
+    "Mexico",
+    "United Kingdom",
+    "Canada",
+    "United States"
+   ],
+   "answer": 2,
+   "explain": "Ottawa is the capital of Canada."
+  },
+  {
+   "id": "sc-cont-CA",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Canada in?",
+   "choices": [
+    "North America",
+    "Africa",
+    "Europe",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "Canada is in North America."
+  },
+  {
+   "id": "sc-flag-AU",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇦🇺",
+   "choices": [
+    "Samoa",
+    "India",
+    "Australia",
+    "New Zealand"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Australia, in Oceania."
+  },
+  {
+   "id": "sc-cap-AU",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Australia?",
+   "choices": [
+    "Wellington",
+    "Canberra",
+    "Suva",
+    "New Delhi"
+   ],
+   "answer": 1,
+   "explain": "The capital of Australia is Canberra."
+  },
+  {
+   "id": "sc-rev-AU",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Canberra is the capital of which country?",
+   "choices": [
+    "Australia",
+    "Egypt",
+    "New Zealand",
+    "Samoa"
+   ],
+   "answer": 0,
+   "explain": "Canberra is the capital of Australia."
+  },
+  {
+   "id": "sc-cont-AU",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Australia in?",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Asia",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Australia is in Oceania."
+  },
+  {
+   "id": "sc-flag-BR",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇧🇷",
+   "choices": [
+    "Peru",
+    "Brazil",
+    "Chile",
+    "China"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Brazil, in South America."
+  },
+  {
+   "id": "sc-cap-BR",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Brazil?",
+   "choices": [
+    "Buenos Aires",
+    "New Delhi",
+    "Brasília",
+    "Lima"
+   ],
+   "answer": 2,
+   "explain": "The capital of Brazil is Brasília."
+  },
+  {
+   "id": "sc-rev-BR",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Brasília is the capital of which country?",
+   "choices": [
+    "Brazil",
+    "United States",
+    "Peru",
+    "Chile"
+   ],
+   "answer": 0,
+   "explain": "Brasília is the capital of Brazil."
+  },
+  {
+   "id": "sc-cont-BR",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Brazil in?",
+   "choices": [
+    "South America",
+    "Asia",
+    "Europe",
+    "Africa"
+   ],
+   "answer": 0,
+   "explain": "Brazil is in South America."
+  },
+  {
+   "id": "sc-flag-MX",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇲🇽",
+   "choices": [
+    "Canada",
+    "Italy",
+    "Mexico",
+    "United States"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Mexico, in North America."
+  },
+  {
+   "id": "sc-cap-MX",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Mexico?",
+   "choices": [
+    "Ottawa",
+    "Mexico City",
+    "Washington, D.C.",
+    "Berlin"
+   ],
+   "answer": 1,
+   "explain": "The capital of Mexico is Mexico City."
+  },
+  {
+   "id": "sc-rev-MX",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Mexico City is the capital of which country?",
+   "choices": [
+    "United States",
+    "Canada",
+    "United Kingdom",
+    "Mexico"
+   ],
+   "answer": 3,
+   "explain": "Mexico City is the capital of Mexico."
+  },
+  {
+   "id": "sc-cont-MX",
+   "topic": "countries",
+   "level": 2,
+   "prompt": "Which continent is Mexico in?",
+   "choices": [
+    "Africa",
+    "Asia",
+    "North America",
+    "Europe"
+   ],
+   "answer": 2,
+   "explain": "Mexico is in North America."
+  },
+  {
+   "id": "sc-flag-EG",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇪🇬",
+   "choices": [
+    "Egypt",
+    "Nigeria",
+    "Kenya",
+    "Russia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Egypt, in Africa."
+  },
+  {
+   "id": "sc-cap-EG",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Egypt?",
+   "choices": [
+    "Nairobi",
+    "Moscow",
+    "Cairo",
+    "Abuja"
+   ],
+   "answer": 2,
+   "explain": "The capital of Egypt is Cairo."
+  },
+  {
+   "id": "sc-rev-EG",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Cairo is the capital of which country?",
+   "choices": [
+    "South Africa",
+    "Egypt",
+    "Kenya",
+    "Spain"
+   ],
+   "answer": 1,
+   "explain": "Cairo is the capital of Egypt."
+  },
+  {
+   "id": "sc-flag-RU",
+   "topic": "flags",
+   "level": 3,
+   "prompt": "Which country's flag is this?\n🇷🇺",
+   "choices": [
+    "Spain",
+    "Russia",
+    "Brazil",
+    "Germany"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Russia, in Europe."
+  },
+  {
+   "id": "sc-cap-RU",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "What is the capital of Russia?",
+   "choices": [
+    "London",
+    "Rome",
+    "Moscow",
+    "Beijing"
+   ],
+   "answer": 2,
+   "explain": "The capital of Russia is Moscow."
+  },
+  {
+   "id": "sc-rev-RU",
+   "topic": "capitals",
+   "level": 4,
+   "prompt": "Moscow is the capital of which country?",
+   "choices": [
+    "Russia",
+    "Germany",
+    "Spain",
+    "Australia"
+   ],
+   "answer": 0,
+   "explain": "Moscow is the capital of Russia."
+  },
+  {
+   "id": "sc-flag-AR",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇦🇷",
+   "choices": [
+    "Chile",
+    "Colombia",
+    "Austria",
+    "Argentina"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Argentina, in South America."
+  },
+  {
+   "id": "sc-cap-AR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Argentina?",
+   "choices": [
+    "Ankara",
+    "Lima",
+    "Santiago",
+    "Buenos Aires"
+   ],
+   "answer": 3,
+   "explain": "The capital of Argentina is Buenos Aires."
+  },
+  {
+   "id": "sc-rev-AR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Buenos Aires is the capital of which country?",
+   "choices": [
+    "Peru",
+    "Colombia",
+    "Portugal",
+    "Argentina"
+   ],
+   "answer": 3,
+   "explain": "Buenos Aires is the capital of Argentina."
+  },
+  {
+   "id": "sc-cont-AR",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Argentina in?",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "North America",
+    "South America"
+   ],
+   "answer": 3,
+   "explain": "Argentina is in South America."
+  },
+  {
+   "id": "sc-flag-KR",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇰🇷",
+   "choices": [
+    "Colombia",
+    "Thailand",
+    "Vietnam",
+    "South Korea"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of South Korea, in Asia."
+  },
+  {
+   "id": "sc-cap-KR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of South Korea?",
+   "choices": [
+    "Riyadh",
+    "Seoul",
+    "Islamabad",
+    "Amsterdam"
+   ],
+   "answer": 1,
+   "explain": "The capital of South Korea is Seoul."
+  },
+  {
+   "id": "sc-rev-KR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Seoul is the capital of which country?",
+   "choices": [
+    "South Korea",
+    "Cuba",
+    "Saudi Arabia",
+    "Indonesia"
+   ],
+   "answer": 0,
+   "explain": "Seoul is the capital of South Korea."
+  },
+  {
+   "id": "sc-cont-KR",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is South Korea in?",
+   "choices": [
+    "Asia",
+    "North America",
+    "South America",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "South Korea is in Asia."
+  },
+  {
+   "id": "sc-flag-TR",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇹🇷",
+   "choices": [
+    "Chile",
+    "Turkey",
+    "Philippines",
+    "Thailand"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Turkey, in Asia."
+  },
+  {
+   "id": "sc-cap-TR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Turkey?",
+   "choices": [
+    "Ankara",
+    "Riyadh",
+    "Seoul",
+    "Buenos Aires"
+   ],
+   "answer": 0,
+   "explain": "The capital of Turkey is Ankara."
+  },
+  {
+   "id": "sc-rev-TR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Ankara is the capital of which country?",
+   "choices": [
+    "Saudi Arabia",
+    "Turkey",
+    "Denmark",
+    "Thailand"
+   ],
+   "answer": 1,
+   "explain": "Ankara is the capital of Turkey."
+  },
+  {
+   "id": "sc-flag-SA",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇸🇦",
+   "choices": [
+    "Thailand",
+    "Saudi Arabia",
+    "Philippines",
+    "Colombia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Saudi Arabia, in Asia."
+  },
+  {
+   "id": "sc-cap-SA",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Saudi Arabia?",
+   "choices": [
+    "Brussels",
+    "Islamabad",
+    "Riyadh",
+    "Bangkok"
+   ],
+   "answer": 2,
+   "explain": "The capital of Saudi Arabia is Riyadh."
+  },
+  {
+   "id": "sc-rev-SA",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Riyadh is the capital of which country?",
+   "choices": [
+    "Indonesia",
+    "Portugal",
+    "Saudi Arabia",
+    "Turkey"
+   ],
+   "answer": 2,
+   "explain": "Riyadh is the capital of Saudi Arabia."
+  },
+  {
+   "id": "sc-cont-SA",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Saudi Arabia in?",
+   "choices": [
+    "Oceania",
+    "Asia",
+    "Europe",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Saudi Arabia is in Asia."
+  },
+  {
+   "id": "sc-flag-ZA",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇿🇦",
+   "choices": [
+    "South Africa",
+    "Kenya",
+    "Turkey",
+    "Nigeria"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of South Africa, in Africa."
+  },
+  {
+   "id": "sc-cont-ZA",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is South Africa in?",
+   "choices": [
+    "South America",
+    "Europe",
+    "North America",
+    "Africa"
+   ],
+   "answer": 3,
+   "explain": "South Africa is in Africa."
+  },
+  {
+   "id": "sc-flag-NG",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇳🇬",
+   "choices": [
+    "Nigeria",
+    "Belgium",
+    "Kenya",
+    "South Africa"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Nigeria, in Africa."
+  },
+  {
+   "id": "sc-cap-NG",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Nigeria?",
+   "choices": [
+    "Nairobi",
+    "Abuja",
+    "Riyadh",
+    "Lusaka"
+   ],
+   "answer": 1,
+   "explain": "The capital of Nigeria is Abuja."
+  },
+  {
+   "id": "sc-rev-NG",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Abuja is the capital of which country?",
+   "choices": [
+    "Kenya",
+    "South Africa",
+    "Nigeria",
+    "Austria"
+   ],
+   "answer": 2,
+   "explain": "Abuja is the capital of Nigeria."
+  },
+  {
+   "id": "sc-cont-NG",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Nigeria in?",
+   "choices": [
+    "Africa",
+    "Asia",
+    "South America",
+    "Europe"
+   ],
+   "answer": 0,
+   "explain": "Nigeria is in Africa."
+  },
+  {
+   "id": "sc-flag-KE",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇰🇪",
+   "choices": [
+    "Nigeria",
+    "Kenya",
+    "South Africa",
+    "Colombia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Kenya, in Africa."
+  },
+  {
+   "id": "sc-cap-KE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Kenya?",
+   "choices": [
+    "Nairobi",
+    "Abuja",
+    "Tunis",
+    "Wellington"
+   ],
+   "answer": 0,
+   "explain": "The capital of Kenya is Nairobi."
+  },
+  {
+   "id": "sc-rev-KE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Nairobi is the capital of which country?",
+   "choices": [
+    "Kenya",
+    "South Africa",
+    "Saudi Arabia",
+    "Nigeria"
+   ],
+   "answer": 0,
+   "explain": "Nairobi is the capital of Kenya."
+  },
+  {
+   "id": "sc-cont-KE",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Kenya in?",
+   "choices": [
+    "Europe",
+    "Oceania",
+    "Africa",
+    "Asia"
+   ],
+   "answer": 2,
+   "explain": "Kenya is in Africa."
+  },
+  {
+   "id": "sc-flag-GR",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇬🇷",
+   "choices": [
+    "Philippines",
+    "Portugal",
+    "Greece",
+    "Poland"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Greece, in Europe."
+  },
+  {
+   "id": "sc-cap-GR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Greece?",
+   "choices": [
+    "Oslo",
+    "Athens",
+    "Nairobi",
+    "Stockholm"
+   ],
+   "answer": 1,
+   "explain": "The capital of Greece is Athens."
+  },
+  {
+   "id": "sc-rev-GR",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Athens is the capital of which country?",
+   "choices": [
+    "Norway",
+    "Argentina",
+    "Switzerland",
+    "Greece"
+   ],
+   "answer": 3,
+   "explain": "Athens is the capital of Greece."
+  },
+  {
+   "id": "sc-cont-GR",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Greece in?",
+   "choices": [
+    "Asia",
+    "Europe",
+    "North America",
+    "South America"
+   ],
+   "answer": 1,
+   "explain": "Greece is in Europe."
+  },
+  {
+   "id": "sc-flag-PT",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇵🇹",
+   "choices": [
+    "Portugal",
+    "Saudi Arabia",
+    "Austria",
+    "Poland"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Portugal, in Europe."
+  },
+  {
+   "id": "sc-cap-PT",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Portugal?",
+   "choices": [
+    "Stockholm",
+    "Seoul",
+    "Lisbon",
+    "Helsinki"
+   ],
+   "answer": 2,
+   "explain": "The capital of Portugal is Lisbon."
+  },
+  {
+   "id": "sc-rev-PT",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Lisbon is the capital of which country?",
+   "choices": [
+    "Switzerland",
+    "South Africa",
+    "Portugal",
+    "Denmark"
+   ],
+   "answer": 2,
+   "explain": "Lisbon is the capital of Portugal."
+  },
+  {
+   "id": "sc-cont-PT",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Portugal in?",
+   "choices": [
+    "North America",
+    "Europe",
+    "Oceania",
+    "Asia"
+   ],
+   "answer": 1,
+   "explain": "Portugal is in Europe."
+  },
+  {
+   "id": "sc-flag-NL",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇳🇱",
+   "choices": [
+    "Netherlands",
+    "Austria",
+    "Peru",
+    "Greece"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Netherlands, in Europe."
+  },
+  {
+   "id": "sc-cap-NL",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Netherlands?",
+   "choices": [
+    "Vienna",
+    "Amsterdam",
+    "Copenhagen",
+    "Lima"
+   ],
+   "answer": 1,
+   "explain": "The capital of Netherlands is Amsterdam."
+  },
+  {
+   "id": "sc-rev-NL",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Amsterdam is the capital of which country?",
+   "choices": [
+    "Switzerland",
+    "Belgium",
+    "Netherlands",
+    "Chile"
+   ],
+   "answer": 2,
+   "explain": "Amsterdam is the capital of Netherlands."
+  },
+  {
+   "id": "sc-cont-NL",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Netherlands in?",
+   "choices": [
+    "North America",
+    "Europe",
+    "Oceania",
+    "Africa"
+   ],
+   "answer": 1,
+   "explain": "Netherlands is in Europe."
+  },
+  {
+   "id": "sc-flag-SE",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇸🇪",
+   "choices": [
+    "Chile",
+    "Poland",
+    "Greece",
+    "Sweden"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Sweden, in Europe."
+  },
+  {
+   "id": "sc-cap-SE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Sweden?",
+   "choices": [
+    "Stockholm",
+    "Amsterdam",
+    "Brussels",
+    "Seoul"
+   ],
+   "answer": 0,
+   "explain": "The capital of Sweden is Stockholm."
+  },
+  {
+   "id": "sc-rev-SE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Stockholm is the capital of which country?",
+   "choices": [
+    "Sweden",
+    "Netherlands",
+    "Argentina",
+    "Norway"
+   ],
+   "answer": 0,
+   "explain": "Stockholm is the capital of Sweden."
+  },
+  {
+   "id": "sc-cont-SE",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Sweden in?",
+   "choices": [
+    "North America",
+    "Europe",
+    "Africa",
+    "Oceania"
+   ],
+   "answer": 1,
+   "explain": "Sweden is in Europe."
+  },
+  {
+   "id": "sc-flag-NO",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇳🇴",
+   "choices": [
+    "Norway",
+    "Poland",
+    "Chile",
+    "Greece"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Norway, in Europe."
+  },
+  {
+   "id": "sc-cap-NO",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Norway?",
+   "choices": [
+    "Amsterdam",
+    "Oslo",
+    "Brussels",
+    "Islamabad"
+   ],
+   "answer": 1,
+   "explain": "The capital of Norway is Oslo."
+  },
+  {
+   "id": "sc-rev-NO",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Oslo is the capital of which country?",
+   "choices": [
+    "Norway",
+    "Belgium",
+    "Switzerland",
+    "Nigeria"
+   ],
+   "answer": 0,
+   "explain": "Oslo is the capital of Norway."
+  },
+  {
+   "id": "sc-cont-NO",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Norway in?",
+   "choices": [
+    "Oceania",
+    "Asia",
+    "South America",
+    "Europe"
+   ],
+   "answer": 3,
+   "explain": "Norway is in Europe."
+  },
+  {
+   "id": "sc-flag-DK",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇩🇰",
+   "choices": [
+    "Norway",
+    "Denmark",
+    "Kenya",
+    "Ireland"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Denmark, in Europe."
+  },
+  {
+   "id": "sc-cap-DK",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Denmark?",
+   "choices": [
+    "Brussels",
+    "Oslo",
+    "Copenhagen",
+    "Jakarta"
+   ],
+   "answer": 2,
+   "explain": "The capital of Denmark is Copenhagen."
+  },
+  {
+   "id": "sc-rev-DK",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Copenhagen is the capital of which country?",
+   "choices": [
+    "Finland",
+    "Denmark",
+    "South Korea",
+    "Sweden"
+   ],
+   "answer": 1,
+   "explain": "Copenhagen is the capital of Denmark."
+  },
+  {
+   "id": "sc-cont-DK",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Denmark in?",
+   "choices": [
+    "Oceania",
+    "North America",
+    "Europe",
+    "Africa"
+   ],
+   "answer": 2,
+   "explain": "Denmark is in Europe."
+  },
+  {
+   "id": "sc-flag-FI",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇫🇮",
+   "choices": [
+    "Finland",
+    "Pakistan",
+    "Switzerland",
+    "Norway"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Finland, in Europe."
+  },
+  {
+   "id": "sc-cap-FI",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Finland?",
+   "choices": [
+    "Helsinki",
+    "Warsaw",
+    "Hanoi",
+    "Oslo"
+   ],
+   "answer": 0,
+   "explain": "The capital of Finland is Helsinki."
+  },
+  {
+   "id": "sc-rev-FI",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Helsinki is the capital of which country?",
+   "choices": [
+    "Portugal",
+    "Finland",
+    "Sweden",
+    "Chile"
+   ],
+   "answer": 1,
+   "explain": "Helsinki is the capital of Finland."
+  },
+  {
+   "id": "sc-cont-FI",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Finland in?",
+   "choices": [
+    "North America",
+    "Asia",
+    "Europe",
+    "Oceania"
+   ],
+   "answer": 2,
+   "explain": "Finland is in Europe."
+  },
+  {
+   "id": "sc-flag-PL",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇵🇱",
+   "choices": [
+    "Finland",
+    "Switzerland",
+    "New Zealand",
+    "Poland"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Poland, in Europe."
+  },
+  {
+   "id": "sc-cap-PL",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Poland?",
+   "choices": [
+    "Stockholm",
+    "Ankara",
+    "Lisbon",
+    "Warsaw"
+   ],
+   "answer": 3,
+   "explain": "The capital of Poland is Warsaw."
+  },
+  {
+   "id": "sc-rev-PL",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Warsaw is the capital of which country?",
+   "choices": [
+    "Switzerland",
+    "Poland",
+    "Austria",
+    "Thailand"
+   ],
+   "answer": 1,
+   "explain": "Warsaw is the capital of Poland."
+  },
+  {
+   "id": "sc-cont-PL",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Poland in?",
+   "choices": [
+    "Europe",
+    "Africa",
+    "Asia",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "Poland is in Europe."
+  },
+  {
+   "id": "sc-flag-IE",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇮🇪",
+   "choices": [
+    "Ireland",
+    "Belgium",
+    "Poland",
+    "Colombia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Ireland, in Europe."
+  },
+  {
+   "id": "sc-cap-IE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Ireland?",
+   "choices": [
+    "Dublin",
+    "Athens",
+    "Helsinki",
+    "Hanoi"
+   ],
+   "answer": 0,
+   "explain": "The capital of Ireland is Dublin."
+  },
+  {
+   "id": "sc-rev-IE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Dublin is the capital of which country?",
+   "choices": [
+    "Ireland",
+    "Vietnam",
+    "Sweden",
+    "Portugal"
+   ],
+   "answer": 0,
+   "explain": "Dublin is the capital of Ireland."
+  },
+  {
+   "id": "sc-cont-IE",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Ireland in?",
+   "choices": [
+    "South America",
+    "Europe",
+    "North America",
+    "Africa"
+   ],
+   "answer": 1,
+   "explain": "Ireland is in Europe."
+  },
+  {
+   "id": "sc-flag-CH",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇨🇭",
+   "choices": [
+    "Austria",
+    "Switzerland",
+    "Ireland",
+    "Cuba"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Switzerland, in Europe."
+  },
+  {
+   "id": "sc-cap-CH",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Switzerland?",
+   "choices": [
+    "Bern",
+    "Brussels",
+    "Dublin",
+    "Havana"
+   ],
+   "answer": 0,
+   "explain": "The capital of Switzerland is Bern."
+  },
+  {
+   "id": "sc-rev-CH",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Bern is the capital of which country?",
+   "choices": [
+    "Poland",
+    "Switzerland",
+    "Nigeria",
+    "Norway"
+   ],
+   "answer": 1,
+   "explain": "Bern is the capital of Switzerland."
+  },
+  {
+   "id": "sc-cont-CH",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Switzerland in?",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe",
+    "Asia"
+   ],
+   "answer": 2,
+   "explain": "Switzerland is in Europe."
+  },
+  {
+   "id": "sc-flag-AT",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇦🇹",
+   "choices": [
+    "Israel",
+    "Austria",
+    "Greece",
+    "Portugal"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Austria, in Europe."
+  },
+  {
+   "id": "sc-cap-AT",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Austria?",
+   "choices": [
+    "Dublin",
+    "Santiago",
+    "Warsaw",
+    "Vienna"
+   ],
+   "answer": 3,
+   "explain": "The capital of Austria is Vienna."
+  },
+  {
+   "id": "sc-rev-AT",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Vienna is the capital of which country?",
+   "choices": [
+    "Portugal",
+    "Switzerland",
+    "Indonesia",
+    "Austria"
+   ],
+   "answer": 3,
+   "explain": "Vienna is the capital of Austria."
+  },
+  {
+   "id": "sc-cont-AT",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Austria in?",
+   "choices": [
+    "Europe",
+    "Africa",
+    "Asia",
+    "South America"
+   ],
+   "answer": 0,
+   "explain": "Austria is in Europe."
+  },
+  {
+   "id": "sc-flag-BE",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇧🇪",
+   "choices": [
+    "Belgium",
+    "South Africa",
+    "Norway",
+    "Portugal"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Belgium, in Europe."
+  },
+  {
+   "id": "sc-cap-BE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Belgium?",
+   "choices": [
+    "Athens",
+    "Brussels",
+    "Vienna",
+    "Lima"
+   ],
+   "answer": 1,
+   "explain": "The capital of Belgium is Brussels."
+  },
+  {
+   "id": "sc-rev-BE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Brussels is the capital of which country?",
+   "choices": [
+    "Austria",
+    "Peru",
+    "Ireland",
+    "Belgium"
+   ],
+   "answer": 3,
+   "explain": "Brussels is the capital of Belgium."
+  },
+  {
+   "id": "sc-cont-BE",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Belgium in?",
+   "choices": [
+    "South America",
+    "North America",
+    "Europe",
+    "Asia"
+   ],
+   "answer": 2,
+   "explain": "Belgium is in Europe."
+  },
+  {
+   "id": "sc-flag-TH",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇹🇭",
+   "choices": [
+    "Turkey",
+    "Thailand",
+    "Switzerland",
+    "Philippines"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Thailand, in Asia."
+  },
+  {
+   "id": "sc-cap-TH",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Thailand?",
+   "choices": [
+    "Brussels",
+    "Jakarta",
+    "Hanoi",
+    "Bangkok"
+   ],
+   "answer": 3,
+   "explain": "The capital of Thailand is Bangkok."
+  },
+  {
+   "id": "sc-rev-TH",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Bangkok is the capital of which country?",
+   "choices": [
+    "Thailand",
+    "Saudi Arabia",
+    "Ireland",
+    "Israel"
+   ],
+   "answer": 0,
+   "explain": "Bangkok is the capital of Thailand."
+  },
+  {
+   "id": "sc-cont-TH",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Thailand in?",
+   "choices": [
+    "Oceania",
+    "Europe",
+    "Asia",
+    "Africa"
+   ],
+   "answer": 2,
+   "explain": "Thailand is in Asia."
+  },
+  {
+   "id": "sc-flag-VN",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇻🇳",
+   "choices": [
+    "Saudi Arabia",
+    "Peru",
+    "South Korea",
+    "Vietnam"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Vietnam, in Asia."
+  },
+  {
+   "id": "sc-cap-VN",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Vietnam?",
+   "choices": [
+    "Bogotá",
+    "Bangkok",
+    "Hanoi",
+    "Manila"
+   ],
+   "answer": 2,
+   "explain": "The capital of Vietnam is Hanoi."
+  },
+  {
+   "id": "sc-rev-VN",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Hanoi is the capital of which country?",
+   "choices": [
+    "Saudi Arabia",
+    "South Korea",
+    "Norway",
+    "Vietnam"
+   ],
+   "answer": 3,
+   "explain": "Hanoi is the capital of Vietnam."
+  },
+  {
+   "id": "sc-cont-VN",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Vietnam in?",
+   "choices": [
+    "Asia",
+    "Africa",
+    "Europe",
+    "North America"
+   ],
+   "answer": 0,
+   "explain": "Vietnam is in Asia."
+  },
+  {
+   "id": "sc-flag-ID",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇮🇩",
+   "choices": [
+    "Kenya",
+    "Turkey",
+    "Thailand",
+    "Indonesia"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Indonesia, in Asia."
+  },
+  {
+   "id": "sc-cap-ID",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Indonesia?",
+   "choices": [
+    "Jakarta",
+    "Santiago",
+    "Seoul",
+    "Manila"
+   ],
+   "answer": 0,
+   "explain": "The capital of Indonesia is Jakarta."
+  },
+  {
+   "id": "sc-rev-ID",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Jakarta is the capital of which country?",
+   "choices": [
+    "Philippines",
+    "South Korea",
+    "Nigeria",
+    "Indonesia"
+   ],
+   "answer": 3,
+   "explain": "Jakarta is the capital of Indonesia."
+  },
+  {
+   "id": "sc-cont-ID",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Indonesia in?",
+   "choices": [
+    "South America",
+    "Asia",
+    "Oceania",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Indonesia is in Asia."
+  },
+  {
+   "id": "sc-flag-PH",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇵🇭",
+   "choices": [
+    "Philippines",
+    "Israel",
+    "Saudi Arabia",
+    "Netherlands"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Philippines, in Asia."
+  },
+  {
+   "id": "sc-cap-PH",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Philippines?",
+   "choices": [
+    "Manila",
+    "Bangkok",
+    "Hanoi",
+    "Oslo"
+   ],
+   "answer": 0,
+   "explain": "The capital of Philippines is Manila."
+  },
+  {
+   "id": "sc-rev-PH",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Manila is the capital of which country?",
+   "choices": [
+    "Indonesia",
+    "Philippines",
+    "South Korea",
+    "South Africa"
+   ],
+   "answer": 1,
+   "explain": "Manila is the capital of Philippines."
+  },
+  {
+   "id": "sc-cont-PH",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Philippines in?",
+   "choices": [
+    "Europe",
+    "North America",
+    "Oceania",
+    "Asia"
+   ],
+   "answer": 3,
+   "explain": "Philippines is in Asia."
+  },
+  {
+   "id": "sc-flag-PK",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇵🇰",
+   "choices": [
+    "Greece",
+    "Pakistan",
+    "Indonesia",
+    "Philippines"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Pakistan, in Asia."
+  },
+  {
+   "id": "sc-cap-PK",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Pakistan?",
+   "choices": [
+    "Riyadh",
+    "Bangkok",
+    "Islamabad",
+    "Lisbon"
+   ],
+   "answer": 2,
+   "explain": "The capital of Pakistan is Islamabad."
+  },
+  {
+   "id": "sc-rev-PK",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Islamabad is the capital of which country?",
+   "choices": [
+    "Peru",
+    "Pakistan",
+    "Israel",
+    "Indonesia"
+   ],
+   "answer": 1,
+   "explain": "Islamabad is the capital of Pakistan."
+  },
+  {
+   "id": "sc-cont-PK",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Pakistan in?",
+   "choices": [
+    "North America",
+    "Africa",
+    "Asia",
+    "South America"
+   ],
+   "answer": 2,
+   "explain": "Pakistan is in Asia."
+  },
+  {
+   "id": "sc-flag-CU",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇨🇺",
+   "choices": [
+    "Cuba",
+    "Dominican Republic",
+    "Portugal",
+    "Jamaica"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Cuba, in North America."
+  },
+  {
+   "id": "sc-cap-CU",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Cuba?",
+   "choices": [
+    "Guatemala City",
+    "Mexico City",
+    "Islamabad",
+    "Havana"
+   ],
+   "answer": 3,
+   "explain": "The capital of Cuba is Havana."
+  },
+  {
+   "id": "sc-rev-CU",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Havana is the capital of which country?",
+   "choices": [
+    "Dominican Republic",
+    "Jamaica",
+    "Cuba",
+    "Sweden"
+   ],
+   "answer": 2,
+   "explain": "Havana is the capital of Cuba."
+  },
+  {
+   "id": "sc-cont-CU",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Cuba in?",
+   "choices": [
+    "Africa",
+    "North America",
+    "Oceania",
+    "Europe"
+   ],
+   "answer": 1,
+   "explain": "Cuba is in North America."
+  },
+  {
+   "id": "sc-flag-PE",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇵🇪",
+   "choices": [
+    "Argentina",
+    "Peru",
+    "Turkey",
+    "Colombia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Peru, in South America."
+  },
+  {
+   "id": "sc-cap-PE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Peru?",
+   "choices": [
+    "Stockholm",
+    "Lima",
+    "Buenos Aires",
+    "Santiago"
+   ],
+   "answer": 1,
+   "explain": "The capital of Peru is Lima."
+  },
+  {
+   "id": "sc-rev-PE",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Lima is the capital of which country?",
+   "choices": [
+    "Indonesia",
+    "Colombia",
+    "Peru",
+    "Chile"
+   ],
+   "answer": 2,
+   "explain": "Lima is the capital of Peru."
+  },
+  {
+   "id": "sc-cont-PE",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Peru in?",
+   "choices": [
+    "South America",
+    "Africa",
+    "Europe",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "Peru is in South America."
+  },
+  {
+   "id": "sc-flag-CL",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇨🇱",
+   "choices": [
+    "Colombia",
+    "Kenya",
+    "Argentina",
+    "Chile"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Chile, in South America."
+  },
+  {
+   "id": "sc-cap-CL",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Chile?",
+   "choices": [
+    "Abuja",
+    "Santiago",
+    "Bogotá",
+    "Buenos Aires"
+   ],
+   "answer": 1,
+   "explain": "The capital of Chile is Santiago."
+  },
+  {
+   "id": "sc-rev-CL",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Santiago is the capital of which country?",
+   "choices": [
+    "Chile",
+    "Finland",
+    "Argentina",
+    "Peru"
+   ],
+   "answer": 0,
+   "explain": "Santiago is the capital of Chile."
+  },
+  {
+   "id": "sc-cont-CL",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Chile in?",
+   "choices": [
+    "Europe",
+    "Asia",
+    "South America",
+    "Oceania"
+   ],
+   "answer": 2,
+   "explain": "Chile is in South America."
+  },
+  {
+   "id": "sc-flag-CO",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇨🇴",
+   "choices": [
+    "Poland",
+    "Colombia",
+    "Argentina",
+    "Peru"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Colombia, in South America."
+  },
+  {
+   "id": "sc-cap-CO",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of Colombia?",
+   "choices": [
+    "Havana",
+    "Buenos Aires",
+    "Santiago",
+    "Bogotá"
+   ],
+   "answer": 3,
+   "explain": "The capital of Colombia is Bogotá."
+  },
+  {
+   "id": "sc-rev-CO",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Bogotá is the capital of which country?",
+   "choices": [
+    "Chile",
+    "Colombia",
+    "Ireland",
+    "Argentina"
+   ],
+   "answer": 1,
+   "explain": "Bogotá is the capital of Colombia."
+  },
+  {
+   "id": "sc-cont-CO",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Colombia in?",
+   "choices": [
+    "South America",
+    "Oceania",
+    "North America",
+    "Europe"
+   ],
+   "answer": 0,
+   "explain": "Colombia is in South America."
+  },
+  {
+   "id": "sc-flag-NZ",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇳🇿",
+   "choices": [
+    "Tonga",
+    "Cuba",
+    "Australia",
+    "New Zealand"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of New Zealand, in Oceania."
+  },
+  {
+   "id": "sc-cap-NZ",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "What is the capital of New Zealand?",
+   "choices": [
+    "Copenhagen",
+    "Suva",
+    "Wellington",
+    "Canberra"
+   ],
+   "answer": 2,
+   "explain": "The capital of New Zealand is Wellington."
+  },
+  {
+   "id": "sc-rev-NZ",
+   "topic": "capitals",
+   "level": 6,
+   "prompt": "Wellington is the capital of which country?",
+   "choices": [
+    "Papua New Guinea",
+    "Pakistan",
+    "Australia",
+    "New Zealand"
+   ],
+   "answer": 3,
+   "explain": "Wellington is the capital of New Zealand."
+  },
+  {
+   "id": "sc-cont-NZ",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is New Zealand in?",
+   "choices": [
+    "Europe",
+    "Africa",
+    "North America",
+    "Oceania"
+   ],
+   "answer": 3,
+   "explain": "New Zealand is in Oceania."
+  },
+  {
+   "id": "sc-flag-IL",
+   "topic": "flags",
+   "level": 5,
+   "prompt": "Which country's flag is this?\n🇮🇱",
+   "choices": [
+    "Israel",
+    "South Korea",
+    "Thailand",
+    "Argentina"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Israel, in Asia."
+  },
+  {
+   "id": "sc-cont-IL",
+   "topic": "countries",
+   "level": 4,
+   "prompt": "Which continent is Israel in?",
+   "choices": [
+    "Oceania",
+    "Africa",
+    "Asia",
+    "South America"
+   ],
+   "answer": 2,
+   "explain": "Israel is in Asia."
+  },
+  {
+   "id": "sc-flag-IR",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇮🇷",
+   "choices": [
+    "Cameroon",
+    "Iran",
+    "United Arab Emirates",
+    "Cambodia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Iran, in Asia."
+  },
+  {
+   "id": "sc-cap-IR",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Iran?",
+   "choices": [
+    "Tehran",
+    "Baghdad",
+    "Beirut",
+    "Tunis"
+   ],
+   "answer": 0,
+   "explain": "The capital of Iran is Tehran."
+  },
+  {
+   "id": "sc-cont-IR",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Iran in?",
+   "choices": [
+    "North America",
+    "Oceania",
+    "South America",
+    "Asia"
+   ],
+   "answer": 3,
+   "explain": "Iran is in Asia."
+  },
+  {
+   "id": "sc-flag-IQ",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇮🇶",
+   "choices": [
+    "Costa Rica",
+    "Iraq",
+    "Kuwait",
+    "Jordan"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Iraq, in Asia."
+  },
+  {
+   "id": "sc-cap-IQ",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Iraq?",
+   "choices": [
+    "Amman",
+    "Baghdad",
+    "Zagreb",
+    "Naypyidaw"
+   ],
+   "answer": 1,
+   "explain": "The capital of Iraq is Baghdad."
+  },
+  {
+   "id": "sc-cont-IQ",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Iraq in?",
+   "choices": [
+    "North America",
+    "Asia",
+    "Oceania",
+    "Africa"
+   ],
+   "answer": 1,
+   "explain": "Iraq is in Asia."
+  },
+  {
+   "id": "sc-flag-UA",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇺🇦",
+   "choices": [
+    "Costa Rica",
+    "Ukraine",
+    "Iceland",
+    "Romania"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Ukraine, in Europe."
+  },
+  {
+   "id": "sc-cap-UA",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Ukraine?",
+   "choices": [
+    "Kyiv",
+    "Sofia",
+    "Tripoli",
+    "Zagreb"
+   ],
+   "answer": 0,
+   "explain": "The capital of Ukraine is Kyiv."
+  },
+  {
+   "id": "sc-cont-UA",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Ukraine in?",
+   "choices": [
+    "Europe",
+    "North America",
+    "Asia",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "Ukraine is in Europe."
+  },
+  {
+   "id": "sc-flag-CZ",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇨🇿",
+   "choices": [
+    "Croatia",
+    "Czechia",
+    "Costa Rica",
+    "Bulgaria"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Czechia, in Europe."
+  },
+  {
+   "id": "sc-cap-CZ",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Czechia?",
+   "choices": [
+    "Zagreb",
+    "Tunis",
+    "Bratislava",
+    "Prague"
+   ],
+   "answer": 3,
+   "explain": "The capital of Czechia is Prague."
+  },
+  {
+   "id": "sc-cont-CZ",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Czechia in?",
+   "choices": [
+    "Oceania",
+    "Asia",
+    "Africa",
+    "Europe"
+   ],
+   "answer": 3,
+   "explain": "Czechia is in Europe."
+  },
+  {
+   "id": "sc-flag-HU",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇭🇺",
+   "choices": [
+    "Algeria",
+    "Hungary",
+    "Iceland",
+    "Serbia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Hungary, in Europe."
+  },
+  {
+   "id": "sc-cap-HU",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Hungary?",
+   "choices": [
+    "Belgrade",
+    "Budapest",
+    "Prague",
+    "Astana"
+   ],
+   "answer": 1,
+   "explain": "The capital of Hungary is Budapest."
+  },
+  {
+   "id": "sc-cont-HU",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Hungary in?",
+   "choices": [
+    "Europe",
+    "South America",
+    "Oceania",
+    "Asia"
+   ],
+   "answer": 0,
+   "explain": "Hungary is in Europe."
+  },
+  {
+   "id": "sc-flag-RO",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇷🇴",
+   "choices": [
+    "Iraq",
+    "Romania",
+    "Slovakia",
+    "Croatia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Romania, in Europe."
+  },
+  {
+   "id": "sc-cap-RO",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Romania?",
+   "choices": [
+    "Bucharest",
+    "Dakar",
+    "Zagreb",
+    "Belgrade"
+   ],
+   "answer": 0,
+   "explain": "The capital of Romania is Bucharest."
+  },
+  {
+   "id": "sc-cont-RO",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Romania in?",
+   "choices": [
+    "South America",
+    "Africa",
+    "Oceania",
+    "Europe"
+   ],
+   "answer": 3,
+   "explain": "Romania is in Europe."
+  },
+  {
+   "id": "sc-flag-MA",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇲🇦",
+   "choices": [
+    "Madagascar",
+    "Uganda",
+    "Morocco",
+    "Uruguay"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Morocco, in Africa."
+  },
+  {
+   "id": "sc-cap-MA",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Morocco?",
+   "choices": [
+    "Rabat",
+    "Harare",
+    "Addis Ababa",
+    "Kathmandu"
+   ],
+   "answer": 0,
+   "explain": "The capital of Morocco is Rabat."
+  },
+  {
+   "id": "sc-cont-MA",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Morocco in?",
+   "choices": [
+    "Oceania",
+    "Asia",
+    "South America",
+    "Africa"
+   ],
+   "answer": 3,
+   "explain": "Morocco is in Africa."
+  },
+  {
+   "id": "sc-flag-DZ",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇩🇿",
+   "choices": [
+    "Angola",
+    "Laos",
+    "Algeria",
+    "Ethiopia"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Algeria, in Africa."
+  },
+  {
+   "id": "sc-cap-DZ",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Algeria?",
+   "choices": [
+    "Addis Ababa",
+    "Algiers",
+    "Tripoli",
+    "Naypyidaw"
+   ],
+   "answer": 1,
+   "explain": "The capital of Algeria is Algiers."
+  },
+  {
+   "id": "sc-cont-DZ",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Algeria in?",
+   "choices": [
+    "Africa",
+    "North America",
+    "Oceania",
+    "Asia"
+   ],
+   "answer": 0,
+   "explain": "Algeria is in Africa."
+  },
+  {
+   "id": "sc-flag-ET",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇪🇹",
+   "choices": [
+    "Senegal",
+    "Ethiopia",
+    "Zimbabwe",
+    "Myanmar"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Ethiopia, in Africa."
+  },
+  {
+   "id": "sc-cap-ET",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Ethiopia?",
+   "choices": [
+    "Addis Ababa",
+    "Kampala",
+    "Port-au-Prince",
+    "Luanda"
+   ],
+   "answer": 0,
+   "explain": "The capital of Ethiopia is Addis Ababa."
+  },
+  {
+   "id": "sc-cont-ET",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Ethiopia in?",
+   "choices": [
+    "Africa",
+    "South America",
+    "Asia",
+    "North America"
+   ],
+   "answer": 0,
+   "explain": "Ethiopia is in Africa."
+  },
+  {
+   "id": "sc-flag-GH",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇬🇭",
+   "choices": [
+    "Iraq",
+    "Ghana",
+    "Senegal",
+    "Uganda"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Ghana, in Africa."
+  },
+  {
+   "id": "sc-cap-GH",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Ghana?",
+   "choices": [
+    "Rabat",
+    "Yaoundé",
+    "Accra",
+    "Santo Domingo"
+   ],
+   "answer": 2,
+   "explain": "The capital of Ghana is Accra."
+  },
+  {
+   "id": "sc-cont-GH",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Ghana in?",
+   "choices": [
+    "Oceania",
+    "South America",
+    "Africa",
+    "Europe"
+   ],
+   "answer": 2,
+   "explain": "Ghana is in Africa."
+  },
+  {
+   "id": "sc-flag-TZ",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇹🇿",
+   "choices": [
+    "Morocco",
+    "Tanzania",
+    "Sudan",
+    "Iraq"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Tanzania, in Africa."
+  },
+  {
+   "id": "sc-cap-TZ",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Tanzania?",
+   "choices": [
+    "Dodoma",
+    "Kingston",
+    "Addis Ababa",
+    "Tunis"
+   ],
+   "answer": 0,
+   "explain": "The capital of Tanzania is Dodoma."
+  },
+  {
+   "id": "sc-cont-TZ",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Tanzania in?",
+   "choices": [
+    "Europe",
+    "North America",
+    "South America",
+    "Africa"
+   ],
+   "answer": 3,
+   "explain": "Tanzania is in Africa."
+  },
+  {
+   "id": "sc-flag-SG",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇸🇬",
+   "choices": [
+    "Jordan",
+    "Paraguay",
+    "Singapore",
+    "Syria"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Singapore, in Asia."
+  },
+  {
+   "id": "sc-cont-SG",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Singapore in?",
+   "choices": [
+    "Europe",
+    "Asia",
+    "Africa",
+    "Oceania"
+   ],
+   "answer": 1,
+   "explain": "Singapore is in Asia."
+  },
+  {
+   "id": "sc-flag-MY",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇲🇾",
+   "choices": [
+    "Malaysia",
+    "Bangladesh",
+    "Kuwait",
+    "Libya"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Malaysia, in Asia."
+  },
+  {
+   "id": "sc-cap-MY",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Malaysia?",
+   "choices": [
+    "Luanda",
+    "Kuala Lumpur",
+    "Astana",
+    "Kathmandu"
+   ],
+   "answer": 1,
+   "explain": "The capital of Malaysia is Kuala Lumpur."
+  },
+  {
+   "id": "sc-cont-MY",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Malaysia in?",
+   "choices": [
+    "Asia",
+    "North America",
+    "Europe",
+    "South America"
+   ],
+   "answer": 0,
+   "explain": "Malaysia is in Asia."
+  },
+  {
+   "id": "sc-flag-BD",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇧🇩",
+   "choices": [
+    "Malaysia",
+    "Cambodia",
+    "Madagascar",
+    "Bangladesh"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Bangladesh, in Asia."
+  },
+  {
+   "id": "sc-cap-BD",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Bangladesh?",
+   "choices": [
+    "Dhaka",
+    "Astana",
+    "Ulaanbaatar",
+    "Luanda"
+   ],
+   "answer": 0,
+   "explain": "The capital of Bangladesh is Dhaka."
+  },
+  {
+   "id": "sc-cont-BD",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Bangladesh in?",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "Europe",
+    "South America"
+   ],
+   "answer": 0,
+   "explain": "Bangladesh is in Asia."
+  },
+  {
+   "id": "sc-flag-NP",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇳🇵",
+   "choices": [
+    "Nepal",
+    "Uzbekistan",
+    "Croatia",
+    "Afghanistan"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Nepal, in Asia."
+  },
+  {
+   "id": "sc-cap-NP",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Nepal?",
+   "choices": [
+    "Tehran",
+    "Tripoli",
+    "Kathmandu",
+    "Amman"
+   ],
+   "answer": 2,
+   "explain": "The capital of Nepal is Kathmandu."
+  },
+  {
+   "id": "sc-cont-NP",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Nepal in?",
+   "choices": [
+    "Africa",
+    "North America",
+    "Asia",
+    "Europe"
+   ],
+   "answer": 2,
+   "explain": "Nepal is in Asia."
+  },
+  {
+   "id": "sc-flag-AF",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇦🇫",
+   "choices": [
+    "Malaysia",
+    "Iran",
+    "Afghanistan",
+    "Ghana"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Afghanistan, in Asia."
+  },
+  {
+   "id": "sc-cap-AF",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Afghanistan?",
+   "choices": [
+    "Bucharest",
+    "Vientiane",
+    "Kabul",
+    "Ulaanbaatar"
+   ],
+   "answer": 2,
+   "explain": "The capital of Afghanistan is Kabul."
+  },
+  {
+   "id": "sc-cont-AF",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Afghanistan in?",
+   "choices": [
+    "Asia",
+    "North America",
+    "South America",
+    "Europe"
+   ],
+   "answer": 0,
+   "explain": "Afghanistan is in Asia."
+  },
+  {
+   "id": "sc-flag-JM",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇯🇲",
+   "choices": [
+    "Uruguay",
+    "Jamaica",
+    "Dominican Republic",
+    "Haiti"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Jamaica, in North America."
+  },
+  {
+   "id": "sc-cap-JM",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Jamaica?",
+   "choices": [
+    "Kingston",
+    "Guatemala City",
+    "Panama City",
+    "Abu Dhabi"
+   ],
+   "answer": 0,
+   "explain": "The capital of Jamaica is Kingston."
+  },
+  {
+   "id": "sc-cont-JM",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Jamaica in?",
+   "choices": [
+    "North America",
+    "Europe",
+    "Africa",
+    "Asia"
+   ],
+   "answer": 0,
+   "explain": "Jamaica is in North America."
+  },
+  {
+   "id": "sc-flag-VE",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇻🇪",
+   "choices": [
+    "Panama",
+    "Paraguay",
+    "Venezuela",
+    "Ecuador"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Venezuela, in South America."
+  },
+  {
+   "id": "sc-cap-VE",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Venezuela?",
+   "choices": [
+    "Quito",
+    "Caracas",
+    "Algiers",
+    "Montevideo"
+   ],
+   "answer": 1,
+   "explain": "The capital of Venezuela is Caracas."
+  },
+  {
+   "id": "sc-cont-VE",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Venezuela in?",
+   "choices": [
+    "Africa",
+    "South America",
+    "North America",
+    "Asia"
+   ],
+   "answer": 1,
+   "explain": "Venezuela is in South America."
+  },
+  {
+   "id": "sc-flag-EC",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇪🇨",
+   "choices": [
+    "Ecuador",
+    "Jamaica",
+    "Uruguay",
+    "Venezuela"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Ecuador, in South America."
+  },
+  {
+   "id": "sc-cap-EC",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Ecuador?",
+   "choices": [
+    "Asunción",
+    "Caracas",
+    "Quito",
+    "Kabul"
+   ],
+   "answer": 2,
+   "explain": "The capital of Ecuador is Quito."
+  },
+  {
+   "id": "sc-cont-EC",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Ecuador in?",
+   "choices": [
+    "South America",
+    "Asia",
+    "Oceania",
+    "Africa"
+   ],
+   "answer": 0,
+   "explain": "Ecuador is in South America."
+  },
+  {
+   "id": "sc-flag-UY",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇺🇾",
+   "choices": [
+    "Uruguay",
+    "Paraguay",
+    "Ecuador",
+    "Guatemala"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Uruguay, in South America."
+  },
+  {
+   "id": "sc-cap-UY",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Uruguay?",
+   "choices": [
+    "Asunción",
+    "Rabat",
+    "Montevideo",
+    "Caracas"
+   ],
+   "answer": 2,
+   "explain": "The capital of Uruguay is Montevideo."
+  },
+  {
+   "id": "sc-cont-UY",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Uruguay in?",
+   "choices": [
+    "Asia",
+    "North America",
+    "Africa",
+    "South America"
+   ],
+   "answer": 3,
+   "explain": "Uruguay is in South America."
+  },
+  {
+   "id": "sc-flag-IS",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇮🇸",
+   "choices": [
+    "Iceland",
+    "Dominican Republic",
+    "Serbia",
+    "Romania"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Iceland, in Europe."
+  },
+  {
+   "id": "sc-cap-IS",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Iceland?",
+   "choices": [
+    "Reykjavik",
+    "Bucharest",
+    "Kuwait City",
+    "Bratislava"
+   ],
+   "answer": 0,
+   "explain": "The capital of Iceland is Reykjavik."
+  },
+  {
+   "id": "sc-cont-IS",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Iceland in?",
+   "choices": [
+    "Africa",
+    "Europe",
+    "Oceania",
+    "South America"
+   ],
+   "answer": 1,
+   "explain": "Iceland is in Europe."
+  },
+  {
+   "id": "sc-flag-HR",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇭🇷",
+   "choices": [
+    "Serbia",
+    "Czechia",
+    "Kuwait",
+    "Croatia"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Croatia, in Europe."
+  },
+  {
+   "id": "sc-cap-HR",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Croatia?",
+   "choices": [
+    "Kyiv",
+    "Zagreb",
+    "Khartoum",
+    "Bratislava"
+   ],
+   "answer": 1,
+   "explain": "The capital of Croatia is Zagreb."
+  },
+  {
+   "id": "sc-cont-HR",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Croatia in?",
+   "choices": [
+    "North America",
+    "Europe",
+    "Africa",
+    "South America"
+   ],
+   "answer": 1,
+   "explain": "Croatia is in Europe."
+  },
+  {
+   "id": "sc-flag-RS",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇷🇸",
+   "choices": [
+    "Serbia",
+    "Iceland",
+    "Ukraine",
+    "Venezuela"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Serbia, in Europe."
+  },
+  {
+   "id": "sc-cap-RS",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Serbia?",
+   "choices": [
+    "Reykjavik",
+    "Zagreb",
+    "Tehran",
+    "Belgrade"
+   ],
+   "answer": 3,
+   "explain": "The capital of Serbia is Belgrade."
+  },
+  {
+   "id": "sc-cont-RS",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Serbia in?",
+   "choices": [
+    "South America",
+    "Europe",
+    "Asia",
+    "Oceania"
+   ],
+   "answer": 1,
+   "explain": "Serbia is in Europe."
+  },
+  {
+   "id": "sc-flag-BG",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇧🇬",
+   "choices": [
+    "Bulgaria",
+    "Madagascar",
+    "Ukraine",
+    "Serbia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Bulgaria, in Europe."
+  },
+  {
+   "id": "sc-cap-BG",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Bulgaria?",
+   "choices": [
+    "Montevideo",
+    "Reykjavik",
+    "Bratislava",
+    "Sofia"
+   ],
+   "answer": 3,
+   "explain": "The capital of Bulgaria is Sofia."
+  },
+  {
+   "id": "sc-cont-BG",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Bulgaria in?",
+   "choices": [
+    "Oceania",
+    "Europe",
+    "Asia",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Bulgaria is in Europe."
+  },
+  {
+   "id": "sc-flag-SK",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇸🇰",
+   "choices": [
+    "Slovakia",
+    "Syria",
+    "Hungary",
+    "Romania"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Slovakia, in Europe."
+  },
+  {
+   "id": "sc-cap-SK",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Slovakia?",
+   "choices": [
+    "Antananarivo",
+    "Reykjavik",
+    "Sofia",
+    "Bratislava"
+   ],
+   "answer": 3,
+   "explain": "The capital of Slovakia is Bratislava."
+  },
+  {
+   "id": "sc-cont-SK",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Slovakia in?",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "North America",
+    "Europe"
+   ],
+   "answer": 3,
+   "explain": "Slovakia is in Europe."
+  },
+  {
+   "id": "sc-flag-KZ",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇰🇿",
+   "choices": [
+    "Kazakhstan",
+    "Lebanon",
+    "Romania",
+    "Iraq"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Kazakhstan, in Asia."
+  },
+  {
+   "id": "sc-cap-KZ",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Kazakhstan?",
+   "choices": [
+    "Phnom Penh",
+    "Damascus",
+    "Astana",
+    "Guatemala City"
+   ],
+   "answer": 2,
+   "explain": "The capital of Kazakhstan is Astana."
+  },
+  {
+   "id": "sc-flag-UZ",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇺🇿",
+   "choices": [
+    "Cambodia",
+    "Uzbekistan",
+    "Bangladesh",
+    "Dominican Republic"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Uzbekistan, in Asia."
+  },
+  {
+   "id": "sc-cap-UZ",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Uzbekistan?",
+   "choices": [
+    "Tehran",
+    "Budapest",
+    "Kuwait City",
+    "Tashkent"
+   ],
+   "answer": 3,
+   "explain": "The capital of Uzbekistan is Tashkent."
+  },
+  {
+   "id": "sc-cont-UZ",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Uzbekistan in?",
+   "choices": [
+    "South America",
+    "Asia",
+    "Africa",
+    "Europe"
+   ],
+   "answer": 1,
+   "explain": "Uzbekistan is in Asia."
+  },
+  {
+   "id": "sc-flag-MN",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇲🇳",
+   "choices": [
+    "Panama",
+    "United Arab Emirates",
+    "Kazakhstan",
+    "Mongolia"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Mongolia, in Asia."
+  },
+  {
+   "id": "sc-cap-MN",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Mongolia?",
+   "choices": [
+    "Lusaka",
+    "Ulaanbaatar",
+    "Amman",
+    "Tashkent"
+   ],
+   "answer": 1,
+   "explain": "The capital of Mongolia is Ulaanbaatar."
+  },
+  {
+   "id": "sc-cont-MN",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Mongolia in?",
+   "choices": [
+    "Europe",
+    "Asia",
+    "South America",
+    "Africa"
+   ],
+   "answer": 1,
+   "explain": "Mongolia is in Asia."
+  },
+  {
+   "id": "sc-flag-MM",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇲🇲",
+   "choices": [
+    "Singapore",
+    "Kazakhstan",
+    "Myanmar",
+    "Libya"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Myanmar, in Asia."
+  },
+  {
+   "id": "sc-cap-MM",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Myanmar?",
+   "choices": [
+    "Kyiv",
+    "Tashkent",
+    "Naypyidaw",
+    "Baghdad"
+   ],
+   "answer": 2,
+   "explain": "The capital of Myanmar is Naypyidaw."
+  },
+  {
+   "id": "sc-cont-MM",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Myanmar in?",
+   "choices": [
+    "South America",
+    "Asia",
+    "Africa",
+    "Oceania"
+   ],
+   "answer": 1,
+   "explain": "Myanmar is in Asia."
+  },
+  {
+   "id": "sc-flag-KH",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇰🇭",
+   "choices": [
+    "Singapore",
+    "Nepal",
+    "Hungary",
+    "Cambodia"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Cambodia, in Asia."
+  },
+  {
+   "id": "sc-cap-KH",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Cambodia?",
+   "choices": [
+    "Phnom Penh",
+    "Baghdad",
+    "Belgrade",
+    "Dhaka"
+   ],
+   "answer": 0,
+   "explain": "The capital of Cambodia is Phnom Penh."
+  },
+  {
+   "id": "sc-cont-KH",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Cambodia in?",
+   "choices": [
+    "South America",
+    "Asia",
+    "Europe",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Cambodia is in Asia."
+  },
+  {
+   "id": "sc-flag-LA",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇱🇦",
+   "choices": [
+    "Kuwait",
+    "Laos",
+    "Slovakia",
+    "Uzbekistan"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Laos, in Asia."
+  },
+  {
+   "id": "sc-cap-LA",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Laos?",
+   "choices": [
+    "Dhaka",
+    "Astana",
+    "Santo Domingo",
+    "Vientiane"
+   ],
+   "answer": 3,
+   "explain": "The capital of Laos is Vientiane."
+  },
+  {
+   "id": "sc-cont-LA",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Laos in?",
+   "choices": [
+    "Oceania",
+    "Africa",
+    "Asia",
+    "South America"
+   ],
+   "answer": 2,
+   "explain": "Laos is in Asia."
+  },
+  {
+   "id": "sc-flag-JO",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇯🇴",
+   "choices": [
+    "Mongolia",
+    "Tanzania",
+    "Iran",
+    "Jordan"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Jordan, in Asia."
+  },
+  {
+   "id": "sc-cap-JO",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Jordan?",
+   "choices": [
+    "Kuwait City",
+    "Damascus",
+    "Kampala",
+    "Amman"
+   ],
+   "answer": 3,
+   "explain": "The capital of Jordan is Amman."
+  },
+  {
+   "id": "sc-cont-JO",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Jordan in?",
+   "choices": [
+    "Oceania",
+    "Europe",
+    "Asia",
+    "North America"
+   ],
+   "answer": 2,
+   "explain": "Jordan is in Asia."
+  },
+  {
+   "id": "sc-flag-LB",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇱🇧",
+   "choices": [
+    "Haiti",
+    "Laos",
+    "Qatar",
+    "Lebanon"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Lebanon, in Asia."
+  },
+  {
+   "id": "sc-cap-LB",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Lebanon?",
+   "choices": [
+    "Amman",
+    "Beirut",
+    "Baghdad",
+    "Prague"
+   ],
+   "answer": 1,
+   "explain": "The capital of Lebanon is Beirut."
+  },
+  {
+   "id": "sc-cont-LB",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Lebanon in?",
+   "choices": [
+    "Asia",
+    "Africa",
+    "Europe",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "Lebanon is in Asia."
+  },
+  {
+   "id": "sc-flag-SY",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇸🇾",
+   "choices": [
+    "Syria",
+    "Kuwait",
+    "Venezuela",
+    "Uzbekistan"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Syria, in Asia."
+  },
+  {
+   "id": "sc-cap-SY",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Syria?",
+   "choices": [
+    "Kingston",
+    "Kuwait City",
+    "Damascus",
+    "Kuala Lumpur"
+   ],
+   "answer": 2,
+   "explain": "The capital of Syria is Damascus."
+  },
+  {
+   "id": "sc-cont-SY",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Syria in?",
+   "choices": [
+    "Africa",
+    "South America",
+    "Asia",
+    "Europe"
+   ],
+   "answer": 2,
+   "explain": "Syria is in Asia."
+  },
+  {
+   "id": "sc-flag-AE",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇦🇪",
+   "choices": [
+    "Iceland",
+    "Iran",
+    "Myanmar",
+    "United Arab Emirates"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of United Arab Emirates, in Asia."
+  },
+  {
+   "id": "sc-cap-AE",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of United Arab Emirates?",
+   "choices": [
+    "Beirut",
+    "Tehran",
+    "Asunción",
+    "Abu Dhabi"
+   ],
+   "answer": 3,
+   "explain": "The capital of United Arab Emirates is Abu Dhabi."
+  },
+  {
+   "id": "sc-cont-AE",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is United Arab Emirates in?",
+   "choices": [
+    "South America",
+    "Africa",
+    "Asia",
+    "North America"
+   ],
+   "answer": 2,
+   "explain": "United Arab Emirates is in Asia."
+  },
+  {
+   "id": "sc-flag-QA",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇶🇦",
+   "choices": [
+    "Qatar",
+    "Algeria",
+    "Laos",
+    "Mongolia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Qatar, in Asia."
+  },
+  {
+   "id": "sc-cap-QA",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Qatar?",
+   "choices": [
+    "Abu Dhabi",
+    "Ulaanbaatar",
+    "Accra",
+    "Doha"
+   ],
+   "answer": 3,
+   "explain": "The capital of Qatar is Doha."
+  },
+  {
+   "id": "sc-cont-QA",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Qatar in?",
+   "choices": [
+    "Asia",
+    "South America",
+    "Oceania",
+    "Africa"
+   ],
+   "answer": 0,
+   "explain": "Qatar is in Asia."
+  },
+  {
+   "id": "sc-flag-KW",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇰🇼",
+   "choices": [
+    "Afghanistan",
+    "Kuwait",
+    "Singapore",
+    "Czechia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Kuwait, in Asia."
+  },
+  {
+   "id": "sc-cap-KW",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Kuwait?",
+   "choices": [
+    "Tripoli",
+    "Kuwait City",
+    "Kabul",
+    "Ulaanbaatar"
+   ],
+   "answer": 1,
+   "explain": "The capital of Kuwait is Kuwait City."
+  },
+  {
+   "id": "sc-cont-KW",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Kuwait in?",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "Africa",
+    "North America"
+   ],
+   "answer": 0,
+   "explain": "Kuwait is in Asia."
+  },
+  {
+   "id": "sc-flag-SN",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇸🇳",
+   "choices": [
+    "Angola",
+    "Jamaica",
+    "Senegal",
+    "Tanzania"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Senegal, in Africa."
+  },
+  {
+   "id": "sc-cap-SN",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Senegal?",
+   "choices": [
+    "Antananarivo",
+    "Harare",
+    "Dakar",
+    "Reykjavik"
+   ],
+   "answer": 2,
+   "explain": "The capital of Senegal is Dakar."
+  },
+  {
+   "id": "sc-cont-SN",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Senegal in?",
+   "choices": [
+    "North America",
+    "Africa",
+    "Oceania",
+    "South America"
+   ],
+   "answer": 1,
+   "explain": "Senegal is in Africa."
+  },
+  {
+   "id": "sc-flag-CM",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇨🇲",
+   "choices": [
+    "Cameroon",
+    "Ecuador",
+    "Libya",
+    "Zambia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Cameroon, in Africa."
+  },
+  {
+   "id": "sc-cap-CM",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Cameroon?",
+   "choices": [
+    "Kampala",
+    "Yaoundé",
+    "Lusaka",
+    "Port-au-Prince"
+   ],
+   "answer": 1,
+   "explain": "The capital of Cameroon is Yaoundé."
+  },
+  {
+   "id": "sc-cont-CM",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Cameroon in?",
+   "choices": [
+    "North America",
+    "Europe",
+    "South America",
+    "Africa"
+   ],
+   "answer": 3,
+   "explain": "Cameroon is in Africa."
+  },
+  {
+   "id": "sc-flag-AO",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇦🇴",
+   "choices": [
+    "Bulgaria",
+    "Tanzania",
+    "Angola",
+    "Morocco"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Angola, in Africa."
+  },
+  {
+   "id": "sc-cap-AO",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Angola?",
+   "choices": [
+    "Algiers",
+    "Luanda",
+    "Dodoma",
+    "Belgrade"
+   ],
+   "answer": 1,
+   "explain": "The capital of Angola is Luanda."
+  },
+  {
+   "id": "sc-cont-AO",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Angola in?",
+   "choices": [
+    "North America",
+    "Africa",
+    "South America",
+    "Asia"
+   ],
+   "answer": 1,
+   "explain": "Angola is in Africa."
+  },
+  {
+   "id": "sc-flag-ZW",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇿🇼",
+   "choices": [
+    "Laos",
+    "Ethiopia",
+    "Zimbabwe",
+    "Ghana"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Zimbabwe, in Africa."
+  },
+  {
+   "id": "sc-cap-ZW",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Zimbabwe?",
+   "choices": [
+    "Lusaka",
+    "Dakar",
+    "Harare",
+    "Naypyidaw"
+   ],
+   "answer": 2,
+   "explain": "The capital of Zimbabwe is Harare."
+  },
+  {
+   "id": "sc-cont-ZW",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Zimbabwe in?",
+   "choices": [
+    "Africa",
+    "Europe",
+    "North America",
+    "Oceania"
+   ],
+   "answer": 0,
+   "explain": "Zimbabwe is in Africa."
+  },
+  {
+   "id": "sc-flag-ZM",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇿🇲",
+   "choices": [
+    "Haiti",
+    "Zimbabwe",
+    "Zambia",
+    "Uganda"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Zambia, in Africa."
+  },
+  {
+   "id": "sc-cap-ZM",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Zambia?",
+   "choices": [
+    "Tunis",
+    "Lusaka",
+    "Tripoli",
+    "Prague"
+   ],
+   "answer": 1,
+   "explain": "The capital of Zambia is Lusaka."
+  },
+  {
+   "id": "sc-cont-ZM",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Zambia in?",
+   "choices": [
+    "North America",
+    "Asia",
+    "Oceania",
+    "Africa"
+   ],
+   "answer": 3,
+   "explain": "Zambia is in Africa."
+  },
+  {
+   "id": "sc-flag-UG",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇺🇬",
+   "choices": [
+    "Madagascar",
+    "Zambia",
+    "Uganda",
+    "Jamaica"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Uganda, in Africa."
+  },
+  {
+   "id": "sc-cap-UG",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Uganda?",
+   "choices": [
+    "Damascus",
+    "Luanda",
+    "Kampala",
+    "Lusaka"
+   ],
+   "answer": 2,
+   "explain": "The capital of Uganda is Kampala."
+  },
+  {
+   "id": "sc-cont-UG",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Uganda in?",
+   "choices": [
+    "South America",
+    "Africa",
+    "Oceania",
+    "North America"
+   ],
+   "answer": 1,
+   "explain": "Uganda is in Africa."
+  },
+  {
+   "id": "sc-flag-SD",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇸🇩",
+   "choices": [
+    "Zambia",
+    "Sudan",
+    "Jamaica",
+    "Zimbabwe"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Sudan, in Africa."
+  },
+  {
+   "id": "sc-cap-SD",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Sudan?",
+   "choices": [
+    "Astana",
+    "Dakar",
+    "Tunis",
+    "Khartoum"
+   ],
+   "answer": 3,
+   "explain": "The capital of Sudan is Khartoum."
+  },
+  {
+   "id": "sc-cont-SD",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Sudan in?",
+   "choices": [
+    "South America",
+    "Europe",
+    "Africa",
+    "North America"
+   ],
+   "answer": 2,
+   "explain": "Sudan is in Africa."
+  },
+  {
+   "id": "sc-flag-LY",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇱🇾",
+   "choices": [
+    "Tanzania",
+    "Libya",
+    "Cameroon",
+    "Hungary"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Libya, in Africa."
+  },
+  {
+   "id": "sc-cap-LY",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Libya?",
+   "choices": [
+    "Kathmandu",
+    "Algiers",
+    "Dakar",
+    "Tripoli"
+   ],
+   "answer": 3,
+   "explain": "The capital of Libya is Tripoli."
+  },
+  {
+   "id": "sc-cont-LY",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Libya in?",
+   "choices": [
+    "South America",
+    "Oceania",
+    "Europe",
+    "Africa"
+   ],
+   "answer": 3,
+   "explain": "Libya is in Africa."
+  },
+  {
+   "id": "sc-flag-TN",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇹🇳",
+   "choices": [
+    "Tunisia",
+    "Iran",
+    "Madagascar",
+    "Senegal"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Tunisia, in Africa."
+  },
+  {
+   "id": "sc-cap-TN",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Tunisia?",
+   "choices": [
+    "Kabul",
+    "Tunis",
+    "Dakar",
+    "Lusaka"
+   ],
+   "answer": 1,
+   "explain": "The capital of Tunisia is Tunis."
+  },
+  {
+   "id": "sc-cont-TN",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Tunisia in?",
+   "choices": [
+    "Europe",
+    "Asia",
+    "Africa",
+    "North America"
+   ],
+   "answer": 2,
+   "explain": "Tunisia is in Africa."
+  },
+  {
+   "id": "sc-flag-MG",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇲🇬",
+   "choices": [
+    "Qatar",
+    "Tunisia",
+    "Zambia",
+    "Madagascar"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Madagascar, in Africa."
+  },
+  {
+   "id": "sc-cap-MG",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Madagascar?",
+   "choices": [
+    "Dhaka",
+    "Yaoundé",
+    "Luanda",
+    "Antananarivo"
+   ],
+   "answer": 3,
+   "explain": "The capital of Madagascar is Antananarivo."
+  },
+  {
+   "id": "sc-cont-MG",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Madagascar in?",
+   "choices": [
+    "Europe",
+    "North America",
+    "Africa",
+    "Asia"
+   ],
+   "answer": 2,
+   "explain": "Madagascar is in Africa."
+  },
+  {
+   "id": "sc-flag-CR",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇨🇷",
+   "choices": [
+    "Costa Rica",
+    "Panama",
+    "Haiti",
+    "Zimbabwe"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Costa Rica, in North America."
+  },
+  {
+   "id": "sc-cap-CR",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Costa Rica?",
+   "choices": [
+    "San José",
+    "Dhaka",
+    "Guatemala City",
+    "Santo Domingo"
+   ],
+   "answer": 0,
+   "explain": "The capital of Costa Rica is San José."
+  },
+  {
+   "id": "sc-cont-CR",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Costa Rica in?",
+   "choices": [
+    "North America",
+    "South America",
+    "Europe",
+    "Africa"
+   ],
+   "answer": 0,
+   "explain": "Costa Rica is in North America."
+  },
+  {
+   "id": "sc-flag-PA",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇵🇦",
+   "choices": [
+    "Panama",
+    "Guatemala",
+    "United Arab Emirates",
+    "Costa Rica"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Panama, in North America."
+  },
+  {
+   "id": "sc-cap-PA",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Panama?",
+   "choices": [
+    "Tehran",
+    "Guatemala City",
+    "Panama City",
+    "Port-au-Prince"
+   ],
+   "answer": 2,
+   "explain": "The capital of Panama is Panama City."
+  },
+  {
+   "id": "sc-cont-PA",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Panama in?",
+   "choices": [
+    "South America",
+    "Africa",
+    "Oceania",
+    "North America"
+   ],
+   "answer": 3,
+   "explain": "Panama is in North America."
+  },
+  {
+   "id": "sc-flag-GT",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇬🇹",
+   "choices": [
+    "Panama",
+    "Zimbabwe",
+    "Dominican Republic",
+    "Guatemala"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Guatemala, in North America."
+  },
+  {
+   "id": "sc-cap-GT",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Guatemala?",
+   "choices": [
+    "San José",
+    "Dhaka",
+    "Guatemala City",
+    "Port-au-Prince"
+   ],
+   "answer": 2,
+   "explain": "The capital of Guatemala is Guatemala City."
+  },
+  {
+   "id": "sc-cont-GT",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Guatemala in?",
+   "choices": [
+    "Europe",
+    "North America",
+    "Africa",
+    "Oceania"
+   ],
+   "answer": 1,
+   "explain": "Guatemala is in North America."
+  },
+  {
+   "id": "sc-flag-DO",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇩🇴",
+   "choices": [
+    "Dominican Republic",
+    "Guatemala",
+    "Jamaica",
+    "Qatar"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Dominican Republic, in North America."
+  },
+  {
+   "id": "sc-cap-DO",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Dominican Republic?",
+   "choices": [
+    "Kingston",
+    "Port-au-Prince",
+    "Santo Domingo",
+    "Dakar"
+   ],
+   "answer": 2,
+   "explain": "The capital of Dominican Republic is Santo Domingo."
+  },
+  {
+   "id": "sc-cont-DO",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Dominican Republic in?",
+   "choices": [
+    "Africa",
+    "Asia",
+    "South America",
+    "North America"
+   ],
+   "answer": 3,
+   "explain": "Dominican Republic is in North America."
+  },
+  {
+   "id": "sc-flag-HT",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇭🇹",
+   "choices": [
+    "Haiti",
+    "Dominican Republic",
+    "Guatemala",
+    "Ethiopia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Haiti, in North America."
+  },
+  {
+   "id": "sc-cap-HT",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Haiti?",
+   "choices": [
+    "Port-au-Prince",
+    "Santo Domingo",
+    "Amman",
+    "San José"
+   ],
+   "answer": 0,
+   "explain": "The capital of Haiti is Port-au-Prince."
+  },
+  {
+   "id": "sc-cont-HT",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Haiti in?",
+   "choices": [
+    "South America",
+    "Oceania",
+    "Europe",
+    "North America"
+   ],
+   "answer": 3,
+   "explain": "Haiti is in North America."
+  },
+  {
+   "id": "sc-flag-PY",
+   "topic": "flags",
+   "level": 7,
+   "prompt": "Which country's flag is this?\n🇵🇾",
+   "choices": [
+    "Paraguay",
+    "Venezuela",
+    "Afghanistan",
+    "Ecuador"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Paraguay, in South America."
+  },
+  {
+   "id": "sc-cap-PY",
+   "topic": "capitals",
+   "level": 8,
+   "prompt": "What is the capital of Paraguay?",
+   "choices": [
+    "Quito",
+    "Budapest",
+    "Montevideo",
+    "Asunción"
+   ],
+   "answer": 3,
+   "explain": "The capital of Paraguay is Asunción."
+  },
+  {
+   "id": "sc-cont-PY",
+   "topic": "countries",
+   "level": 6,
+   "prompt": "Which continent is Paraguay in?",
+   "choices": [
+    "Europe",
+    "Africa",
+    "South America",
+    "North America"
+   ],
+   "answer": 2,
+   "explain": "Paraguay is in South America."
+  },
+  {
+   "id": "sc-flag-BT",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇹",
+   "choices": [
+    "Timor-Leste",
+    "Mozambique",
+    "Kyrgyzstan",
+    "Bhutan"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Bhutan, in Asia."
+  },
+  {
+   "id": "sc-cap-BT",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Bhutan?",
+   "choices": [
+    "Sana'a",
+    "Tegucigalpa",
+    "Thimphu",
+    "Manama"
+   ],
+   "answer": 2,
+   "explain": "The capital of Bhutan is Thimphu."
+  },
+  {
+   "id": "sc-flag-BF",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇫",
+   "choices": [
+    "Rwanda",
+    "Georgia",
+    "Burkina Faso",
+    "Lesotho"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Burkina Faso, in Africa."
+  },
+  {
+   "id": "sc-cap-BF",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Burkina Faso?",
+   "choices": [
+    "Lomé",
+    "Lilongwe",
+    "Ouagadougou",
+    "Bishkek"
+   ],
+   "answer": 2,
+   "explain": "The capital of Burkina Faso is Ouagadougou."
+  },
+  {
+   "id": "sc-flag-ML",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇱",
+   "choices": [
+    "El Salvador",
+    "Mali",
+    "Eritrea",
+    "Rwanda"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Mali, in Africa."
+  },
+  {
+   "id": "sc-cap-ML",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Mali?",
+   "choices": [
+    "Bamako",
+    "Asmara",
+    "Libreville",
+    "Managua"
+   ],
+   "answer": 0,
+   "explain": "The capital of Mali is Bamako."
+  },
+  {
+   "id": "sc-flag-NE",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇳🇪",
+   "choices": [
+    "Barbados",
+    "Liberia",
+    "Republic of the Congo",
+    "Niger"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Niger, in Africa."
+  },
+  {
+   "id": "sc-cap-NE",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Niger?",
+   "choices": [
+    "Niamey",
+    "Chișinău",
+    "Nouakchott",
+    "Bamako"
+   ],
+   "answer": 0,
+   "explain": "The capital of Niger is Niamey."
+  },
+  {
+   "id": "sc-flag-TD",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇩",
+   "choices": [
+    "Malawi",
+    "Moldova",
+    "Chad",
+    "Djibouti"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Chad, in Africa."
+  },
+  {
+   "id": "sc-cap-TD",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Chad?",
+   "choices": [
+    "Tallinn",
+    "Kinshasa",
+    "Banjul",
+    "N'Djamena"
+   ],
+   "answer": 3,
+   "explain": "The capital of Chad is N'Djamena."
+  },
+  {
+   "id": "sc-flag-MR",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇷",
+   "choices": [
+    "Kyrgyzstan",
+    "Malawi",
+    "Sierra Leone",
+    "Mauritania"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Mauritania, in Africa."
+  },
+  {
+   "id": "sc-cap-MR",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Mauritania?",
+   "choices": [
+    "Nouakchott",
+    "Maputo",
+    "Apia",
+    "Ouagadougou"
+   ],
+   "answer": 0,
+   "explain": "The capital of Mauritania is Nouakchott."
+  },
+  {
+   "id": "sc-flag-SO",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇸🇴",
+   "choices": [
+    "Liberia",
+    "Somalia",
+    "Malta",
+    "Rwanda"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Somalia, in Africa."
+  },
+  {
+   "id": "sc-cap-SO",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Somalia?",
+   "choices": [
+    "Nouakchott",
+    "Freetown",
+    "Bandar Seri Begawan",
+    "Mogadishu"
+   ],
+   "answer": 3,
+   "explain": "The capital of Somalia is Mogadishu."
+  },
+  {
+   "id": "sc-flag-ER",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇪🇷",
+   "choices": [
+    "Oman",
+    "Sierra Leone",
+    "Eritrea",
+    "Malawi"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Eritrea, in Africa."
+  },
+  {
+   "id": "sc-cap-ER",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Eritrea?",
+   "choices": [
+    "Lomé",
+    "Asmara",
+    "Bamako",
+    "Dili"
+   ],
+   "answer": 1,
+   "explain": "The capital of Eritrea is Asmara."
+  },
+  {
+   "id": "sc-flag-DJ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇩🇯",
+   "choices": [
+    "Yemen",
+    "Djibouti",
+    "Democratic Republic of the Congo",
+    "Namibia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Djibouti, in Africa."
+  },
+  {
+   "id": "sc-cap-DJ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Djibouti?",
+   "choices": [
+    "Djibouti",
+    "Lilongwe",
+    "N'Djamena",
+    "Sana'a"
+   ],
+   "answer": 0,
+   "explain": "The capital of Djibouti is Djibouti."
+  },
+  {
+   "id": "sc-flag-MW",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇼",
+   "choices": [
+    "Brunei",
+    "Malawi",
+    "Republic of the Congo",
+    "Namibia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Malawi, in Africa."
+  },
+  {
+   "id": "sc-cap-MW",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Malawi?",
+   "choices": [
+    "Asmara",
+    "Mogadishu",
+    "Lilongwe",
+    "San Salvador"
+   ],
+   "answer": 2,
+   "explain": "The capital of Malawi is Lilongwe."
+  },
+  {
+   "id": "sc-flag-MZ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇿",
+   "choices": [
+    "Rwanda",
+    "Mozambique",
+    "Lesotho",
+    "Maldives"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Mozambique, in Africa."
+  },
+  {
+   "id": "sc-cap-MZ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Mozambique?",
+   "choices": [
+    "Vilnius",
+    "Maseru",
+    "Maputo",
+    "Bamako"
+   ],
+   "answer": 2,
+   "explain": "The capital of Mozambique is Maputo."
+  },
+  {
+   "id": "sc-flag-NA",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇳🇦",
+   "choices": [
+    "Albania",
+    "Namibia",
+    "Guinea",
+    "Gabon"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Namibia, in Africa."
+  },
+  {
+   "id": "sc-cap-NA",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Namibia?",
+   "choices": [
+    "Lomé",
+    "Nicosia",
+    "Mogadishu",
+    "Windhoek"
+   ],
+   "answer": 3,
+   "explain": "The capital of Namibia is Windhoek."
+  },
+  {
+   "id": "sc-flag-BW",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇼",
+   "choices": [
+    "Somalia",
+    "Bhutan",
+    "Democratic Republic of the Congo",
+    "Botswana"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Botswana, in Africa."
+  },
+  {
+   "id": "sc-cap-BW",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Botswana?",
+   "choices": [
+    "Gaborone",
+    "Ljubljana",
+    "Mogadishu",
+    "Nouakchott"
+   ],
+   "answer": 0,
+   "explain": "The capital of Botswana is Gaborone."
+  },
+  {
+   "id": "sc-flag-LS",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇱🇸",
+   "choices": [
+    "Togo",
+    "Chad",
+    "Lesotho",
+    "Trinidad and Tobago"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Lesotho, in Africa."
+  },
+  {
+   "id": "sc-cap-LS",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Lesotho?",
+   "choices": [
+    "Ouagadougou",
+    "Paramaribo",
+    "Maseru",
+    "Conakry"
+   ],
+   "answer": 2,
+   "explain": "The capital of Lesotho is Maseru."
+  },
+  {
+   "id": "sc-flag-RW",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇷🇼",
+   "choices": [
+    "Sierra Leone",
+    "Rwanda",
+    "Albania",
+    "Mali"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Rwanda, in Africa."
+  },
+  {
+   "id": "sc-cap-RW",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Rwanda?",
+   "choices": [
+    "Bandar Seri Begawan",
+    "Kigali",
+    "Djibouti",
+    "Libreville"
+   ],
+   "answer": 1,
+   "explain": "The capital of Rwanda is Kigali."
+  },
+  {
+   "id": "sc-flag-TG",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇬",
+   "choices": [
+    "Republic of the Congo",
+    "Somalia",
+    "Togo",
+    "Slovenia"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Togo, in Africa."
+  },
+  {
+   "id": "sc-cap-TG",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Togo?",
+   "choices": [
+    "Dushanbe",
+    "Lilongwe",
+    "Banjul",
+    "Lomé"
+   ],
+   "answer": 3,
+   "explain": "The capital of Togo is Lomé."
+  },
+  {
+   "id": "sc-flag-BJ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇯",
+   "choices": [
+    "Malawi",
+    "Benin",
+    "Estonia",
+    "Rwanda"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Benin, in Africa."
+  },
+  {
+   "id": "sc-cap-BJ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Benin?",
+   "choices": [
+    "Porto-Novo",
+    "Valletta",
+    "Kigali",
+    "Bamako"
+   ],
+   "answer": 0,
+   "explain": "The capital of Benin is Porto-Novo."
+  },
+  {
+   "id": "sc-flag-GM",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇬🇲",
+   "choices": [
+    "Oman",
+    "Eritrea",
+    "Benin",
+    "Gambia"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Gambia, in Africa."
+  },
+  {
+   "id": "sc-cap-GM",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Gambia?",
+   "choices": [
+    "Valletta",
+    "Freetown",
+    "Djibouti",
+    "Banjul"
+   ],
+   "answer": 3,
+   "explain": "The capital of Gambia is Banjul."
+  },
+  {
+   "id": "sc-flag-GN",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇬🇳",
+   "choices": [
+    "Guinea",
+    "Democratic Republic of the Congo",
+    "Djibouti",
+    "Tajikistan"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Guinea, in Africa."
+  },
+  {
+   "id": "sc-cap-GN",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Guinea?",
+   "choices": [
+    "Monrovia",
+    "Asmara",
+    "Belmopan",
+    "Conakry"
+   ],
+   "answer": 3,
+   "explain": "The capital of Guinea is Conakry."
+  },
+  {
+   "id": "sc-flag-SL",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇸🇱",
+   "choices": [
+    "Malawi",
+    "Latvia",
+    "Sierra Leone",
+    "Rwanda"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Sierra Leone, in Africa."
+  },
+  {
+   "id": "sc-cap-SL",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Sierra Leone?",
+   "choices": [
+    "Freetown",
+    "Kigali",
+    "Luxembourg",
+    "N'Djamena"
+   ],
+   "answer": 0,
+   "explain": "The capital of Sierra Leone is Freetown."
+  },
+  {
+   "id": "sc-flag-LR",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇱🇷",
+   "choices": [
+    "Malawi",
+    "Eritrea",
+    "Liberia",
+    "Armenia"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Liberia, in Africa."
+  },
+  {
+   "id": "sc-cap-LR",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Liberia?",
+   "choices": [
+    "Maputo",
+    "Monrovia",
+    "Malé",
+    "Porto-Novo"
+   ],
+   "answer": 1,
+   "explain": "The capital of Liberia is Monrovia."
+  },
+  {
+   "id": "sc-flag-GA",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇬🇦",
+   "choices": [
+    "Albania",
+    "Somalia",
+    "Mali",
+    "Gabon"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Gabon, in Africa."
+  },
+  {
+   "id": "sc-cap-GA",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Gabon?",
+   "choices": [
+    "Libreville",
+    "Riga",
+    "Djibouti",
+    "Gaborone"
+   ],
+   "answer": 0,
+   "explain": "The capital of Gabon is Libreville."
+  },
+  {
+   "id": "sc-flag-CG",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇨🇬",
+   "choices": [
+    "Gambia",
+    "Burkina Faso",
+    "Bahrain",
+    "Republic of the Congo"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Republic of the Congo, in Africa."
+  },
+  {
+   "id": "sc-cap-CG",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Republic of the Congo?",
+   "choices": [
+    "Brazzaville",
+    "Ouagadougou",
+    "Dushanbe",
+    "Lilongwe"
+   ],
+   "answer": 0,
+   "explain": "The capital of Republic of the Congo is Brazzaville."
+  },
+  {
+   "id": "sc-flag-CD",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇨🇩",
+   "choices": [
+    "Georgia",
+    "Rwanda",
+    "Democratic Republic of the Congo",
+    "Burkina Faso"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Democratic Republic of the Congo, in Africa."
+  },
+  {
+   "id": "sc-cap-CD",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Democratic Republic of the Congo?",
+   "choices": [
+    "Banjul",
+    "Kinshasa",
+    "Libreville",
+    "Muscat"
+   ],
+   "answer": 1,
+   "explain": "The capital of Democratic Republic of the Congo is Kinshasa."
+  },
+  {
+   "id": "sc-flag-KG",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇰🇬",
+   "choices": [
+    "Bhutan",
+    "Mozambique",
+    "Kyrgyzstan",
+    "Oman"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Kyrgyzstan, in Asia."
+  },
+  {
+   "id": "sc-cap-KG",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Kyrgyzstan?",
+   "choices": [
+    "Bishkek",
+    "Ashgabat",
+    "Manama",
+    "Windhoek"
+   ],
+   "answer": 0,
+   "explain": "The capital of Kyrgyzstan is Bishkek."
+  },
+  {
+   "id": "sc-flag-TJ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇯",
+   "choices": [
+    "Turkmenistan",
+    "Fiji",
+    "Oman",
+    "Tajikistan"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Tajikistan, in Asia."
+  },
+  {
+   "id": "sc-cap-TJ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Tajikistan?",
+   "choices": [
+    "Skopje",
+    "Malé",
+    "Bandar Seri Begawan",
+    "Dushanbe"
+   ],
+   "answer": 3,
+   "explain": "The capital of Tajikistan is Dushanbe."
+  },
+  {
+   "id": "sc-flag-TM",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇲",
+   "choices": [
+    "Turkmenistan",
+    "Brunei",
+    "Bhutan",
+    "Malta"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Turkmenistan, in Asia."
+  },
+  {
+   "id": "sc-cap-TM",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Turkmenistan?",
+   "choices": [
+    "Bishkek",
+    "Ashgabat",
+    "Sarajevo",
+    "Thimphu"
+   ],
+   "answer": 1,
+   "explain": "The capital of Turkmenistan is Ashgabat."
+  },
+  {
+   "id": "sc-flag-AZ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇦🇿",
+   "choices": [
+    "Gambia",
+    "Oman",
+    "Armenia",
+    "Azerbaijan"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Azerbaijan, in Asia."
+  },
+  {
+   "id": "sc-cap-AZ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Azerbaijan?",
+   "choices": [
+    "Muscat",
+    "Freetown",
+    "Baku",
+    "Bishkek"
+   ],
+   "answer": 2,
+   "explain": "The capital of Azerbaijan is Baku."
+  },
+  {
+   "id": "sc-flag-GE",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇬🇪",
+   "choices": [
+    "Kyrgyzstan",
+    "Georgia",
+    "Oman",
+    "Mali"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Georgia, in Asia."
+  },
+  {
+   "id": "sc-cap-GE",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Georgia?",
+   "choices": [
+    "Malé",
+    "Maputo",
+    "Bishkek",
+    "Tbilisi"
+   ],
+   "answer": 3,
+   "explain": "The capital of Georgia is Tbilisi."
+  },
+  {
+   "id": "sc-flag-AM",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇦🇲",
+   "choices": [
+    "Oman",
+    "Armenia",
+    "Latvia",
+    "Kyrgyzstan"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Armenia, in Asia."
+  },
+  {
+   "id": "sc-cap-AM",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Armenia?",
+   "choices": [
+    "Malé",
+    "Dushanbe",
+    "Maputo",
+    "Yerevan"
+   ],
+   "answer": 3,
+   "explain": "The capital of Armenia is Yerevan."
+  },
+  {
+   "id": "sc-flag-MD",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇩",
+   "choices": [
+    "Slovenia",
+    "Belize",
+    "Belarus",
+    "Moldova"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Moldova, in Europe."
+  },
+  {
+   "id": "sc-cap-MD",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Moldova?",
+   "choices": [
+    "Chișinău",
+    "Libreville",
+    "Tirana",
+    "Skopje"
+   ],
+   "answer": 0,
+   "explain": "The capital of Moldova is Chișinău."
+  },
+  {
+   "id": "sc-flag-BY",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇾",
+   "choices": [
+    "Belarus",
+    "Liberia",
+    "Slovenia",
+    "North Macedonia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Belarus, in Europe."
+  },
+  {
+   "id": "sc-cap-BY",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Belarus?",
+   "choices": [
+    "Nukuʻalofa",
+    "Riga",
+    "Vilnius",
+    "Minsk"
+   ],
+   "answer": 3,
+   "explain": "The capital of Belarus is Minsk."
+  },
+  {
+   "id": "sc-flag-LT",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇱🇹",
+   "choices": [
+    "Moldova",
+    "Guinea",
+    "Luxembourg",
+    "Lithuania"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Lithuania, in Europe."
+  },
+  {
+   "id": "sc-cap-LT",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Lithuania?",
+   "choices": [
+    "Nicosia",
+    "Mogadishu",
+    "Sarajevo",
+    "Vilnius"
+   ],
+   "answer": 3,
+   "explain": "The capital of Lithuania is Vilnius."
+  },
+  {
+   "id": "sc-flag-LV",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇱🇻",
+   "choices": [
+    "Latvia",
+    "Mauritania",
+    "Lithuania",
+    "Belarus"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Latvia, in Europe."
+  },
+  {
+   "id": "sc-cap-LV",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Latvia?",
+   "choices": [
+    "Minsk",
+    "Riga",
+    "Nicosia",
+    "Brazzaville"
+   ],
+   "answer": 1,
+   "explain": "The capital of Latvia is Riga."
+  },
+  {
+   "id": "sc-flag-EE",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇪🇪",
+   "choices": [
+    "Turkmenistan",
+    "Belarus",
+    "Estonia",
+    "Luxembourg"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Estonia, in Europe."
+  },
+  {
+   "id": "sc-cap-EE",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Estonia?",
+   "choices": [
+    "Luxembourg",
+    "Windhoek",
+    "Tallinn",
+    "Tirana"
+   ],
+   "answer": 2,
+   "explain": "The capital of Estonia is Tallinn."
+  },
+  {
+   "id": "sc-flag-SI",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇸🇮",
+   "choices": [
+    "Lithuania",
+    "Yemen",
+    "North Macedonia",
+    "Slovenia"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Slovenia, in Europe."
+  },
+  {
+   "id": "sc-cap-SI",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Slovenia?",
+   "choices": [
+    "Gaborone",
+    "Sarajevo",
+    "Minsk",
+    "Ljubljana"
+   ],
+   "answer": 3,
+   "explain": "The capital of Slovenia is Ljubljana."
+  },
+  {
+   "id": "sc-flag-MK",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇰",
+   "choices": [
+    "Samoa",
+    "North Macedonia",
+    "Malta",
+    "Luxembourg"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of North Macedonia, in Europe."
+  },
+  {
+   "id": "sc-cap-MK",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of North Macedonia?",
+   "choices": [
+    "Asmara",
+    "Skopje",
+    "Ljubljana",
+    "Tirana"
+   ],
+   "answer": 1,
+   "explain": "The capital of North Macedonia is Skopje."
+  },
+  {
+   "id": "sc-flag-AL",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇦🇱",
+   "choices": [
+    "Slovenia",
+    "Albania",
+    "Republic of the Congo",
+    "Montenegro"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Albania, in Europe."
+  },
+  {
+   "id": "sc-cap-AL",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Albania?",
+   "choices": [
+    "Sarajevo",
+    "Tallinn",
+    "Tirana",
+    "Nouakchott"
+   ],
+   "answer": 2,
+   "explain": "The capital of Albania is Tirana."
+  },
+  {
+   "id": "sc-flag-ME",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇪",
+   "choices": [
+    "Belarus",
+    "Montenegro",
+    "Nicaragua",
+    "Estonia"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Montenegro, in Europe."
+  },
+  {
+   "id": "sc-cap-ME",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Montenegro?",
+   "choices": [
+    "Chișinău",
+    "Mogadishu",
+    "Luxembourg",
+    "Podgorica"
+   ],
+   "answer": 3,
+   "explain": "The capital of Montenegro is Podgorica."
+  },
+  {
+   "id": "sc-flag-BA",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇦",
+   "choices": [
+    "Montenegro",
+    "Luxembourg",
+    "Bosnia and Herzegovina",
+    "Mauritania"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Bosnia and Herzegovina, in Europe."
+  },
+  {
+   "id": "sc-cap-BA",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Bosnia and Herzegovina?",
+   "choices": [
+    "Sarajevo",
+    "Minsk",
+    "Niamey",
+    "Valletta"
+   ],
+   "answer": 0,
+   "explain": "The capital of Bosnia and Herzegovina is Sarajevo."
+  },
+  {
+   "id": "sc-flag-MT",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇹",
+   "choices": [
+    "Estonia",
+    "Malta",
+    "Timor-Leste",
+    "Albania"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Malta, in Europe."
+  },
+  {
+   "id": "sc-cap-MT",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Malta?",
+   "choices": [
+    "Chișinău",
+    "Valletta",
+    "Luxembourg",
+    "Nouakchott"
+   ],
+   "answer": 1,
+   "explain": "The capital of Malta is Valletta."
+  },
+  {
+   "id": "sc-flag-CY",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇨🇾",
+   "choices": [
+    "Cyprus",
+    "Moldova",
+    "Guinea",
+    "Estonia"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Cyprus, in Europe."
+  },
+  {
+   "id": "sc-cap-CY",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Cyprus?",
+   "choices": [
+    "Vilnius",
+    "Luxembourg",
+    "Nicosia",
+    "Lilongwe"
+   ],
+   "answer": 2,
+   "explain": "The capital of Cyprus is Nicosia."
+  },
+  {
+   "id": "sc-flag-LU",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇱🇺",
+   "choices": [
+    "Slovenia",
+    "Luxembourg",
+    "Honduras",
+    "Albania"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Luxembourg, in Europe."
+  },
+  {
+   "id": "sc-cap-LU",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Luxembourg?",
+   "choices": [
+    "Tirana",
+    "N'Djamena",
+    "Luxembourg",
+    "Nicosia"
+   ],
+   "answer": 2,
+   "explain": "The capital of Luxembourg is Luxembourg."
+  },
+  {
+   "id": "sc-flag-FJ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇫🇯",
+   "choices": [
+    "Samoa",
+    "Gambia",
+    "Papua New Guinea",
+    "Fiji"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Fiji, in Oceania."
+  },
+  {
+   "id": "sc-cap-FJ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Fiji?",
+   "choices": [
+    "Niamey",
+    "Nukuʻalofa",
+    "Port Moresby",
+    "Suva"
+   ],
+   "answer": 3,
+   "explain": "The capital of Fiji is Suva."
+  },
+  {
+   "id": "sc-flag-PG",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇵🇬",
+   "choices": [
+    "Fiji",
+    "Papua New Guinea",
+    "Tonga",
+    "Mauritania"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Papua New Guinea, in Oceania."
+  },
+  {
+   "id": "sc-cap-PG",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Papua New Guinea?",
+   "choices": [
+    "Maputo",
+    "Suva",
+    "Nukuʻalofa",
+    "Port Moresby"
+   ],
+   "answer": 3,
+   "explain": "The capital of Papua New Guinea is Port Moresby."
+  },
+  {
+   "id": "sc-flag-WS",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇼🇸",
+   "choices": [
+    "Tonga",
+    "Samoa",
+    "Turkmenistan",
+    "Fiji"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Samoa, in Oceania."
+  },
+  {
+   "id": "sc-cap-WS",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Samoa?",
+   "choices": [
+    "Tbilisi",
+    "Apia",
+    "Nukuʻalofa",
+    "Suva"
+   ],
+   "answer": 1,
+   "explain": "The capital of Samoa is Apia."
+  },
+  {
+   "id": "sc-flag-TO",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇴",
+   "choices": [
+    "Fiji",
+    "Somalia",
+    "Samoa",
+    "Tonga"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Tonga, in Oceania."
+  },
+  {
+   "id": "sc-cap-TO",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Tonga?",
+   "choices": [
+    "Apia",
+    "Port Moresby",
+    "Nukuʻalofa",
+    "Ouagadougou"
+   ],
+   "answer": 2,
+   "explain": "The capital of Tonga is Nukuʻalofa."
+  },
+  {
+   "id": "sc-flag-SR",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇸🇷",
+   "choices": [
+    "Guyana",
+    "Moldova",
+    "Venezuela",
+    "Suriname"
+   ],
+   "answer": 3,
+   "explain": "That is the flag of Suriname, in South America."
+  },
+  {
+   "id": "sc-cap-SR",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Suriname?",
+   "choices": [
+    "Caracas",
+    "Georgetown",
+    "Valletta",
+    "Paramaribo"
+   ],
+   "answer": 3,
+   "explain": "The capital of Suriname is Paramaribo."
+  },
+  {
+   "id": "sc-flag-GY",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇬🇾",
+   "choices": [
+    "Guyana",
+    "Paraguay",
+    "Suriname",
+    "Kyrgyzstan"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Guyana, in South America."
+  },
+  {
+   "id": "sc-cap-GY",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Guyana?",
+   "choices": [
+    "Djibouti",
+    "Georgetown",
+    "Quito",
+    "Paramaribo"
+   ],
+   "answer": 1,
+   "explain": "The capital of Guyana is Georgetown."
+  },
+  {
+   "id": "sc-flag-BZ",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇿",
+   "choices": [
+    "Trinidad and Tobago",
+    "Nicaragua",
+    "Belize",
+    "Rwanda"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Belize, in North America."
+  },
+  {
+   "id": "sc-cap-BZ",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Belize?",
+   "choices": [
+    "Belmopan",
+    "Mogadishu",
+    "Port of Spain",
+    "Nassau"
+   ],
+   "answer": 0,
+   "explain": "The capital of Belize is Belmopan."
+  },
+  {
+   "id": "sc-flag-HN",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇭🇳",
+   "choices": [
+    "Trinidad and Tobago",
+    "Honduras",
+    "Nicaragua",
+    "Turkmenistan"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Honduras, in North America."
+  },
+  {
+   "id": "sc-cap-HN",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Honduras?",
+   "choices": [
+    "Managua",
+    "Tegucigalpa",
+    "Bandar Seri Begawan",
+    "Belmopan"
+   ],
+   "answer": 1,
+   "explain": "The capital of Honduras is Tegucigalpa."
+  },
+  {
+   "id": "sc-flag-SV",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇸🇻",
+   "choices": [
+    "Barbados",
+    "Trinidad and Tobago",
+    "El Salvador",
+    "Guyana"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of El Salvador, in North America."
+  },
+  {
+   "id": "sc-cap-SV",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of El Salvador?",
+   "choices": [
+    "San Salvador",
+    "Port of Spain",
+    "Valletta",
+    "Managua"
+   ],
+   "answer": 0,
+   "explain": "The capital of El Salvador is San Salvador."
+  },
+  {
+   "id": "sc-flag-NI",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇳🇮",
+   "choices": [
+    "Nicaragua",
+    "Barbados",
+    "Mozambique",
+    "Bahamas"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Nicaragua, in North America."
+  },
+  {
+   "id": "sc-cap-NI",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Nicaragua?",
+   "choices": [
+    "San Salvador",
+    "Managua",
+    "Manama",
+    "Nassau"
+   ],
+   "answer": 1,
+   "explain": "The capital of Nicaragua is Managua."
+  },
+  {
+   "id": "sc-flag-BS",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇸",
+   "choices": [
+    "El Salvador",
+    "Bahamas",
+    "Honduras",
+    "Bahrain"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Bahamas, in North America."
+  },
+  {
+   "id": "sc-cap-BS",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Bahamas?",
+   "choices": [
+    "Nassau",
+    "Niamey",
+    "Belmopan",
+    "Port of Spain"
+   ],
+   "answer": 0,
+   "explain": "The capital of Bahamas is Nassau."
+  },
+  {
+   "id": "sc-flag-TT",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇹",
+   "choices": [
+    "Trinidad and Tobago",
+    "Tajikistan",
+    "Bahamas",
+    "Nicaragua"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Trinidad and Tobago, in North America."
+  },
+  {
+   "id": "sc-cap-TT",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Trinidad and Tobago?",
+   "choices": [
+    "Minsk",
+    "Port of Spain",
+    "Tegucigalpa",
+    "San Salvador"
+   ],
+   "answer": 1,
+   "explain": "The capital of Trinidad and Tobago is Port of Spain."
+  },
+  {
+   "id": "sc-flag-BB",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇧",
+   "choices": [
+    "Belize",
+    "Bahamas",
+    "Barbados",
+    "Benin"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Barbados, in North America."
+  },
+  {
+   "id": "sc-cap-BB",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Barbados?",
+   "choices": [
+    "Port of Spain",
+    "San Salvador",
+    "Bridgetown",
+    "Nukuʻalofa"
+   ],
+   "answer": 2,
+   "explain": "The capital of Barbados is Bridgetown."
+  },
+  {
+   "id": "sc-flag-YE",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇾🇪",
+   "choices": [
+    "Brunei",
+    "Yemen",
+    "Armenia",
+    "Togo"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Yemen, in Asia."
+  },
+  {
+   "id": "sc-cap-YE",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Yemen?",
+   "choices": [
+    "Managua",
+    "Sana'a",
+    "Dili",
+    "Bandar Seri Begawan"
+   ],
+   "answer": 1,
+   "explain": "The capital of Yemen is Sana'a."
+  },
+  {
+   "id": "sc-flag-OM",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇴🇲",
+   "choices": [
+    "North Macedonia",
+    "Armenia",
+    "Oman",
+    "Azerbaijan"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Oman, in Asia."
+  },
+  {
+   "id": "sc-cap-OM",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Oman?",
+   "choices": [
+    "Muscat",
+    "Sana'a",
+    "Porto-Novo",
+    "Manama"
+   ],
+   "answer": 0,
+   "explain": "The capital of Oman is Muscat."
+  },
+  {
+   "id": "sc-flag-BH",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇭",
+   "choices": [
+    "Moldova",
+    "Bahrain",
+    "Oman",
+    "Yemen"
+   ],
+   "answer": 1,
+   "explain": "That is the flag of Bahrain, in Asia."
+  },
+  {
+   "id": "sc-cap-BH",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Bahrain?",
+   "choices": [
+    "Manama",
+    "Dili",
+    "Malé",
+    "Ljubljana"
+   ],
+   "answer": 0,
+   "explain": "The capital of Bahrain is Manama."
+  },
+  {
+   "id": "sc-flag-TL",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇹🇱",
+   "choices": [
+    "Fiji",
+    "Tajikistan",
+    "Timor-Leste",
+    "Brunei"
+   ],
+   "answer": 2,
+   "explain": "That is the flag of Timor-Leste, in Asia."
+  },
+  {
+   "id": "sc-cap-TL",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Timor-Leste?",
+   "choices": [
+    "Manama",
+    "Port of Spain",
+    "Dili",
+    "Baku"
+   ],
+   "answer": 2,
+   "explain": "The capital of Timor-Leste is Dili."
+  },
+  {
+   "id": "sc-flag-BN",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇧🇳",
+   "choices": [
+    "Brunei",
+    "Lithuania",
+    "Timor-Leste",
+    "Bahrain"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Brunei, in Asia."
+  },
+  {
+   "id": "sc-cap-BN",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Brunei?",
+   "choices": [
+    "Djibouti",
+    "Bandar Seri Begawan",
+    "Thimphu",
+    "Ashgabat"
+   ],
+   "answer": 1,
+   "explain": "The capital of Brunei is Bandar Seri Begawan."
+  },
+  {
+   "id": "sc-flag-MV",
+   "topic": "flags",
+   "level": 9,
+   "prompt": "Which country's flag is this?\n🇲🇻",
+   "choices": [
+    "Maldives",
+    "Brunei",
+    "Georgia",
+    "Belarus"
+   ],
+   "answer": 0,
+   "explain": "That is the flag of Maldives, in Asia."
+  },
+  {
+   "id": "sc-cap-MV",
+   "topic": "capitals",
+   "level": 10,
+   "prompt": "What is the capital of Maldives?",
+   "choices": [
+    "Thimphu",
+    "Bishkek",
+    "Malé",
+    "Libreville"
+   ],
+   "answer": 2,
+   "explain": "The capital of Maldives is Malé."
+  },
+  {
+   "id": "sc-pred-6-1",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "Ice water sits in a glass on a hot day, and drops of water appear on the outside. Where do they come from?",
+   "choices": [
+    "Water vapour in the air, cooled by the glass",
+    "The water leaks through the glass",
+    "The ice sweats"
+   ],
+   "answer": 0,
+   "explain": "Warm air touches the cold glass and the water vapour in it condenses into drops."
+  },
+  {
+   "id": "sc-pred-6-2",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "You keep a plant in a dark cupboard for two weeks. What will most likely happen?",
+   "choices": [
+    "It turns pale and weak",
+    "It turns bright green",
+    "It grows faster"
+   ],
+   "answer": 0,
+   "explain": "Without light a plant cannot make food or chlorophyll."
+  },
+  {
+   "id": "sc-pred-6-3",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "You give a ball the same push on a carpet and on smooth ice. Where does it roll farther?",
+   "choices": [
+    "The same distance",
+    "On the ice",
+    "On the carpet"
+   ],
+   "answer": 1,
+   "explain": "Ice has much less friction."
+  },
+  {
+   "id": "sc-pred-6-4",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "You shake a can of fizzy drink and open it straight away. What happens?",
+   "choices": [
+    "Nothing special",
+    "It goes flat at once",
+    "It sprays out"
+   ],
+   "answer": 2,
+   "explain": "Shaking releases dissolved gas as bubbles that push the liquid out."
+  },
+  {
+   "id": "sc-pred-6-5",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "A bar magnet is cut in half. What do you get?",
+   "choices": [
+    "Two smaller magnets, each with two poles",
+    "One north half and one south half",
+    "Two pieces that are not magnetic"
+   ],
+   "answer": 0,
+   "explain": "Every piece of a magnet has a north and a south pole."
+  },
+  {
+   "id": "sc-pred-6-6",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "Salt is spread on an icy road. What does it do?",
+   "choices": [
+    "It lowers the freezing point so the ice melts",
+    "It makes the road warmer by burning",
+    "It makes the ice colder"
+   ],
+   "answer": 0,
+   "explain": "Salty water freezes at a lower temperature than pure water."
+  },
+  {
+   "id": "sc-pred-6-7",
+   "topic": "predictions",
+   "level": 6,
+   "prompt": "You mix baking soda and vinegar in a bottle and seal it tightly. What is likely to happen?",
+   "choices": [
+    "Nothing, the bottle stays the same",
+    "The mixture freezes",
+    "Pressure builds up and the cap may pop off"
+   ],
+   "answer": 2,
+   "explain": "The reaction makes carbon dioxide gas, which needs space."
+  },
+  {
+   "id": "sc-pred-7-1",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "You drop a hammer and a feather together on the Moon, where there is no air. Which lands first?",
+   "choices": [
+    "The hammer",
+    "They land at the same time",
+    "The feather"
+   ],
+   "answer": 1,
+   "explain": "Without air resistance all objects fall at the same rate."
+  },
+  {
+   "id": "sc-pred-7-2",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "You put a metal spoon and a wooden spoon in hot water. Which handle gets hot faster?",
+   "choices": [
+    "The metal one",
+    "Both the same",
+    "The wooden one"
+   ],
+   "answer": 0,
+   "explain": "Metals are good conductors of heat."
+  },
+  {
+   "id": "sc-pred-7-3",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "You rub a balloon on your hair and hold it near tiny paper bits. What happens?",
+   "choices": [
+    "The paper jumps to the balloon",
+    "The paper flies away",
+    "Nothing happens"
+   ],
+   "answer": 0,
+   "explain": "Rubbing builds up static electricity, which attracts light objects."
+  },
+  {
+   "id": "sc-pred-7-4",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "An ice cube floats in a glass filled to the brim. When it melts, what happens to the water level?",
+   "choices": [
+    "It drops",
+    "It stays the same",
+    "The water overflows"
+   ],
+   "answer": 1,
+   "explain": "Floating ice displaces its own weight in water, so melting changes nothing."
+  },
+  {
+   "id": "sc-pred-7-5",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "On a sunny day, which T-shirt gets warmer in the Sun?",
+   "choices": [
+    "The black one",
+    "The white one",
+    "They stay the same"
+   ],
+   "answer": 0,
+   "explain": "Dark colours absorb more light and turn it into heat."
+  },
+  {
+   "id": "sc-pred-7-6",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "A car brakes suddenly and the passengers lurch forward. Why?",
+   "choices": [
+    "Gravity pulls them forward",
+    "The seats push them",
+    "Their bodies keep moving forward (inertia)"
+   ],
+   "answer": 2,
+   "explain": "Objects keep moving unless a force stops them."
+  },
+  {
+   "id": "sc-pred-7-7",
+   "topic": "predictions",
+   "level": 7,
+   "prompt": "A steel ball sinks but a huge steel ship floats. Why?",
+   "choices": [
+    "The ship is shaped to hold lots of air, so it is less dense overall",
+    "Steel gets lighter in big pieces",
+    "The sea pushes harder on ships"
+   ],
+   "answer": 0,
+   "explain": "Overall density matters, not just the material."
+  },
+  {
+   "id": "sc-pred-8-1",
+   "topic": "predictions",
+   "level": 8,
+   "prompt": "You pour cooking oil onto water. What happens?",
+   "choices": [
+    "The oil dissolves",
+    "The oil floats on top without mixing",
+    "The oil sinks to the bottom"
+   ],
+   "answer": 1,
+   "explain": "Oil is less dense than water and does not mix with it."
+  },
+  {
+   "id": "sc-pred-8-2",
+   "topic": "predictions",
+   "level": 8,
+   "prompt": "A rocket in empty space has nothing to push against. Can it still speed up?",
+   "choices": [
+    "No, it needs air",
+    "Only if it is near a planet",
+    "Yes, by pushing exhaust gas backwards"
+   ],
+   "answer": 2,
+   "explain": "Newton’s third law: pushing gas back pushes the rocket forward."
+  },
+  {
+   "id": "sc-pred-8-3",
+   "topic": "predictions",
+   "level": 8,
+   "prompt": "Water boils inside a pressure cooker. Compared with an open pot, the boiling point is…",
+   "choices": [
+    "Lower than 100 °C",
+    "Still exactly 100 °C",
+    "Higher than 100 °C"
+   ],
+   "answer": 2,
+   "explain": "More pressure means water needs more heat to boil."
+  },
+  {
+   "id": "sc-pred-8-4",
+   "topic": "predictions",
+   "level": 8,
+   "prompt": "An ambulance siren passes you. What happens to its pitch?",
+   "choices": [
+    "It rises as it passes",
+    "It stays the same",
+    "It drops as it passes"
+   ],
+   "answer": 2,
+   "explain": "The Doppler effect: sound waves bunch up when it approaches and spread out as it leaves."
+  },
+  {
+   "id": "sc-pred-8-5",
+   "topic": "predictions",
+   "level": 8,
+   "prompt": "Two identical ice cubes sit at room temperature, one on a metal tray and one on a plastic plate. Which melts first?",
+   "choices": [
+    "The one on metal",
+    "The one on plastic",
+    "Both at the same time"
+   ],
+   "answer": 0,
+   "explain": "Metal conducts heat from the room to the ice faster."
+  },
+  {
+   "id": "sc-pred-8-6",
+   "topic": "predictions",
+   "level": 8,
+   "prompt": "You spin on a chair with your arms out, then pull your arms in. What happens to your spin?",
+   "choices": [
+    "You spin slower",
+    "It stays the same",
+    "You spin faster"
+   ],
+   "answer": 2,
+   "explain": "Angular momentum is conserved: a smaller radius means a faster spin."
+  },
+  {
+   "id": "sc-pred-9-1",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "A satellite orbits Earth. Why does it not fall to the ground?",
+   "choices": [
+    "Its engines push it up all the time",
+    "It is falling, but moves sideways so fast that it keeps missing Earth",
+    "There is no gravity in space"
+   ],
+   "answer": 1,
+   "explain": "An orbit is a continuous fall around the planet."
+  },
+  {
+   "id": "sc-pred-9-2",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "Two bulbs are wired in parallel. You remove one. What happens to the other?",
+   "choices": [
+    "It stays lit",
+    "It gets dimmer",
+    "It goes out"
+   ],
+   "answer": 0,
+   "explain": "Each bulb has its own path for the current."
+  },
+  {
+   "id": "sc-pred-9-3",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "Two bulbs are wired in series. You remove one. What happens to the other?",
+   "choices": [
+    "It goes out",
+    "It gets brighter",
+    "It stays lit"
+   ],
+   "answer": 0,
+   "explain": "Removing one breaks the only path for the current."
+  },
+  {
+   "id": "sc-pred-9-4",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "Equal amounts of a strong acid and a strong base are mixed. The pH ends up close to…",
+   "choices": [
+    "1",
+    "7",
+    "14"
+   ],
+   "answer": 1,
+   "explain": "Neutralisation makes mostly water and salt."
+  },
+  {
+   "id": "sc-pred-9-5",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "A sealed rigid container of gas is heated. What happens to the pressure inside?",
+   "choices": [
+    "It decreases",
+    "It increases",
+    "It stays the same"
+   ],
+   "answer": 1,
+   "explain": "Hotter molecules move faster and hit the walls harder."
+  },
+  {
+   "id": "sc-pred-9-6",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "One bacterium divides into two every hour. About how many are there after 6 hours?",
+   "choices": [
+    "64",
+    "36",
+    "12"
+   ],
+   "answer": 0,
+   "explain": "Doubling six times: 2 × 2 × 2 × 2 × 2 × 2 = 64."
+  },
+  {
+   "id": "sc-pred-9-7",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "If Earth had no atmosphere, what colour would the daytime sky be?",
+   "choices": [
+    "White",
+    "Black",
+    "Blue"
+   ],
+   "answer": 1,
+   "explain": "The sky is blue because the atmosphere scatters blue light."
+  },
+  {
+   "id": "sc-pred-9-8",
+   "topic": "predictions",
+   "level": 9,
+   "prompt": "A metal ring is cooled. What happens to the hole in the middle?",
+   "choices": [
+    "It stays the same",
+    "It gets smaller",
+    "It gets bigger"
+   ],
+   "answer": 1,
+   "explain": "The whole ring contracts, including the hole."
+  },
+  {
+   "id": "sc-pred-10-1",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "A 60 kg person visits the Moon, where gravity is about one sixth of Earth’s. What happens?",
+   "choices": [
+    "Their mass drops to 10 kg",
+    "Nothing changes",
+    "Their mass stays 60 kg but their weight drops to about a sixth"
+   ],
+   "answer": 2,
+   "explain": "Mass is the amount of matter; weight depends on gravity."
+  },
+  {
+   "id": "sc-pred-10-2",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "The Sun suddenly vanished. About how long before Earth noticed the light going out?",
+   "choices": [
+    "At once",
+    "About 8 hours",
+    "About 8 minutes"
+   ],
+   "answer": 2,
+   "explain": "Light takes about 8 minutes to travel from the Sun to Earth."
+  },
+  {
+   "id": "sc-pred-10-3",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "The distance between two masses is doubled. What happens to the gravitational pull between them?",
+   "choices": [
+    "It halves",
+    "It becomes one quarter",
+    "It doubles"
+   ],
+   "answer": 1,
+   "explain": "Gravity follows an inverse-square law."
+  },
+  {
+   "id": "sc-pred-10-4",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "The volume of a gas at constant temperature is halved. What happens to its pressure?",
+   "choices": [
+    "It doubles",
+    "It halves",
+    "It stays the same"
+   ],
+   "answer": 0,
+   "explain": "Boyle’s law: pressure and volume are inversely related."
+  },
+  {
+   "id": "sc-pred-10-5",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "A radioactive sample has a half-life of 10 years. How much is left after 20 years?",
+   "choices": [
+    "One quarter",
+    "None",
+    "One half"
+   ],
+   "answer": 0,
+   "explain": "Each half-life halves what remains: 1/2 then 1/4."
+  },
+  {
+   "id": "sc-pred-10-6",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "A mutation happens in a skin cell of a parent. Can it be passed to their children?",
+   "choices": [
+    "Only if the child is a girl",
+    "No, only changes in egg or sperm cells are inherited",
+    "Yes, always"
+   ],
+   "answer": 1,
+   "explain": "Only changes in reproductive cells (gametes) are passed on."
+  },
+  {
+   "id": "sc-pred-10-7",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "Ignoring air, you drop a ball into a tunnel that goes straight through the centre of Earth. What does it do?",
+   "choices": [
+    "It flies out into space",
+    "It stops at the centre",
+    "It swings back and forth between the two ends"
+   ],
+   "answer": 2,
+   "explain": "Gravity pulls it back toward the centre from either side."
+  },
+  {
+   "id": "sc-pred-10-8",
+   "topic": "predictions",
+   "level": 10,
+   "prompt": "Two objects of different masses fall in a vacuum. Which has the greater acceleration?",
+   "choices": [
+    "The lighter one",
+    "Neither, they accelerate equally",
+    "The heavier one"
+   ],
+   "answer": 1,
+   "explain": "Gravity gives every object the same acceleration, about 9.8 m/s²."
   }
  ]
 }

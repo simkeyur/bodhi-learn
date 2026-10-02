@@ -142,9 +142,13 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
         readyRef.current = true;
         const remote = fromDocData(snap.data);
         lastKeyRef.current = stateKey(remote);
-        // Solved levels only grow, so keep any this device has that the account lacks
+        // Solved puzzles only grow, so keep any this device has that the account lacks
         // (the save effect below then uploads them)
-        const merged = { ...remote, botSolved: unionIds(remote.botSolved, stateRef.current.botSolved) };
+        const merged = {
+          ...remote,
+          botSolved: unionIds(remote.botSolved, stateRef.current.botSolved),
+          solved: unionIds(remote.solved, stateRef.current.solved),
+        };
         if (stateKey(merged) !== stateKey(stateRef.current)) applyRef.current(merged);
         setSyncTick((t) => t + 1);
         setStatus(snap.fromCache ? (navigator.onLine ? 'connecting' : 'offline') : 'saved');

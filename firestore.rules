@@ -47,12 +47,13 @@ service cloud.firestore {
 
     function validProgress(p) {
       return p is map
-        && p.keys().hasOnly(['stars', 'unlockedStickers', 'placedStickers', 'botSolved', 'skills'])
+        && p.keys().hasOnly(['stars', 'unlockedStickers', 'placedStickers', 'botSolved', 'solved', 'skills'])
         && p.stars is int && p.stars >= 0 && p.stars <= 1000000
         && p.unlockedStickers is list && p.unlockedStickers.size() <= 50
         && p.placedStickers is list && p.placedStickers.size() <= 300
         // botSolved is optional so documents written by older versions of the app stay valid
         && (!('botSolved' in p) || (p.botSolved is list && p.botSolved.size() <= 60))
+        && (!('solved' in p) || (p.solved is list && p.solved.size() <= 300))
         && (!('skills' in p) || validSkills(p.skills));
     }
 

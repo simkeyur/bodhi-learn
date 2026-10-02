@@ -2,7 +2,7 @@
 
 import { SUBJECTS, type Subject } from '../firebase/schema.ts';
 import { makeMathQuestion } from './mathGen.ts';
-import type { Question, QuestionPack } from './types';
+import type { OrderPack, OrderPuzzle, Question, QuestionPack } from './types';
 import type { Rng } from '../data/logicData.ts';
 
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -29,19 +29,35 @@ export function readPack(v: unknown): QuestionPack | null {
   return { subject: subject as Subject, version, title, questions: good };
 }
 
+export function isOrderPuzzle(v: unknown): v is OrderPuzzle {
+  if (!isRecord(v)) return false;
+  const { id, topic, level, prompt, from, to, items, explain } = v;
+  return typeof id === 'string' && typeof topic === 'string' && typeof prompt === 'string' && prompt.length > 0
+    && typeof from === 'string' && typeof to === 'string'
+    && typeof level === 'number' && Number.isInteger(level) && level >= 1 && level <= 10
+    && Array.isArray(items) && items.length >= 3 && items.length <= 7 && items.every((i) => typeof i === 'string' && i.length > 0)
+    && new Set(items).size === items.length
+    && (explain === undefined || typeof explain === 'string');
+}
+
+export function readOrderPack(v: unknown): OrderPack | null {
+  if (!isRecord(v) || v.id !== 'order' || v.kind !== 'order') return null;
+  const { version, title, puzzles } = v;
+  if (typeof version !== 'number' || typeof title !== 'string' || !Array.isArray(puzzles)) return null;
+  const good = puzzles.filter(isOrderPuzzle);
+  return good.length ? { id: 'order', kind: 'order', version, title, puzzles: good } : null;
+}
+
 const pickOne = <T,>(rng: Rng, list: readonly T[]): T => list[Math.floor(rng() * list.length)];
 
 // Mostly the child's own level, sometimes one step either side, so a round has some variety.
-// Questions seen recently (`avoid`) are skipped unless there is nothing else.
-export function pickFromPack(allQuestions: readonly Question[], level: number, avoid: ReadonlySet<string>, rng: Rng, topics?: readonly string[]): Question | null {
-  // A game's topic group; if it has no questions at all, fall back to the whole pack rather than nothing
-  const inGroup = topics ? allQuestions.filter((q) => topics.includes(q.topic)) : allQuestions;
-  const questions = inGroup.length ? inGroup : allQuestions;
+// Anything seen recently (`avoid`) is skipped unless there is nothing else.
+export function pickNear<T extends { id: string; level: number }>(items: readonly T[], level: number, avoid: ReadonlySet<string>, rng: Rng): T | null {
   const tiers = [
-    questions.filter((q) => q.level === level),
-    questions.filter((q) => Math.abs(q.level - level) <= 1),
-    questions.filter((q) => Math.abs(q.level - level) <= 2),
-    [...questions],
+    items.filter((q) => q.level === level),
+    items.filter((q) => Math.abs(q.level - level) <= 1),
+    items.filter((q) => Math.abs(q.level - level) <= 2),
+    [...items],
   ];
   const wantNeighbour = rng() < 0.3;
   const order = wantNeighbour ? [1, 0, 2, 3] : [0, 1, 2, 3];
@@ -51,6 +67,12 @@ export function pickFromPack(allQuestions: readonly Question[], level: number, a
   }
   for (const t of order) if (tiers[t].length) return pickOne(rng, tiers[t]);
   return null;
+}
+
+export function pickFromPack(allQuestions: readonly Question[], level: number, avoid: ReadonlySet<string>, rng: Rng, topics?: readonly string[]): Question | null {
+  // A game's topic group; if it has no questions at all, fall back to the whole pack rather than nothing
+  const inGroup = topics ? allQuestions.filter((q) => topics.includes(q.topic)) : allQuestions;
+  return pickNear(inGroup.length ? inGroup : allQuestions, level, avoid, rng);
 }
 
 export function nextQuestion(

@@ -133,6 +133,18 @@ export const QUIZ_GAMES: QuizGame[] = [
     color: '#3B82F6', dark: '#1D4ED8', tint: '#EFF6FF',
   },
   {
+    id: 'flags-capitals', subject: 'science', title: 'Flags & Capitals', icon: '🌍', mode: 'round', minAge: 7, maxAge: 14,
+    blurb: 'Flags, capital cities and continents',
+    topics: ['flags', 'capitals', 'countries'],
+    color: '#0EA5E9', dark: '#0369A1', tint: '#F0F9FF',
+  },
+  {
+    id: 'predict-it', subject: 'science', title: 'Predict It', icon: '🤔', mode: 'round', minAge: 9, maxAge: 14,
+    blurb: 'What will happen? Think like a scientist',
+    topics: ['predictions'],
+    color: '#8B5CF6', dark: '#6D28D9', tint: '#F5F3FF',
+  },
+  {
     id: 'matter-energy', subject: 'science', title: 'Matter & Energy', icon: '⚗️', mode: 'round', minAge: 6, maxAge: 14,
     blurb: 'Forces, light, atoms and chemistry',
     topics: ['matter', 'forces', 'energy', 'light', 'chemistry', 'physics', 'atoms'],

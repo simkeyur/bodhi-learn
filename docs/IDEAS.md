@@ -157,6 +157,12 @@ and functions.
 
 ## Next steps for ages 4–14
 
+Built so far from the first list: Flags & Capitals, Predict It, Order It, Tower of Hanoi, Cipher Desk, Logic Gates Lab.
+Still open: **Match Pairs** (reusable memory-style pairing), **Mini Sudoku**, **Chart Detective**, **Periodic Table Pop**,
+**Body Lab / Food Chain Builder**, **True or False Facts**. Order It and the quiz packs can grow without an app release
+(add puzzles or questions, bump the pack `version`, run `npm run content:seed`).
+
+
 - **More questions.** Each game has at least 5 questions near every level of its age range (checked by a test); more would reduce repeats. Add packs (history, geography, coding
   vocabulary, spelling bee) by adding a subject to `SUBJECTS` in `src/firebase/schema.ts`, the rules, and `subjects.ts`.
 - **Passage reading comprehension** for 8+: a short text with 3 questions (needs a `passage` field on `Question`).

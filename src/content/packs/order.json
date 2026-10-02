@@ -1,0 +1,611 @@
+{
+ "id": "order",
+ "kind": "order",
+ "version": 1,
+ "title": "Order It",
+ "puzzles": [
+  {
+   "id": "or1-1",
+   "topic": "time",
+   "level": 1,
+   "prompt": "Put the day in order.",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "🌅 Sunrise",
+    "🍎 Lunch",
+    "🌇 Sunset",
+    "🌙 Bedtime"
+   ],
+   "explain": "The day starts with the sunrise and ends at bedtime."
+  },
+  {
+   "id": "or1-2",
+   "topic": "size",
+   "level": 1,
+   "prompt": "Put these animals in order of size.",
+   "from": "Smallest",
+   "to": "Biggest",
+   "items": [
+    "🐜 Ant",
+    "🐱 Cat",
+    "🐴 Horse",
+    "🐘 Elephant"
+   ],
+   "explain": "An ant is tiny and an elephant is the biggest land animal."
+  },
+  {
+   "id": "or1-3",
+   "topic": "seasons",
+   "level": 1,
+   "prompt": "Put the seasons in order, starting with spring.",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "🌸 Spring",
+    "☀️ Summer",
+    "🍂 Autumn",
+    "❄️ Winter"
+   ],
+   "explain": "Spring, summer, autumn, winter, then spring again."
+  },
+  {
+   "id": "or2-1",
+   "topic": "life cycles",
+   "level": 2,
+   "prompt": "How does a butterfly grow?",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "🥚 Egg",
+    "🐛 Caterpillar",
+    "🟢 Chrysalis",
+    "🦋 Butterfly"
+   ],
+   "explain": "A caterpillar hatches, makes a chrysalis, then becomes a butterfly."
+  },
+  {
+   "id": "or2-2",
+   "topic": "life cycles",
+   "level": 2,
+   "prompt": "How does a plant grow?",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "🌰 Seed",
+    "🌱 Sprout",
+    "🌿 Small plant",
+    "🌻 Flower"
+   ],
+   "explain": "A seed sprouts and grows into a plant with flowers."
+  },
+  {
+   "id": "or2-3",
+   "topic": "life cycles",
+   "level": 2,
+   "prompt": "Put the ages in order, youngest first.",
+   "from": "Youngest",
+   "to": "Oldest",
+   "items": [
+    "👶 Baby",
+    "🧒 Child",
+    "🧑 Teenager",
+    "🧓 Grandparent"
+   ],
+   "explain": "We grow older from baby to grandparent."
+  },
+  {
+   "id": "or2-4",
+   "topic": "speed",
+   "level": 2,
+   "prompt": "Put these animals in order of speed.",
+   "from": "Slowest",
+   "to": "Fastest",
+   "items": [
+    "🐌 Snail",
+    "🐢 Tortoise",
+    "🐕 Dog",
+    "🐆 Cheetah"
+   ],
+   "explain": "The cheetah is the fastest land animal."
+  },
+  {
+   "id": "or3-1",
+   "topic": "space",
+   "level": 3,
+   "prompt": "Put the planets in order, starting nearest the Sun.",
+   "from": "Nearest the Sun",
+   "to": "Farthest",
+   "items": [
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Mars"
+   ],
+   "explain": "My Very Easy Method: Mercury, Venus, Earth, Mars."
+  },
+  {
+   "id": "or3-2",
+   "topic": "life cycles",
+   "level": 3,
+   "prompt": "How does a frog grow?",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "🥚 Egg",
+    "Tadpole",
+    "Froglet",
+    "🐸 Frog"
+   ],
+   "explain": "A tadpole grows legs and becomes a frog."
+  },
+  {
+   "id": "or3-3",
+   "topic": "temperature",
+   "level": 3,
+   "prompt": "Put these in order of temperature.",
+   "from": "Coldest",
+   "to": "Hottest",
+   "items": [
+    "🧊 Ice cube",
+    "🥛 Cool milk",
+    "🛁 Warm bath",
+    "☕ Boiling kettle"
+   ],
+   "explain": "Ice is 0 °C and a boiling kettle is 100 °C."
+  },
+  {
+   "id": "or3-4",
+   "topic": "matter",
+   "level": 3,
+   "prompt": "What happens when you heat ice?",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "🧊 Ice (solid)",
+    "💧 Water (liquid)",
+    "♨️ Steam (gas)"
+   ],
+   "explain": "Heat turns a solid into a liquid and then a gas."
+  },
+  {
+   "id": "or4-1",
+   "topic": "earth",
+   "level": 4,
+   "prompt": "Put the water cycle in order.",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "Water evaporates",
+    "Vapour condenses into clouds",
+    "Rain falls",
+    "Water collects in rivers and seas"
+   ],
+   "explain": "The Sun lifts water up, clouds form, and it falls again."
+  },
+  {
+   "id": "or4-2",
+   "topic": "food chains",
+   "level": 4,
+   "prompt": "Build a food chain, starting with the plant.",
+   "from": "Plant",
+   "to": "Top predator",
+   "items": [
+    "🌿 Grass",
+    "🦗 Grasshopper",
+    "🐸 Frog",
+    "🐍 Snake",
+    "🦅 Hawk"
+   ],
+   "explain": "Energy passes from plants to the animals that eat them."
+  },
+  {
+   "id": "or4-3",
+   "topic": "space",
+   "level": 4,
+   "prompt": "Put the planets in order, starting nearest the Sun.",
+   "from": "Nearest the Sun",
+   "to": "Farthest",
+   "items": [
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Mars",
+    "Jupiter"
+   ],
+   "explain": "Jupiter is the fifth planet from the Sun."
+  },
+  {
+   "id": "or4-4",
+   "topic": "size",
+   "level": 4,
+   "prompt": "Put these in order of size.",
+   "from": "Smallest",
+   "to": "Biggest",
+   "items": [
+    "🌙 Moon",
+    "🌍 Earth",
+    "🪐 Jupiter",
+    "☀️ Sun"
+   ],
+   "explain": "The Sun is much bigger than any planet."
+  },
+  {
+   "id": "or5-1",
+   "topic": "earth",
+   "level": 5,
+   "prompt": "Put the layers of the Earth in order, from the surface down.",
+   "from": "Surface",
+   "to": "Centre",
+   "items": [
+    "Crust",
+    "Mantle",
+    "Outer core",
+    "Inner core"
+   ],
+   "explain": "We live on the crust. The inner core is solid iron."
+  },
+  {
+   "id": "or5-2",
+   "topic": "history",
+   "level": 5,
+   "prompt": "Put these in order, oldest first.",
+   "from": "Oldest",
+   "to": "Newest",
+   "items": [
+    "🦖 Dinosaurs",
+    "🦣 Woolly mammoths",
+    "🔺 Pyramids built",
+    "🌙 First Moon landing"
+   ],
+   "explain": "Dinosaurs lived about 66 million years ago or more; the Moon landing was in 1969."
+  },
+  {
+   "id": "or5-3",
+   "topic": "speed",
+   "level": 5,
+   "prompt": "Put these in order of speed.",
+   "from": "Slowest",
+   "to": "Fastest",
+   "items": [
+    "🐌 Snail",
+    "🚶 Walking person",
+    "🐎 Galloping horse",
+    "🐆 Cheetah",
+    "✈️ Jet plane"
+   ],
+   "explain": "A jet plane flies at about 900 km/h."
+  },
+  {
+   "id": "or5-4",
+   "topic": "measurement",
+   "level": 5,
+   "prompt": "Put these units of length in order.",
+   "from": "Smallest",
+   "to": "Biggest",
+   "items": [
+    "Millimetre",
+    "Centimetre",
+    "Metre",
+    "Kilometre"
+   ],
+   "explain": "10 mm = 1 cm, 100 cm = 1 m, 1000 m = 1 km."
+  },
+  {
+   "id": "or6-1",
+   "topic": "space",
+   "level": 6,
+   "prompt": "Put these planets in order from the Sun.",
+   "from": "Nearest the Sun",
+   "to": "Farthest",
+   "items": [
+    "Mercury",
+    "Earth",
+    "Jupiter",
+    "Saturn",
+    "Neptune"
+   ],
+   "explain": "Neptune is the farthest planet from the Sun."
+  },
+  {
+   "id": "or6-2",
+   "topic": "history",
+   "level": 6,
+   "prompt": "Put these in order, oldest first.",
+   "from": "Oldest",
+   "to": "Newest",
+   "items": [
+    "🔺 Pyramids of Egypt",
+    "🏛️ Roman Empire",
+    "🏰 Medieval castles",
+    "🏭 Industrial Revolution",
+    "🌐 The Internet"
+   ],
+   "explain": "The pyramids are about 4,500 years old; the Internet is from the 1990s."
+  },
+  {
+   "id": "or6-3",
+   "topic": "life spans",
+   "level": 6,
+   "prompt": "Put these animals in order of how long they live.",
+   "from": "Shortest",
+   "to": "Longest",
+   "items": [
+    "🐭 Mouse",
+    "🐕 Dog",
+    "🧑 Human",
+    "🐢 Giant tortoise"
+   ],
+   "explain": "Giant tortoises can live over 150 years."
+  },
+  {
+   "id": "or7-1",
+   "topic": "temperature",
+   "level": 7,
+   "prompt": "Put these in order of temperature.",
+   "from": "Coldest",
+   "to": "Hottest",
+   "items": [
+    "Antarctic winter (−60 °C)",
+    "Freezing water (0 °C)",
+    "Room (20 °C)",
+    "Human body (37 °C)",
+    "Boiling water (100 °C)"
+   ],
+   "explain": "Water freezes at 0 °C and boils at 100 °C."
+  },
+  {
+   "id": "or7-2",
+   "topic": "ecosystems",
+   "level": 7,
+   "prompt": "Put the layers of a rainforest in order, from the ground up.",
+   "from": "Ground",
+   "to": "Top",
+   "items": [
+    "Forest floor",
+    "Understory",
+    "Canopy",
+    "Emergent layer"
+   ],
+   "explain": "The tallest trees poke out above the canopy."
+  },
+  {
+   "id": "or7-3",
+   "topic": "body",
+   "level": 7,
+   "prompt": "Follow your food through your body.",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "Mouth",
+    "Oesophagus",
+    "Stomach",
+    "Small intestine",
+    "Large intestine"
+   ],
+   "explain": "Most nutrients are absorbed in the small intestine."
+  },
+  {
+   "id": "or8-1",
+   "topic": "history",
+   "level": 8,
+   "prompt": "Put these scientists in order, earliest first.",
+   "from": "Earliest",
+   "to": "Latest",
+   "items": [
+    "Archimedes",
+    "Galileo",
+    "Newton",
+    "Darwin",
+    "Einstein"
+   ],
+   "explain": "Archimedes lived in ancient Greece; Einstein published relativity in 1905."
+  },
+  {
+   "id": "or8-2",
+   "topic": "history",
+   "level": 8,
+   "prompt": "Put these inventions in order, earliest first.",
+   "from": "Earliest",
+   "to": "Latest",
+   "items": [
+    "Printing press",
+    "Steam engine",
+    "Telephone",
+    "Aeroplane",
+    "World Wide Web"
+   ],
+   "explain": "1440, 1700s, 1876, 1903, 1989."
+  },
+  {
+   "id": "or8-3",
+   "topic": "earth",
+   "level": 8,
+   "prompt": "Put the layers of the atmosphere in order, from the ground up.",
+   "from": "Ground",
+   "to": "Space",
+   "items": [
+    "Troposphere",
+    "Stratosphere",
+    "Mesosphere",
+    "Thermosphere"
+   ],
+   "explain": "Weather happens in the troposphere; the ozone layer is in the stratosphere."
+  },
+  {
+   "id": "or8-4",
+   "topic": "earth",
+   "level": 8,
+   "prompt": "Put these events in order, earliest first.",
+   "from": "Earliest",
+   "to": "Latest",
+   "items": [
+    "Earth forms",
+    "First life appears",
+    "Dinosaurs appear",
+    "Humans appear"
+   ],
+   "explain": "Earth is about 4.5 billion years old; humans appeared about 300,000 years ago."
+  },
+  {
+   "id": "or8-5",
+   "topic": "speed",
+   "level": 8,
+   "prompt": "Put these in order of speed.",
+   "from": "Slowest",
+   "to": "Fastest",
+   "items": [
+    "🚶 Walking person",
+    "🏎️ Formula 1 car",
+    "✈️ Passenger jet",
+    "🔊 Sound in air",
+    "💡 Light"
+   ],
+   "explain": "Light travels about a million times faster than sound."
+  },
+  {
+   "id": "or9-1",
+   "topic": "chemistry",
+   "level": 9,
+   "prompt": "Put these in order of acidity.",
+   "from": "Most acidic",
+   "to": "Most basic",
+   "items": [
+    "Battery acid",
+    "Lemon juice",
+    "Pure water",
+    "Baking soda solution",
+    "Bleach"
+   ],
+   "explain": "pH 0, 2, 7, 9 and about 12."
+  },
+  {
+   "id": "or9-2",
+   "topic": "scale",
+   "level": 9,
+   "prompt": "Put these in order of size.",
+   "from": "Smallest",
+   "to": "Biggest",
+   "items": [
+    "Atom",
+    "Molecule",
+    "Cell",
+    "Ant",
+    "Human"
+   ],
+   "explain": "Atoms are about a ten-billionth of a metre across."
+  },
+  {
+   "id": "or9-3",
+   "topic": "space",
+   "level": 9,
+   "prompt": "Put these in order of distance from Earth.",
+   "from": "Nearest",
+   "to": "Farthest",
+   "items": [
+    "Moon",
+    "Sun",
+    "Neptune",
+    "Proxima Centauri"
+   ],
+   "explain": "Proxima Centauri is the nearest star beyond the Sun, over 4 light-years away."
+  },
+  {
+   "id": "or9-4",
+   "topic": "cells",
+   "level": 9,
+   "prompt": "Put the stages of mitosis in order.",
+   "from": "First",
+   "to": "Last",
+   "items": [
+    "Prophase",
+    "Metaphase",
+    "Anaphase",
+    "Telophase"
+   ],
+   "explain": "PMAT: Prophase, Metaphase, Anaphase, Telophase."
+  },
+  {
+   "id": "or9-5",
+   "topic": "matter",
+   "level": 9,
+   "prompt": "Put these in order of density.",
+   "from": "Least dense",
+   "to": "Densest",
+   "items": [
+    "Air",
+    "Cork",
+    "Water",
+    "Iron",
+    "Gold"
+   ],
+   "explain": "Cork floats and gold is very heavy for its size."
+  },
+  {
+   "id": "or10-1",
+   "topic": "classification",
+   "level": 10,
+   "prompt": "Put the levels of classification in order.",
+   "from": "Broadest",
+   "to": "Most specific",
+   "items": [
+    "Kingdom",
+    "Phylum",
+    "Class",
+    "Order",
+    "Family",
+    "Genus",
+    "Species"
+   ],
+   "explain": "King Philip Came Over For Good Soup."
+  },
+  {
+   "id": "or10-2",
+   "topic": "light",
+   "level": 10,
+   "prompt": "Put these waves in order of wavelength.",
+   "from": "Longest",
+   "to": "Shortest",
+   "items": [
+    "Radio waves",
+    "Microwaves",
+    "Infrared",
+    "Visible light",
+    "X-rays"
+   ],
+   "explain": "Longer waves carry less energy."
+  },
+  {
+   "id": "or10-3",
+   "topic": "history",
+   "level": 10,
+   "prompt": "Put these in order of when they happened.",
+   "from": "Earliest",
+   "to": "Latest",
+   "items": [
+    "Big Bang",
+    "First stars form",
+    "Earth forms",
+    "Dinosaurs appear",
+    "Modern humans appear"
+   ],
+   "explain": "The Big Bang was about 13.8 billion years ago."
+  },
+  {
+   "id": "or10-4",
+   "topic": "cells",
+   "level": 10,
+   "prompt": "Put these in order of size.",
+   "from": "Smallest",
+   "to": "Biggest",
+   "items": [
+    "Hydrogen atom",
+    "Virus",
+    "Bacterium",
+    "Human cell",
+    "Grain of sand"
+   ],
+   "explain": "A virus is about 100 nanometres; a bacterium about 2 micrometres."
+  }
+ ]
+}
