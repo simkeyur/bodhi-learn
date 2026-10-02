@@ -69,7 +69,7 @@ _The sticker book is shown only for ages 6 and under (`STICKER_MAX_AGE` in `src/
 
 ### 🛡️ 4. Parental Controls & Settings (Gated)
 - **Math Security Gate**: Settings are protected by an adult math challenge (e.g., `8 + 7 = ?`) to avoid accidental taps.
-- **Learner Profile**: Customize the child's name and age (4–14). From age 9 the gate is a harder sum.
+- **Learner Profile**: Customize the child's name and age (4–14). From age 9 the gate is a harder sum. Children aged 11 and over manage their own settings and account: the button reads *Settings*, there is no gate, and the parent-only star gifting is hidden (`SELF_MANAGE_MIN_AGE` in `src/data/subjects.ts`).
 - **Sound & Voice Controls**: Toggle sound effects and voice narration.
 - **Reward Gifts**: Parents can gift stars for offline chores or real-world milestones.
 

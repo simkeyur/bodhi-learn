@@ -210,7 +210,7 @@ for (const bracket of BRACKETS) {
 import fs from 'fs';
 import { MATH_REGISTRY, makeMathQuestion } from '../src/content/mathGen.ts';
 import { QUIZ_GAMES, gameById, quizGamesFor } from '../src/data/quizGames.ts';
-import { BUDDY_MAX_AGE, STICKER_MAX_AGE, hasBuddy, hasStickers } from '../src/data/subjects.ts';
+import { BUDDY_MAX_AGE, STICKER_MAX_AGE, hasBuddy, hasStickers, isSelfManaged } from '../src/data/subjects.ts';
 import { GATE_CHALLENGES, applyOp, combinations, evaluate, goalTable, isSolved, layout, outputId, truthTable } from '../src/data/gates.ts';
 import { ALPHABET, atbash, checkCipher, lettersOnly, makeCipherPuzzle, makeCipherRound, shiftText } from '../src/data/cipher.ts';
 import { canMove, isSolved as hanoiSolved, move, newGame, optimalMoves, solveFrom } from '../src/data/hanoi.ts';
@@ -687,4 +687,8 @@ test('flags, capitals and predictions are in the science pack with the right age
   assert.ok(!quizGamesFor('science', 8).some((g) => g.id === 'predict-it'));
   assert.ok(quizGamesFor('science', 9).some((g) => g.id === 'predict-it'));
   assert.ok(!quizGamesFor('science', 6).some((g) => g.id === 'flags-capitals'));
+});
+
+test('children over 10 manage their own settings and account', () => {
+  assert.deepEqual([4, 8, 10, 11, 12, 14].map(isSelfManaged), [false, false, false, true, true, true]);
 });

@@ -82,6 +82,10 @@ export const hasStickers = (age: number) => age <= STICKER_MAX_AGE;
 export const BUDDY_MAX_AGE = 5;
 export const hasBuddy = (age: number) => age <= BUDDY_MAX_AGE;
 
+// From this age children manage their own settings and account: no parent gate
+export const SELF_MANAGE_MIN_AGE = 11;
+export const isSelfManaged = (age: number) => age >= SELF_MANAGE_MIN_AGE;
+
 export const SUBJECT_ORDER: Subject[] = ['reading', 'math', 'logic', 'science'];
 
 export const gamesForAge = (subject: Subject, age: number): Game[] =>

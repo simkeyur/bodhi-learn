@@ -1,8 +1,8 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
-import { hasStickers } from '../../data/subjects';
-import { Volume2, VolumeX, Lock, Sparkles } from 'lucide-react';
+import { hasStickers, isSelfManaged } from '../../data/subjects';
+import { Volume2, VolumeX, Lock, Settings, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   onSelectView: (view: string) => void;
@@ -141,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
                 sound.playPop();
                 onOpenParentGate();
               }}
-              aria-label="Parent settings"
+              aria-label={isSelfManaged(age) ? 'Settings' : 'Parent settings'}
               style={{
                 background: '#F8FAFC',
                 border: '2px solid #CBD5E1',
@@ -161,8 +161,8 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
                 boxShadow: '0 3px 0 #CBD5E1',
               }}
             >
-              <Lock size={16} />
-              <span className="hide-mobile">Parents</span>
+              {isSelfManaged(age) ? <Settings size={16} /> : <Lock size={16} />}
+              <span className="hide-mobile">{isSelfManaged(age) ? 'Settings' : 'Parents'}</span>
             </button>
           </div>
         </div>

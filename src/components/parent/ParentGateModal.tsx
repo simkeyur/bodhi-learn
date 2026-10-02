@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import { MAX_AGE, MIN_AGE } from '../../firebase/schema';
+import { isSelfManaged } from '../../data/subjects';
 import { sound } from '../../utils/sound';
 import { AccountSection } from './AccountSection';
 import { X, ShieldCheck, Sparkles } from 'lucide-react';
@@ -43,7 +44,8 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
   });
   useEffect(() => {
     if (isOpen) {
-      setIsUnlocked(false);
+      // Children 11 and over manage their own settings and account, so there is no gate for them
+      setIsUnlocked(isSelfManaged(ageRef.current));
       const r = (lo: number, hi: number) => lo + Math.floor(Math.random() * (hi - lo + 1));
       // Older children can do 6 + 7 in their heads, so from 9 up the gate is a harder sum
       if (ageRef.current >= 9) {
@@ -120,7 +122,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               color: '#0F172A',
               margin: 0,
             }}>
-              Parent Settings
+              {isSelfManaged(age) ? 'Settings' : 'Parent Settings'}
             </h3>
           </div>
 
@@ -219,7 +221,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                 color: '#334155',
                 marginBottom: 6,
               }}>
-                Learner's Name:
+                {isSelfManaged(age) ? 'Your name:' : "Learner's Name:"}
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
                 <input
@@ -338,28 +340,30 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               </button>
             </div>
 
-            {/* Reward Stars Management */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              background: '#FEF3C7',
-              borderRadius: 14,
-              padding: 14,
-              marginBottom: 24,
-            }}>
-              <div>
-                <div style={{ fontWeight: 700, color: '#92400E', fontSize: '0.95rem' }}>Reward Stars: {stars}</div>
-                <div style={{ fontSize: '0.8rem', color: '#B45309' }}>Give stars for offline tasks & chores</div>
+            {/* Parents can gift stars for chores; there is no one to do that for older children */}
+            {!isSelfManaged(age) && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: '#FEF3C7',
+                borderRadius: 14,
+                padding: 14,
+                marginBottom: 24,
+              }}>
+                <div>
+                  <div style={{ fontWeight: 700, color: '#92400E', fontSize: '0.95rem' }}>Reward Stars: {stars}</div>
+                  <div style={{ fontSize: '0.8rem', color: '#B45309' }}>Give stars for offline tasks & chores</div>
+                </div>
+                <button
+                  onClick={() => addStars(5)}
+                  className="kid-btn btn-sun"
+                  style={{ padding: '6px 14px', fontSize: '0.9rem', borderRadius: 999 }}
+                >
+                  <Sparkles size={14} /> Gift +5 Stars
+                </button>
               </div>
-              <button
-                onClick={() => addStars(5)}
-                className="kid-btn btn-sun"
-                style={{ padding: '6px 14px', fontSize: '0.9rem', borderRadius: 999 }}
-              >
-                <Sparkles size={14} /> Gift +5 Stars
-              </button>
-            </div>
+            )}
 
             {/* Save & Close */}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>

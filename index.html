@@ -19,5 +19,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function () {
+        var url = "https://simkeyurapp.web.app/collect";
+        fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            siteId: "bodhi-learn",
+            path: location.pathname,
+            referrer: document.referrer,
+          }),
+          keepalive: true,
+        }).catch(function () {});
+      })();
+    </script>
   </body>
 </html>
