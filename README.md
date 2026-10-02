@@ -2,7 +2,7 @@
 
 A playful, kid-friendly learning web application and offline-capable PWA designed for children (Ages 3–8) to learn reading, phonics, sight words, counting, and visual mathematics.
 
-Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Web Speech API**. Deploys seamlessly to **Cloudflare Workers** (with Static Assets) or **Cloudflare Pages**.
+Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebase** (Auth + Firestore). Hosted on **Firebase Hosting**, with **Google sign-in** and **Cloud Firestore** to save progress.
 
 ---
 
@@ -81,9 +81,9 @@ npm run audio -- --voice Achird --force
 npm run audio -- --prune
 ```
 
-If Flash Lite's daily quota runs out mid-run, the script switches to `gemini-3.1-flash-tts-preview`
-for the rest (`--no-fallback` to just stop); the next run re-renders those clips with Flash Lite
-so the voice stays consistent. Use `--only words` or `--match "phonics_B"` to redo specific clips. Raw API audio is cached in
+If Flash Lite's daily quota runs out mid-run, the script moves on to `gemini-3.8-flash-tts`, then
+`gemini-3.1-flash-tts-preview` (`--no-fallback` to just stop); later runs re-render those clips
+with Flash Lite so the voice stays consistent. Use `--only words` or `--match "phonics_B"` to redo specific clips. Raw API audio is cached in
 `.audio-cache/`, so re-encoding never costs extra API calls. After regenerating, bump
 `CACHE_NAME` in `public/sw.js` so installed apps pick up the new recordings.
 
@@ -91,15 +91,30 @@ The earlier OpenAI recordings are archived locally in `audio-archive/` (git-igno
 
 ---
 
-## ☁️ Cloudflare Deployment
+## ☁️ Accounts, Sync & Hosting (Firebase)
 
-### Deploy via Wrangler:
+Project: `bodhi-learn` · Live site: https://bodhi-learn.web.app
+
+- **Guest mode** works with no account (progress stays on the device).
+- **Parents sign in with Google** under *Parent Settings* (behind the math gate), so children never see
+  a login screen. Stars, stickers, name, age group and voice settings sync live to Firestore at
+  `users/{uid}` and work offline. A new account adopts the device's progress; an account that already
+  has progress wins. Signing out clears the device; *Delete account* removes the account and its data.
+- **Security rules** (`firestore.rules`): each user can only read and write their own document, and the
+  data shape is validated. Tested with `npm run test:rules` (needs Java for the emulator).
+- The mute button is per device and is not synced.
+
 ```bash
-npm run deploy
+npm run emulators        # Auth + Firestore emulators (real rules, fake accounts)
+npm run dev:emulators    # the app pointed at the emulators, http://localhost:5190
 ```
 
-### Deploy via Cloudflare Pages:
-1. Connect this GitHub repository (`simkeyur/bodhi-learn`) in the Cloudflare Dashboard.
-2. Select **Framework preset**: `Vite` (or `None`).
-3. Set **Build command**: `npm run build`
-4. Set **Build output directory**: `dist`
+### Deploying
+
+Pushing to `main` runs `.github/workflows/deploy.yml`: lint, build, rules tests, then deploys
+Hosting and Firestore rules. It authenticates with the `FIREBASE_SERVICE_ACCOUNT` repository secret,
+the key of the `github-deployer` service account (roles: Hosting Admin, Firebase Rules Admin, and
+read-only Firebase/Firestore viewer). To rotate it, create a new key for that account, update the
+secret with `gh secret set FIREBASE_SERVICE_ACCOUNT < key.json`, then delete the old key.
+
+Manual deploy (needs `firebase login`): `npm run deploy`
