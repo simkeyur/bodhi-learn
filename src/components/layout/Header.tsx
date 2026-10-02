@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
 import { Volume2, VolumeX, Lock, Sparkles } from 'lucide-react';
+import { CandyNumberIcon } from '../common/CandyNumberIcon';
 
 interface HeaderProps {
   currentView: string;
@@ -9,19 +10,24 @@ interface HeaderProps {
   onOpenParentGate: () => void;
 }
 
-const NAV_ITEMS = [
+
+const NAV_ITEMS: { view: string; label: string; emoji?: string; isCandyNumber?: boolean; color: string; views: string[] }[] = [
   { view: 'home', label: 'Home', emoji: '🏠', color: '#0EA5E9', views: ['home'] },
-  { view: 'tracing-abc', label: 'Tracing', emoji: '✏️', color: '#FB7185', views: ['tracing-abc', 'tracing-words'] },
+  { view: 'tracing', label: 'Tracing', emoji: '✏️', color: '#FB7185', views: ['tracing-abc', 'tracing-words'] },
   { view: 'phonics', label: 'Reading', emoji: '📖', color: '#38BDF8', views: ['phonics', 'sight-words', 'stories', 'slide-read', 'reading'] },
-  { view: 'counting', label: 'Math', emoji: '🔢', color: '#22C55E', views: ['counting', 'math'] },
+  { view: 'counting', label: 'Math', isCandyNumber: true, color: '#22C55E', views: ['counting', 'math'] },
   { view: 'stickers', label: 'Stickers', emoji: '🎨', color: '#C084FC', views: ['stickers'] },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpenParentGate }) => {
-  const { stars, soundEnabled, setSoundEnabled, kidName } = useApp();
+  const { stars, soundEnabled, setSoundEnabled, kidName, ageBracket } = useApp();
 
   const go = (view: string) => {
     sound.playPop();
+    if (view === 'tracing') {
+      onSelectView(ageBracket === 'pre-k' ? 'tracing-abc' : 'tracing-words');
+      return;
+    }
     onSelectView(view);
   };
 
@@ -113,7 +119,10 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  <span aria-hidden>{item.emoji}</span> {item.label}
+                  <span aria-hidden style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    {item.isCandyNumber ? <CandyNumberIcon size={18} /> : item.emoji}
+                  </span>{' '}
+                  {item.label}
                 </button>
               );
             })}
@@ -213,7 +222,9 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
               onClick={() => go(item.view)}
               aria-current={active ? 'page' : undefined}
             >
-              <span className="nav-emoji" aria-hidden>{item.emoji}</span>
+              <span className="nav-emoji" aria-hidden style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 26 }}>
+                {item.isCandyNumber ? <CandyNumberIcon size={20} /> : item.emoji}
+              </span>
               {item.label}
             </button>
           );

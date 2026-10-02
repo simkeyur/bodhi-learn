@@ -177,49 +177,83 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
         </div>
 
         {/* Word Display & Audio */}
-        <div style={{ fontSize: '3.6rem', marginBottom: 6 }} aria-hidden>{currentWord.emoji}</div>
-        
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 14,
-          background: '#FAF5FF',
-          border: '3px solid #E9D5FF',
-          padding: '8px 10px 8px 24px',
-          borderRadius: 999,
-          marginBottom: 12,
-          maxWidth: '100%',
-        }}>
-          <span style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2rem, 9vw, 2.8rem)',
-            fontWeight: 700,
-            color: '#6B21A8',
-            letterSpacing: '0.12em',
-          }}>
-            {currentWord.word}
-          </span>
-
-          <button
-            onClick={() => {
-              sound.playPop(650);
-              speech.say([clip.word(currentWord.word), clip.sentence(currentWord.id)]);
-            }}
-            className="speaker-bubble"
-            aria-label="Hear the word and sentence"
-          >
-            <Volume2 size={24} />
-          </button>
+        <div style={{ fontSize: '3.6rem', marginBottom: 8 }} aria-hidden>
+          {currentWord.emoji}
         </div>
 
-        <p style={{
-          fontSize: '1.15rem',
-          color: '#475569',
-          fontWeight: 600,
-          marginBottom: 16,
-        }}>
-          "{currentWord.exampleSentence}"
-        </p>
+        {isCompleted ? (
+          <div className="animate-pop" style={{ marginBottom: 16 }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 14,
+                background: '#FAF5FF',
+                border: '3px solid #E9D5FF',
+                padding: '8px 16px 8px 24px',
+                borderRadius: 999,
+                marginBottom: 10,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(2rem, 9vw, 2.8rem)',
+                  fontWeight: 800,
+                  color: '#6B21A8',
+                  letterSpacing: '0.12em',
+                }}
+              >
+                {currentWord.word}
+              </span>
+
+              <button
+                onClick={() => {
+                  sound.playPop(650);
+                  speech.say([clip.word(currentWord.word), clip.sentence(currentWord.id)]);
+                }}
+                className="speaker-bubble"
+                aria-label="Hear the word and sentence"
+              >
+                <Volume2 size={24} />
+              </button>
+            </div>
+
+            <p
+              style={{
+                fontSize: '1.15rem',
+                color: '#475569',
+                fontWeight: 600,
+                margin: '4px 0 0 0',
+              }}
+            >
+              "{currentWord.exampleSentence}"
+            </p>
+          </div>
+        ) : (
+          <div style={{ marginBottom: 18 }}>
+            <button
+              onClick={() => {
+                sound.playPop(650);
+                speech.say([clip.word(currentWord.word)]);
+              }}
+              className="kid-btn btn-grape"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '12px 28px',
+                fontSize: '1.25rem',
+                borderRadius: 999,
+                boxShadow: '0 6px 0 #7E22CE',
+              }}
+              aria-label="Hear the word to spell"
+            >
+              <Volume2 size={26} />
+              <span>Hear Word</span>
+            </button>
+          </div>
+        )}
 
         {/* Puzzle: Tap Letters to Build Word */}
         <div style={{
