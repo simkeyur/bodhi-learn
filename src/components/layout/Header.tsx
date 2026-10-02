@@ -64,17 +64,26 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
             <div style={{
               width: 44,
               height: 44,
-              borderRadius: 14,
-              background: 'linear-gradient(135deg, #FDE047, #F59E0B)',
+              borderRadius: 13,
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(2, 132, 199, 0.22)',
+              border: '2px solid #BAE6FD',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.6rem',
-              boxShadow: '0 4px 10px rgba(245, 158, 11, 0.35)',
-              transform: 'rotate(-4deg)',
               flexShrink: 0,
+              background: '#FFFFFF',
             }}>
-              ⭐
+              <img
+                src="/logo.png"
+                alt="Bodhi Learn Logo"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
             </div>
             <div style={{ minWidth: 0 }}>
               <h1 className="brand-name" style={{ fontSize: '1.35rem', color: '#0284C7', margin: 0, lineHeight: 1.1, whiteSpace: 'nowrap' }}>
