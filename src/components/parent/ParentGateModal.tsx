@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useApp, type AgeBracket } from '../../context/AppContext';
+import { useApp } from '../../context/AppContext';
+import { MAX_AGE, MIN_AGE } from '../../firebase/schema';
 import { sound } from '../../utils/sound';
 import { AccountSection } from './AccountSection';
 import { X, ShieldCheck, Sparkles } from 'lucide-react';
@@ -13,8 +14,8 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
   const {
     kidName,
     setKidName,
-    ageBracket,
-    setAgeBracket,
+    age,
+    setAge,
     speechEnabled,
     setSpeechEnabled,
     voiceSpeed,
@@ -24,8 +25,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
   } = useApp();
 
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [num1, setNum1] = useState(6);
-  const [num2, setNum2] = useState(7);
+  const [gate, setGate] = useState({ text: '6 + 7', answer: 13 });
   const [parentAnswer, setParentAnswer] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -36,16 +36,23 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
   // kidName: the name can change while open (sign-out, or another device syncing), and
   // that must not kick a parent out of the settings.
   const kidNameRef = useRef(kidName);
+  const ageRef = useRef(age);
   useEffect(() => {
     kidNameRef.current = kidName;
+    ageRef.current = age;
   });
   useEffect(() => {
     if (isOpen) {
       setIsUnlocked(false);
-      const n1 = Math.floor(Math.random() * 8) + 5; // e.g. 5 to 12
-      const n2 = Math.floor(Math.random() * 7) + 4;
-      setNum1(n1);
-      setNum2(n2);
+      const r = (lo: number, hi: number) => lo + Math.floor(Math.random() * (hi - lo + 1));
+      // Older children can do 6 + 7 in their heads, so from 9 up the gate is a harder sum
+      if (ageRef.current >= 9) {
+        const a = r(13, 19), b = r(6, 9), c = r(21, 49);
+        setGate({ text: `${a} × ${b} + ${c}`, answer: a * b + c });
+      } else {
+        const a = r(5, 12), b = r(4, 10);
+        setGate({ text: `${a} + ${b}`, answer: a + b });
+      }
       setParentAnswer('');
       setErrorMsg('');
       setNameInput(kidNameRef.current);
@@ -63,7 +70,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
-    if (parseInt(parentAnswer, 10) === num1 + num2) {
+    if (parseInt(parentAnswer, 10) === gate.answer) {
       sound.playSuccess();
       setIsUnlocked(true);
       setErrorMsg('');
@@ -158,7 +165,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                 color: '#0369A1',
                 marginBottom: 16,
               }}>
-                {num1} + {num2} = ?
+                {gate.text} = ?
               </div>
 
               <input
@@ -232,7 +239,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               </div>
             </div>
 
-            {/* Age / Grade Bracket */}
+            {/* Age: drives the look of the home screen and how hard the questions are */}
             <div style={{ marginBottom: 20 }}>
               <label style={{
                 display: 'block',
@@ -241,32 +248,32 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                 color: '#334155',
                 marginBottom: 8,
               }}>
-                Difficulty / Age Group:
+                Age:
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(96px, 1fr))', gap: 8 }}>
-                {[
-                  { id: 'pre-k', label: 'Pre-K (3-4)', desc: 'Numbers 1-5, Phonics' },
-                  { id: 'kindergarten', label: 'Kindergarten (5-6)', desc: 'Numbers 1-10, Sight Words' },
-                  { id: 'grade1', label: '1st Grade (7-8)', desc: 'Numbers 1-20, Full Stories' },
-                ].map((tier) => (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(52px, 1fr))', gap: 8 }}>
+                {Array.from({ length: MAX_AGE - MIN_AGE + 1 }, (_, i) => MIN_AGE + i).map((a) => (
                   <button
-                    key={tier.id}
-                    onClick={() => setAgeBracket(tier.id as AgeBracket)}
+                    key={a}
+                    onClick={() => setAge(a)}
+                    aria-pressed={age === a}
                     style={{
-                      background: ageBracket === tier.id ? '#38BDF8' : '#F8FAFC',
-                      color: ageBracket === tier.id ? '#FFFFFF' : '#334155',
-                      border: ageBracket === tier.id ? '2px solid #0284C7' : '2px solid #E2E8F0',
+                      background: age === a ? '#38BDF8' : '#F8FAFC',
+                      color: age === a ? '#FFFFFF' : '#334155',
+                      border: age === a ? '2px solid #0284C7' : '2px solid #E2E8F0',
                       borderRadius: 14,
-                      padding: '10px 6px',
+                      minHeight: 48,
                       cursor: 'pointer',
-                      textAlign: 'center',
                       fontFamily: 'var(--font-display)',
+                      fontWeight: 700,
+                      fontSize: '1.1rem',
                     }}
                   >
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tier.label}</div>
-                    <div style={{ fontSize: '0.75rem', opacity: 0.85, marginTop: 4 }}>{tier.desc}</div>
+                    {a}
                   </button>
                 ))}
+              </div>
+              <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: 6 }}>
+                Questions start at the right level for this age and adjust as {kidName || 'your child'} plays.
               </div>
             </div>
 

@@ -19,6 +19,7 @@ import {
   connectFirestoreEmulator,
   deleteDoc,
   doc,
+  getDoc,
   initializeFirestore,
   onSnapshot,
   persistentLocalCache,
@@ -123,4 +124,15 @@ export async function deleteAccountAndData(uid: string) {
       throw err;
     }
   }
+}
+
+// Learning content is public (see firestore.rules): readable with no sign-in
+export async function fetchContentMeta(): Promise<{ version: number; packs: Record<string, number> } | null> {
+  const snap = await getDoc(doc(db, 'content_meta', 'current'));
+  return snap.exists() ? (snap.data() as { version: number; packs: Record<string, number> }) : null;
+}
+
+export async function fetchContentPack(subject: string): Promise<unknown> {
+  const snap = await getDoc(doc(db, 'content_packs', subject));
+  return snap.exists() ? snap.data() : null;
 }

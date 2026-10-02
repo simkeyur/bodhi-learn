@@ -1,7 +1,7 @@
 {
-  "name": "Bodhi Learn - Kid Friendly Reading & Math",
+  "name": "Bodhi Learn - Reading, Math, Logic & Science",
   "short_name": "Bodhi Learn",
-  "description": "Fun, tactile, and rewarding reading, math, and phonics learning app for kids.",
+  "description": "A playful learning app for ages 4 to 14: reading, math, logic and science that adapts to your child.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F0F9FF",

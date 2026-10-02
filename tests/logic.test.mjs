@@ -204,3 +204,163 @@ for (const bracket of BRACKETS) {
     assert.equal(used.size, rules.length, 'every rule in the level appears');
   });
 }
+
+// ---------- Quiz content ----------
+
+import fs from 'fs';
+import { makeMathQuestion } from '../src/content/mathGen.ts';
+import { adjustLevel, isQuestion, nextQuestion, pickFromPack, readPack } from '../src/content/select.ts';
+import { bandForAge, bracketForAge, fromDocData, levelForAge, toDocData, DEFAULT_STATE } from '../src/firebase/schema.ts';
+
+const packs = Object.fromEntries(['reading', 'science', 'logic'].map((s) => [s, JSON.parse(fs.readFileSync(`src/content/packs/${s}.json`, 'utf8'))]));
+
+// Fraction strings like "3/8" are compared by value so two spellings of the same number can't both appear
+const value = (s) => {
+  const m = /^(\d+)\/(\d+)$/.exec(s);
+  return m ? Number(m[1]) / Number(m[2]) : s;
+};
+
+test('math generator: every level gives 4 distinct choices that include the answer', () => {
+  for (let level = 1; level <= 10; level++) {
+    const rng = mulberry32(level * 101);
+    for (let i = 0; i < 300; i++) {
+      const q = makeMathQuestion(level, rng);
+      assert.ok(isQuestion(q), `invalid question at level ${level}: ${JSON.stringify(q)}`);
+      assert.equal(q.choices.length, 4, q.prompt);
+      assert.equal(new Set(q.choices.map(value)).size, 4, `duplicate values in ${q.prompt}: ${q.choices}`);
+      assert.ok(q.choices[q.answer] !== undefined, q.prompt);
+      assert.ok(!q.choices.some((c) => /NaN|undefined|Infinity/.test(c)), `${q.prompt} ${q.choices}`);
+    }
+  }
+});
+
+test('math generator: spot-check that the marked answer is really right', () => {
+  const rng = mulberry32(7);
+  for (let i = 0; i < 400; i++) {
+    const q = makeMathQuestion(1 + (i % 3), rng);
+    const m = /^What is (\d+) ([+−]) (\d+)\?$/.exec(q.prompt);
+    if (!m) continue;
+    const want = m[2] === '+' ? Number(m[1]) + Number(m[3]) : Number(m[1]) - Number(m[3]);
+    assert.equal(Number(q.choices[q.answer]), want, q.prompt);
+    assert.ok(want >= 0, q.prompt);
+  }
+  for (let i = 0; i < 300; i++) {
+    const q = makeMathQuestion(5, rng);
+    const m = /^What is (\d+) × (\d+)\?$/.exec(q.prompt);
+    if (m) assert.equal(Number(q.choices[q.answer]), Number(m[1]) * Number(m[2]), q.prompt);
+  }
+  for (let i = 0; i < 300; i++) {
+    const q = makeMathQuestion(10, rng);
+    const m = /^Solve for x:\s+(\d+)x \+ (\d+) = (\d+)$/.exec(q.prompt);
+    if (m) assert.equal(Number(q.choices[q.answer]), (Number(m[3]) - Number(m[2])) / Number(m[1]), q.prompt);
+  }
+});
+
+test('bundled packs are valid and cover every level of every subject', () => {
+  for (const [subject, pack] of Object.entries(packs)) {
+    assert.ok(readPack(pack), `${subject} pack should parse`);
+    assert.equal(pack.subject, subject);
+    const ids = new Set();
+    for (const q of pack.questions) {
+      assert.ok(isQuestion(q), `${q.id} is malformed`);
+      assert.ok(!ids.has(q.id), `duplicate id ${q.id}`);
+      ids.add(q.id);
+    }
+    for (let level = 1; level <= 10; level++) {
+      assert.ok(pack.questions.filter((q) => q.level === level).length >= 5, `${subject} level ${level} needs at least 5 questions`);
+    }
+  }
+});
+
+test('readPack rejects broken data from the network', () => {
+  assert.equal(readPack(null), null);
+  assert.equal(readPack({ subject: 'cooking', version: 1, title: 'x', questions: [] }), null);
+  assert.equal(readPack({ subject: 'logic', version: 1, title: 'x', questions: [{ id: 'a' }] }), null);
+  const good = packs.logic.questions[0];
+  const mixed = readPack({ subject: 'logic', version: 2, title: 'x', questions: [good, { ...good, answer: 9 }] });
+  assert.equal(mixed.questions.length, 1);
+});
+
+test('nextQuestion stays near the level and avoids recent questions', () => {
+  const rng = mulberry32(3);
+  const seen = new Set();
+  for (let i = 0; i < 12; i++) {
+    const q = nextQuestion('science', 6, packs, seen, rng);
+    assert.ok(Math.abs(q.level - 6) <= 1, `${q.id} is level ${q.level}`);
+    assert.ok(!seen.has(q.id));
+    seen.add(q.id);
+  }
+  // Everything has been seen: still returns a question rather than nothing
+  assert.ok(pickFromPack(packs.science.questions, 6, new Set(packs.science.questions.map((q) => q.id)), rng));
+  assert.equal(pickFromPack([], 3, new Set(), rng), null);
+  assert.ok(nextQuestion('math', 4, {}, new Set(), rng));
+  assert.equal(nextQuestion('science', 4, {}, new Set(), rng), null);
+});
+
+test('level goes up after 4 right in a row and down after 2 wrong in a row', () => {
+  let s = { level: 5, streak: 0, misses: 0 };
+  for (let i = 0; i < 4; i++) s = adjustLevel(s, true);
+  assert.equal(s.level, 6);
+  s = adjustLevel(s, false);
+  assert.equal(s.level, 6);
+  s = adjustLevel(s, true); // a right answer resets the miss count
+  s = adjustLevel(s, false);
+  assert.equal(s.level, 6);
+  s = adjustLevel(s, false);
+  assert.equal(s.level, 5);
+  assert.equal(adjustLevel({ level: 10, streak: 3, misses: 0 }, true).level, 10);
+  assert.equal(adjustLevel({ level: 1, streak: 0, misses: 1 }, false).level, 1);
+});
+
+test('ages 4-14 map to bands, brackets and starting levels', () => {
+  assert.deepEqual([4, 6, 7, 10, 11, 14].map(bandForAge), ['little', 'little', 'explorer', 'explorer', 'pro', 'pro']);
+  assert.deepEqual([4, 5, 6, 7, 14].map(bracketForAge), ['pre-k', 'kindergarten', 'kindergarten', 'grade1', 'grade1']);
+  assert.deepEqual([4, 8, 13, 14].map(levelForAge), [1, 5, 10, 10]);
+});
+
+test('saved data round-trips and old documents (bracket only) still load', () => {
+  const state = { ...DEFAULT_STATE, age: 12, skills: { ...DEFAULT_STATE.skills, math: { level: 8, answered: 20, correct: 15 } } };
+  const back = fromDocData(toDocData(state));
+  assert.equal(back.age, 12);
+  assert.deepEqual(back.skills.math, { level: 8, answered: 20, correct: 15 });
+
+  const old = fromDocData({ profile: { kidName: 'Mia', ageBracket: 'grade1' }, settings: {}, progress: { stars: 3, unlockedStickers: ['st1'], placedStickers: [] } });
+  assert.equal(old.age, 7);
+  assert.equal(old.skills.reading.level, levelForAge(7));
+
+  const junk = fromDocData({ profile: { age: 99 }, progress: { skills: { math: { level: 99, answered: 2, correct: 50 } } } });
+  assert.equal(junk.age, 14);
+  assert.deepEqual(junk.skills.math, { level: 10, answered: 2, correct: 2 });
+});
+
+test('math generator: fractions, percentages and Pythagoras answers are right', () => {
+  const rng = mulberry32(11);
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+  let checked = { frac: 0, pct: 0, pyth: 0, ratio: 0 };
+  for (let i = 0; i < 2000; i++) {
+    const q = makeMathQuestion(7 + (i % 4), rng);
+    const answer = q.choices[q.answer];
+    let m;
+    if ((m = /^What is (\d+)\/(\d+) \+ (\d+)\/(\d+)\?$/.exec(q.prompt))) {
+      const [a, b, c, d] = m.slice(1).map(Number);
+      const top = a * d + c * b;
+      const bottom = b * d;
+      const g = gcd(top, bottom);
+      const [n, den] = answer.split('/').map(Number);
+      assert.equal(n * bottom, top * den, `${q.prompt} -> ${answer}`);
+      if (b !== d) assert.equal(gcd(n, den), 1, `${answer} should be in simplest form`);
+      void g;
+      checked.frac++;
+    } else if ((m = /^What is (\d+)% of (\d+)\?$/.exec(q.prompt))) {
+      assert.equal(Number(answer), (Number(m[1]) * Number(m[2])) / 100);
+      checked.pct++;
+    } else if ((m = /^A right triangle has short sides (\d+) and (\d+)/.exec(q.prompt))) {
+      assert.equal(Number(answer) ** 2, Number(m[1]) ** 2 + Number(m[2]) ** 2);
+      checked.pyth++;
+    } else if ((m = /^Red and blue beads are in the ratio (\d+):(\d+)\. There are (\d+) red/.exec(q.prompt))) {
+      assert.equal(Number(answer), (Number(m[2]) * Number(m[3])) / Number(m[1]));
+      checked.ratio++;
+    }
+  }
+  assert.ok(checked.frac > 20 && checked.pct > 20 && checked.pyth > 20 && checked.ratio > 20, JSON.stringify(checked));
+});

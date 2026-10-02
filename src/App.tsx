@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppProvider } from './context/AppContext';
 import { Header } from './components/layout/Header';
-import { HomeHub } from './components/home/HomeHub';
+import { Home } from './components/home/Home';
+import { SubjectPage } from './components/home/SubjectPage';
+import { QuizWorld } from './components/quiz/QuizWorld';
+import { SUBJECT_ORDER, subjectOfView } from './data/subjects';
+import { useApp } from './context/AppContext';
 import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
 import { StoriesWorld } from './components/reading/StoriesWorld';
@@ -20,6 +24,12 @@ import { speech } from './utils/speech';
 export const BodhiApp: React.FC = () => {
   const [currentView, setCurrentViewState] = useState<string>('home');
   const [isParentGateOpen, setIsParentGateOpen] = useState<boolean>(false);
+  const { ageBand } = useApp();
+
+  // Lets the CSS give each age band its own look
+  useEffect(() => {
+    document.documentElement.dataset.band = ageBand;
+  }, [ageBand]);
 
   const setCurrentView = (view: string) => {
     speech.stop();
@@ -27,47 +37,59 @@ export const BodhiApp: React.FC = () => {
     window.scrollTo({ top: 0 });
   };
 
+  // Games go back to the subject they belong to; everything else goes home
+  const backFor = (view: string) => {
+    const subject = subjectOfView(view);
+    return () => setCurrentView(subject && view !== `subject:${subject}` ? `subject:${subject}` : 'home');
+  };
+
   const renderCurrentView = () => {
+    const [kind, id] = currentView.split(':');
+    if ((kind === 'subject' || kind === 'quiz') && SUBJECT_ORDER.includes(id as never)) {
+      return kind === 'subject'
+        ? <SubjectPage subject={id as never} onSelectView={setCurrentView} onBack={backFor(currentView)} />
+        : <QuizWorld subject={id as never} onBack={backFor(currentView)} />;
+    }
     switch (currentView) {
       case 'tracing-abc':
         return (
           <AbcTracingJourney
-            onBack={() => setCurrentView('home')}
+            onBack={backFor(currentView)}
             onGoToWordTracing={() => setCurrentView('tracing-words')}
           />
         );
       case 'tracing-words':
         return (
           <WordTracingWorld
-            onBack={() => setCurrentView('home')}
+            onBack={backFor(currentView)}
             onGoToAbcJourney={() => setCurrentView('tracing-abc')}
           />
         );
       case 'phonics':
-        return <PhonicsWorld onBack={() => setCurrentView('home')} />;
+        return <PhonicsWorld onBack={backFor(currentView)} />;
       case 'sight-words':
-        return <SightWordsWorld onBack={() => setCurrentView('home')} />;
+        return <SightWordsWorld onBack={backFor(currentView)} />;
       case 'code-bot':
-        return <CodeBotWorld onBack={() => setCurrentView('home')} />;
+        return <CodeBotWorld onBack={backFor(currentView)} />;
       case 'patterns':
-        return <PatternWorld onBack={() => setCurrentView('home')} />;
+        return <PatternWorld onBack={backFor(currentView)} />;
       case 'machine':
-        return <MachineWorld onBack={() => setCurrentView('home')} />;
+        return <MachineWorld onBack={backFor(currentView)} />;
       case 'slide-read':
-        return <SlideReadWorld onBack={() => setCurrentView('home')} />;
+        return <SlideReadWorld onBack={backFor(currentView)} />;
       case 'stories':
-        return <StoriesWorld onBack={() => setCurrentView('home')} />;
+        return <StoriesWorld onBack={backFor(currentView)} />;
       case 'counting':
-        return <CountingWorld onBack={() => setCurrentView('home')} />;
+        return <CountingWorld onBack={backFor(currentView)} />;
       case 'math':
-        return <VisualMathWorld onBack={() => setCurrentView('home')} />;
+        return <VisualMathWorld onBack={backFor(currentView)} />;
       case 'stickers':
-        return <StickerBook onBack={() => setCurrentView('home')} />;
+        return <StickerBook onBack={backFor(currentView)} />;
       case 'reading':
-        return <PhonicsWorld onBack={() => setCurrentView('home')} />;
+        return <PhonicsWorld onBack={backFor(currentView)} />;
       case 'home':
       default:
-        return <HomeHub onSelectView={setCurrentView} />;
+        return <Home onSelectView={setCurrentView} />;
     }
   };
 
@@ -82,7 +104,6 @@ export const BodhiApp: React.FC = () => {
 
       {/* Main App Bar */}
       <Header
-        currentView={currentView}
         onSelectView={setCurrentView}
         onOpenParentGate={() => setIsParentGateOpen(true)}
       />

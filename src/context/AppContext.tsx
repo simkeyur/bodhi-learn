@@ -4,17 +4,27 @@ import { sound } from '../utils/sound';
 import { speech } from '../utils/speech';
 import { useCloudSync, type SyncStatus } from '../firebase/useCloudSync';
 import type { CloudUser } from '../firebase/cloud';
+import { syncContent } from '../content/store';
 import {
   DEFAULT_STATE,
   MAX_BOT_SOLVED,
   MAX_PLACED_STICKERS,
+  bandForAge,
+  bracketForAge,
+  clampAge,
+  defaultSkills,
+  levelForAge,
+  readSkills,
   unionIds,
+  type AgeBand,
   type AgeBracket,
   type PlacedSticker,
+  type Skills,
+  type Subject,
   type SyncedState,
 } from '../firebase/schema';
 
-export type { AgeBracket, PlacedSticker };
+export type { AgeBand, AgeBracket, PlacedSticker, Skills, Subject };
 
 interface CloudAccount {
   user: CloudUser | null;
@@ -37,8 +47,12 @@ interface AppContextType {
   removePlacedSticker: (id: string) => void;
   botSolved: string[];
   markBotSolved: (levelId: string) => boolean; // true the first time a level is solved
-  ageBracket: AgeBracket;
-  setAgeBracket: (level: AgeBracket) => void;
+  age: number; // 4..14
+  setAge: (age: number) => void;
+  ageBand: AgeBand; // little 4-6, explorer 7-10, pro 11-14
+  ageBracket: AgeBracket; // derived from age, for the early-years games
+  skills: Skills;
+  recordAnswer: (subject: Subject, correct: boolean, newLevel: number) => void;
   kidName: string;
   setKidName: (name: string) => void;
   soundEnabled: boolean;
@@ -95,8 +109,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [botSolved, setBotSolved] = useState<string[]>(() =>
     readStored('bodhi_bot_solved', (r) => parseJson(r, isStringArray), DEFAULT_STATE.botSolved));
 
-  const [ageBracket, setAgeBracketState] = useState<AgeBracket>(() =>
-    readStored<AgeBracket>('bodhi_age', (r) => (['pre-k', 'kindergarten', 'grade1'].includes(r) ? (r as AgeBracket) : undefined), DEFAULT_STATE.ageBracket));
+  // Exact age. Devices that stored one of the old three brackets are converted on first read.
+  const [age, setAgeState] = useState<number>(() =>
+    readStored('bodhi_exact_age', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) ? clampAge(n) : undefined; },
+      readStored<number>('bodhi_age', (r) => (r === 'pre-k' ? 4 : r === 'grade1' ? 7 : r === 'kindergarten' ? 5 : undefined), DEFAULT_STATE.age)));
+
+  const [skills, setSkills] = useState<Skills>(() =>
+    readStored('bodhi_skills', (r) => readSkills(JSON.parse(r), age), defaultSkills(age)));
 
   const [kidName, setKidNameState] = useState<string>(() =>
     readStored('bodhi_kid_name', (r) => r.trim() || undefined, DEFAULT_STATE.kidName));
@@ -124,7 +143,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => store('bodhi_stickers', JSON.stringify(unlockedStickers)), [unlockedStickers]);
   useEffect(() => store('bodhi_placed_stickers', JSON.stringify(placedStickers)), [placedStickers]);
   useEffect(() => store('bodhi_bot_solved', JSON.stringify(botSolved)), [botSolved]);
-  useEffect(() => store('bodhi_age', ageBracket), [ageBracket]);
+  useEffect(() => store('bodhi_exact_age', String(age)), [age]);
+  useEffect(() => store('bodhi_skills', JSON.stringify(skills)), [skills]);
   useEffect(() => store('bodhi_kid_name', kidName), [kidName]);
 
   const setSoundEnabled = (enabled: boolean) => {
@@ -149,18 +169,43 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     store('bodhi_voice_speed', String(speed));
   };
 
-  const setAgeBracket = (level: AgeBracket) => setAgeBracketState(level);
+  const ageBracket = bracketForAge(age);
+  const ageBand = bandForAge(age);
+
+  // Changing the age also moves a subject's level if the child hasn't really started it yet
+  const setAge = (next: number) => {
+    const a = clampAge(next);
+    setAgeState(a);
+    setSkills((prev) => {
+      const out = { ...prev };
+      for (const s of Object.keys(out) as Subject[]) {
+        if (out[s].answered < 5) out[s] = { ...out[s], level: levelForAge(a) };
+      }
+      return out;
+    });
+  };
+
+  const recordAnswer = (subject: Subject, correct: boolean, newLevel: number) =>
+    setSkills((prev) => ({
+      ...prev,
+      [subject]: {
+        level: newLevel,
+        answered: prev[subject].answered + 1,
+        correct: prev[subject].correct + (correct ? 1 : 0),
+      },
+    }));
   const setKidName = (name: string) => setKidNameState(name);
 
   // Cloud sync (Firestore) for signed-in parents; guests just use this device
   const synced = useMemo<SyncedState>(
-    () => ({ kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved }),
-    [kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved],
+    () => ({ kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, skills }),
+    [kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, skills],
   );
 
   const applyCloudState = (next: SyncedState) => {
     setKidNameState(next.kidName);
-    setAgeBracketState(next.ageBracket);
+    setAgeState(next.age);
+    setSkills(next.skills);
     setSpeechEnabled(next.speechEnabled);
     setVoiceSpeed(next.voiceSpeed);
     setStars(next.stars);
@@ -170,6 +215,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const cloud = useCloudSync(synced, applyCloudState);
+
+  // Pull any newer learning content from Firestore into this device (no sign-in needed)
+  useEffect(() => {
+    const run = () => { void syncContent(); };
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+    if (idle) idle(run); else window.setTimeout(run, 1500);
+    window.addEventListener('online', run);
+    return () => window.removeEventListener('online', run);
+  }, []);
 
   const triggerCelebration = () => {
     sound.playStarFanfare();
@@ -232,8 +286,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         removePlacedSticker,
         botSolved,
         markBotSolved,
+        age,
+        setAge,
+        ageBand,
         ageBracket,
-        setAgeBracket,
+        skills,
+        recordAnswer,
         kidName,
         setKidName,
         soundEnabled,

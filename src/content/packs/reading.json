@@ -1,0 +1,787 @@
+{
+ "subject": "reading",
+ "version": 1,
+ "title": "Reading & Words",
+ "questions": [
+  {
+   "id": "re1-1",
+   "topic": "rhymes",
+   "level": 1,
+   "prompt": "Which word rhymes with \"cat\"?",
+   "choices": [
+    "dog",
+    "hat",
+    "sun"
+   ],
+   "answer": 1,
+   "explain": "Cat and hat both end in \"-at\"."
+  },
+  {
+   "id": "re1-2",
+   "topic": "sounds",
+   "level": 1,
+   "prompt": "Which word starts with the same sound as \"sun\"?",
+   "choices": [
+    "sock",
+    "hat",
+    "dog"
+   ],
+   "answer": 0,
+   "explain": "Sun and sock both start with the \"sss\" sound."
+  },
+  {
+   "id": "re1-3",
+   "topic": "letters",
+   "level": 1,
+   "prompt": "What is the first letter of \"ball\"?",
+   "choices": [
+    "b",
+    "p",
+    "d"
+   ],
+   "answer": 0,
+   "explain": "Ball starts with b."
+  },
+  {
+   "id": "re1-4",
+   "topic": "sounds",
+   "level": 1,
+   "prompt": "Which letter makes the \"mmm\" sound?",
+   "choices": [
+    "n",
+    "m",
+    "w"
+   ],
+   "answer": 1,
+   "explain": "The letter m says \"mmm\" as in moon."
+  },
+  {
+   "id": "re1-5",
+   "topic": "rhymes",
+   "level": 1,
+   "prompt": "Which word rhymes with \"bee\"?",
+   "choices": [
+    "bus",
+    "bed",
+    "tree"
+   ],
+   "answer": 2,
+   "explain": "Bee and tree both end with the \"ee\" sound."
+  },
+  {
+   "id": "re1-6",
+   "topic": "sounds",
+   "level": 1,
+   "prompt": "How many sounds do you hear in \"dog\"?",
+   "choices": [
+    "4",
+    "2",
+    "3"
+   ],
+   "answer": 2,
+   "explain": "d - o - g: three sounds."
+  },
+  {
+   "id": "re2-1",
+   "topic": "opposites",
+   "level": 2,
+   "prompt": "Which word means the opposite of \"hot\"?",
+   "choices": [
+    "red",
+    "cold",
+    "warm"
+   ],
+   "answer": 1,
+   "explain": "Hot and cold are opposites."
+  },
+  {
+   "id": "re2-2",
+   "topic": "spelling",
+   "level": 2,
+   "prompt": "Which word is spelled correctly?",
+   "choices": [
+    "cta",
+    "kat",
+    "cat"
+   ],
+   "answer": 2,
+   "explain": "The word is spelled c-a-t."
+  },
+  {
+   "id": "re2-3",
+   "topic": "sentences",
+   "level": 2,
+   "prompt": "Which word completes it? The dog can ___.",
+   "choices": [
+    "run",
+    "cup",
+    "red"
+   ],
+   "answer": 0,
+   "explain": "\"Run\" is something a dog can do."
+  },
+  {
+   "id": "re2-4",
+   "topic": "phonics",
+   "level": 2,
+   "prompt": "Which word has the short \"a\" sound, like in \"cat\"?",
+   "choices": [
+    "mop",
+    "map",
+    "mud"
+   ],
+   "answer": 1,
+   "explain": "Map has the short a sound."
+  },
+  {
+   "id": "re2-5",
+   "topic": "rhymes",
+   "level": 2,
+   "prompt": "Which word rhymes with \"ring\"?",
+   "choices": [
+    "rug",
+    "rain",
+    "sing"
+   ],
+   "answer": 2,
+   "explain": "Ring and sing both end in \"-ing\"."
+  },
+  {
+   "id": "re2-6",
+   "topic": "opposites",
+   "level": 2,
+   "prompt": "Which word means the opposite of \"up\"?",
+   "choices": [
+    "high",
+    "down",
+    "over"
+   ],
+   "answer": 1,
+   "explain": "Up and down are opposites."
+  },
+  {
+   "id": "re3-1",
+   "topic": "sentences",
+   "level": 3,
+   "prompt": "Which sentence is written correctly?",
+   "choices": [
+    "the cat sat on the mat",
+    "The cat sat on the mat.",
+    "The cat sat on the mat"
+   ],
+   "answer": 1,
+   "explain": "A sentence starts with a capital letter and ends with a full stop."
+  },
+  {
+   "id": "re3-2",
+   "topic": "plurals",
+   "level": 3,
+   "prompt": "What is the plural of \"box\"?",
+   "choices": [
+    "boxies",
+    "boxes",
+    "boxs"
+   ],
+   "answer": 1,
+   "explain": "Words ending in x add -es."
+  },
+  {
+   "id": "re3-3",
+   "topic": "verbs",
+   "level": 3,
+   "prompt": "Which word is an action word (verb)?",
+   "choices": [
+    "jump",
+    "blue",
+    "table"
+   ],
+   "answer": 0,
+   "explain": "Jump is something you can do."
+  },
+  {
+   "id": "re3-4",
+   "topic": "punctuation",
+   "level": 3,
+   "prompt": "What goes at the end of a question?",
+   "choices": [
+    "!",
+    ".",
+    "?"
+   ],
+   "answer": 2,
+   "explain": "A question mark shows that someone is asking."
+  },
+  {
+   "id": "re3-5",
+   "topic": "comprehension",
+   "level": 3,
+   "prompt": "Read: \"Sam has a red kite. The kite is up high.\" What color is the kite?",
+   "choices": [
+    "blue",
+    "red",
+    "green"
+   ],
+   "answer": 1,
+   "explain": "The story says the kite is red."
+  },
+  {
+   "id": "re3-6",
+   "topic": "compound words",
+   "level": 3,
+   "prompt": "Which word is made of two smaller words?",
+   "choices": [
+    "tiger",
+    "cookie",
+    "rainbow"
+   ],
+   "answer": 2,
+   "explain": "Rainbow = rain + bow."
+  },
+  {
+   "id": "re4-1",
+   "topic": "synonyms",
+   "level": 4,
+   "prompt": "Which word means almost the same as \"happy\"?",
+   "choices": [
+    "sad",
+    "tired",
+    "glad"
+   ],
+   "answer": 2,
+   "explain": "Glad and happy are synonyms."
+  },
+  {
+   "id": "re4-2",
+   "topic": "adjectives",
+   "level": 4,
+   "prompt": "In \"The fluffy cat slept\", which word is the adjective?",
+   "choices": [
+    "cat",
+    "slept",
+    "fluffy"
+   ],
+   "answer": 2,
+   "explain": "Adjectives describe nouns. Fluffy describes the cat."
+  },
+  {
+   "id": "re4-3",
+   "topic": "tenses",
+   "level": 4,
+   "prompt": "What is the past tense of \"run\"?",
+   "choices": [
+    "running",
+    "runned",
+    "ran"
+   ],
+   "answer": 2,
+   "explain": "Run is an irregular verb: yesterday I ran."
+  },
+  {
+   "id": "re4-4",
+   "topic": "spelling",
+   "level": 4,
+   "prompt": "Which word has a silent \"k\"?",
+   "choices": [
+    "key",
+    "knee",
+    "kite"
+   ],
+   "answer": 1,
+   "explain": "In knee you do not say the k."
+  },
+  {
+   "id": "re4-5",
+   "topic": "comprehension",
+   "level": 4,
+   "prompt": "Read: \"Tom was late because the bus broke down.\" Why was Tom late?",
+   "choices": [
+    "The bus broke down.",
+    "He woke up late.",
+    "It was raining."
+   ],
+   "answer": 0,
+   "explain": "The sentence says the bus broke down."
+  },
+  {
+   "id": "re4-6",
+   "topic": "nouns",
+   "level": 4,
+   "prompt": "Which of these is a proper noun (a special name)?",
+   "choices": [
+    "river",
+    "city",
+    "London"
+   ],
+   "answer": 2,
+   "explain": "Proper nouns start with a capital letter: London."
+  },
+  {
+   "id": "re5-1",
+   "topic": "prefixes",
+   "level": 5,
+   "prompt": "What does \"unhappy\" mean?",
+   "choices": [
+    "very happy",
+    "happy again",
+    "not happy"
+   ],
+   "answer": 2,
+   "explain": "The prefix un- means \"not\"."
+  },
+  {
+   "id": "re5-2",
+   "topic": "homophones",
+   "level": 5,
+   "prompt": "Which word fits? The ___ is shining today.",
+   "choices": [
+    "sun",
+    "son",
+    "sum"
+   ],
+   "answer": 0,
+   "explain": "Sun, son and sum sound alike but mean different things."
+  },
+  {
+   "id": "re5-3",
+   "topic": "contractions",
+   "level": 5,
+   "prompt": "What is the contraction of \"do not\"?",
+   "choices": [
+    "don't",
+    "do'nt",
+    "dont'"
+   ],
+   "answer": 0,
+   "explain": "The apostrophe replaces the missing o: don't."
+  },
+  {
+   "id": "re5-4",
+   "topic": "prefixes",
+   "level": 5,
+   "prompt": "In \"redo\", what does the prefix \"re-\" mean?",
+   "choices": [
+    "again",
+    "before",
+    "not"
+   ],
+   "answer": 0,
+   "explain": "Re- means again: redo = do again."
+  },
+  {
+   "id": "re5-5",
+   "topic": "synonyms",
+   "level": 5,
+   "prompt": "Which word means the same as \"enormous\"?",
+   "choices": [
+    "tiny",
+    "quiet",
+    "huge"
+   ],
+   "answer": 2,
+   "explain": "Enormous and huge both mean very big."
+  },
+  {
+   "id": "re5-6",
+   "topic": "punctuation",
+   "level": 5,
+   "prompt": "Which sentence is punctuated correctly?",
+   "choices": [
+    "Where are you going,",
+    "Where are you going.",
+    "Where are you going?"
+   ],
+   "answer": 2,
+   "explain": "A question ends with a question mark."
+  },
+  {
+   "id": "re6-1",
+   "topic": "figurative",
+   "level": 6,
+   "prompt": "\"It is raining cats and dogs.\" What does this mean?",
+   "choices": [
+    "It is raining lightly.",
+    "Animals are falling from the sky.",
+    "It is raining very hard."
+   ],
+   "answer": 2,
+   "explain": "It is an idiom: a phrase that does not mean what the words say."
+  },
+  {
+   "id": "re6-2",
+   "topic": "figurative",
+   "level": 6,
+   "prompt": "Which sentence contains a simile?",
+   "choices": [
+    "She ran like the wind.",
+    "She ran very fast.",
+    "The wind ran away."
+   ],
+   "answer": 0,
+   "explain": "A simile compares two things using \"like\" or \"as\"."
+  },
+  {
+   "id": "re6-3",
+   "topic": "figurative",
+   "level": 6,
+   "prompt": "Which sentence is a metaphor?",
+   "choices": [
+    "The bee buzzed.",
+    "He was as busy as a bee.",
+    "The classroom was a zoo."
+   ],
+   "answer": 2,
+   "explain": "A metaphor says one thing IS another, without \"like\" or \"as\"."
+  },
+  {
+   "id": "re6-4",
+   "topic": "antonyms",
+   "level": 6,
+   "prompt": "What is the opposite of \"generous\"?",
+   "choices": [
+    "kind",
+    "giving",
+    "selfish"
+   ],
+   "answer": 2,
+   "explain": "A generous person shares; a selfish person does not."
+  },
+  {
+   "id": "re6-5",
+   "topic": "homophones",
+   "level": 6,
+   "prompt": "Choose the correct word: ___ going to the museum tomorrow.",
+   "choices": [
+    "Their",
+    "They're",
+    "There"
+   ],
+   "answer": 1,
+   "explain": "They're = they are."
+  },
+  {
+   "id": "re6-6",
+   "topic": "grammar",
+   "level": 6,
+   "prompt": "In \"The tired dog slept under the tree\", what is the subject?",
+   "choices": [
+    "under the tree",
+    "slept",
+    "The tired dog"
+   ],
+   "answer": 2,
+   "explain": "The subject is who or what the sentence is about."
+  },
+  {
+   "id": "re7-1",
+   "topic": "vocabulary",
+   "level": 7,
+   "prompt": "Which word means \"to make something better\"?",
+   "choices": [
+    "imitate",
+    "ignore",
+    "improve"
+   ],
+   "answer": 2,
+   "explain": "Improve means to make better."
+  },
+  {
+   "id": "re7-2",
+   "topic": "grammar",
+   "level": 7,
+   "prompt": "Which is correct? ___ a beautiful day.",
+   "choices": [
+    "It's",
+    "Its'",
+    "Its"
+   ],
+   "answer": 0,
+   "explain": "It's is short for \"it is\"."
+  },
+  {
+   "id": "re7-3",
+   "topic": "word roots",
+   "level": 7,
+   "prompt": "What is the root word in \"unbelievable\"?",
+   "choices": [
+    "unbeliev",
+    "able",
+    "believe"
+   ],
+   "answer": 2,
+   "explain": "Take off un- and -able and you are left with believe."
+  },
+  {
+   "id": "re7-4",
+   "topic": "inference",
+   "level": 7,
+   "prompt": "Maya grabbed her umbrella and raincoat before leaving. What is the weather probably like?",
+   "choices": [
+    "hot and sunny",
+    "rainy",
+    "snowy"
+   ],
+   "answer": 1,
+   "explain": "Umbrellas and raincoats are for rain."
+  },
+  {
+   "id": "re7-5",
+   "topic": "commonly confused",
+   "level": 7,
+   "prompt": "Which word fits? The loud noise will ___ the baby's sleep.",
+   "choices": [
+    "afect",
+    "effect",
+    "affect"
+   ],
+   "answer": 2,
+   "explain": "Affect is a verb (to change). Effect is usually a noun (the result)."
+  },
+  {
+   "id": "re7-6",
+   "topic": "parts of speech",
+   "level": 7,
+   "prompt": "Which word is a conjunction?",
+   "choices": [
+    "because",
+    "quickly",
+    "table"
+   ],
+   "answer": 0,
+   "explain": "Conjunctions join ideas: because, and, but, or."
+  },
+  {
+   "id": "re8-1",
+   "topic": "context clues",
+   "level": 8,
+   "prompt": "\"The arid desert had not seen rain for years.\" What does \"arid\" mean?",
+   "choices": [
+    "very dry",
+    "very cold",
+    "full of animals"
+   ],
+   "answer": 0,
+   "explain": "The clue is \"had not seen rain for years\"."
+  },
+  {
+   "id": "re8-2",
+   "topic": "genres",
+   "level": 8,
+   "prompt": "A short story that teaches a lesson, often with animal characters, is called a…",
+   "choices": [
+    "diary",
+    "fable",
+    "biography"
+   ],
+   "answer": 1,
+   "explain": "Aesop wrote famous fables."
+  },
+  {
+   "id": "re8-3",
+   "topic": "vocabulary",
+   "level": 8,
+   "prompt": "Which word is closest in meaning to \"reluctant\"?",
+   "choices": [
+    "tired",
+    "eager",
+    "unwilling"
+   ],
+   "answer": 2,
+   "explain": "Reluctant means not wanting to do something."
+  },
+  {
+   "id": "re8-4",
+   "topic": "purpose",
+   "level": 8,
+   "prompt": "An author writes an article to convince readers to recycle. The author's purpose is to…",
+   "choices": [
+    "describe a place",
+    "persuade",
+    "entertain"
+   ],
+   "answer": 1,
+   "explain": "Trying to change what readers think or do is persuading."
+  },
+  {
+   "id": "re8-5",
+   "topic": "plurals",
+   "level": 8,
+   "prompt": "What is the plural of \"child\"?",
+   "choices": [
+    "children",
+    "childs",
+    "childrens"
+   ],
+   "answer": 0,
+   "explain": "Child has an irregular plural."
+  },
+  {
+   "id": "re8-6",
+   "topic": "figurative",
+   "level": 8,
+   "prompt": "\"She was a ray of sunshine.\" This is an example of a…",
+   "choices": [
+    "simile",
+    "metaphor",
+    "alliteration"
+   ],
+   "answer": 1,
+   "explain": "It says she IS a ray of sunshine, so it is a metaphor."
+  },
+  {
+   "id": "re9-1",
+   "topic": "word roots",
+   "level": 9,
+   "prompt": "The Greek root \"bio\" means…",
+   "choices": [
+    "life",
+    "water",
+    "earth"
+   ],
+   "answer": 0,
+   "explain": "Biology is the study of life."
+  },
+  {
+   "id": "re9-2",
+   "topic": "word roots",
+   "level": 9,
+   "prompt": "The Latin root \"aqua\" means water. An aquarium is most likely related to…",
+   "choices": [
+    "fire",
+    "water",
+    "air"
+   ],
+   "answer": 1,
+   "explain": "Aqua = water."
+  },
+  {
+   "id": "re9-3",
+   "topic": "punctuation",
+   "level": 9,
+   "prompt": "Which sentence uses a semicolon correctly?",
+   "choices": [
+    "I love pizza; and pasta.",
+    "I love pizza; my brother prefers pasta.",
+    "I love; pizza my brother prefers pasta."
+   ],
+   "answer": 1,
+   "explain": "A semicolon joins two complete, related sentences."
+  },
+  {
+   "id": "re9-4",
+   "topic": "literary devices",
+   "level": 9,
+   "prompt": "A fire station burns down. This is an example of…",
+   "choices": [
+    "alliteration",
+    "irony",
+    "onomatopoeia"
+   ],
+   "answer": 1,
+   "explain": "Irony is when the opposite of what you expect happens."
+  },
+  {
+   "id": "re9-5",
+   "topic": "theme",
+   "level": 9,
+   "prompt": "In a story, the theme is…",
+   "choices": [
+    "the setting",
+    "the list of characters",
+    "the central message"
+   ],
+   "answer": 2,
+   "explain": "Theme is the big idea or lesson of the story."
+  },
+  {
+   "id": "re9-6",
+   "topic": "antonyms",
+   "level": 9,
+   "prompt": "Which word is an antonym of \"benevolent\"?",
+   "choices": [
+    "cheerful",
+    "malicious",
+    "generous"
+   ],
+   "answer": 1,
+   "explain": "Benevolent means kind and well-meaning."
+  },
+  {
+   "id": "re10-1",
+   "topic": "connotation",
+   "level": 10,
+   "prompt": "\"The politician dodged the question.\" The word \"dodged\" has a ___ connotation.",
+   "choices": [
+    "positive",
+    "neutral",
+    "negative"
+   ],
+   "answer": 2,
+   "explain": "Dodged suggests sneaky avoidance."
+  },
+  {
+   "id": "re10-2",
+   "topic": "grammar",
+   "level": 10,
+   "prompt": "Which sentence has a dangling modifier?",
+   "choices": [
+    "Walking to school, I got wet in the rain.",
+    "Walking to school, the rain started.",
+    "I walked to school in the rain."
+   ],
+   "answer": 1,
+   "explain": "The rain was not the one walking to school."
+  },
+  {
+   "id": "re10-3",
+   "topic": "rhetoric",
+   "level": 10,
+   "prompt": "\"Everyone is buying it, so it must be good.\" This is a ___ fallacy.",
+   "choices": [
+    "ad hominem",
+    "straw man",
+    "bandwagon"
+   ],
+   "answer": 2,
+   "explain": "Bandwagon: it must be right because lots of people do it."
+  },
+  {
+   "id": "re10-4",
+   "topic": "tone",
+   "level": 10,
+   "prompt": "Which word best describes a tone of mocking humor?",
+   "choices": [
+    "solemn",
+    "sarcastic",
+    "nostalgic"
+   ],
+   "answer": 1,
+   "explain": "Sarcasm says the opposite of what is meant to mock."
+  },
+  {
+   "id": "re10-5",
+   "topic": "vocabulary",
+   "level": 10,
+   "prompt": "\"Ubiquitous\" means…",
+   "choices": [
+    "present everywhere",
+    "very ancient",
+    "very rare"
+   ],
+   "answer": 0,
+   "explain": "Think of smartphones: they are ubiquitous."
+  },
+  {
+   "id": "re10-6",
+   "topic": "figurative",
+   "level": 10,
+   "prompt": "Which is an example of personification?",
+   "choices": [
+    "The wind was strong.",
+    "The wind blew like a whistle.",
+    "The wind whispered through the trees."
+   ],
+   "answer": 2,
+   "explain": "Personification gives human actions to non-human things."
+  }
+ ]
+}

@@ -92,3 +92,45 @@ test('other collections are closed', async () => {
   await assertFails(setDoc(doc(db, 'anything/else'), { a: 1 }));
   await assertFails(getDoc(doc(db, 'anything/else')));
 });
+
+test('exact age and per-subject skills are accepted when valid', async () => {
+  const ref = doc(asUser('dana'), 'users/dana');
+  await assertSucceeds(setDoc(ref, validDoc({
+    profile: { kidName: 'Dana', ageBracket: 'grade1', age: 12 },
+    progress: {
+      stars: 40, unlockedStickers: ['st1'], placedStickers: [],
+      skills: { math: { level: 8, answered: 30, correct: 24 }, science: { level: 9, answered: 0, correct: 0 } },
+    },
+  })));
+});
+
+test('invalid age and skills are rejected', async () => {
+  const ref = doc(asUser('erin'), 'users/erin');
+  const progress = (skills) => ({ stars: 1, unlockedStickers: [], placedStickers: [], skills });
+  const bad = {
+    'age too young': validDoc({ profile: { kidName: 'E', ageBracket: 'pre-k', age: 3 } }),
+    'age too old': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 15 } }),
+    'fractional age': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 9.5 } }),
+    'unknown subject': validDoc({ progress: progress({ cooking: { level: 1, answered: 0, correct: 0 } }) }),
+    'level out of range': validDoc({ progress: progress({ math: { level: 11, answered: 0, correct: 0 } }) }),
+    'more correct than answered': validDoc({ progress: progress({ math: { level: 3, answered: 2, correct: 3 } }) }),
+    'extra skill field': validDoc({ progress: progress({ math: { level: 3, answered: 2, correct: 1, xp: 5 } }) }),
+  };
+  for (const [name, data] of Object.entries(bad)) {
+    await assertFails(setDoc(ref, data), name);
+  }
+});
+
+test('learning content is public to read but never writable', async () => {
+  await env.withSecurityRulesDisabled(async (ctx) => {
+    await setDoc(doc(ctx.firestore(), 'content_meta/current'), { version: 1 });
+    await setDoc(doc(ctx.firestore(), 'content_packs/science'), { version: 1, questions: [] });
+  });
+  for (const db of [asGuest(), asUser('frank')]) {
+    await assertSucceeds(getDoc(doc(db, 'content_meta/current')));
+    await assertSucceeds(getDoc(doc(db, 'content_packs/science')));
+    await assertFails(setDoc(doc(db, 'content_packs/science'), { version: 2, questions: [] }));
+    await assertFails(setDoc(doc(db, 'content_meta/current'), { version: 2 }));
+    await assertFails(deleteDoc(doc(db, 'content_packs/science')));
+  }
+});

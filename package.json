@@ -16,7 +16,8 @@
     "dev:emulators": "VITE_FIREBASE_EMULATORS=true vite --port 5190",
     "test:logic": "node --test tests/logic.test.mjs",
     "test": "npm run test:logic && npm run test:rules",
-    "audio:verify": "node scripts/audio/verify.mjs"
+    "audio:verify": "node scripts/audio/verify.mjs",
+    "content:seed": "node scripts/content/seed.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

@@ -2,36 +2,20 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
 import { Volume2, VolumeX, Lock, Sparkles } from 'lucide-react';
-import { CandyNumberIcon } from '../common/CandyNumberIcon';
 
 interface HeaderProps {
-  currentView: string;
   onSelectView: (view: string) => void;
   onOpenParentGate: () => void;
 }
 
 
-const NAV_ITEMS: { view: string; label: string; emoji?: string; isCandyNumber?: boolean; color: string; views: string[] }[] = [
-  { view: 'home', label: 'Home', emoji: '🏠', color: '#0EA5E9', views: ['home'] },
-  { view: 'tracing', label: 'Tracing', emoji: '✏️', color: '#FB7185', views: ['tracing-abc', 'tracing-words'] },
-  { view: 'phonics', label: 'Reading', emoji: '📖', color: '#38BDF8', views: ['phonics', 'sight-words', 'stories', 'slide-read', 'reading'] },
-  { view: 'counting', label: 'Math', isCandyNumber: true, color: '#22C55E', views: ['counting', 'math', 'code-bot', 'patterns', 'machine'] },
-  { view: 'stickers', label: 'Stickers', emoji: '🎨', color: '#C084FC', views: ['stickers'] },
-];
-
-export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpenParentGate }) => {
-  const { stars, soundEnabled, setSoundEnabled, kidName, ageBracket } = useApp();
+export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }) => {
+  const { stars, soundEnabled, setSoundEnabled } = useApp();
 
   const go = (view: string) => {
     sound.playPop();
-    if (view === 'tracing') {
-      onSelectView(ageBracket === 'pre-k' ? 'tracing-abc' : 'tracing-words');
-      return;
-    }
     onSelectView(view);
   };
-
-  const isActive = (views: string[]) => views.includes(currentView);
 
   return (
     <>
@@ -89,53 +73,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
               <h1 className="brand-name" style={{ fontSize: '1.35rem', color: '#0284C7', margin: 0, lineHeight: 1.1, whiteSpace: 'nowrap' }}>
                 Bodhi Learn
               </h1>
-              <span className="hide-mobile" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#10B981' }}>
-                Hello, {kidName}! 👋
-              </span>
             </div>
           </button>
-
-          {/* Nav pills (tablet & desktop; phones get the bottom bar) */}
-          <nav className="top-nav" aria-label="Main" style={{
-            alignItems: 'center',
-            gap: 4,
-            background: '#F1F5F9',
-            padding: 4,
-            borderRadius: 999,
-          }}>
-            {NAV_ITEMS.map((item) => {
-              const active = isActive(item.views);
-              return (
-                <button
-                  key={item.view}
-                  onClick={() => go(item.view)}
-                  aria-current={active ? 'page' : undefined}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    padding: '8px 14px',
-                    minHeight: 44,
-                    borderRadius: 999,
-                    border: 'none',
-                    background: active ? item.color : 'transparent',
-                    color: active ? '#FFFFFF' : '#475569',
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 600,
-                    fontSize: '0.95rem',
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <span aria-hidden style={{ display: 'inline-flex', alignItems: 'center' }}>
-                    {item.isCandyNumber ? <CandyNumberIcon size={18} /> : item.emoji}
-                  </span>{' '}
-                  {item.label}
-                </button>
-              );
-            })}
-          </nav>
 
           {/* Stars, mute, parents */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
@@ -220,25 +159,6 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onSelectView, onOpe
         </div>
       </header>
 
-      {/* Phone bottom tab bar: big, thumb-friendly targets */}
-      <nav className="bottom-nav" aria-label="Main">
-        {NAV_ITEMS.map((item) => {
-          const active = isActive(item.views);
-          return (
-            <button
-              key={item.view}
-              className="btn-reset"
-              onClick={() => go(item.view)}
-              aria-current={active ? 'page' : undefined}
-            >
-              <span className="nav-emoji" aria-hidden style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 26 }}>
-                {item.isCandyNumber ? <CandyNumberIcon size={20} /> : item.emoji}
-              </span>
-              {item.label}
-            </button>
-          );
-        })}
-      </nav>
     </>
   );
 };

@@ -2,6 +2,35 @@
 
 export type AgeBracket = 'pre-k' | 'kindergarten' | 'grade1';
 
+// The app serves ages 4 to 14. `age` is the source of truth; the three-step AgeBracket
+// is derived from it for the early-years games that only know Pre-K / K / 1st grade, and
+// `band` drives the look and tone of the home screen.
+export const MIN_AGE = 4;
+export const MAX_AGE = 14;
+export type AgeBand = 'little' | 'explorer' | 'pro';
+
+export const clampAge = (n: number) => Math.min(MAX_AGE, Math.max(MIN_AGE, Math.round(n)));
+export const bandForAge = (age: number): AgeBand => (age <= 6 ? 'little' : age <= 10 ? 'explorer' : 'pro');
+export const bracketForAge = (age: number): AgeBracket => (age <= 4 ? 'pre-k' : age <= 6 ? 'kindergarten' : 'grade1');
+// Documents written before exact ages existed only have a bracket
+export const ageForBracket = (b: AgeBracket): number => (b === 'pre-k' ? 4 : b === 'kindergarten' ? 5 : 7);
+
+// Quiz subjects, each with its own adaptive difficulty level (1 easiest .. 10 hardest)
+export const SUBJECTS = ['math', 'reading', 'logic', 'science'] as const;
+export type Subject = (typeof SUBJECTS)[number];
+export const MIN_LEVEL = 1;
+export const MAX_LEVEL = 10;
+export interface SkillRecord {
+  level: number;
+  answered: number;
+  correct: number;
+}
+export type Skills = Record<Subject, SkillRecord>;
+// A child of this age starts around this level (age 4 -> 1 ... age 13+ -> 10)
+export const levelForAge = (age: number) => Math.min(MAX_LEVEL, Math.max(MIN_LEVEL, age - 3));
+export const defaultSkills = (age: number): Skills =>
+  Object.fromEntries(SUBJECTS.map((s) => [s, { level: levelForAge(age), answered: 0, correct: 0 }])) as Skills;
+
 export interface PlacedSticker {
   id: string;
   stickerId: string;
@@ -13,28 +42,30 @@ export interface PlacedSticker {
 // deliberately per-device and not part of this.)
 export interface SyncedState {
   kidName: string;
-  ageBracket: AgeBracket;
+  age: number; // 4..14
   speechEnabled: boolean;
   voiceSpeed: number;
   stars: number;
   unlockedStickers: string[];
   placedStickers: PlacedSticker[];
   botSolved: string[]; // ids of the Code the Bot levels the child has solved
+  skills: Skills; // quiz level and tallies per subject
 }
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 1; // still 1: age and skills are optional additions
 export const MAX_PLACED_STICKERS = 150;
 export const MAX_BOT_SOLVED = 60;
 
 export const DEFAULT_STATE: SyncedState = {
   kidName: 'Bodhi',
-  ageBracket: 'kindergarten',
+  age: 5,
   speechEnabled: true,
   voiceSpeed: 0.85,
   stars: 5, // welcome stars
   unlockedStickers: ['st1'],
   placedStickers: [{ id: 'init-1', stickerId: 'st1', x: 50, y: 50 }],
   botSolved: [],
+  skills: defaultSkills(5),
 };
 
 const AGE_BRACKETS: AgeBracket[] = ['pre-k', 'kindergarten', 'grade1'];
@@ -50,15 +81,35 @@ export const unionIds = (a: string[], b: string[]): string[] => [...new Set([...
 export function toDocData(state: SyncedState) {
   return {
     schemaVersion: SCHEMA_VERSION,
-    profile: { kidName: state.kidName, ageBracket: state.ageBracket },
+    // ageBracket stays in the document so older app versions keep working
+    profile: { kidName: state.kidName, ageBracket: bracketForAge(state.age), age: state.age },
     settings: { speechEnabled: state.speechEnabled, voiceSpeed: state.voiceSpeed },
     progress: {
       stars: state.stars,
       unlockedStickers: state.unlockedStickers,
       placedStickers: state.placedStickers.slice(-MAX_PLACED_STICKERS),
       botSolved: state.botSolved.slice(0, MAX_BOT_SOLVED),
+      skills: state.skills,
     },
   };
+}
+
+const toCount = (v: unknown) => (typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 1_000_000 ? v : 0);
+
+export function readSkills(value: unknown, age: number): Skills {
+  const src = isRecord(value) ? value : {};
+  const out = defaultSkills(age);
+  for (const subject of SUBJECTS) {
+    const r = src[subject];
+    if (!isRecord(r)) continue;
+    const level = typeof r.level === 'number' && Number.isFinite(r.level) ? Math.round(r.level) : out[subject].level;
+    out[subject] = {
+      level: Math.min(MAX_LEVEL, Math.max(MIN_LEVEL, level)),
+      answered: toCount(r.answered),
+      correct: Math.min(toCount(r.correct), toCount(r.answered)),
+    };
+  }
+  return out;
 }
 
 // Defensive read: anything missing or malformed falls back to a default rather than breaking the app
@@ -71,9 +122,15 @@ export function fromDocData(data: unknown): SyncedState {
   const stickers = Array.isArray(progress.placedStickers) ? progress.placedStickers : [];
   const unlocked = Array.isArray(progress.unlockedStickers) ? progress.unlockedStickers : DEFAULT_STATE.unlockedStickers;
 
+  const bracket = AGE_BRACKETS.includes(profile.ageBracket as AgeBracket) ? (profile.ageBracket as AgeBracket) : undefined;
+  const age = typeof profile.age === 'number' && Number.isFinite(profile.age)
+    ? clampAge(profile.age)
+    : bracket ? ageForBracket(bracket) : DEFAULT_STATE.age;
+
   return {
     kidName: typeof profile.kidName === 'string' && profile.kidName.trim() ? profile.kidName.slice(0, 40) : DEFAULT_STATE.kidName,
-    ageBracket: AGE_BRACKETS.includes(profile.ageBracket as AgeBracket) ? (profile.ageBracket as AgeBracket) : DEFAULT_STATE.ageBracket,
+    age,
+    skills: readSkills(progress.skills, age),
     speechEnabled: typeof settings.speechEnabled === 'boolean' ? settings.speechEnabled : DEFAULT_STATE.speechEnabled,
     voiceSpeed: typeof settings.voiceSpeed === 'number' && settings.voiceSpeed >= 0.5 && settings.voiceSpeed <= 1.5
       ? settings.voiceSpeed

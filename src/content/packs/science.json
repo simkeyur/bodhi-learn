@@ -1,0 +1,787 @@
+{
+ "subject": "science",
+ "version": 1,
+ "title": "Discover",
+ "questions": [
+  {
+   "id": "sc1-1",
+   "topic": "animals",
+   "level": 1,
+   "prompt": "Which animal says \"moo\"?",
+   "choices": [
+    "duck",
+    "cow",
+    "cat"
+   ],
+   "answer": 1,
+   "explain": "Cows say moo."
+  },
+  {
+   "id": "sc1-2",
+   "topic": "plants",
+   "level": 1,
+   "prompt": "What do plants need to grow?",
+   "choices": [
+    "water and sunlight",
+    "toys",
+    "candy"
+   ],
+   "answer": 0,
+   "explain": "Plants drink water and use sunlight."
+  },
+  {
+   "id": "sc1-3",
+   "topic": "weather",
+   "level": 1,
+   "prompt": "Which of these is hot?",
+   "choices": [
+    "snow",
+    "the sun",
+    "ice"
+   ],
+   "answer": 1,
+   "explain": "The sun warms the Earth."
+  },
+  {
+   "id": "sc1-4",
+   "topic": "animals",
+   "level": 1,
+   "prompt": "How many legs does a dog have?",
+   "choices": [
+    "6",
+    "2",
+    "4"
+   ],
+   "answer": 2,
+   "explain": "Dogs walk on four legs."
+  },
+  {
+   "id": "sc1-5",
+   "topic": "animals",
+   "level": 1,
+   "prompt": "Which of these can fly?",
+   "choices": [
+    "a fish",
+    "a bird",
+    "a turtle"
+   ],
+   "answer": 1,
+   "explain": "Birds have wings."
+  },
+  {
+   "id": "sc1-6",
+   "topic": "body",
+   "level": 1,
+   "prompt": "What do we use our eyes for?",
+   "choices": [
+    "tasting",
+    "seeing",
+    "hearing"
+   ],
+   "answer": 1,
+   "explain": "Eyes are for seeing."
+  },
+  {
+   "id": "sc2-1",
+   "topic": "senses",
+   "level": 2,
+   "prompt": "Which part of your body do you smell with?",
+   "choices": [
+    "nose",
+    "ears",
+    "hands"
+   ],
+   "answer": 0,
+   "explain": "Your nose smells."
+  },
+  {
+   "id": "sc2-2",
+   "topic": "animals",
+   "level": 2,
+   "prompt": "Which animal lives in the water?",
+   "choices": [
+    "cow",
+    "fish",
+    "lion"
+   ],
+   "answer": 1,
+   "explain": "Fish breathe underwater."
+  },
+  {
+   "id": "sc2-3",
+   "topic": "seasons",
+   "level": 2,
+   "prompt": "Which season is usually the coldest?",
+   "choices": [
+    "spring",
+    "summer",
+    "winter"
+   ],
+   "answer": 2,
+   "explain": "Winter is the coldest season."
+  },
+  {
+   "id": "sc2-4",
+   "topic": "animals",
+   "level": 2,
+   "prompt": "What is a baby cat called?",
+   "choices": [
+    "cub",
+    "puppy",
+    "kitten"
+   ],
+   "answer": 2,
+   "explain": "A baby cat is a kitten."
+  },
+  {
+   "id": "sc2-5",
+   "topic": "life cycles",
+   "level": 2,
+   "prompt": "What does a caterpillar turn into?",
+   "choices": [
+    "a beetle",
+    "a butterfly",
+    "a bee"
+   ],
+   "answer": 1,
+   "explain": "Caterpillars become butterflies."
+  },
+  {
+   "id": "sc2-6",
+   "topic": "food",
+   "level": 2,
+   "prompt": "Which of these is a fruit?",
+   "choices": [
+    "potato",
+    "carrot",
+    "apple"
+   ],
+   "answer": 2,
+   "explain": "Apples grow on trees and have seeds."
+  },
+  {
+   "id": "sc3-1",
+   "topic": "space",
+   "level": 3,
+   "prompt": "Which planet do we live on?",
+   "choices": [
+    "Mars",
+    "Earth",
+    "Jupiter"
+   ],
+   "answer": 1,
+   "explain": "We live on planet Earth."
+  },
+  {
+   "id": "sc3-2",
+   "topic": "animals",
+   "level": 3,
+   "prompt": "Which of these is a reptile?",
+   "choices": [
+    "snake",
+    "frog",
+    "dolphin"
+   ],
+   "answer": 0,
+   "explain": "Reptiles have dry, scaly skin."
+  },
+  {
+   "id": "sc3-3",
+   "topic": "animals",
+   "level": 3,
+   "prompt": "What do bees make?",
+   "choices": [
+    "honey",
+    "milk",
+    "silk"
+   ],
+   "answer": 0,
+   "explain": "Bees make honey from nectar."
+  },
+  {
+   "id": "sc3-4",
+   "topic": "matter",
+   "level": 3,
+   "prompt": "What does ice become when it melts?",
+   "choices": [
+    "steam",
+    "rock",
+    "water"
+   ],
+   "answer": 2,
+   "explain": "Melting turns solid ice into liquid water."
+  },
+  {
+   "id": "sc3-5",
+   "topic": "plants",
+   "level": 3,
+   "prompt": "Which part of a plant takes in water from the soil?",
+   "choices": [
+    "roots",
+    "leaves",
+    "flower"
+   ],
+   "answer": 0,
+   "explain": "Roots soak up water."
+  },
+  {
+   "id": "sc3-6",
+   "topic": "geography",
+   "level": 3,
+   "prompt": "How many continents are there?",
+   "choices": [
+    "5",
+    "10",
+    "7"
+   ],
+   "answer": 2,
+   "explain": "Africa, Antarctica, Asia, Australia, Europe, North America, South America."
+  },
+  {
+   "id": "sc4-1",
+   "topic": "space",
+   "level": 4,
+   "prompt": "How many planets are in our solar system?",
+   "choices": [
+    "9",
+    "8",
+    "7"
+   ],
+   "answer": 1,
+   "explain": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune."
+  },
+  {
+   "id": "sc4-2",
+   "topic": "space",
+   "level": 4,
+   "prompt": "What is the closest star to Earth?",
+   "choices": [
+    "Polaris",
+    "the Sun",
+    "the Moon"
+   ],
+   "answer": 1,
+   "explain": "The Sun is a star, and it is our closest one."
+  },
+  {
+   "id": "sc4-3",
+   "topic": "matter",
+   "level": 4,
+   "prompt": "Water vapour is water in which state?",
+   "choices": [
+    "gas",
+    "solid",
+    "liquid"
+   ],
+   "answer": 0,
+   "explain": "Vapour is a gas."
+  },
+  {
+   "id": "sc4-4",
+   "topic": "animals",
+   "level": 4,
+   "prompt": "What do herbivores eat?",
+   "choices": [
+    "rocks",
+    "plants",
+    "meat"
+   ],
+   "answer": 1,
+   "explain": "Herbi- means plant: cows and rabbits are herbivores."
+  },
+  {
+   "id": "sc4-5",
+   "topic": "geography",
+   "level": 4,
+   "prompt": "Which continent is Egypt in?",
+   "choices": [
+    "Africa",
+    "Europe",
+    "Asia"
+   ],
+   "answer": 0,
+   "explain": "Egypt is in north-east Africa."
+  },
+  {
+   "id": "sc4-6",
+   "topic": "weather",
+   "level": 4,
+   "prompt": "What do we call water falling from clouds?",
+   "choices": [
+    "evaporation",
+    "condensation",
+    "precipitation"
+   ],
+   "answer": 2,
+   "explain": "Rain, snow and hail are precipitation."
+  },
+  {
+   "id": "sc5-1",
+   "topic": "plants",
+   "level": 5,
+   "prompt": "Which gas do plants take in from the air to make food?",
+   "choices": [
+    "carbon dioxide",
+    "helium",
+    "oxygen"
+   ],
+   "answer": 0,
+   "explain": "Plants take in carbon dioxide and give out oxygen."
+  },
+  {
+   "id": "sc5-2",
+   "topic": "earth",
+   "level": 5,
+   "prompt": "What is the hardest natural substance?",
+   "choices": [
+    "diamond",
+    "iron",
+    "gold"
+   ],
+   "answer": 0,
+   "explain": "Diamond is the hardest known natural material."
+  },
+  {
+   "id": "sc5-3",
+   "topic": "body",
+   "level": 5,
+   "prompt": "Which organ pumps blood around your body?",
+   "choices": [
+    "heart",
+    "lungs",
+    "stomach"
+   ],
+   "answer": 0,
+   "explain": "The heart is a muscle that pumps blood."
+  },
+  {
+   "id": "sc5-4",
+   "topic": "forces",
+   "level": 5,
+   "prompt": "What force pulls things toward the Earth?",
+   "choices": [
+    "magnetism",
+    "friction",
+    "gravity"
+   ],
+   "answer": 2,
+   "explain": "Gravity makes things fall down."
+  },
+  {
+   "id": "sc5-5",
+   "topic": "space",
+   "level": 5,
+   "prompt": "Which planet is known as the Red Planet?",
+   "choices": [
+    "Mars",
+    "Venus",
+    "Saturn"
+   ],
+   "answer": 0,
+   "explain": "Mars looks red because of iron oxide (rust) in its soil."
+  },
+  {
+   "id": "sc5-6",
+   "topic": "geography",
+   "level": 5,
+   "prompt": "What is the capital of France?",
+   "choices": [
+    "Lyon",
+    "Rome",
+    "Paris"
+   ],
+   "answer": 2,
+   "explain": "Paris is the capital city of France."
+  },
+  {
+   "id": "sc6-1",
+   "topic": "plants",
+   "level": 6,
+   "prompt": "What is the process plants use to make their own food from light?",
+   "choices": [
+    "photosynthesis",
+    "respiration",
+    "digestion"
+   ],
+   "answer": 0,
+   "explain": "Photo = light. Plants make sugar from light, water and CO₂."
+  },
+  {
+   "id": "sc6-2",
+   "topic": "matter",
+   "level": 6,
+   "prompt": "At what temperature (°C) does pure water boil at sea level?",
+   "choices": [
+    "100",
+    "50",
+    "212"
+   ],
+   "answer": 0,
+   "explain": "Water boils at 100 °C (212 °F)."
+  },
+  {
+   "id": "sc6-3",
+   "topic": "geography",
+   "level": 6,
+   "prompt": "What is the largest ocean on Earth?",
+   "choices": [
+    "Atlantic",
+    "Indian",
+    "Pacific"
+   ],
+   "answer": 2,
+   "explain": "The Pacific covers about a third of the planet."
+  },
+  {
+   "id": "sc6-4",
+   "topic": "energy",
+   "level": 6,
+   "prompt": "Which of these is a renewable energy source?",
+   "choices": [
+    "solar power",
+    "oil",
+    "coal"
+   ],
+   "answer": 0,
+   "explain": "The Sun keeps shining, so solar power does not run out."
+  },
+  {
+   "id": "sc6-5",
+   "topic": "animals",
+   "level": 6,
+   "prompt": "Animals that eat both plants and meat are called…",
+   "choices": [
+    "herbivores",
+    "omnivores",
+    "carnivores"
+   ],
+   "answer": 1,
+   "explain": "Omni means all. Humans and bears are omnivores."
+  },
+  {
+   "id": "sc6-6",
+   "topic": "matter",
+   "level": 6,
+   "prompt": "What is the chemical formula of water?",
+   "choices": [
+    "H₂O",
+    "CO₂",
+    "O₂"
+   ],
+   "answer": 0,
+   "explain": "Two hydrogen atoms and one oxygen atom."
+  },
+  {
+   "id": "sc7-1",
+   "topic": "cells",
+   "level": 7,
+   "prompt": "Which part of a cell is called its \"powerhouse\"?",
+   "choices": [
+    "nucleus",
+    "mitochondria",
+    "membrane"
+   ],
+   "answer": 1,
+   "explain": "Mitochondria release energy from food."
+  },
+  {
+   "id": "sc7-2",
+   "topic": "space",
+   "level": 7,
+   "prompt": "Which planet is famous for its bright rings?",
+   "choices": [
+    "Mars",
+    "Saturn",
+    "Mercury"
+   ],
+   "answer": 1,
+   "explain": "Saturn has the biggest, brightest ring system."
+  },
+  {
+   "id": "sc7-3",
+   "topic": "light",
+   "level": 7,
+   "prompt": "About how fast does light travel?",
+   "choices": [
+    "300 km every second",
+    "3,000 km every hour",
+    "300,000 km every second"
+   ],
+   "answer": 2,
+   "explain": "Light is the fastest thing in the universe."
+  },
+  {
+   "id": "sc7-4",
+   "topic": "body",
+   "level": 7,
+   "prompt": "Which blood cells help fight infection?",
+   "choices": [
+    "platelets",
+    "red blood cells",
+    "white blood cells"
+   ],
+   "answer": 2,
+   "explain": "White blood cells are the body's defenders."
+  },
+  {
+   "id": "sc7-5",
+   "topic": "earth",
+   "level": 7,
+   "prompt": "Rock that forms when lava cools is called…",
+   "choices": [
+    "sedimentary",
+    "igneous",
+    "metamorphic"
+   ],
+   "answer": 1,
+   "explain": "Igneous comes from the Latin for fire."
+  },
+  {
+   "id": "sc7-6",
+   "topic": "body",
+   "level": 7,
+   "prompt": "How many bones does an adult human have?",
+   "choices": [
+    "306",
+    "106",
+    "206"
+   ],
+   "answer": 2,
+   "explain": "Babies are born with about 300 that fuse together."
+  },
+  {
+   "id": "sc8-1",
+   "topic": "chemistry",
+   "level": 8,
+   "prompt": "Which element has the chemical symbol \"Fe\"?",
+   "choices": [
+    "fluorine",
+    "iron",
+    "lead"
+   ],
+   "answer": 1,
+   "explain": "Fe comes from the Latin word ferrum."
+  },
+  {
+   "id": "sc8-2",
+   "topic": "physics",
+   "level": 8,
+   "prompt": "Newton's third law says that every action has…",
+   "choices": [
+    "an equal and opposite reaction",
+    "a longer reaction",
+    "no reaction"
+   ],
+   "answer": 0,
+   "explain": "Pushing a wall pushes you back just as hard."
+  },
+  {
+   "id": "sc8-3",
+   "topic": "chemistry",
+   "level": 8,
+   "prompt": "What is the pH of a neutral substance like pure water?",
+   "choices": [
+    "14",
+    "7",
+    "0"
+   ],
+   "answer": 1,
+   "explain": "Below 7 is acidic; above 7 is basic."
+  },
+  {
+   "id": "sc8-4",
+   "topic": "earth",
+   "level": 8,
+   "prompt": "Which gas makes up most of Earth's atmosphere?",
+   "choices": [
+    "carbon dioxide",
+    "nitrogen",
+    "oxygen"
+   ],
+   "answer": 1,
+   "explain": "About 78% nitrogen and 21% oxygen."
+  },
+  {
+   "id": "sc8-5",
+   "topic": "genetics",
+   "level": 8,
+   "prompt": "What shape is the DNA molecule?",
+   "choices": [
+    "single line",
+    "cube",
+    "double helix"
+   ],
+   "answer": 2,
+   "explain": "Two strands twist around each other."
+  },
+  {
+   "id": "sc8-6",
+   "topic": "history",
+   "level": 8,
+   "prompt": "Which ancient civilization built the pyramids at Giza?",
+   "choices": [
+    "Greeks",
+    "Romans",
+    "Egyptians"
+   ],
+   "answer": 2,
+   "explain": "They were built about 4,500 years ago as tombs."
+  },
+  {
+   "id": "sc9-1",
+   "topic": "physics",
+   "level": 9,
+   "prompt": "What is the SI unit of force?",
+   "choices": [
+    "joule",
+    "newton",
+    "watt"
+   ],
+   "answer": 1,
+   "explain": "1 newton accelerates 1 kg by 1 m/s every second."
+  },
+  {
+   "id": "sc9-2",
+   "topic": "atoms",
+   "level": 9,
+   "prompt": "Which particle has a negative charge?",
+   "choices": [
+    "electron",
+    "proton",
+    "neutron"
+   ],
+   "answer": 0,
+   "explain": "Electrons orbit the nucleus."
+  },
+  {
+   "id": "sc9-3",
+   "topic": "physics",
+   "level": 9,
+   "prompt": "Which formula gives speed?",
+   "choices": [
+    "distance × time",
+    "time ÷ distance",
+    "distance ÷ time"
+   ],
+   "answer": 2,
+   "explain": "Speed = distance ÷ time."
+  },
+  {
+   "id": "sc9-4",
+   "topic": "cells",
+   "level": 9,
+   "prompt": "Which part of a plant cell contains chlorophyll?",
+   "choices": [
+    "vacuole",
+    "nucleus",
+    "chloroplast"
+   ],
+   "answer": 2,
+   "explain": "Chloroplasts capture light and make it green."
+  },
+  {
+   "id": "sc9-5",
+   "topic": "earth",
+   "level": 9,
+   "prompt": "What is the main cause of ocean tides?",
+   "choices": [
+    "the rotation of the Sun",
+    "the wind",
+    "the Moon's gravity"
+   ],
+   "answer": 2,
+   "explain": "The Moon's pull makes the water bulge."
+  },
+  {
+   "id": "sc9-6",
+   "topic": "space",
+   "level": 9,
+   "prompt": "What is the most abundant element in the universe?",
+   "choices": [
+    "carbon",
+    "oxygen",
+    "hydrogen"
+   ],
+   "answer": 2,
+   "explain": "Stars are mostly hydrogen."
+  },
+  {
+   "id": "sc10-1",
+   "topic": "physics",
+   "level": 10,
+   "prompt": "Ohm's law links voltage, current and…",
+   "choices": [
+    "mass",
+    "resistance",
+    "temperature"
+   ],
+   "answer": 1,
+   "explain": "V = I × R."
+  },
+  {
+   "id": "sc10-2",
+   "topic": "cells",
+   "level": 10,
+   "prompt": "Cell division that makes two identical copies of a body cell is called…",
+   "choices": [
+    "osmosis",
+    "mitosis",
+    "meiosis"
+   ],
+   "answer": 1,
+   "explain": "Mitosis is how you grow and heal."
+  },
+  {
+   "id": "sc10-3",
+   "topic": "chemistry",
+   "level": 10,
+   "prompt": "A bond where atoms share electrons is called…",
+   "choices": [
+    "magnetic",
+    "ionic",
+    "covalent"
+   ],
+   "answer": 2,
+   "explain": "Water molecules are held together by covalent bonds."
+  },
+  {
+   "id": "sc10-4",
+   "topic": "physics",
+   "level": 10,
+   "prompt": "Which type of wave has the shortest wavelength?",
+   "choices": [
+    "visible light",
+    "radio waves",
+    "gamma rays"
+   ],
+   "answer": 2,
+   "explain": "Gamma rays carry the most energy."
+  },
+  {
+   "id": "sc10-5",
+   "topic": "earth",
+   "level": 10,
+   "prompt": "What do we call the large slabs that make up Earth's outer shell?",
+   "choices": [
+    "tectonic plates",
+    "magma domes",
+    "ocean basins"
+   ],
+   "answer": 0,
+   "explain": "Their movement causes earthquakes and volcanoes."
+  },
+  {
+   "id": "sc10-6",
+   "topic": "physics",
+   "level": 10,
+   "prompt": "What is the SI unit of energy?",
+   "choices": [
+    "joule",
+    "pascal",
+    "newton"
+   ],
+   "answer": 0,
+   "explain": "Named after James Prescott Joule."
+  }
+ ]
+}

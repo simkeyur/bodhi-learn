@@ -155,6 +155,19 @@ and functions.
 
 ---
 
+## Next steps for ages 4–14
+
+- **More questions.** Each subject has 6 per level; aim for 20+ per level. Add packs (history, geography, coding
+  vocabulary, spelling bee) by adding a subject to `SUBJECTS` in `src/firebase/schema.ts`, the rules, and `subjects.ts`.
+- **Passage reading comprehension** for 8+: a short text with 3 questions (needs a `passage` field on `Question`).
+- **Harder Logic Lab for 9–14**: Code the Bot with functions and conditionals (see the Logic Lab ideas above), Fix the Bug.
+- **Restyle the old games** (Code the Bot, Pattern Parade, Counting…) to match the new home screen and quiz look.
+- **Parent dashboard** can now read `progress.skills` (level and accuracy per subject) straight from the account.
+- **Guests syncing without a Google account** (anonymous auth) so progress is in Firebase from the first launch.
+- **App Check** matters more now: content reads are public, so protect the quota before sharing widely.
+
+---
+
 ## Known limits (today)
 
 - Two devices changing the same thing at the same moment resolve last-write-wins (solved robot levels are

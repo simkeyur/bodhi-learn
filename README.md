@@ -1,12 +1,23 @@
 # Bodhi Learn 🌟
 
-A playful, kid-friendly learning web application and offline-capable PWA designed for children (Ages 3–8) to learn reading, phonics, sight words, counting, and visual mathematics.
+A playful learning web app and offline-capable PWA for children aged **4 to 14**: reading, math, logic and science that start at the right level for the child's age and adjust as they play.
 
 Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebase** (Auth + Firestore). Hosted on **Firebase Hosting**, with **Google sign-in** and **Cloud Firestore** to save progress.
 
 ---
 
 ## 🚀 Features
+
+### 🧭 0. One home screen, four subjects, every age
+- **Home** shows one *Today's pick* and four subjects (Words, Math, Logic, Discover) plus the sticker book.
+  Each subject opens a page with an adaptive **Challenge** and the **games** that suit the child's age
+  (`src/data/subjects.ts` holds the map and each game's age range).
+- **Ages 4–14, three looks.** The parent sets an exact age (Parent Settings). It picks a band that styles the home
+  screen: *little* 4–6 (bright, Buddy the Bear, voice), *explorer* 7–10, *pro* 11–14 (calmer, no mascot).
+- **Challenges** are 8-question rounds. Level 1 (about age 4) to 10 (about age 14), adaptive: four right in a row
+  goes up, two wrong in a row goes down, and the child can also pick a level. Level and accuracy are saved per
+  subject. Math is generated (`src/content/mathGen.ts`: counting, times tables, fractions, percentages,
+  pre-algebra, Pythagoras…); Words, Logic and Discover come from question packs (below).
 
 ### ✏️ 1. ABC Journey & Letter / Spelling Tracing
 - **ABC Tracing Journey**: Big-screen tactile letter tracing for A–Z (e.g. *A for Apple 🍎*, *B for Ball ⚽*). Features standard kindergarten handwriting lines (sky line, plane line, grass line), capital & small letter toggles, and magic rainbow glowing brush strokes.
@@ -37,7 +48,7 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
 
 ### 🛡️ 4. Parental Controls & Settings (Gated)
 - **Math Security Gate**: Settings are protected by an adult math challenge (e.g., `8 + 7 = ?`) to avoid accidental taps.
-- **Learner Profile**: Customize the child's name and learning difficulty bracket (Pre-K, Kindergarten, or 1st Grade).
+- **Learner Profile**: Customize the child's name and age (4–14). From age 9 the gate is a harder sum.
 - **Sound & Voice Controls**: Toggle sound effects and voice narration.
 - **Reward Gifts**: Parents can gift stars for offline chores or real-world milestones.
 
@@ -106,13 +117,34 @@ The earlier OpenAI recordings are archived locally in `audio-archive/` (git-igno
 
 ---
 
+## 📦 Learning content (Firestore → device)
+
+The question packs (`src/content/packs/{reading,science,logic}.json`) live in two places:
+
+- **Bundled** in the app, so a first launch works offline.
+- **Firestore** at `content_packs/{subject}` plus `content_meta/current` (public to read, never writable from the app).
+  On every launch (and when the device comes back online) the app reads `content_meta/current`, downloads only
+  packs whose `version` is newer than what it has, and keeps them in IndexedDB (`src/content/store.ts`).
+  Anything downloaded is validated first.
+
+To change questions: edit a pack, **bump its `version`**, then publish:
+
+```bash
+npm run content:seed -- --dry-run   # see what would change
+npm run content:seed                # publish packs newer than what is online (needs `gcloud auth login` with admin access)
+```
+
+Math generators and the early-years games (words, stories, tracing) are code/bundled assets, not Firestore content.
+
+---
+
 ## ☁️ Accounts, Sync & Hosting (Firebase)
 
 Project: `bodhi-learn` · Live site: https://bodhi-learn.web.app
 
 - **Guest mode** works with no account (progress stays on the device).
 - **Parents sign in with Google** under *Parent Settings* (behind the math gate), so children never see
-  a login screen. Stars, stickers, name, age group and voice settings sync live to Firestore at
+  a login screen. Stars, stickers, name, age, per-subject levels and accuracy, and voice settings sync live to Firestore at
   `users/{uid}` and work offline. A new account adopts the device's progress; an account that already
   has progress wins. Signing out clears the device; *Delete account* removes the account and its data.
 - **Security rules** (`firestore.rules`): each user can only read and write their own document, and the

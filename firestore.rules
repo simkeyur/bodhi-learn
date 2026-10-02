@@ -1,7 +1,9 @@
 rules_version = '2';
 
 // Each signed-in parent can read and write only their own document, users/{uid}.
-// The document holds the learner profile, settings and progress (stars, stickers).
+// The document holds the learner profile, settings and progress (stars, stickers, skills).
+// Learning content (content_meta, content_packs) is public to read and never writable from
+// the app; it is published with `npm run content:seed` using admin credentials.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -19,19 +21,39 @@ service cloud.firestore {
 
     function validProfile(p) {
       return p is map
-        && p.keys().hasOnly(['kidName', 'ageBracket'])
+        && p.keys().hasOnly(['kidName', 'ageBracket', 'age'])
         && p.kidName is string && p.kidName.size() >= 1 && p.kidName.size() <= 40
-        && p.ageBracket in ['pre-k', 'kindergarten', 'grade1'];
+        && p.ageBracket in ['pre-k', 'kindergarten', 'grade1']
+        // age is optional so documents written by older versions of the app stay valid
+        && (!('age' in p) || (p.age is int && p.age >= 4 && p.age <= 14));
+    }
+
+    function validSkill(k) {
+      return k is map
+        && k.keys().hasOnly(['level', 'answered', 'correct'])
+        && k.level is int && k.level >= 1 && k.level <= 10
+        && k.answered is int && k.answered >= 0 && k.answered <= 1000000
+        && k.correct is int && k.correct >= 0 && k.correct <= k.answered;
+    }
+
+    function validSkills(s) {
+      return s is map
+        && s.keys().hasOnly(['math', 'reading', 'logic', 'science'])
+        && (!('math' in s) || validSkill(s.math))
+        && (!('reading' in s) || validSkill(s.reading))
+        && (!('logic' in s) || validSkill(s.logic))
+        && (!('science' in s) || validSkill(s.science));
     }
 
     function validProgress(p) {
       return p is map
-        && p.keys().hasOnly(['stars', 'unlockedStickers', 'placedStickers', 'botSolved'])
+        && p.keys().hasOnly(['stars', 'unlockedStickers', 'placedStickers', 'botSolved', 'skills'])
         && p.stars is int && p.stars >= 0 && p.stars <= 1000000
         && p.unlockedStickers is list && p.unlockedStickers.size() <= 50
         && p.placedStickers is list && p.placedStickers.size() <= 300
         // botSolved is optional so documents written by older versions of the app stay valid
-        && (!('botSolved' in p) || (p.botSolved is list && p.botSolved.size() <= 60));
+        && (!('botSolved' in p) || (p.botSolved is list && p.botSolved.size() <= 60))
+        && (!('skills' in p) || validSkills(p.skills));
     }
 
     function validUserDoc(d) {
@@ -47,6 +69,17 @@ service cloud.firestore {
       allow read: if isOwner(uid);
       allow create, update: if isOwner(uid) && validUserDoc(request.resource.data);
       allow delete: if isOwner(uid);
+    }
+
+    // Learning content: anyone can read (so a fresh install can pull it), nobody can write
+    match /content_meta/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /content_packs/{id} {
+      allow read: if true;
+      allow write: if false;
     }
 
     // Everything else is closed

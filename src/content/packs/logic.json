@@ -1,0 +1,787 @@
+{
+ "subject": "logic",
+ "version": 1,
+ "title": "Logic & Puzzles",
+ "questions": [
+  {
+   "id": "lo1-1",
+   "topic": "patterns",
+   "level": 1,
+   "prompt": "What comes next? 🔴 🔵 🔴 🔵 🔴 ?",
+   "choices": [
+    "🔵",
+    "🟢",
+    "🔴"
+   ],
+   "answer": 0,
+   "explain": "The pattern alternates red, blue."
+  },
+  {
+   "id": "lo1-2",
+   "topic": "odd one out",
+   "level": 1,
+   "prompt": "Which one does not belong? dog, cat, car, cow",
+   "choices": [
+    "cow",
+    "car",
+    "dog"
+   ],
+   "answer": 1,
+   "explain": "Dogs, cats and cows are animals; a car is not."
+  },
+  {
+   "id": "lo1-3",
+   "topic": "shapes",
+   "level": 1,
+   "prompt": "Which shape has 3 sides?",
+   "choices": [
+    "triangle",
+    "square",
+    "circle"
+   ],
+   "answer": 0,
+   "explain": "Tri means three."
+  },
+  {
+   "id": "lo1-4",
+   "topic": "sequences",
+   "level": 1,
+   "prompt": "What comes next? 1, 2, 3, ?",
+   "choices": [
+    "5",
+    "4",
+    "2"
+   ],
+   "answer": 1,
+   "explain": "Count on by one."
+  },
+  {
+   "id": "lo1-5",
+   "topic": "patterns",
+   "level": 1,
+   "prompt": "What comes next? ⭐ ⭐ 🌙 ⭐ ⭐ ?",
+   "choices": [
+    "🌞",
+    "⭐",
+    "🌙"
+   ],
+   "answer": 2,
+   "explain": "The pattern is star, star, moon."
+  },
+  {
+   "id": "lo1-6",
+   "topic": "sorting",
+   "level": 1,
+   "prompt": "Which is the biggest?",
+   "choices": [
+    "a mouse",
+    "an elephant",
+    "a cat"
+   ],
+   "answer": 1,
+   "explain": "Elephants are the largest land animals."
+  },
+  {
+   "id": "lo2-1",
+   "topic": "sequences",
+   "level": 2,
+   "prompt": "What comes next? 2, 4, 6, ?",
+   "choices": [
+    "7",
+    "10",
+    "8"
+   ],
+   "answer": 2,
+   "explain": "Add 2 each time."
+  },
+  {
+   "id": "lo2-2",
+   "topic": "odd one out",
+   "level": 2,
+   "prompt": "Which one does not belong? apple, banana, carrot, grape",
+   "choices": [
+    "carrot",
+    "apple",
+    "grape"
+   ],
+   "answer": 0,
+   "explain": "Carrot is a vegetable; the others are fruit."
+  },
+  {
+   "id": "lo2-3",
+   "topic": "time",
+   "level": 2,
+   "prompt": "Which comes first in a day?",
+   "choices": [
+    "night",
+    "evening",
+    "morning"
+   ],
+   "answer": 2,
+   "explain": "Morning, afternoon, evening, night."
+  },
+  {
+   "id": "lo2-4",
+   "topic": "shapes",
+   "level": 2,
+   "prompt": "How many sides does a square have?",
+   "choices": [
+    "4",
+    "5",
+    "3"
+   ],
+   "answer": 0,
+   "explain": "A square has four equal sides."
+  },
+  {
+   "id": "lo2-5",
+   "topic": "patterns",
+   "level": 2,
+   "prompt": "What comes next? A, B, A, B, A, ?",
+   "choices": [
+    "A",
+    "B",
+    "C"
+   ],
+   "answer": 1,
+   "explain": "The pattern alternates."
+  },
+  {
+   "id": "lo2-6",
+   "topic": "reasoning",
+   "level": 2,
+   "prompt": "Which is heavier?",
+   "choices": [
+    "a feather",
+    "a leaf",
+    "a rock"
+   ],
+   "answer": 2,
+   "explain": "A rock weighs much more than a feather."
+  },
+  {
+   "id": "lo3-1",
+   "topic": "sequences",
+   "level": 3,
+   "prompt": "What comes next? 5, 10, 15, ?",
+   "choices": [
+    "18",
+    "25",
+    "20"
+   ],
+   "answer": 2,
+   "explain": "Add 5 each time."
+  },
+  {
+   "id": "lo3-2",
+   "topic": "deduction",
+   "level": 3,
+   "prompt": "All cats are animals. Tom is a cat. So Tom is…",
+   "choices": [
+    "a dog",
+    "an animal",
+    "a plant"
+   ],
+   "answer": 1,
+   "explain": "If all cats are animals and Tom is a cat, Tom is an animal."
+  },
+  {
+   "id": "lo3-3",
+   "topic": "sequences",
+   "level": 3,
+   "prompt": "What comes next? A, C, E, G, ?",
+   "choices": [
+    "I",
+    "H",
+    "J"
+   ],
+   "answer": 0,
+   "explain": "Skip one letter each time."
+  },
+  {
+   "id": "lo3-4",
+   "topic": "odd one out",
+   "level": 3,
+   "prompt": "Which number does not belong? 2, 4, 7, 8",
+   "choices": [
+    "8",
+    "7",
+    "2"
+   ],
+   "answer": 1,
+   "explain": "The others are even; 7 is odd."
+  },
+  {
+   "id": "lo3-5",
+   "topic": "time",
+   "level": 3,
+   "prompt": "What day comes after Monday?",
+   "choices": [
+    "Sunday",
+    "Tuesday",
+    "Wednesday"
+   ],
+   "answer": 1,
+   "explain": "Mon, Tue, Wed…"
+  },
+  {
+   "id": "lo3-6",
+   "topic": "patterns",
+   "level": 3,
+   "prompt": "What comes next? 10, 9, 8, 7, ?",
+   "choices": [
+    "8",
+    "5",
+    "6"
+   ],
+   "answer": 2,
+   "explain": "Count back by one."
+  },
+  {
+   "id": "lo4-1",
+   "topic": "sequences",
+   "level": 4,
+   "prompt": "What comes next? 3, 6, 12, 24, ?",
+   "choices": [
+    "36",
+    "30",
+    "48"
+   ],
+   "answer": 2,
+   "explain": "Double each time."
+  },
+  {
+   "id": "lo4-2",
+   "topic": "deduction",
+   "level": 4,
+   "prompt": "Tim is taller than Sam. Sam is taller than Lee. Who is the shortest?",
+   "choices": [
+    "Tim",
+    "Lee",
+    "Sam"
+   ],
+   "answer": 1,
+   "explain": "Tim > Sam > Lee."
+  },
+  {
+   "id": "lo4-3",
+   "topic": "odd one out",
+   "level": 4,
+   "prompt": "Which number is odd? 12, 18, 21, 30",
+   "choices": [
+    "21",
+    "12",
+    "30"
+   ],
+   "answer": 0,
+   "explain": "Odd numbers end in 1, 3, 5, 7 or 9."
+  },
+  {
+   "id": "lo4-4",
+   "topic": "code",
+   "level": 4,
+   "prompt": "x = 3. Then x = x + 2. What is x now?",
+   "choices": [
+    "3",
+    "2",
+    "5"
+   ],
+   "answer": 2,
+   "explain": "x started at 3 and had 2 added."
+  },
+  {
+   "id": "lo4-5",
+   "topic": "probability",
+   "level": 4,
+   "prompt": "If you flip a coin twice, how many different results are possible?",
+   "choices": [
+    "3",
+    "2",
+    "4"
+   ],
+   "answer": 2,
+   "explain": "HH, HT, TH, TT."
+  },
+  {
+   "id": "lo4-6",
+   "topic": "reasoning",
+   "level": 4,
+   "prompt": "A kilo of feathers and a kilo of bricks. Which weighs more?",
+   "choices": [
+    "the feathers",
+    "They weigh the same",
+    "the bricks"
+   ],
+   "answer": 1,
+   "explain": "Both are one kilo."
+  },
+  {
+   "id": "lo5-1",
+   "topic": "sequences",
+   "level": 5,
+   "prompt": "What comes next? 1, 4, 9, 16, ?",
+   "choices": [
+    "24",
+    "20",
+    "25"
+   ],
+   "answer": 2,
+   "explain": "Square numbers: 1², 2², 3², 4², 5²."
+  },
+  {
+   "id": "lo5-2",
+   "topic": "deduction",
+   "level": 5,
+   "prompt": "All birds have feathers. A penguin is a bird. So a penguin…",
+   "choices": [
+    "is a mammal",
+    "can fly",
+    "has feathers"
+   ],
+   "answer": 2,
+   "explain": "It follows from the first two sentences."
+  },
+  {
+   "id": "lo5-3",
+   "topic": "code",
+   "level": 5,
+   "prompt": "Repeat 3 times: add 2 to a number that starts at 0. What is the number at the end?",
+   "choices": [
+    "6",
+    "3",
+    "5"
+   ],
+   "answer": 0,
+   "explain": "0 → 2 → 4 → 6."
+  },
+  {
+   "id": "lo5-4",
+   "topic": "puzzle",
+   "level": 5,
+   "prompt": "A farmer has 17 sheep. All but 9 run away. How many are left?",
+   "choices": [
+    "9",
+    "8",
+    "17"
+   ],
+   "answer": 0,
+   "explain": "\"All but 9\" means 9 stay."
+  },
+  {
+   "id": "lo5-5",
+   "topic": "shapes",
+   "level": 5,
+   "prompt": "A cube has how many faces?",
+   "choices": [
+    "8",
+    "6",
+    "4"
+   ],
+   "answer": 1,
+   "explain": "Like a die: 6 square faces."
+  },
+  {
+   "id": "lo5-6",
+   "topic": "patterns",
+   "level": 5,
+   "prompt": "What comes next? Z, Y, X, W, ?",
+   "choices": [
+    "U",
+    "V",
+    "A"
+   ],
+   "answer": 1,
+   "explain": "Going backwards through the alphabet."
+  },
+  {
+   "id": "lo6-1",
+   "topic": "sequences",
+   "level": 6,
+   "prompt": "What comes next? 2, 3, 5, 8, 13, ?",
+   "choices": [
+    "21",
+    "18",
+    "20"
+   ],
+   "answer": 0,
+   "explain": "Each number is the sum of the two before it."
+  },
+  {
+   "id": "lo6-2",
+   "topic": "binary",
+   "level": 6,
+   "prompt": "In binary, what number is 101?",
+   "choices": [
+    "3",
+    "7",
+    "5"
+   ],
+   "answer": 2,
+   "explain": "4 + 0 + 1 = 5."
+  },
+  {
+   "id": "lo6-3",
+   "topic": "code",
+   "level": 6,
+   "prompt": "IF x > 5 THEN print \"big\" ELSE print \"small\". x = 4. What is printed?",
+   "choices": [
+    "big",
+    "nothing",
+    "small"
+   ],
+   "answer": 2,
+   "explain": "4 is not greater than 5."
+  },
+  {
+   "id": "lo6-4",
+   "topic": "combinatorics",
+   "level": 6,
+   "prompt": "Four friends each shake hands once with everyone else. How many handshakes?",
+   "choices": [
+    "4",
+    "6",
+    "8"
+   ],
+   "answer": 1,
+   "explain": "4 × 3 ÷ 2 = 6."
+  },
+  {
+   "id": "lo6-5",
+   "topic": "cipher",
+   "level": 6,
+   "prompt": "If A=1, B=2, C=3 and so on, what is C + D?",
+   "choices": [
+    "5",
+    "7",
+    "9"
+   ],
+   "answer": 1,
+   "explain": "3 + 4 = 7."
+  },
+  {
+   "id": "lo6-6",
+   "topic": "patterns",
+   "level": 6,
+   "prompt": "red, red, blue, red, red, blue, … What is the 8th item?",
+   "choices": [
+    "blue",
+    "red",
+    "green"
+   ],
+   "answer": 1,
+   "explain": "Items 7 and 8 are red, red."
+  },
+  {
+   "id": "lo7-1",
+   "topic": "binary",
+   "level": 7,
+   "prompt": "In binary, what number is 1101?",
+   "choices": [
+    "11",
+    "13",
+    "15"
+   ],
+   "answer": 1,
+   "explain": "8 + 4 + 0 + 1 = 13."
+  },
+  {
+   "id": "lo7-2",
+   "topic": "code",
+   "level": 7,
+   "prompt": "total = 0. For i from 1 to 4: total = total + i. What is total?",
+   "choices": [
+    "4",
+    "24",
+    "10"
+   ],
+   "answer": 2,
+   "explain": "1 + 2 + 3 + 4 = 10."
+  },
+  {
+   "id": "lo7-3",
+   "topic": "puzzle",
+   "level": 7,
+   "prompt": "A bat and a ball cost $1.10. The bat costs $1 more than the ball. How much is the ball?",
+   "choices": [
+    "5 cents",
+    "1 dollar",
+    "10 cents"
+   ],
+   "answer": 0,
+   "explain": "Ball $0.05, bat $1.05, total $1.10."
+  },
+  {
+   "id": "lo7-4",
+   "topic": "puzzle",
+   "level": 7,
+   "prompt": "5 machines make 5 widgets in 5 minutes. How long for 100 machines to make 100 widgets?",
+   "choices": [
+    "5 minutes",
+    "20 minutes",
+    "100 minutes"
+   ],
+   "answer": 0,
+   "explain": "Each machine makes one widget in 5 minutes."
+  },
+  {
+   "id": "lo7-5",
+   "topic": "deduction",
+   "level": 7,
+   "prompt": "All squares are rectangles. Is every rectangle a square?",
+   "choices": [
+    "No, not always",
+    "Only on Tuesdays",
+    "Yes, always"
+   ],
+   "answer": 0,
+   "explain": "A 2×3 rectangle is not a square."
+  },
+  {
+   "id": "lo7-6",
+   "topic": "sequences",
+   "level": 7,
+   "prompt": "What comes next? 1, 1, 2, 3, 5, 8, ?",
+   "choices": [
+    "16",
+    "11",
+    "13"
+   ],
+   "answer": 2,
+   "explain": "Fibonacci: add the last two."
+  },
+  {
+   "id": "lo8-1",
+   "topic": "sequences",
+   "level": 8,
+   "prompt": "What comes next? 2, 6, 18, 54, ?",
+   "choices": [
+    "162",
+    "72",
+    "108"
+   ],
+   "answer": 0,
+   "explain": "Multiply by 3 each time."
+  },
+  {
+   "id": "lo8-2",
+   "topic": "binary",
+   "level": 8,
+   "prompt": "What is the number 10 in binary?",
+   "choices": [
+    "1001",
+    "1100",
+    "1010"
+   ],
+   "answer": 2,
+   "explain": "8 + 2 = 10 → 1010."
+  },
+  {
+   "id": "lo8-3",
+   "topic": "boolean",
+   "level": 8,
+   "prompt": "What is the result of: true AND false?",
+   "choices": [
+    "maybe",
+    "true",
+    "false"
+   ],
+   "answer": 2,
+   "explain": "AND is true only when both are true."
+  },
+  {
+   "id": "lo8-4",
+   "topic": "boolean",
+   "level": 8,
+   "prompt": "What is the result of: true OR false?",
+   "choices": [
+    "false",
+    "maybe",
+    "true"
+   ],
+   "answer": 2,
+   "explain": "OR is true when at least one is true."
+  },
+  {
+   "id": "lo8-5",
+   "topic": "probability",
+   "level": 8,
+   "prompt": "What is the probability of rolling an even number on a fair six-sided die?",
+   "choices": [
+    "1/3",
+    "1/6",
+    "1/2"
+   ],
+   "answer": 2,
+   "explain": "2, 4, 6 are 3 of the 6 outcomes."
+  },
+  {
+   "id": "lo8-6",
+   "topic": "combinatorics",
+   "level": 8,
+   "prompt": "In how many different orders can you line up the letters A, B and C?",
+   "choices": [
+    "6",
+    "9",
+    "3"
+   ],
+   "answer": 0,
+   "explain": "3 × 2 × 1 = 6."
+  },
+  {
+   "id": "lo9-1",
+   "topic": "sequences",
+   "level": 9,
+   "prompt": "What comes next? 1, 3, 7, 15, 31, ?",
+   "choices": [
+    "62",
+    "47",
+    "63"
+   ],
+   "answer": 2,
+   "explain": "Double and add 1."
+  },
+  {
+   "id": "lo9-2",
+   "topic": "boolean",
+   "level": 9,
+   "prompt": "What is NOT (true AND false)?",
+   "choices": [
+    "undefined",
+    "false",
+    "true"
+   ],
+   "answer": 2,
+   "explain": "true AND false = false, and NOT false = true."
+  },
+  {
+   "id": "lo9-3",
+   "topic": "binary",
+   "level": 9,
+   "prompt": "What is 11111111 in binary as a normal number?",
+   "choices": [
+    "127",
+    "255",
+    "256"
+   ],
+   "answer": 1,
+   "explain": "2⁸ − 1 = 255."
+  },
+  {
+   "id": "lo9-4",
+   "topic": "sequences",
+   "level": 9,
+   "prompt": "What comes next? O, T, T, F, F, S, S, ?",
+   "choices": [
+    "E",
+    "N",
+    "T"
+   ],
+   "answer": 0,
+   "explain": "One, Two, Three, Four, Five, Six, Seven, Eight."
+  },
+  {
+   "id": "lo9-5",
+   "topic": "probability",
+   "level": 9,
+   "prompt": "What is the probability of getting two heads when you flip a coin twice?",
+   "choices": [
+    "1/2",
+    "1/3",
+    "1/4"
+   ],
+   "answer": 2,
+   "explain": "½ × ½ = ¼."
+  },
+  {
+   "id": "lo9-6",
+   "topic": "deduction",
+   "level": 9,
+   "prompt": "No reptiles are mammals. All snakes are reptiles. Therefore…",
+   "choices": [
+    "some snakes are mammals",
+    "no snakes are mammals",
+    "all snakes are mammals"
+   ],
+   "answer": 1,
+   "explain": "Snakes are reptiles, and reptiles are never mammals."
+  },
+  {
+   "id": "lo10-1",
+   "topic": "sequences",
+   "level": 10,
+   "prompt": "What is 1 + 2 + 3 + … + 100?",
+   "choices": [
+    "5000",
+    "5050",
+    "10100"
+   ],
+   "answer": 1,
+   "explain": "Pair 1 with 100, 2 with 99…: 50 pairs of 101."
+  },
+  {
+   "id": "lo10-2",
+   "topic": "binary",
+   "level": 10,
+   "prompt": "What is 100000 in binary as a normal number?",
+   "choices": [
+    "16",
+    "32",
+    "64"
+   ],
+   "answer": 1,
+   "explain": "It is 2⁵."
+  },
+  {
+   "id": "lo10-3",
+   "topic": "algorithms",
+   "level": 10,
+   "prompt": "To find an item in an unsorted list of n items, in the worst case you must check about…",
+   "choices": [
+    "1 item",
+    "n items",
+    "log n items"
+   ],
+   "answer": 1,
+   "explain": "You may have to look at every item."
+  },
+  {
+   "id": "lo10-4",
+   "topic": "algorithms",
+   "level": 10,
+   "prompt": "About how many guesses does binary search need, at most, to find a number between 1 and 1000?",
+   "choices": [
+    "100",
+    "500",
+    "10"
+   ],
+   "answer": 2,
+   "explain": "Each guess halves the range: 2¹⁰ = 1024."
+  },
+  {
+   "id": "lo10-5",
+   "topic": "boolean",
+   "level": 10,
+   "prompt": "What is true XOR true?",
+   "choices": [
+    "null",
+    "false",
+    "true"
+   ],
+   "answer": 1,
+   "explain": "XOR is true only when exactly one input is true."
+  },
+  {
+   "id": "lo10-6",
+   "topic": "number theory",
+   "level": 10,
+   "prompt": "Which of these numbers is prime?",
+   "choices": [
+    "51",
+    "53",
+    "57"
+   ],
+   "answer": 1,
+   "explain": "51 = 3 × 17 and 57 = 3 × 19; 53 has no other factors."
+  }
+ ]
+}
