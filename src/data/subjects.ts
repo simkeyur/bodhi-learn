@@ -73,6 +73,10 @@ export const SUBJECT_INFO: Record<Subject, SubjectInfo> = {
 export const STICKER_MAX_AGE = 6;
 export const hasStickers = (age: number) => age <= STICKER_MAX_AGE;
 
+// Buddy the Bear's tap-to-hear button is only for the youngest children
+export const BUDDY_MAX_AGE = 5;
+export const hasBuddy = (age: number) => age <= BUDDY_MAX_AGE;
+
 export const SUBJECT_ORDER: Subject[] = ['reading', 'math', 'logic', 'science'];
 
 export const gamesForAge = (subject: Subject, age: number): Game[] =>

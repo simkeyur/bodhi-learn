@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Sparkles, Volume2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge, hasStickers } from '../../data/subjects';
+import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge, hasBuddy, hasStickers } from '../../data/subjects';
 import { MODE_LABEL, quizGamesFor } from '../../data/quizGames';
 import { sound } from '../../utils/sound';
 import { speech, clip } from '../../utils/speech';
@@ -63,7 +63,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
             Hi <span style={{ color: '#0284C7' }}>{kidName}</span>! What shall we play? 🚀
           </h2>
         </div>
-        {ageBand !== 'pro' && (
+        {hasBuddy(age) && (
           <button className="btn-reset hub-buddy" onClick={hearBuddy} aria-label="Hear Buddy the Bear">
             <span style={{ fontSize: '2.2rem' }} className="animate-bob" aria-hidden>🐻</span>
             <span className="hub-buddy-text">
