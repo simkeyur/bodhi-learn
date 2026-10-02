@@ -146,7 +146,7 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
   const style = { '--q-color': game.color, '--q-dark': game.dark, '--q-tint': game.tint } as React.CSSProperties;
   const levelMoved = levelState.level - startLevel;
   const wrongPicked = picked !== null && question !== null && picked !== question.answer;
-  const lastQuestion = mode === 'round' ? askedRef.current >= ROUND_QUESTIONS : mode === 'lives' ? livesRef.current <= 0 || askedRef.current >= LIVES_CAP : false;
+  const lastQuestion = mode === 'round' ? asked >= ROUND_QUESTIONS : mode === 'lives' ? lives <= 0 || asked >= LIVES_CAP : false;
 
   return (
     <div className="page quiz" style={style}>
@@ -255,7 +255,7 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
           <p className="quiz-sub">
             {mode === 'round' && (score === ROUND_QUESTIONS ? 'A perfect round!' : score >= ROUND_QUESTIONS / 2 ? 'Nice work.' : 'Good try. Every round makes you stronger.')}
             {mode === 'sprint' && (score >= 15 ? 'Lightning fast!' : score >= 8 ? 'Quick thinking!' : 'Try again and beat your score.')}
-            {mode === 'lives' && (livesRef.current > 0 ? `You made it through all ${LIVES_CAP} questions!` : score >= 10 ? 'What a run!' : 'Good try. Go again!')}
+            {mode === 'lives' && (lives > 0 ? `You made it through all ${LIVES_CAP} questions!` : score >= 10 ? 'What a run!' : 'Good try. Go again!')}
           </p>
           <p className="quiz-stars">+{earned} ⭐</p>
           {levelMoved !== 0 && (
