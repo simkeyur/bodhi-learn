@@ -28,6 +28,7 @@ export type { AgeBand, AgeBracket, PlacedSticker, Skills, Subject };
 
 interface CloudAccount {
   user: CloudUser | null;
+  restored: boolean; // the signed-in account already had saved progress, which this device loaded
   authReady: boolean;
   status: SyncStatus;
   error: string | null;
@@ -47,6 +48,8 @@ interface AppContextType {
   removePlacedSticker: (id: string) => void;
   botSolved: string[];
   markBotSolved: (levelId: string) => boolean; // true the first time a level is solved
+  onboarded: boolean; // the welcome questions (age, name) have been answered
+  completeOnboarding: (name: string) => void;
   age: number; // 4..14
   setAge: (age: number) => void;
   ageBand: AgeBand; // little 4-6, explorer 7-10, pro 11-14
@@ -96,7 +99,23 @@ const store = (key: string, value: string) => {
   }
 };
 
+const ONBOARDED_KEY = 'bodhi_onboarded';
+
+// A device counts as set up if it finished the welcome questions, or if it was used before they
+// existed (older versions stored an age under one of these keys)
+const wasOnboarded = (): boolean => {
+  try {
+    return localStorage.getItem(ONBOARDED_KEY) === 'true'
+      || localStorage.getItem('bodhi_age') !== null
+      || localStorage.getItem('bodhi_exact_age') !== null;
+  } catch {
+    return false;
+  }
+};
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [onboarded, setOnboarded] = useState<boolean>(wasOnboarded);
+
   const [stars, setStars] = useState<number>(() =>
     readStored('bodhi_stars', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) && n >= 0 ? n : undefined; }, DEFAULT_STATE.stars));
 
@@ -139,13 +158,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return speed;
   });
 
-  useEffect(() => store('bodhi_stars', stars.toString()), [stars]);
-  useEffect(() => store('bodhi_stickers', JSON.stringify(unlockedStickers)), [unlockedStickers]);
-  useEffect(() => store('bodhi_placed_stickers', JSON.stringify(placedStickers)), [placedStickers]);
-  useEffect(() => store('bodhi_bot_solved', JSON.stringify(botSolved)), [botSolved]);
-  useEffect(() => store('bodhi_exact_age', String(age)), [age]);
-  useEffect(() => store('bodhi_skills', JSON.stringify(skills)), [skills]);
-  useEffect(() => store('bodhi_kid_name', kidName), [kidName]);
+  // Nothing is written to this device until the welcome questions are answered, so a visitor who
+  // leaves halfway doesn't get a made-up age saved for them
+  useEffect(() => { if (onboarded) store(ONBOARDED_KEY, 'true'); }, [onboarded]);
+  useEffect(() => { if (onboarded) store('bodhi_stars', stars.toString()); }, [onboarded, stars]);
+  useEffect(() => { if (onboarded) store('bodhi_stickers', JSON.stringify(unlockedStickers)); }, [onboarded, unlockedStickers]);
+  useEffect(() => { if (onboarded) store('bodhi_placed_stickers', JSON.stringify(placedStickers)); }, [onboarded, placedStickers]);
+  useEffect(() => { if (onboarded) store('bodhi_bot_solved', JSON.stringify(botSolved)); }, [onboarded, botSolved]);
+  useEffect(() => { if (onboarded) store('bodhi_exact_age', String(age)); }, [onboarded, age]);
+  useEffect(() => { if (onboarded) store('bodhi_skills', JSON.stringify(skills)); }, [onboarded, skills]);
+  useEffect(() => { if (onboarded) store('bodhi_kid_name', kidName); }, [onboarded, kidName]);
 
   const setSoundEnabled = (enabled: boolean) => {
     setSoundEnabledState(enabled);
@@ -214,7 +236,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setBotSolved(next.botSolved);
   };
 
-  const cloud = useCloudSync(synced, applyCloudState);
+  // Signing out wipes this device's progress, so the next person is asked who they are again
+  const handleSignedOut = () => {
+    try {
+      // The persistence effects pause while not onboarded, so clear the old family's copy here
+      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
+        .forEach((k) => localStorage.removeItem(k));
+    } catch { /* ignore */ }
+    setOnboarded(false);
+  };
+
+  const cloud = useCloudSync(synced, applyCloudState, handleSignedOut);
+
+  // Signing in to an account that already has progress skips the welcome questions
+  useEffect(() => {
+    if (cloud.restored) setOnboarded(true);
+  }, [cloud.restored]);
+
+  const completeOnboarding = (name: string) => {
+    const trimmed = name.trim().slice(0, 40);
+    if (trimmed) setKidNameState(trimmed);
+    setOnboarded(true);
+  };
 
   // Pull any newer learning content from Firestore into this device (no sign-in needed)
   useEffect(() => {
@@ -286,6 +329,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         removePlacedSticker,
         botSolved,
         markBotSolved,
+        onboarded,
+        completeOnboarding,
         age,
         setAge,
         ageBand,

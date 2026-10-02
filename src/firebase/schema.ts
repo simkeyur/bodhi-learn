@@ -57,7 +57,7 @@ export const MAX_PLACED_STICKERS = 150;
 export const MAX_BOT_SOLVED = 60;
 
 export const DEFAULT_STATE: SyncedState = {
-  kidName: 'Bodhi',
+  kidName: 'Explorer',
   age: 5,
   speechEnabled: true,
   voiceSpeed: 0.85,

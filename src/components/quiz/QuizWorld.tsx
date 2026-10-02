@@ -115,8 +115,8 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
   return (
     <div className="page quiz" style={style}>
       <div className="quiz-bar">
-        <button className="quiz-back" onClick={() => { sound.playPop(); speech.stop(); onBack(); }} aria-label={`Back to ${info.title}`}>
-          <ArrowLeft size={20} /> <span>{info.title}</span>
+        <button className="quiz-back" onClick={() => { sound.playPop(); speech.stop(); onBack(); }} aria-label="Back to home">
+          <ArrowLeft size={20} /> <span>Home</span>
         </button>
         {phase === 'playing' && (
           <div className="quiz-dots" role="progressbar" aria-valuemin={0} aria-valuemax={ROUND_LENGTH} aria-valuenow={index}>

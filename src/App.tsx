@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AppProvider } from './context/AppContext';
 import { Header } from './components/layout/Header';
+import { Welcome } from './components/onboarding/Welcome';
 import { Home } from './components/home/Home';
-import { SubjectPage } from './components/home/SubjectPage';
 import { QuizWorld } from './components/quiz/QuizWorld';
-import { SUBJECT_ORDER, subjectOfView } from './data/subjects';
+import { SUBJECT_ORDER } from './data/subjects';
 import { useApp } from './context/AppContext';
 import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
@@ -24,7 +24,7 @@ import { speech } from './utils/speech';
 export const BodhiApp: React.FC = () => {
   const [currentView, setCurrentViewState] = useState<string>('home');
   const [isParentGateOpen, setIsParentGateOpen] = useState<boolean>(false);
-  const { ageBand } = useApp();
+  const { ageBand, onboarded } = useApp();
 
   // Lets the CSS give each age band its own look
   useEffect(() => {
@@ -37,61 +37,68 @@ export const BodhiApp: React.FC = () => {
     window.scrollTo({ top: 0 });
   };
 
-  // Games go back to the subject they belong to; everything else goes home
-  const backFor = (view: string) => {
-    const subject = subjectOfView(view);
-    return () => setCurrentView(subject && view !== `subject:${subject}` ? `subject:${subject}` : 'home');
-  };
+  const backHome = () => setCurrentView('home');
 
   const renderCurrentView = () => {
     const [kind, id] = currentView.split(':');
-    if ((kind === 'subject' || kind === 'quiz') && SUBJECT_ORDER.includes(id as never)) {
-      return kind === 'subject'
-        ? <SubjectPage subject={id as never} onSelectView={setCurrentView} onBack={backFor(currentView)} />
-        : <QuizWorld subject={id as never} onBack={backFor(currentView)} />;
+    if (kind === 'quiz' && SUBJECT_ORDER.includes(id as never)) {
+      return <QuizWorld subject={id as never} onBack={backHome} />;
     }
     switch (currentView) {
       case 'tracing-abc':
         return (
           <AbcTracingJourney
-            onBack={backFor(currentView)}
+            onBack={backHome}
             onGoToWordTracing={() => setCurrentView('tracing-words')}
           />
         );
       case 'tracing-words':
         return (
           <WordTracingWorld
-            onBack={backFor(currentView)}
+            onBack={backHome}
             onGoToAbcJourney={() => setCurrentView('tracing-abc')}
           />
         );
       case 'phonics':
-        return <PhonicsWorld onBack={backFor(currentView)} />;
+        return <PhonicsWorld onBack={backHome} />;
       case 'sight-words':
-        return <SightWordsWorld onBack={backFor(currentView)} />;
+        return <SightWordsWorld onBack={backHome} />;
       case 'code-bot':
-        return <CodeBotWorld onBack={backFor(currentView)} />;
+        return <CodeBotWorld onBack={backHome} />;
       case 'patterns':
-        return <PatternWorld onBack={backFor(currentView)} />;
+        return <PatternWorld onBack={backHome} />;
       case 'machine':
-        return <MachineWorld onBack={backFor(currentView)} />;
+        return <MachineWorld onBack={backHome} />;
       case 'slide-read':
-        return <SlideReadWorld onBack={backFor(currentView)} />;
+        return <SlideReadWorld onBack={backHome} />;
       case 'stories':
-        return <StoriesWorld onBack={backFor(currentView)} />;
+        return <StoriesWorld onBack={backHome} />;
       case 'counting':
-        return <CountingWorld onBack={backFor(currentView)} />;
+        return <CountingWorld onBack={backHome} />;
       case 'math':
-        return <VisualMathWorld onBack={backFor(currentView)} />;
+        return <VisualMathWorld onBack={backHome} />;
       case 'stickers':
-        return <StickerBook onBack={backFor(currentView)} />;
+        return <StickerBook onBack={backHome} />;
       case 'reading':
-        return <PhonicsWorld onBack={backFor(currentView)} />;
+        return <PhonicsWorld onBack={backHome} />;
       case 'home':
       default:
         return <Home onSelectView={setCurrentView} />;
     }
   };
+
+  // A new visitor is asked their age (and name) before anything else is shown
+  if (!onboarded) {
+    return (
+      <>
+        <div className="ambient-bg">
+          <div className="cloud cloud-1" />
+          <div className="cloud cloud-2" />
+        </div>
+        <Welcome />
+      </>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>

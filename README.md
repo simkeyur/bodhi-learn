@@ -9,11 +9,16 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
 ## 🚀 Features
 
 ### 🧭 0. One home screen, four subjects, every age
-- **Home** shows one *Today's pick* and four subjects (Words, Math, Logic, Discover) plus the sticker book.
-  Each subject opens a page with an adaptive **Challenge** and the **games** that suit the child's age
-  (`src/data/subjects.ts` holds the map and each game's age range).
-- **Ages 4–14, three looks.** The parent sets an exact age (Parent Settings). It picks a band that styles the home
-  screen: *little* 4–6 (bright, Buddy the Bear, voice), *explorer* 7–10, *pro* 11–14 (calmer, no mascot).
+- **Welcome first.** A new visitor is asked their age (4–14) before anything else is shown, then their name.
+  From age 8 they are also offered **Sign in with Google** (progress stored in Firebase from the first launch) or
+  **Play as guest** (progress stays in this browser's localStorage). Younger children go straight in as guests;
+  a parent can sign in later from Parent Settings. Signing in to an account that already has progress skips the
+  questions and loads it; signing out clears the device and asks again. Nothing is saved to the device until the
+  questions are answered.
+- **Home** is grouped by subject (Words, Math, Logic, Discover, Rewards). Each group has a filled **Challenge**
+  row (adaptive) and slim game rows that suit the child's age (`src/data/subjects.ts` holds the map and each
+  game's age range).
+- **Ages 4–14.** The age picks the games shown and where the quizzes start; it can be changed in Parent Settings.
 - **Challenges** are 8-question rounds. Level 1 (about age 4) to 10 (about age 14), adaptive: four right in a row
   goes up, two wrong in a row goes down, and the child can also pick a level. Level and accuracy are saved per
   subject. Math is generated (`src/content/mathGen.ts`: counting, times tables, fractions, percentages,

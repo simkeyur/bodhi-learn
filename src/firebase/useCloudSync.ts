@@ -24,7 +24,7 @@ const friendlyError = (err: unknown) => {
 //    adopts this device's progress
 //  - afterwards: local changes are saved (debounced) and remote changes (another device)
 //    are applied live
-export function useCloudSync(state: SyncedState, applyState: (state: SyncedState) => void) {
+export function useCloudSync(state: SyncedState, applyState: (state: SyncedState) => void, onSignedOut?: () => void) {
   const [user, setUser] = useState<CloudUser | null>(null);
   const [authReady, setAuthReady] = useState(() => {
     try { return !localStorage.getItem(HINT_KEY); } catch { return true; }
@@ -32,20 +32,25 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
   const [status, setStatus] = useState<SyncStatus>('guest');
   const [error, setError] = useState<string | null>(null);
   const [syncTick, setSyncTick] = useState(0); // re-runs the save check after each server snapshot
+  // True once the signed-in account turned out to already have saved progress (so this device just loads it)
+  const [restored, setRestored] = useState(false);
 
   const cloudRef = useRef<Cloud | null>(null);
   const unsubAuthRef = useRef<(() => void) | null>(null);
   const loadingRef = useRef<Promise<Cloud> | null>(null);
   const stateRef = useRef(state);
   const applyRef = useRef(applyState);
+  const signedOutRef = useRef(onSignedOut);
   const lastKeyRef = useRef<string | null>(null); // key of the copy we know the cloud has
   const readyRef = useRef(false); // first server snapshot handled
   const deletingRef = useRef(false);
   const prevUidRef = useRef<string | null>(null);
+  const createdRef = useRef(false); // this session created the account's document (so nothing was restored)
 
   useEffect(() => {
     stateRef.current = state;
     applyRef.current = applyState;
+    signedOutRef.current = onSignedOut;
   });
 
   const loadCloud = useCallback((): Promise<Cloud> => {
@@ -71,6 +76,7 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
         // Signed out (or session ended): don't leave one family's progress on a shared device
         deletingRef.current = false;
         applyRef.current({ ...DEFAULT_STATE });
+        signedOutRef.current?.();
       }
     });
   }, []);
@@ -91,6 +97,8 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
   useEffect(() => {
     readyRef.current = false;
     lastKeyRef.current = null;
+    setRestored(false);
+    createdRef.current = false;
     const cloud = cloudRef.current;
     if (!user || !cloud) {
       setStatus('guest');
@@ -110,6 +118,7 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
             return;
           }
           // Brand-new account: adopt this device's progress
+          createdRef.current = true;
           readyRef.current = true;
           const mine = stateRef.current;
           lastKeyRef.current = stateKey(mine);
@@ -121,6 +130,8 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
           });
           return;
         }
+
+        if (!createdRef.current) setRestored(true);
 
         // Our own write is in flight; the server's answer will follow
         if (snap.hasPendingWrites) {
@@ -205,5 +216,5 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
     }
   }, [user]);
 
-  return { user, authReady, status, error, preload, signIn, signOut, deleteAccount };
+  return { user, authReady, status, error, restored, preload, signIn, signOut, deleteAccount };
 }

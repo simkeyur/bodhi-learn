@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
-import { ArrowRight, Volume2 } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Sparkles, Volume2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER } from '../../data/subjects';
-import { SUBJECTS, type Subject } from '../../firebase/schema';
+import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge } from '../../data/subjects';
 import { sound } from '../../utils/sound';
 import { speech, clip } from '../../utils/speech';
 import './home.css';
@@ -11,28 +10,41 @@ interface HomeProps {
   onSelectView: (view: string) => void;
 }
 
-// A different subject each day, favouring the one the child has practised least
-function todaysPick(answered: Record<Subject, number>): Subject {
-  const day = Math.floor(Date.now() / 86_400_000);
-  const least = Math.min(...SUBJECTS.map((s) => answered[s]));
-  const candidates = SUBJECT_ORDER.filter((s) => answered[s] <= least + 5);
-  return candidates[day % candidates.length];
+interface SlimCardProps {
+  icon: React.ReactNode;
+  title: string;
+  sub: string;
+  color: string;
+  dark: string;
+  tint: string;
+  cta?: string;
+  solid?: boolean;
+  onClick: () => void;
 }
 
-const greeting = () => {
-  const h = new Date().getHours();
-  return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
-};
+// One slim, playful row: icon, name, one line of description, and a Play pill
+const SlimCard: React.FC<SlimCardProps> = ({ icon, title, sub, color, dark, tint, cta = 'Play', solid, onClick }) => (
+  <button
+    className={`btn-reset slim-card ${solid ? 'solid' : ''}`}
+    onClick={onClick}
+    style={{
+      '--c': color,
+      '--cd': dark,
+      '--ct': tint,
+    } as React.CSSProperties}
+  >
+    <span className="slim-icon" aria-hidden>{icon}</span>
+    <span className="slim-text">
+      <span className="slim-title">{title}</span>
+      <span className="slim-sub">{sub}</span>
+    </span>
+    <span className="slim-play">{cta} <ArrowRight size={13} /></span>
+  </button>
+);
 
 export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
-  const { kidName, stars, ageBand, skills } = useApp();
+  const { kidName, stars, age, ageBand, skills } = useApp();
   const showLevels = ageBand !== 'little';
-
-  const pick = useMemo(
-    () => todaysPick(Object.fromEntries(SUBJECTS.map((s) => [s, skills[s].answered])) as Record<Subject, number>),
-    [skills],
-  );
-  const pickInfo = SUBJECT_INFO[pick];
 
   const go = (view: string) => {
     sound.playPop();
@@ -47,61 +59,80 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
 
   return (
     <div className="page home">
-      <header className="home-greet">
-        <div>
-          <p className="home-eyebrow">{greeting()}</p>
-          <h2 className="home-name">{kidName}</h2>
+      <div className="hub-hero">
+        <div style={{ minWidth: 0 }}>
+          <div className="hub-age-badge"><Sparkles size={13} /> Age {age}</div>
+          <h2 className="hub-title">
+            Hi <span style={{ color: '#0284C7' }}>{kidName}</span>! What shall we play? 🚀
+          </h2>
         </div>
-        {ageBand === 'little' && (
-          <button className="home-buddy" onClick={hearBuddy} aria-label="Hear Buddy the Bear">
-            <span className="animate-bob" aria-hidden>🐻</span>
-            <Volume2 size={18} />
+        {ageBand !== 'pro' && (
+          <button className="btn-reset hub-buddy" onClick={hearBuddy} aria-label="Hear Buddy the Bear">
+            <span style={{ fontSize: '2.2rem' }} className="animate-bob" aria-hidden>🐻</span>
+            <span className="hub-buddy-text">
+              <b>Buddy</b>
+              <span><Volume2 size={14} /> Tap me!</span>
+            </span>
           </button>
         )}
-      </header>
-
-      <button
-        className="home-pick"
-        onClick={() => go(`quiz:${pick}`)}
-        style={{ '--accent': pickInfo.color, '--accent-dark': pickInfo.dark } as React.CSSProperties}
-      >
-        <span className="home-pick-icon" aria-hidden>{pickInfo.icon}</span>
-        <span className="home-pick-text">
-          <span className="home-pick-label">Today's pick</span>
-          <span className="home-pick-title">{pickInfo.title} challenge</span>
-          <span className="home-pick-sub">8 quick questions{showLevels ? ` · ${LEVEL_NAMES[skills[pick].level]}` : ''}</span>
-        </span>
-        <span className="home-pick-go" aria-hidden><ArrowRight size={26} /></span>
-      </button>
-
-      <h3 className="home-section">Explore</h3>
-      <div className="home-grid">
-        {SUBJECT_ORDER.map((id) => {
-          const info = SUBJECT_INFO[id];
-          return (
-            <button
-              key={id}
-              className="home-tile"
-              onClick={() => go(`subject:${id}`)}
-              style={{ '--accent': info.color, '--accent-dark': info.dark, '--tint': info.tint } as React.CSSProperties}
-            >
-              <span className="home-tile-icon" aria-hidden>{info.icon}</span>
-              <span className="home-tile-title">{info.title}</span>
-              <span className="home-tile-sub">{info.blurb[ageBand]}</span>
-              {showLevels && <span className="home-tile-level">Level {skills[id].level}</span>}
-            </button>
-          );
-        })}
       </div>
 
-      <button className="home-stickers" onClick={() => go('stickers')}>
-        <span aria-hidden>🎨</span>
-        <span>
-          <strong>Sticker book</strong>
-          <small>Spend your {stars} ⭐ on stickers</small>
-        </span>
-        <ArrowRight size={20} aria-hidden />
-      </button>
+      {SUBJECT_ORDER.map((id) => {
+        const info = SUBJECT_INFO[id];
+        const skill = skills[id];
+        const games = gamesForAge(id, age);
+        return (
+          <section className="hub-section" key={id}>
+            <div className="hub-section-header">
+              <span className="hub-section-icon" aria-hidden>{info.icon}</span>
+              <div className="hub-section-heading">
+                <h3 className="hub-section-title">{info.title}</h3>
+                <p className="hub-section-desc">{info.blurb[ageBand]}</p>
+              </div>
+              {showLevels && <span className="hub-section-badge" style={{ background: info.tint, color: info.dark }}>Level {skill.level}</span>}
+            </div>
+
+            <div className="hub-grid">
+              <SlimCard
+                solid
+                icon="⭐"
+                title="Challenge"
+                sub={showLevels ? `8 questions · ${LEVEL_NAMES[skill.level]}` : '8 quick questions'}
+                color={info.color}
+                dark={info.dark}
+                tint={info.tint}
+                cta="Start"
+                onClick={() => go(`quiz:${id}`)}
+              />
+              {games.map((g) => (
+                <SlimCard
+                  key={g.view}
+                  icon={g.icon}
+                  title={g.title}
+                  sub={g.blurb}
+                  color={g.color}
+                  dark={g.dark}
+                  tint={g.tint}
+                  onClick={() => go(g.view)}
+                />
+              ))}
+            </div>
+          </section>
+        );
+      })}
+
+      <section className="hub-section">
+        <div className="hub-section-header">
+          <span className="hub-section-icon" aria-hidden>🎨</span>
+          <div className="hub-section-heading">
+            <h3 className="hub-section-title">Rewards</h3>
+            <p className="hub-section-desc">Spend your stars on stickers</p>
+          </div>
+        </div>
+        <div className="hub-grid">
+          <SlimCard icon="🎨" title="Sticker Book" sub={`You have ${stars} ⭐ to spend`} color="#818CF8" dark="#4F46E5" tint="#EEF2FF" cta="Open" onClick={() => go('stickers')} />
+        </div>
+      </section>
     </div>
   );
 };
