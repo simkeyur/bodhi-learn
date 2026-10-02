@@ -5,6 +5,7 @@ import { Welcome } from './components/onboarding/Welcome';
 import { Home } from './components/home/Home';
 import { QuizWorld } from './components/quiz/QuizWorld';
 import { gameById } from './data/quizGames';
+import { hasStickers } from './data/subjects';
 import { useApp } from './context/AppContext';
 import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
@@ -24,7 +25,7 @@ import { speech } from './utils/speech';
 export const BodhiApp: React.FC = () => {
   const [currentView, setCurrentViewState] = useState<string>('home');
   const [isParentGateOpen, setIsParentGateOpen] = useState<boolean>(false);
-  const { ageBand, onboarded } = useApp();
+  const { ageBand, age, onboarded } = useApp();
 
   // Lets the CSS give each age band its own look
   useEffect(() => {
@@ -80,6 +81,7 @@ export const BodhiApp: React.FC = () => {
       case 'math':
         return <VisualMathWorld onBack={backHome} />;
       case 'stickers':
+        if (!hasStickers(age)) return <Home onSelectView={setCurrentView} />;
         return <StickerBook onBack={backHome} />;
       case 'reading':
         return <PhonicsWorld onBack={backHome} />;

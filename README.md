@@ -55,6 +55,8 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
   every pattern and machine question must have exactly one right answer).
 
 ### 🎨 3. Gamification & Rewards
+_The sticker book is shown only for ages 6 and under (`STICKER_MAX_AGE` in `src/data/subjects.ts`). For older children stars are just a score; new uses for them are still to be designed._
+
 - **Sticker Playground**: Kids earn stars for completing learning activities, which they can spend to unlock collectible animated stickers.
 - **Interactive Sticker Board**: Children can place and reposition their unlocked stickers on a scenic play canvas.
 - **Celebration Effects**: Confetti bursts and cheering audio fanfares.

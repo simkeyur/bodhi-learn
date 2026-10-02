@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
+import { hasStickers } from '../../data/subjects';
 import { Volume2, VolumeX, Lock, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
@@ -10,7 +11,7 @@ interface HeaderProps {
 
 
 export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }) => {
-  const { stars, soundEnabled, setSoundEnabled } = useApp();
+  const { stars, soundEnabled, setSoundEnabled, age } = useApp();
 
   const go = (view: string) => {
     sound.playPop();
@@ -78,10 +79,8 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
 
           {/* Stars, mute, parents */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-            <button
-              onClick={() => go('stickers')}
-              aria-label={`${stars} stars. Open sticker book`}
-              style={{
+            {(() => {
+              const style: React.CSSProperties = {
                 background: 'linear-gradient(135deg, #FEF08A, #FDE047)',
                 border: '3px solid #F59E0B',
                 boxShadow: '0 3px 0 #D97706',
@@ -91,16 +90,26 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                cursor: 'pointer',
                 fontFamily: 'var(--font-display)',
                 fontWeight: 700,
                 fontSize: '1.2rem',
                 color: '#92400E',
-              }}
-            >
-              <Sparkles size={18} color="#D97706" />
-              <span>{stars}</span>
-            </button>
+              };
+              const content = (
+                <>
+                  <Sparkles size={18} color="#D97706" />
+                  <span>{stars}</span>
+                </>
+              );
+              // Only the youngest children have a sticker book to open; for everyone else it is just a score
+              return hasStickers(age) ? (
+                <button onClick={() => go('stickers')} aria-label={`${stars} stars. Open sticker book`} style={{ ...style, cursor: 'pointer' }}>
+                  {content}
+                </button>
+              ) : (
+                <div role="img" aria-label={`${stars} stars`} style={style}>{content}</div>
+              );
+            })()}
 
             <button
               onClick={() => {

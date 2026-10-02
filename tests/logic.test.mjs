@@ -210,6 +210,7 @@ for (const bracket of BRACKETS) {
 import fs from 'fs';
 import { MATH_REGISTRY, makeMathQuestion } from '../src/content/mathGen.ts';
 import { QUIZ_GAMES, gameById, quizGamesFor } from '../src/data/quizGames.ts';
+import { STICKER_MAX_AGE, hasStickers } from '../src/data/subjects.ts';
 import { adjustLevel, isQuestion, nextQuestion, pickFromPack, readPack } from '../src/content/select.ts';
 import { bandForAge, bracketForAge, fromDocData, levelForAge, toDocData, DEFAULT_STATE } from '../src/firebase/schema.ts';
 
@@ -485,4 +486,9 @@ test('math generator: shapes, word problems and decimals have the right answer',
     }
   }
   assert.equal(seen.size, rules.length, `some rules never matched: ${rules.filter(([re]) => !seen.has(String(re))).map(([re]) => re)}`);
+});
+
+test('the sticker book is only for ages 6 and under', () => {
+  assert.equal(STICKER_MAX_AGE, 6);
+  assert.deepEqual([4, 5, 6, 7, 10, 14].map(hasStickers), [true, true, true, false, false, false]);
 });

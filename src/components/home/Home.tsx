@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Sparkles, Volume2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge } from '../../data/subjects';
+import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge, hasStickers } from '../../data/subjects';
 import { MODE_LABEL, quizGamesFor } from '../../data/quizGames';
 import { sound } from '../../utils/sound';
 import { speech, clip } from '../../utils/speech';
@@ -109,18 +109,20 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
         );
       })}
 
-      <section className="hub-section" style={{ '--sc': '#818CF8', '--sd': '#4F46E5', '--st': '#EEF2FF' } as React.CSSProperties}>
-        <div className="hub-section-header">
-          <span className="hub-section-icon" aria-hidden>🎨</span>
-          <div className="hub-section-heading">
-            <h3 className="hub-section-title">Rewards</h3>
-            <p className="hub-section-desc">Spend your stars on stickers</p>
+      {hasStickers(age) && (
+        <section className="hub-section" style={{ '--sc': '#818CF8', '--sd': '#4F46E5', '--st': '#EEF2FF' } as React.CSSProperties}>
+          <div className="hub-section-header">
+            <span className="hub-section-icon" aria-hidden>🎨</span>
+            <div className="hub-section-heading">
+              <h3 className="hub-section-title">Rewards</h3>
+              <p className="hub-section-desc">Spend your stars on stickers</p>
+            </div>
           </div>
-        </div>
-        <div className="hub-grid">
-          <SlimCard icon="🎨" title="Sticker Book" sub={`You have ${stars} ⭐ to spend`} meta="Collect and decorate" color="#818CF8" dark="#4F46E5" tint="#EEF2FF" onClick={() => go('stickers')} />
-        </div>
-      </section>
+          <div className="hub-grid">
+            <SlimCard icon="🎨" title="Sticker Book" sub={`You have ${stars} ⭐ to spend`} meta="Collect and decorate" color="#818CF8" dark="#4F46E5" tint="#EEF2FF" onClick={() => go('stickers')} />
+          </div>
+        </section>
+      )}
     </div>
   );
 };

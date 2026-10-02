@@ -68,6 +68,11 @@ export const SUBJECT_INFO: Record<Subject, SubjectInfo> = {
   },
 };
 
+// The sticker book is for the youngest children; older ones keep earning stars as a score.
+// New ways to use stars for older children can replace it later.
+export const STICKER_MAX_AGE = 6;
+export const hasStickers = (age: number) => age <= STICKER_MAX_AGE;
+
 export const SUBJECT_ORDER: Subject[] = ['reading', 'math', 'logic', 'science'];
 
 export const gamesForAge = (subject: Subject, age: number): Game[] =>
