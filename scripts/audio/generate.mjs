@@ -9,9 +9,10 @@
 // Options:
 //   --voice <name>      Gemini prebuilt voice (default: Sulafat)
 //   --model <id>        TTS model (default: gemini-3.8-flash-lite-tts)
-//   --fallback-model <id> model to switch to when --model's daily quota runs out
-//                       (default: gemini-3.1-flash-tts-preview; --no-fallback to just stop).
-//                       Clips made by the fallback are re-rendered with --model on later runs.
+//   --fallback-models <ids> comma separated models to move through, in order, as each
+//                       one's daily quota runs out (default: gemini-3.8-flash-tts,gemini-3.1-flash-tts-preview;
+//                       --no-fallback to just stop). Clips made by a fallback are re-rendered
+//                       with --model on later runs, so the set converges on one model.
 //   --only <list>       only these folders or kinds, comma separated (e.g. letters,words or cheer,prompt)
 //   --match <regex>     only paths matching this regex (e.g. "phonics_A|readalong/r6")
 //   --force             re-render even if the clip is up to date (still reuses the raw-audio cache)
@@ -56,7 +57,7 @@ function parseArgs(argv) {
   const opts = {
     voice: 'Sulafat',
     model: 'gemini-3.8-flash-lite-tts',
-    fallbackModel: 'gemini-3.1-flash-tts-preview',
+    fallbackModels: ['gemini-3.8-flash-tts', 'gemini-3.1-flash-tts-preview'],
     concurrency: 3,
     rpm: 9,
     limit: Infinity,
@@ -67,8 +68,8 @@ function parseArgs(argv) {
     switch (arg) {
       case '--voice': opts.voice = next(); break;
       case '--model': opts.model = next(); break;
-      case '--fallback-model': opts.fallbackModel = next(); break;
-      case '--no-fallback': opts.fallbackModel = null; break;
+      case '--fallback-models': opts.fallbackModels = next().split(',').map((m) => m.trim()).filter(Boolean); break;
+      case '--no-fallback': opts.fallbackModels = []; break;
       case '--only': opts.only = next().split(',').map((s) => s.trim()); break;
       case '--match': opts.match = new RegExp(next()); break;
       case '--force': opts.force = true; break;
@@ -366,6 +367,9 @@ async function renderAll(jobs, opts, apiKey) {
   const failures = [];
   const queue = [...jobs];
 
+  // Primary model first, then each fallback as daily quotas run out
+  const modelChain = [opts.model, ...opts.fallbackModels.filter((m) => m !== opts.model)];
+  const exhausted = new Set();
   let activeModel = opts.model;
 
   const worker = async () => {
@@ -391,12 +395,14 @@ async function renderAll(jobs, opts, apiKey) {
         console.log(`[${done + failures.length}/${jobs.length}] ${job.label} "${job.text.slice(0, 60)}"${via}`);
       } catch (err) {
         if (err instanceof DailyQuotaError) {
-          if (opts.fallbackModel && job.model !== opts.fallbackModel) {
-            if (activeModel !== opts.fallbackModel) {
-              activeModel = opts.fallbackModel;
+          exhausted.add(job.model);
+          const next = modelChain.find((m) => !exhausted.has(m));
+          if (next) {
+            if (activeModel !== next) {
+              activeModel = next;
               console.log(`↪ ${err.message.split(':')[0]}; switching to ${activeModel}`);
             }
-            queue.unshift(job); // retry this clip with the fallback
+            queue.unshift(job); // retry this clip with the next model
             continue;
           }
           dailyQuotaHit = true;
