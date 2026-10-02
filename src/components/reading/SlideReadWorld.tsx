@@ -111,7 +111,7 @@ export const SlideReadWorld: React.FC<SlideReadWorldProps> = ({ onBack }) => {
     if (isNewWord && hit.word === words.length - 1) {
       finishSentence(words[hit.word]);
     } else {
-      speech.say([clip.word(words[hit.word])], { fallback: words[hit.word].replace(/[^A-Za-z']/g, '') });
+      speech.say([clip.word(words[hit.word])]);
     }
   };
 

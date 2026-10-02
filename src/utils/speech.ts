@@ -1,5 +1,6 @@
-// Speech engine: plays pre-recorded studio clips (public/audio) and falls back to
-// browser SpeechSynthesis only when a clip is missing.
+// Speech engine: plays the pre-recorded Gemini clips in public/audio, and nothing else.
+// If a clip is missing or fails to load it stays silent; there is deliberately no fallback to
+// the browser's built-in (SpeechSynthesis) voice.
 //
 // Callers describe *what* to say as a list of clip URLs (see `clip` helpers below)
 // instead of free text, so there is no guessing about which recording to play.
@@ -46,12 +47,7 @@ export const clip = {
   retry: () => `phrases/${pick(RETRY_PHRASES)}.mp3`,
 };
 
-// Novelty macOS voices that sound broken to kids
-const NOVELTY_VOICES = /albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox/i;
-
 interface SayOptions {
-  // Spoken with SpeechSynthesis if any clip fails to load
-  fallback?: string;
   // Called once everything has been said (or immediately if voice is off).
   // Never called if the speech is interrupted by another say()/stop().
   onEnd?: () => void;
@@ -66,19 +62,12 @@ class KidSpeechEngine {
   private generation = 0;
   private attempt = 0;
   private unlocked = false;
-  private voice: SpeechSynthesisVoice | null = null;
 
   constructor() {
     if (typeof window === 'undefined') return;
     // Unlock audio on the very first touch so later programmatic playback works on iOS
     const unlock = () => this.unlock();
     window.addEventListener('pointerdown', unlock, { once: true, capture: true });
-    if ('speechSynthesis' in window) {
-      this.voice = this.pickVoice();
-      window.speechSynthesis.addEventListener?.('voiceschanged', () => {
-        this.voice = this.pickVoice();
-      });
-    }
   }
 
   private get canSpeak() {
@@ -106,21 +95,8 @@ class KidSpeechEngine {
     audio.play().catch(() => {});
   }
 
-  private pickVoice(): SpeechSynthesisVoice | null {
-    const voices = window.speechSynthesis.getVoices().filter(
-      (v) => v.lang.toLowerCase().startsWith('en') && !NOVELTY_VOICES.test(v.name)
-    );
-    return (
-      voices.find((v) => /natural|premium|enhanced/i.test(v.name)) ||
-      voices.find((v) => /samantha|google us english|aria|jenny/i.test(v.name)) ||
-      voices.find((v) => v.lang === 'en-US') ||
-      voices[0] ||
-      null
-    );
-  }
-
   // Say a sequence of clips back to back. Interrupts anything currently playing.
-  public say(clips: string[], { fallback, onEnd }: SayOptions = {}) {
+  public say(clips: string[], { onEnd }: SayOptions = {}) {
     const gen = this.interrupt();
     const finish = () => {
       if (gen === this.generation) onEnd?.();
@@ -137,25 +113,10 @@ class KidSpeechEngine {
         finish();
         return;
       }
-      this.playClip(clips[i], gen, () => playAt(i + 1), () => {
-        if (fallback) this.speakWithSynth(fallback, gen, finish);
-        else playAt(i + 1);
-      });
+      // A clip that fails to load is skipped: silence, never another voice
+      this.playClip(clips[i], gen, () => playAt(i + 1), () => playAt(i + 1));
     };
     playAt(0);
-  }
-
-  // Speak arbitrary text with the device voice (for words without a studio clip)
-  public speakText(text: string, onEnd?: () => void) {
-    const gen = this.interrupt();
-    const finish = () => {
-      if (gen === this.generation) onEnd?.();
-    };
-    if (!this.canSpeak) {
-      queueMicrotask(finish);
-      return;
-    }
-    this.speakWithSynth(text, gen, finish);
   }
 
   public stop() {
@@ -166,9 +127,6 @@ class KidSpeechEngine {
     this.generation += 1;
     if (this.audio && !this.audio.paused) {
       this.audio.pause();
-    }
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
     }
     return this.generation;
   }
@@ -200,30 +158,6 @@ class KidSpeechEngine {
       // Autoplay blocked: skip silently rather than falling back to another blocked voice
       settle(err.name === 'NotAllowedError' ? onDone : onFail)();
     });
-  }
-
-  private speakWithSynth(text: string, gen: number, onDone: () => void) {
-    if (!('speechSynthesis' in window)) {
-      onDone();
-      return;
-    }
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = Math.min(1.2, 0.9 * this.playbackRate);
-    utterance.pitch = 1.1;
-    if (this.voice) utterance.voice = this.voice;
-    utterance.onend = () => {
-      if (gen === this.generation) onDone();
-    };
-    utterance.onerror = () => {
-      if (gen === this.generation) onDone();
-    };
-    // Chrome drops an utterance queued in the same tick as cancel()
-    if (synth.speaking || synth.pending) {
-      setTimeout(() => gen === this.generation && synth.speak(utterance), 80);
-    } else {
-      synth.speak(utterance);
-    }
   }
 }
 

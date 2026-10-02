@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, Minus, Plus, Volume2 } from 'lucide-react';
+import { ArrowLeft, Minus, Plus } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { useContent } from '../../content/store';
 import { adjustLevel, nextQuestion, type LevelState } from '../../content/select';
@@ -7,7 +7,6 @@ import type { Question } from '../../content/types';
 import { LEVEL_NAMES, SUBJECT_INFO } from '../../data/subjects';
 import { MAX_LEVEL, MIN_LEVEL, type Subject } from '../../firebase/schema';
 import { sound } from '../../utils/sound';
-import { speech } from '../../utils/speech';
 import './quiz.css';
 
 const ROUND_LENGTH = 8;
@@ -23,7 +22,7 @@ type Phase = 'intro' | 'playing' | 'done';
 // An adaptive round of questions for one subject. Level moves with the child: four right in a row
 // goes up, two wrong in a row goes down. The level is saved with the account.
 export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
-  const { skills, recordAnswer, addStars, age, kidName } = useApp();
+  const { skills, recordAnswer, addStars, kidName } = useApp();
   const { packs } = useContent();
   const info = SUBJECT_INFO[subject];
   const skill = skills[subject];
@@ -42,8 +41,6 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
-  const autoRead = age <= 7;
-
   const draw = useCallback((level: number) => {
     const q = nextQuestion(subject, level, packs, new Set(recent.current));
     if (q) recent.current = [...recent.current, q.id].slice(-RECENT_MEMORY);
@@ -52,11 +49,6 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
     return q;
   }, [subject, packs]);
 
-  const read = (q: Question) => {
-    const choices = q.choices.map((c, i) => `${String.fromCharCode(65 + i)}. ${c}`).join('. ');
-    speech.speakText(`${q.prompt} ${choices}`);
-  };
-
   const start = () => {
     sound.playPop();
     const level = startLevel;
@@ -64,9 +56,8 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
     setIndex(0);
     setScore(0);
     scoreRef.current = 0;
-    const q = draw(level);
+    draw(level);
     setPhase('playing');
-    if (q && autoRead) read(q);
   };
 
   const choose = (i: number) => {
@@ -93,12 +84,10 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
       return;
     }
     setIndex((n) => n + 1);
-    const q = draw(level);
-    if (q && autoRead) read(q);
+    draw(level);
   };
 
   const finish = () => {
-    speech.stop();
     // Half a star per right answer, plus a bonus for a perfect round
     const s = scoreRef.current;
     const stars = Math.ceil(s / 2) + (s === ROUND_LENGTH ? 2 : 0);
@@ -115,7 +104,7 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
   return (
     <div className="page quiz" style={style}>
       <div className="quiz-bar">
-        <button className="quiz-back" onClick={() => { sound.playPop(); speech.stop(); onBack(); }} aria-label="Back to home">
+        <button className="quiz-back" onClick={() => { sound.playPop(); onBack(); }} aria-label="Back to home">
           <ArrowLeft size={20} /> <span>Home</span>
         </button>
         {phase === 'playing' && (
@@ -159,9 +148,6 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ subject, onBack }) => {
         <section className="quiz-card" aria-live="polite">
           <div className="quiz-qhead">
             <span className="quiz-topic">{question.topic}</span>
-            <button className="quiz-read" onClick={() => { sound.playPop(600); read(question); }} aria-label="Read the question aloud">
-              <Volume2 size={20} />
-            </button>
           </div>
           <h2 className="quiz-prompt">{question.prompt}</h2>
 

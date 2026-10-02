@@ -27,10 +27,7 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
     setIsReadingAloud(true);
     const clips = [clip.storyPage(story.id, index)];
     if (withTitle) clips.unshift(clip.storyTitle(story.id));
-    speech.say(clips, {
-      fallback: story.pages[index].text,
-      onEnd: () => setIsReadingAloud(false),
-    });
+    speech.say(clips, { onEnd: () => setIsReadingAloud(false) });
   };
 
   const startStory = (story: Story) => {
@@ -65,7 +62,7 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
     if (!isNaN(num) && num >= 0 && num <= 20) {
       speech.say([clip.number(num)]);
     } else if (wordKey(word)) {
-      speech.say([clip.word(word)], { fallback: word.replace(/[^A-Za-z']/g, '') });
+      speech.say([clip.word(word)]);
     }
   };
 
