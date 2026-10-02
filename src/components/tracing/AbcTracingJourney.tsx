@@ -41,7 +41,7 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
     reset();
     setIsCompleted(false);
     const intro = greeting();
-    speech.say([...intro, clip.phonics(currentItem.letter), clip.phrase('trace_the_letter'), clip.letter(currentItem.letter)]);
+    speech.say([...intro, clip.phonics(currentItem.letter), clip.traceLetter(currentItem.letter)]);
 
     // Keep the active letter visible in the A–Z strip
     const ribbon = ribbonRef.current;

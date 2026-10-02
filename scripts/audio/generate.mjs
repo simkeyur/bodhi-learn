@@ -10,7 +10,7 @@
 //   --voice <name>      Gemini prebuilt voice (default: Sulafat)
 //   --model <id>        TTS model (default: gemini-3.8-flash-lite-tts)
 //   --fallback-models <ids> comma separated models to move through, in order, as each
-//                       one's daily quota runs out (default: gemini-3.8-flash-tts,gemini-3.1-flash-tts-preview;
+//                       one's daily quota runs out (default: gemini-3.8-flash-tts,gemini-3.1-flash-tts-preview,gemini-2.5-flash-preview-tts;
 //                       --no-fallback to just stop). Clips made by a fallback are re-rendered
 //                       with --model on later runs, so the set converges on one model.
 //   --only <list>       only these folders or kinds, comma separated (e.g. letters,words or cheer,prompt)
@@ -57,7 +57,7 @@ function parseArgs(argv) {
   const opts = {
     voice: 'Sulafat',
     model: 'gemini-3.8-flash-lite-tts',
-    fallbackModels: ['gemini-3.8-flash-tts', 'gemini-3.1-flash-tts-preview'],
+    fallbackModels: ['gemini-3.8-flash-tts', 'gemini-3.1-flash-tts-preview', 'gemini-2.5-flash-preview-tts'],
     concurrency: 3,
     rpm: 9,
     limit: Infinity,
@@ -220,7 +220,23 @@ function makeRateLimiter(rpm) {
 // get the style as a spoken-style prefix instead, which they don't read aloud
 const noAnnotationModels = new Set();
 
+// The 2.5 TTS models use the older generateContent API (and, like 3.1, take the style as a text prefix)
+const usesGenerateContent = (model) => /^gemini-2\.5-.*tts/.test(model);
+const endpointFor = (model) =>
+  usesGenerateContent(model)
+    ? `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
+    : API_URL;
+
 function requestBody({ model, voice, text, style }) {
+  if (usesGenerateContent(model)) {
+    return {
+      contents: [{ parts: [{ text: `${style} Say: ${text}` }] }],
+      generationConfig: {
+        responseModalities: ['AUDIO'],
+        speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } },
+      },
+    };
+  }
   const content = noAnnotationModels.has(model)
     ? { type: 'text', text: `${style} Say: ${text}` }
     : { type: 'text', text, annotations: [{ type: 'speech_metadata', style }] };
@@ -241,7 +257,7 @@ async function synthesize({ apiKey, model, voice, text, style }, throttle) {
     await throttle();
     let res;
     try {
-      res = await fetch(API_URL, {
+      res = await fetch(endpointFor(model), {
         method: 'POST',
         headers: { 'x-goog-api-key': apiKey, 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -285,6 +301,15 @@ async function synthesize({ apiKey, model, voice, text, style }, throttle) {
     }
 
     const json = await res.json();
+
+    if (usesGenerateContent(model)) {
+      const inline = (json.candidates?.[0]?.content?.parts ?? []).find((p) => p.inlineData?.data)?.inlineData;
+      if (!inline) throw new Error(`No audio in response: ${JSON.stringify(json).slice(0, 500)}`);
+      const rate = Number(/rate=(\d+)/.exec(inline.mimeType ?? '')?.[1]) || 24000;
+      const pcm = Buffer.from(inline.data, 'base64');
+      return pcm.subarray(0, 4).toString() === 'RIFF' ? pcm : wrapPcmAsWav(pcm, rate);
+    }
+
     const audio = (json.steps ?? [])
       .filter((s) => s.type === 'model_output')
       .flatMap((s) => s.content ?? [])

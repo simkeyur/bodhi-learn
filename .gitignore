@@ -39,3 +39,4 @@ audio-archive/
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+public/_check/

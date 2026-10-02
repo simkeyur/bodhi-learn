@@ -21,7 +21,6 @@ import { EXCLAMATIONS, RETRY_PHRASES, wordKey } from '../../src/utils/speech.ts'
 
 // Delivery styles, by kind of clip
 export const STYLES = {
-  letter: 'Say only the name of this single letter of the alphabet, clearly and warmly, like a kindergarten teacher pointing at it on a chart. No extra words.',
   phonics: 'Warm, playful kindergarten teacher introducing a letter to a young child. Gentle, unhurried pace with a short pause after the first sentence.',
   number: 'Say only this number, clearly and cheerfully, like counting objects together with a young child.',
   word: 'Say only this one word, clearly and naturally, at a gentle pace, as a teacher reading a flash card to a young child. Calm statement tone.',
@@ -72,15 +71,11 @@ export const PHRASES = {
   keep_trying: ['encourage', "Keep going! You're doing great!"],
   count_again: ['encourage', "Let's count them again. Take your time!"],
   spelling_try_again: ['encourage', "Oops! Let's try spelling it again."],
+  letter_try_again: ['encourage', "Almost! Let's try another one."],
 
   // Sentence starters, followed by a letter / number / word clip
-  can_you_find: ['lead', 'Can you find the letter'],
-  find_the_letter: ['lead', 'Find the letter'],
-  trace_the_letter: ['lead', 'Trace the letter'],
-  lets_find: ['lead', "Let's find"],
   lets_trace_word: ['lead', "Let's trace the word"],
   tap_letters_to_spell: ['lead', 'Tap the letters to spell'],
-  thats: ['lead', "That's"],
   there_are: ['lead', 'There are'],
   count_to: ['lead', "Let's count to"],
   you_have: ['lead', 'You have'],
@@ -90,7 +85,7 @@ export const PHRASES = {
   greet_codebot: ['prompt', "Let's code the robot! Tap the arrows to make a path, then press go."],
   bot_made_it: ['cheer', 'The robot found the star!'],
   bot_try_again: ['encourage', "Oops! The robot got stuck. Let's fix the code and try again."],
-  bot_repeat_tip: ['prompt', 'Repeat runs the steps inside it again and again!'],
+  bot_repeat_tip: ['prompt', 'The repeat block does the steps inside it again and again!'],
 
   // Logic Lab: Pattern Parade
   greet_patterns: ['prompt', "Welcome to Pattern Parade! Let's find out what comes next."],
@@ -102,8 +97,8 @@ export const PHRASES = {
   // Logic Lab: Magic Machine
   greet_machine: ['prompt', 'Welcome to the Magic Machine! Can you find the secret rule?'],
   machine_what_out: ['prompt', 'What comes out of the machine?'],
-  machine_goes_in: ['tail', 'goes in,'],
-  machine_comes_out: ['tail', 'comes out.'],
+  machine_goes_in: ['tail', 'Goes in.'],
+  machine_comes_out: ['tail', 'Comes out.'],
   machine_adds: ['lead', 'The machine adds'],
   machine_takes: ['lead', 'The machine takes away'],
   machine_doubles: ['prompt', 'The machine doubles the number!'],
@@ -123,7 +118,7 @@ export const MATH = {
 };
 
 export const EXCLAMATION_TEXT = {
-  woohoo: 'Woohoo!',
+  woohoo: 'Woo hoo!',
   yay: 'Yay!',
   hurray: 'Hooray!',
   yippee: 'Yippee!',
@@ -149,9 +144,10 @@ export function buildManifest() {
   const entries = [];
   const add = (path, text, style) => entries.push({ path, text, style: STYLES[style], kind: style });
 
-  // Letters: name + "A is for Apple..." sentence
+  // Letters: "A is for Apple...", plus whole prompts for the Letter Quest and ABC tracing
   for (const item of ALPHABET_DATA) {
-    add(`letters/${item.letter}.mp3`, item.letter, 'letter');
+    add(`letters/find_${item.letter}.mp3`, `Can you find the letter ${item.letter}?`, 'prompt');
+    add(`letters/trace_${item.letter}.mp3`, `Trace the letter ${item.letter}.`, 'prompt');
     add(`letters/phonics_${item.letter}.mp3`, item.sentence, 'phonics');
   }
 

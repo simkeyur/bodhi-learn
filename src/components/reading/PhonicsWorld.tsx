@@ -32,7 +32,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
     const shuffledOthers = [...others].sort(() => 0.5 - Math.random()).slice(0, 3);
     setQuestOptions([target, ...shuffledOthers].sort(() => 0.5 - Math.random()));
 
-    speech.say([clip.phrase('can_you_find'), clip.letter(target.letter)]);
+    speech.say([clip.findLetter(target.letter)]);
   };
 
   useEffect(() => {
@@ -60,12 +60,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
       sound.playGentleTryAgain();
       setQuestFeedback('try-again');
       setWrongPicks((prev) => [...prev, item.letter]);
-      speech.say([
-        clip.phrase('thats'),
-        clip.letter(item.letter),
-        clip.phrase('lets_find'),
-        clip.letter(questTarget.letter),
-      ]);
+      speech.say([clip.phrase('letter_try_again'), clip.findLetter(questTarget.letter)]);
     }
   };
 
@@ -225,7 +220,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
               Find <span style={{ color: '#D97706' }}>{questTarget.letter}</span>
             </h2>
             <button
-              onClick={() => speech.say([clip.phrase('find_the_letter'), clip.letter(questTarget.letter)])}
+              onClick={() => speech.say([clip.findLetter(questTarget.letter)])}
               className="speaker-bubble"
               aria-label="Hear the letter again"
             >

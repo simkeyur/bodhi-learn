@@ -28,7 +28,10 @@ const AUDIO_BASE = '/audio';
 
 // Clip paths are relative to AUDIO_BASE
 export const clip = {
-  letter: (letter: string) => `letters/${letter.toUpperCase()}.mp3`,
+  // Whole sentences per letter ("Can you find the letter K?"): a lone letter name, or a sentence
+  // fragment stitched onto one, is what voice models get wrong most often
+  findLetter: (letter: string) => `letters/find_${letter.toUpperCase()}.mp3`,
+  traceLetter: (letter: string) => `letters/trace_${letter.toUpperCase()}.mp3`,
   phonics: (letter: string) => `letters/phonics_${letter.toUpperCase()}.mp3`,
   number: (n: number) => `numbers/${n}.mp3`,
   word: (word: string) => `words/${wordKey(word)}.mp3`,
