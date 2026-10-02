@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { DEFAULT_STATE, fromDocData, stateKey, type SyncedState } from './schema';
+import { DEFAULT_STATE, fromDocData, stateKey, unionIds, type SyncedState } from './schema';
 import type { CloudUser } from './cloud';
 
 type Cloud = typeof import('./cloud');
@@ -31,6 +31,7 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
   });
   const [status, setStatus] = useState<SyncStatus>('guest');
   const [error, setError] = useState<string | null>(null);
+  const [syncTick, setSyncTick] = useState(0); // re-runs the save check after each server snapshot
 
   const cloudRef = useRef<Cloud | null>(null);
   const unsubAuthRef = useRef<(() => void) | null>(null);
@@ -129,9 +130,12 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
 
         readyRef.current = true;
         const remote = fromDocData(snap.data);
-        const remoteKey = stateKey(remote);
-        lastKeyRef.current = remoteKey;
-        if (remoteKey !== stateKey(stateRef.current)) applyRef.current(remote);
+        lastKeyRef.current = stateKey(remote);
+        // Solved levels only grow, so keep any this device has that the account lacks
+        // (the save effect below then uploads them)
+        const merged = { ...remote, botSolved: unionIds(remote.botSolved, stateRef.current.botSolved) };
+        if (stateKey(merged) !== stateKey(stateRef.current)) applyRef.current(merged);
+        setSyncTick((t) => t + 1);
         setStatus(snap.fromCache ? (navigator.onLine ? 'connecting' : 'offline') : 'saved');
       },
       (err) => {
@@ -159,7 +163,7 @@ export function useCloudSync(state: SyncedState, applyState: (state: SyncedState
       });
     }, SAVE_DELAY_MS);
     return () => window.clearTimeout(timer);
-  }, [state, user]);
+  }, [state, user, syncTick]);
 
   // Load the SDK ahead of the tap so the sign-in popup opens inside the gesture
   const preload = useCallback(() => {

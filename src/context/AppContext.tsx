@@ -6,7 +6,9 @@ import { useCloudSync, type SyncStatus } from '../firebase/useCloudSync';
 import type { CloudUser } from '../firebase/cloud';
 import {
   DEFAULT_STATE,
+  MAX_BOT_SOLVED,
   MAX_PLACED_STICKERS,
+  unionIds,
   type AgeBracket,
   type PlacedSticker,
   type SyncedState,
@@ -33,6 +35,8 @@ interface AppContextType {
   placedStickers: PlacedSticker[];
   placeSticker: (stickerId: string, x: number, y: number) => void;
   removePlacedSticker: (id: string) => void;
+  botSolved: string[];
+  markBotSolved: (levelId: string) => boolean; // true the first time a level is solved
   ageBracket: AgeBracket;
   setAgeBracket: (level: AgeBracket) => void;
   kidName: string;
@@ -88,6 +92,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>(() =>
     readStored('bodhi_placed_stickers', (r) => parseJson(r, isStickerArray), DEFAULT_STATE.placedStickers));
 
+  const [botSolved, setBotSolved] = useState<string[]>(() =>
+    readStored('bodhi_bot_solved', (r) => parseJson(r, isStringArray), DEFAULT_STATE.botSolved));
+
   const [ageBracket, setAgeBracketState] = useState<AgeBracket>(() =>
     readStored<AgeBracket>('bodhi_age', (r) => (['pre-k', 'kindergarten', 'grade1'].includes(r) ? (r as AgeBracket) : undefined), DEFAULT_STATE.ageBracket));
 
@@ -116,6 +123,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => store('bodhi_stars', stars.toString()), [stars]);
   useEffect(() => store('bodhi_stickers', JSON.stringify(unlockedStickers)), [unlockedStickers]);
   useEffect(() => store('bodhi_placed_stickers', JSON.stringify(placedStickers)), [placedStickers]);
+  useEffect(() => store('bodhi_bot_solved', JSON.stringify(botSolved)), [botSolved]);
   useEffect(() => store('bodhi_age', ageBracket), [ageBracket]);
   useEffect(() => store('bodhi_kid_name', kidName), [kidName]);
 
@@ -146,8 +154,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Cloud sync (Firestore) for signed-in parents; guests just use this device
   const synced = useMemo<SyncedState>(
-    () => ({ kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers }),
-    [kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers],
+    () => ({ kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved }),
+    [kidName, ageBracket, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved],
   );
 
   const applyCloudState = (next: SyncedState) => {
@@ -158,6 +166,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setStars(next.stars);
     setUnlockedStickers(next.unlockedStickers);
     setPlacedStickers(next.placedStickers);
+    setBotSolved(next.botSolved);
   };
 
   const cloud = useCloudSync(synced, applyCloudState);
@@ -199,6 +208,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     sound.playPop(650);
   };
 
+  // Returns true only the first time, so replaying a solved level doesn't pay out stars again
+  const markBotSolved = (levelId: string): boolean => {
+    if (botSolved.includes(levelId)) return false;
+    setBotSolved((prev) => unionIds(prev, [levelId]).slice(0, MAX_BOT_SOLVED));
+    return true;
+  };
+
   const removePlacedSticker = (id: string) => {
     setPlacedStickers((prev) => prev.filter((p) => p.id !== id));
     sound.playPop(400);
@@ -214,6 +230,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         placedStickers,
         placeSticker,
         removePlacedSticker,
+        botSolved,
+        markBotSolved,
         ageBracket,
         setAgeBracket,
         kidName,

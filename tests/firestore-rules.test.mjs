@@ -26,7 +26,7 @@ const validDoc = (overrides = {}) => ({
   schemaVersion: 1,
   profile: { kidName: 'Bodhi', ageBracket: 'kindergarten' },
   settings: { speechEnabled: true, voiceSpeed: 0.85 },
-  progress: { stars: 5, unlockedStickers: ['st1'], placedStickers: [] },
+  progress: { stars: 5, unlockedStickers: ['st1'], placedStickers: [], botSolved: ['pk-1', 'k-2'] },
   updatedAt: serverTimestamp(),
   ...overrides,
 });
@@ -41,6 +41,11 @@ test('owner can create, read, update and delete their own document', async () =>
   assert.equal(snap.data().progress.stars, 5);
   await assertSucceeds(setDoc(ref, validDoc({ progress: { stars: 9, unlockedStickers: ['st1', 'st2'], placedStickers: [] } })));
   await assertSucceeds(deleteDoc(ref));
+});
+
+test('documents from older app versions (no botSolved) are still valid', async () => {
+  const ref = doc(asUser('olivia'), 'users/olivia');
+  await assertSucceeds(setDoc(ref, validDoc({ progress: { stars: 3, unlockedStickers: ['st1'], placedStickers: [] } })));
 });
 
 test("users cannot read or write someone else's document", async () => {
@@ -64,6 +69,9 @@ test('invalid data is rejected', async () => {
   const bad = {
     'negative stars': validDoc({ progress: { stars: -1, unlockedStickers: [], placedStickers: [] } }),
     'fractional stars': validDoc({ progress: { stars: 1.5, unlockedStickers: [], placedStickers: [] } }),
+    'botSolved too long': validDoc({ progress: { stars: 1, unlockedStickers: [], placedStickers: [], botSolved: new Array(61).fill('x') } }),
+    'botSolved not a list': validDoc({ progress: { stars: 1, unlockedStickers: [], placedStickers: [], botSolved: 'pk-1' } }),
+    'unknown progress field': validDoc({ progress: { stars: 1, unlockedStickers: [], placedStickers: [], badges: [] } }),
     'huge sticker list': validDoc({ progress: { stars: 1, unlockedStickers: [], placedStickers: new Array(301).fill({ id: 'x' }) } }),
     'empty name': validDoc({ profile: { kidName: '', ageBracket: 'pre-k' } }),
     'long name': validDoc({ profile: { kidName: 'x'.repeat(41), ageBracket: 'pre-k' } }),

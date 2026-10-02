@@ -42,13 +42,19 @@ const DirIcon: React.FC<{ dir: Dir; size?: number }> = ({ dir, size = 26 }) => {
 // Code the Bot: build a program from arrow blocks, press Go, and watch the robot run it.
 // Teaches sequencing, loops (Repeat) and debugging (the block that failed is highlighted).
 export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { addStars, ageBracket, botSolved, markBotSolved } = useApp();
   const { later, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_codebot'));
   const repeatTipShown = useRef(false);
 
+  // Pick up where the child left off: the first level of this age group they haven't solved yet
+  const firstUnsolved = (b: AgeBracket) => {
+    const i = BOT_LEVELS[b].findIndex((l) => !botSolved.includes(l.id));
+    return i === -1 ? 0 : i;
+  };
+
   const [bracket, setBracket] = useState<AgeBracket>(ageBracket);
-  const [levelIndex, setLevelIndex] = useState(0);
+  const [levelIndex, setLevelIndex] = useState(() => firstUnsolved(ageBracket));
   const level = BOT_LEVELS[bracket][levelIndex];
 
   const [program, setProgram] = useState<Block[]>([]);
@@ -61,7 +67,7 @@ export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
   const [bugStep, setBugStep] = useState<number | null>(null);
   const [blocked, setBlocked] = useState<Cell | null>(null);
   const [bumping, setBumping] = useState(false);
-  const [solved, setSolved] = useState<string[]>([]);
+  const [earnedStar, setEarnedStar] = useState(false); // this run was the first solve of the level
 
   const used = blockCount(program);
   const full = used >= level.maxBlocks;
@@ -133,10 +139,11 @@ export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
     setActiveStep(null);
     setBumping(false);
     if (outcome === 'goal') {
+      const firstTime = markBotSolved(level.id);
+      setEarnedStar(firstTime);
       setStatus('won');
       sound.playSuccess();
-      addStars(1);
-      setSolved((s) => (s.includes(level.id) ? s : [...s, level.id]));
+      if (firstTime) addStars(1);
       speech.say([clip.cheer(), clip.phrase('bot_made_it')]);
     } else {
       setStatus(outcome);
@@ -195,7 +202,7 @@ export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
   const changeBracket = (next: AgeBracket) => {
     speech.stop();
     setBracket(next);
-    setLevelIndex(0);
+    setLevelIndex(firstUnsolved(next));
   };
 
   const levels = BOT_LEVELS[bracket];
@@ -207,7 +214,7 @@ export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
     isHit(blockIndex, inner, bugStep) ? ' bug' : isHit(blockIndex, inner, activeStep) ? ' active' : '';
 
   const message =
-    status === 'won' ? { text: '🎉 You did it! +1 ⭐', tone: 'good' }
+    status === 'won' ? { text: earnedStar ? '🎉 You did it! +1 ⭐' : '🎉 You did it again!', tone: 'good' }
     : status === 'bump' ? { text: 'Oops! Fix the red block 🔧', tone: 'oops' }
     : status === 'short' ? { text: 'Not there yet. Add more steps!', tone: 'oops' }
     : status === 'running' ? { text: 'Running…', tone: '' }
@@ -239,12 +246,12 @@ export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
           {levels.map((lvl, i) => (
             <button
               key={lvl.id}
-              className={`lab-level${solved.includes(lvl.id) ? ' done' : ''}`}
+              className={`lab-level${botSolved.includes(lvl.id) ? ' done' : ''}`}
               aria-current={i === levelIndex ? 'step' : undefined}
-              aria-label={`Level ${i + 1}${solved.includes(lvl.id) ? ', done' : ''}`}
+              aria-label={`Level ${i + 1}${botSolved.includes(lvl.id) ? ', done' : ''}`}
               onClick={() => goToLevel(i)}
             >
-              {solved.includes(lvl.id) && i !== levelIndex ? '✓' : i + 1}
+              {botSolved.includes(lvl.id) && i !== levelIndex ? '✓' : i + 1}
             </button>
           ))}
         </div>

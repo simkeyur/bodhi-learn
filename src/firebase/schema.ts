@@ -19,10 +19,12 @@ export interface SyncedState {
   stars: number;
   unlockedStickers: string[];
   placedStickers: PlacedSticker[];
+  botSolved: string[]; // ids of the Code the Bot levels the child has solved
 }
 
 export const SCHEMA_VERSION = 1;
 export const MAX_PLACED_STICKERS = 150;
+export const MAX_BOT_SOLVED = 60;
 
 export const DEFAULT_STATE: SyncedState = {
   kidName: 'Bodhi',
@@ -32,10 +34,17 @@ export const DEFAULT_STATE: SyncedState = {
   stars: 5, // welcome stars
   unlockedStickers: ['st1'],
   placedStickers: [{ id: 'init-1', stickerId: 'st1', x: 50, y: 50 }],
+  botSolved: [],
 };
 
 const AGE_BRACKETS: AgeBracket[] = ['pre-k', 'kindergarten', 'grade1'];
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+const uniqueStrings = (value: unknown): string[] =>
+  Array.isArray(value) ? [...new Set(value.filter((v): v is string => typeof v === 'string'))] : [];
+
+// Solved levels only ever grow, so merging two copies is a union (nothing gets lost between devices)
+export const unionIds = (a: string[], b: string[]): string[] => [...new Set([...a, ...b])];
 
 // Firestore document body (updatedAt is added by the writer)
 export function toDocData(state: SyncedState) {
@@ -47,6 +56,7 @@ export function toDocData(state: SyncedState) {
       stars: state.stars,
       unlockedStickers: state.unlockedStickers,
       placedStickers: state.placedStickers.slice(-MAX_PLACED_STICKERS),
+      botSolved: state.botSolved.slice(0, MAX_BOT_SOLVED),
     },
   };
 }
@@ -70,6 +80,8 @@ export function fromDocData(data: unknown): SyncedState {
       : DEFAULT_STATE.voiceSpeed,
     stars: typeof progress.stars === 'number' && Number.isInteger(progress.stars) && progress.stars >= 0 ? progress.stars : DEFAULT_STATE.stars,
     unlockedStickers: unlocked.filter((s): s is string => typeof s === 'string'),
+    // Older documents have no botSolved field: that just means nothing solved yet
+    botSolved: uniqueStrings(progress.botSolved).slice(0, MAX_BOT_SOLVED),
     placedStickers: stickers
       .filter((s): s is PlacedSticker =>
         isRecord(s) && typeof s.id === 'string' && typeof s.stickerId === 'string' && typeof s.x === 'number' && typeof s.y === 'number')
