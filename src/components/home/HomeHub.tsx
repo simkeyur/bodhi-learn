@@ -63,6 +63,42 @@ const ALL_CARDS: LearningCard[] = [
     tag: 'Snack Math',
   },
   {
+    id: 'code-bot',
+    title: 'Code the Bot',
+    subtitle: 'Program a robot with arrows to find the star',
+    category: 'math',
+    icon: '🤖',
+    color: '#14B8A6',
+    darkColor: '#0F766E',
+    tint: '#F0FDFA',
+    starsBonus: '+1 ⭐',
+    tag: 'Coding',
+  },
+  {
+    id: 'patterns',
+    title: 'Pattern Parade',
+    subtitle: 'What comes next? Spot the pattern',
+    category: 'math',
+    icon: '🎠',
+    color: '#EC4899',
+    darkColor: '#BE185D',
+    tint: '#FDF2F8',
+    starsBonus: '+1 ⭐',
+    tag: 'Logic',
+  },
+  {
+    id: 'machine',
+    title: 'Magic Machine',
+    subtitle: 'Find the secret rule inside the machine',
+    category: 'math',
+    icon: '⚙️',
+    color: '#0891B2',
+    darkColor: '#155E75',
+    tint: '#ECFEFF',
+    starsBonus: '+1 ⭐',
+    tag: 'Secret Rule',
+  },
+  {
     id: 'slide-read',
     title: 'Slide & Read',
     subtitle: 'Slide your finger under words and hear them',
@@ -169,12 +205,12 @@ export const HomeHub: React.FC<HomeHubProps> = ({ onSelectView }) => {
   const getSpotlightCards = (bracket: AgeBracket): LearningCard[] => {
     let ids: string[];
     if (bracket === 'pre-k') {
-      ids = ['tracing-abc', 'phonics', 'counting'];
+      ids = ['tracing-abc', 'phonics', 'counting', 'patterns'];
     } else if (bracket === 'grade1') {
-      ids = ['stories', 'tracing-words', 'math', 'sight-words'];
+      ids = ['stories', 'tracing-words', 'math', 'code-bot', 'machine'];
     } else {
       // Kindergarten (Ages 5–6)
-      ids = ['tracing-words', 'sight-words', 'math', 'slide-read'];
+      ids = ['tracing-words', 'sight-words', 'math', 'code-bot', 'patterns', 'slide-read'];
     }
     return ids
       .map((id) => ALL_CARDS.find((c) => c.id === id))

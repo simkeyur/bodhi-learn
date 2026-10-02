@@ -15,14 +15,14 @@ concurrency:
 
 jobs:
   test:
-    name: Typecheck, build, test rules
+    name: Typecheck, build, test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - uses: actions/setup-java@v4
@@ -33,6 +33,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      - run: npm run test:logic
       - run: npm run test:rules
 
       - uses: actions/upload-artifact@v4
@@ -55,7 +56,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - uses: actions/download-artifact@v4

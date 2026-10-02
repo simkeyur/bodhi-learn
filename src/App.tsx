@@ -6,6 +6,9 @@ import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
 import { StoriesWorld } from './components/reading/StoriesWorld';
 import { SlideReadWorld } from './components/reading/SlideReadWorld';
+import { CodeBotWorld } from './components/logic/CodeBotWorld';
+import { PatternWorld } from './components/logic/PatternWorld';
+import { MachineWorld } from './components/logic/MachineWorld';
 import { CountingWorld } from './components/math/CountingWorld';
 import { VisualMathWorld } from './components/math/VisualMathWorld';
 import { StickerBook } from './components/gamification/StickerBook';
@@ -44,6 +47,12 @@ export const BodhiApp: React.FC = () => {
         return <PhonicsWorld onBack={() => setCurrentView('home')} />;
       case 'sight-words':
         return <SightWordsWorld onBack={() => setCurrentView('home')} />;
+      case 'code-bot':
+        return <CodeBotWorld onBack={() => setCurrentView('home')} />;
+      case 'patterns':
+        return <PatternWorld onBack={() => setCurrentView('home')} />;
+      case 'machine':
+        return <MachineWorld onBack={() => setCurrentView('home')} />;
       case 'slide-read':
         return <SlideReadWorld onBack={() => setCurrentView('home')} />;
       case 'stories':

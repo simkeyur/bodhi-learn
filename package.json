@@ -13,7 +13,9 @@
     "audio": "node scripts/audio/generate.mjs",
     "test:rules": "firebase emulators:exec --only firestore --project bodhi-learn-rules-test \"node --test tests/firestore-rules.test.mjs\"",
     "emulators": "firebase emulators:start --only auth,firestore --project bodhi-learn-emulator",
-    "dev:emulators": "VITE_FIREBASE_EMULATORS=true vite --port 5190"
+    "dev:emulators": "VITE_FIREBASE_EMULATORS=true vite --port 5190",
+    "test:logic": "node --test tests/logic.test.mjs",
+    "test": "npm run test:logic && npm run test:rules"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

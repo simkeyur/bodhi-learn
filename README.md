@@ -23,6 +23,12 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
 - **Counting Meadow**: Floating items (balloons, stars, apples) that pop with ascending musical pentatonic chimes and spoken numbers.
 - **"How Many?" Quiz**: Visual counting challenges with large kid-friendly choices.
 - **Visual Math Kitchen**: Concrete visual addition and subtraction equations with real tangible counters.
+- **Code the Bot** 🤖: Program a robot to the star with arrow blocks. Teaches sequences, **loops** (a *Repeat* block for 1st grade, where the block limit makes a loop necessary) and **debugging** (a failed run highlights the block that went wrong).
+- **Pattern Parade** 🎠: "What comes next?" and "What is missing?" with picture patterns (AB, AAB, ABC, AABB…) and counting patterns (by 1, 2, 3, 5, and counting down).
+- **Magic Machine** ⚙️: Numbers go into a machine and come out changed. Study the examples, find the secret rule (+n, −n, double, triple) and predict the next output. That is a *function*, in programming terms.
+  All three scale with the age setting, award stars, and are narrated. The logic lives in `src/data/logicData.ts`
+  and is unit tested with `npm run test:logic` (every robot level must be solvable within its block limit, and
+  every pattern and machine question must have exactly one right answer).
 
 ### 🎨 3. Gamification & Rewards
 - **Sticker Playground**: Kids earn stars for completing learning activities, which they can spend to unlock collectible animated stickers.

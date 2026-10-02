@@ -16,6 +16,7 @@ import {
   TRACING_WORDS,
   READ_ALONG_SENTENCES,
 } from '../../src/data/learningData.ts';
+import { PATTERN_ITEMS } from '../../src/data/logicData.ts';
 import { EXCLAMATIONS, RETRY_PHRASES, wordKey } from '../../src/utils/speech.ts';
 
 // Delivery styles, by kind of clip
@@ -85,6 +86,29 @@ export const PHRASES = {
   you_have: ['lead', 'You have'],
   you_need: ['lead', 'You need'],
 
+  // Logic Lab: Code the Bot
+  greet_codebot: ['prompt', "Let's code the robot! Tap the arrows to make a path, then press go."],
+  bot_made_it: ['cheer', 'The robot found the star!'],
+  bot_try_again: ['encourage', "Oops! The robot got stuck. Let's fix the code and try again."],
+  bot_repeat_tip: ['prompt', 'Repeat runs the steps inside it again and again!'],
+
+  // Logic Lab: Pattern Parade
+  greet_patterns: ['prompt', "Welcome to Pattern Parade! Let's find out what comes next."],
+  what_comes_next: ['prompt', 'What comes next?'],
+  whats_missing: ['prompt', 'What is missing?'],
+  pattern_yes: ['cheer', "Yes! That's the pattern!"],
+  look_again: ['encourage', 'Look at the pattern again. You can do it!'],
+
+  // Logic Lab: Magic Machine
+  greet_machine: ['prompt', 'Welcome to the Magic Machine! Can you find the secret rule?'],
+  machine_what_out: ['prompt', 'What comes out of the machine?'],
+  machine_goes_in: ['tail', 'goes in,'],
+  machine_comes_out: ['tail', 'comes out.'],
+  machine_adds: ['lead', 'The machine adds'],
+  machine_takes: ['lead', 'The machine takes away'],
+  machine_doubles: ['prompt', 'The machine doubles the number!'],
+  machine_triples: ['prompt', 'The machine makes the number three times bigger!'],
+
   // Sentence endings, after a number clip
   stars_word: ['tail', 'stars!'],
   stars_for_sticker: ['tail', 'stars for this sticker. Play more games to earn stars!'],
@@ -110,6 +134,9 @@ export const EXCLAMATION_TEXT = {
   you_rock: 'You rock!',
   shining_star: "You're a shining star!",
 };
+
+// What the robot's arrow buttons say (clip.word('up') etc.)
+const DIRECTION_WORDS = ['up', 'down', 'left', 'right'];
 
 const NUMBER_NAMES = [
   'Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten',
@@ -137,6 +164,9 @@ export function buildManifest() {
     ...TRACING_WORDS.map((w) => w.word),
     ...STORIES.flatMap((s) => s.pages.flatMap((p) => p.text.split(/\s+/))),
     ...READ_ALONG_SENTENCES.flatMap((s) => s.text.split(/\s+/)),
+    // Logic Lab: robot directions and the pattern pictures
+    ...DIRECTION_WORDS,
+    ...PATTERN_ITEMS.map((i) => i.word),
   ].map(wordKey).filter(Boolean));
   for (const w of [...words].sort()) {
     add(`words/${w}.mp3`, titleCase(w), 'word');

@@ -15,7 +15,7 @@ const NAV_ITEMS: { view: string; label: string; emoji?: string; isCandyNumber?: 
   { view: 'home', label: 'Home', emoji: '🏠', color: '#0EA5E9', views: ['home'] },
   { view: 'tracing', label: 'Tracing', emoji: '✏️', color: '#FB7185', views: ['tracing-abc', 'tracing-words'] },
   { view: 'phonics', label: 'Reading', emoji: '📖', color: '#38BDF8', views: ['phonics', 'sight-words', 'stories', 'slide-read', 'reading'] },
-  { view: 'counting', label: 'Math', isCandyNumber: true, color: '#22C55E', views: ['counting', 'math'] },
+  { view: 'counting', label: 'Math', isCandyNumber: true, color: '#22C55E', views: ['counting', 'math', 'code-bot', 'patterns', 'machine'] },
   { view: 'stickers', label: 'Stickers', emoji: '🎨', color: '#C084FC', views: ['stickers'] },
 ];
 
