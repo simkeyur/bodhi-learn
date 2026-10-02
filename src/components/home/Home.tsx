@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, Sparkles, Volume2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge } from '../../data/subjects';
+import { MODE_LABEL, quizGamesFor } from '../../data/quizGames';
 import { sound } from '../../utils/sound';
 import { speech, clip } from '../../utils/speech';
 import './home.css';
@@ -17,28 +18,24 @@ interface SlimCardProps {
   color: string;
   dark: string;
   tint: string;
-  cta?: string;
-  solid?: boolean;
+  meta?: string;
   onClick: () => void;
 }
 
-// One slim, playful row: icon, name, one line of description, and a Play pill
-const SlimCard: React.FC<SlimCardProps> = ({ icon, title, sub, color, dark, tint, cta = 'Play', solid, onClick }) => (
+// One slim, playful card: icon, name, a short description, and how it is played
+const SlimCard: React.FC<SlimCardProps> = ({ icon, title, sub, color, dark, tint, meta, onClick }) => (
   <button
-    className={`btn-reset slim-card ${solid ? 'solid' : ''}`}
+    className="btn-reset slim-card"
     onClick={onClick}
-    style={{
-      '--c': color,
-      '--cd': dark,
-      '--ct': tint,
-    } as React.CSSProperties}
+    style={{ '--c': color, '--cd': dark, '--ct': tint } as React.CSSProperties}
   >
     <span className="slim-icon" aria-hidden>{icon}</span>
     <span className="slim-text">
       <span className="slim-title">{title}</span>
       <span className="slim-sub">{sub}</span>
+      {meta && <span className="slim-meta">{meta}</span>}
     </span>
-    <span className="slim-play">{cta} <ArrowRight size={13} /></span>
+    <span className="slim-go" aria-hidden><ArrowRight size={16} /></span>
   </button>
 );
 
@@ -80,48 +77,39 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
       {SUBJECT_ORDER.map((id) => {
         const info = SUBJECT_INFO[id];
         const skill = skills[id];
-        const games = gamesForAge(id, age);
+        const quizGames = quizGamesFor(id, age);
+        const minis = gamesForAge(id, age);
+        const cards = [
+          ...quizGames.map((g) => (
+            <SlimCard key={g.id} icon={g.icon} title={g.title} sub={g.blurb} meta={MODE_LABEL[g.mode]}
+              color={g.color} dark={g.dark} tint={g.tint} onClick={() => go(`play:${g.id}`)} />
+          )),
+          ...minis.map((g) => (
+            <SlimCard key={g.view} icon={g.icon} title={g.title} sub={g.blurb} meta="Play and learn"
+              color={g.color} dark={g.dark} tint={g.tint} onClick={() => go(g.view)} />
+          )),
+        ];
+        // Little ones get the hands-on games first; older children get the question games first
+        if (ageBand === 'little') cards.unshift(...cards.splice(quizGames.length));
+        if (cards.length === 0) return null;
         return (
-          <section className="hub-section" key={id}>
+          <section className="hub-section" key={id} style={{ '--sc': info.color, '--sd': info.dark, '--st': info.tint } as React.CSSProperties}>
             <div className="hub-section-header">
               <span className="hub-section-icon" aria-hidden>{info.icon}</span>
               <div className="hub-section-heading">
-                <h3 className="hub-section-title">{info.title}</h3>
+                <h3 className="hub-section-title">
+                  {info.title}
+                  {showLevels && <span className="hub-section-badge">Level {skill.level} · {LEVEL_NAMES[skill.level]}</span>}
+                </h3>
                 <p className="hub-section-desc">{info.blurb[ageBand]}</p>
               </div>
-              {showLevels && <span className="hub-section-badge" style={{ background: info.tint, color: info.dark }}>Level {skill.level}</span>}
             </div>
-
-            <div className="hub-grid">
-              <SlimCard
-                solid
-                icon="⭐"
-                title="Challenge"
-                sub={showLevels ? `8 questions · ${LEVEL_NAMES[skill.level]}` : '8 quick questions'}
-                color={info.color}
-                dark={info.dark}
-                tint={info.tint}
-                cta="Start"
-                onClick={() => go(`quiz:${id}`)}
-              />
-              {games.map((g) => (
-                <SlimCard
-                  key={g.view}
-                  icon={g.icon}
-                  title={g.title}
-                  sub={g.blurb}
-                  color={g.color}
-                  dark={g.dark}
-                  tint={g.tint}
-                  onClick={() => go(g.view)}
-                />
-              ))}
-            </div>
+            <div className="hub-grid">{cards}</div>
           </section>
         );
       })}
 
-      <section className="hub-section">
+      <section className="hub-section" style={{ '--sc': '#818CF8', '--sd': '#4F46E5', '--st': '#EEF2FF' } as React.CSSProperties}>
         <div className="hub-section-header">
           <span className="hub-section-icon" aria-hidden>🎨</span>
           <div className="hub-section-heading">
@@ -130,7 +118,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
           </div>
         </div>
         <div className="hub-grid">
-          <SlimCard icon="🎨" title="Sticker Book" sub={`You have ${stars} ⭐ to spend`} color="#818CF8" dark="#4F46E5" tint="#EEF2FF" cta="Open" onClick={() => go('stickers')} />
+          <SlimCard icon="🎨" title="Sticker Book" sub={`You have ${stars} ⭐ to spend`} meta="Collect and decorate" color="#818CF8" dark="#4F46E5" tint="#EEF2FF" onClick={() => go('stickers')} />
         </div>
       </section>
     </div>

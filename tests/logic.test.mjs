@@ -208,7 +208,8 @@ for (const bracket of BRACKETS) {
 // ---------- Quiz content ----------
 
 import fs from 'fs';
-import { makeMathQuestion } from '../src/content/mathGen.ts';
+import { MATH_REGISTRY, makeMathQuestion } from '../src/content/mathGen.ts';
+import { QUIZ_GAMES, gameById, quizGamesFor } from '../src/data/quizGames.ts';
 import { adjustLevel, isQuestion, nextQuestion, pickFromPack, readPack } from '../src/content/select.ts';
 import { bandForAge, bracketForAge, fromDocData, levelForAge, toDocData, DEFAULT_STATE } from '../src/firebase/schema.ts';
 
@@ -363,4 +364,125 @@ test('math generator: fractions, percentages and Pythagoras answers are right', 
     }
   }
   assert.ok(checked.frac > 20 && checked.pct > 20 && checked.pyth > 20 && checked.ratio > 20, JSON.stringify(checked));
+});
+
+// ---------- Quiz games ----------
+
+test('every math generator is tagged with the topic it really produces', () => {
+  const rng = mulberry32(21);
+  for (const entry of MATH_REGISTRY) {
+    for (let i = 0; i < 25; i++) {
+      const q = entry.gen(rng, entry.level);
+      assert.equal(q.topic, entry.topic, `${q.prompt} is tagged ${entry.topic} but asks about ${q.topic}`);
+      assert.ok(isQuestion(q), q.prompt);
+      assert.equal(new Set(q.choices.map(value)).size, q.choices.length, `duplicate values: ${q.prompt} ${q.choices}`);
+      assert.ok(!q.choices.some((c) => /NaN|undefined|Infinity|\.\d{4,}/.test(c)), `ugly number in ${q.prompt}: ${q.choices}`);
+    }
+  }
+});
+
+test('quiz games: unique ids, sensible ages, and every topic has questions', () => {
+  const ids = new Set();
+  const mathTopics = new Set(MATH_REGISTRY.map((e) => e.topic));
+  for (const g of QUIZ_GAMES) {
+    assert.ok(!ids.has(g.id), `duplicate game id ${g.id}`);
+    ids.add(g.id);
+    assert.ok(g.minAge >= 4 && g.maxAge <= 14 && g.minAge <= g.maxAge, g.id);
+    assert.ok(['round', 'sprint', 'lives'].includes(g.mode), g.id);
+    assert.equal(gameById(g.id), g);
+    for (const topic of g.topics) {
+      const known = g.subject === 'math' ? mathTopics.has(topic) : packs[g.subject].questions.some((q) => q.topic === topic);
+      assert.ok(known, `${g.id}: no questions for topic "${topic}"`);
+    }
+  }
+});
+
+test('every question topic in the packs belongs to a game, so nothing is unreachable', () => {
+  for (const [subject, pack] of Object.entries(packs)) {
+    const covered = new Set(QUIZ_GAMES.filter((g) => g.subject === subject).flatMap((g) => g.topics));
+    for (const q of pack.questions) assert.ok(covered.has(q.topic), `${q.id} (${subject}/${q.topic}) is in no game`);
+  }
+});
+
+test('every game can serve questions at every level of its age range, drawn from its own topics', () => {
+  const rng = mulberry32(5);
+  for (const g of QUIZ_GAMES) {
+    for (let age = g.minAge; age <= g.maxAge; age++) {
+      const level = levelForAge(age);
+      if (g.subject === 'math') {
+        for (let i = 0; i < 20; i++) {
+          const q = makeMathQuestion(level, rng, g.topics);
+          assert.ok(g.topics.includes(q.topic), `${g.id} age ${age}: got topic ${q.topic}`);
+        }
+      } else {
+        const inGroup = packs[g.subject].questions.filter((q) => g.topics.includes(q.topic));
+        const near = inGroup.filter((q) => Math.abs(q.level - level) <= 1);
+        assert.ok(near.length >= 4, `${g.id} at level ${level} (age ${age}) has only ${near.length} questions within one level`);
+        const q = nextQuestion(g.subject, level, packs, new Set(), rng, g.topics);
+        assert.ok(g.topics.includes(q.topic), `${g.id}: got topic ${q.topic}`);
+      }
+    }
+  }
+});
+
+test('games shown to a child are limited to their age, and each age sees every subject', () => {
+  for (let age = 4; age <= 14; age++) {
+    for (const subject of ['math', 'reading', 'logic', 'science']) {
+      assert.ok(quizGamesFor(subject, age).length >= 1, `age ${age} has no ${subject} game`);
+    }
+  }
+  assert.ok(!quizGamesFor('math', 5).some((g) => g.id === 'equation-lab'));
+  assert.ok(quizGamesFor('math', 12).some((g) => g.id === 'equation-lab'));
+  assert.ok(!quizGamesFor('reading', 12).some((g) => g.id === 'rhyme-time'));
+});
+
+test('a game never runs out of fresh questions for a full round', () => {
+  const rng = mulberry32(9);
+  for (const g of QUIZ_GAMES.filter((x) => x.subject !== 'math')) {
+    const seen = new Set();
+    for (let i = 0; i < 8; i++) {
+      const q = nextQuestion(g.subject, levelForAge(g.minAge + 1), packs, seen, rng, g.topics);
+      assert.ok(q);
+      assert.ok(!seen.has(q.id), `${g.id} repeated ${q.id} within one round`);
+      seen.add(q.id);
+    }
+  }
+});
+
+test('math generator: shapes, word problems and decimals have the right answer', () => {
+  const rng = mulberry32(33);
+  const num = (s) => Number(String(s).replace('−', '-').replace(/[^\d.-]/g, ''));
+  const seen = new Set();
+  const rules = [
+    [/^A rectangle is (\d+) cm long and (\d+) cm wide\. What is its perimeter/, (m) => 2 * (+m[1] + +m[2])],
+    [/^Two angles of a triangle are (\d+)° and (\d+)°/, (m) => 180 - +m[1] - +m[2]],
+    [/^A triangle has a base of (\d+) cm and a height of (\d+) cm/, (m) => (+m[1] * +m[2]) / 2],
+    [/^A box is (\d+) cm long, (\d+) cm wide and (\d+) cm tall/, (m) => +m[1] * +m[2] * +m[3]],
+    [/^A circle has a radius of (\d+) cm/, (m) => Math.round(3.14 * m[1] * m[1] * 100) / 100],
+    [/^A cyclist rides (\d+) km in (\d+) hours.*in (\d+) hours\?$/, (m) => (+m[1] / +m[2]) * +m[3]],
+    [/^(\d+) notebooks cost \$(\d+)\. How much do (\d+) notebooks cost/, (m) => (+m[2] / +m[1]) * +m[3]],
+    [/^Two numbers add up to (\d+)\. Their difference is (\d+)/, (m) => (+m[1] + +m[2]) / 2],
+    [/^A taxi charges \$(\d+) plus \$(\d+) for each km\. A trip cost \$(\d+)/, (m) => (+m[3] - +m[1]) / +m[2]],
+    [/^Tom had (\d+) \w+ and gave (\d+) to his friend/, (m) => +m[1] - +m[2]],
+    [/^A pack has (\d+) pens\. Mia buys (\d+) packs, then loses (\d+)/, (m) => +m[1] * +m[2] - +m[3]],
+    [/^Solve for x:\s+x − (\d+) = (\d+)$/, (m) => +m[1] + +m[2]],
+    [/^Solve for x:\s+x \+ (\d+) = (\d+)$/, (m) => +m[2] - +m[1]],
+    [/^\? × (\d+) = (\d+)$/, (m) => +m[2] / +m[1]],
+    [/^What is (\d+) × (\d+)\?$/, (m) => +m[1] * +m[2]],
+    [/^What is (\d+) ÷ (\d+)\?$/, (m) => +m[1] / +m[2]],
+    [/^What is (\d+) [+] (\d+)\?$/, (m) => +m[1] + +m[2]],
+    [/^What is (\d+) − (\d+)\?$/, (m) => +m[1] - +m[2]],
+  ];
+  for (const entry of MATH_REGISTRY) {
+    for (let i = 0; i < 60; i++) {
+      const q = entry.gen(rng, entry.level);
+      for (const [re, answer] of rules) {
+        const m = re.exec(q.prompt);
+        if (!m) continue;
+        seen.add(String(re));
+        assert.equal(num(q.choices[q.answer]), answer(m), `${q.prompt} -> ${q.choices[q.answer]}`);
+      }
+    }
+  }
+  assert.equal(seen.size, rules.length, `some rules never matched: ${rules.filter(([re]) => !seen.has(String(re))).map(([re]) => re)}`);
 });

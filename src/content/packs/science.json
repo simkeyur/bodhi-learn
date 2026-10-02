@@ -1,6 +1,6 @@
 {
  "subject": "science",
- "version": 1,
+ "version": 2,
  "title": "Discover",
  "questions": [
   {
@@ -782,6 +782,682 @@
    ],
    "answer": 0,
    "explain": "Named after James Prescott Joule."
+  },
+  {
+   "id": "sc4-7",
+   "topic": "animals",
+   "level": 4,
+   "prompt": "Which animal is a mammal that can fly?",
+   "choices": [
+    "bat",
+    "butterfly",
+    "eagle"
+   ],
+   "answer": 0,
+   "explain": "Bats have fur and feed their babies milk."
+  },
+  {
+   "id": "sc4-8",
+   "topic": "plants",
+   "level": 4,
+   "prompt": "Which part of a plant makes the seeds?",
+   "choices": [
+    "the root",
+    "the flower",
+    "the stem"
+   ],
+   "answer": 1,
+   "explain": "Flowers make seeds."
+  },
+  {
+   "id": "sc4-9",
+   "topic": "body",
+   "level": 4,
+   "prompt": "Which organ do we use to breathe?",
+   "choices": [
+    "the heart",
+    "the lungs",
+    "the stomach"
+   ],
+   "answer": 1,
+   "explain": "Lungs take in air."
+  },
+  {
+   "id": "sc4-10",
+   "topic": "life cycles",
+   "level": 4,
+   "prompt": "What is a baby frog called?",
+   "choices": [
+    "a kitten",
+    "a chick",
+    "a tadpole"
+   ],
+   "answer": 2,
+   "explain": "Tadpoles grow into frogs."
+  },
+  {
+   "id": "sc4-11",
+   "topic": "food",
+   "level": 4,
+   "prompt": "Which food group do milk and cheese belong to?",
+   "choices": [
+    "dairy",
+    "vegetables",
+    "grains"
+   ],
+   "answer": 0,
+   "explain": "Dairy comes from milk."
+  },
+  {
+   "id": "sc8-7",
+   "topic": "cells",
+   "level": 8,
+   "prompt": "What carries the instructions for how a living thing grows?",
+   "choices": [
+    "DNA",
+    "oxygen",
+    "sugar"
+   ],
+   "answer": 0,
+   "explain": "DNA is the instruction code in every cell."
+  },
+  {
+   "id": "sc8-8",
+   "topic": "body",
+   "level": 8,
+   "prompt": "Which part of the brain helps with balance and coordination?",
+   "choices": [
+    "the cerebellum",
+    "the spinal cord",
+    "the cerebrum"
+   ],
+   "answer": 0,
+   "explain": "The cerebellum sits at the back of the brain."
+  },
+  {
+   "id": "sc8-9",
+   "topic": "animals",
+   "level": 8,
+   "prompt": "Which group of animals is cold-blooded?",
+   "choices": [
+    "reptiles",
+    "mammals",
+    "birds"
+   ],
+   "answer": 0,
+   "explain": "Reptiles rely on the Sun to warm up."
+  },
+  {
+   "id": "sc8-10",
+   "topic": "plants",
+   "level": 8,
+   "prompt": "Which part of a flower makes pollen?",
+   "choices": [
+    "the petal",
+    "the stamen",
+    "the pistil"
+   ],
+   "answer": 1,
+   "explain": "The stamen is the male part."
+  },
+  {
+   "id": "sc8-11",
+   "topic": "body",
+   "level": 8,
+   "prompt": "Which blood vessels carry blood away from the heart?",
+   "choices": [
+    "arteries",
+    "capillaries",
+    "veins"
+   ],
+   "answer": 0,
+   "explain": "Arteries go Away."
+  },
+  {
+   "id": "sc9-7",
+   "topic": "cells",
+   "level": 9,
+   "prompt": "Which process do cells use to release energy from glucose?",
+   "choices": [
+    "photosynthesis",
+    "digestion",
+    "cellular respiration"
+   ],
+   "answer": 2,
+   "explain": "Cells \"burn\" glucose with oxygen."
+  },
+  {
+   "id": "sc9-8",
+   "topic": "genetics",
+   "level": 9,
+   "prompt": "An organism's observable traits are called its…",
+   "choices": [
+    "chromosome",
+    "genotype",
+    "phenotype"
+   ],
+   "answer": 2,
+   "explain": "Phenotype is what you can see."
+  },
+  {
+   "id": "sc9-9",
+   "topic": "body",
+   "level": 9,
+   "prompt": "Which hormone helps control blood sugar?",
+   "choices": [
+    "adrenaline",
+    "insulin",
+    "melatonin"
+   ],
+   "answer": 1,
+   "explain": "The pancreas releases insulin."
+  },
+  {
+   "id": "sc9-10",
+   "topic": "cells",
+   "level": 9,
+   "prompt": "Which part of a cell controls what goes in and out?",
+   "choices": [
+    "the cell membrane",
+    "the nucleus",
+    "the ribosome"
+   ],
+   "answer": 0,
+   "explain": "The membrane is the cell's gatekeeper."
+  },
+  {
+   "id": "sc9-11",
+   "topic": "animals",
+   "level": 9,
+   "prompt": "What do we call animals that hunt other animals for food?",
+   "choices": [
+    "predators",
+    "decomposers",
+    "producers"
+   ],
+   "answer": 0,
+   "explain": "Hunters are predators."
+  },
+  {
+   "id": "sc10-7",
+   "topic": "genetics",
+   "level": 10,
+   "prompt": "Two parents are both Bb for a trait. What fraction of their children are expected to be bb?",
+   "choices": [
+    "1/2",
+    "3/4",
+    "1/4"
+   ],
+   "answer": 2,
+   "explain": "A Punnett square gives BB, Bb, Bb, bb."
+  },
+  {
+   "id": "sc10-8",
+   "topic": "cells",
+   "level": 10,
+   "prompt": "Which cell structure makes proteins?",
+   "choices": [
+    "the ribosome",
+    "the lysosome",
+    "the Golgi body"
+   ],
+   "answer": 0,
+   "explain": "Ribosomes build proteins."
+  },
+  {
+   "id": "sc10-9",
+   "topic": "genetics",
+   "level": 10,
+   "prompt": "Mutations are changes in…",
+   "choices": [
+    "body temperature",
+    "DNA",
+    "blood type only"
+   ],
+   "answer": 1,
+   "explain": "A mutation changes the DNA sequence."
+  },
+  {
+   "id": "sc10-10",
+   "topic": "body",
+   "level": 10,
+   "prompt": "Which part of a neuron receives signals from other neurons?",
+   "choices": [
+    "the axon",
+    "the myelin sheath",
+    "dendrites"
+   ],
+   "answer": 2,
+   "explain": "Dendrites branch like tree roots to catch signals."
+  },
+  {
+   "id": "sc10-11",
+   "topic": "cells",
+   "level": 10,
+   "prompt": "Which type of cell division makes sex cells (gametes)?",
+   "choices": [
+    "mitosis",
+    "meiosis",
+    "osmosis"
+   ],
+   "answer": 1,
+   "explain": "Meiosis halves the chromosome number."
+  },
+  {
+   "id": "sc1-7",
+   "topic": "weather",
+   "level": 1,
+   "prompt": "What falls from clouds when it rains?",
+   "choices": [
+    "water",
+    "sand",
+    "leaves"
+   ],
+   "answer": 0,
+   "explain": "Rain is water."
+  },
+  {
+   "id": "sc1-8",
+   "topic": "space",
+   "level": 1,
+   "prompt": "What can you see shining in the sky at night?",
+   "choices": [
+    "the Sun",
+    "the Moon and stars",
+    "a rainbow"
+   ],
+   "answer": 1,
+   "explain": "The Moon and stars shine at night."
+  },
+  {
+   "id": "sc1-9",
+   "topic": "seasons",
+   "level": 1,
+   "prompt": "In which season do leaves fall from the trees?",
+   "choices": [
+    "summer",
+    "autumn",
+    "spring"
+   ],
+   "answer": 1,
+   "explain": "Autumn is also called fall."
+  },
+  {
+   "id": "sc2-7",
+   "topic": "space",
+   "level": 2,
+   "prompt": "What do we call the big ball of fire in the sky that gives us light?",
+   "choices": [
+    "the Sun",
+    "the Moon",
+    "a planet"
+   ],
+   "answer": 0,
+   "explain": "The Sun is a star."
+  },
+  {
+   "id": "sc2-8",
+   "topic": "weather",
+   "level": 2,
+   "prompt": "What can we see in the sky when it rains while the Sun shines?",
+   "choices": [
+    "a comet",
+    "a rainbow",
+    "a volcano"
+   ],
+   "answer": 1,
+   "explain": "Sunlight through raindrops makes a rainbow."
+  },
+  {
+   "id": "sc2-9",
+   "topic": "geography",
+   "level": 2,
+   "prompt": "Which is bigger?",
+   "choices": [
+    "a puddle",
+    "an ocean",
+    "a pond"
+   ],
+   "answer": 1,
+   "explain": "Oceans are huge."
+  },
+  {
+   "id": "sc6-7",
+   "topic": "weather",
+   "level": 6,
+   "prompt": "Which tool measures temperature?",
+   "choices": [
+    "a clock",
+    "a thermometer",
+    "a ruler"
+   ],
+   "answer": 1,
+   "explain": "Thermo means heat."
+  },
+  {
+   "id": "sc6-8",
+   "topic": "earth",
+   "level": 6,
+   "prompt": "What causes day and night on Earth?",
+   "choices": [
+    "Earth going around the Sun",
+    "Earth spinning on its axis",
+    "the Moon blocking the Sun"
+   ],
+   "answer": 1,
+   "explain": "Earth turns once every 24 hours."
+  },
+  {
+   "id": "sc7-7",
+   "topic": "earth",
+   "level": 7,
+   "prompt": "What causes the seasons on Earth?",
+   "choices": [
+    "solar flares",
+    "the tilt of Earth's axis",
+    "Earth's distance from the Sun"
+   ],
+   "answer": 1,
+   "explain": "Tilt changes how directly sunlight hits each part of Earth."
+  },
+  {
+   "id": "sc8-12",
+   "topic": "space",
+   "level": 8,
+   "prompt": "About how long does sunlight take to reach Earth?",
+   "choices": [
+    "8 hours",
+    "8 seconds",
+    "8 minutes"
+   ],
+   "answer": 2,
+   "explain": "The Sun is about 150 million km away."
+  },
+  {
+   "id": "sc10-12",
+   "topic": "earth",
+   "level": 10,
+   "prompt": "Which layer of Earth is made of liquid iron and nickel?",
+   "choices": [
+    "the crust",
+    "the outer core",
+    "the mantle"
+   ],
+   "answer": 1,
+   "explain": "The outer core is liquid; the inner core is solid."
+  },
+  {
+   "id": "sc10-13",
+   "topic": "history",
+   "level": 10,
+   "prompt": "In which year did humans first walk on the Moon?",
+   "choices": [
+    "1969",
+    "1979",
+    "1959"
+   ],
+   "answer": 0,
+   "explain": "Apollo 11 landed in July 1969."
+  },
+  {
+   "id": "sc10-14",
+   "topic": "geography",
+   "level": 10,
+   "prompt": "Which line of latitude is at 0°?",
+   "choices": [
+    "the Equator",
+    "the Tropic of Cancer",
+    "the Prime Meridian"
+   ],
+   "answer": 0,
+   "explain": "The Prime Meridian is a line of longitude."
+  },
+  {
+   "id": "sc3-7",
+   "topic": "matter",
+   "level": 3,
+   "prompt": "Which of these is a solid?",
+   "choices": [
+    "a rock",
+    "air",
+    "water"
+   ],
+   "answer": 0,
+   "explain": "Solids keep their shape."
+  },
+  {
+   "id": "sc3-8",
+   "topic": "forces",
+   "level": 3,
+   "prompt": "What do you do to a door to open it?",
+   "choices": [
+    "push or pull",
+    "freeze it",
+    "sing to it"
+   ],
+   "answer": 0,
+   "explain": "A push or a pull is a force."
+  },
+  {
+   "id": "sc3-9",
+   "topic": "energy",
+   "level": 3,
+   "prompt": "What gives us light and heat during the day?",
+   "choices": [
+    "the Sun",
+    "the Moon",
+    "a tree"
+   ],
+   "answer": 0,
+   "explain": "The Sun gives light and heat."
+  },
+  {
+   "id": "sc3-10",
+   "topic": "light",
+   "level": 3,
+   "prompt": "What do we need in order to see colours?",
+   "choices": [
+    "silence",
+    "light",
+    "cold"
+   ],
+   "answer": 1,
+   "explain": "Without light everything looks dark."
+  },
+  {
+   "id": "sc3-11",
+   "topic": "matter",
+   "level": 3,
+   "prompt": "What is steam?",
+   "choices": [
+    "water as a solid",
+    "a type of rock",
+    "water as a gas"
+   ],
+   "answer": 2,
+   "explain": "Heat turns liquid water into a gas."
+  },
+  {
+   "id": "sc4-12",
+   "topic": "forces",
+   "level": 4,
+   "prompt": "Which force slows things down when they rub together?",
+   "choices": [
+    "gravity",
+    "magnetism",
+    "friction"
+   ],
+   "answer": 2,
+   "explain": "Rubbing causes friction."
+  },
+  {
+   "id": "sc4-13",
+   "topic": "energy",
+   "level": 4,
+   "prompt": "Which of these gives off heat and light?",
+   "choices": [
+    "a candle flame",
+    "an ice cube",
+    "a rock"
+   ],
+   "answer": 0,
+   "explain": "Burning gives heat and light."
+  },
+  {
+   "id": "sc4-14",
+   "topic": "light",
+   "level": 4,
+   "prompt": "Which of these is transparent, so you can see through it?",
+   "choices": [
+    "wood",
+    "glass",
+    "metal"
+   ],
+   "answer": 1,
+   "explain": "Light passes through glass."
+  },
+  {
+   "id": "sc4-15",
+   "topic": "matter",
+   "level": 4,
+   "prompt": "What happens to water when it freezes?",
+   "choices": [
+    "it disappears",
+    "it becomes steam",
+    "it becomes ice"
+   ],
+   "answer": 2,
+   "explain": "Freezing turns liquid into solid."
+  },
+  {
+   "id": "sc5-7",
+   "topic": "energy",
+   "level": 5,
+   "prompt": "What type of energy does a moving car have?",
+   "choices": [
+    "kinetic energy",
+    "potential energy",
+    "chemical energy"
+   ],
+   "answer": 0,
+   "explain": "Kinetic means movement."
+  },
+  {
+   "id": "sc5-8",
+   "topic": "light",
+   "level": 5,
+   "prompt": "What happens when light hits a mirror?",
+   "choices": [
+    "it disappears",
+    "it turns into sound",
+    "it bounces off"
+   ],
+   "answer": 2,
+   "explain": "Mirrors reflect light."
+  },
+  {
+   "id": "sc5-9",
+   "topic": "chemistry",
+   "level": 5,
+   "prompt": "Which gas do we breathe out?",
+   "choices": [
+    "hydrogen",
+    "helium",
+    "carbon dioxide"
+   ],
+   "answer": 2,
+   "explain": "We breathe out carbon dioxide."
+  },
+  {
+   "id": "sc5-10",
+   "topic": "matter",
+   "level": 5,
+   "prompt": "Which of these is a liquid at room temperature?",
+   "choices": [
+    "oxygen",
+    "iron",
+    "milk"
+   ],
+   "answer": 2,
+   "explain": "Milk flows and takes the shape of its container."
+  },
+  {
+   "id": "sc6-9",
+   "topic": "chemistry",
+   "level": 6,
+   "prompt": "What is the chemical symbol for gold?",
+   "choices": [
+    "Ag",
+    "Au",
+    "Go"
+   ],
+   "answer": 1,
+   "explain": "Au comes from the Latin word aurum."
+  },
+  {
+   "id": "sc10-15",
+   "topic": "physics",
+   "level": 10,
+   "prompt": "About what is the acceleration due to gravity near Earth's surface?",
+   "choices": [
+    "9.8 m/s²",
+    "0.98 m/s²",
+    "98 m/s²"
+   ],
+   "answer": 0,
+   "explain": "Falling objects speed up by about 9.8 m/s every second."
+  },
+  {
+   "id": "sc10-16",
+   "topic": "atoms",
+   "level": 10,
+   "prompt": "How many protons does a carbon atom have?",
+   "choices": [
+    "12",
+    "6",
+    "4"
+   ],
+   "answer": 1,
+   "explain": "Carbon has atomic number 6."
+  },
+  {
+   "id": "sc10-17",
+   "topic": "chemistry",
+   "level": 10,
+   "prompt": "A chemical reaction that releases heat is called…",
+   "choices": [
+    "exothermic",
+    "endothermic",
+    "catalytic"
+   ],
+   "answer": 0,
+   "explain": "Exo = out."
+  },
+  {
+   "id": "sc10-18",
+   "topic": "physics",
+   "level": 10,
+   "prompt": "A 2 kg object accelerates at 3 m/s². What net force acts on it?",
+   "choices": [
+    "1.5 N",
+    "5 N",
+    "6 N"
+   ],
+   "answer": 2,
+   "explain": "F = m × a = 2 × 3."
+  },
+  {
+   "id": "sc10-19",
+   "topic": "chemistry",
+   "level": 10,
+   "prompt": "What is the chemical formula of table salt?",
+   "choices": [
+    "NaOH",
+    "KCl",
+    "NaCl"
+   ],
+   "answer": 2,
+   "explain": "Sodium chloride."
   }
  ]
 }

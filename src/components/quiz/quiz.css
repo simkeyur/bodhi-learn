@@ -233,3 +233,23 @@
 @media (prefers-reduced-motion: reduce) {
   .quiz * { transition: none !important; }
 }
+
+.quiz-how { color: #334155; font-weight: 700; max-width: 38ch; }
+
+.quiz-clock {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 260px;
+}
+.quiz-clock b { font: 700 1.1rem var(--font-display); color: var(--q-dark); min-width: 2.4em; text-align: right; }
+.quiz-clock-bar { flex: 1; height: 10px; border-radius: 999px; background: #E2E8F0; overflow: hidden; }
+.quiz-clock-bar > span { display: block; height: 100%; background: var(--q-color); transition: width 0.25s linear; }
+
+.quiz-lives { display: flex; align-items: center; gap: 4px; }
+.quiz-lives .on { color: #E11D48; }
+.quiz-lives .off { color: #CBD5E1; }
+.quiz-lives b { margin-left: 8px; font: 700 1.1rem var(--font-display); color: var(--q-dark); }
+
+.quiz-score { font: 700 0.95rem var(--font-display); color: var(--q-dark); }

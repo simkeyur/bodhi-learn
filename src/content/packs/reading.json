@@ -1,6 +1,6 @@
 {
  "subject": "reading",
- "version": 1,
+ "version": 2,
  "title": "Reading & Words",
  "questions": [
   {
@@ -782,6 +782,1020 @@
    ],
    "answer": 2,
    "explain": "Personification gives human actions to non-human things."
+  },
+  {
+   "id": "re3-7",
+   "topic": "rhymes",
+   "level": 3,
+   "prompt": "Which word rhymes with \"light\"?",
+   "choices": [
+    "night",
+    "lift",
+    "late"
+   ],
+   "answer": 0,
+   "explain": "Light and night both end in \"-ight\"."
+  },
+  {
+   "id": "re3-8",
+   "topic": "spelling",
+   "level": 3,
+   "prompt": "Which word is spelled correctly?",
+   "choices": [
+    "frend",
+    "friend",
+    "freind"
+   ],
+   "answer": 1,
+   "explain": "Remember: i before e in \"friend\"."
+  },
+  {
+   "id": "re3-9",
+   "topic": "sounds",
+   "level": 3,
+   "prompt": "Which word starts with the \"sh\" sound?",
+   "choices": [
+    "shop",
+    "chop",
+    "stop"
+   ],
+   "answer": 0,
+   "explain": "Shop starts with s-h."
+  },
+  {
+   "id": "re3-10",
+   "topic": "opposites",
+   "level": 3,
+   "prompt": "What is the opposite of \"empty\"?",
+   "choices": [
+    "small",
+    "full",
+    "open"
+   ],
+   "answer": 1,
+   "explain": "Empty and full are opposites."
+  },
+  {
+   "id": "re3-11",
+   "topic": "plurals",
+   "level": 3,
+   "prompt": "What is the plural of \"baby\"?",
+   "choices": [
+    "babys",
+    "babyes",
+    "babies"
+   ],
+   "answer": 2,
+   "explain": "Change the y to i and add -es."
+  },
+  {
+   "id": "re3-12",
+   "topic": "compound words",
+   "level": 3,
+   "prompt": "Which two words make \"football\"?",
+   "choices": [
+    "fool + bat",
+    "fort + ball",
+    "foot + ball"
+   ],
+   "answer": 2,
+   "explain": "Foot + ball = football."
+  },
+  {
+   "id": "re4-7",
+   "topic": "rhymes",
+   "level": 4,
+   "prompt": "Which word rhymes with \"train\"?",
+   "choices": [
+    "trip",
+    "brain",
+    "tree"
+   ],
+   "answer": 1,
+   "explain": "Train and brain both end in \"-ain\"."
+  },
+  {
+   "id": "re4-8",
+   "topic": "spelling",
+   "level": 4,
+   "prompt": "Which word is spelled correctly?",
+   "choices": [
+    "because",
+    "becaus",
+    "becuase"
+   ],
+   "answer": 0,
+   "explain": "Big Elephants Can Always Understand Small Elephants."
+  },
+  {
+   "id": "re4-9",
+   "topic": "sounds",
+   "level": 4,
+   "prompt": "Which word has the same vowel sound as \"moon\"?",
+   "choices": [
+    "spoon",
+    "spot",
+    "spin"
+   ],
+   "answer": 0,
+   "explain": "Moon and spoon both have the long \"oo\" sound."
+  },
+  {
+   "id": "re4-10",
+   "topic": "plurals",
+   "level": 4,
+   "prompt": "What is the plural of \"mouse\"?",
+   "choices": [
+    "mices",
+    "mice",
+    "mouses"
+   ],
+   "answer": 1,
+   "explain": "Mouse has an irregular plural."
+  },
+  {
+   "id": "re4-11",
+   "topic": "opposites",
+   "level": 4,
+   "prompt": "What is the opposite of \"ancient\"?",
+   "choices": [
+    "tall",
+    "modern",
+    "old"
+   ],
+   "answer": 1,
+   "explain": "Ancient means very old; modern means new."
+  },
+  {
+   "id": "re4-12",
+   "topic": "compound words",
+   "level": 4,
+   "prompt": "Which word is a compound word?",
+   "choices": [
+    "sung",
+    "sunny",
+    "sunshine"
+   ],
+   "answer": 2,
+   "explain": "Sunshine = sun + shine."
+  },
+  {
+   "id": "re4-13",
+   "topic": "phonics",
+   "level": 4,
+   "prompt": "Which letters together make the \"ch\" sound in \"chair\"?",
+   "choices": [
+    "c and h",
+    "t and h",
+    "s and h"
+   ],
+   "answer": 0,
+   "explain": "C and h make \"ch\"."
+  },
+  {
+   "id": "re5-7",
+   "topic": "spelling",
+   "level": 5,
+   "prompt": "Which word is spelled correctly?",
+   "choices": [
+    "beautifull",
+    "beutiful",
+    "beautiful"
+   ],
+   "answer": 2,
+   "explain": "Beau-ti-ful."
+  },
+  {
+   "id": "re5-8",
+   "topic": "plurals",
+   "level": 5,
+   "prompt": "What is the plural of \"leaf\"?",
+   "choices": [
+    "leaves",
+    "leafes",
+    "leafs"
+   ],
+   "answer": 0,
+   "explain": "Words ending in f often change to -ves."
+  },
+  {
+   "id": "re5-9",
+   "topic": "rhymes",
+   "level": 5,
+   "prompt": "Which word rhymes with \"knight\"?",
+   "choices": [
+    "nest",
+    "kite",
+    "knot"
+   ],
+   "answer": 1,
+   "explain": "Knight and kite both end with the \"ite\" sound."
+  },
+  {
+   "id": "re5-10",
+   "topic": "opposites",
+   "level": 5,
+   "prompt": "What is the opposite of \"brave\"?",
+   "choices": [
+    "bold",
+    "cowardly",
+    "strong"
+   ],
+   "answer": 1,
+   "explain": "A cowardly person is not brave."
+  },
+  {
+   "id": "re5-11",
+   "topic": "spelling",
+   "level": 5,
+   "prompt": "Which word is spelled correctly?",
+   "choices": [
+    "seperate",
+    "separete",
+    "separate"
+   ],
+   "answer": 2,
+   "explain": "There is \"a rat\" in sep-a-rate."
+  },
+  {
+   "id": "re5-12",
+   "topic": "sounds",
+   "level": 5,
+   "prompt": "How many syllables are in \"elephant\"?",
+   "choices": [
+    "4",
+    "2",
+    "3"
+   ],
+   "answer": 2,
+   "explain": "el-e-phant: three beats."
+  },
+  {
+   "id": "re5-13",
+   "topic": "phonics",
+   "level": 5,
+   "prompt": "Which word has a silent \"b\"?",
+   "choices": [
+    "bell",
+    "lamb",
+    "bike"
+   ],
+   "answer": 1,
+   "explain": "You do not say the b in lamb."
+  },
+  {
+   "id": "re5-14",
+   "topic": "plurals",
+   "level": 5,
+   "prompt": "What is the plural of \"city\"?",
+   "choices": [
+    "citys",
+    "cityes",
+    "cities"
+   ],
+   "answer": 2,
+   "explain": "Change the y to i and add -es."
+  },
+  {
+   "id": "re6-7",
+   "topic": "sentences",
+   "level": 6,
+   "prompt": "Which is a complete sentence?",
+   "choices": [
+    "When the dog barked.",
+    "The dog barked loudly.",
+    "Barking at the mailman."
+   ],
+   "answer": 1,
+   "explain": "A complete sentence has a subject and a verb and makes sense on its own."
+  },
+  {
+   "id": "re6-8",
+   "topic": "punctuation",
+   "level": 6,
+   "prompt": "Which sentence uses commas in a list correctly?",
+   "choices": [
+    "I bought apples, bananas, and grapes.",
+    "I bought, apples bananas and grapes.",
+    "I bought apples bananas, and, grapes."
+   ],
+   "answer": 0,
+   "explain": "Separate items in a list with commas."
+  },
+  {
+   "id": "re6-9",
+   "topic": "parts of speech",
+   "level": 6,
+   "prompt": "In \"She quickly ran home\", which word is the adverb?",
+   "choices": [
+    "ran",
+    "home",
+    "quickly"
+   ],
+   "answer": 2,
+   "explain": "Adverbs tell how something is done."
+  },
+  {
+   "id": "re6-10",
+   "topic": "tenses",
+   "level": 6,
+   "prompt": "Which sentence is in the future tense?",
+   "choices": [
+    "We visit Grandma often.",
+    "We visited Grandma yesterday.",
+    "We will visit Grandma tomorrow."
+   ],
+   "answer": 2,
+   "explain": "\"Will\" shows the future."
+  },
+  {
+   "id": "re7-7",
+   "topic": "grammar",
+   "level": 7,
+   "prompt": "Which sentence has correct subject-verb agreement?",
+   "choices": [
+    "The dogs running in the park.",
+    "The dogs runs in the park.",
+    "The dogs run in the park."
+   ],
+   "answer": 2,
+   "explain": "A plural subject takes a plural verb."
+  },
+  {
+   "id": "re7-8",
+   "topic": "parts of speech",
+   "level": 7,
+   "prompt": "In \"The cat sat under the table\", which word is a preposition?",
+   "choices": [
+    "table",
+    "sat",
+    "under"
+   ],
+   "answer": 2,
+   "explain": "Prepositions show position or direction."
+  },
+  {
+   "id": "re7-9",
+   "topic": "punctuation",
+   "level": 7,
+   "prompt": "Which sentence uses an apostrophe correctly?",
+   "choices": [
+    "The girl book's is on the desk.",
+    "The girl's book is on the desk.",
+    "The girls book's is on the desk."
+   ],
+   "answer": 1,
+   "explain": "Add 's to show that the book belongs to the girl."
+  },
+  {
+   "id": "re7-10",
+   "topic": "commonly confused",
+   "level": 7,
+   "prompt": "Which word fits? I have ___ much homework.",
+   "choices": [
+    "two",
+    "too",
+    "to"
+   ],
+   "answer": 1,
+   "explain": "\"Too\" means more than enough."
+  },
+  {
+   "id": "re7-11",
+   "topic": "commonly confused",
+   "level": 7,
+   "prompt": "Which sentence is correct?",
+   "choices": [
+    "Please put your coat over they're.",
+    "Please put your coat over there.",
+    "Please put your coat over their."
+   ],
+   "answer": 1,
+   "explain": "\"There\" is a place."
+  },
+  {
+   "id": "re8-7",
+   "topic": "grammar",
+   "level": 8,
+   "prompt": "Which sentence is in the passive voice?",
+   "choices": [
+    "The window was broken by the ball.",
+    "The ball broke the window.",
+    "The ball is breaking the window."
+   ],
+   "answer": 0,
+   "explain": "In the passive voice the thing acted on comes first."
+  },
+  {
+   "id": "re8-8",
+   "topic": "grammar",
+   "level": 8,
+   "prompt": "Which pronoun is correct? \"Please give the books to ___.\"",
+   "choices": [
+    "myself",
+    "me",
+    "I"
+   ],
+   "answer": 1,
+   "explain": "After \"to\" use an object pronoun: me."
+  },
+  {
+   "id": "re8-9",
+   "topic": "commonly confused",
+   "level": 8,
+   "prompt": "Which sentence is correct?",
+   "choices": [
+    "Less students came today.",
+    "Fewer students came today.",
+    "Lesser students came today."
+   ],
+   "answer": 1,
+   "explain": "Use \"fewer\" for things you can count."
+  },
+  {
+   "id": "re8-10",
+   "topic": "punctuation",
+   "level": 8,
+   "prompt": "Which sentence uses a colon correctly?",
+   "choices": [
+    "You will need: three things a pencil, paper and a ruler.",
+    "You will: need three things a pencil, paper and a ruler.",
+    "You will need three things: a pencil, paper and a ruler."
+   ],
+   "answer": 2,
+   "explain": "A colon introduces a list after a complete sentence."
+  },
+  {
+   "id": "re8-11",
+   "topic": "parts of speech",
+   "level": 8,
+   "prompt": "In \"Although it rained, we played outside\", what kind of word is \"although\"?",
+   "choices": [
+    "an adjective",
+    "a noun",
+    "a conjunction"
+   ],
+   "answer": 2,
+   "explain": "It joins two ideas."
+  },
+  {
+   "id": "re9-7",
+   "topic": "grammar",
+   "level": 9,
+   "prompt": "Which sentence uses \"whom\" correctly?",
+   "choices": [
+    "To whom did you give the letter?",
+    "Whom is coming to dinner?",
+    "Whom wrote this book?"
+   ],
+   "answer": 0,
+   "explain": "Use \"whom\" for the object: you gave it to him/whom."
+  },
+  {
+   "id": "re9-8",
+   "topic": "grammar",
+   "level": 9,
+   "prompt": "Which sentence has parallel structure?",
+   "choices": [
+    "She likes to swim, hiking and to read.",
+    "She likes swimming, to hike and reading.",
+    "She likes swimming, hiking and reading."
+   ],
+   "answer": 2,
+   "explain": "Keep list items in the same form."
+  },
+  {
+   "id": "re9-9",
+   "topic": "commonly confused",
+   "level": 9,
+   "prompt": "Which word fits? The school ___ announced the new rules.",
+   "choices": [
+    "principal",
+    "principle",
+    "principel"
+   ],
+   "answer": 0,
+   "explain": "The principal is the head of the school."
+  },
+  {
+   "id": "re9-10",
+   "topic": "punctuation",
+   "level": 9,
+   "prompt": "Which sentence uses a hyphen correctly?",
+   "choices": [
+    "She is a well known-author.",
+    "She is a well-known author.",
+    "She is a well-known-author."
+   ],
+   "answer": 1,
+   "explain": "Hyphenate two words that work together before a noun."
+  },
+  {
+   "id": "re9-11",
+   "topic": "grammar",
+   "level": 9,
+   "prompt": "\"If I were you, I would apologize.\" The verb \"were\" is in which mood?",
+   "choices": [
+    "subjunctive",
+    "imperative",
+    "indicative"
+   ],
+   "answer": 0,
+   "explain": "The subjunctive is used for wishes and things that are not real."
+  },
+  {
+   "id": "re10-7",
+   "topic": "grammar",
+   "level": 10,
+   "prompt": "Which sentence contains a split infinitive?",
+   "choices": [
+    "She decided to quickly leave.",
+    "She decided to leave quickly.",
+    "She quickly decided to leave."
+   ],
+   "answer": 0,
+   "explain": "\"To quickly leave\" puts a word between \"to\" and \"leave\"."
+  },
+  {
+   "id": "re10-8",
+   "topic": "grammar",
+   "level": 10,
+   "prompt": "Which sentence avoids a comma splice?",
+   "choices": [
+    "It was late, so we went home.",
+    "It was late, we went home.",
+    "It was late we, went home."
+   ],
+   "answer": 0,
+   "explain": "Join two sentences with a conjunction, not just a comma."
+  },
+  {
+   "id": "re10-9",
+   "topic": "punctuation",
+   "level": 10,
+   "prompt": "Which sentence uses a semicolon with a transition word correctly?",
+   "choices": [
+    "I studied; hard however, I failed the test.",
+    "I studied hard; however, I failed the test.",
+    "I studied hard, however; I failed the test."
+   ],
+   "answer": 1,
+   "explain": "Put the semicolon before \"however\" and a comma after it."
+  },
+  {
+   "id": "re10-10",
+   "topic": "parts of speech",
+   "level": 10,
+   "prompt": "In \"The committee has made its decision\", \"committee\" is a…",
+   "choices": [
+    "abstract noun",
+    "collective noun",
+    "proper noun"
+   ],
+   "answer": 1,
+   "explain": "A collective noun names a group."
+  },
+  {
+   "id": "re10-11",
+   "topic": "grammar",
+   "level": 10,
+   "prompt": "Which sentence has a gerund as its subject?",
+   "choices": [
+    "Swimming is good exercise.",
+    "She swims every day.",
+    "They want to swim."
+   ],
+   "answer": 0,
+   "explain": "A gerund is a verb ending in -ing used as a noun."
+  },
+  {
+   "id": "re4-14",
+   "topic": "synonyms",
+   "level": 4,
+   "prompt": "Which word means almost the same as \"big\"?",
+   "choices": [
+    "large",
+    "tiny",
+    "thin"
+   ],
+   "answer": 0,
+   "explain": "Large and big are synonyms."
+  },
+  {
+   "id": "re4-15",
+   "topic": "antonyms",
+   "level": 4,
+   "prompt": "What is the opposite of \"early\"?",
+   "choices": [
+    "late",
+    "quick",
+    "soon"
+   ],
+   "answer": 0,
+   "explain": "Early and late are opposites."
+  },
+  {
+   "id": "re4-16",
+   "topic": "vocabulary",
+   "level": 4,
+   "prompt": "What does \"gigantic\" mean?",
+   "choices": [
+    "very fast",
+    "very big",
+    "very small"
+   ],
+   "answer": 1,
+   "explain": "Giants are gigantic."
+  },
+  {
+   "id": "re6-11",
+   "topic": "synonyms",
+   "level": 6,
+   "prompt": "Which word is closest in meaning to \"brave\"?",
+   "choices": [
+    "nervous",
+    "courageous",
+    "clever"
+   ],
+   "answer": 1,
+   "explain": "Courageous means brave."
+  },
+  {
+   "id": "re6-12",
+   "topic": "antonyms",
+   "level": 6,
+   "prompt": "What is the opposite of \"expand\"?",
+   "choices": [
+    "stretch",
+    "shrink",
+    "grow"
+   ],
+   "answer": 1,
+   "explain": "Expand means get bigger; shrink means get smaller."
+  },
+  {
+   "id": "re6-13",
+   "topic": "prefixes",
+   "level": 6,
+   "prompt": "What does the prefix \"dis-\" mean in \"disagree\"?",
+   "choices": [
+    "before",
+    "again",
+    "not or the opposite"
+   ],
+   "answer": 2,
+   "explain": "Disagree = not agree."
+  },
+  {
+   "id": "re6-14",
+   "topic": "vocabulary",
+   "level": 6,
+   "prompt": "What does \"fragile\" mean?",
+   "choices": [
+    "very old",
+    "very heavy",
+    "easily broken"
+   ],
+   "answer": 2,
+   "explain": "Handle glass with care: it is fragile."
+  },
+  {
+   "id": "re7-12",
+   "topic": "word roots",
+   "level": 7,
+   "prompt": "The root \"port\" means carry. What does \"transport\" mean?",
+   "choices": [
+    "stay in one place",
+    "break apart",
+    "carry from one place to another"
+   ],
+   "answer": 2,
+   "explain": "Trans = across, port = carry."
+  },
+  {
+   "id": "re7-13",
+   "topic": "context clues",
+   "level": 7,
+   "prompt": "\"The ravenous kids ate everything on the table.\" What does \"ravenous\" mean?",
+   "choices": [
+    "very polite",
+    "extremely hungry",
+    "very sleepy"
+   ],
+   "answer": 1,
+   "explain": "They ate everything, so they were very hungry."
+  },
+  {
+   "id": "re7-14",
+   "topic": "synonyms",
+   "level": 7,
+   "prompt": "Which word is a synonym for \"ancient\"?",
+   "choices": [
+    "sticky",
+    "old",
+    "new"
+   ],
+   "answer": 1,
+   "explain": "Ancient means very old."
+  },
+  {
+   "id": "re7-15",
+   "topic": "antonyms",
+   "level": 7,
+   "prompt": "What is the opposite of \"victory\"?",
+   "choices": [
+    "success",
+    "defeat",
+    "prize"
+   ],
+   "answer": 1,
+   "explain": "Victory is winning; defeat is losing."
+  },
+  {
+   "id": "re4-17",
+   "topic": "comprehension",
+   "level": 4,
+   "prompt": "Read: \"Ben put on his boots and grabbed a shovel. Outside, the snow was deep.\" What will Ben probably do?",
+   "choices": [
+    "go swimming",
+    "paint a fence",
+    "shovel the snow"
+   ],
+   "answer": 2,
+   "explain": "Boots, a shovel and deep snow go together."
+  },
+  {
+   "id": "re4-18",
+   "topic": "comprehension",
+   "level": 4,
+   "prompt": "Read: \"Lily watered the seeds every day. After two weeks, tiny green shoots appeared.\" What happened to the seeds?",
+   "choices": [
+    "They were eaten.",
+    "They began to grow.",
+    "They disappeared."
+   ],
+   "answer": 1,
+   "explain": "Green shoots mean the seeds are growing."
+  },
+  {
+   "id": "re4-19",
+   "topic": "comprehension",
+   "level": 4,
+   "prompt": "What is the main idea? \"Bees help flowers grow by carrying pollen. They also make honey.\"",
+   "choices": [
+    "Bees are scary.",
+    "Bees are helpful.",
+    "Flowers are red."
+   ],
+   "answer": 1,
+   "explain": "Both sentences say bees do helpful things."
+  },
+  {
+   "id": "re5-15",
+   "topic": "inference",
+   "level": 5,
+   "prompt": "Read: \"Dad checked his watch again and again. He paced by the door.\" How does Dad feel?",
+   "choices": [
+    "impatient",
+    "proud",
+    "sleepy"
+   ],
+   "answer": 0,
+   "explain": "Checking the time and pacing show he is impatient."
+  },
+  {
+   "id": "re5-16",
+   "topic": "comprehension",
+   "level": 5,
+   "prompt": "Read: \"The ice cream truck played its song. Kids ran out of their houses with coins.\" Where is this happening?",
+   "choices": [
+    "at the airport",
+    "in a library",
+    "in a neighborhood"
+   ],
+   "answer": 2,
+   "explain": "Kids are running out of their houses."
+  },
+  {
+   "id": "re5-17",
+   "topic": "figurative",
+   "level": 5,
+   "prompt": "\"Her smile was as bright as the sun.\" This is a…",
+   "choices": [
+    "simile",
+    "metaphor",
+    "riddle"
+   ],
+   "answer": 0,
+   "explain": "It compares using \"as\"."
+  },
+  {
+   "id": "re5-18",
+   "topic": "genres",
+   "level": 5,
+   "prompt": "A true story about a real person's life, written by someone else, is a…",
+   "choices": [
+    "fable",
+    "biography",
+    "poem"
+   ],
+   "answer": 1,
+   "explain": "Bio = life."
+  },
+  {
+   "id": "re6-15",
+   "topic": "inference",
+   "level": 6,
+   "prompt": "\"Mia hugged her trophy and could not stop smiling.\" How does Mia feel?",
+   "choices": [
+    "angry",
+    "proud",
+    "bored"
+   ],
+   "answer": 1,
+   "explain": "Hugging a trophy and smiling shows pride."
+  },
+  {
+   "id": "re6-16",
+   "topic": "theme",
+   "level": 6,
+   "prompt": "The slow tortoise beats the fast hare in a race. Which lesson fits?",
+   "choices": [
+    "Fast animals always win.",
+    "Slow and steady wins the race.",
+    "Never run races."
+   ],
+   "answer": 1,
+   "explain": "The hare gave up too soon; the tortoise kept going."
+  },
+  {
+   "id": "re6-17",
+   "topic": "purpose",
+   "level": 6,
+   "prompt": "A recipe is written to…",
+   "choices": [
+    "persuade you to vote",
+    "explain how to make something",
+    "tell a scary story"
+   ],
+   "answer": 1,
+   "explain": "A recipe gives instructions."
+  },
+  {
+   "id": "re7-16",
+   "topic": "inference",
+   "level": 7,
+   "prompt": "\"The streets were empty and every shop had its lights off, except one.\" What time is it probably?",
+   "choices": [
+    "lunchtime",
+    "school drop-off time",
+    "late at night"
+   ],
+   "answer": 2,
+   "explain": "Empty streets and dark shops suggest night."
+  },
+  {
+   "id": "re7-17",
+   "topic": "literary devices",
+   "level": 7,
+   "prompt": "The words \"buzz\", \"hiss\" and \"sizzle\" are examples of…",
+   "choices": [
+    "alliteration",
+    "hyperbole",
+    "onomatopoeia"
+   ],
+   "answer": 2,
+   "explain": "Onomatopoeia words sound like what they mean."
+  },
+  {
+   "id": "re7-18",
+   "topic": "literary devices",
+   "level": 7,
+   "prompt": "\"I've told you a million times!\" is an example of…",
+   "choices": [
+    "irony",
+    "simile",
+    "hyperbole"
+   ],
+   "answer": 2,
+   "explain": "Hyperbole is a big exaggeration."
+  },
+  {
+   "id": "re8-12",
+   "topic": "tone",
+   "level": 8,
+   "prompt": "An author describes the old house as \"dark, silent and cold\". The tone is…",
+   "choices": [
+    "excited",
+    "gloomy",
+    "cheerful"
+   ],
+   "answer": 1,
+   "explain": "The word choices create a gloomy mood."
+  },
+  {
+   "id": "re8-13",
+   "topic": "inference",
+   "level": 8,
+   "prompt": "\"After the third failed test, Sam stared at his notes and sighed.\" What can you infer?",
+   "choices": [
+    "Sam loves tests.",
+    "Sam is frustrated.",
+    "Sam is hungry."
+   ],
+   "answer": 1,
+   "explain": "Failing and sighing show frustration."
+  },
+  {
+   "id": "re9-12",
+   "topic": "literary devices",
+   "level": 9,
+   "prompt": "A character says \"Great weather!\" during a thunderstorm. This is…",
+   "choices": [
+    "verbal irony",
+    "a simile",
+    "alliteration"
+   ],
+   "answer": 0,
+   "explain": "Saying the opposite of what you mean is verbal irony."
+  },
+  {
+   "id": "re9-13",
+   "topic": "theme",
+   "level": 9,
+   "prompt": "A boy lies and loses his friends. Which is the most likely theme?",
+   "choices": [
+    "Friends are never needed.",
+    "Honesty is important for trust.",
+    "Lying is fun."
+   ],
+   "answer": 1,
+   "explain": "The story shows the cost of lying."
+  },
+  {
+   "id": "re9-14",
+   "topic": "purpose",
+   "level": 9,
+   "prompt": "A news editorial arguing for a new park mainly aims to…",
+   "choices": [
+    "teach a recipe",
+    "entertain with a story",
+    "persuade readers"
+   ],
+   "answer": 2,
+   "explain": "Editorials give opinions to convince."
+  },
+  {
+   "id": "re10-12",
+   "topic": "rhetoric",
+   "level": 10,
+   "prompt": "\"Think of the lonely puppies waiting for a home.\" This is an appeal to…",
+   "choices": [
+    "logic (logos)",
+    "credibility (ethos)",
+    "emotion (pathos)"
+   ],
+   "answer": 2,
+   "explain": "Pathos aims at feelings."
+  },
+  {
+   "id": "re10-13",
+   "topic": "rhetoric",
+   "level": 10,
+   "prompt": "A speaker cites statistics and research to support her claim. This is an appeal to…",
+   "choices": [
+    "emotion (pathos)",
+    "logic (logos)",
+    "credibility (ethos)"
+   ],
+   "answer": 1,
+   "explain": "Logos uses facts and reasoning."
+  },
+  {
+   "id": "re10-14",
+   "topic": "literary devices",
+   "level": 10,
+   "prompt": "A story begins at the end and then jumps back in time. This is…",
+   "choices": [
+    "a flashback structure",
+    "foreshadowing",
+    "personification"
+   ],
+   "answer": 0,
+   "explain": "A flashback shows earlier events."
+  },
+  {
+   "id": "re10-15",
+   "topic": "tone",
+   "level": 10,
+   "prompt": "Which word best describes a serious, respectful tone, as in a memorial speech?",
+   "choices": [
+    "sarcastic",
+    "solemn",
+    "playful"
+   ],
+   "answer": 1,
+   "explain": "Solemn means serious and dignified."
   }
  ]
 }

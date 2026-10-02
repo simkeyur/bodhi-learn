@@ -4,7 +4,7 @@ import { Header } from './components/layout/Header';
 import { Welcome } from './components/onboarding/Welcome';
 import { Home } from './components/home/Home';
 import { QuizWorld } from './components/quiz/QuizWorld';
-import { SUBJECT_ORDER } from './data/subjects';
+import { gameById } from './data/quizGames';
 import { useApp } from './context/AppContext';
 import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
@@ -41,8 +41,10 @@ export const BodhiApp: React.FC = () => {
 
   const renderCurrentView = () => {
     const [kind, id] = currentView.split(':');
-    if (kind === 'quiz' && SUBJECT_ORDER.includes(id as never)) {
-      return <QuizWorld subject={id as never} onBack={backHome} />;
+    const quizGame = kind === 'play' ? gameById(id) : undefined;
+    if (quizGame) {
+      // key: moving between games must start a fresh game, not reuse the previous one's state
+      return <QuizWorld key={quizGame.id} game={quizGame} onBack={backHome} />;
     }
     switch (currentView) {
       case 'tracing-abc':

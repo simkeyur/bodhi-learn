@@ -157,7 +157,7 @@ and functions.
 
 ## Next steps for ages 4–14
 
-- **More questions.** Each subject has 6 per level; aim for 20+ per level. Add packs (history, geography, coding
+- **More questions.** Each game has at least 5 questions near every level of its age range (checked by a test); more would reduce repeats. Add packs (history, geography, coding
   vocabulary, spelling bee) by adding a subject to `SUBJECTS` in `src/firebase/schema.ts`, the rules, and `subjects.ts`.
 - **Passage reading comprehension** for 8+: a short text with 3 questions (needs a `passage` field on `Question`).
 - **Harder Logic Lab for 9–14**: Code the Bot with functions and conditionals (see the Logic Lab ideas above), Fix the Bug.

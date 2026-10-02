@@ -15,10 +15,18 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
   a parent can sign in later from Parent Settings. Signing in to an account that already has progress skips the
   questions and loads it; signing out clears the device and asks again. Nothing is saved to the device until the
   questions are answered.
-- **Home** is grouped by subject (Words, Math, Logic, Discover, Rewards). Each group has a filled **Challenge**
-  row (adaptive) and slim game rows that suit the child's age (`src/data/subjects.ts` holds the map and each
-  game's age range).
-- **Ages 4–14.** The age picks the games shown and where the quizzes start; it can be changed in Parent Settings.
+- **Home** is grouped by subject (Words, Math, Logic, Discover, Rewards), one panel each, with slim game cards in an
+  even grid. Younger children see the hands-on games first; older children see the question games first.
+- **Several games per subject**, not one catch-all quiz (`src/data/quizGames.ts`). Each draws from its own topic
+  group and plays one of three ways: a *round* (8 questions), a *sprint* (60 seconds) or *lives* (3 lives).
+  Words: Rhyme Time, Grammar Gym, Word Rush, Story Sense. Math: Quick Facts, Word Problems, Shape Up, Fraction Fun,
+  Equation Lab. Logic: Pattern Pop, Brain Teasers, Code Breakers, Chance & Counting. Discover: Living World,
+  Space & Earth, Matter & Energy. Games are shown only for the ages they suit.
+- **Levels** run 1 (about age 4) to 10 (about age 14) and are shared by the games of a subject: four right in a row
+  goes up, two wrong in a row goes down, and the child can pick a level. Level and accuracy are saved per subject.
+  Math is generated (`src/content/mathGen.ts`, every generator tagged with a topic and level); Words, Logic and
+  Discover come from question packs (below).
+- **Ages 4–14.** The age picks the games shown and where the levels start; it can be changed in Parent Settings.
 - **Challenges** are 8-question rounds. Level 1 (about age 4) to 10 (about age 14), adaptive: four right in a row
   goes up, two wrong in a row goes down, and the child can also pick a level. Level and accuracy are saved per
   subject. Math is generated (`src/content/mathGen.ts`: counting, times tables, fractions, percentages,
@@ -86,7 +94,7 @@ What could come next (with effort estimates and what each idea needs) is in [doc
 
 ## 🎙️ Narration Audio
 
-All narration is recorded with **Gemini 3.8 Flash Lite TTS** (voice *Sulafat*) into `public/audio/`. Every clip is
+The app speaks **only** with the recordings below; if a clip is missing it stays silent (there is no browser-voice fallback). All narration is recorded with **Gemini 3.8 Flash Lite TTS** (voice *Sulafat*) into `public/audio/`. Every clip is
 listed in `scripts/audio/manifest.mjs`, built from `src/data/learningData.ts`, so new words,
 stories and sentences get audio automatically.
 

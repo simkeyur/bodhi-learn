@@ -33,7 +33,10 @@ const pickOne = <T,>(rng: Rng, list: readonly T[]): T => list[Math.floor(rng() *
 
 // Mostly the child's own level, sometimes one step either side, so a round has some variety.
 // Questions seen recently (`avoid`) are skipped unless there is nothing else.
-export function pickFromPack(questions: readonly Question[], level: number, avoid: ReadonlySet<string>, rng: Rng): Question | null {
+export function pickFromPack(allQuestions: readonly Question[], level: number, avoid: ReadonlySet<string>, rng: Rng, topics?: readonly string[]): Question | null {
+  // A game's topic group; if it has no questions at all, fall back to the whole pack rather than nothing
+  const inGroup = topics ? allQuestions.filter((q) => topics.includes(q.topic)) : allQuestions;
+  const questions = inGroup.length ? inGroup : allQuestions;
   const tiers = [
     questions.filter((q) => q.level === level),
     questions.filter((q) => Math.abs(q.level - level) <= 1),
@@ -56,10 +59,11 @@ export function nextQuestion(
   packs: Partial<Record<Subject, QuestionPack>>,
   avoid: ReadonlySet<string>,
   rng: Rng = Math.random,
+  topics?: readonly string[],
 ): Question | null {
-  if (subject === 'math') return makeMathQuestion(level, rng);
+  if (subject === 'math') return makeMathQuestion(level, rng, topics);
   const pack = packs[subject];
-  return pack ? pickFromPack(pack.questions, level, avoid, rng) : null;
+  return pack ? pickFromPack(pack.questions, level, avoid, rng, topics) : null;
 }
 
 // How the level moves: four right in a row goes up a level; two wrong in a row goes down one.
