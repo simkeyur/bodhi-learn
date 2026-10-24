@@ -1,10 +1,10 @@
-# Plan: Texas State Test Prep in Bodhi Learn
+# Plan: Texas State Bodhi Prep in Bodhi Learn
 
-Bodhi Learn gets a **Test Prep** section for the Texas state tests: STAAR now, and the Student Success Tool (SST)
+Bodhi Learn gets a **Bodhi Prep** section for the Texas state tests: STAAR now, and the Student Success Tool (SST)
 that replaces it in 2027–28. It is one app:
 
 - **Pre-K to grade 3:** the Bodhi games, as before (their content now stops at grade 3).
-- **Grade 4 and up:** Test Prep instead of the games.
+- **Grade 4 and up:** Bodhi Prep instead of the games.
 
 Written 2026-10-24, revised the same day when the plan changed from "a new app" to "a section of Bodhi Learn".
 Facts about the tests are linked to their sources at the bottom; the SST blueprints are still marked DRAFT by
@@ -75,13 +75,15 @@ graphing…) are only worth building if we want to serve spring 2027 users.
 ## 2. Decisions
 
 **Made**
-- **One app, Bodhi Learn.** Grade 4 and up get Test Prep; Pre-K to grade 3 keep the games.
+- **One app, Bodhi Learn.** Grade 4 and up get Bodhi Prep; Pre-K to grade 3 keep the games.
 - **The grade is asked from age 9** (pre-filled with the usual grade for the age), so a 9-year-old in grade 3
-  keeps the games and one in grade 4 gets Test Prep. Under 9 there is no grade question.
+  keeps the games and one in grade 4 gets Bodhi Prep. Under 9 there is no grade question.
 - **Bodhi content above grade 3 is removed:** questions and math above level 6, and the games that only
   served older children (section 4).
 - **Until each grade has its own questions, grades 4–8 practise grade 5 math**, with a note saying so.
-- Test Prep is designed for the SST first; the STAAR-only question types are optional.
+- Bodhi Prep is designed for the SST first; the STAAR-only question types are optional.
+- **No parental controls.** No parent gate anywhere; Settings open for everyone. Signing in with Google is only
+  there to save progress across devices.
 
 **Still open**
 1. **Ship for spring 2027 STAAR or for fall 2027 SST?** Grade 5 math by March 2027 is possible if we stay
@@ -93,7 +95,7 @@ graphing…) are only worth building if we want to serve spring 2027 users.
 
 ---
 
-## 3. How Test Prep fits into Bodhi Learn
+## 3. How Bodhi Prep fits into Bodhi Learn
 
 - **Same project and site:** `bodhi-learn` on Firebase, deployed from `main` as before. The `classic` branch and
   the `bodhi-learn-v1` tag keep a copy of Bodhi Learn as it was before this work.
@@ -101,10 +103,10 @@ graphing…) are only worth building if we want to serve spring 2027 users.
   Prep (`src/prep/`) loads on demand, so younger children never download it.
 - **Profile:** name, age and the new `grade` (3–8, asked from age 9) live in Bodhi's profile, sync to
   `users/{uid}.profile.grade`, and are checked by `firestore.rules` (grade is optional, so documents from older
-  versions of the app stay valid). Grade can be changed in Parent Settings and in Test Prep's settings.
-- **Styles:** every Test Prep style is scoped under `.prep`, so the games' look is untouched, and Test Prep turns
+  versions of the app stay valid). Grade can be changed in Settings (games) and in Bodhi Prep's settings.
+- **Styles:** every Bodhi Prep style is scoped under `.prep`, so the games' look is untouched, and Bodhi Prep turns
   pinch-zoom back on while it is open (the games keep it off for tracing).
-- **Test Prep progress** (mastery per standard, streak) is kept in the browser for now (`bodhi_prep_v1`) and
+- **Bodhi Prep progress** (mastery per standard, streak) is kept in the browser for now (`bodhi_prep_v1`) and
   cleared on sign-out. Syncing it with the account is still to do: it needs a place in the user document (or a
   sub-collection) and matching rules.
 
@@ -154,7 +156,7 @@ don't learn habits that won't work on the day.
 ### 5.4 Screens
 
 ```
-Landing (parents) ── Sign in ── Parent setup: add a child (name, grade, language)
+Welcome (age, grade from 9, optional Google sign-in, name)
                                       │
                           Profile picker ("Who's practising?")
                                       │
@@ -224,7 +226,7 @@ plot, stem-and-leaf, frequency table, rectangular prism, polygons, money. Fracti
 
 ### 5.8 Folder layout
 
-Test Prep lives in `src/prep/`, next to the Bodhi games:
+Bodhi Prep lives in `src/prep/`, next to the Bodhi games:
 
 ```
 src/prep/
@@ -287,7 +289,7 @@ interface Passage {
 
 ```
 users/{uid}                          Bodhi's document: profile (name, age, grade), settings, game progress
-users/{uid}/prep/{subject}           Test Prep mastery per standard: seen, correct, recent results, difficulty, lastSeen
+users/{uid}/prep/{subject}           Bodhi Prep mastery per standard: seen, correct, recent results, difficulty, lastSeen
 users/{uid}/prepSessions/{id}        finished check-ups and practice tests, with scores per strand
 ```
 
@@ -327,8 +329,8 @@ In-progress tests live on the device until they are submitted.
 
 | # | Phase | What "done" means | Effort |
 |---|---|---|---|
-| 0 | Fit into Bodhi Learn | Section 3: grade in the profile, Test Prep for grade 4+, games trimmed to grade 3 | S |
-| 1 | Foundations | Routes, design tokens and core components, Test Prep progress synced with the account, rules and rules tests | M–L |
+| 0 | Fit into Bodhi Learn | Section 3: grade in the profile, Bodhi Prep for grade 4+, games trimmed to grade 3 | S |
+| 1 | Foundations | Routes, design tokens and core components, Bodhi Prep progress synced with the account, rules and rules tests | M–L |
 | 2 | Content model | Item and passage types, validators, standards catalog for grade 5, pack store pointed at the new packs, tests | M |
 | 3 | Question components | The four SST types, figures, scoring with partial credit, all keyboard-usable | M |
 | 4 | Practice mode | Skill map, practice a standard, explanations, mastery updates, daily plan, mistakes list | M |
@@ -341,13 +343,13 @@ In-progress tests live on the device until they are submitted.
 
 ### Status (2026-10-24)
 
-- **One app again:** Bodhi Learn is back on `main` with Test Prep for grade 4 and up, the grade question from
+- **One app again:** Bodhi Learn is back on `main` with Bodhi Prep for grade 4 and up, the grade question from
   age 9, and the games trimmed to grade 3. Deploys from `main` to `bodhi-learn` are on again.
-- **Test Prep, first cut:** routes, design tokens and components, the item model with validation and TEA
+- **Bodhi Prep, first cut:** routes, design tokens and components, the item model with validation and TEA
   partial-credit scoring, the four SST question types, eight SVG figure types, generators for all 36 grade 5
   math standards at three difficulties, and practice mode (Today plan, skill map, 10-question sessions,
   explanations, per-standard mastery).
-- **Not started:** syncing Test Prep progress, passages, the mistakes list, test mode, parent dashboard, other
+- **Not started:** syncing Bodhi Prep progress, passages, the mistakes list, test mode, parent dashboard, other
   grades, launch checks.
 - **Content review:** the generated questions are checked by tests for validity and answer keys, but a Texas
   teacher has not reviewed them against the standards yet.

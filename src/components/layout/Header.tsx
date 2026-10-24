@@ -1,16 +1,16 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
-import { hasStickers, isSelfManaged } from '../../data/subjects';
-import { Volume2, VolumeX, Lock, Settings, Sparkles } from 'lucide-react';
+import { hasStickers } from '../../data/subjects';
+import { Volume2, VolumeX, Settings, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   onSelectView: (view: string) => void;
-  onOpenParentGate: () => void;
+  onOpenSettings: () => void;
 }
 
 
-export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }) => {
+export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenSettings }) => {
   const { stars, soundEnabled, setSoundEnabled, age } = useApp();
 
   const go = (view: string) => {
@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
             </div>
           </button>
 
-          {/* Stars, mute, parents */}
+          {/* Stars, mute, settings */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
             {(() => {
               const style: React.CSSProperties = {
@@ -139,9 +139,9 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
             <button
               onClick={() => {
                 sound.playPop();
-                onOpenParentGate();
+                onOpenSettings();
               }}
-              aria-label={isSelfManaged(age) ? 'Settings' : 'Parent settings'}
+              aria-label="Settings"
               style={{
                 background: '#F8FAFC',
                 border: '2px solid #CBD5E1',
@@ -161,8 +161,8 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenParentGate }
                 boxShadow: '0 3px 0 #CBD5E1',
               }}
             >
-              {isSelfManaged(age) ? <Settings size={16} /> : <Lock size={16} />}
-              <span className="hide-mobile">{isSelfManaged(age) ? 'Settings' : 'Parents'}</span>
+              <Settings size={16} />
+              <span className="hide-mobile">Settings</span>
             </button>
           </div>
         </div>

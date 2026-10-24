@@ -1,7 +1,7 @@
 # Bodhi Learn 🌟
 
 A playful learning web app and offline-capable PWA. **Pre-K to grade 3** play reading, math, logic and science games
-that start at the right level for the child's age and adjust as they play. **Grade 4 and up** get **Test Prep**:
+that start at the right level for the child's age and adjust as they play. **Grade 4 and up** get **Bodhi Prep**:
 practice for the Texas state test (STAAR® now, the SST from 2027–28). The plan and the test facts are in
 [docs/STAAR_PIVOT.md](docs/STAAR_PIVOT.md).
 
@@ -11,8 +11,8 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
 
 ## 🚀 Features
 
-### 🎯 Test Prep (grade 4 and up, `src/prep/`)
-- **Who gets it:** the welcome asks the grade from age 9; grade 4 and up see Test Prep instead of the games
+### 🎯 Bodhi Prep (grade 4 and up, `src/prep/`)
+- **Who gets it:** the welcome asks the grade from age 9; grade 4 and up see Bodhi Prep instead of the games
   (`isPrepLearner` in `src/firebase/schema.ts`). It loads on demand, so younger children never download it.
 - **Today:** five skills to practise (weak readiness skills first), a 15-question daily goal, a streak, and a
   countdown to the next test window.
@@ -28,7 +28,7 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
 - **Welcome first.** A new visitor is asked their age (4–14) before anything else is shown, then their name.
   From age 8 they are also offered **Sign in with Google** (progress stored in Firebase from the first launch) or
   **Play as guest** (progress stays in this browser's localStorage). Younger children go straight in as guests;
-  a parent can sign in later from Parent Settings. Signing in to an account that already has progress skips the
+  anyone can sign in later from Settings. Signing in to an account that already has progress skips the
   questions and loads it; signing out clears the device and asks again. Nothing is saved to the device until the
   questions are answered.
 - **Home** is grouped by subject (Words, Math, Logic, Discover, Rewards), one panel each, with slim game cards in an
@@ -44,12 +44,12 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
   cipher, with an interactive wheel) and **Logic Gates Lab** (Logic, 9+: 14 circuits where you pick what each blank
   gate does so the bulb behaves as the goal says; any circuit with the right truth table counts). Solved puzzles are saved
   with the account (`progress.solved`) and pay stars the first time.
-- **Levels** run 1 (about age 4) to 6 (about grade 3; older children get Test Prep) and are shared by the games of a subject: four right in a row
+- **Levels** run 1 (about age 4) to 6 (about grade 3; older children get Bodhi Prep) and are shared by the games of a subject: four right in a row
   goes up, two wrong in a row goes down, and the child can pick a level. Level and accuracy are saved per subject.
   Math is generated (`src/content/mathGen.ts`, every generator tagged with a topic and level); Words, Logic and
   Discover come from question packs (below).
 - **Ages 4–14.** The age picks the games shown and where the levels start; from age 9 the grade decides between the
-  games and Test Prep. Both can be changed in Parent Settings.
+  games and Bodhi Prep. Both can be changed in Settings.
 - **Challenges** are 8-question rounds. Level 1 (about age 4) to 6 (about grade 3), adaptive: four right in a row
   goes up, two wrong in a row goes down, and the child can also pick a level. Level and accuracy are saved per
   subject. Math is generated (`src/content/mathGen.ts`: counting, adding, times tables, division, shapes,
@@ -84,11 +84,11 @@ _The sticker book is shown only for ages 6 and under (`STICKER_MAX_AGE` in `src/
 - **Interactive Sticker Board**: Children can place and reposition their unlocked stickers on a scenic play canvas.
 - **Celebration Effects**: Confetti bursts and cheering audio fanfares.
 
-### 🛡️ 4. Parental Controls & Settings (Gated)
-- **Math Security Gate**: Settings are protected by an adult math challenge (e.g., `8 + 7 = ?`) to avoid accidental taps.
-- **Learner Profile**: Customize the child's name and age (4–14). From age 9 the gate is a harder sum. Children aged 11 and over manage their own settings and account: the button reads *Settings*, there is no gate, and the parent-only star gifting is hidden (`SELF_MANAGE_MIN_AGE` in `src/data/subjects.ts`).
+### ⚙️ 4. Settings
+- **No parent gate:** the *Settings* button opens straight away for everyone (`src/components/parent/SettingsModal.tsx`).
+- **Save progress:** sign in with Google to keep progress on every device; sign out or delete the account.
+- **Profile:** name, age (4–14) and, from age 9, grade.
 - **Sound & Voice Controls**: Toggle sound effects and voice narration.
-- **Reward Gifts**: Parents can gift stars for offline chores or real-world milestones.
 
 ### 📱 5. Progressive Web App (PWA) & Offline Ready
 - Complete `manifest.json` and `sw.js` (Service Worker) for standalone home-screen installation on iPads, tablets, and phones.
@@ -181,8 +181,7 @@ Math generators and the early-years games (words, stories, tracing) are code/bun
 Project: `bodhi-learn` · Live site: https://bodhi-learn.web.app
 
 - **Guest mode** works with no account (progress stays on the device).
-- **Parents sign in with Google** under *Parent Settings* (behind the math gate), so children never see
-  a login screen. Stars, stickers, name, age, per-subject levels and accuracy, and voice settings sync live to Firestore at
+- **Sign in with Google** from the welcome (age 8 and up) or from *Settings* at any time. Stars, stickers, name, age, per-subject levels and accuracy, and voice settings sync live to Firestore at
   `users/{uid}` and work offline. A new account adopts the device's progress; an account that already
   has progress wins. Signing out clears the device; *Delete account* removes the account and its data.
 - **Security rules** (`firestore.rules`): each user can only read and write their own document, and the

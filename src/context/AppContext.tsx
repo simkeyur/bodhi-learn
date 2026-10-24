@@ -63,7 +63,7 @@ interface AppContextType {
   setAge: (age: number) => void;
   grade: number | null; // school grade from age 9 (null for younger children)
   setGrade: (grade: number) => void;
-  isPrep: boolean; // grade 4 and up: Texas test prep instead of the Bodhi games
+  isPrep: boolean; // grade 4 and up: Bodhi Prep (Texas test prep) instead of the Bodhi games
   ageBand: AgeBand; // little 4-6, explorer 7-10, pro 11-14
   ageBracket: AgeBracket; // derived from age, for the early-years games
   skills: Skills;
@@ -244,7 +244,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const grade = effectiveGrade(age, gradeChoice);
   const isPrep = isPrepLearner(age, gradeChoice);
 
-  // Cloud sync (Firestore) for signed-in parents; guests just use this device
+  // Cloud sync (Firestore) for signed-in accounts; guests just use this device
   const synced = useMemo<SyncedState>(
     () => ({ kidName, age, grade: gradeChoice, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills }),
     [kidName, age, gradeChoice, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills],

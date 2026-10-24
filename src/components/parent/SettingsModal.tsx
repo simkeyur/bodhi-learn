@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import { MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE } from '../../firebase/schema';
-import { isSelfManaged } from '../../data/subjects';
 import { sound } from '../../utils/sound';
 import { AccountSection } from './AccountSection';
-import { X, ShieldCheck, Sparkles } from 'lucide-react';
+import { X, Settings } from 'lucide-react';
 
-interface ParentGateModalProps {
+interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClose }) => {
+// Settings for everyone, no gate: profile, account sign-in (to save progress), voice and sound.
+export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const {
     kidName,
     setKidName,
@@ -23,44 +23,19 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
     setSpeechEnabled,
     voiceSpeed,
     setVoiceSpeed,
-    stars,
-    addStars,
   } = useApp();
-
-  const [isUnlocked, setIsUnlocked] = useState(false);
-  const [gate, setGate] = useState({ text: '6 + 7', answer: 13 });
-  const [parentAnswer, setParentAnswer] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
 
   // Local settings draft
   const [nameInput, setNameInput] = useState(kidName);
 
-  // Re-lock and pick a fresh sum each time the modal opens. This must not depend on
-  // kidName: the name can change while open (sign-out, or another device syncing), and
-  // that must not kick a parent out of the settings.
+  // Start from the current name each time the panel opens. This must not depend on kidName: the name can
+  // change while open (sign-out, or another device syncing), and that must not reset what is being typed.
   const kidNameRef = useRef(kidName);
-  const ageRef = useRef(age);
   useEffect(() => {
     kidNameRef.current = kidName;
-    ageRef.current = age;
   });
   useEffect(() => {
-    if (isOpen) {
-      // Children 11 and over manage their own settings and account, so there is no gate for them
-      setIsUnlocked(isSelfManaged(ageRef.current));
-      const r = (lo: number, hi: number) => lo + Math.floor(Math.random() * (hi - lo + 1));
-      // Older children can do 6 + 7 in their heads, so from 9 up the gate is a harder sum
-      if (ageRef.current >= 9) {
-        const a = r(13, 19), b = r(6, 9), c = r(21, 49);
-        setGate({ text: `${a} × ${b} + ${c}`, answer: a * b + c });
-      } else {
-        const a = r(5, 12), b = r(4, 10);
-        setGate({ text: `${a} + ${b}`, answer: a + b });
-      }
-      setParentAnswer('');
-      setErrorMsg('');
-      setNameInput(kidNameRef.current);
-    }
+    if (isOpen) setNameInput(kidNameRef.current);
   }, [isOpen]);
 
   // If the name changes underneath an untouched field (e.g. synced from another device), follow it
@@ -71,19 +46,6 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
   }, [kidName]);
 
   if (!isOpen) return null;
-
-  const handleVerify = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (parseInt(parentAnswer, 10) === gate.answer) {
-      sound.playSuccess();
-      setIsUnlocked(true);
-      setErrorMsg('');
-    } else {
-      sound.playGentleTryAgain();
-      setErrorMsg('Incorrect answer. Grown-ups verification only.');
-      setParentAnswer('');
-    }
-  };
 
   const handleSaveProfile = () => {
     if (nameInput.trim()) {
@@ -116,7 +78,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               justifyContent: 'center',
               color: '#0284C7',
             }}>
-              <ShieldCheck size={22} />
+              <Settings size={22} />
             </div>
             <h3 style={{
               fontFamily: 'var(--font-display)',
@@ -124,7 +86,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               color: '#0F172A',
               margin: 0,
             }}>
-              {isSelfManaged(age) ? 'Settings' : 'Parent Settings'}
+              Settings
             </h3>
           </div>
 
@@ -149,68 +111,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
           </button>
         </div>
 
-        {!isUnlocked ? (
-          /* Grown-ups Math Gate */
-          <div style={{ textAlign: 'center', padding: '12px 0' }}>
-            <p style={{
-              fontSize: '1.05rem',
-              color: '#475569',
-              fontWeight: 600,
-              marginBottom: 16,
-            }}>
-              To protect learning settings from accidental taps, please solve this math problem:
-            </p>
-
-            <form onSubmit={handleVerify}>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '2.4rem',
-                fontWeight: 700,
-                color: '#0369A1',
-                marginBottom: 16,
-              }}>
-                {gate.text} = ?
-              </div>
-
-              <input
-                type="number"
-                inputMode="numeric"
-                value={parentAnswer}
-                onChange={(e) => setParentAnswer(e.target.value)}
-                placeholder="Enter answer"
-                autoFocus
-                style={{
-                  width: 140,
-                  fontSize: '1.8rem',
-                  fontFamily: 'var(--font-display)',
-                  textAlign: 'center',
-                  padding: '8px 12px',
-                  borderRadius: 14,
-                  border: '3px solid #38BDF8',
-                  outline: 'none',
-                  marginBottom: 16,
-                  display: 'block',
-                  margin: '0 auto 16px',
-                }}
-              />
-
-              {errorMsg && (
-                <div style={{ color: '#EF4444', fontWeight: 600, fontSize: '0.95rem', marginBottom: 12 }}>
-                  {errorMsg}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                className="kid-btn btn-sky"
-                style={{ padding: '10px 28px', fontSize: '1.1rem' }}
-              >
-                Unlock Settings
-              </button>
-            </form>
-          </div>
-        ) : (
-          /* Unlocked Settings Form */
+        {/* Settings form */}
           <div>
             <AccountSection />
 
@@ -223,7 +124,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                 color: '#334155',
                 marginBottom: 6,
               }}>
-                {isSelfManaged(age) ? 'Your name:' : "Learner's Name:"}
+                Your name:
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
                 <input
@@ -281,7 +182,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               </div>
             </div>
 
-            {/* Grade (from age 9): grade 4 and up get Texas test prep instead of the games */}
+            {/* Grade (from age 9): grade 4 and up get Bodhi Prep (Texas test prep) instead of the games */}
             {grade !== null && (
               <div style={{ marginBottom: 20 }}>
                 <label style={{ display: 'block', fontWeight: 700, fontSize: '0.95rem', color: '#334155', marginBottom: 8 }}>
@@ -310,7 +211,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                   ))}
                 </div>
                 <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: 6 }}>
-                  From grade {PREP_MIN_GRADE}, Bodhi Learn switches to practice for the Texas state test.
+                  From grade {PREP_MIN_GRADE}, Bodhi Learn switches to Bodhi Prep: practice for the Texas state test.
                 </div>
               </div>
             )}
@@ -376,31 +277,6 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               </button>
             </div>
 
-            {/* Parents can gift stars for chores; there is no one to do that for older children */}
-            {!isSelfManaged(age) && (
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                background: '#FEF3C7',
-                borderRadius: 14,
-                padding: 14,
-                marginBottom: 24,
-              }}>
-                <div>
-                  <div style={{ fontWeight: 700, color: '#92400E', fontSize: '0.95rem' }}>Reward Stars: {stars}</div>
-                  <div style={{ fontSize: '0.8rem', color: '#B45309' }}>Give stars for offline tasks & chores</div>
-                </div>
-                <button
-                  onClick={() => addStars(5)}
-                  className="kid-btn btn-sun"
-                  style={{ padding: '6px 14px', fontSize: '0.9rem', borderRadius: 999 }}
-                >
-                  <Sparkles size={14} /> Gift +5 Stars
-                </button>
-              </div>
-            )}
-
             {/* Save & Close */}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
               <button
@@ -412,7 +288,6 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
               </button>
             </div>
           </div>
-        )}
       </div>
     </div>
   );

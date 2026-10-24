@@ -21,17 +21,39 @@ import { MachineWorld } from './components/logic/MachineWorld';
 import { CountingWorld } from './components/math/CountingWorld';
 import { VisualMathWorld } from './components/math/VisualMathWorld';
 import { StickerBook } from './components/gamification/StickerBook';
-import { ParentGateModal } from './components/parent/ParentGateModal';
+import { SettingsModal } from './components/parent/SettingsModal';
 import { AbcTracingJourney } from './components/tracing/AbcTracingJourney';
 import { WordTracingWorld } from './components/tracing/WordTracingWorld';
 import { speech } from './utils/speech';
+import { Loader2 } from 'lucide-react';
 
-// Grade 4 and up get Texas test prep instead of the games; loaded only for them
+// Grade 4 and up get Bodhi Prep (Texas test prep) instead of the games; loaded only for them
 const PrepApp = lazy(() => import('./prep/PrepApp'));
 
+// Shown while Bodhi Prep downloads (it is a separate file, fetched only for grade 4 and up). It fades in after
+// a moment, so a quick load (the usual case once cached) shows no flash at all.
+const PrepLoading: React.FC = () => (
+  <div role="status" aria-live="polite" className="prep-loading" style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center', background: '#F0F9FF' }}>
+    <div style={{ display: 'grid', justifyItems: 'center', gap: 14, color: '#3E4560', fontFamily: 'system-ui, sans-serif', fontWeight: 700 }}>
+      <Loader2 size={36} className="spin" color="#0284C7" aria-hidden />
+      Loading Bodhi Prep…
+    </div>
+  </div>
+);
+
+// The games have no addresses of their own, so each one opened gets a history entry (same address, with the
+// game in `history.state`). The browser or phone back button then goes back to the home screen instead of
+// leaving the app, and the in-app Home buttons rewind those entries so Back never walks through old games.
+interface ViewState { bodhiView: string; depth: number }
+const viewState = (): ViewState | null => {
+  const s = window.history.state as Partial<ViewState> | null;
+  return s && typeof s.bodhiView === 'string' && typeof s.depth === 'number' ? (s as ViewState) : null;
+};
+
 export const BodhiApp: React.FC = () => {
-  const [currentView, setCurrentViewState] = useState<string>('home');
-  const [isParentGateOpen, setIsParentGateOpen] = useState<boolean>(false);
+  // A reload while in a game comes back to that game
+  const [currentView, setCurrentViewState] = useState<string>(() => viewState()?.bodhiView ?? 'home');
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const { ageBand, age, onboarded, isPrep } = useApp();
 
   // Lets the CSS give each age band its own look
@@ -39,13 +61,46 @@ export const BodhiApp: React.FC = () => {
     document.documentElement.dataset.band = ageBand;
   }, [ageBand]);
 
-  const setCurrentView = (view: string) => {
+  // Bodhi Prep has its own addresses (/math, /practice/...). The games don't, so leaving Bodhi Prep (a grade
+  // changed to 3, say) goes back to the plain address instead of keeping a Bodhi Prep one.
+  useEffect(() => {
+    if (!isPrep && window.location.pathname !== '/') window.history.replaceState(null, '', '/');
+  }, [isPrep]);
+
+  // Back / forward (browser, phone, or the rewinds below) shows whatever game that history entry holds.
+  // Only while the games are showing: Bodhi Prep has its own router and scroll handling.
+  useEffect(() => {
+    if (isPrep) return;
+    const onPop = () => {
+      // An entry left over from Bodhi Prep (/math, /settings...) is shown as the games' home, at the plain address
+      if (window.location.pathname !== '/') window.history.replaceState(null, '', '/');
+      speech.stop();
+      setIsSettingsOpen(false);
+      setCurrentViewState(viewState()?.bodhiView ?? 'home');
+      window.scrollTo({ top: 0 });
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, [isPrep]);
+
+  const backHome = () => {
     speech.stop();
+    const depth = viewState()?.depth ?? 0;
+    if (depth > 0) {
+      window.history.go(-depth); // popstate then shows home
+    } else {
+      setCurrentViewState('home');
+      window.scrollTo({ top: 0 });
+    }
+  };
+
+  const setCurrentView = (view: string) => {
+    if (view === 'home') { backHome(); return; }
+    speech.stop();
+    window.history.pushState({ bodhiView: view, depth: (viewState()?.depth ?? 0) + 1 } satisfies ViewState, '', '/');
     setCurrentViewState(view);
     window.scrollTo({ top: 0 });
   };
-
-  const backHome = () => setCurrentView('home');
 
   const renderCurrentView = () => {
     const [kind, id] = currentView.split(':');
@@ -121,7 +176,7 @@ export const BodhiApp: React.FC = () => {
 
   if (isPrep) {
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={<PrepLoading />}>
         <PrepApp />
       </Suspense>
     );
@@ -139,7 +194,7 @@ export const BodhiApp: React.FC = () => {
       {/* Main App Bar */}
       <Header
         onSelectView={setCurrentView}
-        onOpenParentGate={() => setIsParentGateOpen(true)}
+        onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
       {/* Main Learning Canvas */}
@@ -147,10 +202,10 @@ export const BodhiApp: React.FC = () => {
         {renderCurrentView()}
       </main>
 
-      {/* Parent Settings Modal */}
-      <ParentGateModal
-        isOpen={isParentGateOpen}
-        onClose={() => setIsParentGateOpen(false)}
+      {/* Settings: profile, sign-in to save progress, voice and sound */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
       />
     </div>
   );
