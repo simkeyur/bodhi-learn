@@ -43,6 +43,7 @@
 }
 .prep .tag-code { background: var(--blue-100); color: var(--blue-700); font-variant-numeric: tabular-nums; }
 .prep .tag-readiness { background: var(--sun-100); color: var(--sun-700); border: 1px solid #FCD34D; }
+.prep .tag-new { background: var(--grass-100); color: var(--grass-600); border: 1px solid #86EFAC; }
 .prep .tag-supporting { background: var(--surface-2); color: var(--ink-3); border: 1px solid var(--line); }
 
 .prep .mastery { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--ink-2); white-space: nowrap; }

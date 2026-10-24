@@ -8,10 +8,11 @@ import { dayKey, newRecord, recordResult, type SkillRecord } from './mastery.ts'
 export interface PrepProgress {
   skills: Record<string, SkillRecord>; // by standard code
   days: Record<string, number>; // yyyy-mm-dd -> questions answered
+  lessons: Record<string, string>; // standard code -> day its walkthrough was finished
 }
 
 const KEY = 'bodhi_prep_v1';
-const EMPTY: PrepProgress = { skills: {}, days: {} };
+const EMPTY: PrepProgress = { skills: {}, days: {}, lessons: {} };
 
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
@@ -22,7 +23,8 @@ function load(): PrepProgress {
     if (!isRecord(raw)) return EMPTY;
     const skills = isRecord(raw.skills) ? (raw.skills as Record<string, SkillRecord>) : {};
     const days = isRecord(raw.days) ? (raw.days as Record<string, number>) : {};
-    return { skills, days };
+    const lessons = isRecord(raw.lessons) ? (raw.lessons as Record<string, string>) : {};
+    return { skills, days, lessons };
   } catch {
     return EMPTY;
   }
@@ -47,9 +49,14 @@ export const learner = {
   record: (standard: string, fraction: number, now = new Date()) => {
     const day = dayKey(now);
     set({
+      ...state,
       skills: { ...state.skills, [standard]: recordResult(state.skills[standard] ?? newRecord(), fraction, day) },
       days: { ...state.days, [day]: (state.days[day] ?? 0) + 1 },
     });
+  },
+  lessonDone: (standard: string, now = new Date()) => {
+    if (state.lessons[standard]) return;
+    set({ ...state, lessons: { ...state.lessons, [standard]: dayKey(now) } });
   },
   resetProgress: () => set(EMPTY),
 };

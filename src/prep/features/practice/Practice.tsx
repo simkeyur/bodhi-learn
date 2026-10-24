@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router';
-import { ArrowLeft, ArrowRight, Check, RotateCcw, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Check, RotateCcw, Sparkles, X } from 'lucide-react';
 import { makeG5MathItem } from '../../content/generators/g5';
 import { mulberry32 } from '../../content/rng';
 import { answerComplete, emptyAnswer, score } from '../../content/scoring';
@@ -12,6 +12,10 @@ import { ItemView } from '../../items/ItemView';
 import { Bar, Mastery, StandardTags } from '../../ui/bits';
 import { RichText } from '../../items/Rich';
 import { NotFound } from '../../app/NotFound';
+import { g5Lesson } from '../../content/lessons/g5-math';
+import { IdeaDeck } from '../learn/LessonParts';
+import { strandStyle } from '../../ui/strands';
+import '../learn/learn.css';
 import '../screens.css';
 
 const SESSION_LENGTH = 10;
@@ -35,11 +39,13 @@ export function Practice() {
   const location = useLocation();
   if (code !== 'today' && !g5Standard(code)) return <NotFound />;
   // key: every visit (including "Practice again" to the same address) starts a new session
-  return <Session key={location.key} code={code} />;
+  return <Session key={`${code}:${location.key}`} code={code} />;
 }
 
 function Session({ code }: { code: string }) {
-  const { skills } = useLearner();
+  const { skills, lessons } = useLearner();
+  // New skills get a first look before their first question (see NewSkill below)
+  const [introSeen, setIntroSeen] = useState<string[]>([]);
   const [order] = useState(() => sessionStandards(code));
   const [index, setIndex] = useState(0);
   const [item, setItem] = useState(() => nextItem(order[0]));
@@ -71,12 +77,14 @@ function Session({ code }: { code: string }) {
   };
 
   const feedbackRef = useRef<HTMLDivElement>(null);
+  const needsIntro = !done && !revealed && !skills[item.standard] && !lessons[item.standard]
+    && !introSeen.includes(item.standard) && !!g5Lesson(item.standard);
 
   // Enter checks the answer, then moves on. Practice only: test mode will behave exactly like the real test.
   useEffect(() => {
     if (done) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Enter' || e.repeat) return;
+      if (e.key !== 'Enter' || e.repeat || needsIntro) return;
       if ((e.target as HTMLElement).closest('button, a, select, textarea, input[type="text"], dialog')) return;
       e.preventDefault();
       if (revealed) next();
@@ -110,6 +118,13 @@ function Session({ code }: { code: string }) {
         </div>
       </div>
 
+      {needsIntro ? (
+        <NewSkill
+          code={item.standard}
+          inToday={code === 'today'}
+          onReady={() => setIntroSeen((s) => [...s, item.standard])}
+        />
+      ) : (
       <div className="practice-layout">
         <article className="card practice-card" aria-labelledby="q-title">
           <header className="practice-card-head">
@@ -147,16 +162,40 @@ function Session({ code }: { code: string }) {
         </aside>
       </div>
 
+      )}
+
       {/* Narrow screens: the main button stays at the bottom of the screen */}
-      <div className="action-bar">
+      {!needsIntro && <div className="action-bar">
         <span className={`action-status ${revealed ? `is-${outcome}` : ''}`} aria-hidden>
           {revealed && last ? `${outcome === 'right' ? 'Correct!' : outcome === 'partial' ? 'Partly right' : 'Not quite'} · ${last.earned} of ${last.points}` : help}
         </span>
         {revealed
           ? <button className="btn btn-primary btn-lg" onClick={next}>{index + 1 >= SESSION_LENGTH ? 'See results' : 'Next'} <ArrowRight size={20} aria-hidden /></button>
           : <button className="btn btn-primary btn-lg" onClick={check} disabled={!complete}><Check size={20} aria-hidden /> Check</button>}
-      </div>
+      </div>}
     </div>
+  );
+}
+
+// First time a skill comes up. Practising one skill: offer the full walkthrough. In today's mixed practice:
+// show the big ideas right here, so the session isn't interrupted.
+function NewSkill({ code, inToday, onReady }: { code: string; inToday: boolean; onReady: () => void }) {
+  const lesson = g5Lesson(code)!;
+  const standard = g5Standard(code)!;
+  return (
+    <section className="card learn-card new-skill" style={strandStyle(standard.strand)} aria-labelledby="new-skill-title">
+      <span className="new-skill-badge"><Sparkles size={16} aria-hidden /> New skill</span>
+      <h1 id="new-skill-title" className="learn-head-title">{standard.title}</h1>
+      <p className="learn-goal"><RichText text={lesson.goal} /></p>
+      {inToday ? (
+        <IdeaDeck ideas={lesson.ideas} doneLabel="Got it, let's try one" onDone={() => { learner.lessonDone(code); onReady(); }} />
+      ) : (
+        <div className="learn-actions">
+          <button type="button" className="btn btn-ghost" onClick={onReady}>Skip, start practicing</button>
+          <Link to={`/learn/${code}`} replace className="btn btn-primary btn-lg"><BookOpen size={20} aria-hidden /> Show me how first</Link>
+        </div>
+      )}
+    </section>
   );
 }
 

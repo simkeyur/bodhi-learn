@@ -84,3 +84,22 @@ export interface Item {
 // What a student has chosen: one array per part.
 //   mc: [index]  ·  multiselect: the indexes picked  ·  inline: one option index per blank, -1 when empty
 export type Answer = number[][];
+
+// ---------- Lessons ----------
+// A short walkthrough shown before practising a skill: what you'll learn, the words, and a few big ideas.
+// The worked example and the "your turn" question are generated, so they come from the practice generators.
+
+export interface LessonIdea {
+  title: string;
+  text: string; // same markup as questions: {3/4} fractions, **bold**
+  example?: string; // a line set apart, e.g. "3.472 = 3 + 0.4 + 0.07 + 0.002"
+  figure?: Figure;
+  alt?: string;
+}
+
+export interface Lesson {
+  code: string; // the standard it teaches
+  goal: string; // "You'll learn to ..."
+  words: { term: string; meaning: string }[];
+  ideas: LessonIdea[];
+}

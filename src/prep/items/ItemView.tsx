@@ -12,11 +12,13 @@ interface Props {
   answer: Answer;
   onChange: (answer: Answer) => void;
   revealed: boolean;
+  showKey?: boolean; // a worked example: the right answers are shown, labelled "Answer"
+  readOnly?: boolean; // shown but not answerable (a worked example before it is solved)
 }
 
 const COUNT = ['', 'ONE', 'TWO', 'THREE', 'FOUR'];
 
-export function ItemView({ item, answer, onChange, revealed }: Props) {
+export function ItemView({ item, answer, onChange, revealed, showKey, readOnly }: Props) {
   const setPart = (i: number, a: number[]) => onChange(answer.map((p, k) => (k === i ? a : p)));
   return (
     <div className="item">
@@ -25,21 +27,22 @@ export function ItemView({ item, answer, onChange, revealed }: Props) {
         <section key={i} className="item-part" aria-label={item.parts.length > 1 ? `Part ${'AB'[i]}` : undefined}>
           {item.parts.length > 1 && <h3 className="item-part-name">Part {'AB'[i]}</h3>}
           {part.prompt && <div className="item-prompt"><Blocks blocks={part.prompt} /></div>}
-          <PartView part={part} value={answer[i] ?? []} onChange={(a) => setPart(i, a)} revealed={revealed} name={`${item.id}-${i}`} />
+          <PartView part={part} value={answer[i] ?? []} onChange={(a) => setPart(i, a)} revealed={revealed} showKey={showKey} readOnly={readOnly} name={`${item.id}-${i}`} />
         </section>
       ))}
     </div>
   );
 }
 
-function PartView({ part, value, onChange, revealed, name }: { part: Part; value: number[]; onChange: (a: number[]) => void; revealed: boolean; name: string }) {
-  return part.type === 'inline'
-    ? <InlineView part={part} value={value} onChange={onChange} revealed={revealed} name={name} />
-    : <ChoicesView part={part} value={value} onChange={onChange} revealed={revealed} name={name} />;
+interface PartProps<P> { part: P; value: number[]; onChange: (a: number[]) => void; revealed: boolean; showKey?: boolean; readOnly?: boolean; name: string }
+
+function PartView(props: PartProps<Part>) {
+  const { part } = props;
+  return part.type === 'inline' ? <InlineView {...props} part={part} /> : <ChoicesView {...props} part={part} />;
 }
 
 // ---------- Multiple choice and multiselect ----------
-function ChoicesView({ part, value, onChange, revealed, name }: { part: ChoicePart; value: number[]; onChange: (a: number[]) => void; revealed: boolean; name: string }) {
+function ChoicesView({ part, value, onChange, revealed, showKey, readOnly, name }: PartProps<ChoicePart>) {
   const multi = part.type === 'multiselect';
   const want = needed(part);
   const figures = part.choices.some((c) => c.figure);
@@ -53,9 +56,9 @@ function ChoicesView({ part, value, onChange, revealed, name }: { part: ChoicePa
   };
 
   return (
-    <fieldset className={`choices ${figures ? 'choices-figures' : ''}`} disabled={revealed}>
+    <fieldset className={`choices ${figures ? 'choices-figures' : ''}`} disabled={revealed || readOnly}>
       <legend className="sr-only">{multi ? `Select ${want} answers` : 'Select one answer'}</legend>
-      {multi && !revealed && <p className="choices-hint" aria-live="polite">{value.length} of {want} selected{full ? '. Unselect one to change your answer.' : ''}</p>}
+      {multi && !revealed && !readOnly && <p className="choices-hint" aria-live="polite">{value.length} of {want} selected{full ? '. Unselect one to change your answer.' : ''}</p>}
       {part.choices.map((c, i) => {
         const picked = value.includes(i);
         const right = part.correct.includes(i);
@@ -72,7 +75,7 @@ function ChoicesView({ part, value, onChange, revealed, name }: { part: ChoicePa
               {c.text && <span className="choice-text"><RichText text={c.text} /></span>}
               {c.figure && <FigureView figure={c.figure} alt={c.alt ?? ''} />}
               {revealed && (state === 'right' || state === 'missed' || state === 'wrong') && (
-                <span className="choice-mark">{state === 'right' ? 'Correct' : state === 'missed' ? 'Correct answer' : 'Your answer'}</span>
+                <span className="choice-mark">{showKey ? 'Answer' : state === 'right' ? 'Correct' : state === 'missed' ? 'Correct answer' : 'Your answer'}</span>
               )}
               {revealed && state === 'wrong' && c.why && <span className="choice-why" id={`${name}-why-${i}`}>{c.why}</span>}
             </span>
@@ -85,7 +88,7 @@ function ChoicesView({ part, value, onChange, revealed, name }: { part: ChoicePa
 }
 
 // ---------- Inline choice: drop-downs inside a sentence ----------
-function InlineView({ part, value, onChange, revealed, name }: { part: InlinePart; value: number[]; onChange: (a: number[]) => void; revealed: boolean; name: string }) {
+function InlineView({ part, value, onChange, revealed, readOnly, name }: PartProps<InlinePart>) {
   const set = (b: number, v: number) => onChange(part.blanks.map((_, k) => (k === b ? v : value[k] ?? -1)));
   return (
     <p className="inline-sentence">
@@ -98,7 +101,7 @@ function InlineView({ part, value, onChange, revealed, name }: { part: InlinePar
           <span key={i} className={`inline-blank ${state}`}>
             <select
               aria-label={part.blanks.length > 1 ? `Choose answer ${seg.blank + 1} of ${part.blanks.length}` : 'Choose the answer'} name={`${name}-${seg.blank}`} value={v}
-              onChange={(e) => set(seg.blank, Number(e.target.value))} disabled={revealed}
+              onChange={(e) => set(seg.blank, Number(e.target.value))} disabled={revealed || readOnly}
             >
               <option value={-1}>Choose…</option>
               {b.options.map((o, k) => <option key={k} value={k}>{o}</option>)}

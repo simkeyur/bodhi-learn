@@ -96,3 +96,7 @@ export function itemProblems(item: Item): string[] {
   if (texts.some(bad)) out.push('text contains NaN/undefined');
   return out;
 }
+
+// The right answers, as an Answer (used to show worked examples)
+export const answerKey = (item: Item): Answer =>
+  item.parts.map((p) => (p.type === 'inline' ? p.blanks.map((b) => b.correct) : [...p.correct]));

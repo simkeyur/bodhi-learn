@@ -89,3 +89,38 @@ test('number and fraction formatting', () => {
   assert.equal(frac(6, 3), '2');
   assert.equal(plain('2{1/3} + {1/4}'), '2 1/3 + 1/4');
 });
+
+// ---------- Walkthroughs ----------
+import { G5_MATH_LESSONS, g5Lesson } from '../../src/prep/content/lessons/g5-math.ts';
+import { explainSteps } from '../../src/prep/content/lessons/steps.ts';
+
+test('every grade 5 math standard has a walkthrough with words and big ideas', () => {
+  assert.equal(G5_MATH_LESSONS.length, G5_MATH.length);
+  for (const s of G5_MATH) {
+    const l = g5Lesson(s.code);
+    assert.ok(l, `no walkthrough for ${s.code}`);
+    assert.ok(l.goal.length > 10, s.code);
+    assert.ok(l.words.length >= 1, `${s.code} needs key words`);
+    assert.ok(l.ideas.length >= 2, `${s.code} needs at least two big ideas`);
+    for (const idea of l.ideas) {
+      assert.ok(idea.title && idea.text, s.code);
+      if (idea.figure) {
+        assert.ok(idea.alt, `${s.code}: figure without alt text`);
+        if (idea.figure.kind === 'coordGrid') assert.ok(idea.figure.points.every((p) => p.x <= idea.figure.max && p.y <= idea.figure.max), `${s.code}: point off the grid`);
+        if (idea.figure.kind === 'barGraph') assert.equal(idea.figure.categories.length, idea.figure.values.length, s.code);
+        if (idea.figure.kind === 'dotPlot') assert.equal(idea.figure.labels.length, idea.figure.counts.length, s.code);
+      }
+    }
+  }
+});
+
+test('worked explanations split into steps without breaking decimals', () => {
+  assert.deepEqual(explainSteps('2.4 × 1.5 = 3.6. Count the places. 3 groups of 0.5 is 1.5.'), ['2.4 × 1.5 = 3.6.', 'Count the places.', '3 groups of 0.5 is 1.5.']);
+  assert.deepEqual(explainSteps('One step only.'), ['One step only.']);
+  for (const s of G5_MATH) {
+    for (let seed = 1; seed <= 20; seed++) {
+      const steps = explainSteps(makeG5MathItem(s.code, 1, mulberry32(seed)).explain);
+      assert.ok(steps.length >= 1 && steps.every((x) => x.length > 2), `${s.code}: ${steps}`);
+    }
+  }
+});

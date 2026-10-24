@@ -53,6 +53,7 @@
 .prep .legend li[data-state='close']::before { background: var(--m-close); }
 .prep .legend li[data-state='mastered']::before { background: var(--m-mastered); }
 .prep .real-test { display: grid; gap: var(--s3); justify-items: start; }
+.prep .icon-title { display: flex; align-items: center; gap: var(--s2); }
 
 /* ---------- Skill map ---------- */
 /* One panel per strand, like Bodhi Learn's subject panels: a tinted border and an icon tile */
@@ -67,7 +68,7 @@
 .prep .strand-tile { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: var(--st); font-size: 1.4rem; }
 .prep .skill-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
 .prep .skill-row {
-  display: grid; grid-template-columns: 190px minmax(0, 1fr) 160px auto; gap: var(--s4); align-items: center;
+  display: grid; grid-template-columns: 180px minmax(0, 1fr) 140px auto; gap: var(--s4); align-items: center;
   padding: var(--s3) var(--s4); border-radius: var(--r-md); background: linear-gradient(160deg, #FFFFFF 50%, var(--st) 100%);
   border: 2px solid color-mix(in srgb, var(--sc) 30%, #FFFFFF);
 }
@@ -75,6 +76,7 @@
 .prep .skill-main h3 { font-size: var(--text-md); }
 .prep .skill-main p { font-size: var(--text-sm); color: var(--ink-3); margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .prep .skill-state { display: grid; gap: 2px; }
+.prep .skill-actions { display: flex; gap: var(--s2); }
 .prep .skill-recent { font-size: var(--text-xs); color: var(--ink-3); padding-left: 16px; }
 
 /* ---------- Practice ---------- */

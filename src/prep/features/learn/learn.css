@@ -1,0 +1,90 @@
+/* The walkthrough. Colors come from the skill's strand (--sc, --sd, --st), like the skills page. */
+
+.prep .learn { max-width: 880px; padding-top: var(--s4); }
+.prep .learn-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s4); flex-wrap: wrap; }
+
+/* Step tracker: Goal · Big ideas · Watch · Your turn */
+.prep .learn-steps { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--s2); }
+.prep .learn-steps li { display: flex; align-items: center; gap: 6px; padding: 4px 12px 4px 4px; border-radius: 999px; background: rgb(255 255 255 / 70%); border: 2px solid var(--line); color: var(--ink-3); font: 600 var(--text-sm) var(--font-display); }
+.prep .learn-step-dot { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 2px solid var(--line-strong); font-size: var(--text-xs); }
+.prep .learn-steps li.now { border-color: var(--sc); color: var(--sd); background: var(--st); }
+.prep .learn-steps li.now .learn-step-dot { background: var(--sc); border-color: var(--sc); color: #fff; }
+.prep .learn-steps li.done { color: var(--good); }
+.prep .learn-steps li.done .learn-step-dot { background: var(--good); border-color: var(--good); color: #fff; }
+
+.prep .learn-card { padding: var(--s6); border-color: color-mix(in srgb, var(--sc) 45%, #FFFFFF); display: grid; gap: var(--s5); }
+.prep .learn-head { display: flex; align-items: center; gap: var(--s4); padding-bottom: var(--s4); border-bottom: 2px solid var(--line); }
+.prep .learn-head h1 { font-size: var(--text-2xl); margin-top: 4px; }
+.prep .learn-body { display: grid; gap: var(--s5); animation: learn-in var(--med) var(--ease); }
+@keyframes learn-in { from { opacity: 0; transform: translateY(6px); } }
+.prep .learn-goal { font-size: var(--text-xl); line-height: 1.45; color: var(--ink); max-width: 56ch; }
+.prep .learn-sub { display: flex; align-items: center; gap: var(--s2); font-size: var(--text-lg); color: var(--sd); }
+.prep .learn-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
+.prep .learn-actions.center { justify-content: center; }
+
+/* Words: tap to flip */
+.prep .word-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s3); }
+.prep .word-card {
+  width: 100%; min-height: 92px; display: grid; align-content: center; gap: 4px; text-align: left; padding: var(--s3) var(--s4);
+  border-radius: var(--r-md); border: 2px solid color-mix(in srgb, var(--sc) 40%, #FFFFFF); background: var(--surface);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--sc) 30%, #FFFFFF); transition: background var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.prep .word-card:active { transform: translateY(2px); box-shadow: 0 1px 0 color-mix(in srgb, var(--sc) 30%, #FFFFFF); }
+.prep .word-card.open { background: var(--st); }
+.prep .word-term { font: 600 var(--text-lg) var(--font-display); color: var(--sd); }
+.prep .word-meaning { font-size: var(--text-sm); color: var(--ink-3); }
+.prep .word-card.open .word-meaning { color: var(--ink-2); font-size: var(--text-md); }
+
+/* Big ideas */
+.prep .idea-deck { display: grid; gap: var(--s4); }
+.prep .idea-dots { display: flex; gap: 6px; }
+.prep .idea-dots span { width: 28px; height: 6px; border-radius: 999px; background: var(--line); }
+.prep .idea-dots span.done { background: color-mix(in srgb, var(--sc) 50%, #FFFFFF); }
+.prep .idea-dots span.on { background: var(--sc); }
+.prep .idea-card {
+  display: grid; gap: var(--s3); padding: var(--s5); border-radius: var(--r-lg);
+  background: linear-gradient(160deg, #FFFFFF 40%, var(--st) 100%); border: 2px solid color-mix(in srgb, var(--sc) 35%, #FFFFFF);
+  animation: learn-in var(--med) var(--ease);
+}
+.prep .idea-card h3 { font-size: var(--text-xl); color: var(--ink); }
+.prep .idea-card p { font-size: var(--text-lg); line-height: 1.55; max-width: 60ch; }
+.prep .idea-figure { overflow-x: auto; }
+.prep .idea-example {
+  justify-self: start; padding: var(--s2) var(--s4); border-radius: var(--r-md); background: var(--surface);
+  border: 2px dashed color-mix(in srgb, var(--sc) 55%, #FFFFFF); font-weight: 700; color: var(--ink);
+}
+
+/* Worked example and your turn */
+.prep .learn-question { padding: var(--s4); border-radius: var(--r-md); background: var(--surface-2); border: 2px solid var(--line); }
+.prep .solve-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.prep .solve-steps li { display: flex; gap: var(--s3); align-items: flex-start; padding: var(--s3) var(--s4); border-radius: var(--r-md); background: var(--surface); border: 2px solid var(--line); animation: learn-in var(--med) var(--ease); }
+.prep .solve-num { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--sc); color: #fff; font: 600 var(--text-sm) var(--font-display); }
+.prep .learn-hint { display: flex; gap: var(--s2); align-items: flex-start; padding: var(--s3) var(--s4); border-radius: var(--r-md); background: var(--sun-100); border: 2px solid #FCD34D; color: #92400E; }
+.prep .learn-hint svg { flex: none; margin-top: 3px; }
+.prep .learn-feedback { display: grid; gap: var(--s3); padding: var(--s4); border-radius: var(--r-md); border: 2px solid; }
+.prep .learn-feedback.right { background: var(--good-bg); border-color: var(--good-line); }
+.prep .learn-feedback.wrong { background: var(--surface); border-color: var(--line); }
+.prep .learn-feedback-title { display: flex; align-items: center; gap: var(--s2); font: 600 var(--text-lg) var(--font-display); }
+.prep .learn-feedback.right .learn-feedback-title { color: var(--good); }
+
+.prep .learn-done { justify-items: center; text-align: center; padding: var(--s5) 0; }
+.prep .learn-trophy { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: var(--sun-100); color: var(--sun-500); border: 3px solid #FCD34D; }
+.prep .learn-done h2 { font-size: var(--text-2xl); }
+
+/* A new skill inside today's practice: a quick look before the first question */
+.prep .new-skill { display: grid; gap: var(--s4); }
+.prep .learn-head-title { font-size: var(--text-2xl); }
+.prep .new-skill-badge { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 2px 12px; border-radius: 999px; background: var(--st); color: var(--sd); border: 2px solid color-mix(in srgb, var(--sc) 40%, #FFFFFF); font: 600 var(--text-sm) var(--font-display); }
+
+@media (max-width: 720px) {
+  .prep .learn-card { padding: var(--s4); }
+  .prep .learn-step-label { display: none; }
+  .prep .learn-steps li { padding: 4px; }
+  .prep .learn-goal { font-size: var(--text-lg); }
+  .prep .idea-card { padding: var(--s4); }
+  .prep .idea-card p { font-size: var(--text-md); }
+  .prep .learn-actions .btn-lg { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prep .learn-body, .prep .idea-card, .prep .solve-steps li { animation: none; }
+}
