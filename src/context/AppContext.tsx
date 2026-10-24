@@ -5,6 +5,7 @@ import { speech } from '../utils/speech';
 import { useCloudSync, type SyncStatus } from '../firebase/useCloudSync';
 import type { CloudUser } from '../firebase/cloud';
 import { syncContent } from '../content/store';
+import { learner as prepLearner } from '../prep/learner/store';
 import {
   DEFAULT_STATE,
   MAX_BOT_SOLVED,
@@ -13,6 +14,11 @@ import {
   bandForAge,
   bracketForAge,
   clampAge,
+  clampGrade,
+  effectiveGrade,
+  gradeForAge,
+  GRADE_ASK_MIN_AGE,
+  isPrepLearner,
   defaultSkills,
   levelForAge,
   readSkills,
@@ -55,6 +61,9 @@ interface AppContextType {
   completeOnboarding: (name: string) => void;
   age: number; // 4..14
   setAge: (age: number) => void;
+  grade: number | null; // school grade from age 9 (null for younger children)
+  setGrade: (grade: number) => void;
+  isPrep: boolean; // grade 4 and up: Texas test prep instead of the Bodhi games
   ageBand: AgeBand; // little 4-6, explorer 7-10, pro 11-14
   ageBracket: AgeBracket; // derived from age, for the early-years games
   skills: Skills;
@@ -139,6 +148,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     readStored('bodhi_exact_age', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) ? clampAge(n) : undefined; },
       readStored<number>('bodhi_age', (r) => (r === 'pre-k' ? 4 : r === 'grade1' ? 7 : r === 'kindergarten' ? 5 : undefined), DEFAULT_STATE.age)));
 
+  // 0 until asked; see effectiveGrade
+  const [gradeChoice, setGradeChoice] = useState<number>(() =>
+    readStored('bodhi_grade', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) ? clampGrade(n) : undefined; }, DEFAULT_STATE.grade));
+
   const [skills, setSkills] = useState<Skills>(() =>
     readStored('bodhi_skills', (r) => readSkills(JSON.parse(r), age), defaultSkills(age)));
 
@@ -173,6 +186,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => { if (onboarded) store('bodhi_bot_solved', JSON.stringify(botSolved)); }, [onboarded, botSolved]);
   useEffect(() => { if (onboarded) store('bodhi_solved', JSON.stringify(solved)); }, [onboarded, solved]);
   useEffect(() => { if (onboarded) store('bodhi_exact_age', String(age)); }, [onboarded, age]);
+  useEffect(() => { if (onboarded) store('bodhi_grade', String(gradeChoice)); }, [onboarded, gradeChoice]);
   useEffect(() => { if (onboarded) store('bodhi_skills', JSON.stringify(skills)); }, [onboarded, skills]);
   useEffect(() => { if (onboarded) store('bodhi_kid_name', kidName); }, [onboarded, kidName]);
 
@@ -205,6 +219,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setAge = (next: number) => {
     const a = clampAge(next);
     setAgeState(a);
+    // Reaching the age where grade matters starts from the usual grade for that age
+    if (a >= GRADE_ASK_MIN_AGE && !gradeChoice) setGradeChoice(gradeForAge(a));
     setSkills((prev) => {
       const out = { ...prev };
       for (const s of Object.keys(out) as Subject[]) {
@@ -224,16 +240,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       },
     }));
   const setKidName = (name: string) => setKidNameState(name);
+  const setGrade = (g: number) => setGradeChoice(clampGrade(g));
+  const grade = effectiveGrade(age, gradeChoice);
+  const isPrep = isPrepLearner(age, gradeChoice);
 
   // Cloud sync (Firestore) for signed-in parents; guests just use this device
   const synced = useMemo<SyncedState>(
-    () => ({ kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills }),
-    [kidName, age, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills],
+    () => ({ kidName, age, grade: gradeChoice, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills }),
+    [kidName, age, gradeChoice, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills],
   );
 
   const applyCloudState = (next: SyncedState) => {
     setKidNameState(next.kidName);
     setAgeState(next.age);
+    setGradeChoice(next.grade);
     setSkills(next.skills);
     setSpeechEnabled(next.speechEnabled);
     setVoiceSpeed(next.voiceSpeed);
@@ -248,9 +268,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const handleSignedOut = () => {
     try {
       // The persistence effects pause while not onboarded, so clear the old family's copy here
-      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
+      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_grade', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
         .forEach((k) => localStorage.removeItem(k));
     } catch { /* ignore */ }
+    prepLearner.resetProgress();
     setOnboarded(false);
   };
 
@@ -350,6 +371,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         completeOnboarding,
         age,
         setAge,
+        grade,
+        setGrade,
+        isPrep,
         ageBand,
         ageBracket,
         skills,

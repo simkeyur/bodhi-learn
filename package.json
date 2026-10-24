@@ -15,16 +15,18 @@
     "emulators": "firebase emulators:start --only auth,firestore --project bodhi-learn-emulator",
     "dev:emulators": "VITE_FIREBASE_EMULATORS=true vite --port 5190",
     "test:logic": "node --test tests/logic.test.mjs",
-    "test": "npm run test:logic && npm run test:rules",
+    "test": "npm run test:logic && npm run test:prep && npm run test:rules",
     "audio:verify": "node scripts/audio/verify.mjs",
-    "content:seed": "node scripts/content/seed.mjs"
+    "content:seed": "node scripts/content/seed.mjs",
+    "test:prep": "node --test tests/prep/*.test.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
     "firebase": "^12.19.0",
     "lucide-react": "^1.48.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-router": "^8.5.0"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^5.0.2",

@@ -1,11 +1,14 @@
-# Pivot Plan: Texas State Test Practice
+# Plan: Texas State Test Prep in Bodhi Learn
 
-Turning Bodhi Learn into a practice app for the Texas state tests in grades 3–8: STAAR now, and the
-Student Success Tool (SST) that replaces it in 2027–28. The current app is kept on its own branch and the
-new app gets a brand new UX.
+Bodhi Learn gets a **Test Prep** section for the Texas state tests: STAAR now, and the Student Success Tool (SST)
+that replaces it in 2027–28. It is one app:
 
-Written 2026-10-24. Nothing is built yet. Facts about the tests are linked to their sources at the bottom;
-the SST blueprints are still marked DRAFT by TEA, so check them again before launch.
+- **Pre-K to grade 3:** the Bodhi games, as before (their content now stops at grade 3).
+- **Grade 4 and up:** Test Prep instead of the games.
+
+Written 2026-10-24, revised the same day when the plan changed from "a new app" to "a section of Bodhi Learn".
+Facts about the tests are linked to their sources at the bottom; the SST blueprints are still marked DRAFT by
+TEA, so check them again before launch.
 
 **Effort:** S = a day or less · M = a few days · L = a week or more (same scale as [IDEAS.md](IDEAS.md))
 
@@ -72,65 +75,51 @@ graphing…) are only worth building if we want to serve spring 2027 users.
 ## 2. Decisions
 
 **Made**
-- The current app moves to a `classic` branch; `main` becomes the new app with a brand new UX (section 3).
-
-**Recommended, to confirm**
-- Design for SST first; STAAR-only question types are optional.
-- First version: **grade 5 math**. The math generators already cover a lot of it and TEA has published the
-  SST grade 5 blueprints.
+- **One app, Bodhi Learn.** Grade 4 and up get Test Prep; Pre-K to grade 3 keep the games.
+- **The grade is asked from age 9** (pre-filled with the usual grade for the age), so a 9-year-old in grade 3
+  keeps the games and one in grade 4 gets Test Prep. Under 9 there is no grade question.
+- **Bodhi content above grade 3 is removed:** questions and math above level 6, and the games that only
+  served older children (section 4).
+- **Until each grade has its own questions, grades 4–8 practise grade 5 math**, with a note saying so.
+- Test Prep is designed for the SST first; the STAAR-only question types are optional.
 
 **Still open**
-1. **Name and domain.** Don't put "STAAR" in the product name: it is TEA's registered trademark and the test
-   is being renamed. Use it only to describe the test ("practice for the STAAR® and SST tests").
-2. **Firebase project.** Recommended: a new project for the new app (section 3 explains why).
-3. **Does Bodhi Learn stay live?** Recommended: keep serving it, frozen, from the `classic` branch.
-4. **Ship for spring 2027 STAAR or for fall 2027 SST?** Grade 5 math by March 2027 is possible if we stay
+1. **Ship for spring 2027 STAAR or for fall 2027 SST?** Grade 5 math by March 2027 is possible if we stay
    narrow; otherwise aim for the first SST window (late August 2027).
-5. **Free or paid.** Affects whether we need TEA's permission for anything we reuse, and payments.
-6. **Who checks content.** Ideally a Texas teacher reviews every question against its standard.
-7. **AI essay scoring.** Needs a parent's consent and a server (section 7).
+2. **Free or paid.** Affects whether we need TEA's permission for anything we reuse, and payments.
+3. **Who checks content.** Ideally a Texas teacher reviews every question against its standard.
+4. **AI essay scoring.** Needs a parent's consent and a server (section 7).
+5. **Which grade's content comes next** (grade 4 math is the natural next one).
 
 ---
 
-## 3. Branch and hosting plan  ·  S
+## 3. How Test Prep fits into Bodhi Learn
 
-Today there is one branch (`main`), no tags, and every push to `main` deploys **both Hosting and Firestore
-rules** to the `bodhi-learn` project (`.github/workflows/deploy.yml`). So the first push of the new app to
-`main` would replace the live Bodhi Learn site *and* its rules, and installed copies of Bodhi Learn (a PWA,
-cached by `sw.js`) would start failing to save. The split has to happen before any new-app commit is pushed.
-
-Steps, in order:
-
-1. **Tag** the last Bodhi Learn commit (`3a1a106`) as `bodhi-learn-v1` and push the tag.
-2. **Branch** `classic` from that commit and push it. It keeps the old README, IDEAS.md, audio, packs and tests.
-3. **On `classic`:** change `deploy.yml` so it deploys from `refs/heads/classic` to `bodhi-learn` (or turn
-   deploys off and leave the site as it is). Optionally protect the branch.
-4. **New Firebase project** for the new app (Auth with Google, Firestore, Hosting; Functions later, which
-   needs the Blaze plan). Reasons not to share `bodhi-learn`:
-   - the user document shape and rules change completely (grades, per-standard progress, parent/child profiles);
-   - `content_packs/{subject}` ids would collide with Bodhi Learn's packs;
-   - a different domain means Bodhi Learn's service worker and caches never touch the new app.
-5. **On `main`:** point `.firebaserc`, `firebase.json` (`hosting.site`) and `deploy.yml` at the new project,
-   with a new deploy service account and a new repository secret (for example
-   `FIREBASE_SERVICE_ACCOUNT_TXPREP`) in its own GitHub environment.
-6. **Clean `main`:** delete the Bodhi Learn screens, audio (`public/audio`, 7.9 MB, and `scripts/audio`), the
-   unused `db/` and `src/data/dbClient.ts`, and the old packs. Rewrite README.md for the new app; IDEAS.md
-   stays on `classic`.
-
-Only after step 5 is merged does anything new get pushed to `main`.
+- **Same project and site:** `bodhi-learn` on Firebase, deployed from `main` as before. The `classic` branch and
+  the `bodhi-learn-v1` tag keep a copy of Bodhi Learn as it was before this work.
+- **Who sees what:** `App.tsx` shows the games unless `isPrep` (grade 4 and up, `src/firebase/schema.ts`). Test
+  Prep (`src/prep/`) loads on demand, so younger children never download it.
+- **Profile:** name, age and the new `grade` (3–8, asked from age 9) live in Bodhi's profile, sync to
+  `users/{uid}.profile.grade`, and are checked by `firestore.rules` (grade is optional, so documents from older
+  versions of the app stay valid). Grade can be changed in Parent Settings and in Test Prep's settings.
+- **Styles:** every Test Prep style is scoped under `.prep`, so the games' look is untouched, and Test Prep turns
+  pinch-zoom back on while it is open (the games keep it off for tracing).
+- **Test Prep progress** (mastery per standard, streak) is kept in the browser for now (`bodhi_prep_v1`) and
+  cleared on sign-out. Syncing it with the account is still to do: it needs a place in the user document (or a
+  sub-collection) and matching rules.
 
 ---
 
-## 4. What carries over from Bodhi Learn
+## 4. What changed in the Bodhi games
 
-| Keep | Rework | Remove from `main` |
-|---|---|---|
-| Vite, React, TypeScript, oxlint, `node --test`, CI | `src/content/types.ts`: new item and passage model (section 6) | Tracing, phonics, sight words, slide & read, stories |
-| Firebase Auth + Firestore sync (`src/firebase/cloud.ts`, `useCloudSync.ts`) | `src/content/select.ts`: new validators; per-standard mastery instead of one level per subject | Counting, Math Kitchen |
-| Pack pipeline: bundled packs → Firestore → IndexedDB with versions and validation (`src/content/store.ts`, `scripts/content/seed.mjs`) | `src/content/mathGen.ts`: retag every generator with grade + standard, add figures and the new question types | Code the Bot, Pattern Parade, Magic Machine, Hanoi, Cipher Desk, Logic Gates, Order It |
-| Rules tests with the emulator | `src/firebase/schema.ts`, `firestore.rules`: grades, parent/child profiles, progress per standard | Stickers, stars, Buddy, the parent math gate |
-| `mulberry32` seeded RNG and the "every answer is computed" rule for math | Onboarding asks grade, not age | Quiz games (Rhyme Time, Word Rush…) and the reading/science/logic packs |
-| | `public/sw.js`, `manifest.json`, `index.html`: new name, icons, and **allow zoom** (drop `user-scalable=no`) | Narration audio and its scripts (bring back TTS later if wanted) |
+- **Levels stop at 6** (about grade 3) instead of 10. Saved levels above 6 are brought down to 6 when read.
+- **Question packs** keep levels 1–6 only (reading 138 → 78 questions, science 602 → 295, logic 136 → 60, Order
+  It 39 → 22 puzzles); pack versions were bumped. Run `npm run content:seed` to publish them to Firestore.
+- **Math generators** above level 6 are gone (decimals, percentages, ratios, exponents, algebra, Pythagoras…).
+- **Games removed:** Equation Lab (10+), Chance & Counting and Predict It (too few questions at grade 3 for a full
+  round; their questions moved into Brain Teasers and Matter & Energy). Other games lost topics that only had
+  older questions.
+- Everything else (tracing, phonics, stories, Code the Bot, puzzles, stickers, audio) is unchanged.
 
 ---
 
@@ -219,8 +208,8 @@ disabled, and review (after submit).
 
 **Figures** are SVG components drawn from data in the pack, never images, so generated questions can use them
 and they stay sharp at any zoom: number line, coordinate grid, fraction model (area and strip), bar graph, dot
-plot, stem-and-leaf, frequency table, rectangular prism, polygons, money. Math notation uses native MathML
-(supported in current Chrome, Safari and Firefox), so no math library is needed.
+plot, stem-and-leaf, frequency table, rectangular prism, polygons, money. Fractions are drawn as stacked text with CSS
+(React's types don't cover MathML yet), so no math library is needed.
 
 ### 5.7 Design system  ·  built before any screen
 
@@ -233,18 +222,21 @@ plot, stem-and-leaf, frequency table, rectangular prism, polygons, money. Math n
 - **Accessibility, WCAG 2.1 AA:** full keyboard use, visible focus, screen-reader labels, zoom to 200% without
   breaking, contrast checked. The real test supports these, so practice should too.
 
-### 5.8 Proposed folder layout on `main`
+### 5.8 Folder layout
+
+Test Prep lives in `src/prep/`, next to the Bodhi games:
 
 ```
-src/
-  app/        routes, providers, layout
-  ui/         tokens.css and design-system components
-  features/   onboarding, home, practice, test-mode, results, parent, writing
-  items/      question renderers and figures/
-  content/    types, validation, pack store (carried over), generators/math/
-  data/       standards catalog per grade
-  firebase/   config, auth, sync, schema
-tests/        content validity, generators, scoring, rules
+src/prep/
+  PrepApp.tsx  entry point, loaded on demand by App.tsx
+  app/         routes, layout, brand
+  ui/          tokens.css and design-system components (all scoped under .prep)
+  features/    home (Today), skills, practice, settings
+  items/       question renderers and figures/
+  content/     types, validation and scoring, seeded RNG, generators/g5/
+  data/        standards catalog per grade, test calendar
+  learner/     mastery rules and the on-device progress store
+tests/prep/    content validity, generators, scoring, mastery
 ```
 
 ---
@@ -266,7 +258,7 @@ interface Item {
   type: ItemType;
   points: 1 | 2 | 6;
   passageId?: string;
-  stem: Rich;                     // text + MathML + figure specs
+  stem: Rich;                     // text (with {3/4} fractions) + figure specs
   choices?: { content: Rich; why: string }[];   // mc, multiselect
   correct?: number[];             // mc: one index; multiselect: all right indexes
   blanks?: { options: string[]; correct: number }[];  // inline
@@ -294,13 +286,13 @@ interface Passage {
 ### Learners and progress (Firestore)
 
 ```
-users/{uid}                          parent account (name, email, consent date)
-users/{uid}/learners/{learnerId}     name, grade, language
-  /mastery/{subject}                 per standard: seen, correct, recent results, estimated level, lastSeen
-  /sessions/{sessionId}              finished check-ups and practice tests, with scores per strand
+users/{uid}                          Bodhi's document: profile (name, age, grade), settings, game progress
+users/{uid}/prep/{subject}           Test Prep mastery per standard: seen, correct, recent results, difficulty, lastSeen
+users/{uid}/prepSessions/{id}        finished check-ups and practice tests, with scores per strand
 ```
 
-Rules validate each document's shape; one mastery document per subject keeps reads cheap for the dashboard.
+`profile.grade` is done. The two sub-collections are the next step: they keep the main document small, and
+rules can validate each one's shape. Multiple children per account would come later.
 In-progress tests live on the device until they are submitted.
 
 ### Adaptivity
@@ -335,8 +327,8 @@ In-progress tests live on the device until they are submitted.
 
 | # | Phase | What "done" means | Effort |
 |---|---|---|---|
-| 0 | Branch and hosting split | Section 3 done; Bodhi Learn still live; `main` deploys to the new project | S |
-| 1 | Foundations | Routes, design tokens and core components, parent/child profiles by grade, new schema, rules and rules tests | M–L |
+| 0 | Fit into Bodhi Learn | Section 3: grade in the profile, Test Prep for grade 4+, games trimmed to grade 3 | S |
+| 1 | Foundations | Routes, design tokens and core components, Test Prep progress synced with the account, rules and rules tests | M–L |
 | 2 | Content model | Item and passage types, validators, standards catalog for grade 5, pack store pointed at the new packs, tests | M |
 | 3 | Question components | The four SST types, figures, scoring with partial credit, all keyboard-usable | M |
 | 4 | Practice mode | Skill map, practice a standard, explanations, mastery updates, daily plan, mistakes list | M |
@@ -347,7 +339,20 @@ In-progress tests live on the device until they are submitted.
 | 9 | Grade 5 reading | Passages, reading and editing questions, essay editor; then essay scoring in a Cloud Function | L + L |
 | 10 | More | Other grades, Spanish for grades 3–5, science (5, 8), social studies (8), STAAR-only question types if still useful | L each |
 
-**First release = phases 0–8 (grade 5 math).** For spring 2027 STAAR users it has to ship by about mid-March
+### Status (2026-10-24)
+
+- **One app again:** Bodhi Learn is back on `main` with Test Prep for grade 4 and up, the grade question from
+  age 9, and the games trimmed to grade 3. Deploys from `main` to `bodhi-learn` are on again.
+- **Test Prep, first cut:** routes, design tokens and components, the item model with validation and TEA
+  partial-credit scoring, the four SST question types, eight SVG figure types, generators for all 36 grade 5
+  math standards at three difficulties, and practice mode (Today plan, skill map, 10-question sessions,
+  explanations, per-standard mastery).
+- **Not started:** syncing Test Prep progress, passages, the mistakes list, test mode, parent dashboard, other
+  grades, launch checks.
+- **Content review:** the generated questions are checked by tests for validity and answer keys, but a Texas
+  teacher has not reviewed them against the standards yet.
+
+**First release = phases 0–8 (grade 5 math, used by grades 4–8 for now).** For spring 2027 STAAR users it has to ship by about mid-March
 2027; otherwise aim for the first SST beginning-of-year window (late August 2027).
 
 ---

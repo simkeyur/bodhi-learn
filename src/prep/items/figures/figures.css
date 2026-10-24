@@ -1,0 +1,24 @@
+.prep .fig { display: inline-block; max-width: 100%; }
+.prep .fig svg { height: auto; overflow: visible; font-family: var(--font); }
+
+.prep .fig-empty { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+.prep .fig-shade-1 { fill: var(--blue-100); stroke: var(--line-strong); stroke-width: 1; }
+.prep .fig-shade-2 { fill: var(--sun-100); stroke: var(--line-strong); stroke-width: 1; }
+.prep .fig-shade-3 { fill: var(--blue-500); stroke: var(--blue-700); stroke-width: 1; }
+.prep .fig-frame { fill: none; stroke: var(--ink); stroke-width: 2; }
+
+.prep .fig-gridline { stroke: var(--line); stroke-width: 1; }
+.prep .fig-axis { stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.prep .fig-tick { fill: var(--ink-2); font-size: 13px; }
+.prep .fig-title { fill: var(--ink); font-size: 15px; font-weight: 700; }
+.prep .fig-label { fill: var(--ink-2); font-size: 14px; font-weight: 700; }
+.prep .fig-axis-name { fill: var(--ink); font-size: 14px; font-style: italic; font-weight: 700; }
+.prep .fig-axis-label { fill: var(--ink-2); font-size: 13px; font-weight: 700; }
+.prep .fig-point { fill: var(--ink); }
+.prep .fig-point-label { fill: var(--ink); font-size: 14px; font-weight: 700; }
+.prep .fig-bar { fill: var(--blue-500); stroke: var(--blue-700); stroke-width: 1; }
+
+.prep .fig-face-front { fill: var(--blue-100); }
+.prep .fig-face-top { fill: var(--blue-50); }
+.prep .fig-face-side { fill: var(--blue-200); }
+.prep .fig-cube-lines line { stroke: var(--blue-700); stroke-width: 1.2; }

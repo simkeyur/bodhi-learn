@@ -216,7 +216,7 @@ import { ALPHABET, atbash, checkCipher, lettersOnly, makeCipherPuzzle, makeCiphe
 import { canMove, isSolved as hanoiSolved, move, newGame, optimalMoves, solveFrom } from '../src/data/hanoi.ts';
 import { isOrderPuzzle, pickNear, readOrderPack } from '../src/content/select.ts';
 import { adjustLevel, isQuestion, nextQuestion, pickFromPack, readPack } from '../src/content/select.ts';
-import { bandForAge, bracketForAge, fromDocData, levelForAge, toDocData, DEFAULT_STATE } from '../src/firebase/schema.ts';
+import { bandForAge, bracketForAge, effectiveGrade, fromDocData, gradeForAge, isPrepLearner, levelForAge, toDocData, DEFAULT_STATE, MAX_LEVEL } from '../src/firebase/schema.ts';
 
 const packs = Object.fromEntries(['reading', 'science', 'logic'].map((s) => [s, JSON.parse(fs.readFileSync(`src/content/packs/${s}.json`, 'utf8'))]));
 
@@ -227,7 +227,7 @@ const value = (s) => {
 };
 
 test('math generator: every level gives 4 distinct choices that include the answer', () => {
-  for (let level = 1; level <= 10; level++) {
+  for (let level = 1; level <= MAX_LEVEL; level++) {
     const rng = mulberry32(level * 101);
     for (let i = 0; i < 300; i++) {
       const q = makeMathQuestion(level, rng);
@@ -255,11 +255,6 @@ test('math generator: spot-check that the marked answer is really right', () => 
     const m = /^What is (\d+) × (\d+)\?$/.exec(q.prompt);
     if (m) assert.equal(Number(q.choices[q.answer]), Number(m[1]) * Number(m[2]), q.prompt);
   }
-  for (let i = 0; i < 300; i++) {
-    const q = makeMathQuestion(10, rng);
-    const m = /^Solve for x:\s+(\d+)x \+ (\d+) = (\d+)$/.exec(q.prompt);
-    if (m) assert.equal(Number(q.choices[q.answer]), (Number(m[3]) - Number(m[2])) / Number(m[1]), q.prompt);
-  }
 });
 
 test('bundled packs are valid and cover every level of every subject', () => {
@@ -272,9 +267,10 @@ test('bundled packs are valid and cover every level of every subject', () => {
       assert.ok(!ids.has(q.id), `duplicate id ${q.id}`);
       ids.add(q.id);
     }
-    for (let level = 1; level <= 10; level++) {
+    for (let level = 1; level <= MAX_LEVEL; level++) {
       assert.ok(pack.questions.filter((q) => q.level === level).length >= 5, `${subject} level ${level} needs at least 5 questions`);
     }
+    assert.ok(pack.questions.every((q) => q.level <= MAX_LEVEL), `${subject}: the games stop at level ${MAX_LEVEL} (grade 3)`);
   }
 });
 
@@ -321,14 +317,32 @@ test('level goes up after 4 right in a row and down after 2 wrong in a row', () 
 test('ages 4-14 map to bands, brackets and starting levels', () => {
   assert.deepEqual([4, 6, 7, 10, 11, 14].map(bandForAge), ['little', 'little', 'explorer', 'explorer', 'pro', 'pro']);
   assert.deepEqual([4, 5, 6, 7, 14].map(bracketForAge), ['pre-k', 'kindergarten', 'kindergarten', 'grade1', 'grade1']);
-  assert.deepEqual([4, 8, 13, 14].map(levelForAge), [1, 5, 10, 10]);
+  assert.deepEqual([4, 8, 9, 13, 14].map(levelForAge), [1, 5, 6, 6, 6]);
+});
+
+test('grade 4 and up get test prep; the grade is asked from age 9', () => {
+  assert.equal(effectiveGrade(8, 5), null, 'under 9 there is no grade');
+  assert.equal(effectiveGrade(10, 0), 5, 'not asked yet: the usual grade for the age');
+  assert.equal(effectiveGrade(10, 3), 3);
+  assert.deepEqual([9, 10, 13, 14].map(gradeForAge), [4, 5, 8, 8]);
+  assert.equal(isPrepLearner(7, 0), false);
+  assert.equal(isPrepLearner(9, 3), false, 'a 9-year-old in grade 3 keeps the games');
+  assert.equal(isPrepLearner(9, 4), true);
+  assert.equal(isPrepLearner(9, 0), true, 'age 9 defaults to grade 4');
+  assert.equal(isPrepLearner(12, 7), true);
 });
 
 test('saved data round-trips and old documents (bracket only) still load', () => {
-  const state = { ...DEFAULT_STATE, age: 12, skills: { ...DEFAULT_STATE.skills, math: { level: 8, answered: 20, correct: 15 } } };
+  const state = { ...DEFAULT_STATE, age: 12, grade: 7, skills: { ...DEFAULT_STATE.skills, math: { level: 5, answered: 20, correct: 15 } } };
   const back = fromDocData(toDocData(state));
   assert.equal(back.age, 12);
-  assert.deepEqual(back.skills.math, { level: 8, answered: 20, correct: 15 });
+  assert.equal(back.grade, 7);
+  assert.deepEqual(back.skills.math, { level: 5, answered: 20, correct: 15 });
+  // Levels saved before the games stopped at grade 3 are brought down to the top level
+  assert.equal(fromDocData(toDocData({ ...state, skills: { ...state.skills, math: { level: 9, answered: 1, correct: 1 } } })).skills.math.level, MAX_LEVEL);
+  // Younger children have no grade, and the document leaves it out
+  assert.equal(toDocData(DEFAULT_STATE).profile.grade, undefined);
+  assert.equal(fromDocData({ profile: { kidName: 'A', age: 10, grade: 12 } }).grade, 0);
 
   const withSolved = fromDocData(toDocData({ ...DEFAULT_STATE, solved: ['gates-1', 'hanoi-3', 'gates-1'] }));
   assert.deepEqual(withSolved.solved, ['gates-1', 'hanoi-3']);
@@ -340,39 +354,31 @@ test('saved data round-trips and old documents (bracket only) still load', () =>
 
   const junk = fromDocData({ profile: { age: 99 }, progress: { skills: { math: { level: 99, answered: 2, correct: 50 } } } });
   assert.equal(junk.age, 14);
-  assert.deepEqual(junk.skills.math, { level: 10, answered: 2, correct: 2 });
+  assert.deepEqual(junk.skills.math, { level: MAX_LEVEL, answered: 2, correct: 2 });
 });
 
-test('math generator: fractions, percentages and Pythagoras answers are right', () => {
+test('math generator: fraction answers are right', () => {
   const rng = mulberry32(11);
-  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
-  let checked = { frac: 0, pct: 0, pyth: 0, ratio: 0 };
+  const checked = { of: 0, compare: 0 };
   for (let i = 0; i < 2000; i++) {
-    const q = makeMathQuestion(7 + (i % 4), rng);
+    const q = makeMathQuestion(6, rng, ['fractions']);
     const answer = q.choices[q.answer];
     let m;
-    if ((m = /^What is (\d+)\/(\d+) \+ (\d+)\/(\d+)\?$/.exec(q.prompt))) {
+    if ((m = /^What is 1\/(\d+) of (\d+)\?$/.exec(q.prompt))) {
+      assert.equal(Number(answer), Number(m[2]) / Number(m[1]), q.prompt);
+      checked.of++;
+    } else if ((m = /^Which fraction is bigger: (\d+)\/(\d+) or (\d+)\/(\d+)\?$/.exec(q.prompt))) {
       const [a, b, c, d] = m.slice(1).map(Number);
-      const top = a * d + c * b;
-      const bottom = b * d;
-      const g = gcd(top, bottom);
-      const [n, den] = answer.split('/').map(Number);
-      assert.equal(n * bottom, top * den, `${q.prompt} -> ${answer}`);
-      if (b !== d) assert.equal(gcd(n, den), 1, `${answer} should be in simplest form`);
-      void g;
-      checked.frac++;
-    } else if ((m = /^What is (\d+)% of (\d+)\?$/.exec(q.prompt))) {
-      assert.equal(Number(answer), (Number(m[1]) * Number(m[2])) / 100);
-      checked.pct++;
-    } else if ((m = /^A right triangle has short sides (\d+) and (\d+)/.exec(q.prompt))) {
-      assert.equal(Number(answer) ** 2, Number(m[1]) ** 2 + Number(m[2]) ** 2);
-      checked.pyth++;
-    } else if ((m = /^Red and blue beads are in the ratio (\d+):(\d+)\. There are (\d+) red/.exec(q.prompt))) {
-      assert.equal(Number(answer), (Number(m[2]) * Number(m[3])) / Number(m[1]));
-      checked.ratio++;
+      assert.equal(answer, a / b > c / d ? `${a}/${b}` : `${c}/${d}`, q.prompt);
+      checked.compare++;
     }
   }
-  assert.ok(checked.frac > 20 && checked.pct > 20 && checked.pyth > 20 && checked.ratio > 20, JSON.stringify(checked));
+  assert.ok(checked.of > 20 && checked.compare > 20, JSON.stringify(checked));
+});
+
+test('no math generator is above level 6 (grade 3): older children get test prep', () => {
+  assert.ok(MATH_REGISTRY.every((e) => e.level <= MAX_LEVEL));
+  for (let level = 1; level <= MAX_LEVEL; level++) assert.ok(MATH_REGISTRY.some((e) => e.level === level), `nothing at level ${level}`);
 });
 
 // ---------- Quiz games ----------
@@ -440,8 +446,8 @@ test('games shown to a child are limited to their age, and each age sees every s
       assert.ok(quizGamesFor(subject, age).length >= 1, `age ${age} has no ${subject} game`);
     }
   }
-  assert.ok(!quizGamesFor('math', 5).some((g) => g.id === 'equation-lab'));
-  assert.ok(quizGamesFor('math', 12).some((g) => g.id === 'equation-lab'));
+  assert.ok(!quizGamesFor('math', 5).some((g) => g.id === 'fraction-fun'));
+  assert.ok(quizGamesFor('math', 8).some((g) => g.id === 'fraction-fun'));
   assert.ok(!quizGamesFor('reading', 12).some((g) => g.id === 'rhyme-time'));
 });
 
@@ -465,17 +471,8 @@ test('math generator: shapes, word problems and decimals have the right answer',
   const rules = [
     [/^A rectangle is (\d+) cm long and (\d+) cm wide\. What is its perimeter/, (m) => 2 * (+m[1] + +m[2])],
     [/^Two angles of a triangle are (\d+)° and (\d+)°/, (m) => 180 - +m[1] - +m[2]],
-    [/^A triangle has a base of (\d+) cm and a height of (\d+) cm/, (m) => (+m[1] * +m[2]) / 2],
-    [/^A box is (\d+) cm long, (\d+) cm wide and (\d+) cm tall/, (m) => +m[1] * +m[2] * +m[3]],
-    [/^A circle has a radius of (\d+) cm/, (m) => Math.round(3.14 * m[1] * m[1] * 100) / 100],
-    [/^A cyclist rides (\d+) km in (\d+) hours.*in (\d+) hours\?$/, (m) => (+m[1] / +m[2]) * +m[3]],
-    [/^(\d+) notebooks cost \$(\d+)\. How much do (\d+) notebooks cost/, (m) => (+m[2] / +m[1]) * +m[3]],
-    [/^Two numbers add up to (\d+)\. Their difference is (\d+)/, (m) => (+m[1] + +m[2]) / 2],
-    [/^A taxi charges \$(\d+) plus \$(\d+) for each km\. A trip cost \$(\d+)/, (m) => (+m[3] - +m[1]) / +m[2]],
     [/^Tom had (\d+) \w+ and gave (\d+) to his friend/, (m) => +m[1] - +m[2]],
     [/^A pack has (\d+) pens\. Mia buys (\d+) packs, then loses (\d+)/, (m) => +m[1] * +m[2] - +m[3]],
-    [/^Solve for x:\s+x − (\d+) = (\d+)$/, (m) => +m[1] + +m[2]],
-    [/^Solve for x:\s+x \+ (\d+) = (\d+)$/, (m) => +m[2] - +m[1]],
     [/^\? × (\d+) = (\d+)$/, (m) => +m[2] / +m[1]],
     [/^What is (\d+) × (\d+)\?$/, (m) => +m[1] * +m[2]],
     [/^What is (\d+) ÷ (\d+)\?$/, (m) => +m[1] / +m[2]],
@@ -662,7 +659,7 @@ test('order puzzles are valid and cover every level', () => {
     assert.ok(!ids.has(p.id), `duplicate ${p.id}`);
     ids.add(p.id);
   }
-  for (let level = 1; level <= 10; level++) {
+  for (let level = 1; level <= MAX_LEVEL; level++) {
     const near = orderPack.puzzles.filter((p) => Math.abs(p.level - level) <= 1);
     assert.ok(near.length >= 5, `level ${level} has only ${near.length} puzzles within one level`);
   }
@@ -671,21 +668,16 @@ test('order puzzles are valid and cover every level', () => {
   assert.ok(pickNear(orderPack.puzzles, 5, new Set(), mulberry32(1)));
 });
 
-// ---------- Flags & Capitals, Predict It ----------
+// ---------- Flags & Capitals ----------
 
 test('flags, capitals and predictions are in the science pack with the right ages', () => {
   const sci = packs.science.questions;
   const topic = (t) => sci.filter((q) => q.topic === t);
-  assert.ok(topic('flags').length >= 100 && topic('capitals').length >= 100 && topic('countries').length >= 40);
-  assert.ok(topic('predictions').length >= 30);
+  assert.ok(topic('flags').length >= 40 && topic('capitals').length >= 50 && topic('countries').length >= 50);
   for (const q of topic('flags')) assert.match(q.prompt, /[\u{1F1E6}-\u{1F1FF}]{2}/u, q.id);
-  // Predict It is for ages 9+ (level 6 and up); Flags & Capitals starts around age 7
-  assert.ok(topic('predictions').every((q) => q.level >= 6));
-  const fc = gameById('flags-capitals');
-  const pi = gameById('predict-it');
-  assert.ok(fc.minAge >= 7 && pi.minAge >= 9);
-  assert.ok(!quizGamesFor('science', 8).some((g) => g.id === 'predict-it'));
-  assert.ok(quizGamesFor('science', 9).some((g) => g.id === 'predict-it'));
+  // Prediction questions are played in Matter & Energy; Flags & Capitals starts around age 7
+  assert.ok(gameById('matter-energy').topics.includes('predictions'));
+  assert.ok(gameById('flags-capitals').minAge >= 7);
   assert.ok(!quizGamesFor('science', 6).some((g) => g.id === 'flags-capitals'));
 });
 

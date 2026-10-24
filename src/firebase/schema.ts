@@ -10,6 +10,20 @@ export const MAX_AGE = 14;
 export type AgeBand = 'little' | 'explorer' | 'pro';
 
 export const clampAge = (n: number) => Math.min(MAX_AGE, Math.max(MIN_AGE, Math.round(n)));
+
+// School grade, asked from age 9. From grade 4 the learner gets Texas test prep (src/prep) instead of the
+// Bodhi games, which are for Pre-K to grade 3. 0 means "not asked" (younger children).
+export const GRADE_ASK_MIN_AGE = 9;
+export const MIN_GRADE = 3;
+export const MAX_GRADE = 8;
+export const PREP_MIN_GRADE = 4;
+export const clampGrade = (n: number) => Math.min(MAX_GRADE, Math.max(MIN_GRADE, Math.round(n)));
+// The usual grade for an age in Texas (age 10 by September 1 -> grade 5)
+export const gradeForAge = (age: number) => clampGrade(age - 5);
+// The grade that counts: none under 9, otherwise the one chosen (or the usual one for the age)
+export const effectiveGrade = (age: number, grade: number): number | null =>
+  age < GRADE_ASK_MIN_AGE ? null : grade >= MIN_GRADE && grade <= MAX_GRADE ? grade : gradeForAge(age);
+export const isPrepLearner = (age: number, grade: number): boolean => (effectiveGrade(age, grade) ?? 0) >= PREP_MIN_GRADE;
 export const bandForAge = (age: number): AgeBand => (age <= 6 ? 'little' : age <= 10 ? 'explorer' : 'pro');
 export const bracketForAge = (age: number): AgeBracket => (age <= 4 ? 'pre-k' : age <= 6 ? 'kindergarten' : 'grade1');
 // Documents written before exact ages existed only have a bracket
@@ -19,14 +33,16 @@ export const ageForBracket = (b: AgeBracket): number => (b === 'pre-k' ? 4 : b =
 export const SUBJECTS = ['math', 'reading', 'logic', 'science'] as const;
 export type Subject = (typeof SUBJECTS)[number];
 export const MIN_LEVEL = 1;
-export const MAX_LEVEL = 10;
+// The games stop at level 6 (about grade 3); from grade 4 children get test prep instead.
+// Saved documents may still hold levels up to 10 (the rules allow it); reading clamps them to 6.
+export const MAX_LEVEL = 6;
 export interface SkillRecord {
   level: number;
   answered: number;
   correct: number;
 }
 export type Skills = Record<Subject, SkillRecord>;
-// A child of this age starts around this level (age 4 -> 1 ... age 13+ -> 10)
+// A child of this age starts around this level (age 4 -> 1 ... age 9+ -> 6)
 export const levelForAge = (age: number) => Math.min(MAX_LEVEL, Math.max(MIN_LEVEL, age - 3));
 export const defaultSkills = (age: number): Skills =>
   Object.fromEntries(SUBJECTS.map((s) => [s, { level: levelForAge(age), answered: 0, correct: 0 }])) as Skills;
@@ -43,6 +59,7 @@ export interface PlacedSticker {
 export interface SyncedState {
   kidName: string;
   age: number; // 4..14
+  grade: number; // 3..8, or 0 when not asked (under 9)
   speechEnabled: boolean;
   voiceSpeed: number;
   stars: number;
@@ -61,6 +78,7 @@ export const MAX_SOLVED = 300;
 export const DEFAULT_STATE: SyncedState = {
   kidName: 'Explorer',
   age: 5,
+  grade: 0,
   speechEnabled: true,
   voiceSpeed: 0.85,
   stars: 5, // welcome stars
@@ -85,7 +103,10 @@ export function toDocData(state: SyncedState) {
   return {
     schemaVersion: SCHEMA_VERSION,
     // ageBracket stays in the document so older app versions keep working
-    profile: { kidName: state.kidName, ageBracket: bracketForAge(state.age), age: state.age },
+    profile: {
+      kidName: state.kidName, ageBracket: bracketForAge(state.age), age: state.age,
+      ...(state.grade ? { grade: state.grade } : {}),
+    },
     settings: { speechEnabled: state.speechEnabled, voiceSpeed: state.voiceSpeed },
     progress: {
       stars: state.stars,
@@ -131,7 +152,11 @@ export function fromDocData(data: unknown): SyncedState {
     ? clampAge(profile.age)
     : bracket ? ageForBracket(bracket) : DEFAULT_STATE.age;
 
+  const grade = typeof profile.grade === 'number' && Number.isInteger(profile.grade) && profile.grade >= MIN_GRADE && profile.grade <= MAX_GRADE
+    ? profile.grade : 0;
+
   return {
+    grade,
     kidName: typeof profile.kidName === 'string' && profile.kidName.trim() ? profile.kidName.slice(0, 40) : DEFAULT_STATE.kidName,
     age,
     skills: readSkills(progress.skills, age),

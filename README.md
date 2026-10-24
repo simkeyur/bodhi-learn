@@ -1,12 +1,28 @@
 # Bodhi Learn 🌟
 
-A playful learning web app and offline-capable PWA for children aged **4 to 14**: reading, math, logic and science that start at the right level for the child's age and adjust as they play.
+A playful learning web app and offline-capable PWA. **Pre-K to grade 3** play reading, math, logic and science games
+that start at the right level for the child's age and adjust as they play. **Grade 4 and up** get **Test Prep**:
+practice for the Texas state test (STAAR® now, the SST from 2027–28). The plan and the test facts are in
+[docs/STAAR_PIVOT.md](docs/STAAR_PIVOT.md).
 
 Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebase** (Auth + Firestore). Hosted on **Firebase Hosting**, with **Google sign-in** and **Cloud Firestore** to save progress.
 
 ---
 
 ## 🚀 Features
+
+### 🎯 Test Prep (grade 4 and up, `src/prep/`)
+- **Who gets it:** the welcome asks the grade from age 9; grade 4 and up see Test Prep instead of the games
+  (`isPrepLearner` in `src/firebase/schema.ts`). It loads on demand, so younger children never download it.
+- **Today:** five skills to practise (weak readiness skills first), a 15-question daily goal, a streak, and a
+  countdown to the next test window.
+- **Math skills:** all 36 grade 5 math standards the test can ask about, in TEA's four reporting strands, each with
+  its mastery. Only grade 5 math is written so far; grades 4–8 practise it until their own grade exists.
+- **Practice:** 10 questions at a time in the four SST question types (multiple choice, select-two, drop-downs,
+  two-part) with TEA's partial-credit scoring, a worked explanation, and why a tempting wrong answer is wrong.
+  Questions are generated with drawn figures (grids, graphs, dot plots, cubes, fraction bars), and difficulty adapts
+  per standard. Tested with `npm run test:prep`.
+- Progress is kept in the browser for now; syncing it with the account is next.
 
 ### 🧭 0. One home screen, four subjects, every age
 - **Welcome first.** A new visitor is asked their age (4–14) before anything else is shown, then their name.
@@ -19,24 +35,25 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
   even grid. Younger children see the hands-on games first; older children see the question games first.
 - **Several games per subject**, not one catch-all quiz (`src/data/quizGames.ts`). Each draws from its own topic
   group and plays one of three ways: a *round* (8 questions), a *sprint* (60 seconds) or *lives* (3 lives).
-  Words: Rhyme Time, Grammar Gym, Word Rush, Story Sense. Math: Quick Facts, Word Problems, Shape Up, Fraction Fun,
-  Equation Lab. Logic: Pattern Pop, Brain Teasers, Code Breakers, Chance & Counting. Discover: Living World,
-  Space & Earth, Flags & Capitals (7+), Predict It (9+), Matter & Energy. Games are shown only for the ages they suit.
+  Words: Rhyme Time, Grammar Gym, Word Rush, Story Sense. Math: Quick Facts, Word Problems, Shape Up, Fraction Fun.
+  Logic: Pattern Pop, Brain Teasers, Code Breakers. Discover: Living World, Space & Earth, Flags & Capitals (7+),
+  Matter & Energy. Games are shown only for the ages they suit.
 - **Puzzle games** (not quizzes, `src/components/puzzles/`): **Order It** (Discover, all ages: tap cards into the right
   order; puzzles are a downloadable pack), **Tower of Hanoi** (Logic, 6+: 3 to 7 discs, a hint button that finds the
   shortest solution from wherever you are), **Cipher Desk** (Logic, 8+: decode, encode, crack a hidden shift, mirror
   cipher, with an interactive wheel) and **Logic Gates Lab** (Logic, 9+: 14 circuits where you pick what each blank
   gate does so the bulb behaves as the goal says; any circuit with the right truth table counts). Solved puzzles are saved
   with the account (`progress.solved`) and pay stars the first time.
-- **Levels** run 1 (about age 4) to 10 (about age 14) and are shared by the games of a subject: four right in a row
+- **Levels** run 1 (about age 4) to 6 (about grade 3; older children get Test Prep) and are shared by the games of a subject: four right in a row
   goes up, two wrong in a row goes down, and the child can pick a level. Level and accuracy are saved per subject.
   Math is generated (`src/content/mathGen.ts`, every generator tagged with a topic and level); Words, Logic and
   Discover come from question packs (below).
-- **Ages 4–14.** The age picks the games shown and where the levels start; it can be changed in Parent Settings.
-- **Challenges** are 8-question rounds. Level 1 (about age 4) to 10 (about age 14), adaptive: four right in a row
+- **Ages 4–14.** The age picks the games shown and where the levels start; from age 9 the grade decides between the
+  games and Test Prep. Both can be changed in Parent Settings.
+- **Challenges** are 8-question rounds. Level 1 (about age 4) to 6 (about grade 3), adaptive: four right in a row
   goes up, two wrong in a row goes down, and the child can also pick a level. Level and accuracy are saved per
-  subject. Math is generated (`src/content/mathGen.ts`: counting, times tables, fractions, percentages,
-  pre-algebra, Pythagoras…); Words, Logic and Discover come from question packs (below).
+  subject. Math is generated (`src/content/mathGen.ts`: counting, adding, times tables, division, shapes,
+  simple fractions); Words, Logic and Discover come from question packs (below).
 
 ### ✏️ 1. ABC Journey & Letter / Spelling Tracing
 - **ABC Tracing Journey**: Big-screen tactile letter tracing for A–Z (e.g. *A for Apple 🍎*, *B for Ball ⚽*). Features standard kindergarten handwriting lines (sky line, plane line, grass line), capital & small letter toggles, and magic rainbow glowing brush strokes.

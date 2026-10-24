@@ -1,0 +1,40 @@
+/* Base styles for the test prep section only. Everything is under .prep, so the Bodhi games' styles are untouched. */
+
+.prep {
+  min-height: 100dvh;
+  font-family: var(--font);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--page);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.prep *, .prep *::before, .prep *::after { box-sizing: border-box; -webkit-user-select: inherit; user-select: inherit; }
+
+.prep h1, .prep h2, .prep h3, .prep h4, .prep p { margin: 0; font-family: var(--font); }
+.prep h1, .prep h2, .prep h3 { line-height: 1.2; letter-spacing: -0.01em; }
+
+.prep a { color: var(--blue-600); text-underline-offset: 2px; }
+.prep a:hover { color: var(--blue-700); }
+
+.prep button, .prep input, .prep select, .prep textarea { font: inherit; color: inherit; }
+.prep button { cursor: pointer; }
+.prep button:disabled { cursor: not-allowed; }
+
+.prep :focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+
+.prep img, .prep svg { display: block; max-width: 100%; }
+
+.prep .sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.prep .skip-link {
+  position: absolute; left: var(--s4); top: -100px; z-index: 100;
+  background: var(--surface); padding: var(--s2) var(--s4); border-radius: var(--r-md); box-shadow: var(--shadow-2);
+}
+.prep .skip-link:focus { top: var(--s3); }

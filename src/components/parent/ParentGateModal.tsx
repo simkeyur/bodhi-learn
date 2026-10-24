@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
-import { MAX_AGE, MIN_AGE } from '../../firebase/schema';
+import { MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE } from '../../firebase/schema';
 import { isSelfManaged } from '../../data/subjects';
 import { sound } from '../../utils/sound';
 import { AccountSection } from './AccountSection';
@@ -17,6 +17,8 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
     setKidName,
     age,
     setAge,
+    grade,
+    setGrade,
     speechEnabled,
     setSpeechEnabled,
     voiceSpeed,
@@ -278,6 +280,40 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({ isOpen, onClos
                 Questions start at the right level for this age and adjust as {kidName || 'your child'} plays.
               </div>
             </div>
+
+            {/* Grade (from age 9): grade 4 and up get Texas test prep instead of the games */}
+            {grade !== null && (
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ display: 'block', fontWeight: 700, fontSize: '0.95rem', color: '#334155', marginBottom: 8 }}>
+                  Grade:
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(52px, 1fr))', gap: 8 }}>
+                  {Array.from({ length: MAX_GRADE - MIN_GRADE + 1 }, (_, i) => MIN_GRADE + i).map((g) => (
+                    <button
+                      key={g}
+                      onClick={() => setGrade(g)}
+                      aria-pressed={grade === g}
+                      style={{
+                        background: grade === g ? '#38BDF8' : '#F8FAFC',
+                        color: grade === g ? '#FFFFFF' : '#334155',
+                        border: grade === g ? '2px solid #0284C7' : '2px solid #E2E8F0',
+                        borderRadius: 14,
+                        minHeight: 48,
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 700,
+                        fontSize: '1.1rem',
+                      }}
+                    >
+                      {g}
+                    </button>
+                  ))}
+                </div>
+                <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: 6 }}>
+                  From grade {PREP_MIN_GRADE}, Bodhi Learn switches to practice for the Texas state test.
+                </div>
+              </div>
+            )}
 
             {/* Voice Speed Controls */}
             <div style={{ marginBottom: 20 }}>

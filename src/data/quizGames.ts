@@ -45,19 +45,19 @@ export const QUIZ_GAMES: QuizGame[] = [
   {
     id: 'grammar-gym', subject: 'reading', title: 'Grammar Gym', icon: '💪', mode: 'round', minAge: 6, maxAge: 14,
     blurb: 'Sentences, punctuation and parts of speech',
-    topics: ['sentences', 'punctuation', 'verbs', 'adjectives', 'nouns', 'tenses', 'contractions', 'parts of speech', 'grammar', 'homophones', 'commonly confused', 'plurals'],
+    topics: ['sentences', 'punctuation', 'verbs', 'adjectives', 'nouns', 'tenses', 'contractions', 'parts of speech', 'grammar', 'homophones', 'plurals'],
     color: '#F97316', dark: '#C2410C', tint: '#FFF7ED',
   },
   {
     id: 'word-rush', subject: 'reading', title: 'Word Rush', icon: '⚡', mode: 'sprint', minAge: 7, maxAge: 14,
     blurb: 'Synonyms, opposites and word roots',
-    topics: ['synonyms', 'antonyms', 'vocabulary', 'prefixes', 'word roots', 'context clues', 'connotation', 'opposites'],
+    topics: ['synonyms', 'antonyms', 'vocabulary', 'prefixes', 'opposites'],
     color: '#F59E0B', dark: '#B45309', tint: '#FFFBEB',
   },
   {
     id: 'story-sense', subject: 'reading', title: 'Story Sense', icon: '🕵️', mode: 'round', minAge: 7, maxAge: 14,
     blurb: 'Read between the lines',
-    topics: ['comprehension', 'inference', 'figurative', 'literary devices', 'theme', 'purpose', 'genres', 'tone', 'rhetoric'],
+    topics: ['comprehension', 'inference', 'figurative', 'theme', 'purpose', 'genres'],
     color: '#C084FC', dark: '#9333EA', tint: '#FAF5FF',
   },
 
@@ -82,15 +82,9 @@ export const QUIZ_GAMES: QuizGame[] = [
   },
   {
     id: 'fraction-fun', subject: 'math', title: 'Fraction Fun', icon: '🍕', mode: 'round', minAge: 8, maxAge: 14,
-    blurb: 'Fractions, decimals and percentages',
-    topics: ['fractions', 'decimals', 'percentages'],
+    blurb: 'Halves, thirds, quarters and more',
+    topics: ['fractions'],
     color: '#F59E0B', dark: '#B45309', tint: '#FFFBEB',
-  },
-  {
-    id: 'equation-lab', subject: 'math', title: 'Equation Lab', icon: '🧪', mode: 'round', minAge: 10, maxAge: 14,
-    blurb: 'Algebra, powers, ratios and negatives',
-    topics: ['algebra', 'exponents', 'order of operations', 'negative numbers', 'ratios', 'statistics'],
-    color: '#8B5CF6', dark: '#6D28D9', tint: '#F5F3FF',
   },
 
   // ----- Logic -----
@@ -102,34 +96,28 @@ export const QUIZ_GAMES: QuizGame[] = [
   },
   {
     id: 'brain-teasers', subject: 'logic', title: 'Brain Teasers', icon: '🧩', mode: 'round', minAge: 5, maxAge: 14,
-    blurb: 'Riddles and reasoning',
-    topics: ['puzzle', 'reasoning', 'deduction', 'time'],
+    blurb: 'Riddles, chance and number puzzles',
+    topics: ['puzzle', 'reasoning', 'deduction', 'time', 'probability', 'combinatorics', 'number theory'],
     color: '#14B8A6', dark: '#0F766E', tint: '#F0FDFA',
   },
   {
     id: 'code-breakers', subject: 'logic', title: 'Code Breakers', icon: '💻', mode: 'lives', minAge: 7, maxAge: 14,
     blurb: 'Binary, codes and true or false',
-    topics: ['code', 'binary', 'boolean', 'cipher', 'algorithms'],
+    topics: ['code', 'binary', 'boolean', 'cipher'],
     color: '#4F46E5', dark: '#3730A3', tint: '#EEF2FF',
-  },
-  {
-    id: 'chance-counting', subject: 'logic', title: 'Chance & Counting', icon: '🎲', mode: 'round', minAge: 9, maxAge: 14,
-    blurb: 'Odds, arrangements and primes',
-    topics: ['probability', 'combinatorics', 'number theory'],
-    color: '#F59E0B', dark: '#B45309', tint: '#FFFBEB',
   },
 
   // ----- Discover -----
   {
     id: 'living-world', subject: 'science', title: 'Living World', icon: '🌿', mode: 'round', minAge: 4, maxAge: 14,
     blurb: 'Animals, plants and the human body',
-    topics: ['animals', 'plants', 'life cycles', 'food', 'body', 'senses', 'cells', 'genetics'],
+    topics: ['animals', 'plants', 'life cycles', 'food', 'body', 'senses'],
     color: '#10B981', dark: '#047857', tint: '#ECFDF5',
   },
   {
     id: 'space-earth', subject: 'science', title: 'Space & Earth', icon: '🚀', mode: 'lives', minAge: 4, maxAge: 14,
     blurb: 'Planets, weather and places',
-    topics: ['space', 'earth', 'weather', 'seasons', 'geography', 'history'],
+    topics: ['space', 'earth', 'weather', 'seasons', 'geography'],
     color: '#3B82F6', dark: '#1D4ED8', tint: '#EFF6FF',
   },
   {
@@ -139,15 +127,9 @@ export const QUIZ_GAMES: QuizGame[] = [
     color: '#0EA5E9', dark: '#0369A1', tint: '#F0F9FF',
   },
   {
-    id: 'predict-it', subject: 'science', title: 'Predict It', icon: '🤔', mode: 'round', minAge: 9, maxAge: 14,
-    blurb: 'What will happen? Think like a scientist',
-    topics: ['predictions'],
-    color: '#8B5CF6', dark: '#6D28D9', tint: '#F5F3FF',
-  },
-  {
     id: 'matter-energy', subject: 'science', title: 'Matter & Energy', icon: '⚗️', mode: 'round', minAge: 6, maxAge: 14,
     blurb: 'Forces, light, atoms and chemistry',
-    topics: ['matter', 'forces', 'energy', 'light', 'chemistry', 'physics', 'atoms'],
+    topics: ['matter', 'forces', 'energy', 'light', 'chemistry', 'predictions'],
     color: '#F43F5E', dark: '#BE123C', tint: '#FFF1F2',
   },
 ];

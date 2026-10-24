@@ -1,0 +1,79 @@
+/* Design tokens: the only place raw colors, sizes and timings are defined. */
+.prep {
+  /* Brand: bluebonnet blue, with a Texas-sunset accent */
+  --blue-50: #EEF1FD;
+  --blue-100: #DCE2FB;
+  --blue-200: #B9C5F6;
+  --blue-500: #3D55CC;
+  --blue-600: #2F44B5;
+  --blue-700: #253893;
+  --blue-900: #17225A;
+  --sun-100: #FFF0E0;
+  --sun-500: #E8732C;
+  --sun-700: #B4521A;
+
+  /* Neutrals */
+  --ink: #161B2E;
+  --ink-2: #3E4560;
+  --ink-3: #6A718C;
+  --line: #DCE0EA;
+  --line-strong: #B8BED0;
+  --surface: #FFFFFF;
+  --surface-2: #F6F7FB;
+  --page: #F3F5FA;
+
+  /* Feedback */
+  --good: #1E7A44;
+  --good-bg: #E6F5EC;
+  --good-line: #9ED5B3;
+  --bad: #B42323;
+  --bad-bg: #FDECEC;
+  --bad-line: #F0AFAF;
+  --part: #8A5A00;
+  --part-bg: #FFF5DB;
+  --part-line: #EAC970;
+
+  /* Mastery */
+  --m-new: #C5CAD8;
+  --m-learning: #E8A13C;
+  --m-close: #5A8DEE;
+  --m-mastered: #1E7A44;
+
+  /* Type */
+  --font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --text-xs: 0.78rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+
+  /* Space, shape, depth */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --shadow-1: 0 1px 2px rgb(22 27 46 / 6%), 0 1px 1px rgb(22 27 46 / 4%);
+  --shadow-2: 0 4px 16px rgb(22 27 46 / 8%), 0 1px 3px rgb(22 27 46 / 6%);
+  --focus: 0 0 0 3px var(--surface), 0 0 0 5px var(--blue-500);
+
+  --content: 1120px;
+  --reading: 760px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fast: 120ms;
+  --med: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prep {
+    --fast: 0ms;
+    --med: 0ms;
+  }
+}

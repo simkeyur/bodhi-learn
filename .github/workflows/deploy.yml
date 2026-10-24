@@ -34,6 +34,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run test:logic
+      - run: npm run test:prep
       - run: npm run test:rules
 
       - uses: actions/upload-artifact@v4

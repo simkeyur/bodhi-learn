@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { MAX_AGE, MIN_AGE } from '../../firebase/schema';
+import { GRADE_ASK_MIN_AGE, MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE, gradeForAge } from '../../firebase/schema';
 import { sound } from '../../utils/sound';
 import './welcome.css';
 
@@ -9,7 +9,7 @@ import './welcome.css';
 // Younger children go straight in as a guest; a parent can still sign in later from Parent Settings.
 const SIGN_IN_FROM_AGE = 8;
 
-type Step = 'age' | 'account' | 'name';
+type Step = 'age' | 'grade' | 'account' | 'name';
 
 const AGE_COLORS = ['#FB7185', '#F59E0B', '#4ADE80', '#38BDF8', '#C084FC', '#14B8A6', '#F97316', '#818CF8', '#EC4899', '#0EA5E9', '#10B981'];
 
@@ -17,7 +17,7 @@ const firstName = (full: string | undefined) => (full ?? '').trim().split(/\s+/)
 
 // Shown to a new visitor before anything else: nothing about the child is assumed.
 export const Welcome: React.FC = () => {
-  const { age, setAge, completeOnboarding, cloud } = useApp();
+  const { age, setAge, grade, setGrade, completeOnboarding, cloud } = useApp();
   const [picked, setPicked] = useState<number | null>(null);
   const [step, setStep] = useState<Step>('age');
   const [typedName, setTypedName] = useState<string | null>(null);
@@ -37,7 +37,15 @@ export const Welcome: React.FC = () => {
     sound.playPop();
     setPicked(a);
     setAge(a);
+    if (a >= GRADE_ASK_MIN_AGE) { setGrade(gradeForAge(a)); setStep('grade'); return; }
     setStep(a >= SIGN_IN_FROM_AGE && !cloud.user ? 'account' : 'name');
+  };
+
+  // From age 9 the grade decides between the Bodhi games and test prep (grade 4 and up)
+  const chooseGrade = (g: number) => {
+    sound.playPop();
+    setGrade(g);
+    setStep(!cloud.user ? 'account' : 'name');
   };
 
   const name = typedName ?? firstName(cloud.user?.name);
@@ -65,6 +73,26 @@ export const Welcome: React.FC = () => {
               ))}
             </div>
             <p className="welcome-note">This picks the right activities and questions for you.</p>
+          </>
+        )}
+
+        {shownStep === 'grade' && (
+          <>
+            <h1>What grade are you in?</h1>
+            <div className="welcome-ages" role="group" aria-label="Choose your grade">
+              {Array.from({ length: MAX_GRADE - MIN_GRADE + 1 }, (_, i) => MIN_GRADE + i).map((g, i) => (
+                <button
+                  key={g}
+                  className={`welcome-age ${g === grade ? 'suggested' : ''}`}
+                  style={{ '--c': AGE_COLORS[(i + 5) % AGE_COLORS.length] } as React.CSSProperties}
+                  onClick={() => chooseGrade(g)}
+                  aria-label={`Grade ${g}`}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+            <p className="welcome-note">From grade {PREP_MIN_GRADE}, you get practice for the Texas state test (STAAR®).</p>
           </>
         )}
 
@@ -118,7 +146,7 @@ export const Welcome: React.FC = () => {
 
         {shownStep !== 'age' && !waiting && (
           <button className="welcome-back" onClick={() => { sound.playPop(); setStep('age'); }} aria-label="Change age">
-            <ArrowLeft size={16} /> Age {picked ?? age}
+            <ArrowLeft size={16} /> Age {picked ?? age}{(picked ?? age) >= GRADE_ASK_MIN_AGE && shownStep !== 'grade' && grade ? ` · Grade ${grade}` : ''}
           </button>
         )}
       </div>

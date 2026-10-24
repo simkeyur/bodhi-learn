@@ -21,11 +21,13 @@ service cloud.firestore {
 
     function validProfile(p) {
       return p is map
-        && p.keys().hasOnly(['kidName', 'ageBracket', 'age'])
+        && p.keys().hasOnly(['kidName', 'ageBracket', 'age', 'grade'])
         && p.kidName is string && p.kidName.size() >= 1 && p.kidName.size() <= 40
         && p.ageBracket in ['pre-k', 'kindergarten', 'grade1']
         // age is optional so documents written by older versions of the app stay valid
-        && (!('age' in p) || (p.age is int && p.age >= 4 && p.age <= 14));
+        && (!('age' in p) || (p.age is int && p.age >= 4 && p.age <= 14))
+        // grade (3..8) is asked from age 9; it decides who gets test prep
+        && (!('grade' in p) || (p.grade is int && p.grade >= 3 && p.grade <= 8));
     }
 
     function validSkill(k) {

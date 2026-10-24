@@ -1,0 +1,82 @@
+.prep .item { display: grid; gap: var(--s5); }
+.prep .item-stem, .prep .item-prompt { display: grid; gap: var(--s4); }
+.prep .item-text { font-size: var(--text-lg); line-height: 1.6; max-width: 68ch; }
+.prep .item-figure { overflow-x: auto; }
+.prep .item-part { display: grid; gap: var(--s4); }
+.prep .item-part + .item-part { border-top: 1px dashed var(--line-strong); padding-top: var(--s5); }
+.prep .item-part-name { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue-700); }
+
+/* Stacked fractions */
+.prep .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: 0.86em; line-height: 1.1; margin: 0 0.12em; }
+.prep .frac-n { border-bottom: 1.5px solid currentColor; padding: 0 0.2em; }
+.prep .frac-d { padding: 0 0.2em; }
+
+/* Tables */
+.prep .item-table-wrap { overflow-x: auto; }
+.prep .item-table { border-collapse: collapse; font-size: var(--text-md); background: var(--surface); }
+.prep .item-table caption { text-align: left; font-weight: 700; padding-bottom: var(--s2); }
+.prep .item-table th, .prep .item-table td { border: 1.5px solid var(--ink-3); padding: var(--s2) var(--s4); text-align: center; min-width: 56px; }
+.prep .item-table thead th, .prep .item-table tbody th { background: var(--surface-2); font-weight: 700; }
+.prep .item-table tbody th { text-align: left; }
+
+/* ---------- Choices ---------- */
+.prep .choices { border: 0; margin: 0; padding: 0; display: grid; gap: var(--s3); min-width: 0; }
+.prep .choices-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.prep .choices-hint { grid-column: 1 / -1; font-size: var(--text-sm); color: var(--ink-3); font-weight: 700; }
+
+.prep .choice {
+  position: relative; display: flex; align-items: flex-start; gap: var(--s3);
+  padding: var(--s3) var(--s4); min-height: 56px; border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+  background: var(--surface); cursor: pointer;
+  transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.prep .choice:hover { border-color: var(--blue-500); background: var(--blue-50); }
+.prep .choice input { position: absolute; opacity: 0; pointer-events: none; }
+.prep .choice:has(input:focus-visible) { box-shadow: var(--focus); }
+.prep .choice[data-locked='true'] { opacity: 0.55; cursor: not-allowed; }
+.prep .choice[data-locked='true']:hover { border-color: var(--line-strong); background: var(--surface); }
+
+.prep .choice-letter {
+  flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%;
+  border: 1.5px solid var(--line-strong); font-weight: 700; color: var(--ink-2); background: var(--surface);
+}
+.prep .choice input[type='checkbox'] + .choice-letter { border-radius: var(--r-sm); }
+.prep .choice-body { display: grid; gap: var(--s2); padding-top: 4px; min-width: 0; font-size: var(--text-lg); }
+.prep .choice-text { line-height: 1.45; }
+.prep .choice-body .fig { overflow-x: auto; }
+
+.prep .choice.picked { border-color: var(--blue-600); background: var(--blue-50); box-shadow: inset 0 0 0 1px var(--blue-600); }
+.prep .choice.picked .choice-letter { background: var(--blue-600); border-color: var(--blue-600); color: #fff; }
+
+/* After checking */
+.prep .choices:disabled .choice { cursor: default; }
+.prep .choices:disabled .choice:hover { background: inherit; }
+.prep .choice.right, .prep .choice.right:hover { border-color: var(--good); background: var(--good-bg); box-shadow: inset 0 0 0 1px var(--good); }
+.prep .choice.right .choice-letter { background: var(--good); border-color: var(--good); color: #fff; }
+.prep .choice.missed, .prep .choice.missed:hover { border-color: var(--good); border-style: dashed; background: var(--surface); }
+.prep .choice.missed .choice-letter { border-color: var(--good); color: var(--good); }
+.prep .choice.wrong, .prep .choice.wrong:hover { border-color: var(--bad); background: var(--bad-bg); box-shadow: inset 0 0 0 1px var(--bad); }
+.prep .choice.wrong .choice-letter { background: var(--bad); border-color: var(--bad); color: #fff; }
+.prep .choice.dim { opacity: 0.6; }
+.prep .choice-mark { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.prep .choice.right .choice-mark, .prep .choice.missed .choice-mark { color: var(--good); }
+.prep .choice.wrong .choice-mark { color: var(--bad); }
+.prep .choice-why { font-size: var(--text-md); color: var(--ink-2); }
+
+/* ---------- Inline choice ---------- */
+.prep .inline-sentence { font-size: var(--text-lg); line-height: 2.6; }
+.prep .inline-blank { display: inline-flex; align-items: center; gap: var(--s2); margin: 0 var(--s1); vertical-align: middle; }
+.prep .inline-blank select {
+  min-height: 44px; min-width: 120px; padding: 0 var(--s6) 0 var(--s3); border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233E4560' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance: none; font-size: var(--text-lg); font-weight: 700; cursor: pointer;
+}
+.prep .inline-blank select:hover:not(:disabled) { border-color: var(--blue-500); }
+.prep .inline-blank.right select { border-color: var(--good); background-color: var(--good-bg); color: var(--good); opacity: 1; }
+.prep .inline-blank.wrong select { border-color: var(--bad); background-color: var(--bad-bg); color: var(--bad); opacity: 1; }
+.prep .inline-fix { font-size: var(--text-sm); color: var(--good); line-height: 1.3; }
+
+@media (max-width: 720px) {
+  .prep .choices-figures { grid-template-columns: 1fr; }
+  .prep .item-text, .prep .choice-body, .prep .inline-sentence { font-size: var(--text-md); }
+}

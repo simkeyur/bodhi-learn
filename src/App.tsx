@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { AppProvider } from './context/AppContext';
 import { Header } from './components/layout/Header';
 import { OrderItWorld } from './components/puzzles/OrderItWorld';
@@ -26,10 +26,13 @@ import { AbcTracingJourney } from './components/tracing/AbcTracingJourney';
 import { WordTracingWorld } from './components/tracing/WordTracingWorld';
 import { speech } from './utils/speech';
 
+// Grade 4 and up get Texas test prep instead of the games; loaded only for them
+const PrepApp = lazy(() => import('./prep/PrepApp'));
+
 export const BodhiApp: React.FC = () => {
   const [currentView, setCurrentViewState] = useState<string>('home');
   const [isParentGateOpen, setIsParentGateOpen] = useState<boolean>(false);
-  const { ageBand, age, onboarded } = useApp();
+  const { ageBand, age, onboarded, isPrep } = useApp();
 
   // Lets the CSS give each age band its own look
   useEffect(() => {
@@ -113,6 +116,14 @@ export const BodhiApp: React.FC = () => {
         </div>
         <Welcome />
       </>
+    );
+  }
+
+  if (isPrep) {
+    return (
+      <Suspense fallback={null}>
+        <PrepApp />
+      </Suspense>
     );
   }
 
