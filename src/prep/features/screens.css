@@ -1,25 +1,50 @@
 /* Screen layouts. Shared pieces live in ui/components.css. */
 /* ---------- Today ---------- */
-.prep .countdown { display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s4); background: var(--sun-100); color: var(--sun-700); border-radius: 999px; font-size: var(--text-sm); }
+/* The greeting panel, like Bodhi Learn's home hero: white to sky, with a sky border */
+.prep .hero {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s4); flex-wrap: wrap;
+  margin-bottom: var(--s5); padding: var(--s5) var(--s6); border-radius: var(--r-lg);
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--blue-50) 100%);
+  border: 2px solid var(--blue-200); box-shadow: var(--shadow-2);
+}
+.prep .hero h1 { font-size: var(--text-2xl); }
+.prep .countdown {
+  display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s4); border-radius: 999px;
+  background: var(--surface); border: 2px solid var(--line); color: var(--ink-2); font-size: var(--text-sm);
+}
+.prep .countdown svg { color: var(--blue-600); }
+.prep .countdown b { font-family: var(--font-display); font-weight: 600; color: var(--blue-700); }
+
 .prep .home-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: var(--s5); align-items: start; }
-.prep .today { display: grid; gap: var(--s4); grid-row: span 2; }
+.prep .today { display: grid; gap: var(--s4); grid-row: span 2; border-color: var(--blue-200); }
 .prep .today-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s4); flex-wrap: wrap; }
 .prep .today h2, .prep .progress h2, .prep .real-test h2 { font-size: var(--text-xl); }
-.prep .today-stats { display: flex; gap: var(--s4); }
-.prep .stat { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); font-size: var(--text-sm); }
-.prep .stat b { color: var(--ink); font-size: var(--text-lg); }
+.prep .today-stats { display: flex; gap: var(--s2); }
+.prep .stat {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px;
+  background: var(--sun-100); border: 2px solid #FCD34D; color: var(--sun-700); font-size: var(--text-sm);
+}
+.prep .stat b { font: 600 var(--text-lg) var(--font-display); color: #92400E; }
 .prep .stat svg { color: var(--sun-500); }
 .prep .plan-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); counter-reset: plan; }
-.prep .plan-list li { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); background: var(--surface-2); border-radius: var(--r-md); counter-increment: plan; }
-.prep .plan-list li::before { content: counter(plan); font-weight: 700; color: var(--ink-3); width: 1.2em; }
+.prep .plan-list li {
+  display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); counter-increment: plan;
+  background: linear-gradient(160deg, #FFFFFF 40%, var(--st) 100%); border: 2px solid color-mix(in srgb, var(--sc) 45%, #FFFFFF);
+  border-radius: var(--r-md);
+}
+.prep .plan-list li::before {
+  content: counter(plan); flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--sc); color: #fff; font: 600 var(--text-sm) var(--font-display);
+}
 .prep .plan-list li > span:nth-child(2) { flex: 1; font-weight: 700; }
 .prep .today .btn-lg { justify-self: start; }
 
 .prep .progress { display: grid; gap: var(--s4); }
 .prep .strand-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s3); }
-.prep .strand-link { display: flex; justify-content: space-between; text-decoration: none; color: var(--ink); margin-bottom: 6px; font-size: var(--text-sm); }
-.prep .strand-link:hover .strand-name { text-decoration: underline; }
-.prep .strand-name { font-weight: 700; }
+.prep .strand-link { display: flex; align-items: center; gap: var(--s2); text-decoration: none; color: var(--ink); margin-bottom: 6px; font-size: var(--text-sm); }
+.prep .strand-link:hover .strand-name { color: var(--sd); }
+.prep .strand-icon { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: var(--st); border: 1.5px solid color-mix(in srgb, var(--sc) 40%, #FFFFFF); font-size: 0.95rem; }
+.prep .strand-name { font-weight: 700; flex: 1; }
 .prep .strand-count { color: var(--ink-3); }
 .prep .legend { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font-size: var(--text-xs); color: var(--ink-3); }
 .prep .legend li { display: flex; align-items: center; gap: 6px; }
@@ -30,14 +55,22 @@
 .prep .real-test { display: grid; gap: var(--s3); justify-items: start; }
 
 /* ---------- Skill map ---------- */
+/* One panel per strand, like Bodhi Learn's subject panels: a tinted border and an icon tile */
 .prep .skills-summary { width: min(320px, 100%); }
-.prep .strand { margin-top: var(--s6); scroll-margin-top: 80px; }
-.prep .strand-head { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; margin-bottom: var(--s3); }
-.prep .strand-head h2 { font-size: var(--text-xl); display: flex; align-items: center; gap: var(--s3); }
-.prep .strand-num { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--blue-600); color: #fff; font-size: var(--text-sm); }
-.prep .skill-list { list-style: none; padding: 0; margin: 0; overflow: hidden; }
-.prep .skill-row { display: grid; grid-template-columns: 190px minmax(0, 1fr) 160px auto; gap: var(--s4); align-items: center; padding: var(--s4) var(--s5); }
-.prep .skill-row + .skill-row { border-top: 1px solid var(--line); }
+.prep .strand {
+  margin-top: var(--s5); scroll-margin-top: 84px; padding: var(--s4); border-radius: 24px;
+  background: rgb(255 255 255 / 70%); border: 2px solid color-mix(in srgb, var(--sc) 35%, #FFFFFF);
+}
+.prep .strand-head { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; margin-bottom: var(--s3); }
+.prep .strand-head h2 { font-size: var(--text-xl); }
+.prep .strand-head .page-sub { margin: 0; }
+.prep .strand-tile { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: var(--st); font-size: 1.4rem; }
+.prep .skill-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
+.prep .skill-row {
+  display: grid; grid-template-columns: 190px minmax(0, 1fr) 160px auto; gap: var(--s4); align-items: center;
+  padding: var(--s3) var(--s4); border-radius: var(--r-md); background: linear-gradient(160deg, #FFFFFF 50%, var(--st) 100%);
+  border: 2px solid color-mix(in srgb, var(--sc) 30%, #FFFFFF);
+}
 .prep .skill-tags { display: flex; gap: var(--s2); flex-wrap: wrap; }
 .prep .skill-main h3 { font-size: var(--text-md); }
 .prep .skill-main p { font-size: var(--text-sm); color: var(--ink-3); margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -47,11 +80,15 @@
 /* ---------- Practice ---------- */
 .prep .practice { padding-top: var(--s4); }
 .prep .practice-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s4); }
-.prep .practice-progress { display: grid; gap: 6px; width: min(320px, 50%); font-size: var(--text-sm); color: var(--ink-3); text-align: right; }
+.prep .practice-progress { display: flex; align-items: center; gap: var(--s3); width: min(360px, 60%); font-size: var(--text-sm); font-weight: 700; color: var(--ink-2); white-space: nowrap; }
+.prep .practice-progress .bar { flex: 1; }
+
+/* Bottom action bar: only on narrow screens, where the side panel drops under the question */
+.prep .action-bar { display: none; }
 .prep .practice-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--s5); align-items: start; }
-.prep .practice-card { padding: var(--s6); display: grid; gap: var(--s5); }
+.prep .practice-card { padding: var(--s6); display: grid; gap: var(--s5); border-color: var(--blue-200); }
 .prep .practice-card-head { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; padding-bottom: var(--s4); border-bottom: 1px solid var(--line); }
-.prep .practice-skill { font-size: var(--text-md); color: var(--ink-2); flex: 1; }
+.prep .practice-skill { font-size: var(--text-lg); color: var(--ink); flex: 1; }
 .prep .practice-points { font-size: var(--text-sm); color: var(--ink-3); }
 .prep .practice-side { position: sticky; top: 84px; }
 .prep .side-card { display: grid; gap: var(--s4); }
@@ -59,7 +96,7 @@
 .prep .side-help { color: var(--ink-2); }
 .prep .side-skill { display: flex; justify-content: space-between; align-items: center; font-size: var(--text-sm); color: var(--ink-3); border-top: 1px solid var(--line); padding-top: var(--s3); }
 
-.prep .feedback-title { display: flex; align-items: center; gap: var(--s2); font-size: var(--text-xl); font-weight: 700; }
+.prep .feedback-title { display: flex; align-items: center; gap: var(--s2); font: 600 var(--text-xl) var(--font-display); }
 .prep .feedback-right { border-color: var(--good-line); background: linear-gradient(var(--good-bg), var(--surface) 120px); }
 .prep .feedback-right .feedback-title { color: var(--good); }
 .prep .feedback-partial { border-color: var(--part-line); background: linear-gradient(var(--part-bg), var(--surface) 120px); }
@@ -68,14 +105,14 @@
 .prep .feedback-wrong .feedback-title { color: var(--bad); }
 .prep .feedback-points { font-size: var(--text-sm); color: var(--ink-2); margin-top: calc(var(--s3) * -1); }
 .prep .feedback-explain { display: grid; gap: var(--s2); padding: var(--s4); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); }
-.prep .feedback-explain h2 { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+.prep .feedback-explain h2 { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); font-family: var(--font); font-weight: 700; }
 
 .prep .summary { max-width: 720px; margin: 0 auto; display: grid; gap: var(--s5); }
 .prep .summary h1 { font-size: var(--text-2xl); }
 .prep .summary h2 { font-size: var(--text-lg); }
 .prep .summary-score { display: flex; gap: var(--s4); }
-.prep .summary-score > div { flex: 1; display: grid; padding: var(--s4); background: var(--surface-2); border-radius: var(--r-md); }
-.prep .summary-score b { font-size: var(--text-3xl); line-height: 1.1; }
+.prep .summary-score > div { flex: 1; display: grid; padding: var(--s4); background: var(--blue-50); border: 2px solid var(--blue-200); border-radius: var(--r-md); }
+.prep .summary-score b { font: 600 var(--text-3xl)/1.1 var(--font-display); color: var(--blue-700); }
 .prep .summary-score span { color: var(--ink-3); }
 .prep .summary-skills { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
 .prep .summary-skills li { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) 0; border-bottom: 1px solid var(--line); }
@@ -93,7 +130,20 @@
 /* ---------- Smaller screens ---------- */
 @media (max-width: 1000px) {
   .prep .practice-layout { grid-template-columns: 1fr; }
-  .prep .practice-side { position: static; }
+  .prep .practice-side { position: static; scroll-margin-top: 80px; }
+  .prep .side-card .btn-lg { display: none; }
+  .prep .practice { padding-bottom: var(--s5); }
+  .prep .app:has(.action-bar) .app-footer { padding-bottom: 88px; }
+  .prep .action-bar {
+    display: flex; align-items: center; gap: var(--s3); position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    padding: var(--s3) var(--s4) calc(var(--s3) + env(safe-area-inset-bottom));
+    background: rgb(255 255 255 / 96%); backdrop-filter: blur(8px); border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgb(22 27 46 / 6%);
+  }
+  .prep .action-bar .btn { margin-left: auto; min-width: 140px; }
+  .prep .action-status { font-size: var(--text-sm); color: var(--ink-3); font-weight: 700; }
+  .prep .action-status.is-right { color: var(--good); }
+  .prep .action-status.is-partial { color: var(--part); }
+  .prep .action-status.is-wrong { color: var(--bad); }
   .prep .skill-row { grid-template-columns: minmax(0, 1fr) auto; }
   .prep .skill-tags { grid-column: 1 / -1; }
   .prep .skill-state { grid-row: 3; }
@@ -106,6 +156,9 @@
   .prep .practice-card { padding: var(--s4); }
   .prep .practice-progress { width: 55%; }
 }
-.prep .grade-field { border: 0; padding: 0; margin: 0; }
-.prep .grade-row { display: flex; gap: var(--s2); flex-wrap: wrap; margin: var(--s2) 0; }
-.prep .grade-row .btn { min-width: 48px; }
+.prep .choice-field { border: 0; padding: 0; margin: 0; }
+.prep .pick-row { display: flex; gap: var(--s2); flex-wrap: wrap; margin: var(--s2) 0; }
+.prep .pick-row .btn { min-width: 48px; padding: 0 var(--s3); }
+.prep .field-error { color: var(--bad); font-weight: 700; }
+.prep .spin { display: inline-block; vertical-align: -2px; animation: prep-spin 0.9s linear infinite; }
+@keyframes prep-spin { to { transform: rotate(360deg); } }

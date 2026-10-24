@@ -4,7 +4,7 @@
 .prep .item-figure { overflow-x: auto; }
 .prep .item-part { display: grid; gap: var(--s4); }
 .prep .item-part + .item-part { border-top: 1px dashed var(--line-strong); padding-top: var(--s5); }
-.prep .item-part-name { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue-700); }
+.prep .item-part-name { justify-self: start; padding: 2px 12px; border-radius: 999px; background: var(--blue-100); font: 600 var(--text-sm) var(--font-display); letter-spacing: 0.04em; color: var(--blue-700); }
 
 /* Stacked fractions */
 .prep .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: 0.86em; line-height: 1.1; margin: 0 0.12em; }
@@ -26,8 +26,8 @@
 
 .prep .choice {
   position: relative; display: flex; align-items: flex-start; gap: var(--s3);
-  padding: var(--s3) var(--s4); min-height: 56px; border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
-  background: var(--surface); cursor: pointer;
+  padding: var(--s3) var(--s4); min-height: 56px; border: 2px solid var(--line-strong); border-radius: var(--r-md);
+  background: var(--surface); cursor: pointer; box-shadow: 0 3px 0 var(--line);
   transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
 }
 .prep .choice:hover { border-color: var(--blue-500); background: var(--blue-50); }
@@ -38,12 +38,18 @@
 
 .prep .choice-letter {
   flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%;
-  border: 1.5px solid var(--line-strong); font-weight: 700; color: var(--ink-2); background: var(--surface);
+  border: 2px solid var(--line-strong); font: 600 var(--text-md) var(--font-display); color: var(--ink-2); background: var(--surface);
 }
 .prep .choice input[type='checkbox'] + .choice-letter { border-radius: var(--r-sm); }
 .prep .choice-body { display: grid; gap: var(--s2); padding-top: 4px; min-width: 0; font-size: var(--text-lg); }
 .prep .choice-text { line-height: 1.45; }
 .prep .choice-body .fig { overflow-x: auto; }
+
+/* Choices that are pictures fill their card, so graphs are as big as the layout allows */
+.prep .choices-figures .choice { flex-direction: column; gap: var(--s2); padding: var(--s3); }
+.prep .choices-figures .choice-body { width: 100%; padding-top: 0; }
+.prep .choices-figures .fig { display: block; width: 100%; overflow: visible; }
+.prep .choices-figures .fig svg { width: 100%; height: auto; max-height: 300px; }
 
 .prep .choice.picked { border-color: var(--blue-600); background: var(--blue-50); box-shadow: inset 0 0 0 1px var(--blue-600); }
 .prep .choice.picked .choice-letter { background: var(--blue-600); border-color: var(--blue-600); color: #fff; }
@@ -67,7 +73,7 @@
 .prep .inline-sentence { font-size: var(--text-lg); line-height: 2.6; }
 .prep .inline-blank { display: inline-flex; align-items: center; gap: var(--s2); margin: 0 var(--s1); vertical-align: middle; }
 .prep .inline-blank select {
-  min-height: 44px; min-width: 120px; padding: 0 var(--s6) 0 var(--s3); border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+  min-height: 44px; min-width: 120px; padding: 0 var(--s6) 0 var(--s3); border: 2px solid var(--line-strong); border-radius: var(--r-md); box-shadow: 0 3px 0 var(--line);
   background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233E4560' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;
   appearance: none; font-size: var(--text-lg); font-weight: 700; cursor: pointer;
 }
@@ -76,7 +82,10 @@
 .prep .inline-blank.wrong select { border-color: var(--bad); background-color: var(--bad-bg); color: var(--bad); opacity: 1; }
 .prep .inline-fix { font-size: var(--text-sm); color: var(--good); line-height: 1.3; }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .prep .choices-figures { grid-template-columns: 1fr; }
+  .prep .choices-figures .fig svg { max-height: 340px; }
+}
+@media (max-width: 720px) {
   .prep .item-text, .prep .choice-body, .prep .inline-sentence { font-size: var(--text-md); }
 }

@@ -33,7 +33,7 @@ export const ageForBracket = (b: AgeBracket): number => (b === 'pre-k' ? 4 : b =
 export const SUBJECTS = ['math', 'reading', 'logic', 'science'] as const;
 export type Subject = (typeof SUBJECTS)[number];
 export const MIN_LEVEL = 1;
-// The games stop at level 6 (about grade 3); from grade 4 children get test prep instead.
+// The games stop at level 6 (about grade 3); from grade 4 children get Bodhi Prep instead.
 // Saved documents may still hold levels up to 10 (the rules allow it); reading clamps them to 6.
 export const MAX_LEVEL = 6;
 export interface SkillRecord {

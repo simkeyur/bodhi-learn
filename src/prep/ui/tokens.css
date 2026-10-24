@@ -1,46 +1,56 @@
-/* Design tokens: the only place raw colors, sizes and timings are defined. */
+/* Design tokens for Bodhi Prep: the Bodhi Learn palette (sky, sun, grass, coral, grape) and fonts, a step
+   more grown-up: thinner borders, smaller chunky shadows, calmer type. The only place raw colors live. */
 .prep {
-  /* Brand: bluebonnet blue, with a Texas-sunset accent */
-  --blue-50: #EEF1FD;
-  --blue-100: #DCE2FB;
-  --blue-200: #B9C5F6;
-  --blue-500: #3D55CC;
-  --blue-600: #2F44B5;
-  --blue-700: #253893;
-  --blue-900: #17225A;
-  --sun-100: #FFF0E0;
-  --sun-500: #E8732C;
-  --sun-700: #B4521A;
+  /* Sky: Bodhi's main blue (token names kept as blue-* so components don't care which blue it is) */
+  --blue-50: #F0F9FF;
+  --blue-100: #E0F2FE;
+  --blue-200: #BAE6FD;
+  --blue-500: #0EA5E9;
+  --blue-600: #0284C7;
+  --blue-700: #0369A1;
+  --blue-900: #0C4A6E;
+  /* Sun: streaks, readiness, highlights */
+  --sun-100: #FEF3C7;
+  --sun-300: #FDE047;
+  --sun-500: #F59E0B;
+  --sun-700: #B45309;
+  /* Grape and grass: strand accents */
+  --grape-100: #F3E8FF;
+  --grape-600: #9333EA;
+  --grass-100: #DCFCE7;
+  --grass-600: #16A34A;
 
-  /* Neutrals */
-  --ink: #161B2E;
-  --ink-2: #3E4560;
-  --ink-3: #6A718C;
-  --line: #DCE0EA;
-  --line-strong: #B8BED0;
+  /* Neutrals (Bodhi's slate) */
+  --ink: #0F172A;
+  --ink-2: #334155;
+  --ink-3: #64748B;
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
   --surface: #FFFFFF;
-  --surface-2: #F6F7FB;
-  --page: #F3F5FA;
+  --surface-2: #F8FAFC;
+  --page: #F0F9FF;
 
   /* Feedback */
-  --good: #1E7A44;
-  --good-bg: #E6F5EC;
-  --good-line: #9ED5B3;
-  --bad: #B42323;
-  --bad-bg: #FDECEC;
-  --bad-line: #F0AFAF;
-  --part: #8A5A00;
-  --part-bg: #FFF5DB;
-  --part-line: #EAC970;
+  --good: #15803D;
+  --good-bg: #DCFCE7;
+  --good-line: #86EFAC;
+  --bad: #BE123C;
+  --bad-bg: #FFE4E6;
+  --bad-line: #FDA4AF;
+  --part: #A16207;
+  --part-bg: #FEF9C3;
+  --part-line: #FDE047;
 
   /* Mastery */
-  --m-new: #C5CAD8;
-  --m-learning: #E8A13C;
-  --m-close: #5A8DEE;
-  --m-mastered: #1E7A44;
+  --m-new: #CBD5E1;
+  --m-learning: #F59E0B;
+  --m-close: #38BDF8;
+  --m-mastered: #16A34A;
 
-  /* Type */
-  --font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Type: Fredoka (Bodhi's display font) for headings and buttons; Atkinson Hyperlegible for reading,
+     with Lexend loaded for digits only so numbers get a plain zero */
+  --font-display: 'Fredoka', 'Lexend', system-ui, sans-serif;
+  --font: 'Lexend', 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --text-xs: 0.78rem;
   --text-sm: 0.875rem;
   --text-md: 1rem;
@@ -49,7 +59,7 @@
   --text-2xl: 1.75rem;
   --text-3xl: 2.25rem;
 
-  /* Space, shape, depth */
+  /* Space, shape, depth: Bodhi's rounded shapes and "chunky" bottom shadows, toned down */
   --s1: 4px;
   --s2: 8px;
   --s3: 12px;
@@ -57,12 +67,12 @@
   --s5: 24px;
   --s6: 32px;
   --s7: 48px;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 16px;
-  --shadow-1: 0 1px 2px rgb(22 27 46 / 6%), 0 1px 1px rgb(22 27 46 / 4%);
-  --shadow-2: 0 4px 16px rgb(22 27 46 / 8%), 0 1px 3px rgb(22 27 46 / 6%);
-  --focus: 0 0 0 3px var(--surface), 0 0 0 5px var(--blue-500);
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --shadow-1: 0 3px 0 rgb(15 23 42 / 5%), 0 8px 20px -8px rgb(15 23 42 / 8%);
+  --shadow-2: 0 4px 0 rgb(15 23 42 / 6%), 0 16px 32px -10px rgb(2 132 199 / 22%);
+  --focus: 0 0 0 3px var(--surface), 0 0 0 6px var(--blue-500);
 
   --content: 1120px;
   --reading: 760px;

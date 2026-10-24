@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router';
 import { ArrowLeft, ArrowRight, Check, RotateCcw, X } from 'lucide-react';
 import { makeG5MathItem } from '../../content/generators/g5';
@@ -70,9 +70,33 @@ function Session({ code }: { code: string }) {
     setAnswer(emptyAnswer(it));
   };
 
+  const feedbackRef = useRef<HTMLDivElement>(null);
+
+  // Enter checks the answer, then moves on. Practice only: test mode will behave exactly like the real test.
+  useEffect(() => {
+    if (done) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' || e.repeat) return;
+      if ((e.target as HTMLElement).closest('button, a, select, textarea, input[type="text"], dialog')) return;
+      e.preventDefault();
+      if (revealed) next();
+      else if (answerComplete(item, answer)) check();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
+  // On narrow screens the feedback sits under the question: bring it into view after checking
+  useEffect(() => {
+    if (!revealed || !window.matchMedia('(max-width: 1000px)').matches) return;
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    feedbackRef.current?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  }, [revealed]);
+
   if (done) return <Summary code={code} title={title} results={results} startState={startState} />;
 
   const complete = answerComplete(item, answer);
+  const help = item.type === 'multiselect' ? 'Pick two answers, then check.' : item.type === 'inline' ? 'Choose from each drop-down, then check.' : item.type === 'multipart' ? 'Answer Part A and Part B, then check.' : 'Pick one answer, then check.';
   const outcome = !revealed || !last ? null : last.earned === last.points ? 'right' : last.earned > 0 ? 'partial' : 'wrong';
   const r = skills[item.standard];
 
@@ -81,8 +105,8 @@ function Session({ code }: { code: string }) {
       <div className="practice-top">
         <Link to={code === 'today' ? '/' : '/math'} className="btn btn-ghost btn-sm"><ArrowLeft size={16} aria-hidden /> {code === 'today' ? 'Today' : 'Skills'}</Link>
         <div className="practice-progress">
-          <span>Question {Math.min(index + 1, SESSION_LENGTH)} of {SESSION_LENGTH}</span>
           <Bar value={(results.length) / SESSION_LENGTH} label="Session progress" />
+          <span>{Math.min(index + 1, SESSION_LENGTH)} / {SESSION_LENGTH}</span>
         </div>
       </div>
 
@@ -99,13 +123,13 @@ function Session({ code }: { code: string }) {
         <aside className="practice-side" aria-live="polite">
           {!revealed && (
             <div className="card card-pad side-card">
-              <p className="side-help">{item.type === 'multiselect' ? 'Pick two answers, then check.' : item.type === 'inline' ? 'Choose from each drop-down, then check.' : item.type === 'multipart' ? 'Answer Part A and Part B, then check.' : 'Pick one answer, then check.'}</p>
+              <p className="side-help">{help}</p>
               <button className="btn btn-primary btn-lg" onClick={check} disabled={!complete}><Check size={20} aria-hidden /> Check answer</button>
               <div className="side-skill"><span>This skill</span><Mastery record={r} /></div>
             </div>
           )}
           {revealed && last && (
-            <div className={`card card-pad side-card feedback feedback-${outcome}`}>
+            <div ref={feedbackRef} className={`card card-pad side-card feedback feedback-${outcome}`}>
               <p className="feedback-title">
                 {outcome === 'right' ? <><Check size={22} aria-hidden /> Correct!</> : outcome === 'partial' ? 'Partly right' : <><X size={22} aria-hidden /> Not quite</>}
               </p>
@@ -121,6 +145,16 @@ function Session({ code }: { code: string }) {
             </div>
           )}
         </aside>
+      </div>
+
+      {/* Narrow screens: the main button stays at the bottom of the screen */}
+      <div className="action-bar">
+        <span className={`action-status ${revealed ? `is-${outcome}` : ''}`} aria-hidden>
+          {revealed && last ? `${outcome === 'right' ? 'Correct!' : outcome === 'partial' ? 'Partly right' : 'Not quite'} · ${last.earned} of ${last.points}` : help}
+        </span>
+        {revealed
+          ? <button className="btn btn-primary btn-lg" onClick={next}>{index + 1 >= SESSION_LENGTH ? 'See results' : 'Next'} <ArrowRight size={20} aria-hidden /></button>
+          : <button className="btn btn-primary btn-lg" onClick={check} disabled={!complete}><Check size={20} aria-hidden /> Check</button>}
       </div>
     </div>
   );

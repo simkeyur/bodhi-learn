@@ -1,4 +1,4 @@
-/* Base styles for the test prep section only. Everything is under .prep, so the Bodhi games' styles are untouched. */
+/* Base styles for Bodhi Prep only. Everything is under .prep, so the Bodhi games' styles are untouched. */
 
 .prep {
   min-height: 100dvh;
@@ -6,7 +6,8 @@
   font-size: var(--text-md);
   line-height: 1.5;
   color: var(--ink);
-  background: var(--page);
+  /* Bodhi's sky-to-sunshine background, lighter */
+  background: linear-gradient(180deg, #E8F6FE 0%, #F3FBF6 55%, #FFF8E6 100%) fixed;
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -webkit-user-select: text;
@@ -15,7 +16,7 @@
 .prep *, .prep *::before, .prep *::after { box-sizing: border-box; -webkit-user-select: inherit; user-select: inherit; }
 
 .prep h1, .prep h2, .prep h3, .prep h4, .prep p { margin: 0; font-family: var(--font); }
-.prep h1, .prep h2, .prep h3 { line-height: 1.2; letter-spacing: -0.01em; }
+.prep h1, .prep h2, .prep h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; letter-spacing: 0; }
 
 .prep a { color: var(--blue-600); text-underline-offset: 2px; }
 .prep a:hover { color: var(--blue-700); }

@@ -4,6 +4,7 @@ import { G5_MATH, G5_MATH_STRANDS } from '../../data/standards/g5-math';
 import { useLearner } from '../../learner/store';
 import { recentAverage } from '../../learner/mastery';
 import { Mastery, MasteryStack, StandardTags } from '../../ui/bits';
+import { strandIcon, strandStyle } from '../../ui/strands';
 import '../screens.css';
 
 export function SkillMap() {
@@ -29,12 +30,13 @@ export function SkillMap() {
       {G5_MATH_STRANDS.map((st) => {
         const list = G5_MATH.filter((s) => s.strand === st.id);
         return (
-          <section key={st.id} id={`strand-${st.id}`} className="strand" aria-labelledby={`strand-${st.id}-title`}>
+          <section key={st.id} id={`strand-${st.id}`} className="strand" style={strandStyle(st.id)} aria-labelledby={`strand-${st.id}-title`}>
             <div className="strand-head">
-              <h2 id={`strand-${st.id}-title`}><span className="strand-num">{st.id}</span>{st.title}</h2>
+              <span className="strand-tile" aria-hidden>{strandIcon(st.id)}</span>
+              <h2 id={`strand-${st.id}-title`}>{st.title}</h2>
               <span className="page-sub">{st.full}</span>
             </div>
-            <ul className="skill-list card">
+            <ul className="skill-list">
               {list.map((s) => {
                 const r = skills[s.code];
                 return (

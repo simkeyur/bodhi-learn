@@ -31,14 +31,16 @@ export const representData: Gen = (rng, d) => {
     if (counts.every((c) => c === counts[0])) counts[0] += 1;
     const data = shuffle(rng, labels.flatMap((l, i) => Array(counts[i]).fill(l.includes('/') ? `{${l}}` : l)));
     const plot = (c: number[]): Figure => ({ kind: 'dotPlot', title: 'Lengths of Pencils (inches)', labels, counts: c, axis: 'Length beyond 5 inches' });
-    const alt = (c: number[]) => `Dot plot: ${labels.map((l, i) => `${l}: ${c[i]} dots`).join(', ')}.`;
+    const alt = (c: number[]) => `Dot plot: ${labels.map((l, i) => `${l}: ${c[i]} dot${c[i] === 1 ? '' : 's'}`).join(', ')}.`;
     const rev = [...counts].reverse();
     const plus = counts.map((c, i) => (i === 0 ? c + 1 : c));
     const shifted = [counts[3], counts[0], counts[1], counts[2]];
+    const lastPlus = counts.map((c, i) => (i === 3 ? c + 1 : c));
+    const big = counts.indexOf(Math.max(...counts));
+    const moved = counts.map((c, i) => (i === big ? c - 1 : i === (big + 1) % 4 ? c + 1 : c));
+    const variants = [rev, plus, shifted, lastPlus, moved].map((c) => ({ figure: plot(c), alt: alt(c) }));
     return one('mc', [txt(`A class measured how far past 5 inches their pencils were, in inches: ${data.join(', ')}. Which dot plot shows the data?`)],
-      mc(rng, { figure: plot(counts), alt: alt(counts) }, [
-        { figure: plot(rev), alt: alt(rev) }, { figure: plot(plus), alt: alt(plus) }, { figure: plot(shifted), alt: alt(shifted) },
-      ]),
+      mc(rng, { figure: plot(counts), alt: alt(counts) }, variants),
       `Count each length: ${labels.map((l, i) => `${counts[i]} at ${l}`).join(', ')}. Put one dot above the number for each.`);
   }
   const step = d === 1 ? 1 : 2;
@@ -46,12 +48,16 @@ export const representData: Gen = (rng, d) => {
   const swap = [...s.values]; [swap[0], swap[1]] = [swap[1], swap[0]];
   const off = s.values.map((v, i) => (i === s.values.length - 1 ? v + step : v));
   const sorted = [...s.values].sort((a, b) => b - a);
+  const firstUp = s.values.map((v, i) => (i === 0 ? v + step : v));
+  const lastTwo = [...s.values]; [lastTwo[lastTwo.length - 1], lastTwo[lastTwo.length - 2]] = [lastTwo[lastTwo.length - 2], lastTwo[lastTwo.length - 1]];
   return one('mc', [txt(`The frequency table shows the results of a survey. Which bar graph represents the data?`),
     table([s.title, 'Frequency'], s.categories.map((c, i) => [c, s.values[i]]))],
   mc(rng, { figure: bar(s, s.values, step), alt: barAlt(s.categories, s.values) }, [
     { figure: bar(s, swap, step), alt: barAlt(s.categories, swap), why: `Check ${s.categories[0]} and ${s.categories[1]}: their bars are swapped.` },
     { figure: bar(s, off, step), alt: barAlt(s.categories, off) },
     { figure: bar(s, sorted, step), alt: barAlt(s.categories, sorted) },
+    { figure: bar(s, firstUp, step), alt: barAlt(s.categories, firstUp) },
+    { figure: bar(s, lastTwo, step), alt: barAlt(s.categories, lastTwo) },
   ]),
   `Each bar's height must match its frequency: ${s.categories.map((c, i) => `${c} ${s.values[i]}`).join(', ')}.`);
 };

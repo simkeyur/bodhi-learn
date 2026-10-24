@@ -97,7 +97,7 @@ function InlineView({ part, value, onChange, revealed, name }: { part: InlinePar
         return (
           <span key={i} className={`inline-blank ${state}`}>
             <select
-              aria-label={`Drop-down ${seg.blank + 1}`} name={`${name}-${seg.blank}`} value={v}
+              aria-label={part.blanks.length > 1 ? `Choose answer ${seg.blank + 1} of ${part.blanks.length}` : 'Choose the answer'} name={`${name}-${seg.blank}`} value={v}
               onChange={(e) => set(seg.blank, Number(e.target.value))} disabled={revealed}
             >
               <option value={-1}>Choose…</option>

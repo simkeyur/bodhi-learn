@@ -1,6 +1,6 @@
 import { Link, NavLink, Outlet, ScrollRestoration } from 'react-router';
 import { useApp } from '../../context/AppContext';
-import { APP_NAME, DISCLAIMER, SECTION_NAME } from './brand';
+import { APP_NAME, DISCLAIMER } from './brand';
 import './app.css';
 
 // Every prep screen: header with navigation, the screen, and the footer notice.
@@ -12,10 +12,9 @@ export function AppLayout() {
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="app-header">
         <div className="app-header-inner">
-          <Link to="/" className="brand" aria-label={`${APP_NAME} ${SECTION_NAME} home`}>
-            <img src="/icon-192.png" alt="" width={32} height={32} className="brand-logo" />
-            <span>{APP_NAME}</span>
-            <span className="brand-section">{SECTION_NAME}</span>
+          <Link to="/" className="brand" aria-label={`${APP_NAME} home`}>
+            <span className="brand-logo"><img src="/logo.png" alt="" width={40} height={40} /></span>
+            <span className="brand-name">Bodhi <b>Prep</b></span>
           </Link>
           <nav className="nav" aria-label="Main">
             <NavLink to="/" end>Today</NavLink>
@@ -34,7 +33,9 @@ export function AppLayout() {
       <footer className="app-footer">
         <p>{DISCLAIMER}</p>
       </footer>
-      <ScrollRestoration />
+      {/* Remember scroll per page address. The default (per history entry) gives every freshly loaded page the
+          same key, so a reload could open one page at another page's scroll position. */}
+      <ScrollRestoration getKey={(location) => location.pathname} />
     </div>
   );
 }

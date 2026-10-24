@@ -36,6 +36,7 @@ test('generated items are valid at every difficulty, and the answer key scores f
         assert.ok(answerComplete(item, key));
         assert.equal(score(item, key), item.points, `${s.code} d${d} seed ${seed}: key does not score full marks`);
         assert.equal(score(item, emptyAnswer(item)), 0);
+        for (const p of item.parts) if (p.type === 'mc') assert.equal(p.choices.length, 4, `${s.code} d${d} seed ${seed}: multiple choice needs 4 choices`);
       }
     }
   }

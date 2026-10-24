@@ -205,7 +205,7 @@ interface Entry { level: number; topic: string; gen: Gen }
 const REGISTRY: Entry[] = [];
 const at = (levels: number[], topic: string, gen: Gen) => levels.forEach((level) => REGISTRY.push({ level, topic, gen }));
 
-// Bodhi games are for Pre-K to grade 3 (levels 1-6); older children get test prep instead
+// Bodhi games are for Pre-K to grade 3 (levels 1-6); older children get Bodhi Prep instead
 at([1], 'addition', addSmall(5));
 at([1], 'addition', addSmall(6));
 at([1], 'subtraction', subSmall(5));

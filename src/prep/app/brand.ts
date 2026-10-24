@@ -1,6 +1,5 @@
-// Test prep is a section of Bodhi Learn for grade 4 and up.
-export const APP_NAME = 'Bodhi Learn';
-export const SECTION_NAME = 'Test Prep';
+// Bodhi Prep: Bodhi Learn for grade 4 and up, with practice for the Texas state test.
+export const APP_NAME = 'Bodhi Prep';
 
 export const DISCLAIMER =
   'Not affiliated with or endorsed by the Texas Education Agency. STAAR® is a registered trademark of the Texas Education Agency. Questions are written for practice; they are not released test questions.';

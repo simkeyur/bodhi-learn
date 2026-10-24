@@ -6,7 +6,7 @@ import { sound } from '../../utils/sound';
 import './welcome.css';
 
 // Ages from this one up are offered a sign-in so progress is kept in the cloud from the first launch.
-// Younger children go straight in as a guest; a parent can still sign in later from Parent Settings.
+// Younger children go straight in as a guest; anyone can sign in later from Settings.
 const SIGN_IN_FROM_AGE = 8;
 
 type Step = 'age' | 'grade' | 'account' | 'name';
@@ -41,7 +41,7 @@ export const Welcome: React.FC = () => {
     setStep(a >= SIGN_IN_FROM_AGE && !cloud.user ? 'account' : 'name');
   };
 
-  // From age 9 the grade decides between the Bodhi games and test prep (grade 4 and up)
+  // From age 9 the grade decides between the Bodhi games and Bodhi Prep (grade 4 and up)
   const chooseGrade = (g: number) => {
     sound.playPop();
     setGrade(g);
@@ -49,11 +49,13 @@ export const Welcome: React.FC = () => {
   };
 
   const name = typedName ?? firstName(cloud.user?.name);
+  // From age 9 the questions after the age look plainer: these children are heading to Bodhi Prep or are nearly there
+  const older = shownStep !== 'age' && (picked ?? age) >= GRADE_ASK_MIN_AGE;
 
   return (
     <div className="welcome">
-      <div className="welcome-card">
-        <div className="welcome-buddy animate-bob" aria-hidden>🐻</div>
+      <div className={`welcome-card ${older ? 'plain' : ''}`}>
+        {!older && <div className="welcome-buddy animate-bob" aria-hidden>🐻</div>}
 
         {shownStep === 'age' && (
           <>
@@ -92,7 +94,7 @@ export const Welcome: React.FC = () => {
                 </button>
               ))}
             </div>
-            <p className="welcome-note">From grade {PREP_MIN_GRADE}, you get practice for the Texas state test (STAAR®).</p>
+            <p className="welcome-note">From grade {PREP_MIN_GRADE}, you get Bodhi Prep: practice for the Texas state test (STAAR®).</p>
           </>
         )}
 
@@ -100,7 +102,9 @@ export const Welcome: React.FC = () => {
           <>
             <h1>Save your progress?</h1>
             <p className="welcome-sub">
-              Sign in with Google and your stars, stickers and levels follow you to every device.
+              {older
+                ? 'Sign in with Google and your progress follows you to every device.'
+                : 'Sign in with Google and your stars, stickers and levels follow you to every device.'}
             </p>
             <button
               className="welcome-primary"
@@ -110,9 +114,9 @@ export const Welcome: React.FC = () => {
               {waiting ? 'Setting up your account…' : 'Continue with Google'}
             </button>
             <button className="welcome-secondary" onClick={() => { sound.playPop(); setStep('name'); }} disabled={waiting}>
-              Play as guest
+              {older ? 'Continue without signing in' : 'Play as guest'}
             </button>
-            <p className="welcome-note">As a guest, progress stays on this device. You can sign in later from Parent Settings.</p>
+            <p className="welcome-note">As a guest, progress stays on this device. You can sign in later from Settings.</p>
             {cloud.error && <p className="welcome-error" role="alert">{cloud.error}</p>}
           </>
         )}
@@ -138,7 +142,7 @@ export const Welcome: React.FC = () => {
                 autoFocus
                 autoComplete="given-name"
               />
-              <button className="welcome-primary" type="submit">Let's go! 🚀</button>
+              <button className="welcome-primary" type="submit">{older ? 'Continue' : "Let's go! 🚀"}</button>
               <button className="welcome-secondary" type="button" onClick={() => completeOnboarding('')}>Skip</button>
             </form>
           </>

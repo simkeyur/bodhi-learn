@@ -112,11 +112,39 @@
   cursor: pointer;
 }
 
+/* Ages 9 and up, after the age question: calmer, closer to Bodhi Prep's look */
+.welcome-card.plain {
+  background: #FFFFFF;
+  border: 1px solid #DCE0EA;
+  box-shadow: 0 4px 16px rgb(22 27 46 / 8%), 0 1px 3px rgb(22 27 46 / 6%);
+  border-radius: 16px;
+  padding: 32px 28px 24px;
+  gap: 14px;
+  font-family: 'Lexend', 'Atkinson Hyperlegible', system-ui, sans-serif;
+}
+.welcome-card.plain h1 { font-family: inherit; font-size: 1.6rem; letter-spacing: -0.01em; color: #161B2E; }
+.welcome-card.plain .welcome-sub, .welcome-card.plain .welcome-note { font-weight: 400; color: #6A718C; }
+.welcome-card.plain .welcome-age {
+  background: #FFFFFF; color: #161B2E; border: 1.5px solid #B8BED0; box-shadow: none;
+  font: 700 1.5rem 'Lexend', 'Atkinson Hyperlegible', system-ui, sans-serif; min-height: 56px; border-radius: 10px;
+}
+.welcome-card.plain .welcome-age:hover { border-color: #3D55CC; background: #EEF1FD; }
+.welcome-card.plain .welcome-age.suggested { outline: none; border-color: #2F44B5; box-shadow: inset 0 0 0 1px #2F44B5; background: #EEF1FD; }
+.welcome-card.plain .welcome-age:active { transform: translateY(1px); box-shadow: none; }
+.welcome-card.plain .welcome-primary {
+  background: #2F44B5; box-shadow: none; border-radius: 10px; font-family: inherit; min-height: 52px;
+}
+.welcome-card.plain .welcome-primary:active:not(:disabled) { transform: translateY(1px); box-shadow: none; }
+.welcome-card.plain .welcome-secondary { border: 1.5px solid #B8BED0; border-radius: 10px; font-family: inherit; box-shadow: none; }
+.welcome-card.plain .welcome-input { border-radius: 10px; font-family: inherit; }
+.welcome-card.plain .welcome-ages { grid-template-columns: repeat(6, 1fr); }
+
 @media (max-width: 480px) {
   .welcome-card { padding: 16px 14px; border-width: 4px; }
   .welcome-card h1 { font-size: 1.6rem; }
   .welcome-ages { grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .welcome-age { min-height: 60px; font-size: 1.7rem; }
+  .welcome-card.plain .welcome-ages { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {

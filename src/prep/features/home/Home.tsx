@@ -8,6 +8,7 @@ import { G5_MATH, G5_MATH_STRANDS, g5Standard } from '../../data/standards/g5-ma
 import { DAILY_GOAL, dayKey, planStandards, streakDays } from '../../learner/mastery';
 import { useLearner } from '../../learner/store';
 import { Bar, MasteryStack } from '../../ui/bits';
+import { strandIcon, strandStyle } from '../../ui/strands';
 import '../screens.css';
 
 const greeting = (h: number) => (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening');
@@ -26,7 +27,7 @@ export function Home() {
 
   return (
     <div className="page home">
-      <div className="page-head">
+      <div className="hero">
         <div>
           <p className="eyebrow">Grade {CONTENT_GRADE} math</p>
           <h1>{greeting(now.getHours())}, {kidName}.</h1>
@@ -59,7 +60,7 @@ export function Home() {
           <Bar value={doneToday / DAILY_GOAL} good={doneToday >= DAILY_GOAL} label="Daily goal" />
           <ol className="plan-list">
             {plan.map((s) => (
-              <li key={s.code}>
+              <li key={s.code} style={strandStyle(s.strand)}>
                 <span className="tag tag-code">{s.code}</span>
                 <span>{s.title}</span>
                 {s.kind === 'readiness' && <span className="tag tag-readiness">Readiness</span>}
@@ -81,8 +82,9 @@ export function Home() {
             {G5_MATH_STRANDS.map((st) => {
               const list = G5_MATH.filter((s) => s.strand === st.id);
               return (
-                <li key={st.id}>
+                <li key={st.id} style={strandStyle(st.id)}>
                   <Link to={`/math#strand-${st.id}`} className="strand-link">
+                    <span className="strand-icon" aria-hidden>{strandIcon(st.id)}</span>
                     <span className="strand-name">{st.title}</span>
                     <span className="strand-count">{list.length} skills</span>
                   </Link>
@@ -97,7 +99,7 @@ export function Home() {
         </section>
 
         <section className="card card-pad real-test">
-          <h2>Try the real test screen</h2>
+          <h2><span aria-hidden>🎯</span> Try the real test screen</h2>
           <p className="page-sub">TEA's free practice site has every released test in the same screen you'll use on test day. Try one once you've practiced a few skills.</p>
           <a className="btn btn-secondary" href={OFFICIAL_PRACTICE_URL} target="_blank" rel="noreferrer">Open TEA's practice site <ExternalLink size={16} aria-hidden /></a>
         </section>
