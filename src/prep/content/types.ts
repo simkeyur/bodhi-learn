@@ -34,7 +34,10 @@ export type Figure =
   | { kind: 'barGraph'; title: string; categories: string[]; values: number[]; step: number; axis: string }
   | { kind: 'dotPlot'; title: string; labels: string[]; counts: number[]; axis: string }
   | { kind: 'prism'; l: number; w: number; h: number }
-  | { kind: 'numberLine'; from: number; to: number; step: number; decimals: number; point: number };
+  | { kind: 'numberLine'; from: number; to: number; step: number; decimals: number; point: number; pointLabel?: string }
+  | { kind: 'protractor'; ray1: number; ray2: number }
+  | { kind: 'anglePair'; a1: number; a2: number; label1?: string; label2?: string }
+  | { kind: 'symmetry'; shape: 'rectangle' | 'square' | 'rhombus' | 'trapezoid' | 'equilateralTriangle' | 'isoscelesTriangle' | 'scaleneTriangle' | 'hexagon'; line: 'v' | 'h' | 'd1' | 'd2' };
 
 export type Block =
   | { kind: 'text'; text: string }

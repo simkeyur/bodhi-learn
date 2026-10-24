@@ -172,7 +172,7 @@ function Prism({ l, w, h }: Of<'prism'>) {
 }
 
 // ---------- Number line ----------
-function NumberLine({ from, to, step, decimals, point }: Of<'numberLine'>) {
+function NumberLine({ from, to, step, decimals, point, pointLabel }: Of<'numberLine'>) {
   const n = Math.round((to - from) / step), gap = 44, left = 34;
   const W = left * 2 + n * gap, base = 44;
   const X = (v: number) => left + ((v - from) / (to - from)) * n * gap;
@@ -189,7 +189,152 @@ function NumberLine({ from, to, step, decimals, point }: Of<'numberLine'>) {
         );
       })}
       <circle cx={X(point)} cy={base} r={6} className="fig-point" />
-      <text x={X(point)} y={base - 16} textAnchor="middle" className="fig-point-label">{String(Math.round(point * 1000) / 1000)}</text>
+      <text x={X(point)} y={base - 16} textAnchor="middle" className="fig-point-label">{pointLabel ?? String(Math.round(point * 1000) / 1000)}</text>
+    </svg>
+  );
+}
+
+// ---------- Protractor with angle rays ----------
+function Protractor({ ray1, ray2 }: Of<'protractor'>) {
+  const cx = 170, cy = 160, R = 130, inR = 105;
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const pt = (deg: number, r: number) => ({
+    x: cx + r * Math.cos(toRad(deg)),
+    y: cy - r * Math.sin(toRad(deg)),
+  });
+
+  const ticks = [];
+  for (let deg = 0; deg <= 180; deg += 5) {
+    const is10 = deg % 10 === 0;
+    const rStart = R;
+    const rEnd = is10 ? R - 12 : R - 6;
+    const p1 = pt(deg, rStart), p2 = pt(deg, rEnd);
+    ticks.push(<line key={`t${deg}`} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} className="fig-gridline" />);
+    if (is10 && deg > 0 && deg < 180) {
+      const pOuter = pt(deg, R - 20);
+      const pInner = pt(deg, R - 32);
+      ticks.push(
+        <g key={`lbl${deg}`}>
+          <text x={pOuter.x} y={pOuter.y + 3} textAnchor="middle" className="fig-tick-sm">{deg}</text>
+          <text x={pInner.x} y={pInner.y + 3} textAnchor="middle" className="fig-tick-sm">{180 - deg}</text>
+        </g>
+      );
+    }
+  }
+
+  const pRay1 = pt(ray1, R + 14);
+  const pRay2 = pt(ray2, R + 14);
+  const minDeg = Math.min(ray1, ray2), maxDeg = Math.max(ray1, ray2);
+  const arcP1 = pt(minDeg, 45), arcP2 = pt(maxDeg, 45);
+  const largeArc = maxDeg - minDeg > 180 ? 1 : 0;
+  const arcD = `M ${arcP1.x} ${arcP1.y} A 45 45 0 ${largeArc} 0 ${arcP2.x} ${arcP2.y}`;
+
+  return (
+    <svg viewBox="0 0 340 185" width={340}>
+      <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy} Z`} className="fig-protractor-base" />
+      <path d={`M ${cx - inR} ${cy} A ${inR} ${inR} 0 0 1 ${cx + inR} ${cy} Z`} fill="none" stroke="var(--line)" strokeWidth={1} />
+      <line x1={cx - R - 8} y1={cy} x2={cx + R + 8} y2={cy} className="fig-axis" />
+      <text x={cx + R - 14} y={cy - 4} textAnchor="end" className="fig-tick-sm">0 / 180</text>
+      <text x={cx - R + 14} y={cy - 4} textAnchor="start" className="fig-tick-sm">180 / 0</text>
+      {ticks}
+      <path d={arcD} className="fig-angle-arc" />
+      <line x1={cx} y1={cy} x2={pRay1.x} y2={pRay1.y} className="fig-protractor-ray" />
+      <line x1={cx} y1={cy} x2={pRay2.x} y2={pRay2.y} className="fig-protractor-ray" />
+      <circle cx={cx} cy={cy} r={4} className="fig-point" />
+    </svg>
+  );
+}
+
+// ---------- Adjacent angle pair ----------
+function AnglePair({ a1, a2, label1, label2 }: Of<'anglePair'>) {
+  const ox = 35, oy = 150, L = 140;
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const pt = (deg: number, r: number) => ({
+    x: ox + r * Math.cos(toRad(deg)),
+    y: oy - r * Math.sin(toRad(deg)),
+  });
+
+  const p0 = pt(0, L);
+  const p1 = pt(a1, L);
+  const p2 = pt(a1 + a2, L);
+
+  const arc1P1 = pt(0, 40), arc1P2 = pt(a1, 40);
+  const arc2P1 = pt(a1, 60), arc2P2 = pt(a1 + a2, 60);
+
+  const lbl1 = pt(a1 / 2, 55);
+  const lbl2 = pt(a1 + a2 / 2, 75);
+
+  return (
+    <svg viewBox="0 0 240 180" width={240}>
+      <line x1={ox} y1={oy} x2={p0.x} y2={p0.y} className="fig-axis" />
+      <line x1={ox} y1={oy} x2={p1.x} y2={p1.y} className="fig-axis" />
+      <line x1={ox} y1={oy} x2={p2.x} y2={p2.y} className="fig-axis" />
+      <path d={`M ${arc1P1.x} ${arc1P1.y} A 40 40 0 0 0 ${arc1P2.x} ${arc1P2.y}`} className="fig-angle-arc" />
+      <path d={`M ${arc2P1.x} ${arc2P1.y} A 60 60 0 0 0 ${arc2P2.x} ${arc2P2.y}`} className="fig-angle-arc" />
+      <circle cx={ox} cy={oy} r={4} className="fig-point" />
+      {label1 && <text x={lbl1.x} y={lbl1.y} textAnchor="middle" className="fig-label">{label1}</text>}
+      {label2 && <text x={lbl2.x} y={lbl2.y} textAnchor="middle" className="fig-label">{label2}</text>}
+    </svg>
+  );
+}
+
+// ---------- 2D shape with line of symmetry ----------
+function SymmetryFigure({ shape, line }: Of<'symmetry'>) {
+  const cx = 90, cy = 90;
+  let shapeEl = null;
+
+  switch (shape) {
+    case 'rectangle':
+      shapeEl = <rect x={cx - 60} y={cy - 40} width={120} height={80} className="fig-shape" />;
+      break;
+    case 'square':
+      shapeEl = <rect x={cx - 45} y={cy - 45} width={90} height={90} className="fig-shape" />;
+      break;
+    case 'rhombus':
+      shapeEl = <polygon points={`${cx},${cy - 55} ${cx + 50},${cy} ${cx},${cy + 55} ${cx - 50},${cy}`} className="fig-shape" />;
+      break;
+    case 'trapezoid':
+      shapeEl = <polygon points={`${cx - 35},${cy - 35} ${cx + 35},${cy - 35} ${cx + 60},${cy + 35} ${cx - 60},${cy + 35}`} className="fig-shape" />;
+      break;
+    case 'equilateralTriangle':
+      shapeEl = <polygon points={`${cx},${cy - 50} ${cx + 50},${cy + 40} ${cx - 50},${cy + 40}`} className="fig-shape" />;
+      break;
+    case 'isoscelesTriangle':
+      shapeEl = <polygon points={`${cx},${cy - 55} ${cx + 35},${cy + 45} ${cx - 35},${cy + 45}`} className="fig-shape" />;
+      break;
+    case 'scaleneTriangle':
+      shapeEl = <polygon points={`${cx - 15},${cy - 50} ${cx + 55},${cy + 40} ${cx - 55},${cy + 25}`} className="fig-shape" />;
+      break;
+    case 'hexagon': {
+      const pts = Array.from({ length: 6 }, (_, i) => {
+        const a = (i * 60 * Math.PI) / 180;
+        return `${cx + 50 * Math.cos(a)},${cy + 50 * Math.sin(a)}`;
+      }).join(' ');
+      shapeEl = <polygon points={pts} className="fig-shape" />;
+      break;
+    }
+  }
+
+  let lineEl = null;
+  switch (line) {
+    case 'v':
+      lineEl = <line x1={cx} y1={15} x2={cx} y2={165} className="fig-sym-line" />;
+      break;
+    case 'h':
+      lineEl = <line x1={15} y1={cy} x2={165} y2={cy} className="fig-sym-line" />;
+      break;
+    case 'd1':
+      lineEl = <line x1={20} y1={20} x2={160} y2={160} className="fig-sym-line" />;
+      break;
+    case 'd2':
+      lineEl = <line x1={20} y1={160} x2={160} y2={20} className="fig-sym-line" />;
+      break;
+  }
+
+  return (
+    <svg viewBox="0 0 180 180" width={180}>
+      {shapeEl}
+      {lineEl}
     </svg>
   );
 }
@@ -205,7 +350,11 @@ export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
       case 'dotPlot': return <DotPlot {...figure} />;
       case 'prism': return <Prism {...figure} />;
       case 'numberLine': return <NumberLine {...figure} />;
+      case 'protractor': return <Protractor {...figure} />;
+      case 'anglePair': return <AnglePair {...figure} />;
+      case 'symmetry': return <SymmetryFigure {...figure} />;
     }
   })();
   return <div className="fig" role="img" aria-label={alt}>{body}</div>;
 }
+

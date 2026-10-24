@@ -46,6 +46,8 @@ function figureProblems(f: Figure): string[] {
   if (f.kind === 'dotPlot' && f.labels.length !== f.counts.length) out.push('dot plot labels and counts differ in length');
   if (f.kind === 'coordGrid' && f.points.some((p) => p.x < 0 || p.y < 0 || p.x > f.max || p.y > f.max)) out.push('point off the grid');
   if (f.kind === 'numberLine' && (f.point < f.from || f.point > f.to)) out.push('number line point out of range');
+  if (f.kind === 'protractor' && (f.ray1 < 0 || f.ray1 > 180 || f.ray2 < 0 || f.ray2 > 180 || f.ray1 === f.ray2)) out.push('protractor angles out of range or equal');
+  if (f.kind === 'anglePair' && (f.a1 <= 0 || f.a2 <= 0 || f.a1 + f.a2 > 180)) out.push('angle pair invalid');
   return out;
 }
 
