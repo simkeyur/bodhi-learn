@@ -34,4 +34,12 @@
 .prep .fig-tick-sm { fill: var(--ink-2); font-size: 10px; font-weight: 600; }
 .prep .fig-box-plot { fill: var(--blue-100); stroke: var(--blue-700); stroke-width: 2; }
 .prep .fig-whisker { stroke: var(--blue-700); stroke-width: 2; stroke-linecap: round; }
+.prep .fig-circle-bg { fill: var(--blue-50); stroke: var(--blue-700); stroke-width: 2; }
+.prep .fig-dim-line { stroke: var(--ink); stroke-width: 1.5; }
+.prep .fig-slice-0 { fill: var(--blue-100); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-slice-1 { fill: var(--sun-100); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-slice-2 { fill: var(--blue-200); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-slice-3 { fill: var(--sun-200); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-slice-4 { fill: var(--blue-300); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-slice-5 { fill: var(--sun-300); stroke: var(--blue-700); stroke-width: 1.5; }
 

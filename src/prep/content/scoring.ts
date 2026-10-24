@@ -50,6 +50,8 @@ function figureProblems(f: Figure): string[] {
   if (f.kind === 'anglePair' && (f.a1 <= 0 || f.a2 <= 0 || f.a1 + f.a2 > 180)) out.push('angle pair invalid');
   if (f.kind === 'boxPlot' && !(f.min <= f.q1 && f.q1 <= f.median && f.median <= f.q3 && f.q3 <= f.max)) out.push('box plot values out of order');
   if (f.kind === 'histogram' && f.intervals.length !== f.frequencies.length) out.push('histogram intervals and frequencies differ in length');
+  if (f.kind === 'circleGraph' && f.slices.length < 2) out.push('circle graph needs at least 2 slices');
+  if (f.kind === 'circle' && !f.radius && !f.diameter) out.push('circle needs radius or diameter');
   return out;
 }
 

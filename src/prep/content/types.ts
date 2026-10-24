@@ -39,7 +39,9 @@ export type Figure =
   | { kind: 'anglePair'; a1: number; a2: number; label1?: string; label2?: string }
   | { kind: 'symmetry'; shape: 'rectangle' | 'square' | 'rhombus' | 'trapezoid' | 'equilateralTriangle' | 'isoscelesTriangle' | 'scaleneTriangle' | 'hexagon'; line: 'v' | 'h' | 'd1' | 'd2' }
   | { kind: 'boxPlot'; title?: string; min: number; q1: number; median: number; q3: number; max: number; from?: number; to?: number; step?: number; axis?: string }
-  | { kind: 'histogram'; title?: string; intervals: string[]; frequencies: number[]; step?: number; axis?: string };
+  | { kind: 'histogram'; title?: string; intervals: string[]; frequencies: number[]; step?: number; axis?: string }
+  | { kind: 'circleGraph'; title?: string; slices: { label: string; pct: number }[] }
+  | { kind: 'circle'; radius?: number; diameter?: number; label?: string };
 
 export type Block =
   | { kind: 'text'; text: string }

@@ -480,6 +480,75 @@ function Histogram({ title, intervals, frequencies, step = 1, axis }: Of<'histog
   );
 }
 
+// ---------- Circle graph (pie chart) ----------
+function CircleGraph({ title, slices }: Of<'circleGraph'>) {
+  const cx = 110, cy = 115, R = 75;
+  const W = 320, H = 220;
+  let currAngle = -Math.PI / 2;
+  const total = slices.reduce((s, sl) => s + sl.pct, 0);
+
+  const paths = slices.map((sl, i) => {
+    const fraction = sl.pct / total;
+    const sweep = fraction * 2 * Math.PI;
+    const startA = currAngle;
+    const endA = currAngle + sweep;
+    currAngle = endA;
+
+    const x1 = cx + R * Math.cos(startA);
+    const y1 = cy + R * Math.sin(startA);
+    const x2 = cx + R * Math.cos(endA);
+    const y2 = cy + R * Math.sin(endA);
+    const largeArc = sweep > Math.PI ? 1 : 0;
+    const d = `M ${cx} ${cy} L ${x1} ${y1} A ${R} ${R} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+    return <path key={i} d={d} className={`fig-slice-${i % 6}`} />;
+  });
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      {title && <text x={W / 2} y={18} textAnchor="middle" className="fig-title">{title}</text>}
+      <g>{paths}</g>
+      <g transform={`translate(${cx + R + 20}, 45)`}>
+        {slices.map((sl, i) => (
+          <g key={i} transform={`translate(0, ${i * 24})`}>
+            <rect x={0} y={-10} width={14} height={14} className={`fig-slice-${i % 6}`} rx={2} />
+            <text x={20} y={2} className="fig-tick">{`${sl.label} (${sl.pct}%)`}</text>
+          </g>
+        ))}
+      </g>
+    </svg>
+  );
+}
+
+// ---------- Circle (radius / diameter) ----------
+function CircleFigure({ radius, diameter, label }: Of<'circle'>) {
+  const cx = 100, cy = 100, R = 70;
+  const W = 200, H = 200;
+  const isRadius = radius !== undefined;
+  const val = isRadius ? radius : diameter;
+  const displayLabel = label ?? (isRadius ? `r = ${val}` : `d = ${val}`);
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      <circle cx={cx} cy={cy} r={R} className="fig-circle-bg" />
+      <circle cx={cx} cy={cy} r={3} className="fig-point" />
+      {isRadius ? (
+        <>
+          <line x1={cx} y1={cy} x2={cx + R} y2={cy} className="fig-dim-line" />
+          <circle cx={cx + R} cy={cy} r={2.5} className="fig-point" />
+          <text x={cx + R / 2} y={cy - 8} textAnchor="middle" className="fig-point-label">{displayLabel}</text>
+        </>
+      ) : (
+        <>
+          <line x1={cx - R} y1={cy} x2={cx + R} y2={cy} className="fig-dim-line" />
+          <circle cx={cx - R} cy={cy} r={2.5} className="fig-point" />
+          <circle cx={cx + R} cy={cy} r={2.5} className="fig-point" />
+          <text x={cx} y={cy - 8} textAnchor="middle" className="fig-point-label">{displayLabel}</text>
+        </>
+      )}
+    </svg>
+  );
+}
+
 export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
   const body = (() => {
     switch (figure.kind) {
@@ -496,8 +565,11 @@ export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
       case 'symmetry': return <SymmetryFigure {...figure} />;
       case 'boxPlot': return <BoxPlot {...figure} />;
       case 'histogram': return <Histogram {...figure} />;
+      case 'circleGraph': return <CircleGraph {...figure} />;
+      case 'circle': return <CircleFigure {...figure} />;
     }
   })();
   return <div className="fig" role="img" aria-label={alt}>{body}</div>;
 }
+
 
