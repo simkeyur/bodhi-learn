@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { sound } from '../../utils/sound';
 import { hasStickers } from '../../data/subjects';
+import { ModeSwitch } from './ModeSwitch';
 import { Volume2, VolumeX, Settings, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
@@ -77,8 +78,10 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenSettings }) 
             </div>
           </button>
 
-          {/* Stars, mute, settings */}
+          {/* Learn / Prep switch (grade 4 and up), stars, mute, settings */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+            <span className="hide-mobile"><ModeSwitch /></span>
+            <span className="show-mobile"><ModeSwitch compact /></span>
             {(() => {
               const style: React.CSSProperties = {
                 background: 'linear-gradient(135deg, #FEF08A, #FDE047)',

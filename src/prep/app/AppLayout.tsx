@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet, ScrollRestoration } from 'react-router';
 import { useApp } from '../../context/AppContext';
 import { APP_NAME, DISCLAIMER } from './brand';
+import { ModeSwitch } from '../../components/layout/ModeSwitch';
 import './app.css';
 
 // Every prep screen: header with navigation, the screen, and the footer notice.
@@ -21,6 +22,8 @@ export function AppLayout() {
             <NavLink to="/math">Math</NavLink>
             <span className="nav-soon" aria-disabled="true" title="Reading is coming next">Reading <small>Soon</small></span>
           </nav>
+          <span className="mode-switch-wide"><ModeSwitch /></span>
+          <span className="mode-switch-compact"><ModeSwitch compact /></span>
           <Link to="/settings" className="who" aria-label={`Settings for ${kidName}`}>
             <span className="who-avatar" aria-hidden>{kidName.slice(0, 1).toUpperCase()}</span>
             <span className="who-text"><b>{kidName}</b><span>Grade {grade}</span></span>

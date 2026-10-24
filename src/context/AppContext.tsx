@@ -63,7 +63,9 @@ interface AppContextType {
   setAge: (age: number) => void;
   grade: number | null; // school grade from age 9 (null for younger children)
   setGrade: (grade: number) => void;
-  isPrep: boolean; // grade 4 and up: Bodhi Prep (Texas test prep) instead of the Bodhi games
+  isPrep: boolean; // showing Bodhi Prep (Texas test prep) instead of the Bodhi games
+  canPrep: boolean; // Bodhi Prep is available for this grade (4 and up for now), so the Learn / Prep switch shows
+  setMode: (mode: 'learn' | 'prep') => void; // the switch: remembered on this device
   ageBand: AgeBand; // little 4-6, explorer 7-10, pro 11-14
   ageBracket: AgeBracket; // derived from age, for the early-years games
   skills: Skills;
@@ -147,6 +149,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [age, setAgeState] = useState<number>(() =>
     readStored('bodhi_exact_age', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) ? clampAge(n) : undefined; },
       readStored<number>('bodhi_age', (r) => (r === 'pre-k' ? 4 : r === 'grade1' ? 7 : r === 'kindergarten' ? 5 : undefined), DEFAULT_STATE.age)));
+
+  // The Learn / Prep switch (per device). Unset means "pick by grade".
+  const [modeChoice, setModeChoice] = useState<string>(() => readStored('bodhi_mode', (r) => r, ''));
 
   // 0 until asked; see effectiveGrade
   const [gradeChoice, setGradeChoice] = useState<number>(() =>
@@ -242,7 +247,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setKidName = (name: string) => setKidNameState(name);
   const setGrade = (g: number) => setGradeChoice(clampGrade(g));
   const grade = effectiveGrade(age, gradeChoice);
-  const isPrep = isPrepLearner(age, gradeChoice);
+  // Grade 4 and up start in Bodhi Prep; the Learn / Prep switch lets them play the Bodhi games too
+  const canPrep = isPrepLearner(age, gradeChoice);
+  const isPrep = canPrep && modeChoice !== 'learn';
+  const setMode = (mode: 'learn' | 'prep') => {
+    setModeChoice(mode);
+    store('bodhi_mode', mode);
+  };
 
   // Cloud sync (Firestore) for signed-in accounts; guests just use this device
   const synced = useMemo<SyncedState>(
@@ -268,10 +279,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const handleSignedOut = () => {
     try {
       // The persistence effects pause while not onboarded, so clear the old family's copy here
-      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_grade', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
+      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_grade', 'bodhi_mode', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
         .forEach((k) => localStorage.removeItem(k));
     } catch { /* ignore */ }
     prepLearner.resetProgress();
+    setModeChoice('');
     setOnboarded(false);
   };
 
@@ -374,6 +386,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         grade,
         setGrade,
         isPrep,
+        canPrep,
+        setMode,
         ageBand,
         ageBracket,
         skills,

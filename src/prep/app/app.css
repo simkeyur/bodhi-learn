@@ -29,8 +29,9 @@
 .prep .nav-soon { cursor: default; color: var(--line-strong); }
 .prep .nav-soon small { font-size: var(--text-xs); background: var(--surface-2); color: var(--ink-3); border-radius: 999px; padding: 1px 8px; }
 
-.prep .who {
-  margin-left: auto; display: flex; align-items: center; gap: var(--s3); text-decoration: none; color: var(--ink);
+.prep .mode-switch-wide { margin-left: auto; display: inline-flex; }
+.prep .mode-switch-compact { margin-left: auto; display: none; }
+.prep .who { display: flex; align-items: center; gap: var(--s3); text-decoration: none; color: var(--ink);
   padding: 4px 12px 4px 4px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface);
   box-shadow: 0 3px 0 var(--line);
 }
@@ -53,5 +54,14 @@
   .prep .who { padding: 3px; }
   .prep .nav a, .prep .nav-soon { padding: 0 var(--s3); }
   .prep .nav-soon { display: none; }
+  .prep .mode-switch-wide { display: none; }
+  .prep .mode-switch-compact { display: inline-flex; }
   .prep .page { padding: var(--s5) var(--s4) var(--s6); }
+}
+
+/* Laptops narrower than 1000px: drop the least useful header bits so the Learn / Prep switch fits */
+@media (max-width: 1000px) {
+  .prep .nav-soon, .prep .who-text { display: none; }
+  .prep .who { padding: 3px; }
+  .prep .app-header-inner { gap: var(--s3); }
 }

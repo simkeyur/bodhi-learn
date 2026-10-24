@@ -3,7 +3,8 @@
 A playful learning web app and offline-capable PWA. **Pre-K to grade 3** play reading, math, logic and science games
 that start at the right level for the child's age and adjust as they play. **Grade 4 and up** get **Bodhi Prep**:
 practice for the Texas state test (STAAR® now, the SST from 2027–28). The plan and the test facts are in
-[docs/STAAR_PIVOT.md](docs/STAAR_PIVOT.md).
+[docs/STAAR_PIVOT.md](docs/STAAR_PIVOT.md); where the curriculum comes from and how to add grades 4–8 is in
+[docs/CURRICULUM.md](docs/CURRICULUM.md).
 
 Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebase** (Auth + Firestore). Hosted on **Firebase Hosting**, with **Google sign-in** and **Cloud Firestore** to save progress.
 
@@ -12,7 +13,8 @@ Built with **React**, **Vite**, **TypeScript**, **Web Audio API**, and **Firebas
 ## 🚀 Features
 
 ### 🎯 Bodhi Prep (grade 4 and up, `src/prep/`)
-- **Who gets it:** the welcome asks the grade from age 9; grade 4 and up see Bodhi Prep instead of the games
+- **Who gets it:** the welcome asks the grade from age 9; grade 4 and up start in Bodhi Prep. A **Learn / Prep
+  switch** in both headers lets them move between Bodhi Prep and the games (remembered on the device)
   (`isPrepLearner` in `src/firebase/schema.ts`). It loads on demand, so younger children never download it.
 - **Today:** five skills to practise (weak readiness skills first), a 15-question daily goal, a streak, and a
   countdown to the next test window.
