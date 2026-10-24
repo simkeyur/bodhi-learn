@@ -52,6 +52,8 @@ function figureProblems(f: Figure): string[] {
   if (f.kind === 'histogram' && f.intervals.length !== f.frequencies.length) out.push('histogram intervals and frequencies differ in length');
   if (f.kind === 'circleGraph' && f.slices.length < 2) out.push('circle graph needs at least 2 slices');
   if (f.kind === 'circle' && !f.radius && !f.diameter) out.push('circle needs radius or diameter');
+  if (f.kind === 'rightTriangle' && (f.a <= 0 || f.b <= 0)) out.push('right triangle legs must be positive');
+  if (f.kind === 'scatterPlot' && (!f.points || f.points.length < 2)) out.push('scatter plot needs at least 2 points');
   return out;
 }
 

@@ -484,16 +484,19 @@ function Histogram({ title, intervals, frequencies, step = 1, axis }: Of<'histog
 function CircleGraph({ title, slices }: Of<'circleGraph'>) {
   const cx = 110, cy = 115, R = 75;
   const W = 320, H = 220;
-  let currAngle = -Math.PI / 2;
   const total = slices.reduce((s, sl) => s + sl.pct, 0);
 
-  const paths = slices.map((sl, i) => {
-    const fraction = sl.pct / total;
-    const sweep = fraction * 2 * Math.PI;
-    const startA = currAngle;
-    const endA = currAngle + sweep;
-    currAngle = endA;
+  // Compute angles with reduce to avoid mutating outer variable during render
+  const angles: { startA: number; endA: number; sweep: number }[] = [];
+  let current = -Math.PI / 2;
+  for (const sl of slices) {
+    const sweep = (sl.pct / total) * 2 * Math.PI;
+    angles.push({ startA: current, endA: current + sweep, sweep });
+    current += sweep;
+  }
 
+  const paths = slices.map((_, i) => {
+    const { startA, endA, sweep } = angles[i];
     const x1 = cx + R * Math.cos(startA);
     const y1 = cy + R * Math.sin(startA);
     const x2 = cx + R * Math.cos(endA);
@@ -549,6 +552,86 @@ function CircleFigure({ radius, diameter, label }: Of<'circle'>) {
   );
 }
 
+// ---------- Right Triangle ----------
+function RightTriangle({ a, b, c, showC, aLabel, bLabel, cLabel }: Of<'rightTriangle'>) {
+  const W = 240, H = 190, padX = 40, padY = 30;
+  const hyp = c ?? Math.round(Math.hypot(a, b) * 10) / 10;
+  const lblA = aLabel ?? `${a}`;
+  const lblB = bLabel ?? `${b}`;
+  const lblC = cLabel ?? (showC ? `${hyp}` : '?');
+
+  // Scale to fit canvas
+  const drawW = 150, drawH = 120;
+  const x0 = padX, y0 = H - padY;
+  const x1 = x0 + drawW, y1 = y0;
+  const x2 = x0, y2 = y0 - drawH;
+  const sq = 14;
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      <polygon points={`${x0},${y0} ${x1},${y1} ${x2},${y2}`} className="fig-shape" />
+      {/* Right angle symbol */}
+      <polyline points={`${x0},${y0 - sq} ${x0 + sq},${y0 - sq} ${x0 + sq},${y0}`} fill="none" stroke="var(--ink)" strokeWidth="1.5" />
+      {/* Labels */}
+      <text x={x0 + drawW / 2} y={y0 + 20} textAnchor="middle" className="fig-label">{lblA}</text>
+      <text x={x0 - 16} y={y0 - drawH / 2 + 5} textAnchor="middle" className="fig-label">{lblB}</text>
+      <text x={x0 + drawW / 2 + 16} y={y0 - drawH / 2 - 6} textAnchor="middle" className="fig-label">{lblC}</text>
+    </svg>
+  );
+}
+
+// ---------- Scatter Plot ----------
+function ScatterPlot({ title, points, trendLine, xLabel, yLabel, xMax: propXMax, yMax: propYMax }: Of<'scatterPlot'>) {
+  const W = 280, H = 220;
+  const padLeft = 46, padRight = 20, padTop = title ? 30 : 20, padBottom = 36;
+  const plotW = W - padLeft - padRight;
+  const plotH = H - padTop - padBottom;
+
+  const maxX = propXMax ?? Math.max(...points.map((p) => p.x), 10);
+  const maxY = propYMax ?? Math.max(...points.map((p) => p.y), 10);
+
+  const scaleX = (x: number) => padLeft + (x / maxX) * plotW;
+  const scaleY = (y: number) => padTop + plotH - (y / maxY) * plotH;
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      {title && <text x={W / 2} y={16} textAnchor="middle" className="fig-title">{title}</text>}
+      {/* Grid lines */}
+      <line x1={padLeft} y1={padTop + plotH} x2={padLeft + plotW} y2={padTop + plotH} className="fig-axis" />
+      <line x1={padLeft} y1={padTop} x2={padLeft} y2={padTop + plotH} className="fig-axis" />
+      {/* Points */}
+      {points.map((p, i) => (
+        <circle key={i} cx={scaleX(p.x)} cy={scaleY(p.y)} r={3.5} className="fig-point" />
+      ))}
+      {/* Trend line */}
+      {trendLine && (
+        <line
+          x1={scaleX(0)}
+          y1={scaleY(trendLine.b)}
+          x2={scaleX(maxX)}
+          y2={scaleY(trendLine.m * maxX + trendLine.b)}
+          stroke="var(--sun-500)"
+          strokeWidth="2.5"
+          strokeDasharray="5 3"
+        />
+      )}
+      {/* Axis labels */}
+      {xLabel && <text x={padLeft + plotW / 2} y={H - 6} textAnchor="middle" className="fig-axis-label">{xLabel}</text>}
+      {yLabel && (
+        <text
+          x={12}
+          y={padTop + plotH / 2}
+          textAnchor="middle"
+          transform={`rotate(-90 12 ${padTop + plotH / 2})`}
+          className="fig-axis-label"
+        >
+          {yLabel}
+        </text>
+      )}
+    </svg>
+  );
+}
+
 export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
   const body = (() => {
     switch (figure.kind) {
@@ -567,6 +650,8 @@ export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
       case 'histogram': return <Histogram {...figure} />;
       case 'circleGraph': return <CircleGraph {...figure} />;
       case 'circle': return <CircleFigure {...figure} />;
+      case 'rightTriangle': return <RightTriangle {...figure} />;
+      case 'scatterPlot': return <ScatterPlot {...figure} />;
     }
   })();
   return <div className="fig" role="img" aria-label={alt}>{body}</div>;

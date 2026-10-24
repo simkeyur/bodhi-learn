@@ -41,7 +41,9 @@ export type Figure =
   | { kind: 'boxPlot'; title?: string; min: number; q1: number; median: number; q3: number; max: number; from?: number; to?: number; step?: number; axis?: string }
   | { kind: 'histogram'; title?: string; intervals: string[]; frequencies: number[]; step?: number; axis?: string }
   | { kind: 'circleGraph'; title?: string; slices: { label: string; pct: number }[] }
-  | { kind: 'circle'; radius?: number; diameter?: number; label?: string };
+  | { kind: 'circle'; radius?: number; diameter?: number; label?: string }
+  | { kind: 'rightTriangle'; a: number; b: number; c?: number; showC?: boolean; aLabel?: string; bLabel?: string; cLabel?: string }
+  | { kind: 'scatterPlot'; title?: string; points: { x: number; y: number }[]; trendLine?: { m: number; b: number }; xLabel?: string; yLabel?: string; xMax?: number; yMax?: number };
 
 export type Block =
   | { kind: 'text'; text: string }
