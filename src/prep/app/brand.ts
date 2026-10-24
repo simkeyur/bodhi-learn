@@ -7,5 +7,3 @@ export const DISCLAIMER =
 // TEA's free practice site: real released tests in the real test screen
 export const OFFICIAL_PRACTICE_URL = 'https://txpt.cambiumtds.com/student/?a=Student';
 
-// Only grade 5 math is written so far; every prep grade practises it until its own grade exists
-export const CONTENT_GRADE = 5;

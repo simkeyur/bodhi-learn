@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { ArrowRight, CalendarDays, ExternalLink, Flame, Target } from 'lucide-react';
 import { useApp } from '../../../context/AppContext';
-import { CONTENT_GRADE, OFFICIAL_PRACTICE_URL } from '../../app/brand';
-import { G5_MATH_WINDOWS, nextWindow } from '../../data/calendar';
-import { G5_MATH, G5_MATH_STRANDS, g5Standard } from '../../data/standards/g5-math';
+import { OFFICIAL_PRACTICE_URL } from '../../app/brand';
+import { MATH_WINDOWS, nextWindow } from '../../data/calendar';
+import { contentFor, findStandard } from '../../content/registry';
 import { DAILY_GOAL, dayKey, planStandards, streakDays } from '../../learner/mastery';
 import { useLearner } from '../../learner/store';
 import { Bar, MasteryStack } from '../../ui/bits';
@@ -18,22 +18,25 @@ const longDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString
 export function Home() {
   const { kidName, grade } = useApp();
   const { skills, days } = useLearner();
+  // The child's grade, or the nearest grade with content until theirs is written
+  const content = contentFor(grade);
+  const { standards, strands } = content;
   const [now] = useState(() => new Date());
   const today = dayKey(now);
   const doneToday = days[today] ?? 0;
   const streak = streakDays(days, now);
-  const plan = planStandards(G5_MATH, skills, today, 5).map((c) => g5Standard(c)!);
-  const next = nextWindow(G5_MATH_WINDOWS, today);
-  const started = G5_MATH.some((s) => skills[s.code]);
+  const plan = planStandards(standards, skills, today, 5).map((c) => findStandard(c)!);
+  const next = nextWindow(MATH_WINDOWS, today);
+  const started = standards.some((s) => skills[s.code]);
 
   return (
     <div className="page home">
       <div className="hero">
         <div>
-          <p className="eyebrow">Grade {CONTENT_GRADE} math</p>
+          <p className="eyebrow">Grade {content.grade} math</p>
           <h1>{greeting(now.getHours())}, {kidName}.</h1>
-          {grade !== CONTENT_GRADE && (
-            <p className="page-sub">Grade {grade} questions are on the way. Until then, you're practicing grade {CONTENT_GRADE} math.</p>
+          {grade !== content.grade && (
+            <p className="page-sub">Grade {grade} questions are on the way. Until then, you're practicing grade {content.grade} math.</p>
           )}
         </div>
         {next && (
@@ -79,10 +82,10 @@ export function Home() {
             <h2 id="progress-title">Math skills</h2>
             <Link to="/math" className="btn btn-ghost btn-sm">All skills <ArrowRight size={16} aria-hidden /></Link>
           </div>
-          <MasteryStack records={G5_MATH.map((s) => skills[s.code])} label="All grade 5 math skills" />
+          <MasteryStack records={standards.map((s) => skills[s.code])} label={`All grade ${content.grade} math skills`} />
           <ul className="strand-list">
-            {G5_MATH_STRANDS.map((st) => {
-              const list = G5_MATH.filter((s) => s.strand === st.id);
+            {strands.map((st) => {
+              const list = standards.filter((s) => s.strand === st.id);
               return (
                 <li key={st.id} style={strandStyle(st.id)}>
                   <Link to={`/math#strand-${st.id}`} className="strand-link">

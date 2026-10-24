@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { ArrowLeft, ArrowRight, Check, Eye, Lightbulb, RotateCcw, Trophy, X } from 'lucide-react';
-import { makeG5MathItem } from '../../content/generators/g5';
-import { g5Lesson } from '../../content/lessons/g5-math';
+import { findLesson, findStandard, makeItem } from '../../content/registry';
 import { explainSteps } from '../../content/lessons/steps';
 import { mulberry32 } from '../../content/rng';
 import { answerComplete, answerKey, emptyAnswer, score } from '../../content/scoring';
 import type { Answer, Item } from '../../content/types';
-import { g5Standard } from '../../data/standards/g5-math';
 import { learner } from '../../learner/store';
 import { ItemView } from '../../items/ItemView';
 import { RichText } from '../../items/Rich';
@@ -31,18 +29,18 @@ const STEPS: { id: Step; label: string }[] = [
 ];
 
 const rng = mulberry32(Date.now() % 2 ** 31);
-const easyItem = (code: string): Item => makeG5MathItem(code, 1, rng);
+const easyItem = (code: string): Item => makeItem(code, 1, rng);
 
 export function Learn() {
   const { code = '' } = useParams();
   const location = useLocation();
-  if (!g5Lesson(code) || !g5Standard(code)) return <NotFound />;
+  if (!findLesson(code) || !findStandard(code)) return <NotFound />;
   return <Walkthrough key={`${code}:${location.key}`} code={code} />;
 }
 
 function Walkthrough({ code }: { code: string }) {
-  const lesson = g5Lesson(code)!;
-  const standard = g5Standard(code)!;
+  const lesson = findLesson(code)!;
+  const standard = findStandard(code)!;
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('intro');
   const at = STEPS.findIndex((s) => s.id === step);

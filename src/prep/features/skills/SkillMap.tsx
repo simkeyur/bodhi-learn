@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { BookOpen, Check } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
-import { G5_MATH, G5_MATH_STRANDS } from '../../data/standards/g5-math';
+import { contentFor } from '../../content/registry';
+import { useApp } from '../../../context/AppContext';
 import { useLearner } from '../../learner/store';
 import { recentAverage } from '../../learner/mastery';
 import { Mastery, MasteryStack, StandardTags } from '../../ui/bits';
@@ -11,6 +12,8 @@ import '../screens.css';
 
 export function SkillMap() {
   const { skills, lessons } = useLearner();
+  const { grade } = useApp();
+  const { grade: shown, standards, strands } = contentFor(grade);
   const { hash } = useLocation();
 
   // Links from Today jump to a strand
@@ -22,15 +25,15 @@ export function SkillMap() {
     <div className="page">
       <div className="page-head">
         <div>
-          <p className="eyebrow">Grade 5</p>
+          <p className="eyebrow">Grade {shown}</p>
           <h1>Math skills</h1>
-          <p className="page-sub">The 36 skills the state test can ask about. Readiness skills show up on the test most.</p>
+          <p className="page-sub">The {standards.length} skills the state test can ask about. Readiness skills show up on the test most.</p>
         </div>
-        <div className="skills-summary"><MasteryStack records={G5_MATH.map((s) => skills[s.code])} label="All skills" /></div>
+        <div className="skills-summary"><MasteryStack records={standards.map((s) => skills[s.code])} label="All skills" /></div>
       </div>
 
-      {G5_MATH_STRANDS.map((st) => {
-        const list = G5_MATH.filter((s) => s.strand === st.id);
+      {strands.map((st) => {
+        const list = standards.filter((s) => s.strand === st.id);
         return (
           <section key={st.id} id={`strand-${st.id}`} className="strand" style={strandStyle(st.id)} aria-labelledby={`strand-${st.id}-title`}>
             <div className="strand-head">

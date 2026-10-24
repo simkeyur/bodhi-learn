@@ -55,9 +55,9 @@ Algebraic Relationships, (3) Geometry and Measurement, (4) Data Analysis and Per
 The exception is **grade 7**, whose strand 1 is **Probability and Numerical Representations**.
 
 **Question types for math: multiple choice, multiselect and inline choice only.** The math blueprints don't
-list multipart (the reading blueprints do). Grade 5 currently has two multipart generators (5.4B at difficulty 2–3
-and 5.9C at difficulty 3). Turn those into single questions so practice matches the real test, and don't use
-`twoPart` for math in new grades.
+list multipart (the reading blueprints do). Grade 5's two former multipart questions (5.4B, 5.9C) are now single
+questions with two drop-downs, and a test fails any math question that is multipart. Don't use `twoPart` for
+math.
 
 **Calculators:** none on grades 3–7 math (unless a student has it as an accommodation). Grade 8 math has a
 graphing calculator, so grade 8 questions can use messier numbers.
@@ -85,6 +85,7 @@ A starting map for planning, from the TEKS. Readiness/supporting labels and exac
 | Question model, scoring, validation | `src/prep/content/types.ts`, `scoring.ts` | Item and figure types; TEA partial credit; `itemProblems()` lists anything wrong with a question |
 | Figures | `src/prep/items/figures/Figures.tsx` | SVG drawings from data: area model, hundred grids, fraction bars, coordinate grid, bar graph, dot plot, prism, number line |
 | Walkthroughs | `src/prep/content/lessons/g5-math.ts` | Per standard: goal, key words, 2–4 big ideas (optional figure and example line) |
+| Grade registry | `src/prep/content/registry.ts` | Every grade with content; screens and tests look grades up here |
 | Tests | `tests/prep/content.test.mjs` | Standard counts match the blueprint, every standard has a generator and a walkthrough, every question at every difficulty is valid and its key scores full marks, four choices on multiple choice, enough variety |
 
 ---
@@ -93,23 +94,24 @@ A starting map for planning, from the TEKS. Readiness/supporting labels and exac
 
 Each step names what "done" means. Grade 6 is used as the example.
 
-### Step 0: Make the app grade-aware (once, before the first new grade)  ·  M
+### Step 0: Make the app grade-aware ✓ done (2026-10-24)
 
-Today several files assume grade 5. Grades 4 and 6–8 practise grade 5 math for now, via `CONTENT_GRADE` in
-`src/prep/app/brand.ts`. Before adding a grade:
+`src/prep/content/registry.ts` lists every grade with content: its strands, standards, generators, `makeItem`
+function, walkthroughs, and the blueprint's readiness/supporting counts per strand. The screens (Today, skills,
+practice, Learn) look content up there. A grade with no content yet uses the nearest built grade, and Today says
+so. The tests in `tests/prep/content.test.mjs` run once per registered grade.
 
-1. **Add a registry**, `src/prep/content/registry.ts`, mapping each grade to its strands, standards,
-   generator function, walkthroughs and blueprint counts. Example: `{ 5: { strands, standards, makeItem, lessons, blueprint } }`.
-2. **Look up the learner's grade in it** everywhere `G5_MATH`, `G5_MATH_STRANDS`, `makeG5MathItem`,
-   `g5Standard` or `g5Lesson` is imported. Today that's Home, SkillMap, Practice, Learn and the two test files.
-   Fall back to the nearest built grade when a grade has no content yet, and keep the "on the way" note on Today.
-3. **Remove `CONTENT_GRADE`**. The test windows in `src/prep/data/calendar.ts` are the same for grades 3–8, so
-   only their labels need the subject.
-4. **Parametrise the tests** over every grade in the registry.
+To add a grade, add its files (Steps 2–4), then one entry to `GRADES` in `registry.ts`:
+
+```ts
+4: {
+  grade: 4, subject: 'math', strands: G4_MATH_STRANDS, standards: G4_MATH,
+  generators: G4_GENERATORS, makeItem: makeG4MathItem, lessons: G4_MATH_LESSONS,
+  blueprint: { readiness: [3, 5, 4, 1], supporting: [10, 7, 7, 4] },
+},
+```
 
 Progress needs no change: standard codes start with the grade (`6.4B`), so mastery records never collide.
-
-**Done when** grade 5 still works through the registry and the tests run once per registered grade.
 
 ### Step 1: Get the documents  ·  S
 
@@ -134,7 +136,8 @@ Create `src/prep/data/standards/g6-math.ts` like `g5-math.ts`:
   real-world problems involving ratios and rates…").
 - **Grade 7:** use its own strand 1 name.
 
-**Done when** a test checks the readiness/supporting count per strand against section 2, as grade 5's does.
+**Done when** the registry entry's `blueprint` matches section 2 and `npm run test:prep` passes (it checks the
+count per strand).
 
 ### Step 3: Write the generators  ·  L
 
@@ -221,7 +224,7 @@ Rough, for one person with Claude drafting:
 
 | Grade | Standards | Standards list | Generators | Walkthroughs | Review |
 |---|---|---|---|---|---|
-| Step 0 (once) | | | M | | |
+| Step 0 (once) | done | | | | |
 | 4 | 41 | S | L | M | S |
 | 6 | 51 | S | L+ | M | S |
 | 7 | 38 | S | L | M | S |

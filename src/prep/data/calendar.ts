@@ -1,4 +1,4 @@
-// Upcoming state test windows for grade 5 math, from TEA's 2026-27 testing calendar and the HB 8 FAQ
+// Upcoming state math test windows (the same for grades 3-8), from TEA's 2026-27 testing calendar and the HB 8 FAQ
 // (SST windows: BOY from the 4th Monday in August to Sep 30, MOY Jan 2 - Feb 21, EOY May 1-30).
 // Pure, so it can be tested.
 
@@ -8,7 +8,7 @@ export interface TestWindow {
   end: string;
 }
 
-export const G5_MATH_WINDOWS: TestWindow[] = [
+export const MATH_WINDOWS: TestWindow[] = [
   { name: 'STAAR math', start: '2027-04-20', end: '2027-04-30' },
   { name: 'SST beginning-of-year test', start: '2027-08-23', end: '2027-09-30' },
   { name: 'SST middle-of-year test', start: '2028-01-02', end: '2028-02-21' },

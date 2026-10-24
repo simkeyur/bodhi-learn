@@ -96,6 +96,13 @@ export function multi(rng: Rng, rights: (Choice | string)[], wrong: (Choice | st
 
 // A drop-down: the options are shown in the given order (sorted, like a real menu), not shuffled
 export const blank = (options: string[], right: string) => ({ options, correct: options.indexOf(right) });
+// Numbers for a drop-down: the right one plus distinct non-negative neighbours, smallest first
+export function numberOptions(right: number, others: number[], count = 4): string[] {
+  const set = [right];
+  for (const o of others) if (set.length < count && o >= 0 && !set.includes(o)) set.push(o);
+  return set.sort((a, b) => a - b).map(String);
+}
+
 export const inline = (segments: InlinePart['segments'], blanks: InlinePart['blanks'], prompt?: Block[]): InlinePart =>
   ({ type: 'inline', segments, blanks, prompt });
 

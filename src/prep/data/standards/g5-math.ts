@@ -60,4 +60,3 @@ export const G5_MATH: Standard[] = [
   { code: '5.10F', strand: 4, kind: S, title: 'Balance a budget', text: 'Balance a simple budget.' },
 ];
 
-export const g5Standard = (code: string): Standard | undefined => G5_MATH.find((s) => s.code === code);

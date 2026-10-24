@@ -1,7 +1,7 @@
 // Grade 5 math, strand 4: data analysis and personal financial literacy.
 
 import { pick, randInt, sample, shuffle, type Rng } from '../../rng.ts';
-import { fig, mc, money, multi, one, table, twoPart, txt, type Gen } from '../build.ts';
+import { blank, fig, inline, mc, money, multi, numberOptions, one, table, txt, type Gen } from '../build.ts';
 import type { Figure } from '../../types.ts';
 
 const SURVEYS: { title: string; axis: string; categories: string[] }[] = [
@@ -100,10 +100,13 @@ export const solveWithData: Gen = (rng, d) => {
       mc(rng, total - s.values[k], [total, s.values[k], total - s.values[k] + step, total + s.values[k]]),
       `Total: ${s.values.join(' + ')} = ${total}. Take away ${s.categories[k]}: ${total} − ${s.values[k]} = ${total - s.values[k]}.`);
   }
-  const a = mc(rng, total, [total - s.values[0], total + step, s.values.length, Math.max(...s.values)], [txt('What is the total for all the categories?')]);
-  const b = mc(rng, diff, [s.values[hi] + s.values[lo], diff + step, s.values[lo]], [txt(`How many more for ${s.categories[hi]} than for ${s.categories[lo]}?`)]);
-  return twoPart([txt(`The bar graph shows ${s.title.toLowerCase()} data.`), graph], a, b,
-    `Part A: ${s.values.join(' + ')} = ${total}. Part B: ${s.values[hi]} − ${s.values[lo]} = ${diff}.`);
+  // Two steps in one sentence with two drop-downs (SST math has no two-part questions)
+  return one('inline', [txt(`The bar graph shows ${s.title.toLowerCase()} data. Complete the sentence.`), graph],
+    inline(['The total for all the categories is ', { blank: 0 }, ', and ', s.categories[hi], ' has ', { blank: 1 }, ' more than ', s.categories[lo], '.'], [
+      blank(numberOptions(total, [total - s.values[0], total + step, total - step, Math.max(...s.values)]), String(total)),
+      blank(numberOptions(diff, [s.values[hi] + s.values[lo], diff + step, diff - step, s.values[lo]]), String(diff)),
+    ]),
+    `Add every bar: ${s.values.join(' + ')} = ${total}. Then ${s.values[hi]} − ${s.values[lo]} = ${diff}.`);
 };
 
 // ---------- 5.10A kinds of taxes ----------

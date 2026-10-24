@@ -1,7 +1,7 @@
 // Grade 5 math, strand 2: computation with whole numbers, decimals and fractions, and algebraic reasoning.
 
 import { pick, randInt, shuffle, type Rng } from '../../rng.ts';
-import { blank, dec, fig, frac, inline, lcm, mc, money, near, num, one, table, twoPart, txt, type Gen } from '../build.ts';
+import { blank, dec, fig, frac, inline, lcm, mc, money, near, num, numberOptions, one, table, txt, type Gen } from '../build.ts';
 import type { Figure } from '../../types.ts';
 
 const NAMES = ['Maya', 'Diego', 'Aisha', 'Ethan', 'Sofia', 'Jayden', 'Camila', 'Noah', 'Lucia', 'Mateo', 'Priya', 'Owen'];
@@ -292,10 +292,18 @@ export const multiStepEquation: Gen = (rng, d) => {
     work = `${b} × ${c} = ${b * c}, then ${a} + ${b * c} = ${v}.`;
   }
   const target = t === 1 ? 'n, the number of students on each team' : `n, the number of ${t === 0 ? 'cards' : 'stickers'} ${who} has now`;
-  const eq = mc(rng, right, wrong, [txt(`Which equation can be used to find ${target}?`)]);
-  if (d === 1) return one('mc', [txt(story)], eq, `${right}. ${work}`);
-  const solve = mc(rng, v, near(v, [1, -1, 10, -10, 2]), [txt('What is the value of n?')]);
-  return twoPart([txt(story)], eq, solve, `${right}. ${work}`);
+  // SST math has no two-part questions: difficulty 1 picks the equation, 2 solves it, 3 does both in one sentence
+  if (d === 1) return one('mc', [txt(story)], mc(rng, right, wrong, [txt(`Which equation can be used to find ${target}?`)]), `${right}. ${work}`);
+  if (d === 2) {
+    const ask = t === 1 ? 'How many students are on each team?' : `How many ${t === 0 ? 'cards' : 'stickers'} does ${who} have now?`;
+    return one('mc', [txt(story), txt(ask)], mc(rng, v, near(v, [1, -1, 10, -10, 2])), `${right}. ${work}`);
+  }
+  return one('inline', [txt(story), txt('Complete the sentence.')],
+    inline(['The equation ', { blank: 0 }, ' can be used to find n, and n = ', { blank: 1 }, '.'], [
+      blank(shuffle(rng, [right, ...wrong.slice(0, 2)]), right),
+      blank(numberOptions(v, near(v, [1, -1, 10, -10])), String(v)),
+    ]),
+    `${right}. ${work}`);
 };
 
 // ---------- 5.4C patterns from a rule ----------

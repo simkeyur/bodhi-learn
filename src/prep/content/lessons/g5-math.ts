@@ -449,4 +449,3 @@ export const G5_MATH_LESSONS: Lesson[] = [
   },
 ];
 
-export const g5Lesson = (code: string) => G5_MATH_LESSONS.find((l) => l.code === code);

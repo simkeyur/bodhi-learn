@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router';
 import { ArrowLeft, ArrowRight, BookOpen, Check, RotateCcw, Sparkles, X } from 'lucide-react';
-import { makeG5MathItem } from '../../content/generators/g5';
+import { contentFor, findLesson, findStandard, makeItem } from '../../content/registry';
+import { useApp } from '../../../context/AppContext';
 import { mulberry32 } from '../../content/rng';
 import { answerComplete, emptyAnswer, score } from '../../content/scoring';
 import type { Answer, Item } from '../../content/types';
-import { G5_MATH, g5Standard } from '../../data/standards/g5-math';
 import { dayKey, MASTERY_LABEL, masteryOf, planStandards, type MasteryState } from '../../learner/mastery';
 import { learner, useLearner } from '../../learner/store';
 import { ItemView } from '../../items/ItemView';
 import { Bar, Mastery, StandardTags } from '../../ui/bits';
 import { RichText } from '../../items/Rich';
 import { NotFound } from '../../app/NotFound';
-import { g5Lesson } from '../../content/lessons/g5-math';
 import { IdeaDeck } from '../learn/LessonParts';
 import { strandStyle } from '../../ui/strands';
 import '../learn/learn.css';
@@ -22,22 +21,23 @@ const SESSION_LENGTH = 10;
 
 interface Result { standard: string; earned: number; points: number }
 
-// Which standard each question in the session practises. Today's practice spreads over the plan.
-function sessionStandards(code: string): string[] {
+// Which standard each question in the session practises. Today's practice spreads over the plan for the
+// child's grade (or the nearest grade with content).
+function sessionStandards(code: string, grade: number | null): string[] {
   if (code !== 'today') return Array(SESSION_LENGTH).fill(code);
-  const plan = planStandards(G5_MATH, learner.get().skills, dayKey(new Date()), 5);
+  const plan = planStandards(contentFor(grade).standards, learner.get().skills, dayKey(new Date()), 5);
   return Array.from({ length: SESSION_LENGTH }, (_, i) => plan[i % plan.length]);
 }
 
 // Each question uses the standard's difficulty at the moment it is asked, so the session adapts as it goes
 const rng = mulberry32(Date.now() % 2 ** 31);
 const nextItem = (standard: string): Item =>
-  makeG5MathItem(standard, learner.get().skills[standard]?.difficulty ?? 1, rng);
+  makeItem(standard, learner.get().skills[standard]?.difficulty ?? 1, rng);
 
 export function Practice() {
   const { code = '' } = useParams();
   const location = useLocation();
-  if (code !== 'today' && !g5Standard(code)) return <NotFound />;
+  if (code !== 'today' && !findStandard(code)) return <NotFound />;
   // key: every visit (including "Practice again" to the same address) starts a new session
   return <Session key={`${code}:${location.key}`} code={code} />;
 }
@@ -46,7 +46,8 @@ function Session({ code }: { code: string }) {
   const { skills, lessons } = useLearner();
   // New skills get a first look before their first question (see NewSkill below)
   const [introSeen, setIntroSeen] = useState<string[]>([]);
-  const [order] = useState(() => sessionStandards(code));
+  const { grade } = useApp();
+  const [order] = useState(() => sessionStandards(code, grade));
   const [index, setIndex] = useState(0);
   const [item, setItem] = useState(() => nextItem(order[0]));
   const [answer, setAnswer] = useState<Answer>(() => emptyAnswer(item));
@@ -54,7 +55,7 @@ function Session({ code }: { code: string }) {
   const [results, setResults] = useState<Result[]>([]);
   const [startState] = useState(() => Object.fromEntries([...new Set(order)].map((c) => [c, masteryOf(learner.get().skills[c])])));
 
-  const standard = g5Standard(item.standard)!;
+  const standard = findStandard(item.standard)!;
   const done = results.length === SESSION_LENGTH && revealed === false;
   const last = results[results.length - 1];
   const title = code === 'today' ? 'Today\'s practice' : `${standard.title}`;
@@ -78,7 +79,7 @@ function Session({ code }: { code: string }) {
 
   const feedbackRef = useRef<HTMLDivElement>(null);
   const needsIntro = !done && !revealed && !skills[item.standard] && !lessons[item.standard]
-    && !introSeen.includes(item.standard) && !!g5Lesson(item.standard);
+    && !introSeen.includes(item.standard) && !!findLesson(item.standard);
 
   // Enter checks the answer, then moves on. Practice only: test mode will behave exactly like the real test.
   useEffect(() => {
@@ -180,8 +181,8 @@ function Session({ code }: { code: string }) {
 // First time a skill comes up. Practising one skill: offer the full walkthrough. In today's mixed practice:
 // show the big ideas right here, so the session isn't interrupted.
 function NewSkill({ code, inToday, onReady }: { code: string; inToday: boolean; onReady: () => void }) {
-  const lesson = g5Lesson(code)!;
-  const standard = g5Standard(code)!;
+  const lesson = findLesson(code)!;
+  const standard = findStandard(code)!;
   return (
     <section className="card learn-card new-skill" style={strandStyle(standard.strand)} aria-labelledby="new-skill-title">
       <span className="new-skill-badge"><Sparkles size={16} aria-hidden /> New skill</span>
@@ -218,7 +219,7 @@ function Summary({ code, title, results, startState }: { code: string; title: st
         <h2>Skills you practiced</h2>
         <ul className="summary-skills">
           {codes.map((c) => {
-            const s = g5Standard(c)!;
+            const s = findStandard(c)!;
             const now = masteryOf(skills[c]);
             return (
               <li key={c}>

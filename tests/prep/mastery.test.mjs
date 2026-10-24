@@ -1,7 +1,7 @@
 import assert from 'assert/strict';
 import { test } from 'node:test';
 import { masteryOf, newRecord, planStandards, recordResult, streakDays } from '../../src/prep/learner/mastery.ts';
-import { G5_MATH } from '../../src/prep/data/standards/g5-math.ts';
+import { GRADES } from '../../src/prep/content/registry.ts';
 
 const run = (results, r = newRecord()) => results.reduce((rec, f) => recordResult(rec, f, '2026-10-24'), r);
 
@@ -38,7 +38,7 @@ test('today\'s plan puts weak readiness standards first and leaves out mastered 
     '5.2A': run([0, 0, 1, 0]), // supporting, struggling
     '5.4F': run(Array(10).fill(1)), // readiness, mastered
   };
-  const plan = planStandards(G5_MATH, skills, '2026-10-24', 5);
+  const plan = planStandards(GRADES[5].standards, skills, '2026-10-24', 5);
   assert.equal(plan[0], '5.3K');
   assert.ok(!plan.includes('5.4F'));
   assert.equal(new Set(plan).size, 5);
