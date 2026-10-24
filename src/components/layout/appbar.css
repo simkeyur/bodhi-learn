@@ -1,0 +1,90 @@
+/* The shared header (AppBar.tsx). Plain colors rather than either app's variables, so it looks the same in both.
+   Selectors start with .bh-bar so they win over each app's own link and button styles. */
+
+.bh-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgb(255 255 255 / 94%); backdrop-filter: blur(10px);
+  border-bottom: 3px solid #E2E8F0; box-shadow: 0 4px 20px rgb(15 23 42 / 5%);
+  padding-top: env(safe-area-inset-top);
+}
+.bh-bar .bh-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 68px;
+  display: flex; align-items: center; gap: 24px;
+}
+
+/* Brand */
+.bh-bar .bh-brand {
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; color: #0F172A;
+}
+.bh-bar .bh-logo {
+  width: 44px; height: 44px; border-radius: 13px; overflow: hidden; flex: none; background: #FFFFFF;
+  border: 2px solid #BAE6FD; box-shadow: 0 4px 12px rgb(2 132 199 / 22%);
+}
+.bh-bar .bh-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bh-bar .bh-name { font: 600 1.35rem/1 Fredoka, system-ui, sans-serif; color: #0284C7; white-space: nowrap; letter-spacing: 0; }
+.bh-bar .bh-name b { font-weight: 600; color: #EA580C; }
+
+/* Page links (Bodhi Prep) */
+.bh-bar .bh-nav { display: flex; align-items: center; gap: 4px; }
+.bh-bar .bh-nav a, .bh-bar .bh-soon {
+  display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px;
+  font: 600 1rem Fredoka, system-ui, sans-serif; color: #64748B; text-decoration: none;
+}
+.bh-bar .bh-nav a:hover { color: #0369A1; background: #F0F9FF; }
+.bh-bar .bh-nav a.active { color: #0369A1; background: #E0F2FE; box-shadow: inset 0 0 0 2px #BAE6FD; }
+.bh-bar .bh-soon { cursor: default; color: #CBD5E1; }
+.bh-bar .bh-soon small { font-size: 0.78rem; background: #F8FAFC; color: #64748B; border-radius: 999px; padding: 1px 8px; }
+
+/* Right side: switch, extras, name chip */
+.bh-bar .bh-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.bh-bar .bh-compact { display: none; }
+
+.bh-bar .bh-pill {
+  display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px;
+  background: #FEF3C7; border: 2px solid #FCD34D; color: #92400E; font: 600 1.05rem Fredoka, system-ui, sans-serif;
+}
+.bh-bar button.bh-pill { cursor: pointer; box-shadow: 0 3px 0 #FCD34D; }
+.bh-bar button.bh-pill:active { transform: translateY(2px); box-shadow: 0 1px 0 #FCD34D; }
+
+.bh-bar .bh-icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  background: #FFFFFF; border: 2px solid #E2E8F0; color: #0284C7; box-shadow: 0 3px 0 #E2E8F0;
+}
+.bh-bar .bh-icon-btn[aria-pressed='true'] { background: #FFE4E6; border-color: #FDA4AF; color: #BE123C; box-shadow: 0 3px 0 #FDA4AF; }
+.bh-bar .bh-icon-btn:active { transform: translateY(2px); box-shadow: none; }
+
+.bh-bar .bh-who {
+  display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0F172A; cursor: pointer;
+  padding: 4px 14px 4px 4px; border-radius: 999px; border: 2px solid #E2E8F0; background: #FFFFFF;
+  box-shadow: 0 3px 0 #E2E8F0; font: inherit;
+}
+.bh-bar .bh-who:hover { border-color: #BAE6FD; color: #0F172A; }
+.bh-bar .bh-who:active { transform: translateY(2px); box-shadow: none; }
+.bh-bar .bh-avatar {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: linear-gradient(135deg, #0EA5E9, #0369A1); color: #FFFFFF; font: 600 1rem Fredoka, system-ui, sans-serif;
+}
+.bh-bar .bh-who-text { display: grid; line-height: 1.15; text-align: left; font-size: 0.875rem; }
+.bh-bar .bh-who-text b { font: 600 0.95rem Fredoka, system-ui, sans-serif; }
+.bh-bar .bh-who-text span { color: #64748B; font-size: 0.78rem; }
+
+.bh-bar :focus-visible { outline: none; box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #0EA5E9; }
+
+/* Narrower laptops: drop the least useful bits so everything fits */
+@media (max-width: 1000px) {
+  .bh-bar .bh-soon, .bh-bar .bh-who-text { display: none; }
+  .bh-bar .bh-who { padding: 3px; }
+  .bh-bar .bh-inner { gap: 12px; }
+}
+/* Phones: icon-only switch, no wordmark */
+@media (max-width: 720px) {
+  .bh-bar .bh-inner { padding: 0 12px; height: 60px; gap: 8px; }
+  .bh-bar .bh-name { display: none; }
+  .bh-bar .bh-logo { width: 40px; height: 40px; }
+  .bh-bar .bh-nav a { padding: 0 12px; }
+  .bh-bar .bh-right { gap: 6px; }
+  .bh-bar .bh-wide { display: none; }
+  .bh-bar .bh-compact { display: inline-flex; }
+  .bh-bar .bh-pill { padding: 0 10px; }
+}

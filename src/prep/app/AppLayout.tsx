@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet, ScrollRestoration } from 'react-router';
 import { useApp } from '../../context/AppContext';
 import { APP_NAME, DISCLAIMER } from './brand';
 import { ModeSwitch } from '../../components/layout/ModeSwitch';
+import { AppBar, BrandMark, ProfileMark } from '../../components/layout/AppBar';
 import './app.css';
 
 // Every prep screen: header with navigation, the screen, and the footer notice.
@@ -11,25 +12,22 @@ export function AppLayout() {
   return (
     <div className="app">
       <a className="skip-link" href="#main">Skip to content</a>
-      <header className="app-header">
-        <div className="app-header-inner">
-          <Link to="/" className="brand" aria-label={`${APP_NAME} home`}>
-            <span className="brand-logo"><img src="/logo.png" alt="" width={40} height={40} /></span>
-            <span className="brand-name">Bodhi <b>Prep</b></span>
-          </Link>
-          <nav className="nav" aria-label="Main">
+      <AppBar
+        brand={<Link to="/" className="bh-brand" aria-label={`${APP_NAME} home`}><BrandMark app="Prep" /></Link>}
+        nav={
+          <nav className="bh-nav" aria-label="Main">
             <NavLink to="/" end>Today</NavLink>
             <NavLink to="/math">Math</NavLink>
-            <span className="nav-soon" aria-disabled="true" title="Reading is coming next">Reading <small>Soon</small></span>
+            <span className="bh-soon" aria-disabled="true" title="Reading is coming next">Reading <small>Soon</small></span>
           </nav>
-          <span className="mode-switch-wide"><ModeSwitch /></span>
-          <span className="mode-switch-compact"><ModeSwitch compact /></span>
-          <Link to="/settings" className="who" aria-label={`Settings for ${kidName}`}>
-            <span className="who-avatar" aria-hidden>{kidName.slice(0, 1).toUpperCase()}</span>
-            <span className="who-text"><b>{kidName}</b><span>Grade {grade}</span></span>
-          </Link>
-        </div>
-      </header>
+        }
+      >
+        <span className="bh-wide"><ModeSwitch /></span>
+        <span className="bh-compact"><ModeSwitch compact /></span>
+        <Link to="/settings" className="bh-who" aria-label={`Settings for ${kidName}`}>
+          <ProfileMark name={kidName} detail={`Grade ${grade}`} />
+        </Link>
+      </AppBar>
       <main id="main" className="app-main">
         <Outlet />
       </main>
