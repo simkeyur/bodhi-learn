@@ -91,7 +91,8 @@ graphing…) are only worth building if we want to serve spring 2027 users.
 2. **Free or paid.** Affects whether we need TEA's permission for anything we reuse, and payments.
 3. **Who checks content.** Ideally a Texas teacher reviews every question against its standard.
 4. **AI essay scoring.** Needs a parent's consent and a server (section 7).
-5. **Which grade's content comes next** (grade 4 math is the natural next one).
+5. **Which grade's content comes next** (grade 4 math is the natural next one). How to build each grade, and
+   where TEA's curriculum documents are: [CURRICULUM.md](CURRICULUM.md).
 
 ---
 
