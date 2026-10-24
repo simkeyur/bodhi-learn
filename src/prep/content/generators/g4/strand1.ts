@@ -161,7 +161,7 @@ export const compareWholeNumbers: Gen = (rng, d) => {
       `Line up the digits by place value. Compare from left to right. The correct order from least to greatest is ${rightStr}.`);
   }
 
-  // d === 3: Comparison with 1,000,000,000 or multi-comparison
+  // d === 3: Comparison with large numbers (astronomical distances in miles)
   const m1 = randInt(rng, 100, 900) * 1000000;
   const m2 = m1 + randInt(rng, 1, 9) * 100000;
   const m3 = m2 + randInt(rng, 1, 9) * 10000;
@@ -171,7 +171,9 @@ export const compareWholeNumbers: Gen = (rng, d) => {
     `${num(m1)} > ${num(m2)} > ${num(m3)}`,
     `${num(m2)} < ${num(m1)} < ${num(m3)}`,
   ];
-  return one('mc', [txt(`Which statement correctly compares the three attendance figures?`)],
+  return one('mc', [
+    txt(`Three asteroids have distances of ${num(m1)} miles, ${num(m2)} miles, and ${num(m3)} miles from the Sun. Which statement correctly compares the three distances?`),
+  ],
     mc(rng, right, wrong),
     `${num(m1)} is less than ${num(m2)}, and ${num(m2)} is less than ${num(m3)}. The correct comparison is ${right}.`);
 };
@@ -186,9 +188,15 @@ export const roundWholeNumbers: Gen = (rng, d) => {
     const right = Math.round(raw / roundTo) * roundTo;
     const down = Math.floor(raw / roundTo) * roundTo;
     const up = Math.ceil(raw / roundTo) * roundTo;
-    const other = right === up ? down : up;
+    const wrongDir = right === up ? down : up;
+    const otherPlace = roundTo === 10000 ? 1000 : 100;
+    const wrongPlace = Math.round(raw / otherPlace) * otherPlace;
+    const wrongTrunc = Math.floor(raw / otherPlace) * otherPlace;
+    const wrong3 = wrongTrunc !== wrongPlace && wrongTrunc !== right && wrongTrunc !== wrongDir
+      ? wrongTrunc
+      : Math.round(raw / (roundTo * 10)) * (roundTo * 10);
     return one('mc', [txt(`What is ${num(raw)} rounded to the nearest ${placeName}?`)],
-      mc(rng, num(right), [num(other), num(right + roundTo), num(Math.max(0, right - roundTo))]),
+      mc(rng, num(right), [num(wrongDir), num(wrongPlace), num(wrong3)]),
       `Find the ${placeName} place. Look at the digit to its right. If it is 5 or more, round up. ${num(raw)} rounded to the nearest ${placeName} is ${num(right)}.`);
   }
 
@@ -200,9 +208,14 @@ export const roundWholeNumbers: Gen = (rng, d) => {
     const right = Math.round(raw / 100000) * 100000;
     const down = ht * 100000;
     const up = (ht + 1) * 100000;
-    const wrong = right === up ? down : up;
-    return one('mc', [txt(`A stadium sold ${num(raw)} tickets in a season. What is this number rounded to the nearest hundred thousands place?`)],
-      mc(rng, num(right), [num(wrong), num(right + 10000), num(Math.max(0, right - 10000))]),
+    const wrongDir = right === up ? down : up;
+    const wrongTenThousand = Math.round(raw / 10000) * 10000;
+    const wrongTenThousandDown = Math.floor(raw / 10000) * 10000;
+    const wrong3 = wrongTenThousandDown !== wrongTenThousand && wrongTenThousandDown !== right && wrongTenThousandDown !== wrongDir
+      ? wrongTenThousandDown
+      : Math.round(raw / 1000) * 1000;
+    return one('mc', [txt(`A national park welcomed ${num(raw)} visitors in a year. What is this number rounded to the nearest hundred thousands place?`)],
+      mc(rng, num(right), [num(wrongDir), num(wrongTenThousand), num(wrong3)]),
       `The hundred thousands digit is ${ht}. The ten thousands digit is ${nextDigit}. Since ${nextDigit} is ${nextDigit >= 5 ? '5 or greater, round up' : 'less than 5, round down'}. The answer is ${num(right)}.`);
   }
 
@@ -245,7 +258,8 @@ export const decimalModels: Gen = (rng, d) => {
     const dimes = randInt(rng, 1, 9);
     const pennies = randInt(rng, 1, 9);
     const decStr = `${dollars}.${dimes}${pennies}`;
-    return one('mc', [txt(`Javier has ${dollars} one-dollar bills, ${dimes} dimes, and ${pennies} pennies. Which decimal number of dollars represents this amount?`)],
+    const pennyText = pennies === 1 ? '1 penny' : `${pennies} pennies`;
+    return one('mc', [txt(`Javier has ${dollars} one-dollar bills, ${dimes} dimes, and ${pennyText}. Which decimal number of dollars represents this amount?`)],
       mc(rng, decStr, [`${dollars}.${pennies}${dimes}`, `${dollars + dimes}.${pennies}`, `${dollars}.0${dimes + pennies}`]),
       `One dollar is 1 whole. Each dime is 0.1 of a dollar. Each penny is 0.01 of a dollar. Javier has ${decStr} dollars.`);
   }
@@ -255,13 +269,15 @@ export const decimalModels: Gen = (rng, d) => {
   const extraHundredths = randInt(rng, 15, 65);
   const totalHundredths = wholes * 100 + extraHundredths;
   const decVal = dec(totalHundredths, 2);
+  const gridCountText = wholes === 1 ? '1 fully shaded grid' : `${wholes} fully shaded grids`;
+  const gridExplainText = wholes === 1 ? '1 full grid is 1 whole' : `${wholes} full grids are ${wholes} wholes`;
   return one('mc', [
     txt(`The model shows ${wholes} fully shaded hundred grid${wholes > 1 ? 's' : ''} and ${extraHundredths} shaded squares in the next grid.`),
-    fig({ kind: 'decimalGrids', hundredths: totalHundredths }, `${wholes} fully shaded grid and ${extraHundredths} squares of another.`),
+    fig({ kind: 'decimalGrids', hundredths: totalHundredths }, `${gridCountText} and ${extraHundredths} squares of another.`),
     txt(`Which number represents the total shaded area?`),
   ],
     mc(rng, decVal, [dec(totalHundredths, 1), dec(wholes * 10 + extraHundredths, 2), dec(extraHundredths, 2)]),
-    `${wholes} full grid is ${wholes} whole${wholes > 1 ? 's' : ''}. ${extraHundredths} squares of the second grid is 0.${extraHundredths}. Together they represent ${decVal}.`);
+    `${gridExplainText}. ${extraHundredths} squares of the second grid is 0.${extraHundredths}. Together they represent ${decVal}.`);
 };
 
 // ---------- 4.2F compare and order decimals ----------

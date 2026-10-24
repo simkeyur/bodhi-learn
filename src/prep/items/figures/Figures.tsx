@@ -196,7 +196,14 @@ function NumberLine({ from, to, step, decimals, point, pointLabel }: Of<'numberL
 
 // ---------- Protractor with angle rays ----------
 function Protractor({ ray1, ray2 }: Of<'protractor'>) {
-  const cx = 170, cy = 160, R = 130, inR = 105;
+  const cx = 230, cy = 215;
+  const R_edge = 200;
+  const R_outer = 170;
+  const R_outer_lbl = 186;
+  const R_inner = 130;
+  const R_inner_lbl = 112;
+  const R_ray = 210;
+
   const toRad = (deg: number) => (deg * Math.PI) / 180;
   const pt = (deg: number, r: number) => ({
     x: cx + r * Math.cos(toRad(deg)),
@@ -204,43 +211,98 @@ function Protractor({ ray1, ray2 }: Of<'protractor'>) {
   });
 
   const ticks = [];
+  const labels = [];
+
   for (let deg = 0; deg <= 180; deg += 5) {
     const is10 = deg % 10 === 0;
-    const rStart = R;
-    const rEnd = is10 ? R - 12 : R - 6;
-    const p1 = pt(deg, rStart), p2 = pt(deg, rEnd);
-    ticks.push(<line key={`t${deg}`} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} className="fig-gridline" />);
-    if (is10 && deg > 0 && deg < 180) {
-      const pOuter = pt(deg, R - 20);
-      const pInner = pt(deg, R - 32);
-      ticks.push(
-        <g key={`lbl${deg}`}>
-          <text x={pOuter.x} y={pOuter.y + 3} textAnchor="middle" className="fig-tick-sm">{deg}</text>
-          <text x={pInner.x} y={pInner.y + 3} textAnchor="middle" className="fig-tick-sm">{180 - deg}</text>
-        </g>
+
+    // Outer ticks: from R_outer inward
+    const pOut1 = pt(deg, R_outer);
+    const pOut2 = pt(deg, is10 ? R_outer - 10 : R_outer - 5);
+    ticks.push(<line key={`ot${deg}`} x1={pOut1.x} y1={pOut1.y} x2={pOut2.x} y2={pOut2.y} className="fig-gridline" />);
+
+    // Inner ticks: from R_inner outward
+    const pIn1 = pt(deg, R_inner);
+    const pIn2 = pt(deg, is10 ? R_inner + 10 : R_inner + 5);
+    ticks.push(<line key={`it${deg}`} x1={pIn1.x} y1={pIn1.y} x2={pIn2.x} y2={pIn2.y} className="fig-gridline" />);
+
+    if (is10) {
+      // Outer scale: 0 at left (deg = 180), 180 at right (deg = 0)
+      const outerVal = 180 - deg;
+      const pOuter = pt(deg, R_outer_lbl);
+      labels.push(
+        <text
+          key={`ol${deg}`}
+          x={pOuter.x}
+          y={pOuter.y + 4}
+          textAnchor="middle"
+          className="fig-protractor-lbl-outer"
+        >
+          {outerVal}
+        </text>
+      );
+
+      // Inner scale: 180 at left (deg = 180), 0 at right (deg = 0)
+      const innerVal = deg;
+      const pInner = pt(deg, R_inner_lbl);
+      labels.push(
+        <text
+          key={`il${deg}`}
+          x={pInner.x}
+          y={pInner.y + 4}
+          textAnchor="middle"
+          className="fig-protractor-lbl-inner"
+        >
+          {innerVal}
+        </text>
       );
     }
   }
 
-  const pRay1 = pt(ray1, R + 14);
-  const pRay2 = pt(ray2, R + 14);
+  const pRay1 = pt(ray1, R_ray);
+  const pRay2 = pt(ray2, R_ray);
   const minDeg = Math.min(ray1, ray2), maxDeg = Math.max(ray1, ray2);
-  const arcP1 = pt(minDeg, 45), arcP2 = pt(maxDeg, 45);
+  const arcR = 48;
+  const arcP1 = pt(minDeg, arcR), arcP2 = pt(maxDeg, arcR);
   const largeArc = maxDeg - minDeg > 180 ? 1 : 0;
-  const arcD = `M ${arcP1.x} ${arcP1.y} A 45 45 0 ${largeArc} 0 ${arcP2.x} ${arcP2.y}`;
+  const arcD = `M ${arcP1.x} ${arcP1.y} A ${arcR} ${arcR} 0 ${largeArc} 0 ${arcP2.x} ${arcP2.y}`;
 
   return (
-    <svg viewBox="0 0 340 185" width={340}>
-      <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy} Z`} className="fig-protractor-base" />
-      <path d={`M ${cx - inR} ${cy} A ${inR} ${inR} 0 0 1 ${cx + inR} ${cy} Z`} fill="none" stroke="var(--line)" strokeWidth={1} />
-      <line x1={cx - R - 8} y1={cy} x2={cx + R + 8} y2={cy} className="fig-axis" />
-      <text x={cx + R - 14} y={cy - 4} textAnchor="end" className="fig-tick-sm">0 / 180</text>
-      <text x={cx - R + 14} y={cy - 4} textAnchor="start" className="fig-tick-sm">180 / 0</text>
+    <svg viewBox="0 0 460 250" width={460} className="fig-protractor-svg">
+      {/* Protractor semi-circle base */}
+      <path
+        d={`M ${cx - R_edge} ${cy} A ${R_edge} ${R_edge} 0 0 1 ${cx + R_edge} ${cy} Z`}
+        className="fig-protractor-base"
+      />
+      {/* Scale guide arcs */}
+      <path
+        d={`M ${cx - R_outer} ${cy} A ${R_outer} ${R_outer} 0 0 1 ${cx + R_outer} ${cy}`}
+        fill="none"
+        stroke="var(--line-strong)"
+        strokeWidth={1}
+      />
+      <path
+        d={`M ${cx - R_inner} ${cy} A ${R_inner} ${R_inner} 0 0 1 ${cx + R_inner} ${cy}`}
+        fill="none"
+        stroke="var(--line-strong)"
+        strokeWidth={1}
+      />
+      {/* Baseline */}
+      <line x1={cx - R_edge} y1={cy} x2={cx + R_edge} y2={cy} className="fig-axis" />
+      {/* Ticks and scale labels */}
       {ticks}
+      {labels}
+      {/* Angle arc */}
       <path d={arcD} className="fig-angle-arc" />
+      {/* Angle Rays crossing the scale */}
       <line x1={cx} y1={cy} x2={pRay1.x} y2={pRay1.y} className="fig-protractor-ray" />
+      <circle cx={pRay1.x} cy={pRay1.y} r={3.5} className="fig-point" />
       <line x1={cx} y1={cy} x2={pRay2.x} y2={pRay2.y} className="fig-protractor-ray" />
-      <circle cx={cx} cy={cy} r={4} className="fig-point" />
+      <circle cx={pRay2.x} cy={pRay2.y} r={3.5} className="fig-point" />
+      {/* Center vertex crosshair and point */}
+      <line x1={cx - 8} y1={cy} x2={cx + 8} y2={cy} stroke="var(--ink)" strokeWidth={1.5} />
+      <line x1={cx} y1={cy - 8} x2={cx} y2={cy + 8} stroke="var(--ink)" strokeWidth={1.5} />
+      <circle cx={cx} cy={cy} r={3} className="fig-point" />
     </svg>
   );
 }

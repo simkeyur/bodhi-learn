@@ -1,7 +1,7 @@
 // Grade 4 math, strand 2: computations and algebraic relationships.
 
 import { pick, randInt } from '../../rng.ts';
-import { dec, frac, mc, num, one, table, txt, type Gen } from '../build.ts';
+import { dec, mc, num, one, table, txt, type Gen } from '../build.ts';
 
 // ---------- 4.3E add and subtract like fractions ----------
 export const addSubtractFractions: Gen = (rng, d) => {
@@ -14,48 +14,49 @@ export const addSubtractFractions: Gen = (rng, d) => {
       const a = randInt(rng, 1, Math.floor(denom / 2));
       const b = randInt(rng, 1, denom - a - 1);
       const sum = a + b;
+      const right = `{${sum}/${denom}}`;
+      const wrong1 = `{${sum}/${denom * 2}}`;
+      const subVal = Math.abs(a - b);
+      const wrong2 = subVal > 0 && subVal !== sum && subVal * 2 !== sum ? `{${subVal}/${denom}}` : `{${sum + 2 <= denom ? sum + 2 : 1}/${denom}}`;
+      const wrong3 = sum + 1 <= denom && sum + 1 !== subVal ? `{${sum + 1}/${denom}}` : `{${sum - 1 > 0 ? sum - 1 : 2}/${denom}}`;
       return one('mc', [
         txt(`What is the sum?`),
         txt(`{${a}/${denom}} + {${b}/${denom}}`),
       ],
-        mc(rng, frac(sum, denom), [
-          `{${sum}/${denom * 2}}`,
-          `{${Math.abs(a - b) || 1}/${denom}}`,
-          `{${sum + 1}/${denom}}`,
-        ]),
-        `Add the numerators: ${a} + ${b} = ${sum}. Keep the denominator ${denom}. The answer is ${frac(sum, denom)}.`);
+        mc(rng, right, [wrong1, wrong2, wrong3]),
+        `Add the numerators: ${a} + ${b} = ${sum}. Keep the denominator ${denom}. The answer is {${sum}/${denom}}.`);
     }
     const a = randInt(rng, 3, denom - 1);
     const b = randInt(rng, 1, a - 1);
     const diff = a - b;
+    const right = `{${diff}/${denom}}`;
+    const wrong1 = `{${a + b}/${denom}}`;
+    const wrong2 = `{${diff}/${denom * 2}}`;
+    const wrong3 = diff + 1 <= denom && diff + 1 !== a + b ? `{${diff + 1}/${denom}}` : `{${Math.max(1, diff - 1)}/${denom}}`;
     return one('mc', [
       txt(`What is the difference?`),
       txt(`{${a}/${denom}} − {${b}/${denom}}`),
     ],
-      mc(rng, frac(diff, denom), [
-        `{${diff}/0}`,
-        `{${a + b}/${denom}}`,
-        `{${diff + 1}/${denom}}`,
-      ]),
-      `Subtract the numerators: ${a} − ${b} = ${diff}. Keep the denominator ${denom}. The answer is ${frac(diff, denom)}.`);
+      mc(rng, right, [wrong1, wrong2, wrong3]),
+      `Subtract the numerators: ${a} − ${b} = ${diff}. Keep the denominator ${denom}. The answer is {${diff}/${denom}}.`);
   }
 
   if (d === 2) {
-    // Word problem with mixed numbers or improper fractions
+    // Word problem with like fractions
     const person = pick(rng, ['Leila', 'Mateo', 'Kaitlyn', 'Noah']);
     const a = randInt(rng, 2, denom - 1);
     const b = randInt(rng, 1, denom - 1);
     const sum = a + b;
     const item = pick(rng, ['fabric', 'ribbon', 'dough', 'trail mix']);
+    const right = `{${sum}/${denom}}`;
+    const wrong1 = `{${sum}/${denom * 2}}`;
+    const wrong2 = `{${Math.abs(a - b) || 1}/${denom}}`;
+    const wrong3 = `{${sum + 2}/${denom}}`;
     return one('mc', [
       txt(`${person} used {${a}/${denom}} yard of ${item} for one project and {${b}/${denom}} yard for another project. How many total yards of ${item} did ${person} use?`),
     ],
-      mc(rng, frac(sum, denom), [
-        `{${sum}/${denom * 2}}`,
-        frac(Math.abs(a - b) || 1, denom),
-        `{${sum + 2}/${denom}}`,
-      ]),
-      `Add the two amounts: {${a}/${denom}} + {${b}/${denom}} = {${sum}/${denom}}. In simplest terms, this is ${frac(sum, denom)} yards.`);
+      mc(rng, right, [wrong1, wrong2, wrong3]),
+      `Add the two amounts: {${a}/${denom}} + {${b}/${denom}} = {${sum}/${denom}} yards.`);
   }
 
   // d === 3: Subtracting mixed numbers with regrouping
@@ -64,9 +65,10 @@ export const addSubtractFractions: Gen = (rng, d) => {
   const n2 = randInt(rng, 2, denom - 1);
   // whole n1/denom - n2/denom = (whole - 1) + (denom + n1 - n2)/denom
   const remNum = denom + n1 - n2;
-  const right = `${whole - 1}${frac(remNum, denom)}`;
-  const wrong1 = `${whole}${frac(n2 - n1, denom)}`;
-  const wrong2 = `${whole - 1}${frac(remNum - 1, denom)}`;
+  const right = `${whole - 1}{${remNum}/${denom}}`;
+  const wrong1 = `${whole}{${n2 - n1}/${denom}}`;
+  const wrong2 = `${whole}{${remNum}/${denom}}`;
+  const wrong3 = `${whole - 1}{${remNum + 1 < denom ? remNum + 1 : Math.max(1, remNum - 1)}/${denom}}`;
   return one('mc', [
     txt(`Solve the subtraction problem:`),
     txt(`${whole}{${n1}/${denom}} − {${n2}/${denom}}`),
@@ -74,7 +76,7 @@ export const addSubtractFractions: Gen = (rng, d) => {
     mc(rng, right, [
       { text: wrong1, why: 'You must regroup 1 whole into fractions before subtracting.' },
       wrong2,
-      `${whole}${frac(n1 + n2, denom)}`,
+      wrong3,
     ]),
     `Regroup 1 whole as {${denom}/${denom}}. ${whole}{${n1}/${denom}} becomes ${whole - 1}{${denom + n1}/${denom}}. Subtract {${n2}/${denom}}: ${whole - 1}{${remNum}/${denom}} = ${right}.`);
 };
@@ -332,7 +334,7 @@ export const divisionModels: Gen = (rng, d) => {
     txt(`A school has ${items} students dividing equally among ${groups} buses. Which equation accurately represents the situation?`),
   ],
     mc(rng, eq, [
-      `${items} × ${groups} = ${items * groups}`,
+      `${items} × ${groups} = ${num(items * groups)}`,
       `${items} + ${groups} = ${items + groups}`,
       `${items} = (${groups} × ${perGroup + 1}) − 5`,
     ]),
@@ -393,8 +395,8 @@ export const estimateSolutions: Gen = (rng, d) => {
       txt(`Estimate the sum by rounding each number to the nearest hundred:`),
       txt(`${a} + ${b}`),
     ],
-      mc(rng, String(est), [String(est + 100), String(est - 100), String(a + b)]),
-      `${a} rounds to ${rA}. ${b} rounds to ${rB}. ${rA} + ${rB} = ${est}.`);
+      mc(rng, num(est), [num(est + 100), num(est - 100), num(a + b)]),
+      `${a} rounds to ${num(rA)}. ${b} rounds to ${num(rB)}. ${num(rA)} + ${num(rB)} = ${num(est)}.`);
   }
 
   if (d === 2) {
@@ -428,36 +430,39 @@ export const estimateSolutions: Gen = (rng, d) => {
 // ---------- 4.4H multiply and divide multi-step problems ----------
 export const multiStepMultiplyDivide: Gen = (rng, d) => {
   if (d === 1) {
-    // Interpreting remainder: round up (buses needed)
+    // Interpreting remainder: round up (buses needed), remainder >= 1
     const perBus = 40;
-    const kids = randInt(rng, 125, 215);
-    const needed = Math.ceil(kids / perBus);
+    const fullBuses = randInt(rng, 3, 5);
+    const remKids = randInt(rng, 1, perBus - 1);
+    const kids = fullBuses * perBus + remKids;
+    const needed = fullBuses + 1;
     return one('mc', [
       txt(`A total of ${kids} students are going on a field trip. Each bus holds at most ${perBus} students. What is the minimum number of buses needed?`),
     ],
       mc(rng, `${needed} buses`, [
-        { text: `${Math.floor(kids / perBus)} buses`, why: 'That would leave some students without a seat.' },
+        { text: `${fullBuses} buses`, why: 'That would leave some students without a seat.' },
         `${needed + 1} buses`,
-        `${kids % perBus} buses`,
+        `${remKids} buses`,
       ]),
-      `${kids} ÷ ${perBus} = ${Math.floor(kids / perBus)} with a remainder of ${kids % perBus}. Because all students need a seat, you must round up to ${needed} buses.`);
+      `${kids} ÷ ${perBus} = ${fullBuses} with a remainder of ${remKids}. Because all students need a seat, you must round up to ${needed} buses.`);
   }
 
   if (d === 2) {
-    // Interpreting remainder: remainder is the answer (leftovers)
+    // Interpreting remainder: remainder is the answer (leftovers), remainder >= 1
     const perBox = 6;
-    const muffins = randInt(rng, 45, 95);
-    const leftover = muffins % perBox;
-    const boxes = Math.floor(muffins / perBox);
+    const boxes = randInt(rng, 8, 15);
+    const leftover = randInt(rng, 1, perBox - 1);
+    const muffins = boxes * perBox + leftover;
+    const mUnit = (n: number) => `${n} muffin${n === 1 ? '' : 's'}`;
     return one('mc', [
       txt(`A bakery made ${muffins} muffins and packed them into boxes of ${perBox}. Any leftover muffins are sold individually. How many muffins were sold individually?`),
     ],
-      mc(rng, `${leftover} muffins`, [
-        { text: `${boxes} muffins`, why: 'That is the number of boxes, not the leftover muffins.' },
-        `${perBox - leftover} muffins`,
-        `${leftover + 2} muffins`,
+      mc(rng, mUnit(leftover), [
+        { text: `${boxes} boxes`, why: 'That is the number of boxes, not the leftover muffins.' },
+        mUnit(leftover + 1),
+        mUnit(leftover + 2),
       ]),
-      `Divide ${muffins} by ${perBox}: ${muffins} ÷ ${perBox} = ${boxes} R ${leftover}. The remainder represents the leftover muffins: ${leftover} muffins.`);
+      `Divide ${muffins} by ${perBox}: ${muffins} ÷ ${perBox} = ${boxes} R ${leftover}. The remainder represents the leftover muffins: ${mUnit(leftover)}.`);
   }
 
   // d === 3: Two-step multiplication and division

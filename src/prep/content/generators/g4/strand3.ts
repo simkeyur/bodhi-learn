@@ -1,7 +1,7 @@
 // Grade 4 math, strand 3: geometry and measurement.
 
 import { pick, randInt } from '../../rng.ts';
-import { fig, mc, multi, one, table, txt, type Gen } from '../build.ts';
+import { fig, mc, multi, num, one, table, txt, type Gen } from '../build.ts';
 
 // ---------- 4.5D perimeter and area of rectangles ----------
 export const perimeterAreaRectangles: Gen = (rng, d) => {
@@ -65,16 +65,18 @@ export const linesRaysAngles: Gen = (rng, d) => {
   if (d === 1) {
     // Basic definitions: point, line, ray, line segment
     const terms = [
-      { term: 'line segment', def: 'part of a line with two definite endpoints', wrong: ['line', 'ray', 'angle'] },
-      { term: 'ray', def: 'part of a line that has one endpoint and extends endlessly in one direction', wrong: ['line segment', 'line', 'point'] },
-      { term: 'line', def: 'a straight path that continues in both directions without ending', wrong: ['line segment', 'ray', 'point'] },
-      { term: 'perpendicular lines', def: 'lines that intersect to form right angles (90 degrees)', wrong: ['parallel lines', 'rays', 'acute angles'] },
-      { term: 'parallel lines', def: 'lines that stay the same distance apart and never intersect', wrong: ['perpendicular lines', 'intersecting lines', 'line segments'] },
+      { term: 'line segment', isPlural: false, def: 'a part of a line with two definite endpoints', wrong: ['line', 'ray', 'angle'] },
+      { term: 'ray', isPlural: false, def: 'a part of a line that has one endpoint and extends endlessly in one direction', wrong: ['line segment', 'line', 'point'] },
+      { term: 'line', isPlural: false, def: 'a straight path that continues in both directions without ending', wrong: ['line segment', 'ray', 'point'] },
+      { term: 'perpendicular lines', isPlural: true, def: 'lines that intersect to form right angles (90 degrees)', wrong: ['parallel lines', 'rays', 'acute angles'] },
+      { term: 'parallel lines', isPlural: true, def: 'lines that stay the same distance apart and never intersect', wrong: ['perpendicular lines', 'intersecting lines', 'line segments'] },
     ];
     const t = pick(rng, terms);
-    return one('mc', [txt(`Which geometric term describes a ${t.def}?`)],
-      mc(rng, t.term, t.wrong),
-      `By definition, a ${t.term} is a ${t.def}.`);
+    const capTerm = t.term.charAt(0).toUpperCase() + t.term.slice(1);
+    const capWrong = t.wrong.map((w) => w.charAt(0).toUpperCase() + w.slice(1));
+    return one('mc', [txt(`Which geometric term describes ${t.def}?`)],
+      mc(rng, capTerm, capWrong),
+      t.isPlural ? `By definition, ${t.term} are ${t.def}.` : `By definition, a ${t.term} is ${t.def}.`);
   }
 
   if (d === 2) {
@@ -86,13 +88,14 @@ export const linesRaysAngles: Gen = (rng, d) => {
       { name: 'the plus sign (+)', prop: 'perpendicular lines' },
     ];
     const it = pick(rng, items);
+    const capName = it.name.charAt(0).toUpperCase() + it.name.slice(1);
     return one('mc', [txt(`Which geometric relationship is best modeled by ${it.name}?`)],
       mc(rng, it.prop, [
         it.prop === 'parallel lines' ? 'perpendicular lines' : 'parallel lines',
         'acute angles',
         'rays with common endpoints',
       ]),
-      `${it.name} models ${it.prop}.`);
+      `${capName} models ${it.prop}.`);
   }
 
   // d === 3: Select TWO statements that are true about lines and angles
@@ -167,32 +170,32 @@ export const classifyTriangles: Gen = (rng, d) => {
   if (d === 1) {
     // Direct angle classification: acute, right, obtuse
     const types = [
-      { name: 'right triangle', prop: 'has exactly one 90-degree right angle', wrong: ['acute triangle', 'obtuse triangle', 'equilateral triangle'] },
-      { name: 'acute triangle', prop: 'has all three angles measuring less than 90 degrees', wrong: ['right triangle', 'obtuse triangle', 'straight triangle'] },
-      { name: 'obtuse triangle', prop: 'has one angle measuring greater than 90 degrees', wrong: ['right triangle', 'acute triangle', 'equilateral triangle'] },
+      { name: 'Right triangle', article: 'a', prop: 'has exactly one 90-degree right angle', wrong: ['Acute triangle', 'Obtuse triangle', 'Equilateral triangle'] },
+      { name: 'Acute triangle', article: 'an', prop: 'has all three angles measuring less than 90 degrees', wrong: ['Right triangle', 'Obtuse triangle', 'Equilateral triangle'] },
+      { name: 'Obtuse triangle', article: 'an', prop: 'has one angle measuring greater than 90 degrees', wrong: ['Right triangle', 'Acute triangle', 'Equilateral triangle'] },
     ];
     const t = pick(rng, types);
-    return one('mc', [txt(`A triangle that ${t.prop} is classified as a(n) —`)],
+    return one('mc', [txt(`Which type of triangle ${t.prop}?`)],
       mc(rng, t.name, t.wrong),
-      `By definition, a triangle that ${t.prop} is a(n) ${t.name}.`);
+      `By definition, a triangle that ${t.prop} is ${t.article} ${t.name.toLowerCase()}.`);
   }
 
   if (d === 2) {
     // Given three angle measures, classify the triangle
     const triCases = [
-      { a1: 90, a2: 45, a3: 45, type: 'Right triangle', why: 'It has one right angle of 90°.' },
-      { a1: 90, a2: 30, a3: 60, type: 'Right triangle', why: 'It has one right angle of 90°.' },
-      { a1: 110, a2: 35, a3: 35, type: 'Obtuse triangle', why: 'One angle (110°) is greater than 90°.' },
-      { a1: 125, a2: 25, a3: 30, type: 'Obtuse triangle', why: 'One angle (125°) is greater than 90°.' },
-      { a1: 60, a2: 60, a3: 60, type: 'Acute triangle', why: 'All three angles are less than 90°.' },
-      { a1: 70, a2: 50, a3: 60, type: 'Acute triangle', why: 'All three angles are less than 90°.' },
+      { a1: 90, a2: 45, a3: 45, type: 'Right triangle', article: 'a', why: 'It has one right angle of 90°.' },
+      { a1: 90, a2: 30, a3: 60, type: 'Right triangle', article: 'a', why: 'It has one right angle of 90°.' },
+      { a1: 110, a2: 35, a3: 35, type: 'Obtuse triangle', article: 'an', why: 'One angle (110°) is greater than 90°.' },
+      { a1: 125, a2: 25, a3: 30, type: 'Obtuse triangle', article: 'an', why: 'One angle (125°) is greater than 90°.' },
+      { a1: 60, a2: 60, a3: 60, type: 'Acute triangle', article: 'an', why: 'All three angles are less than 90°.' },
+      { a1: 70, a2: 50, a3: 60, type: 'Acute triangle', article: 'an', why: 'All three angles are less than 90°.' },
     ];
     const tc = pick(rng, triCases);
     return one('mc', [
       txt(`A triangle has angle measures of ${tc.a1}°, ${tc.a2}°, and ${tc.a3}°. What kind of triangle is it?`),
     ],
-      mc(rng, tc.type, ['Acute triangle', 'Right triangle', 'Obtuse triangle', 'Straight triangle'].filter((x) => x !== tc.type)),
-      `${tc.why} Therefore it is a(n) ${tc.type}.`);
+      mc(rng, tc.type, ['Acute triangle', 'Right triangle', 'Obtuse triangle', 'Equilateral triangle'].filter((x) => x !== tc.type)),
+      `${tc.why} Therefore, it is ${tc.article} ${tc.type.toLowerCase()}.`);
   }
 
   // d === 3: Identifying property
@@ -402,12 +405,47 @@ export const measurementUnits: Gen = (rng, d) => {
       `${it.unit} is the standard benchmark for ${it.obj}.`);
   }
 
-  // d === 3: Relationship between sizes
-  return one('mc', [
-    txt(`A student knows that 1 meter = 100 centimeters. If an object is 4 meters long, how many centimeters long is it?`),
-  ],
-    mc(rng, '400 centimeters', ['40 centimeters', '4,000 centimeters', '104 centimeters']),
-    `Multiply the number of meters by 100: 4 × 100 = 400 centimeters.`);
+  // d === 3: Relative size relationships: "Unit A is how many times as long/heavy/large as Unit B?"
+  const relQuestions = [
+    {
+      stem: 'A meter is how many times as long as a centimeter?',
+      right: '100 times',
+      wrong: ['10 times', '1,000 times', '12 times'],
+      explain: 'Since 1 meter = 100 centimeters, a meter is 100 times as long as a centimeter.',
+    },
+    {
+      stem: 'A kilometer is how many times as long as a meter?',
+      right: '1,000 times',
+      wrong: ['100 times', '10 times', '10,000 times'],
+      explain: 'Since 1 kilometer = 1,000 meters, a kilometer is 1,000 times as long as a meter.',
+    },
+    {
+      stem: 'A yard is how many times as long as a foot?',
+      right: '3 times',
+      wrong: ['12 times', '4 times', '36 times'],
+      explain: 'Since 1 yard = 3 feet, a yard is 3 times as long as a foot.',
+    },
+    {
+      stem: 'A pound is how many times as heavy as an ounce?',
+      right: '16 times',
+      wrong: ['10 times', '12 times', '100 times'],
+      explain: 'Since 1 pound = 16 ounces, a pound is 16 times as heavy as an ounce.',
+    },
+    {
+      stem: 'A gallon is how many times the volume of a quart?',
+      right: '4 times',
+      wrong: ['2 times', '8 times', '16 times'],
+      explain: 'Since 1 gallon = 4 quarts, a gallon is 4 times the volume of a quart.',
+    },
+    {
+      stem: 'A kilogram is how many times as heavy as a gram?',
+      right: '1,000 times',
+      wrong: ['100 times', '10 times', '10,000 times'],
+      explain: 'Since 1 kilogram = 1,000 grams, a kilogram is 1,000 times as heavy as a gram.',
+    },
+  ];
+  const q = pick(rng, relQuestions);
+  return one('mc', [txt(q.stem)], mc(rng, q.right, q.wrong), q.explain);
 };
 
 // ---------- 4.8B convert units with tables ----------
@@ -426,10 +464,10 @@ export const convertUnitsTable: Gen = (rng, d) => {
 
   if (d === 1) {
     // Missing entry in row 4
-    const rows = [
-      [1, outputs[0]],
-      [2, outputs[1]],
-      [3, outputs[2]],
+    const rows: (string | number)[][] = [
+      [1, num(outputs[0])],
+      [2, num(outputs[1])],
+      [3, num(outputs[2])],
       [4, '?'],
     ];
     return one('mc', [
@@ -437,53 +475,53 @@ export const convertUnitsTable: Gen = (rng, d) => {
       table([c.from, c.to], rows),
       txt(`What number belongs in the table for 4 ${c.from.toLowerCase()}?`),
     ],
-      mc(rng, String(outputs[3]), [
-        String(outputs[3] + c.mult),
-        String(outputs[3] - c.mult),
-        String(4 + c.mult),
+      mc(rng, num(outputs[3]), [
+        num(outputs[3] + c.mult),
+        num(outputs[3] - c.mult),
+        num(4 + c.mult),
       ]),
-      `Each 1 ${c.from.toLowerCase().slice(0, -1)} equals ${c.mult} ${c.to.toLowerCase()}. Multiply by ${c.mult}: 4 × ${c.mult} = ${outputs[3]}.`);
+      `Each 1 ${c.from.toLowerCase().slice(0, -1)} equals ${num(c.mult)} ${c.to.toLowerCase()}. Multiply by ${num(c.mult)}: 4 × ${num(c.mult)} = ${num(outputs[3])}.`);
   }
 
   if (d === 2) {
     // Given 7 units, find conversion
     const count = randInt(rng, 5, 9);
     const ans = count * c.mult;
-    const rows = [
-      [1, outputs[0]],
-      [2, outputs[1]],
-      [3, outputs[2]],
+    const rows: (string | number)[][] = [
+      [1, num(outputs[0])],
+      [2, num(outputs[1])],
+      [3, num(outputs[2])],
     ];
     return one('mc', [
       txt(`Based on the conversion table, how many ${c.to.toLowerCase()} are equal to ${count} ${c.from.toLowerCase()}?`),
       table([c.from, c.to], rows),
     ],
-      mc(rng, `${ans} ${c.to.toLowerCase()}`, [
-        `${ans + c.mult} ${c.to.toLowerCase()}`,
-        `${count + c.mult} ${c.to.toLowerCase()}`,
-        `${ans - c.mult} ${c.to.toLowerCase()}`,
+      mc(rng, `${num(ans)} ${c.to.toLowerCase()}`, [
+        `${num(ans + c.mult)} ${c.to.toLowerCase()}`,
+        `${num(count + c.mult)} ${c.to.toLowerCase()}`,
+        `${num(ans - c.mult)} ${c.to.toLowerCase()}`,
       ]),
-      `The rule is multiply by ${c.mult}. ${count} × ${c.mult} = ${ans} ${c.to.toLowerCase()}.`);
+      `The rule is multiply by ${num(c.mult)}. ${count} × ${num(c.mult)} = ${num(ans)} ${c.to.toLowerCase()}.`);
   }
 
   // d === 3: Reverse conversion: smaller to larger
   const targetLarger = randInt(rng, 3, 8);
   const smallerVal = targetLarger * c.mult;
-  const rows = [
-    [1, outputs[0]],
-    [2, outputs[1]],
-    [3, outputs[2]],
+  const rows: (string | number)[][] = [
+    [1, num(outputs[0])],
+    [2, num(outputs[1])],
+    [3, num(outputs[2])],
   ];
   return one('mc', [
-    txt(`A scientist has ${smallerVal} ${c.to.toLowerCase()}. Using the table, how many ${c.from.toLowerCase()} is this equivalent to?`),
+    txt(`A scientist has ${num(smallerVal)} ${c.to.toLowerCase()}. Using the table, how many ${c.from.toLowerCase()} is this equivalent to?`),
     table([c.from, c.to], rows),
   ],
     mc(rng, `${targetLarger} ${c.from.toLowerCase()}`, [
       `${targetLarger + 1} ${c.from.toLowerCase()}`,
       `${targetLarger - 1} ${c.from.toLowerCase()}`,
-      `${smallerVal - c.mult} ${c.from.toLowerCase()}`,
+      `${num(smallerVal - c.mult)} ${c.from.toLowerCase()}`,
     ]),
-    `Divide the number of ${c.to.toLowerCase()} by ${c.mult}: ${smallerVal} ÷ ${c.mult} = ${targetLarger} ${c.from.toLowerCase()}.`);
+    `Divide the number of ${c.to.toLowerCase()} by ${num(c.mult)}: ${num(smallerVal)} ÷ ${num(c.mult)} = ${targetLarger} ${c.from.toLowerCase()}.`);
 };
 
 // ---------- 4.8C solve measurement problems ----------
@@ -524,7 +562,7 @@ export const solveMeasurementProblems: Gen = (rng, d) => {
         `${liters * 2 + 1} bottles`,
         `${liters * 10} bottles`,
       ]),
-      `1 liter = 1,000 milliliters, so ${liters} liters = ${totalML} milliliters. ${totalML} ÷ ${perBottleML} = ${bottles} bottles.`);
+      `1 liter = 1,000 milliliters, so ${liters} liters = ${num(totalML)} milliliters. ${num(totalML)} ÷ ${perBottleML} = ${bottles} bottles.`);
   }
 
   // d === 3: Mass / weight problem with addition and subtraction
