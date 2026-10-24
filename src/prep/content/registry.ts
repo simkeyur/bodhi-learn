@@ -11,6 +11,9 @@ import { G4_MATH_LESSONS } from './lessons/g4-math.ts';
 import { G5_MATH, G5_MATH_STRANDS } from '../data/standards/g5-math.ts';
 import { G5_GENERATORS, makeG5MathItem } from './generators/g5/index.ts';
 import { G5_MATH_LESSONS } from './lessons/g5-math.ts';
+import { G6_MATH, G6_MATH_STRANDS } from '../data/standards/g6-math.ts';
+import { G6_GENERATORS, makeG6MathItem } from './generators/g6/index.ts';
+import { G6_MATH_LESSONS } from './lessons/g6-math.ts';
 
 export interface GradeContent {
   grade: number;
@@ -45,6 +48,16 @@ export const GRADES: Record<number, GradeContent> = {
     makeItem: makeG5MathItem,
     lessons: G5_MATH_LESSONS,
     blueprint: { readiness: [2, 6, 3, 1], supporting: [4, 9, 5, 6] },
+  },
+  6: {
+    grade: 6,
+    subject: 'math',
+    strands: G6_MATH_STRANDS,
+    standards: G6_MATH,
+    generators: G6_GENERATORS,
+    makeItem: makeG6MathItem,
+    lessons: G6_MATH_LESSONS,
+    blueprint: { readiness: [4, 6, 3, 3], supporting: [11, 11, 3, 10] },
   },
 };
 

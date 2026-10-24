@@ -30,14 +30,16 @@ export type Figure =
   | { kind: 'area'; rows: number; cols: number } // 10x10 grid: `rows` tenths times `cols` tenths, overlap shaded darker
   | { kind: 'decimalGrids'; hundredths: number } // a decimal shown on hundred grids, one grid per whole
   | { kind: 'fractionBars'; bars: { parts: number; shaded: number; label?: string }[] }
-  | { kind: 'coordGrid'; max: number; points: { x: number; y: number; label?: string }[] }
+  | { kind: 'coordGrid'; max: number; min?: number; points: { x: number; y: number; label?: string }[] }
   | { kind: 'barGraph'; title: string; categories: string[]; values: number[]; step: number; axis: string }
   | { kind: 'dotPlot'; title: string; labels: string[]; counts: number[]; axis: string }
   | { kind: 'prism'; l: number; w: number; h: number }
   | { kind: 'numberLine'; from: number; to: number; step: number; decimals: number; point: number; pointLabel?: string }
   | { kind: 'protractor'; ray1: number; ray2: number }
   | { kind: 'anglePair'; a1: number; a2: number; label1?: string; label2?: string }
-  | { kind: 'symmetry'; shape: 'rectangle' | 'square' | 'rhombus' | 'trapezoid' | 'equilateralTriangle' | 'isoscelesTriangle' | 'scaleneTriangle' | 'hexagon'; line: 'v' | 'h' | 'd1' | 'd2' };
+  | { kind: 'symmetry'; shape: 'rectangle' | 'square' | 'rhombus' | 'trapezoid' | 'equilateralTriangle' | 'isoscelesTriangle' | 'scaleneTriangle' | 'hexagon'; line: 'v' | 'h' | 'd1' | 'd2' }
+  | { kind: 'boxPlot'; title?: string; min: number; q1: number; median: number; q3: number; max: number; from?: number; to?: number; step?: number; axis?: string }
+  | { kind: 'histogram'; title?: string; intervals: string[]; frequencies: number[]; step?: number; axis?: string };
 
 export type Block =
   | { kind: 'text'; text: string }

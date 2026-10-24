@@ -63,26 +63,41 @@ function FractionBars({ bars }: Of<'fractionBars'>) {
   );
 }
 
-// ---------- First-quadrant coordinate grid ----------
-function CoordGrid({ max, points }: Of<'coordGrid'>) {
-  const c = max > 10 ? 18 : 24, left = 30, bottom = 28, top = 14, right = 14;
-  const W = left + c * max + right, H = top + c * max + bottom;
-  const X = (x: number) => left + x * c, Y = (y: number) => top + (max - y) * c;
-  const every = max > 10 ? 2 : 1;
+// ---------- Coordinate grid (quadrant 1 or all 4 quadrants) ----------
+function CoordGrid({ max, min = 0, points }: Of<'coordGrid'>) {
+  const span = max - min;
+  const c = span > 12 ? 18 : 24, left = 32, bottom = 28, top = 16, right = 16;
+  const W = left + c * span + right, H = top + c * span + bottom;
+  const X = (x: number) => left + (x - min) * c;
+  const Y = (y: number) => top + (max - y) * c;
+  const every = span > 12 ? 2 : 1;
+  const yAxisX = X(0);
+  const xAxisY = Y(0);
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width={W}>
-      {Array.from({ length: max + 1 }, (_, i) => (
-        <g key={i}>
-          <line x1={X(i)} y1={Y(0)} x2={X(i)} y2={Y(max)} className="fig-gridline" />
-          <line x1={X(0)} y1={Y(i)} x2={X(max)} y2={Y(i)} className="fig-gridline" />
-          {i % every === 0 && <text x={X(i)} y={Y(0) + 17} textAnchor="middle" className="fig-tick">{i}</text>}
-          {i % every === 0 && i > 0 && <text x={X(0) - 8} y={Y(i) + 4} textAnchor="end" className="fig-tick">{i}</text>}
-        </g>
-      ))}
-      <line x1={X(0)} y1={Y(0)} x2={X(max) + 8} y2={Y(0)} className="fig-axis" />
-      <line x1={X(0)} y1={Y(0)} x2={X(0)} y2={Y(max) - 8} className="fig-axis" />
-      <text x={X(max) + 6} y={Y(0) - 6} className="fig-axis-name">x</text>
-      <text x={X(0) + 6} y={Y(max) - 2} className="fig-axis-name">y</text>
+      {Array.from({ length: span + 1 }, (_, i) => {
+        const v = min + i;
+        return (
+          <g key={i}>
+            <line x1={X(v)} y1={Y(min)} x2={X(v)} y2={Y(max)} className="fig-gridline" />
+            <line x1={X(min)} y1={Y(v)} x2={X(max)} y2={Y(v)} className="fig-gridline" />
+            {v % every === 0 && (
+              <text x={X(v)} y={xAxisY + (min < 0 && 0 === max ? -6 : 17)} textAnchor="middle" className="fig-tick">
+                {v < 0 ? `−${Math.abs(v)}` : v}
+              </text>
+            )}
+            {v % every === 0 && v !== 0 && (
+              <text x={yAxisX - 8} y={Y(v) + 4} textAnchor="end" className="fig-tick">
+                {v < 0 ? `−${Math.abs(v)}` : v}
+              </text>
+            )}
+          </g>
+        );
+      })}
+      <line x1={X(min) - 8} y1={xAxisY} x2={X(max) + 8} y2={xAxisY} className="fig-axis" />
+      <line x1={yAxisX} y1={Y(min) + 8} x2={yAxisX} y2={Y(max) - 8} className="fig-axis" />
+      <text x={X(max) + 6} y={xAxisY - 6} className="fig-axis-name">x</text>
+      <text x={yAxisX + 6} y={Y(max) - 2} className="fig-axis-name">y</text>
       {points.map((p, i) => (
         <g key={i}>
           <circle cx={X(p.x)} cy={Y(p.y)} r={5} className="fig-point" />
@@ -401,6 +416,70 @@ function SymmetryFigure({ shape, line }: Of<'symmetry'>) {
   );
 }
 
+// ---------- Box plot (box-and-whisker) ----------
+function BoxPlot({ title, min, q1, median, q3, max, from, to, step, axis }: Of<'boxPlot'>) {
+  const f = from ?? Math.floor((min - 2) / 5) * 5;
+  const t = to ?? Math.ceil((max + 2) / 5) * 5;
+  const s = step ?? (t - f <= 30 ? 5 : 10);
+  const span = Math.max(1, t - f);
+  const n = Math.round(span / s), gap = 44, left = 40;
+  const W = left * 2 + n * gap;
+  const axisY = 74;
+  const boxTop = 24, boxH = 30, boxMid = boxTop + boxH / 2;
+  const X = (v: number) => left + ((v - f) / span) * n * gap;
+  return (
+    <svg viewBox={`0 0 ${W} ${axis ? 116 : 100}`} width={W}>
+      {title && <text x={W / 2} y={16} textAnchor="middle" className="fig-title">{title}</text>}
+      <line x1={left - 18} y1={axisY} x2={W - left + 18} y2={axisY} className="fig-axis" />
+      {Array.from({ length: n + 1 }, (_, i) => {
+        const v = f + i * s;
+        return (
+          <g key={i}>
+            <line x1={X(v)} y1={axisY - 6} x2={X(v)} y2={axisY + 6} className="fig-axis" />
+            <text x={X(v)} y={axisY + 20} textAnchor="middle" className="fig-tick">{v < 0 ? `−${Math.abs(v)}` : v}</text>
+          </g>
+        );
+      })}
+      {axis && <text x={W / 2} y={axisY + 36} textAnchor="middle" className="fig-axis-label">{axis}</text>}
+      <line x1={X(min)} y1={boxMid} x2={X(q1)} y2={boxMid} className="fig-whisker" />
+      <line x1={X(min)} y1={boxMid - 10} x2={X(min)} y2={boxMid + 10} className="fig-whisker" />
+      <rect x={X(q1)} y={boxTop} width={Math.max(2, X(q3) - X(q1))} height={boxH} className="fig-box-plot" />
+      <line x1={X(median)} y1={boxTop} x2={X(median)} y2={boxTop + boxH} className="fig-whisker" strokeWidth={2.5} />
+      <line x1={X(q3)} y1={boxMid} x2={X(max)} y2={boxMid} className="fig-whisker" />
+      <line x1={X(max)} y1={boxMid - 10} x2={X(max)} y2={boxMid + 10} className="fig-whisker" />
+    </svg>
+  );
+}
+
+// ---------- Histogram ----------
+function Histogram({ title, intervals, frequencies, step = 1, axis }: Of<'histogram'>) {
+  const top = Math.max(step * 4, Math.ceil(Math.max(...frequencies) / step) * step + step);
+  const ticks = Math.round(top / step);
+  const left = 54, bottom = 44, head = title ? 30 : 16, plotH = 170, bw = 64;
+  const W = left + intervals.length * bw + 20, H = head + plotH + bottom;
+  const Y = (v: number) => head + plotH - (v / top) * plotH;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      {title && <text x={left + (intervals.length * bw) / 2} y={16} textAnchor="middle" className="fig-title">{title}</text>}
+      {Array.from({ length: ticks + 1 }, (_, i) => (
+        <g key={i}>
+          <line x1={left} y1={Y(i * step)} x2={W - 16} y2={Y(i * step)} className="fig-gridline" />
+          <text x={left - 8} y={Y(i * step) + 4} textAnchor="end" className="fig-tick">{i * step}</text>
+        </g>
+      ))}
+      {frequencies.map((f, i) => (
+        <g key={i}>
+          <rect x={left + i * bw} y={Y(f)} width={bw} height={Y(0) - Y(f)} className="fig-bar" />
+          <text x={left + i * bw + bw / 2} y={Y(0) + 18} textAnchor="middle" className="fig-tick">{intervals[i]}</text>
+        </g>
+      ))}
+      <line x1={left} y1={Y(0)} x2={W - 16} y2={Y(0)} className="fig-axis" />
+      <line x1={left} y1={Y(0)} x2={left} y2={head - 4} className="fig-axis" />
+      <text x={14} y={head + plotH / 2} textAnchor="middle" transform={`rotate(-90 14 ${head + plotH / 2})`} className="fig-axis-label">{axis}</text>
+    </svg>
+  );
+}
+
 export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
   const body = (() => {
     switch (figure.kind) {
@@ -415,6 +494,8 @@ export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
       case 'protractor': return <Protractor {...figure} />;
       case 'anglePair': return <AnglePair {...figure} />;
       case 'symmetry': return <SymmetryFigure {...figure} />;
+      case 'boxPlot': return <BoxPlot {...figure} />;
+      case 'histogram': return <Histogram {...figure} />;
     }
   })();
   return <div className="fig" role="img" aria-label={alt}>{body}</div>;

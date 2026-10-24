@@ -32,4 +32,6 @@
 .prep .fig-protractor-lbl-inner { fill: var(--blue-700); font-size: 10px; font-weight: 700; }
 .prep .fig-protractor-svg { max-width: 100%; }
 .prep .fig-tick-sm { fill: var(--ink-2); font-size: 10px; font-weight: 600; }
+.prep .fig-box-plot { fill: var(--blue-100); stroke: var(--blue-700); stroke-width: 2; }
+.prep .fig-whisker { stroke: var(--blue-700); stroke-width: 2; stroke-linecap: round; }
 
