@@ -8,6 +8,9 @@ import type { Gen } from './generators/build.ts';
 import { G1_MATH, G1_MATH_STRANDS } from '../data/standards/g1-math.ts';
 import { G1_GENERATORS, makeG1MathItem } from './generators/g1/index.ts';
 import { G1_MATH_LESSONS } from './lessons/g1-math.ts';
+import { G2_MATH, G2_MATH_STRANDS } from '../data/standards/g2-math.ts';
+import { G2_GENERATORS, makeG2MathItem } from './generators/g2/index.ts';
+import { G2_MATH_LESSONS } from './lessons/g2-math.ts';
 import { G3_MATH, G3_MATH_STRANDS } from '../data/standards/g3-math.ts';
 import { G3_GENERATORS, makeG3MathItem } from './generators/g3/index.ts';
 import { G3_MATH_LESSONS } from './lessons/g3-math.ts';
@@ -50,6 +53,16 @@ export const GRADES: Record<number, GradeContent> = {
     makeItem: makeG1MathItem,
     lessons: G1_MATH_LESSONS,
     blueprint: { readiness: [3, 4, 3, 3], supporting: [4, 7, 8, 7] },
+  },
+  2: {
+    grade: 2,
+    subject: 'math',
+    strands: G2_MATH_STRANDS,
+    standards: G2_MATH,
+    generators: G2_GENERATORS,
+    makeItem: makeG2MathItem,
+    lessons: G2_MATH_LESSONS,
+    blueprint: { readiness: [4, 5, 4, 3], supporting: [6, 4, 8, 9] },
   },
   3: {
     grade: 3,
