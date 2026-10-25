@@ -210,7 +210,7 @@ for (const bracket of BRACKETS) {
 import fs from 'fs';
 import { MATH_REGISTRY, makeMathQuestion } from '../src/content/mathGen.ts';
 import { QUIZ_GAMES, gameById, quizGamesFor } from '../src/data/quizGames.ts';
-import { BUDDY_MAX_AGE, STICKER_MAX_AGE, hasBuddy, hasStickers } from '../src/data/subjects.ts';
+import { BUDDY_MAX_AGE, hasBuddy } from '../src/data/subjects.ts';
 import { GATE_CHALLENGES, applyOp, combinations, evaluate, goalTable, isSolved, layout, outputId, truthTable } from '../src/data/gates.ts';
 import { ALPHABET, atbash, checkCipher, lettersOnly, makeCipherPuzzle, makeCipherRound, shiftText } from '../src/data/cipher.ts';
 import { canMove, isSolved as hanoiSolved, move, newGame, optimalMoves, solveFrom } from '../src/data/hanoi.ts';
@@ -356,7 +356,7 @@ test('saved data round-trips and old documents (bracket only) still load', () =>
   assert.deepEqual(withSolved.solved, ['gates-1', 'hanoi-3']);
   assert.deepEqual(fromDocData({}).solved, []);
 
-  const old = fromDocData({ profile: { kidName: 'Mia', ageBracket: 'grade1' }, settings: {}, progress: { stars: 3, unlockedStickers: ['st1'], placedStickers: [] } });
+  const old = fromDocData({ profile: { kidName: 'Mia', ageBracket: 'grade1' }, settings: {}, progress: {} });
   assert.equal(old.age, 7);
   assert.equal(old.skills.reading.level, levelForAge(7));
 
@@ -501,10 +501,6 @@ test('math generator: shapes, word problems and decimals have the right answer',
   assert.equal(seen.size, rules.length, `some rules never matched: ${rules.filter(([re]) => !seen.has(String(re))).map(([re]) => re)}`);
 });
 
-test('the sticker book is only for ages 6 and under', () => {
-  assert.equal(STICKER_MAX_AGE, 6);
-  assert.deepEqual([4, 5, 6, 7, 10, 14].map(hasStickers), [true, true, true, false, false, false]);
-});
 
 test("Buddy's voice button is only for ages 5 and under", () => {
   assert.equal(BUDDY_MAX_AGE, 5);

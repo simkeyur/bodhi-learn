@@ -18,7 +18,7 @@ const itemClip = (x: PatternItem) => (typeof x === 'number' ? clip.number(x) : c
 
 // Pattern Parade: spot the repeating pattern (or counting rule) and say what comes next or what is missing.
 export const PatternWorld: React.FC<PatternWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { celebrate, ageBracket } = useApp();
   const { sayThen, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_patterns'));
 
@@ -52,7 +52,7 @@ export const PatternWorld: React.FC<PatternWorldProps> = ({ onBack }) => {
     if (option === q.answer) {
       sound.playSuccess();
       setFeedback('correct');
-      addStars(1);
+      celebrate();
       sayThen([clip.cheer(), clip.phrase('pattern_yes')], () => newQuestion(bracket), 1800);
     } else {
       sound.playGentleTryAgain();

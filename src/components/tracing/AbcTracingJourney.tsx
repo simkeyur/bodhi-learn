@@ -13,7 +13,7 @@ interface AbcTracingJourneyProps {
 }
 
 export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, onGoToWordTracing }) => {
-  const { addStars } = useApp();
+  const { celebrate } = useApp();
   useKidTimers();
   const [letterIndex, setLetterIndex] = useState(0);
   const [isUppercase, setIsUppercase] = useState(true);
@@ -61,7 +61,7 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
     if (isCompleted || !hasDrawn) return;
     setIsCompleted(true);
     sound.playStarFanfare();
-    addStars(1);
+    celebrate();
     speech.say([clip.cheer(), clip.phrase('great_tracing')]);
   };
 

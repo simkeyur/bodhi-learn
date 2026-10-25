@@ -20,7 +20,6 @@ const BULB_R = 34;
 const ON = '#16A34A';
 const OFF = '#94A3B8';
 
-const starsFor = (ch: GateChallenge) => Math.max(1, ch.level - 5);
 
 const Circuit: React.FC<{
   ch: GateChallenge;
@@ -131,13 +130,12 @@ const GoalTable: React.FC<{ ch: GateChallenge; choice: Choice; showResult: boole
 };
 
 export const LogicGatesWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
-  const { solved, markSolved, addStars } = useApp();
+  const { solved, markSolved, celebrate } = useApp();
   const [current, setCurrent] = useState<GateChallenge | null>(null);
   const [choice, setChoice] = useState<Choice>({});
   const [switches, setSwitches] = useState<Record<string, boolean>>({});
   const [hinted, setHinted] = useState(false);
   const [result, setResult] = useState<'idle' | 'wrong' | 'right'>('idle');
-  const [earned, setEarned] = useState(0);
 
   const firstUnsolved = GATE_CHALLENGES.find((c) => !solved.includes(c.id));
 
@@ -148,7 +146,6 @@ export const LogicGatesWorld: React.FC<{ onBack: () => void }> = ({ onBack }) =>
     setSwitches(Object.fromEntries(ch.switches.map((s) => [s, false])));
     setHinted(false);
     setResult('idle');
-    setEarned(0);
   };
 
   const cycle = (id: string) => {
@@ -171,10 +168,8 @@ export const LogicGatesWorld: React.FC<{ onBack: () => void }> = ({ onBack }) =>
   const check = () => {
     if (!current || !complete) return;
     if (isSolved(current, choice)) {
-      const first = !hinted && markSolved(current.id);
-      const stars = first ? starsFor(current) : 0;
-      if (stars > 0) addStars(stars); else sound.playSuccess();
-      setEarned(stars);
+      // The big celebration is for the first solve without a hint
+      if (!hinted && markSolved(current.id)) celebrate(); else sound.playSuccess();
       setResult('right');
     } else {
       sound.playGentleTryAgain();
@@ -245,7 +240,6 @@ export const LogicGatesWorld: React.FC<{ onBack: () => void }> = ({ onBack }) =>
         {result === 'right' && (
           <div className="quiz-explain" role="status">
             <p><strong>The bulb behaves exactly right!</strong></p>
-            <p>{earned > 0 ? `+${earned} ⭐` : hinted ? 'Solve it without a hint for stars.' : 'You already solved this one.'}</p>
             <div className="quiz-actions">
               <button className="quiz-primary" onClick={nextChallenge}>Next challenge</button>
               <button className="quiz-secondary" onClick={() => setCurrent(null)}>All challenges</button>

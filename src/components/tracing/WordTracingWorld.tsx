@@ -13,7 +13,7 @@ interface WordTracingWorldProps {
 }
 
 export const WordTracingWorld: React.FC<WordTracingWorldProps> = ({ onBack, onGoToAbcJourney }) => {
-  const { addStars } = useApp();
+  const { celebrate } = useApp();
   useKidTimers();
   const [wordIndex, setWordIndex] = useState(0);
   const [selectedBrush, setSelectedBrush] = useState<string>('rainbow');
@@ -52,7 +52,7 @@ export const WordTracingWorld: React.FC<WordTracingWorldProps> = ({ onBack, onGo
     if (isCompleted || !hasDrawn) return;
     setIsCompleted(true);
     sound.playStarFanfare();
-    addStars(1);
+    celebrate();
     speech.say([clip.cheer(), clip.phrase('you_spelled_word')]);
   };
 

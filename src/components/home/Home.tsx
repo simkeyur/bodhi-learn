@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Sparkles, Volume2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge, hasBuddy, hasStickers } from '../../data/subjects';
+import { LEVEL_NAMES, SUBJECT_INFO, SUBJECT_ORDER, gamesForAge, hasBuddy } from '../../data/subjects';
 import { MODE_LABEL, quizGamesFor } from '../../data/quizGames';
 import { sound } from '../../utils/sound';
 import { speech, clip } from '../../utils/speech';
@@ -40,7 +40,7 @@ const SlimCard: React.FC<SlimCardProps> = ({ icon, title, sub, color, dark, tint
 );
 
 export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
-  const { kidName, stars, age, ageBand, skills } = useApp();
+  const { kidName, age, ageBand, skills } = useApp();
   const showLevels = ageBand !== 'little';
 
   const go = (view: string) => {
@@ -50,8 +50,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
 
   const hearBuddy = () => {
     sound.playPop();
-    const starClips = stars >= 1 && stars <= 20 ? [clip.phrase('you_have'), clip.number(stars), clip.phrase('stars_word')] : [];
-    speech.say([clip.phrase('buddy_hello'), ...starClips, clip.phrase('what_to_play')]);
+    speech.say([clip.phrase('buddy_hello'), clip.phrase('what_to_play')]);
   };
 
   return (
@@ -109,20 +108,6 @@ export const Home: React.FC<HomeProps> = ({ onSelectView }) => {
         );
       })}
 
-      {hasStickers(age) && (
-        <section className="hub-section" style={{ '--sc': '#818CF8', '--sd': '#4F46E5', '--st': '#EEF2FF' } as React.CSSProperties}>
-          <div className="hub-section-header">
-            <span className="hub-section-icon" aria-hidden>🎨</span>
-            <div className="hub-section-heading">
-              <h3 className="hub-section-title">Rewards</h3>
-              <p className="hub-section-desc">Spend your stars on stickers</p>
-            </div>
-          </div>
-          <div className="hub-grid">
-            <SlimCard icon="🎨" title="Sticker Book" sub={`You have ${stars} ⭐ to spend`} meta="Collect and decorate" color="#818CF8" dark="#4F46E5" tint="#EEF2FF" onClick={() => go('stickers')} />
-          </div>
-        </section>
-      )}
     </div>
   );
 };

@@ -9,7 +9,6 @@ import { learner as prepLearner } from '../prep/learner/store';
 import {
   DEFAULT_STATE,
   MAX_BOT_SOLVED,
-  MAX_PLACED_STICKERS,
   MAX_SOLVED,
   bandForAge,
   bracketForAge,
@@ -26,13 +25,12 @@ import {
   unionIds,
   type AgeBand,
   type AgeBracket,
-  type PlacedSticker,
   type Skills,
   type Subject,
   type SyncedState,
 } from '../firebase/schema';
 
-export type { AgeBand, AgeBracket, PlacedSticker, Skills, Subject };
+export type { AgeBand, AgeBracket, Skills, Subject };
 
 interface CloudAccount {
   user: CloudUser | null;
@@ -47,13 +45,7 @@ interface CloudAccount {
 }
 
 interface AppContextType {
-  stars: number;
-  addStars: (count: number) => void;
-  unlockedStickers: string[];
-  unlockSticker: (stickerId: string, cost: number) => boolean;
-  placedStickers: PlacedSticker[];
-  placeSticker: (stickerId: string, x: number, y: number) => void;
-  removePlacedSticker: (id: string) => void;
+  celebrate: () => void; // confetti and a fanfare when a child finishes something
   botSolved: string[];
   markBotSolved: (levelId: string) => boolean; // true the first time a level is solved
   solved: string[];
@@ -79,7 +71,6 @@ interface AppContextType {
   setSpeechEnabled: (enabled: boolean) => void;
   voiceSpeed: number;
   setVoiceSpeed: (speed: number) => void;
-  triggerCelebration: () => void;
   cloud: CloudAccount;
 }
 
@@ -103,8 +94,6 @@ const parseJson = <T,>(raw: string, ok: (v: unknown) => v is T): T | undefined =
 };
 
 const isStringArray = (v: unknown): v is string[] => Array.isArray(v) && v.every((x) => typeof x === 'string');
-const isStickerArray = (v: unknown): v is PlacedSticker[] =>
-  Array.isArray(v) && v.every((s) => s && typeof s.id === 'string' && typeof s.stickerId === 'string' && typeof s.x === 'number' && typeof s.y === 'number');
 
 const store = (key: string, value: string) => {
   try {
@@ -130,15 +119,6 @@ const wasOnboarded = (): boolean => {
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [onboarded, setOnboarded] = useState<boolean>(wasOnboarded);
-
-  const [stars, setStars] = useState<number>(() =>
-    readStored('bodhi_stars', (r) => { const n = parseInt(r, 10); return Number.isInteger(n) && n >= 0 ? n : undefined; }, DEFAULT_STATE.stars));
-
-  const [unlockedStickers, setUnlockedStickers] = useState<string[]>(() =>
-    readStored('bodhi_stickers', (r) => parseJson(r, isStringArray), DEFAULT_STATE.unlockedStickers));
-
-  const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>(() =>
-    readStored('bodhi_placed_stickers', (r) => parseJson(r, isStickerArray), DEFAULT_STATE.placedStickers));
 
   const [botSolved, setBotSolved] = useState<string[]>(() =>
     readStored('bodhi_bot_solved', (r) => parseJson(r, isStringArray), DEFAULT_STATE.botSolved));
@@ -186,9 +166,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Nothing is written to this device until the welcome questions are answered, so a visitor who
   // leaves halfway doesn't get a made-up age saved for them
   useEffect(() => { if (onboarded) store(ONBOARDED_KEY, 'true'); }, [onboarded]);
-  useEffect(() => { if (onboarded) store('bodhi_stars', stars.toString()); }, [onboarded, stars]);
-  useEffect(() => { if (onboarded) store('bodhi_stickers', JSON.stringify(unlockedStickers)); }, [onboarded, unlockedStickers]);
-  useEffect(() => { if (onboarded) store('bodhi_placed_stickers', JSON.stringify(placedStickers)); }, [onboarded, placedStickers]);
   useEffect(() => { if (onboarded) store('bodhi_bot_solved', JSON.stringify(botSolved)); }, [onboarded, botSolved]);
   useEffect(() => { if (onboarded) store('bodhi_solved', JSON.stringify(solved)); }, [onboarded, solved]);
   useEffect(() => { if (onboarded) store('bodhi_exact_age', String(age)); }, [onboarded, age]);
@@ -258,8 +235,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Cloud sync (Firestore) for signed-in accounts; guests just use this device
   const synced = useMemo<SyncedState>(
-    () => ({ kidName, age, grade: gradeChoice, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills }),
-    [kidName, age, gradeChoice, speechEnabled, voiceSpeed, stars, unlockedStickers, placedStickers, botSolved, solved, skills],
+    () => ({ kidName, age, grade: gradeChoice, speechEnabled, voiceSpeed, botSolved, solved, skills }),
+    [kidName, age, gradeChoice, speechEnabled, voiceSpeed, botSolved, solved, skills],
   );
 
   const applyCloudState = (next: SyncedState) => {
@@ -269,9 +246,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setSkills(next.skills);
     setSpeechEnabled(next.speechEnabled);
     setVoiceSpeed(next.voiceSpeed);
-    setStars(next.stars);
-    setUnlockedStickers(next.unlockedStickers);
-    setPlacedStickers(next.placedStickers);
     setBotSolved(next.botSolved);
     setSolved(next.solved);
   };
@@ -280,7 +254,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const handleSignedOut = () => {
     try {
       // The persistence effects pause while not onboarded, so clear the old family's copy here
-      ['bodhi_stars', 'bodhi_stickers', 'bodhi_placed_stickers', 'bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_grade', 'bodhi_mode', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
+      ['bodhi_bot_solved', 'bodhi_solved', 'bodhi_age', 'bodhi_exact_age', 'bodhi_grade', 'bodhi_mode', 'bodhi_skills', 'bodhi_kid_name', ONBOARDED_KEY]
         .forEach((k) => localStorage.removeItem(k));
     } catch { /* ignore */ }
     prepLearner.resetProgress();
@@ -310,7 +284,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return () => window.removeEventListener('online', run);
   }, []);
 
-  const triggerCelebration = () => {
+  const celebrate = () => {
     sound.playStarFanfare();
     confetti({
       particleCount: 70,
@@ -320,62 +294,25 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   };
 
-  const addStars = (count: number) => {
-    setStars((prev) => prev + count);
-    triggerCelebration();
-  };
-
-  const unlockSticker = (stickerId: string, cost: number): boolean => {
-    if (stars < cost || unlockedStickers.includes(stickerId)) {
-      return false;
-    }
-    setStars((prev) => prev - cost);
-    setUnlockedStickers((prev) => [...prev, stickerId]);
-    sound.playSuccess();
-    return true;
-  };
-
-  const placeSticker = (stickerId: string, x: number, y: number) => {
-    const newPlaced: PlacedSticker = {
-      id: 'pl-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
-      stickerId,
-      x,
-      y,
-    };
-    // The board keeps the most recent stickers so the saved progress stays small
-    setPlacedStickers((prev) => [...prev, newPlaced].slice(-MAX_PLACED_STICKERS));
-    sound.playPop(650);
-  };
-
-  // Returns true only the first time, so replaying a solved level doesn't pay out stars again
+  // Returns true only the first time a level is solved
   const markBotSolved = (levelId: string): boolean => {
     if (botSolved.includes(levelId)) return false;
     setBotSolved((prev) => unionIds(prev, [levelId]).slice(0, MAX_BOT_SOLVED));
     return true;
   };
 
-  // Returns true only the first time, so replaying a solved puzzle doesn't pay out stars again
+  // Returns true only the first time a puzzle is solved
   const markSolved = (puzzleId: string): boolean => {
     if (solved.includes(puzzleId)) return false;
     setSolved((prev) => unionIds(prev, [puzzleId]).slice(0, MAX_SOLVED));
     return true;
   };
 
-  const removePlacedSticker = (id: string) => {
-    setPlacedStickers((prev) => prev.filter((p) => p.id !== id));
-    sound.playPop(400);
-  };
 
   return (
     <AppContext.Provider
       value={{
-        stars,
-        addStars,
-        unlockedStickers,
-        unlockSticker,
-        placedStickers,
-        placeSticker,
-        removePlacedSticker,
+        celebrate,
         botSolved,
         markBotSolved,
         solved,
@@ -401,7 +338,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSpeechEnabled,
         voiceSpeed,
         setVoiceSpeed,
-        triggerCelebration,
         cloud,
       }}
     >

@@ -9,7 +9,6 @@ import { Welcome } from './components/onboarding/Welcome';
 import { Home } from './components/home/Home';
 import { QuizWorld } from './components/quiz/QuizWorld';
 import { gameById } from './data/quizGames';
-import { hasStickers } from './data/subjects';
 import { useApp } from './context/AppContext';
 import { PhonicsWorld } from './components/reading/PhonicsWorld';
 import { SightWordsWorld } from './components/reading/SightWordsWorld';
@@ -20,7 +19,6 @@ import { PatternWorld } from './components/logic/PatternWorld';
 import { MachineWorld } from './components/logic/MachineWorld';
 import { CountingWorld } from './components/math/CountingWorld';
 import { VisualMathWorld } from './components/math/VisualMathWorld';
-import { StickerBook } from './components/gamification/StickerBook';
 import { SettingsModal } from './components/parent/SettingsModal';
 import { AbcTracingJourney } from './components/tracing/AbcTracingJourney';
 import { WordTracingWorld } from './components/tracing/WordTracingWorld';
@@ -54,7 +52,7 @@ export const BodhiApp: React.FC = () => {
   // A reload while in a game comes back to that game
   const [currentView, setCurrentViewState] = useState<string>(() => viewState()?.bodhiView ?? 'home');
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
-  const { ageBand, age, onboarded, isPrep } = useApp();
+  const { ageBand, onboarded, isPrep } = useApp();
 
   // Lets the CSS give each age band its own look
   useEffect(() => {
@@ -150,9 +148,6 @@ export const BodhiApp: React.FC = () => {
         return <LogicGatesWorld onBack={backHome} />;
       case 'hanoi':
         return <HanoiWorld onBack={backHome} />;
-      case 'stickers':
-        if (!hasStickers(age)) return <Home onSelectView={setCurrentView} />;
-        return <StickerBook onBack={backHome} />;
       case 'reading':
         return <PhonicsWorld onBack={backHome} />;
       case 'home':

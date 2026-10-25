@@ -42,7 +42,7 @@ const DirIcon: React.FC<{ dir: Dir; size?: number }> = ({ dir, size = 26 }) => {
 // Code the Bot: build a program from arrow blocks, press Go, and watch the robot run it.
 // Teaches sequencing, loops (Repeat) and debugging (the block that failed is highlighted).
 export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket, botSolved, markBotSolved } = useApp();
+  const { celebrate, ageBracket, botSolved, markBotSolved } = useApp();
   const { later, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_codebot'));
   const repeatTipShown = useRef(false);
@@ -143,7 +143,7 @@ export const CodeBotWorld: React.FC<CodeBotWorldProps> = ({ onBack }) => {
       setEarnedStar(firstTime);
       setStatus('won');
       sound.playSuccess();
-      if (firstTime) addStars(1);
+      if (firstTime) celebrate();
       speech.say([clip.cheer(), clip.phrase('bot_made_it')]);
     } else {
       setStatus(outcome);

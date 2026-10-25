@@ -17,7 +17,7 @@ interface SightWordsWorldProps {
 }
 
 export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { celebrate, ageBracket } = useApp();
   const { later, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_sight_words'));
   const [activeLevel, setActiveLevel] = useState<'pre-k' | 'kindergarten' | 'grade1'>(ageBracket);
@@ -76,7 +76,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
       if (spelled === currentWord.word) {
         setIsCompleted(true);
         sound.playSuccess();
-        addStars(1);
+        celebrate();
         speech.say([clip.cheer(), clip.spelling(currentWord.word)]);
       } else {
         sound.playGentleTryAgain();

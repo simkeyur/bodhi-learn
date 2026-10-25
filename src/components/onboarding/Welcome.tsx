@@ -106,7 +106,7 @@ export const Welcome: React.FC = () => {
             <p className="welcome-sub">
               {older
                 ? 'Sign in with Google and your progress follows you to every device.'
-                : 'Sign in with Google and your stars, stickers and levels follow you to every device.'}
+                : 'Sign in with Google and your levels and progress follow you to every device.'}
             </p>
             <button
               className="welcome-primary"

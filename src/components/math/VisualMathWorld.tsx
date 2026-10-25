@@ -12,7 +12,7 @@ interface VisualMathWorldProps {
 const FOOD_EMOJIS = ['🍎', '🍓', '🍌', '🥕', '🍪', '⭐'];
 
 export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { celebrate, ageBracket } = useApp();
   const { sayThen, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_math'));
   const [operation, setOperation] = useState<'add' | 'subtract'>('add');
@@ -75,7 +75,7 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
     if (selected === correctAnswer) {
       sound.playSuccess();
       setFeedback('correct');
-      addStars(1);
+      celebrate();
       sayThen(
         [clip.cheer(), clip.number(num1), opClip, clip.number(num2), clip.math('equals'), clip.number(correctAnswer)],
         generateProblem,

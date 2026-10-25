@@ -11,7 +11,7 @@ interface PhonicsWorldProps {
 }
 
 export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
-  const { addStars } = useApp();
+  const { celebrate } = useApp();
   const { sayThen } = useKidTimers();
   const [selectedLetter, setSelectedLetter] = useState<PhonicLetter>(ALPHABET_DATA[0]);
   const [gameMode, setGameMode] = useState<'explore' | 'quest'>('explore');
@@ -54,7 +54,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
     if (item.letter === questTarget.letter) {
       sound.playSuccess();
       setQuestFeedback('correct');
-      addStars(1);
+      celebrate();
       sayThen([clip.cheer(), clip.phonics(item.letter)], startNewQuest);
     } else {
       sound.playGentleTryAgain();

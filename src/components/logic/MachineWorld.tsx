@@ -34,7 +34,7 @@ const Machine: React.FC<{ spinning?: boolean }> = ({ spinning }) => (
 // Magic Machine: numbers go in and come out changed. Work out the secret rule from the
 // examples, then predict what comes out for a new number. (A function, in programming words.)
 export const MachineWorld: React.FC<MachineWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { celebrate, ageBracket } = useApp();
   const { sayThen, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_machine'));
 
@@ -70,7 +70,7 @@ export const MachineWorld: React.FC<MachineWorldProps> = ({ onBack }) => {
     if (option === q.answer) {
       sound.playSuccess();
       setFeedback('correct');
-      addStars(1);
+      celebrate();
       // The reveal: say the secret rule so the child hears the idea, not just "correct"
       sayThen([clip.cheer(), ...ruleClips(q.rule)], () => newQuestion(bracket), 3200);
     } else {

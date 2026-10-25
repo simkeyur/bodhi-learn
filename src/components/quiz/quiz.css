@@ -75,7 +75,6 @@
 .quiz-intro h2 { font-size: 1.8rem; color: #0F172A; }
 .quiz-sub { color: #475569; font-weight: 600; max-width: 34ch; }
 .quiz-hint { color: #64748B; font-size: 0.9rem; font-weight: 600; max-width: 40ch; }
-.quiz-stars { font: 700 2rem var(--font-display); color: #D97706; }
 
 .quiz-stepper {
   display: flex;

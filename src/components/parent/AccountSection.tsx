@@ -56,7 +56,7 @@ export const AccountSection: React.FC = () => {
           <Cloud size={20} /> Save progress to the cloud
         </div>
         <p style={{ fontSize: '0.9rem', color: '#334155', lineHeight: 1.45, marginBottom: 12 }}>
-          Sign in with Google to keep stars and stickers safe and use them on any device. Progress on this device is
+          Sign in with Google to keep progress safe and use them on any device. Progress on this device is
           saved to your account. If the account already has saved progress, that is used instead.
         </p>
         <button
@@ -130,7 +130,7 @@ export const AccountSection: React.FC = () => {
         <div style={{ background: '#FEF2F2', border: '2px solid #FECACA', borderRadius: 12, padding: 12 }}>
           <div style={{ fontWeight: 700, color: '#991B1B', marginBottom: 6 }}>Delete everything?</div>
           <p style={{ fontSize: '0.88rem', color: '#7F1D1D', lineHeight: 1.45, marginBottom: 10 }}>
-            This permanently removes your account and all saved stars, stickers and settings. It can't be undone.
+            This permanently removes your account and all saved progress and settings. It can't be undone.
           </p>
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={() => setConfirmDelete(false)} className="kid-btn btn-white" style={{ flex: 1, fontSize: '0.95rem' }}>

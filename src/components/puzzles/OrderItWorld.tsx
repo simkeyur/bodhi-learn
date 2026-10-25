@@ -30,7 +30,7 @@ const shuffled = (items: string[]): string[] => {
 
 // Put things in order by tapping them into the slots. A round is five puzzles.
 export const OrderItWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
-  const { skills, recordAnswer, addStars, kidName } = useApp();
+  const { skills, recordAnswer, celebrate, kidName } = useApp();
   const { order } = useContent();
   const skill = skills.science;
 
@@ -47,7 +47,6 @@ export const OrderItWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [index, setIndex] = useState(0);
   const [points, setPoints] = useState(0);
   const [firstTryCount, setFirstTryCount] = useState(0);
-  const [earned, setEarned] = useState(0);
   const [message, setMessage] = useState('');
 
   const recent = useRef<string[]>([]);
@@ -100,9 +99,7 @@ export const OrderItWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   };
 
   const finishRound = () => {
-    const stars = Math.ceil(pointsRef.current / 2) + (firstRef.current === ROUND ? 2 : 0);
-    setEarned(stars);
-    if (stars > 0) addStars(stars);
+    if (pointsRef.current > 0) celebrate();
     setPhase('done');
   };
 
@@ -247,7 +244,6 @@ export const OrderItWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <div className="quiz-emoji" aria-hidden>{firstTryCount === ROUND ? '🏆' : '🪜'}</div>
           <h2>{firstTryCount} of {ROUND} first try</h2>
           <p className="quiz-sub">{firstTryCount === ROUND ? 'A perfect round!' : points >= ROUND ? 'Nice ordering.' : 'Good try. Every round makes you sharper.'}</p>
-          <p className="quiz-stars">+{earned} ⭐</p>
           <div className="quiz-actions">
             <button className="quiz-primary" onClick={() => { setStartLevel(levelState.level); setPhase('intro'); }}>Play again</button>
             <button className="quiz-secondary" onClick={onBack}>Done</button>

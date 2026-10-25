@@ -11,7 +11,7 @@ interface StoriesWorldProps {
 }
 
 export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
-  const { addStars } = useApp();
+  const { celebrate } = useApp();
   const { later } = useKidTimers();
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
@@ -79,7 +79,7 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
     if (hasCompleted) return;
     setHasCompleted(true);
     setIsReadingAloud(false);
-    addStars(2);
+    celebrate();
     speech.say([clip.cheer(), clip.phrase('story_finished')]);
   };
 
@@ -273,7 +273,7 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
                 fontSize: '1.3rem',
                 fontFamily: 'var(--font-display)',
               }} className="animate-pop">
-                🎉 You read the whole story! +2 Stars!
+                🎉 You read the whole story!
               </div>
             )}
           </div>

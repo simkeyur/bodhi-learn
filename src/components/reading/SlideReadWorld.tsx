@@ -24,7 +24,7 @@ interface Knob {
 // Slide & Read: the child drags a finger along the bars under a sentence and
 // hears each word as the finger reaches it, strictly left to right.
 export const SlideReadWorld: React.FC<SlideReadWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { celebrate, ageBracket } = useApp();
   const { later } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_slide_read'));
 
@@ -67,7 +67,7 @@ export const SlideReadWorld: React.FC<SlideReadWorldProps> = ({ onBack }) => {
   const finishSentence = (lastWord: string) => {
     completedRef.current = true;
     setIsCompleted(true);
-    addStars(1);
+    celebrate();
     setDoneIds((prev) => (prev.includes(sentence.id) ? prev : [...prev, sentence.id]));
     speech.say([clip.word(lastWord), clip.cheer(), clip.readAlong(sentence.id)]);
   };

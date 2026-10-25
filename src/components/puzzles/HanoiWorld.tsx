@@ -13,7 +13,7 @@ const LEVELS = Array.from({ length: MAX_DISCS - MIN_DISCS + 1 }, (_, i) => MIN_D
 const startDiscs = (age: number) => Math.min(MAX_DISCS, Math.max(MIN_DISCS, age <= 7 ? 3 : age <= 9 ? 4 : age <= 11 ? 5 : 6));
 
 export const HanoiWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
-  const { age, solved, markSolved, addStars } = useApp();
+  const { age, solved, markSolved, celebrate } = useApp();
 
   const [discs, setDiscs] = useState(() => {
     const first = LEVELS.find((n) => n >= startDiscs(age) && !solved.includes(`hanoi-${n}`));
@@ -24,7 +24,7 @@ export const HanoiWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [moves, setMoves] = useState(0);
   const [hint, setHint] = useState<[number, number] | null>(null);
   const [shake, setShake] = useState<number | null>(null);
-  const [win, setWin] = useState<{ stars: number; optimal: boolean } | null>(null);
+  const [win, setWin] = useState<{ optimal: boolean } | null>(null);
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
@@ -61,11 +61,9 @@ export const HanoiWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     setSelected(null);
     if (isSolved(next, discs)) {
       const optimal = count === optimalMoves(discs);
-      // Stars are paid the first time a tower is solved: bigger towers pay more
-      const first = markSolved(`hanoi-${discs}`);
-      const stars = first ? discs - 1 + (optimal ? 1 : 0) : 0;
-      if (stars > 0) addStars(stars); else sound.playSuccess();
-      setWin({ stars, optimal });
+      // The big celebration is for the first time a tower is solved
+      if (markSolved(`hanoi-${discs}`)) celebrate(); else sound.playSuccess();
+      setWin({ optimal });
     }
   };
 
@@ -125,7 +123,7 @@ export const HanoiWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         {win ? (
           <div className="quiz-explain" role="status">
             <p><strong>{win.optimal ? 'Perfect! The fewest moves possible.' : 'You did it!'}</strong></p>
-            <p>{moves} moves{win.optimal ? '' : `. It can be done in ${best}. Can you beat it?`}{win.stars > 0 ? ` +${win.stars} ⭐` : ''}</p>
+            <p>{moves} moves{win.optimal ? '' : `. It can be done in ${best}. Can you beat it?`}</p>
             <div className="quiz-actions">
               {discs < MAX_DISCS && <button className="quiz-primary" onClick={() => reset(discs + 1)}>Try {discs + 1} discs</button>}
               <button className="quiz-secondary" onClick={() => reset(discs)}>Again</button>

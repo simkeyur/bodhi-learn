@@ -19,7 +19,7 @@ interface CountItem {
 const ITEMS_POOL = ['⭐', '🍎', '🎈', '🧁', '🐶', '🍓', '🚀', '🐬'];
 
 export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
-  const { addStars, ageBracket } = useApp();
+  const { celebrate, ageBracket } = useApp();
   const { sayThen, clearAll } = useKidTimers();
   const greeting = useGreeting(clip.phrase('greet_counting'));
   const [mode, setMode] = useState<'tap-count' | 'quiz'>('tap-count');
@@ -101,7 +101,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
 
     if (nextCount === targetCount) {
       setIsAllCounted(true);
-      addStars(1);
+      celebrate();
       speech.say([clip.number(nextCount), clip.cheer(), clip.phrase('great_job_counting')]);
     } else {
       speech.say([clip.number(nextCount)]);
@@ -113,7 +113,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
     if (num === quizCount) {
       sound.playSuccess();
       setQuizFeedback('correct');
-      addStars(1);
+      celebrate();
       sayThen(
         [clip.cheer(), clip.phrase('there_are'), clip.number(quizCount), clip.phrase('star_earned')],
         startQuizRound,

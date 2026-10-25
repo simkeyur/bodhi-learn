@@ -28,7 +28,7 @@ const HOW_TO: Record<QuizGame['mode'], string> = {
 // One game: a topic group from a subject, played as a round, a sprint or with lives.
 // The level is shared by every game in the subject: four right in a row goes up, two wrong in a row goes down.
 export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
-  const { skills, recordAnswer, addStars, kidName } = useApp();
+  const { skills, recordAnswer, celebrate, kidName } = useApp();
   const { packs } = useContent();
   const subject = game.subject;
   const info = SUBJECT_INFO[subject];
@@ -44,7 +44,6 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(LIVES);
   const [secondsLeft, setSecondsLeft] = useState(SPRINT_SECONDS);
-  const [earned, setEarned] = useState(0);
 
   // Refs hold what the timers read, since state inside a timeout callback would be stale
   const scoreRef = useRef(0);
@@ -74,13 +73,7 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
     finishedRef.current = true;
     window.clearTimeout(timer.current);
     window.clearInterval(clock.current);
-    const s = scoreRef.current;
-    const stars =
-      mode === 'sprint' ? Math.ceil(s / 3)
-        : mode === 'round' ? Math.ceil(s / 2) + (s === ROUND_QUESTIONS ? 2 : 0)
-          : Math.ceil(s / 2);
-    setEarned(stars);
-    if (stars > 0) addStars(stars);
+    if (scoreRef.current > 0) celebrate();
     setPhase('done');
   };
 
@@ -259,7 +252,6 @@ export const QuizWorld: React.FC<QuizWorldProps> = ({ game, onBack }) => {
             {mode === 'sprint' && (score >= 15 ? 'Lightning fast!' : score >= 8 ? 'Quick thinking!' : 'Try again and beat your score.')}
             {mode === 'lives' && (lives > 0 ? `You made it through all ${LIVES_CAP} questions!` : score >= 10 ? 'What a run!' : 'Good try. Go again!')}
           </p>
-          <p className="quiz-stars">+{earned} ⭐</p>
           {levelMoved !== 0 && (
             <p className="quiz-hint">{levelMoved > 0 ? `You moved up to level ${levelState.level}.` : `Moved to level ${levelState.level} to build confidence.`}</p>
           )}

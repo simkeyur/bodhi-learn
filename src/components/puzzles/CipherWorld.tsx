@@ -53,7 +53,7 @@ const Wheel: React.FC<{ mirror: boolean; shift: number; onShift: (n: number) => 
 // Secret messages: decode, encode, crack a hidden shift, or read the mirror cipher.
 // Five per round; the difficulty follows the child like the quiz games do.
 export const CipherWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
-  const { skills, recordAnswer, addStars, kidName } = useApp();
+  const { skills, recordAnswer, celebrate, kidName } = useApp();
   const skill = skills.logic;
 
   const [phase, setPhase] = useState<Phase>('intro');
@@ -69,7 +69,6 @@ export const CipherWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [index, setIndex] = useState(0);
   const [points, setPoints] = useState(0);
   const [firstTryCount, setFirstTryCount] = useState(0);
-  const [earned, setEarned] = useState(0);
 
   const seen = useRef<string[]>([]);
   const timer = useRef<number | undefined>(undefined);
@@ -103,9 +102,7 @@ export const CipherWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const next = () => {
     window.clearTimeout(timer.current);
     if (index + 1 >= ROUND) {
-      const stars = Math.ceil(pointsRef.current / 2) + (firstRef.current === ROUND ? 2 : 0);
-      setEarned(stars);
-      if (stars > 0) addStars(stars);
+      if (pointsRef.current > 0) celebrate();
       setPhase('done');
       return;
     }
@@ -225,7 +222,6 @@ export const CipherWorld: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <div className="quiz-emoji" aria-hidden>{firstTryCount === ROUND ? '🏆' : '🔐'}</div>
           <h2>{firstTryCount} of {ROUND} on the first try</h2>
           <p className="quiz-sub">{firstTryCount === ROUND ? 'A master code breaker!' : points >= ROUND ? 'Nice detective work.' : 'Good try. Codes get easier with practice.'}</p>
-          <p className="quiz-stars">+{earned} ⭐</p>
           <div className="quiz-actions">
             <button className="quiz-primary" onClick={() => { setStartLevel(levelState.level); setPhase('intro'); }}>Play again</button>
             <button className="quiz-secondary" onClick={onBack}>Done</button>
