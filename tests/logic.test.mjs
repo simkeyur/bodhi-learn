@@ -320,13 +320,17 @@ test('ages 4-14 map to bands, brackets and starting levels', () => {
   assert.deepEqual([4, 8, 9, 13, 14].map(levelForAge), [1, 5, 6, 6, 6]);
 });
 
-test('grade 4 and up open in test prep; the grade is asked from age 8', () => {
-  assert.equal(effectiveGrade(7, 5), null, 'under 8 there is no grade');
+test('grade 4 and up open in test prep; the grade is asked from age 6', () => {
+  assert.equal(effectiveGrade(5, 1), null, 'under 6 there is no grade');
+  assert.equal(effectiveGrade(6, 0), 1, 'not asked yet: the usual grade for age 6 is grade 1');
+  assert.equal(effectiveGrade(7, 0), 2, 'not asked yet: the usual grade for age 7 is grade 2');
   assert.equal(effectiveGrade(8, 0), 3, 'not asked yet: the usual grade for age 8 is grade 3');
   assert.equal(effectiveGrade(10, 0), 5, 'not asked yet: the usual grade for the age');
   assert.equal(effectiveGrade(10, 3), 3);
-  assert.deepEqual([8, 9, 10, 13, 14].map(gradeForAge), [3, 4, 5, 8, 8]);
-  assert.equal(isPrepLearner(7, 0), false);
+  assert.deepEqual([6, 7, 8, 9, 10, 13, 14].map(gradeForAge), [1, 2, 3, 4, 5, 8, 8]);
+  assert.equal(isPrepLearner(5, 0), false);
+  assert.equal(isPrepLearner(6, 1), false, 'a 6-year-old in grade 1 opens in the games');
+  assert.equal(isPrepLearner(7, 2), false, 'a 7-year-old in grade 2 opens in the games');
   assert.equal(isPrepLearner(8, 3), false, 'an 8-year-old in grade 3 opens in the games');
   assert.equal(isPrepLearner(9, 3), false, 'a 9-year-old in grade 3 opens in the games');
   assert.equal(isPrepLearner(9, 4), true);

@@ -91,7 +91,7 @@ export function Settings() {
               </button>
             ))}
           </div>
-          <span className="field-hint">Bodhi Prep is for grade {PREP_MIN_GRADE} and up. Grade 3 and younger use the Bodhi games.</span>
+          <span className="field-hint">Bodhi Prep is for grade {PREP_MIN_GRADE} and up. Grades 1–3 use the Bodhi games by default.</span>
         </fieldset>
         <fieldset className="field choice-field">
           <legend className="field-label">Age</legend>

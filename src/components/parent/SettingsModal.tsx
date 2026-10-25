@@ -182,7 +182,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
               </div>
             </div>
 
-            {/* Grade (from age 9): grade 4 and up get Bodhi Prep (Texas test prep) instead of the games */}
+            {/* Grade (from age 6): grade 4 and up get Bodhi Prep (Texas test prep) instead of the games */}
             {grade !== null && (
               <div style={{ marginBottom: 20 }}>
                 <label style={{ display: 'block', fontWeight: 700, fontSize: '0.95rem', color: '#334155', marginBottom: 8 }}>

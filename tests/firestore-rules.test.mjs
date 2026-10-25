@@ -111,7 +111,7 @@ test('invalid age and skills are rejected', async () => {
     'age too young': validDoc({ profile: { kidName: 'E', ageBracket: 'pre-k', age: 3 } }),
     'age too old': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 15 } }),
     'fractional age': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 9.5 } }),
-    'grade too low': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 9, grade: 2 } }),
+    'grade too low': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 9, grade: 0 } }),
     'grade too high': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 14, grade: 9 } }),
     'grade as text': validDoc({ profile: { kidName: 'E', ageBracket: 'grade1', age: 10, grade: '5' } }),
     'unknown subject': validDoc({ progress: progress({ cooking: { level: 1, answered: 0, correct: 0 } }) }),

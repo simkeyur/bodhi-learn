@@ -39,12 +39,18 @@ export function Home() {
             <p className="page-sub">Grade {grade} questions are on the way. Until then, you're practicing grade {content.grade} math.</p>
           )}
         </div>
-        {next && (
+        {content.grade >= 3 ? (
+          next && (
+            <p className="countdown">
+              <CalendarDays size={18} aria-hidden />
+              {next.days === 0
+                ? <span><b>{next.window.name}</b> testing is happening now</span>
+                : <span><b>{next.days} days</b> until {next.window.name} ({longDate(next.window.start)})</span>}
+            </p>
+          )
+        ) : (
           <p className="countdown">
-            <CalendarDays size={18} aria-hidden />
-            {next.days === 0
-              ? <span><b>{next.window.name}</b> testing is happening now</span>
-              : <span><b>{next.days} days</b> until {next.window.name} ({longDate(next.window.start)})</span>}
+            <span>Math practice for grade {content.grade}</span>
           </p>
         )}
       </div>
@@ -68,7 +74,7 @@ export function Home() {
                 <span className="tag tag-code">{s.code}</span>
                 <span>{s.title}</span>
                 {!skills[s.code] && <span className="tag tag-new">New</span>}
-                {s.kind === 'readiness' && <span className="tag tag-readiness">Readiness</span>}
+                {s.kind === 'readiness' && <span className="tag tag-readiness">{content.grade < 3 ? 'Key skill' : 'Readiness'}</span>}
               </li>
             ))}
           </ol>

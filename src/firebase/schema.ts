@@ -11,16 +11,16 @@ export type AgeBand = 'little' | 'explorer' | 'pro';
 
 export const clampAge = (n: number) => Math.min(MAX_AGE, Math.max(MIN_AGE, Math.round(n)));
 
-// School grade, asked from age 8. From grade 4 the learner gets Texas test prep (src/prep) by default;
-// grade 3 opens in the Bodhi games with a switch to Prep. 0 means "not asked" (younger children).
-export const GRADE_ASK_MIN_AGE = 8;
-export const MIN_GRADE = 3;
+// School grade, asked from age 6. From grade 4 the learner gets Texas test prep (src/prep) by default;
+// grades 1–3 open in the Bodhi games with a switch to Prep. 0 means "not asked" (younger children).
+export const GRADE_ASK_MIN_AGE = 6;
+export const MIN_GRADE = 1;
 export const MAX_GRADE = 8;
 export const PREP_MIN_GRADE = 4;
 export const clampGrade = (n: number) => Math.min(MAX_GRADE, Math.max(MIN_GRADE, Math.round(n)));
-// The usual grade for an age in Texas (age 8 by September 1 -> grade 3, age 10 -> grade 5)
+// The usual grade for an age in Texas (age 6 by September 1 -> grade 1, age 8 -> grade 3, age 10 -> grade 5)
 export const gradeForAge = (age: number) => clampGrade(age - 5);
-// The grade that counts: none under 8, otherwise the one chosen (or the usual one for the age)
+// The grade that counts: none under 6, otherwise the one chosen (or the usual one for the age)
 export const effectiveGrade = (age: number, grade: number): number | null =>
   age < GRADE_ASK_MIN_AGE ? null : grade >= MIN_GRADE && grade <= MAX_GRADE ? grade : gradeForAge(age);
 export const isPrepLearner = (age: number, grade: number): boolean => (effectiveGrade(age, grade) ?? 0) >= PREP_MIN_GRADE;
@@ -59,7 +59,7 @@ export interface PlacedSticker {
 export interface SyncedState {
   kidName: string;
   age: number; // 4..14
-  grade: number; // 3..8, or 0 when not asked (under 9)
+  grade: number; // 1..8, or 0 when not asked (under 6)
   speechEnabled: boolean;
   voiceSpeed: number;
   stars: number;

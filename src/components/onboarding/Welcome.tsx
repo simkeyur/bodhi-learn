@@ -41,7 +41,7 @@ export const Welcome: React.FC = () => {
     setStep(a >= SIGN_IN_FROM_AGE && !cloud.user ? 'account' : 'name');
   };
 
-  // From age 9 the grade decides between the Bodhi games and Bodhi Prep (grade 4 and up)
+  // From age 6 the grade is asked; grade 4 and up open in Bodhi Prep, grades 1–3 open in the games
   const chooseGrade = (g: number) => {
     sound.playPop();
     setGrade(g);
@@ -49,7 +49,7 @@ export const Welcome: React.FC = () => {
   };
 
   const name = typedName ?? firstName(cloud.user?.name);
-  // From age 9 the questions after the age look plainer: these children are heading to Bodhi Prep or are nearly there
+  // From age 6 the questions after the age look plainer: these children are heading to Bodhi Prep or are nearly there
   const older = shownStep !== 'age' && (picked ?? age) >= GRADE_ASK_MIN_AGE;
 
   return (
