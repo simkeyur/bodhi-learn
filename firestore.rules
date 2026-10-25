@@ -26,7 +26,7 @@ service cloud.firestore {
         && p.ageBracket in ['pre-k', 'kindergarten', 'grade1']
         // age is optional so documents written by older versions of the app stay valid
         && (!('age' in p) || (p.age is int && p.age >= 4 && p.age <= 14))
-        // grade (3..8) is asked from age 9; it decides who gets test prep
+        // grade (3..8) is asked from age 8; it decides who gets test prep
         && (!('grade' in p) || (p.grade is int && p.grade >= 3 && p.grade <= 8));
     }
 

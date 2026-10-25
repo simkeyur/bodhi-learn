@@ -18,7 +18,6 @@ import {
   effectiveGrade,
   gradeForAge,
   GRADE_ASK_MIN_AGE,
-  isPrepLearner,
   defaultSkills,
   levelForAge,
   readSkills,
@@ -61,10 +60,10 @@ interface AppContextType {
   completeOnboarding: (name: string) => void;
   age: number; // 4..14
   setAge: (age: number) => void;
-  grade: number | null; // school grade from age 9 (null for younger children)
+  grade: number | null; // school grade from age 8 (null for younger children)
   setGrade: (grade: number) => void;
   isPrep: boolean; // showing Bodhi Prep (Texas test prep) instead of the Bodhi games
-  canPrep: boolean; // Bodhi Prep is available for this grade (4 and up for now), so the Learn / Prep switch shows
+  canPrep: boolean; // Bodhi Prep is available for this grade (grade 3 and up), so the Learn / Prep switch shows
   setMode: (mode: 'learn' | 'prep') => void; // the switch: remembered on this device
   ageBand: AgeBand; // little 4-6, explorer 7-10, pro 11-14
   ageBracket: AgeBracket; // derived from age, for the early-years games
@@ -247,9 +246,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setKidName = (name: string) => setKidNameState(name);
   const setGrade = (g: number) => setGradeChoice(clampGrade(g));
   const grade = effectiveGrade(age, gradeChoice);
-  // Grade 4 and up start in Bodhi Prep; the Learn / Prep switch lets them play the Bodhi games too
-  const canPrep = isPrepLearner(age, gradeChoice);
-  const isPrep = canPrep && modeChoice !== 'learn';
+  // Grade 3 and up have Bodhi Prep content. Grade 4 and up open in Prep by default;
+  // grade 3 opens in the Bodhi games by default and can switch to Prep.
+  const canPrep = (grade ?? 0) >= 3;
+  const defaultMode = (grade ?? 0) >= 4 ? 'prep' : 'learn';
+  const isPrep = canPrep && (modeChoice ? modeChoice === 'prep' : defaultMode === 'prep');
   const setMode = (mode: 'learn' | 'prep') => {
     setModeChoice(mode);
     store('bodhi_mode', mode);
