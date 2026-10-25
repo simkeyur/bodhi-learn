@@ -39,3 +39,6 @@
   background: var(--surface); padding: var(--s2) var(--s4); border-radius: var(--r-md); box-shadow: var(--shadow-2);
 }
 .prep .skip-link:focus { top: var(--s3); }
+
+/* Bodhi Play's Settings page reuses Prep's styles inside the games' layout (PlaySettings.tsx) */
+.prep.prep-embedded { min-height: 0; background: transparent; }

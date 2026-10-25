@@ -280,32 +280,7 @@ h1, h2, h3, h4, .font-display {
 }
 
 /* Modal Overlay */
-.kid-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  padding: 16px;
-}
 
-.kid-modal-content {
-  background: #FFFFFF;
-  border-radius: var(--radius-lg);
-  border: 6px solid #38BDF8;
-  padding: 28px;
-  max-width: 520px;
-  width: 100%;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* Taller than the window (settings on a laptop): scroll inside the box, not the page behind it */
-  max-height: calc(100dvh - 32px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
 
 /* Responsive Mobile Optimizations */
 @media (max-width: 640px) {
@@ -324,12 +299,6 @@ h1, h2, h3, h4, .font-display {
     gap: 6px;
   }
 
-  .kid-modal-content {
-    padding: 20px 16px;
-    border-width: 4px;
-    margin: 8px;
-    max-height: calc(100dvh - 48px);
-  }
 
   .speaker-bubble {
     width: 48px;

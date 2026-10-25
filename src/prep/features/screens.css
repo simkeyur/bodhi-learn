@@ -122,9 +122,27 @@
 .prep .summary-moved { font-size: var(--text-xs); font-weight: 700; color: var(--blue-700); background: var(--blue-50); padding: 2px 8px; border-radius: 999px; }
 .prep .summary-actions { display: flex; gap: var(--s3); flex-wrap: wrap; }
 
-/* ---------- Settings ---------- */
-.prep .settings { max-width: 760px; }
-.prep .settings-section { display: grid; gap: var(--s4); margin-bottom: var(--s5); }
+/* ---------- Settings (one page for Bodhi Play and Bodhi Prep; two columns so it fits on a laptop screen) ---------- */
+.prep .settings { max-width: 1040px; padding-top: var(--s5); padding-bottom: var(--s5); }
+.prep .settings .page-head { margin-bottom: var(--s4); align-items: center; }
+.prep .settings-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--s4); align-items: start; }
+.prep .settings-col { display: grid; gap: var(--s4); }
+.prep .settings-section { display: grid; gap: var(--s3); align-content: start; }
+.prep .settings-section > p { margin: 0; }
+.prep .settings-toggle { display: flex; align-items: center; gap: var(--s3); font-weight: 700; cursor: pointer; }
+.prep .settings-toggle input { width: 22px; height: 22px; accent-color: var(--blue-600); }
+.prep .settings fieldset:disabled { opacity: 0.5; }
+.prep .settings-sub { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; padding-top: var(--s3); border-top: 1px solid var(--line); }
+@media (max-width: 820px) {
+  .prep .settings-grid { grid-template-columns: 1fr; }
+}
+/* Phones: age and grade chips share the row evenly, so grade fits on one line and age on two */
+@media (max-width: 520px) {
+  .prep .settings .page-head h1 { font-size: var(--text-xl); }
+  .prep .settings .card-pad { padding: var(--s4); }
+  .prep .settings .pick-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(32px, 1fr)); gap: 6px; }
+  .prep .settings .pick-row .btn { min-width: 0; padding: 0; }
+}
 .prep .settings-section h2 { font-size: var(--text-lg); }
 .prep .settings-actions { display: flex; gap: var(--s3); align-items: center; flex-wrap: wrap; }
 .prep .field-label { font-weight: 700; }

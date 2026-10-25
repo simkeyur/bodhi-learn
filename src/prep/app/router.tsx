@@ -16,7 +16,7 @@ export const routes: RouteObject[] = [
       { path: 'math', element: <SkillMap /> },
       { path: 'learn/:code', element: <Learn /> },
       { path: 'practice/:code', element: <Practice /> },
-      { path: 'settings', element: <Settings /> },
+      { path: 'settings', element: <Settings app="prep" /> },
       { path: 'home', element: <Navigate to="/" replace /> },
       { path: '*', element: <NotFound /> },
     ],

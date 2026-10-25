@@ -19,7 +19,6 @@ import { PatternWorld } from './components/logic/PatternWorld';
 import { MachineWorld } from './components/logic/MachineWorld';
 import { CountingWorld } from './components/math/CountingWorld';
 import { VisualMathWorld } from './components/math/VisualMathWorld';
-import { SettingsModal } from './components/parent/SettingsModal';
 import { AbcTracingJourney } from './components/tracing/AbcTracingJourney';
 import { WordTracingWorld } from './components/tracing/WordTracingWorld';
 import { speech } from './utils/speech';
@@ -27,6 +26,8 @@ import { Loader2 } from 'lucide-react';
 
 // Grade 4 and up get Bodhi Prep (Texas test prep) instead of the games; loaded only for them
 const PrepApp = lazy(() => import('./prep/PrepApp'));
+// The Settings page is shared with Bodhi Prep (and styled like it), so it loads on demand too
+const PlaySettings = lazy(() => import('./prep/PlaySettings'));
 
 // Shown while Bodhi Prep downloads (it is a separate file, fetched only for grade 4 and up). It fades in after
 // a moment, so a quick load (the usual case once cached) shows no flash at all.
@@ -51,7 +52,6 @@ const viewState = (): ViewState | null => {
 export const BodhiApp: React.FC = () => {
   // A reload while in a game comes back to that game
   const [currentView, setCurrentViewState] = useState<string>(() => viewState()?.bodhiView ?? 'home');
-  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const { ageBand, onboarded, isPrep } = useApp();
 
   // Lets the CSS give each age band its own look
@@ -73,7 +73,6 @@ export const BodhiApp: React.FC = () => {
       // An entry left over from Bodhi Prep (/math, /settings...) is shown as the games' home, at the plain address
       if (window.location.pathname !== '/') window.history.replaceState(null, '', '/');
       speech.stop();
-      setIsSettingsOpen(false);
       setCurrentViewState(viewState()?.bodhiView ?? 'home');
       window.scrollTo({ top: 0 });
     };
@@ -150,6 +149,8 @@ export const BodhiApp: React.FC = () => {
         return <HanoiWorld onBack={backHome} />;
       case 'reading':
         return <PhonicsWorld onBack={backHome} />;
+      case 'settings':
+        return <Suspense fallback={null}><PlaySettings onDone={backHome} /></Suspense>;
       case 'home':
       default:
         return <Home onSelectView={setCurrentView} />;
@@ -189,19 +190,13 @@ export const BodhiApp: React.FC = () => {
       {/* Main App Bar */}
       <Header
         onSelectView={setCurrentView}
-        onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenSettings={() => { if (currentView !== 'settings') setCurrentView('settings'); }}
       />
 
       {/* Main Learning Canvas */}
       <main style={{ flex: 1, position: 'relative', zIndex: 1, paddingBottom: 40 }}>
         {renderCurrentView()}
       </main>
-
-      {/* Settings: profile, sign-in to save progress, voice and sound */}
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-      />
     </div>
   );
 };
