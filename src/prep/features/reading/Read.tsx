@@ -43,7 +43,7 @@ function Session({ set, items, skill }: { set: ReadingSet; items: Item[]; skill:
   const item = items[index];
   const result = results[index];
   const standard = findStandard(item.standard)!;
-  const unit = unitName(set.passages[0]);
+  const unit = unitName(set.passages[item.passage ?? 0] ?? set.passages[0]);
   const done = results.filter(Boolean).length;
 
   const check = () => {
@@ -66,7 +66,7 @@ function Session({ set, items, skill }: { set: ReadingSet; items: Item[]; skill:
   const show = (n: number) => {
     setPane('passage');
     requestAnimationFrame(() => {
-      const el = passageRef.current?.querySelector(`#para-${n}`);
+      const el = passageRef.current?.querySelector(`#p${item.passage ?? 0}-${n}`);
       el?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
     });
   };
@@ -95,7 +95,9 @@ function Session({ set, items, skill }: { set: ReadingSet; items: Item[]; skill:
       <div className="read-layout" data-pane={pane}>
         <section className="card read-passage" ref={passageRef} aria-label={set.kind === 'editing' ? 'Draft' : 'Passage'}>
           <p className="read-intro">{set.intro}</p>
-          {set.passages.map((p) => <PassageView key={p.id} passage={p} highlight={result ? item.cites : []} />)}
+          {set.passages.map((p, i) => (
+            <PassageView key={p.id} passage={p} idPrefix={`p${i}`} highlight={result && (item.passage ?? 0) === i ? item.cites : []} />
+          ))}
           <button type="button" className="btn btn-primary read-to-questions" onClick={() => setPane('questions')}>Go to the questions <ArrowRight size={18} aria-hidden /></button>
         </section>
 

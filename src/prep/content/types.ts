@@ -95,6 +95,7 @@ export interface Item {
   parts: Part[]; // one part, except multipart which has two (Part A, Part B)
   explain: string; // the worked answer, shown after checking
   cites?: number[]; // reading: the paragraphs (or lines, or sentences) the question is about
+  passage?: number; // reading, paired sets: which passage `cites` refers to (0 = the first, the default)
 }
 
 // What a student has chosen: one array per part.
@@ -140,6 +141,7 @@ export type PassageBlock =
   | { kind: 'line'; text: string; stanzaEnd?: boolean } // a numbered poem line; stanzaEnd leaves a gap after it
   | { kind: 'speech'; speaker: string; text: string } // a numbered line of dialogue in a play
   | { kind: 'direction'; text: string } // a stage direction (not numbered)
+  | { kind: 'note'; text: string } // plain unnumbered text, like a letter's greeting or sign-off
   | { kind: 'sentences'; sentences: string[] } // a paragraph of a draft; each sentence numbered (1), (2)...
   | { kind: 'sidebar'; title: string; text: string } // a text feature, for questions about features
   | { kind: 'figure'; figure: Figure; alt: string; caption?: string };

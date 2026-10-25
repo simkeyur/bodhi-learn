@@ -4,6 +4,8 @@
 import { pick, sample, shuffle, type Rng } from '../../rng.ts';
 import { inline, mc, one, txt, type Gen } from '../../generators/build.ts';
 import type { InlinePart } from '../../types.ts';
+import { SPELLING_GENERATORS } from './generators-spelling.ts';
+import { EDITING_GENERATORS } from './generators-editing.ts';
 
 // A drop-down inside a sentence: `sentence` has one ___ where the drop-down goes
 function dropdown(rng: Rng, sentence: string, right: string, wrong: string[]): InlinePart {
@@ -191,4 +193,6 @@ export const G5_RLA_GENERATORS: Record<string, Gen[]> = {
   'rla:5.11D.i': [completeSentences],
   'rla:5.11D.ix': [capitals],
   'rla:5.11D.iii': [collective],
+  ...SPELLING_GENERATORS,
+  ...EDITING_GENERATORS,
 };

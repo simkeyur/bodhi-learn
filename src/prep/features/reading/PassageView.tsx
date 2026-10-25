@@ -27,6 +27,8 @@ export function PassageView({ passage, highlight = [], idPrefix = 'para' }: { pa
               return <h3 key={i} className="passage-heading">{b.text}</h3>;
             case 'direction':
               return <p key={i} className="passage-direction">{b.text}</p>;
+            case 'note':
+              return <p key={i} className="passage-note">{b.text}</p>;
             case 'sidebar':
               return <aside key={i} className="passage-sidebar"><h4>{b.title}</h4><p><RichText text={b.text} /></p></aside>;
             case 'figure':

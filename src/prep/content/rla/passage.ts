@@ -30,7 +30,7 @@ export const numberedCount = (passage: Passage): number =>
 
 // What the numbers are called on screen and in questions
 export const unitName = (passage: Passage): 'paragraph' | 'line' | 'sentence' =>
-  passage.blocks.some((b) => b.kind === 'sentences') ? 'sentence' : passage.blocks.some((b) => b.kind === 'line') ? 'line' : 'paragraph';
+  passage.blocks.some((b) => b.kind === 'sentences') ? 'sentence' : passage.blocks.some((b) => b.kind === 'line' || b.kind === 'speech') ? 'line' : 'paragraph';
 
 const words = (s: string) => s.split(/\s+/).filter(Boolean).length;
 
@@ -65,27 +65,31 @@ export function setProblems(set: ReadingSet): string[] {
     const poem = p.blocks.some((b) => b.kind === 'line');
     const kind = set.kind === 'editing' ? 'draft' : poem ? 'poem' : 'prose';
     const size = poem ? numberedCount(p) : wordCount(p);
-    const [lo, hi] = lengthBand(set.grade, kind);
+    const band = lengthBand(set.grade, kind);
+    // Each passage of a pair is shorter than a single passage, as on the test
+    const [lo, hi] = set.passages.length === 2 && kind === 'prose' ? band.map((n) => Math.round(n * 0.6)) : band;
     if (size < lo || size > hi) out.push(`${p.id}: ${size} ${poem ? 'lines' : 'words'}, want ${lo}–${hi}`);
     if (set.kind === 'editing' && unitName(p) !== 'sentence') out.push(`${p.id}: a draft numbers sentences`);
     if (p.author && !p.source) out.push(`${p.id}: a public-domain text needs its source`);
   }
 
-  // Questions about one passage cite that passage's numbers; a paired set's questions can cite either
-  const most = Math.max(...set.passages.map(numberedCount));
+  // Citations point into one passage: the first, or the one named by `passage` in a paired set
   const letters = new Set<number>();
+  let mcParts = 0;
   for (const it of set.items) {
     out.push(...itemProblems(it).map((e) => `${it.id}: ${e}`));
     if (it.subject !== 'rla' || it.grade !== set.grade) out.push(`${it.id}: wrong subject or grade`);
-    for (const c of it.cites ?? []) if (c < 1 || c > most) out.push(`${it.id}: cites ${c}, which doesn't exist`);
+    const cited = set.passages[it.passage ?? 0];
+    if (!cited) out.push(`${it.id}: passage ${it.passage} doesn't exist`);
+    else for (const c of it.cites ?? []) if (c < 1 || c > numberedCount(cited)) out.push(`${it.id}: cites ${c}, which doesn't exist in ${cited.id}`);
     if (set.kind === 'editing' && !it.cites?.length) out.push(`${it.id}: an editing question must cite its sentence`);
     for (const p of it.parts) {
       if (p.type === 'mc' && p.choices.length !== 4) out.push(`${it.id}: multiple choice needs 4 choices`);
       if (p.type === 'multiselect' && (p.choices.length !== 5 || p.correct.length !== 2)) out.push(`${it.id}: multiselect needs 5 choices, 2 right`);
-      if (p.type === 'mc') letters.add(p.correct[0]);
+      if (p.type === 'mc') { letters.add(p.correct[0]); mcParts += 1; }
     }
   }
   // Authored answers are easy to leave all on one letter
-  if (set.items.length >= 5 && letters.size < 3) out.push('right answers sit on fewer than 3 different letters');
+  if (mcParts >= 4 && letters.size < 3) out.push('right answers sit on fewer than 3 different letters');
   return out;
 }

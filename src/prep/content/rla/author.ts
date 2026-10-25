@@ -10,17 +10,17 @@ type C = string | [text: string, why: string];
 const choice = (c: C): Choice => (typeof c === 'string' ? { text: c } : { text: c[0], why: c[1] });
 const stemOf = (stem: string | string[]): Block[] => (Array.isArray(stem) ? stem : [stem]).map((text) => ({ kind: 'text', text }));
 
-interface Common { standard: string; explain: string; cites?: number[] }
+interface Common { standard: string; explain: string; cites?: number[]; passage?: number }
 
 // Multiple choice: 4 choices, 1 point
 export const mcq = (o: Common & { stem: string | string[]; choices: C[]; answer: number }): Authored => ({
-  standard: o.standard, type: 'mc', points: 1, stem: stemOf(o.stem), explain: o.explain, cites: o.cites,
+  standard: o.standard, type: 'mc', points: 1, stem: stemOf(o.stem), explain: o.explain, cites: o.cites, passage: o.passage,
   parts: [{ type: 'mc', choices: o.choices.map(choice), correct: [o.answer] }],
 });
 
 // Multiselect: 5 choices, select two, 2 points
 export const msq = (o: Common & { stem: string | string[]; choices: C[]; answers: [number, number] }): Authored => ({
-  standard: o.standard, type: 'multiselect', points: 2, stem: stemOf(o.stem), explain: o.explain, cites: o.cites,
+  standard: o.standard, type: 'multiselect', points: 2, stem: stemOf(o.stem), explain: o.explain, cites: o.cites, passage: o.passage,
   parts: [{ type: 'multiselect', choices: o.choices.map(choice), correct: [...o.answers].sort((a, b) => a - b) }],
 });
 
@@ -34,7 +34,7 @@ export const inq = (o: Common & { stem: string | string[]; sentence: Seg[] }): A
     return { blank: blanks.length - 1 };
   });
   return {
-    standard: o.standard, type: 'inline', points: blanks.length === 2 ? 2 : 1, stem: stemOf(o.stem), explain: o.explain, cites: o.cites,
+    standard: o.standard, type: 'inline', points: blanks.length === 2 ? 2 : 1, stem: stemOf(o.stem), explain: o.explain, cites: o.cites, passage: o.passage,
     parts: [{ type: 'inline', segments, blanks }],
   };
 };
@@ -48,7 +48,7 @@ const partOf = (p: PartSpec): ChoicePart => ({
   correct: p.answers ? [...p.answers].sort((a, b) => a - b) : [p.answer ?? -1],
 });
 export const twoq = (o: Common & { stem?: string; a: PartSpec; b: PartSpec }): Authored => ({
-  standard: o.standard, type: 'multipart', points: 2, stem: o.stem ? stemOf(o.stem) : [], explain: o.explain, cites: o.cites,
+  standard: o.standard, type: 'multipart', points: 2, stem: o.stem ? stemOf(o.stem) : [], explain: o.explain, cites: o.cites, passage: o.passage,
   parts: [partOf(o.a), partOf(o.b)],
 });
 

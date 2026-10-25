@@ -59,7 +59,7 @@ Prep. Keep phonics and spelling patterns, high-frequency words, vocabulary, and 
 | 4–5 | 400–900 |
 | 6–8 | 600–1,200 |
 
-Poems are 12–40 lines; drama scenes are 1–2 pages.
+Poems are 8–48 lines; drama scenes are 1–2 pages. Each passage of a paired set is about 60% of the band.
 
 **Copyright.**
 - Every passage is original, or in the public domain (published before 1930: Aesop, Stevenson, Rossetti, Dickinson
@@ -156,7 +156,7 @@ interface EditingDraft {
 | Step | What | Who | Effort |
 |---|---|---|---|
 | **R0** ✓ | **Shared code and the reference grade 5.** Subject-aware registry and codes, `Passage` / `ReadingSet` / `EditingDraft` types, validators and tests, Reader screen, set and skill practice, Reading page and Today. Grade 5 standards catalog (all 52), **3 complete sets** (fiction, informational, poetry), **1 editing draft**, generators for 6 convention and vocabulary standards, and walkthroughs for those standards. Split the Prep bundle per grade and subject (it's 820 kB today; reading text would grow it). | Claude | L |
-| R1 | **Finish grade 5:** the remaining 9 sets, 5 drafts, generators and walkthroughs. Every standard covered. | Gemini, then review | L |
+| R1 ✓ | **Finish grade 5:** the remaining 9 sets, 5 drafts, generators and walkthroughs. Every standard covered. | Claude | L |
 | R2 | **Grades 4 and 3**, then **6, 7 and 8:** the same files and tests per grade, from each grade's PDFs. | Gemini, one grade per branch, then review | L each |
 | R3 | **Essay:** editor, rubric self-check, 2–3 prompts per grade. | Claude (screen), Gemini (prompts) | M |
 | R4 | **Grades 1–2:** TEKS standards, short passages, phonics and spelling generators, no essay. | Gemini, then review | M each |
@@ -203,6 +203,24 @@ This is the slow part. Budget about an hour per grade to read, plus fixes.
   - 1 essay prompt.
 - **Coverage:** 27 of the 52 standards have practice. The rest show "Coming soon".
 
+**R1 is done (2026-10-25).** Grade 5 is complete:
+- **Coverage:** all 52 standards have practice and a walkthrough (the tests require it).
+- **Reading sets (12):**
+  - fiction ×3: a story, a pourquoi folktale, and a first-person story;
+  - literary nonfiction: a biography of Bessie Coleman;
+  - informational ×2;
+  - argumentative and persuasive;
+  - poetry ×2: Stevenson and Rossetti, both public domain;
+  - drama;
+  - a paired set on monarchs (an article and a story).
+- **Editing drafts (6):** a letter, an opinion piece, a report, a narrative, a how-to, and the class garden draft.
+- **Other content:** 119 written questions, 21 generators and 2 essays (informational and argumentative).
+- **Shared-code additions:**
+  - `passage` on a question (which passage of a pair its citations refer to);
+  - a `note` block (unnumbered text such as a letter's greeting);
+  - each half of a pair is checked against about 60% of the length band;
+  - the genre test is grade-aware (the full mix from grade 3).
+
 **Not done in R0:**
 - Splitting the Prep download per grade and subject (it's 901 kB, 277 kB compressed).
 - A paired set and a drama set (the types support both).
@@ -220,16 +238,20 @@ Copy grade 5's layout exactly. Everything a grade needs:
    - Reading sets have 6–9 questions and editing drafts 5–7.
    - Every multiple-choice question has 4 choices, and every multiselect has 5 with 2 right.
    - Every wrong choice gets a short `why`.
-   - Cite the paragraphs (or sentences) a question is about. **Headings and sidebars are not numbered**: count
-     only `p`, `line` and `speech` blocks.
+   - Cite the paragraphs (or sentences) a question is about. **Headings, sidebars, directions and notes are not
+     numbered**: count only `p`, `line` and `speech` blocks (and each sentence in a draft).
+   - In a paired set, add `passage: 1` to a question whose citations are in the second passage.
    - Vary which letter is right.
    - Passages are original, or public domain before 1930 with `author` and `source`.
 3. **Generators:** `src/prep/content/rla/g{N}/generators.ts`, for standards that work one sentence at a time:
    spelling patterns, word parts, conventions.
    - Each draws from a bank of at least 10 entries, so the test sees at least 8 different questions.
-4. **Walkthroughs:** `src/prep/content/lessons/g{N}-rla.ts`.
+4. **Walkthroughs:** `src/prep/content/lessons/g{N}-rla.ts` (grade 5 splits them into `g5-rla.ts` and
+   `g5-rla-more.ts`).
    - Generated skills: goal, words and at least 2 ideas.
    - Passage skills: the same, plus two `samples`, each a short passage (40–120 words) with one question.
+   - Keep a pool of short passages (`g5-rla-passages.ts`) and reuse each one across several walkthroughs with
+     different questions.
 5. **Essays:** 1–2 prompts in the grade's `index.ts`, each tied to one of its sets, with the checklist.
 6. **Register** the grade in `READING` in `src/prep/content/registry.ts`, with the blueprint counts per strand.
 7. **Check:**

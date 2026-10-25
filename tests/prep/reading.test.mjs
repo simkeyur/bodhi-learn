@@ -115,14 +115,27 @@ for (const grade of BUILT_READING) {
       }
     });
 
-    test('coverage so far (grade 5 R0 is partial; the full build needs every standard)', () => {
-      const covered = standards.filter((s) => hasPractice(s.code));
-      // Every readiness standard with questions should have at least 2 to practise from
-      for (const s of covered) {
-        const n = setsFor(s.code).reduce((t, set) => t + set.items.filter((i) => i.standard === s.code).length, 0);
-        assert.ok(n >= 1 || r.generators[s.code], s.code);
+    test('every standard has practice and a walkthrough; readiness standards have enough questions', () => {
+      for (const s of standards) {
+        assert.ok(hasPractice(s.code), `${s.code} has no questions or generator`);
+        assert.ok(findLesson(s.code), `${s.code} has no walkthrough`);
+        if (s.kind === 'readiness' && !r.generators[s.code]) {
+          const n = setsFor(s.code).reduce((t, set) => t + set.items.filter((i) => i.standard === s.code).length, 0);
+          assert.ok(n >= 3, `readiness ${s.code} has only ${n} set questions (needs 3, or a generator)`);
+        }
       }
-      assert.ok(covered.length >= 10, `only ${covered.length} standards have practice`);
+      assert.equal(new Set(lessons.map((l) => l.code)).size, lessons.length, 'duplicate walkthroughs');
+    });
+
+    test('the genre mix covers the kinds of reading the grade uses', () => {
+      const genres = new Set(sets.filter((s) => s.kind === 'reading').flatMap((s) => s.passages.map((p) => p.genre)));
+      // The state test (grade 3 and up) uses every genre and paired passages; grades 1–2 build up to it
+      const want = grade >= 3
+        ? ['fiction', 'literaryNonfiction', 'poetry', 'drama', 'informational', 'argumentative', 'persuasive']
+        : ['fiction', 'poetry', 'informational'];
+      for (const g of want) assert.ok(genres.has(g), `no ${g} passage`);
+      if (grade >= 3) assert.ok(sets.some((s) => s.passages.length === 2), 'no paired set');
+      assert.ok(sets.filter((s) => s.kind === 'editing').length >= 3, 'fewer than 3 editing drafts');
     });
   });
 }

@@ -3,8 +3,9 @@
 
 import { mcq, sample } from '../rla/author.ts';
 import type { Lesson } from '../types.ts';
+import { G5_RLA_LESSONS_MORE } from './g5-rla-more.ts';
 
-export const G5_RLA_LESSONS: Lesson[] = [
+const G5_RLA_LESSONS_FIRST: Lesson[] = [
   // ---------- Generated skills ----------
   {
     code: 'rla:5.3C',
@@ -235,3 +236,5 @@ export const G5_RLA_LESSONS: Lesson[] = [
     ],
   },
 ];
+
+export const G5_RLA_LESSONS: Lesson[] = [...G5_RLA_LESSONS_FIRST, ...G5_RLA_LESSONS_MORE];
