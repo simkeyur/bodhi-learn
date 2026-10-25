@@ -43,7 +43,13 @@ export type Figure =
   | { kind: 'circleGraph'; title?: string; slices: { label: string; pct: number }[] }
   | { kind: 'circle'; radius?: number; diameter?: number; label?: string }
   | { kind: 'rightTriangle'; a: number; b: number; c?: number; showC?: boolean; aLabel?: string; bLabel?: string; cLabel?: string }
-  | { kind: 'scatterPlot'; title?: string; points: { x: number; y: number }[]; trendLine?: { m: number; b: number }; xLabel?: string; yLabel?: string; xMax?: number; yMax?: number };
+  | { kind: 'scatterPlot'; title?: string; points: { x: number; y: number }[]; trendLine?: { m: number; b: number }; xLabel?: string; yLabel?: string; xMax?: number; yMax?: number }
+  | { kind: 'tenFrame'; count: number; frames?: 1 | 2 }
+  | { kind: 'baseTenBlocks'; hundreds?: number; tens?: number; ones?: number }
+  | { kind: 'coins'; coins: ('penny' | 'nickel' | 'dime' | 'quarter')[] }
+  | { kind: 'analogClock'; hour: number; minute: number }
+  | { kind: 'shape2D'; shape: 'circle' | 'triangle' | 'rectangle' | 'square' | 'rhombus' | 'trapezoid' | 'pentagon' | 'hexagon' | 'octagon'; label?: string }
+  | { kind: 'shape3D'; shape: 'cube' | 'sphere' | 'cylinder' | 'cone' | 'rectangularPrism' | 'triangularPrism'; label?: string };
 
 export type Block =
   | { kind: 'text'; text: string }

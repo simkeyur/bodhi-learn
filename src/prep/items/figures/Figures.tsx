@@ -641,6 +641,293 @@ function ScatterPlot({ title, points, trendLine, xLabel, yLabel, xMax: propXMax,
   );
 }
 
+// ---------- Ten Frame (1 or 2 frames of 10) ----------
+function TenFrame({ count, frames }: Of<'tenFrame'>) {
+  const numFrames = frames ?? (count > 10 ? 2 : 1);
+  const frameW = 150, frameH = 64, pad = 4, gap = 12;
+  const totalW = numFrames === 1 ? frameW + pad * 2 : frameW * 2 + gap + pad * 2;
+  const cellW = 30, cellH = 30;
+
+  return (
+    <svg viewBox={`0 0 ${totalW} ${frameH + pad * 2}`} width={totalW}>
+      {Array.from({ length: numFrames }, (_, f) => {
+        const xOffset = pad + f * (frameW + gap);
+        const yOffset = pad;
+        const frameCount = Math.max(0, Math.min(10, count - f * 10));
+        return (
+          <g key={f}>
+            {Array.from({ length: 10 }, (_, i) => {
+              const col = i % 5;
+              const row = Math.floor(i / 5);
+              const cx = xOffset + col * cellW + cellW / 2;
+              const cy = yOffset + row * cellH + cellH / 2;
+              return (
+                <g key={i}>
+                  <rect
+                    x={xOffset + col * cellW}
+                    y={yOffset + row * cellH}
+                    width={cellW}
+                    height={cellH}
+                    className="fig-empty"
+                  />
+                  {i < frameCount && (
+                    <circle cx={cx} cy={cy} r={10} className="fig-counter" />
+                  )}
+                </g>
+              );
+            })}
+            <rect x={xOffset} y={yOffset} width={5 * cellW} height={2 * cellH} className="fig-frame" />
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// ---------- Base Ten Blocks (Hundreds, Tens, Ones) ----------
+function BaseTenBlocks({ hundreds = 0, tens = 0, ones = 0 }: Of<'baseTenBlocks'>) {
+  const flatSize = 46;
+  const rodW = 7, rodH = 46;
+  const unitSize = 7;
+  const pad = 6;
+
+  const hWidth = hundreds > 0 ? hundreds * (flatSize + 6) : 0;
+  const tWidth = tens > 0 ? tens * (rodW + 4) : 0;
+  const oWidth = ones > 0 ? Math.min(ones, 5) * (unitSize + 3) : 0;
+
+  const totalW = Math.max(120, pad * 2 + hWidth + (hWidth && (tWidth || oWidth) ? 14 : 0) + tWidth + (tWidth && oWidth ? 14 : 0) + oWidth);
+  const totalH = flatSize + pad * 2 + 8;
+
+  let currentX = pad;
+
+  return (
+    <svg viewBox={`0 0 ${totalW} ${totalH}`} width={totalW}>
+      {Array.from({ length: hundreds }, (_, i) => {
+        const x = currentX + i * (flatSize + 6);
+        return (
+          <g key={`h-${i}`}>
+            <rect x={x} y={pad} width={flatSize} height={flatSize} className="fig-block-flat" />
+            {Array.from({ length: 9 }, (_, k) => (
+              <line key={`hl-${k}`} x1={x + (k + 1) * (flatSize / 10)} y1={pad} x2={x + (k + 1) * (flatSize / 10)} y2={pad + flatSize} className="fig-gridline" />
+            ))}
+            {Array.from({ length: 9 }, (_, k) => (
+              <line key={`hr-${k}`} x1={x} y1={pad + (k + 1) * (flatSize / 10)} x2={x + flatSize} y2={pad + (k + 1) * (flatSize / 10)} className="fig-gridline" />
+            ))}
+          </g>
+        );
+      })}
+      {(() => {
+        if (hundreds > 0) currentX += hWidth + 14;
+        return Array.from({ length: tens }, (_, i) => {
+          const x = currentX + i * (rodW + 4);
+          return (
+            <g key={`t-${i}`}>
+              <rect x={x} y={pad} width={rodW} height={rodH} className="fig-block-rod" />
+              {Array.from({ length: 9 }, (_, k) => (
+                <line key={`tr-${k}`} x1={x} y1={pad + (k + 1) * (rodH / 10)} x2={x + rodW} y2={pad + (k + 1) * (rodH / 10)} className="fig-gridline" />
+              ))}
+            </g>
+          );
+        });
+      })()}
+      {(() => {
+        if (tens > 0 || (hundreds > 0 && !tens)) currentX += (tens > 0 ? tWidth + 14 : 0);
+        return Array.from({ length: ones }, (_, i) => {
+          const col = i % 5;
+          const row = Math.floor(i / 5);
+          const x = currentX + col * (unitSize + 3);
+          const y = pad + row * (unitSize + 3);
+          return (
+            <rect key={`o-${i}`} x={x} y={y} width={unitSize} height={unitSize} className="fig-block-unit" />
+          );
+        });
+      })()}
+    </svg>
+  );
+}
+
+// ---------- Coins Figure ----------
+function CoinsFigure({ coins }: Of<'coins'>) {
+  const specs: Record<string, { r: number; fill: string; stroke: string; label: string; textCol: string }> = {
+    penny: { r: 17, fill: '#FDE68A', stroke: '#D97706', label: '1¢', textCol: '#92400E' },
+    nickel: { r: 21, fill: '#F1F5F9', stroke: '#64748B', label: '5¢', textCol: '#334155' },
+    dime: { r: 15, fill: '#E2E8F0', stroke: '#64748B', label: '10¢', textCol: '#1E293B' },
+    quarter: { r: 26, fill: '#F8FAFC', stroke: '#475569', label: '25¢', textCol: '#0F172A' },
+  };
+
+  const pad = 6;
+  const maxR = 26;
+  let totalW = pad;
+  const positions: { x: number; y: number; kind: string }[] = [];
+  coins.forEach((c) => {
+    const s = specs[c] ?? specs.penny;
+    positions.push({ x: totalW + s.r, y: maxR + pad, kind: c });
+    totalW += s.r * 2 + 8;
+  });
+  totalW += pad;
+  const totalH = (maxR + pad) * 2;
+
+  return (
+    <svg viewBox={`0 0 ${totalW} ${totalH}`} width={totalW}>
+      {positions.map((p, i) => {
+        const s = specs[p.kind] ?? specs.penny;
+        return (
+          <g key={i}>
+            <circle cx={p.x} cy={p.y} r={s.r} fill={s.fill} stroke={s.stroke} strokeWidth={2} />
+            <text x={p.x} y={p.y + 4} textAnchor="middle" fill={s.textCol} fontSize={s.r > 20 ? 13 : 11} fontWeight={700} fontFamily="var(--font)">
+              {s.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// ---------- Analog Clock ----------
+function AnalogClock({ hour, minute }: Of<'analogClock'>) {
+  const size = 140, cx = 70, cy = 70, r = 58;
+  const hourAngle = ((hour % 12) + minute / 60) * 30;
+  const minAngle = minute * 6;
+  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const rad = (deg: number) => (deg - 90) * (Math.PI / 180);
+
+  const hLen = 30;
+  const mLen = 44;
+  const hx = cx + hLen * Math.cos(rad(hourAngle));
+  const hy = cy + hLen * Math.sin(rad(hourAngle));
+  const mx = cx + mLen * Math.cos(rad(minAngle));
+  const my = cy + mLen * Math.sin(rad(minAngle));
+
+  return (
+    <svg viewBox={`0 0 ${size} ${size}`} width={size}>
+      <circle cx={cx} cy={cy} r={r} className="fig-empty" strokeWidth={2.5} />
+      {nums.map((n) => {
+        const a = n * 30;
+        const tx = cx + (r - 12) * Math.cos(rad(a));
+        const ty = cy + (r - 12) * Math.sin(rad(a)) + 4;
+        return (
+          <text key={n} x={tx} y={ty} textAnchor="middle" className="fig-clock-num">
+            {n}
+          </text>
+        );
+      })}
+      <line x1={cx} y1={cy} x2={mx} y2={my} stroke="var(--ink)" strokeWidth={2.5} strokeLinecap="round" />
+      <line x1={cx} y1={cy} x2={hx} y2={hy} stroke="var(--blue-600)" strokeWidth={4} strokeLinecap="round" />
+      <circle cx={cx} cy={cy} r={3} fill="var(--ink)" />
+    </svg>
+  );
+}
+
+// ---------- 2D Shape Figure ----------
+function Shape2DFigure({ shape, label }: Of<'shape2D'>) {
+  const W = 150, H = 130, cx = 75, cy = label ? 55 : 65;
+  const renderShape = () => {
+    switch (shape) {
+      case 'circle':
+        return <circle cx={cx} cy={cy} r={42} className="fig-shape" />;
+      case 'triangle':
+        return <polygon points={`${cx},${cy - 42} ${cx - 45},${cy + 38} ${cx + 45},${cy + 38}`} className="fig-shape" />;
+      case 'square':
+        return <rect x={cx - 38} y={cy - 38} width={76} height={76} className="fig-shape" />;
+      case 'rectangle':
+        return <rect x={cx - 52} y={cy - 32} width={104} height={64} className="fig-shape" />;
+      case 'rhombus':
+        return <polygon points={`${cx},${cy - 40} ${cx + 40},${cy} ${cx},${cy + 40} ${cx - 40},${cy}`} className="fig-shape" />;
+      case 'trapezoid':
+        return <polygon points={`${cx - 26},${cy - 32} ${cx + 26},${cy - 32} ${cx + 50},${cy + 32} ${cx - 50},${cy + 32}`} className="fig-shape" />;
+      case 'pentagon': {
+        const pts = [0, 1, 2, 3, 4].map((i) => {
+          const a = (i * 72 - 90) * (Math.PI / 180);
+          return `${cx + 42 * Math.cos(a)},${cy + 42 * Math.sin(a)}`;
+        }).join(' ');
+        return <polygon points={pts} className="fig-shape" />;
+      }
+      case 'hexagon': {
+        const pts = [0, 1, 2, 3, 4, 5].map((i) => {
+          const a = (i * 60 - 90) * (Math.PI / 180);
+          return `${cx + 42 * Math.cos(a)},${cy + 42 * Math.sin(a)}`;
+        }).join(' ');
+        return <polygon points={pts} className="fig-shape" />;
+      }
+      case 'octagon': {
+        const pts = [0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+          const a = (i * 45 - 22.5) * (Math.PI / 180);
+          return `${cx + 42 * Math.cos(a)},${cy + 42 * Math.sin(a)}`;
+        }).join(' ');
+        return <polygon points={pts} className="fig-shape" />;
+      }
+    }
+  };
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      {renderShape()}
+      {label && <text x={cx} y={H - 6} textAnchor="middle" className="fig-label">{label}</text>}
+    </svg>
+  );
+}
+
+// ---------- 3D Shape Figure ----------
+function Shape3DFigure({ shape, label }: Of<'shape3D'>) {
+  const W = 150, H = 140, cx = 75, cy = label ? 60 : 70;
+  const renderShape = () => {
+    switch (shape) {
+      case 'cube':
+        return (
+          <g>
+            <polygon points={`${cx - 28},${cy - 8} ${cx},${cy - 22} ${cx + 28},${cy - 8} ${cx},${cy + 6}`} className="fig-face-top" stroke="var(--ink)" strokeWidth={1.5} />
+            <polygon points={`${cx - 28},${cy - 8} ${cx},${cy + 6} ${cx},${cy + 42} ${cx - 28},${cy + 28}`} className="fig-face-front" stroke="var(--ink)" strokeWidth={1.5} />
+            <polygon points={`${cx},${cy + 6} ${cx + 28},${cy - 8} ${cx + 28},${cy + 28} ${cx},${cy + 42}`} className="fig-face-side" stroke="var(--ink)" strokeWidth={1.5} />
+          </g>
+        );
+      case 'rectangularPrism':
+        return (
+          <g>
+            <polygon points={`${cx - 42},${cy - 12} ${cx},${cy - 26} ${cx + 42},${cy - 12} ${cx},${cy + 2}`} className="fig-face-top" stroke="var(--ink)" strokeWidth={1.5} />
+            <polygon points={`${cx - 42},${cy - 12} ${cx},${cy + 2} ${cx},${cy + 38} ${cx - 42},${cy + 24}`} className="fig-face-front" stroke="var(--ink)" strokeWidth={1.5} />
+            <polygon points={`${cx},${cy + 2} ${cx + 42},${cy - 12} ${cx + 42},${cy + 24} ${cx},${cy + 38}`} className="fig-face-side" stroke="var(--ink)" strokeWidth={1.5} />
+          </g>
+        );
+      case 'sphere':
+        return (
+          <g>
+            <circle cx={cx} cy={cy} r={42} className="fig-face-front" stroke="var(--ink)" strokeWidth={1.5} />
+            <ellipse cx={cx} cy={cy} rx={42} ry={13} fill="none" stroke="var(--blue-400)" strokeWidth={1.2} strokeDasharray="4 3" />
+          </g>
+        );
+      case 'cylinder':
+        return (
+          <g>
+            <path d={`M ${cx - 32} ${cy - 22} L ${cx - 32} ${cy + 22} A 32 11 0 0 0 ${cx + 32} ${cy + 22} L ${cx + 32} ${cy - 22} Z`} className="fig-face-front" stroke="var(--ink)" strokeWidth={1.5} />
+            <ellipse cx={cx} cy={cy - 22} rx={32} ry={11} className="fig-face-top" stroke="var(--ink)" strokeWidth={1.5} />
+          </g>
+        );
+      case 'cone':
+        return (
+          <g>
+            <path d={`M ${cx - 32} ${cy + 26} L ${cx} ${cy - 40} L ${cx + 32} ${cy + 26} Z`} className="fig-face-front" stroke="var(--ink)" strokeWidth={1.5} />
+            <ellipse cx={cx} cy={cy + 26} rx={32} ry={11} className="fig-face-side" stroke="var(--ink)" strokeWidth={1.5} />
+          </g>
+        );
+      case 'triangularPrism':
+        return (
+          <g>
+            <polygon points={`${cx - 32},${cy + 26} ${cx - 5},${cy - 32} ${cx - 5},${cy + 18}`} className="fig-face-front" stroke="var(--ink)" strokeWidth={1.5} />
+            <polygon points={`${cx - 5},${cy - 32} ${cx + 32},${cy - 12} ${cx + 32},${cy + 36} ${cx - 5},${cy + 18}`} className="fig-face-side" stroke="var(--ink)" strokeWidth={1.5} />
+          </g>
+        );
+    }
+  };
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W}>
+      {renderShape()}
+      {label && <text x={cx} y={H - 6} textAnchor="middle" className="fig-label">{label}</text>}
+    </svg>
+  );
+}
+
 export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
   const body = (() => {
     switch (figure.kind) {
@@ -661,6 +948,12 @@ export function FigureView({ figure, alt }: { figure: Figure; alt: string }) {
       case 'circle': return <CircleFigure {...figure} />;
       case 'rightTriangle': return <RightTriangle {...figure} />;
       case 'scatterPlot': return <ScatterPlot {...figure} />;
+      case 'tenFrame': return <TenFrame {...figure} />;
+      case 'baseTenBlocks': return <BaseTenBlocks {...figure} />;
+      case 'coins': return <CoinsFigure {...figure} />;
+      case 'analogClock': return <AnalogClock {...figure} />;
+      case 'shape2D': return <Shape2DFigure {...figure} />;
+      case 'shape3D': return <Shape3DFigure {...figure} />;
     }
   })();
   return <div className="fig" role="img" aria-label={alt}>{body}</div>;

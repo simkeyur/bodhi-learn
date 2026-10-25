@@ -54,6 +54,12 @@ function figureProblems(f: Figure): string[] {
   if (f.kind === 'circle' && !f.radius && !f.diameter) out.push('circle needs radius or diameter');
   if (f.kind === 'rightTriangle' && (f.a <= 0 || f.b <= 0)) out.push('right triangle legs must be positive');
   if (f.kind === 'scatterPlot' && (!f.points || f.points.length < 2)) out.push('scatter plot needs at least 2 points');
+  if (f.kind === 'tenFrame' && (f.count < 0 || f.count > (f.frames === 1 ? 10 : 20))) out.push('ten frame count out of range');
+  if (f.kind === 'baseTenBlocks' && ((f.hundreds ?? 0) < 0 || (f.tens ?? 0) < 0 || (f.ones ?? 0) < 0)) out.push('base ten blocks negative count');
+  if (f.kind === 'coins' && (!f.coins || f.coins.length === 0)) out.push('coins list empty');
+  if (f.kind === 'analogClock' && (f.hour < 1 || f.hour > 12 || f.minute < 0 || f.minute > 59)) out.push('analog clock time invalid');
+  if (f.kind === 'shape2D' && !f.shape) out.push('shape2D missing shape');
+  if (f.kind === 'shape3D' && !f.shape) out.push('shape3D missing shape');
   return out;
 }
 

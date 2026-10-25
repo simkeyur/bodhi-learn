@@ -43,3 +43,9 @@
 .prep .fig-slice-4 { fill: var(--blue-300); stroke: var(--blue-700); stroke-width: 1.5; }
 .prep .fig-slice-5 { fill: var(--sun-300); stroke: var(--blue-700); stroke-width: 1.5; }
 
+.prep .fig-counter { fill: var(--blue-600); stroke: var(--blue-800); stroke-width: 1.5; }
+.prep .fig-block-flat { fill: var(--blue-100); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-block-rod { fill: var(--blue-200); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-block-unit { fill: var(--blue-400); stroke: var(--blue-800); stroke-width: 1.2; }
+.prep .fig-clock-num { fill: var(--ink); font-size: 11px; font-weight: 700; font-family: var(--font); }
+

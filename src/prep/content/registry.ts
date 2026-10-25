@@ -5,6 +5,9 @@
 import type { Rng } from './rng.ts';
 import type { Item, Lesson, Standard, Strand } from './types.ts';
 import type { Gen } from './generators/build.ts';
+import { G1_MATH, G1_MATH_STRANDS } from '../data/standards/g1-math.ts';
+import { G1_GENERATORS, makeG1MathItem } from './generators/g1/index.ts';
+import { G1_MATH_LESSONS } from './lessons/g1-math.ts';
 import { G3_MATH, G3_MATH_STRANDS } from '../data/standards/g3-math.ts';
 import { G3_GENERATORS, makeG3MathItem } from './generators/g3/index.ts';
 import { G3_MATH_LESSONS } from './lessons/g3-math.ts';
@@ -38,6 +41,16 @@ export interface GradeContent {
 }
 
 export const GRADES: Record<number, GradeContent> = {
+  1: {
+    grade: 1,
+    subject: 'math',
+    strands: G1_MATH_STRANDS,
+    standards: G1_MATH,
+    generators: G1_GENERATORS,
+    makeItem: makeG1MathItem,
+    lessons: G1_MATH_LESSONS,
+    blueprint: { readiness: [3, 4, 3, 3], supporting: [4, 7, 8, 7] },
+  },
   3: {
     grade: 3,
     subject: 'math',
