@@ -482,8 +482,8 @@ function Histogram({ title, intervals, frequencies, step = 1, axis }: Of<'histog
 
 // ---------- Circle graph (pie chart) ----------
 function CircleGraph({ title, slices }: Of<'circleGraph'>) {
-  const cx = 110, cy = 115, R = 75;
-  const W = 320, H = 220;
+  const cx = 80, cy = 110, R = 68;
+  const W = 360, H = 210;
   const total = slices.reduce((s, sl) => s + sl.pct, 0);
 
   // Compute angles with reduce to avoid mutating outer variable during render
@@ -510,7 +510,7 @@ function CircleGraph({ title, slices }: Of<'circleGraph'>) {
     <svg viewBox={`0 0 ${W} ${H}`} width={W}>
       {title && <text x={W / 2} y={18} textAnchor="middle" className="fig-title">{title}</text>}
       <g>{paths}</g>
-      <g transform={`translate(${cx + R + 20}, 45)`}>
+      <g transform={`translate(${cx + R + 14}, 40)`}>
         {slices.map((sl, i) => (
           <g key={i} transform={`translate(0, ${i * 24})`}>
             <rect x={0} y={-10} width={14} height={14} className={`fig-slice-${i % 6}`} rx={2} />
@@ -560,8 +560,17 @@ function RightTriangle({ a, b, c, showC, aLabel, bLabel, cLabel }: Of<'rightTria
   const lblB = bLabel ?? `${b}`;
   const lblC = cLabel ?? (showC ? `${hyp}` : '?');
 
-  // Scale to fit canvas
-  const drawW = 150, drawH = 120;
+  // Scale both legs using one shared factor so their lengths keep the right ratio,
+  // fitting the longer leg to the space the figure has now (maxW = 150, maxH = 120),
+  // keeping the shorter leg at least ~25% of the longer one.
+  const maxW = 150, maxH = 120;
+  const isVerticalLonger = b >= a;
+  const scale = isVerticalLonger
+    ? Math.min(maxH / b, maxW / a)
+    : Math.min(maxW / a, maxH / b);
+  const drawW = isVerticalLonger ? Math.max(a * scale, maxH * 0.25) : a * scale;
+  const drawH = isVerticalLonger ? b * scale : Math.max(b * scale, maxW * 0.25);
+
   const x0 = padX, y0 = H - padY;
   const x1 = x0 + drawW, y1 = y0;
   const x2 = x0, y2 = y0 - drawH;

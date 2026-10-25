@@ -1,5 +1,5 @@
 .prep .fig { display: inline-block; max-width: 100%; }
-.prep .fig svg { height: auto; overflow: visible; font-family: var(--font); }
+.prep .fig svg { max-width: 100%; height: auto; font-family: var(--font); }
 
 .prep .fig-empty { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
 .prep .fig-shade-1 { fill: var(--blue-100); stroke: var(--line-strong); stroke-width: 1; }
@@ -39,7 +39,7 @@
 .prep .fig-slice-0 { fill: var(--blue-100); stroke: var(--blue-700); stroke-width: 1.5; }
 .prep .fig-slice-1 { fill: var(--sun-100); stroke: var(--blue-700); stroke-width: 1.5; }
 .prep .fig-slice-2 { fill: var(--blue-200); stroke: var(--blue-700); stroke-width: 1.5; }
-.prep .fig-slice-3 { fill: var(--sun-200); stroke: var(--blue-700); stroke-width: 1.5; }
+.prep .fig-slice-3 { fill: var(--sun-300); stroke: var(--blue-700); stroke-width: 1.5; }
 .prep .fig-slice-4 { fill: var(--blue-300); stroke: var(--blue-700); stroke-width: 1.5; }
 .prep .fig-slice-5 { fill: var(--sun-300); stroke: var(--blue-700); stroke-width: 1.5; }
 
