@@ -2,7 +2,7 @@
 // Standards: 1.6A, 1.6B, 1.6D, 1.6E, 1.6F, 1.6G, 1.6H, 1.7B, 1.7C, 1.7D, 1.7E
 
 import { pick, randInt } from '../../rng.ts';
-import { fig, mc, one, txt, type Gen } from '../build.ts';
+import { fig, mc, one, ordinal, txt, type Gen } from '../build.ts';
 
 // ---------- 1.6A Classify 2D shapes using informal geometric language ----------
 export const classify2DShapes: Gen = (rng, _d) => {
@@ -156,7 +156,7 @@ export const compareTwoUnitLengths: Gen = (rng, _d) => {
 // ---------- 1.7D Describe length to nearest whole unit ----------
 export const describeLengthUnits: Gen = (rng, _d) => {
   const units = randInt(rng, 3, 9);
-  return one('mc', [txt(`A marker is laid next to a row of paperclips. The marker reaches from the start of the first clip to the end of the ${units}th clip. How long is the marker?`)],
+  return one('mc', [txt(`A marker is laid next to a row of paperclips. The marker reaches from the start of the first clip to the end of the ${ordinal(units)} clip. How long is the marker?`)],
     mc(rng, `${units} paperclips`, [
       `${units + 1} paperclips`,
       `${units - 1} paperclips`,

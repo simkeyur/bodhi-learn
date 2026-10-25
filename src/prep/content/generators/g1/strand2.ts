@@ -110,7 +110,7 @@ export const factStrategiesWithin20: Gen = (rng, d) => {
 // ---------- 1.3F Problem situations for number sentences ----------
 export const matchSituationToSentence: Gen = (rng, _d) => {
   const a = randInt(rng, 4, 10);
-  const b = randInt(rng, 2, 6);
+  const b = randInt(rng, 2, Math.min(6, a - 1)); // grade 1 has no negative numbers
   const isAdd = rng() < 0.5;
 
   if (isAdd) {
@@ -181,7 +181,7 @@ export const tenMoreTenLess: Gen = (rng, _d) => {
 export const representWordProblem: Gen = (rng, _d) => {
   const name = pick(rng, NAMES);
   const a = randInt(rng, 5, 12);
-  const b = randInt(rng, 2, 7);
+  const b = randInt(rng, 2, Math.min(7, a - 1)); // grade 1 has no negative numbers
   const isAdd = rng() < 0.5;
 
   if (isAdd) {
@@ -199,8 +199,8 @@ export const representWordProblem: Gen = (rng, _d) => {
   return one('mc', [txt(`${name} has ${a} cookies. ${name} eats ${b} cookies. Which number sentence shows how many cookies are left?`)],
     mc(rng, `${a} − ${b} = ${diff}`, [
       `${a} + ${b} = ${a + b}`,
-      `${diff} − ${b} = ${diff - b}`,
-      `${a} − ${diff} = ${diff}`,
+      `${a + 1} − ${b} = ${diff + 1}`,
+      `${a} − ${b - 1} = ${diff + 1}`,
     ]),
     `Eating cookies means subtraction: ${a} − ${b} = ${diff}.`);
 };

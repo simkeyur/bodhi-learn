@@ -131,7 +131,7 @@ export const convertMeasurements: Gen = (rng, d) => {
   }
   const m = randInt(rng, 2, 9), cm = randInt(rng, 10, 90);
   return one('mc', [txt(`A ribbon is ${m} meters long. ${pick(rng, ['Ana', 'Luis', 'Mei'])} cuts off ${cm} centimeters. How many centimeters of ribbon are left?`)],
-    mc(rng, num(m * 100 - cm), [num(m - cm > 0 ? m - cm : m * 10 - cm), num(m * 100 + cm), num(m * 1000 - cm), num(m * 10 - cm > 0 ? m * 10 - cm : m * 100 - cm + 10)]),
+    mc(rng, num(m * 100 - cm), [num(m * 100 - cm + 100), num(m * 100 + cm), num(m * 1000 - cm), num(m * 10 - cm > 0 ? m * 10 - cm : m * 100 - cm + 10)]),
     `${m} meters = ${m * 100} centimeters. ${m * 100} − ${cm} = ${m * 100 - cm} centimeters.`);
 };
 

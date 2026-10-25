@@ -130,7 +130,7 @@ export const addSubtractAlgorithm: Gen = (rng, d) => {
     // Large whole numbers addition or subtraction
     const isAdd = rng() < 0.5;
     const a = randInt(rng, 15000, 75000);
-    const b = randInt(rng, 8000, 35000);
+    const b = randInt(rng, 8000, Math.min(35000, a - 1000)); // a − b stays positive
     if (isAdd) {
       const sum = a + b;
       return one('mc', [txt(`What is the sum?`), txt(`${num(a)} + ${num(b)}`)],

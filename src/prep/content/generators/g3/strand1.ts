@@ -2,7 +2,7 @@
 // Standards: 3.2A, 3.2B, 3.2C, 3.2D, 3.3A, 3.3B, 3.3C, 3.3D, 3.3E, 3.3F, 3.3G, 3.3H, 3.4I, 3.7A
 
 import { pick, randInt } from '../../rng.ts';
-import { fig, mc, num, one, txt, type Gen } from '../build.ts';
+import { fig, mc, num, one, ordinal, txt, type Gen } from '../build.ts';
 
 // Names for Texas 3rd-grade context
 const NAMES = ['Liam', 'Emma', 'Noah', 'Olivia', 'Mateo', 'Sofia', 'Lucas', 'Mia', 'Ethan', 'Camila', 'Santiago', 'Ava'];
@@ -279,7 +279,7 @@ export const fractionsOnNumberLine: Gen = (rng, d) => {
       `{${numVal}/${den === 8 ? 6 : 8}}`,
       `{1/${den}}`,
     ]),
-    `Count the equal intervals from 0 to 1: there are ${den} equal parts. Point P is located at the ${numVal}th mark, representing {${numVal}/${den}}.`);
+    `Count the equal intervals from 0 to 1: there are ${den} equal parts. Point P is located at the ${ordinal(numVal)} mark, representing {${numVal}/${den}}.`);
 };
 
 // ---------- 3.3C Unit fractions as one part of a whole ----------

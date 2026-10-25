@@ -250,7 +250,7 @@ export const measureVolumeWeight: Gen = (rng, _d) => {
     mc(rng, `${diff} grams`, [
       `${heavy + light} grams`,
       `${diff + 20} grams`,
-      `${diff - 10} grams`,
+      `${diff > 10 ? diff - 10 : diff + 10} grams`,
     ]),
     `Subtract to find the difference: ${heavy} − ${light} = ${diff} grams.`);
 };

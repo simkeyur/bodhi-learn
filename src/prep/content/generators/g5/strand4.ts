@@ -139,7 +139,8 @@ export const grossNet: Gen = (rng, d) => {
       ]),
       'Gross income is everything earned. Net income ("take-home pay") is gross income minus taxes and other deductions.');
   }
-  const gross = randInt(rng, 120, 480) * 10, taxes = randInt(rng, 15, 90) * 10;
+  const gross = randInt(rng, 120, 480) * 10;
+  const taxes = randInt(rng, 15, Math.min(90, Math.floor(gross / 30))) * 10; // at most a third, so net − taxes stays positive
   const net = gross - taxes;
   if (d === 2) {
     return one('mc', [txt(`Carlos earns a gross income of ${money(gross * 100)} this month. ${money(taxes * 100)} is taken out for taxes. What is his net income?`)],

@@ -148,4 +148,11 @@ export function frac(n: number, d: number, mixed = true): string {
 }
 
 // Plain text for figure labels and alt text, where markup isn't rendered: "2 1/3"
+// 1st, 2nd, 3rd, 4th ... 11th, 12th, 13th, 21st
+export const ordinal = (n: number): string => {
+  const t = n % 100;
+  if (t >= 11 && t <= 13) return `${n}th`;
+  return `${n}${['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
+};
+
 export const plain = (s: string): string => s.replace(/(\d)\{/g, '$1 {').replace(/\{(\d+)\/(\d+)\}/g, '$1/$2');

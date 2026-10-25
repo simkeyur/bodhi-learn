@@ -4,7 +4,7 @@ import assert from 'assert/strict';
 import { describe, test } from 'node:test';
 import { BUILT_GRADES, GRADES, contentFor, findLesson, findStandard, makeItem } from '../../src/prep/content/registry.ts';
 import { answerComplete, answerKey, emptyAnswer, itemProblems, partRight, score } from '../../src/prep/content/scoring.ts';
-import { dec, frac, money, numberOptions, plain } from '../../src/prep/content/generators/build.ts';
+import { dec, frac, money, numberOptions, ordinal, plain } from '../../src/prep/content/generators/build.ts';
 import { explainSteps } from '../../src/prep/content/lessons/steps.ts';
 import { mulberry32 } from '../../src/prep/content/rng.ts';
 
@@ -71,6 +71,10 @@ for (const grade of BUILT_GRADES) {
             for (const p of item.parts) if (p.type === 'mc') assert.equal(p.choices.length, 4, `${where}: multiple choice needs 4 choices`);
             // TEA's SST math blueprints list multiple choice, multiselect and inline choice only
             if (content.subject === 'math') assert.notEqual(item.type, 'multipart', `${where}: no two-part questions in math`);
+            const words = JSON.stringify({ stem: item.stem, parts: item.parts, explain: item.explain });
+            assert.doesNotMatch(words, /(?<!1)[123]th\b/, `${where}: wrong ordinal ("3th")`);
+            // Negative numbers start in grade 6 (6.2A)
+            if (grade < 6) assert.doesNotMatch(words, /(?<![\w.)])[-−]\d/, `${where}: negative number before grade 6`);
           }
         }
       }
@@ -155,6 +159,7 @@ test('number and fraction formatting', () => {
   assert.equal(frac(7, 3), '2{1/3}');
   assert.equal(frac(6, 3), '2');
   assert.equal(plain('2{1/3} + {1/4}'), '2 1/3 + 1/4');
+  assert.deepEqual([1, 2, 3, 4, 11, 12, 13, 21, 22, 101].map(ordinal), ['1st', '2nd', '3rd', '4th', '11th', '12th', '13th', '21st', '22nd', '101st']);
   assert.deepEqual(numberOptions(10, [12, 8, 10, -1, 30, 40]), ['8', '10', '12', '30']);
 });
 

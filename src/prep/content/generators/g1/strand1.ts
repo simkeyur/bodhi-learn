@@ -129,7 +129,7 @@ export const comparePlaceValueWords: Gen = (rng, _d) => {
   const right = isGreater ? `${num1} is greater than ${num2}` : `${num1} is less than ${num2}`;
   const wrong1 = isGreater ? `${num1} is less than ${num2}` : `${num1} is greater than ${num2}`;
   const wrong2 = `${num1} is equal to ${num2}`;
-  const wrong3 = `${num2} is greater than ${Math.max(num1, num2) + 10}`;
+  const wrong3 = isGreater ? `${num2} is greater than ${num1}` : `${num2} is less than ${num1}`;
 
   return one('mc', [txt(`Compare ${num1} and ${num2}. Which sentence is true?`)],
     mc(rng, right, [wrong1, wrong2, wrong3]),
