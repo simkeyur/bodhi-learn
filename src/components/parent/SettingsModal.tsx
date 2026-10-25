@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
-import { MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE } from '../../firebase/schema';
+import { MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE, PREP_START_GRADE } from '../../firebase/schema';
 import { sound } from '../../utils/sound';
 import { AccountSection } from './AccountSection';
 import { X, Settings } from 'lucide-react';
@@ -182,7 +182,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
               </div>
             </div>
 
-            {/* Grade (from age 6): grade 4 and up get Bodhi Prep (Texas test prep) instead of the games */}
+            {/* Grade (from age 6): grade 1 and up can use Bodhi Prep (Texas test practice); grade 4 and up open in it */}
             {grade !== null && (
               <div style={{ marginBottom: 20 }}>
                 <label style={{ display: 'block', fontWeight: 700, fontSize: '0.95rem', color: '#334155', marginBottom: 8 }}>
@@ -211,7 +211,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                   ))}
                 </div>
                 <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: 6 }}>
-                  From grade {PREP_MIN_GRADE}, Bodhi Learn switches to Bodhi Prep: practice for the Texas state test.
+                  From grade {PREP_MIN_GRADE}, Bodhi Prep has practice for the Texas state test. From grade {PREP_START_GRADE}, the app opens there.
                 </div>
               </div>
             )}

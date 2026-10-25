@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-// Each math strand gets a color, the way Bodhi Learn gives each subject its own panel.
+// Each math strand gets a color, the way Bodhi Play gives each subject its own panel.
 // Screens read them as --sc (color), --sd (dark) and --st (tint). The icon is in StrandIcon.tsx.
 const LOOK: Record<number, { color: string; dark: string; tint: string }> = {
   1: { color: '#38BDF8', dark: '#0369A1', tint: '#F0F9FF' },

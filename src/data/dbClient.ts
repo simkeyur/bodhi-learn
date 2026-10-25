@@ -1,4 +1,4 @@
-// Typed SQLite Data Access Layer for Bodhi Learn (Cloudflare D1 & SQLite)
+// Typed SQLite Data Access Layer for Bodhi Play (Cloudflare D1 & SQLite)
 
 export interface DbAlphabetRow {
   letter: string;

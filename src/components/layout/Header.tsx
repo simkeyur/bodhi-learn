@@ -11,7 +11,7 @@ interface HeaderProps {
   onOpenSettings: () => void;
 }
 
-// The games' header: the shared bar with stars and the sound button. Tapping the name opens Settings.
+// Bodhi Play's header: the shared bar with stars and the sound button. Tapping the name opens Settings.
 export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenSettings }) => {
   const { stars, soundEnabled, setSoundEnabled, age, grade, kidName } = useApp();
 
@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectView, onOpenSettings }) 
   const starsLabel = `${stars} stars`;
 
   return (
-    <AppBar brand={<button type="button" className="bh-brand" onClick={() => go('home')} aria-label="Bodhi Learn home"><BrandMark app="Learn" /></button>}>
+    <AppBar brand={<button type="button" className="bh-brand" onClick={() => go('home')} aria-label="Bodhi Play home"><BrandMark app="Play" /></button>}>
       <span className="bh-wide"><ModeSwitch /></span>
       <span className="bh-compact"><ModeSwitch compact /></span>
 

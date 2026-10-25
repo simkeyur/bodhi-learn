@@ -1,4 +1,4 @@
-/* Design tokens for Bodhi Prep: the Bodhi Learn palette (sky, sun, grass, coral, grape) and fonts, a step
+/* Design tokens for Bodhi Prep: the Bodhi Play palette (sky, sun, grass, coral, grape) and fonts, a step
    more grown-up: thinner borders, smaller chunky shadows, calmer type. The only place raw colors live. */
 .prep {
   /* Sky: Bodhi's main blue (token names kept as blue-* so components don't care which blue it is) */

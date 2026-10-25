@@ -216,7 +216,7 @@ import { ALPHABET, atbash, checkCipher, lettersOnly, makeCipherPuzzle, makeCiphe
 import { canMove, isSolved as hanoiSolved, move, newGame, optimalMoves, solveFrom } from '../src/data/hanoi.ts';
 import { isOrderPuzzle, pickNear, readOrderPack } from '../src/content/select.ts';
 import { adjustLevel, isQuestion, nextQuestion, pickFromPack, readPack } from '../src/content/select.ts';
-import { bandForAge, bracketForAge, effectiveGrade, fromDocData, gradeForAge, isPrepLearner, levelForAge, toDocData, DEFAULT_STATE, MAX_LEVEL } from '../src/firebase/schema.ts';
+import { bandForAge, bracketForAge, effectiveGrade, fromDocData, gradeForAge, hasPrep, startsInPrep, levelForAge, toDocData, DEFAULT_STATE, MAX_LEVEL } from '../src/firebase/schema.ts';
 
 const packs = Object.fromEntries(['reading', 'science', 'logic'].map((s) => [s, JSON.parse(fs.readFileSync(`src/content/packs/${s}.json`, 'utf8'))]));
 
@@ -328,14 +328,16 @@ test('grade 4 and up open in test prep; the grade is asked from age 6', () => {
   assert.equal(effectiveGrade(10, 0), 5, 'not asked yet: the usual grade for the age');
   assert.equal(effectiveGrade(10, 3), 3);
   assert.deepEqual([6, 7, 8, 9, 10, 13, 14].map(gradeForAge), [1, 2, 3, 4, 5, 8, 8]);
-  assert.equal(isPrepLearner(5, 0), false);
-  assert.equal(isPrepLearner(6, 1), false, 'a 6-year-old in grade 1 opens in the games');
-  assert.equal(isPrepLearner(7, 2), false, 'a 7-year-old in grade 2 opens in the games');
-  assert.equal(isPrepLearner(8, 3), false, 'an 8-year-old in grade 3 opens in the games');
-  assert.equal(isPrepLearner(9, 3), false, 'a 9-year-old in grade 3 opens in the games');
-  assert.equal(isPrepLearner(9, 4), true);
-  assert.equal(isPrepLearner(9, 0), true, 'age 9 defaults to grade 4');
-  assert.equal(isPrepLearner(12, 7), true);
+  assert.equal(hasPrep(5, 0), false, 'kindergarten has Bodhi Play only');
+  assert.equal(hasPrep(6, 1), true, 'grade 1 and up have Bodhi Prep');
+  assert.equal(hasPrep(8, 3), true);
+  assert.equal(startsInPrep(6, 1), false, 'a 6-year-old in grade 1 opens in Bodhi Play');
+  assert.equal(startsInPrep(7, 2), false, 'a 7-year-old in grade 2 opens in Bodhi Play');
+  assert.equal(startsInPrep(8, 3), false, 'an 8-year-old in grade 3 opens in Bodhi Play');
+  assert.equal(startsInPrep(9, 3), false, 'a 9-year-old in grade 3 opens in Bodhi Play');
+  assert.equal(startsInPrep(9, 4), true);
+  assert.equal(startsInPrep(9, 0), true, 'age 9 defaults to grade 4');
+  assert.equal(startsInPrep(12, 7), true);
 });
 
 test('saved data round-trips and old documents (bracket only) still load', () => {

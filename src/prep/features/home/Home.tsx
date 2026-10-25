@@ -109,11 +109,14 @@ export function Home() {
           </ul>
         </section>
 
-        <section className="card card-pad real-test">
-          <h2 className="icon-title"><Target size={22} color="var(--blue-600)" aria-hidden /> Try the real test screen</h2>
-          <p className="page-sub">TEA's free practice site has every released test in the same screen you'll use on test day. Try one once you've practiced a few skills.</p>
-          <a className="btn btn-secondary" href={OFFICIAL_PRACTICE_URL} target="_blank" rel="noreferrer">Open TEA's practice site <ExternalLink size={16} aria-hidden /></a>
-        </section>
+        {/* The state test starts in grade 3 */}
+        {content.grade >= 3 && (
+          <section className="card card-pad real-test">
+            <h2 className="icon-title"><Target size={22} color="var(--blue-600)" aria-hidden /> Try the real test screen</h2>
+            <p className="page-sub">TEA's free practice site has every released test in the same screen you'll use on test day. Try one once you've practiced a few skills.</p>
+            <a className="btn btn-secondary" href={OFFICIAL_PRACTICE_URL} target="_blank" rel="noreferrer">Open TEA's practice site <ExternalLink size={16} aria-hidden /></a>
+          </section>
+        )}
       </div>
     </div>
   );

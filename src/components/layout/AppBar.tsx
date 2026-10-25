@@ -1,7 +1,7 @@
 import React from 'react';
 import './appbar.css';
 
-// The one header both apps use: the Bodhi Learn games and Bodhi Prep. Callers pass the parts that differ
+// The one header both apps use: Bodhi Play (the games) and Bodhi Prep. Callers pass the parts that differ
 // (the brand and profile as a link or a button, page links, extra buttons), so it works with and without a router.
 
 export function AppBar({ brand, nav, children }: { brand: React.ReactNode; nav?: React.ReactNode; children: React.ReactNode }) {
@@ -16,8 +16,8 @@ export function AppBar({ brand, nav, children }: { brand: React.ReactNode; nav?:
   );
 }
 
-// Logo tile and wordmark: "Bodhi Learn" or "Bodhi Prep". Goes inside a link or button with className "bh-brand".
-export function BrandMark({ app }: { app: 'Learn' | 'Prep' }) {
+// Logo tile and wordmark: "Bodhi Play" or "Bodhi Prep". Goes inside a link or button with className "bh-brand".
+export function BrandMark({ app }: { app: 'Play' | 'Prep' }) {
   return (
     <>
       <span className="bh-logo"><img src="/logo.png" alt="" width={40} height={40} /></span>

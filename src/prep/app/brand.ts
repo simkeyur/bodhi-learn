@@ -1,4 +1,4 @@
-// Bodhi Prep: Bodhi Learn for grade 4 and up, with practice for the Texas state test.
+// Bodhi Prep: Bodhi's test practice for grades 1 to 8, with practice for the Texas state test.
 export const APP_NAME = 'Bodhi Prep';
 
 export const DISCLAIMER =

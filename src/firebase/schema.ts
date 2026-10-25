@@ -11,19 +11,23 @@ export type AgeBand = 'little' | 'explorer' | 'pro';
 
 export const clampAge = (n: number) => Math.min(MAX_AGE, Math.max(MIN_AGE, Math.round(n)));
 
-// School grade, asked from age 6. From grade 4 the learner gets Texas test prep (src/prep) by default;
-// grades 1–3 open in the Bodhi games with a switch to Prep. 0 means "not asked" (younger children).
+// School grade, asked from age 6; kindergarten and younger have Bodhi Play only. 0 means "not asked".
+// Bodhi Prep (Texas test practice, src/prep) has grades 1–8: grade 4 and up open in Prep, grades 1–3 open in
+// Bodhi Play (the games) with a switch to Prep.
 export const GRADE_ASK_MIN_AGE = 6;
 export const MIN_GRADE = 1;
 export const MAX_GRADE = 8;
-export const PREP_MIN_GRADE = 4;
+export const PREP_MIN_GRADE = 1;
+export const PREP_START_GRADE = 4;
 export const clampGrade = (n: number) => Math.min(MAX_GRADE, Math.max(MIN_GRADE, Math.round(n)));
 // The usual grade for an age in Texas (age 6 by September 1 -> grade 1, age 8 -> grade 3, age 10 -> grade 5)
 export const gradeForAge = (age: number) => clampGrade(age - 5);
 // The grade that counts: none under 6, otherwise the one chosen (or the usual one for the age)
 export const effectiveGrade = (age: number, grade: number): number | null =>
   age < GRADE_ASK_MIN_AGE ? null : grade >= MIN_GRADE && grade <= MAX_GRADE ? grade : gradeForAge(age);
-export const isPrepLearner = (age: number, grade: number): boolean => (effectiveGrade(age, grade) ?? 0) >= PREP_MIN_GRADE;
+export const hasPrep = (age: number, grade: number): boolean => (effectiveGrade(age, grade) ?? 0) >= PREP_MIN_GRADE;
+// Where the app opens when the child hasn't used the Play / Prep switch on this device
+export const startsInPrep = (age: number, grade: number): boolean => (effectiveGrade(age, grade) ?? 0) >= PREP_START_GRADE;
 export const bandForAge = (age: number): AgeBand => (age <= 6 ? 'little' : age <= 10 ? 'explorer' : 'pro');
 export const bracketForAge = (age: number): AgeBracket => (age <= 4 ? 'pre-k' : age <= 6 ? 'kindergarten' : 'grade1');
 // Documents written before exact ages existed only have a bracket

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useApp } from '../../../context/AppContext';
-import { isPrepLearner, MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE } from '../../../firebase/schema';
+import { hasPrep, MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE, PREP_START_GRADE } from '../../../firebase/schema';
 import { DISCLAIMER, OFFICIAL_PRACTICE_URL } from '../../app/brand';
 import { learner, useLearner } from '../../learner/store';
 import { useConfirm } from '../../ui/useConfirm';
@@ -18,9 +18,9 @@ const SYNC_TEXT: Record<string, string> = {
   error: "Couldn't save to your account.",
 };
 
-// Name, age and grade live in Bodhi Learn's profile, so changes here apply to the whole app
+// Name, age and grade live in the app's shared profile, so changes here apply to Bodhi Play too
 export function Settings() {
-  const { kidName, setKidName, age, setAge, grade, setGrade, cloud } = useApp();
+  const { kidName, setKidName, age, setAge, grade, setGrade, setMode, cloud } = useApp();
   const { skills } = useLearner();
   const [dialog, confirm] = useConfirm();
   const [name, setName] = useState(kidName);
@@ -39,16 +39,21 @@ export function Settings() {
     setSaved(true);
   };
 
-  // Changes that move the learner out of Bodhi Prep ask first
-  const leaving = async (nextAge: number, nextGrade: number) =>
-    isPrepLearner(nextAge, nextGrade) || confirm({
-      title: 'Switch to the Bodhi games?',
-      body: `Bodhi Prep is for grade ${PREP_MIN_GRADE} and up. With this change, Bodhi Learn shows the games for younger children instead. Bodhi Prep progress is kept.`,
+  // A change that takes away Bodhi Prep (kindergarten age) asks first. Any other change stays in Prep, even for
+  // grades 1–3, which would otherwise open in Bodhi Play.
+  const change = async (nextAge: number, nextGrade: number, apply: () => void) => {
+    const stays = hasPrep(nextAge, nextGrade);
+    if (!stays && !(await confirm({
+      title: 'Switch to Bodhi Play?',
+      body: `Bodhi Prep is for grade ${PREP_MIN_GRADE} and up. With this change, the app shows Bodhi Play instead. Bodhi Prep progress is kept.`,
       action: 'Switch',
-    });
+    }))) return;
+    apply();
+    if (stays) setMode('prep');
+  };
 
-  const pickGrade = async (g: number) => { if (await leaving(age, g)) setGrade(g); };
-  const pickAge = async (a: number) => { if (await leaving(a, grade ?? 0)) setAge(a); };
+  const pickGrade = (g: number) => change(age, g, () => setGrade(g));
+  const pickAge = (a: number) => change(a, grade ?? 0, () => setAge(a));
 
   const signOut = async () => {
     const ok = await confirm({
@@ -91,7 +96,7 @@ export function Settings() {
               </button>
             ))}
           </div>
-          <span className="field-hint">Bodhi Prep is for grade {PREP_MIN_GRADE} and up. Grades 1–3 use the Bodhi games by default.</span>
+          <span className="field-hint">Bodhi Prep is for grade {PREP_MIN_GRADE} and up. From grade {PREP_START_GRADE} the app opens here; grades {PREP_MIN_GRADE}–{PREP_START_GRADE - 1} open in Bodhi Play.</span>
         </fieldset>
         <fieldset className="field choice-field">
           <legend className="field-label">Age</legend>

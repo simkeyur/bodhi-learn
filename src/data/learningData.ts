@@ -1,4 +1,4 @@
-// Comprehensive educational datasets for Bodhi Learn
+// Comprehensive educational datasets for Bodhi Play
 
 export interface PhonicLetter {
   letter: string;

@@ -1,6 +1,6 @@
 {
-  "name": "Bodhi Learn - Reading, Math, Logic & Science",
-  "short_name": "Bodhi Learn",
+  "name": "Bodhi: Play and Prep",
+  "short_name": "Bodhi",
   "description": "A playful learning app for ages 4 to 14: reading, math, logic and science that adapts to your child.",
   "start_url": "/",
   "display": "standalone",

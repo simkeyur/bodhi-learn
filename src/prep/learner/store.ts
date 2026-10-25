@@ -1,5 +1,5 @@
 // Test prep progress on this device: mastery per standard and questions answered per day.
-// The learner's name and grade come from Bodhi Learn's profile (context/AppContext). Kept in localStorage
+// The learner's name and grade come from the app's shared profile (context/AppContext). Kept in localStorage
 // for now; syncing it with the signed-in account is still to do (docs/STAAR_PIVOT.md).
 
 import { useSyncExternalStore } from 'react';

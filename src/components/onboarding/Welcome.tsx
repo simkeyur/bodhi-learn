@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { GRADE_ASK_MIN_AGE, MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE, gradeForAge } from '../../firebase/schema';
+import { GRADE_ASK_MIN_AGE, MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE, PREP_MIN_GRADE, PREP_START_GRADE, gradeForAge } from '../../firebase/schema';
 import { sound } from '../../utils/sound';
 import './welcome.css';
 
@@ -16,6 +16,8 @@ const AGE_COLORS = ['#FB7185', '#F59E0B', '#4ADE80', '#38BDF8', '#C084FC', '#14B
 const firstName = (full: string | undefined) => (full ?? '').trim().split(/\s+/)[0] ?? '';
 
 // Shown to a new visitor before anything else: nothing about the child is assumed.
+const PLAIN_FROM_AGE = 9;
+
 export const Welcome: React.FC = () => {
   const { age, setAge, grade, setGrade, completeOnboarding, cloud } = useApp();
   const [picked, setPicked] = useState<number | null>(null);
@@ -41,7 +43,7 @@ export const Welcome: React.FC = () => {
     setStep(a >= SIGN_IN_FROM_AGE && !cloud.user ? 'account' : 'name');
   };
 
-  // From age 6 the grade is asked; grade 4 and up open in Bodhi Prep, grades 1–3 open in the games
+  // From age 6 the grade is asked; grade 4 and up open in Bodhi Prep, grades 1–3 in Bodhi Play
   const chooseGrade = (g: number) => {
     sound.playPop();
     setGrade(g);
@@ -49,8 +51,8 @@ export const Welcome: React.FC = () => {
   };
 
   const name = typedName ?? firstName(cloud.user?.name);
-  // From age 6 the questions after the age look plainer: these children are heading to Bodhi Prep or are nearly there
-  const older = shownStep !== 'age' && (picked ?? age) >= GRADE_ASK_MIN_AGE;
+  // From age 9 the questions after the age look plainer: these children open in Bodhi Prep or nearly do
+  const older = shownStep !== 'age' && (picked ?? age) >= PLAIN_FROM_AGE;
 
   return (
     <div className="welcome">
@@ -94,7 +96,7 @@ export const Welcome: React.FC = () => {
                 </button>
               ))}
             </div>
-            <p className="welcome-note">From grade {PREP_MIN_GRADE}, you get Bodhi Prep: practice for the Texas state test (STAAR®).</p>
+            <p className="welcome-note">From grade {PREP_MIN_GRADE}, Bodhi Prep has practice for the Texas state test (STAAR®). From grade {PREP_START_GRADE}, you start there.</p>
           </>
         )}
 
