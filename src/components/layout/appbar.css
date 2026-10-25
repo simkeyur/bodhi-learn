@@ -88,3 +88,9 @@
   .bh-bar .bh-compact { display: inline-flex; }
   .bh-bar .bh-pill { padding: 0 10px; }
 }
+/* Small phones: Bodhi Prep has three page links, so tighten them to keep the switch and name chip on screen */
+@media (max-width: 420px) {
+  .bh-bar .bh-inner { padding: 0 10px; gap: 6px; }
+  .bh-bar .bh-nav { gap: 0; }
+  .bh-bar .bh-nav a { padding: 0 8px; font-size: 0.95rem; }
+}

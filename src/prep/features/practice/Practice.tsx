@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router';
+import { Link, Navigate, useLocation, useParams } from 'react-router';
 import { ArrowLeft, ArrowRight, BookOpen, Check, RotateCcw, Sparkles, X } from 'lucide-react';
-import { contentFor, findLesson, findStandard, makeItem } from '../../content/registry';
+import { contentFor, findLesson, findStandard, hasGenerator, makeItem, setsFor, shortCode, skillsPage } from '../../content/registry';
 import { useApp } from '../../../context/AppContext';
 import { mulberry32 } from '../../content/rng';
 import { answerComplete, emptyAnswer, score } from '../../content/scoring';
@@ -38,6 +38,11 @@ export function Practice() {
   const { code = '' } = useParams();
   const location = useLocation();
   if (code !== 'today' && !findStandard(code)) return <NotFound />;
+  // Reading skills without a generator are practised inside a passage: open a set at that skill's questions
+  if (code !== 'today' && !hasGenerator(code)) {
+    const set = setsFor(code)[0];
+    return set ? <Navigate to={`/read/${set.id}?skill=${encodeURIComponent(code)}`} replace /> : <NotFound />;
+  }
   // key: every visit (including "Practice again" to the same address) starts a new session
   return <Session key={`${code}:${location.key}`} code={code} />;
 }
@@ -112,7 +117,7 @@ function Session({ code }: { code: string }) {
   return (
     <div className="page practice">
       <div className="practice-top">
-        <Link to={code === 'today' ? '/' : '/math'} className="btn btn-ghost btn-sm"><ArrowLeft size={16} aria-hidden /> {code === 'today' ? 'Today' : 'Skills'}</Link>
+        <Link to={code === 'today' ? '/' : skillsPage(code)} className="btn btn-ghost btn-sm"><ArrowLeft size={16} aria-hidden /> {code === 'today' ? 'Today' : 'Skills'}</Link>
         <div className="practice-progress">
           <Bar value={(results.length) / SESSION_LENGTH} label="Session progress" />
           <span>{Math.min(index + 1, SESSION_LENGTH)} / {SESSION_LENGTH}</span>
@@ -223,7 +228,7 @@ function Summary({ code, title, results, startState }: { code: string; title: st
             const now = masteryOf(skills[c]);
             return (
               <li key={c}>
-                <span className="tag tag-code">{c}</span>
+                <span className="tag tag-code">{shortCode(c)}</span>
                 <span className="summary-skill-name">{s.title}</span>
                 <Mastery record={skills[c]} />
                 {now !== startState[c] && <span className="summary-moved">was {MASTERY_LABEL[startState[c]]}</span>}
@@ -235,7 +240,7 @@ function Summary({ code, title, results, startState }: { code: string; title: st
           <Link to={`/practice/${code}`} className="btn btn-primary">
             <RotateCcw size={18} aria-hidden /> Practice again
           </Link>
-          <Link to="/math" className="btn btn-secondary">All skills</Link>
+          <Link to={skillsPage(codes[0] ?? code)} className="btn btn-secondary">All skills</Link>
           <Link to="/" className="btn btn-ghost">Today</Link>
         </div>
       </div>

@@ -18,7 +18,7 @@ export function AppLayout() {
           <nav className="bh-nav" aria-label="Main">
             <NavLink to="/" end>Today</NavLink>
             <NavLink to="/math">Math</NavLink>
-            <span className="bh-soon" aria-disabled="true" title="Reading is coming next">Reading <small>Soon</small></span>
+            <NavLink to="/reading">Reading</NavLink>
           </nav>
         }
       >

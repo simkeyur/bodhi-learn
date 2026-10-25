@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, CalendarDays, ExternalLink, Flame, Target } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, ExternalLink, Flame, PenLine, Target } from 'lucide-react';
 import { useApp } from '../../../context/AppContext';
 import { OFFICIAL_PRACTICE_URL } from '../../app/brand';
 import { MATH_WINDOWS, nextWindow } from '../../data/calendar';
-import { contentFor, findStandard } from '../../content/registry';
+import { contentFor, findStandard, readingFor } from '../../content/registry';
 import { DAILY_GOAL, dayKey, planStandards, streakDays } from '../../learner/mastery';
 import { useLearner } from '../../learner/store';
 import { Bar, MasteryStack } from '../../ui/bits';
 import { strandStyle } from '../../ui/strands';
 import { StrandIcon } from '../../ui/StrandIcon';
+import { GENRE_LABEL } from '../../content/rla/passage';
 import '../screens.css';
 
 const greeting = (h: number) => (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening');
@@ -17,7 +18,10 @@ const longDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString
 
 export function Home() {
   const { kidName, grade } = useApp();
-  const { skills, days } = useLearner();
+  const { skills, days, sets: setsDone } = useLearner();
+  const reading = readingFor(grade);
+  // The next passage: the first one not read yet, otherwise the one read longest ago
+  const nextSet = [...reading.sets].sort((a, b) => (setsDone[a.id] ?? '').localeCompare(setsDone[b.id] ?? ''))[0];
   // The child's grade, or the nearest grade with content until theirs is written
   const content = contentFor(grade);
   const { standards, strands } = content;
@@ -33,7 +37,7 @@ export function Home() {
     <div className="page home">
       <div className="hero">
         <div>
-          <p className="eyebrow">Grade {content.grade} math</p>
+          <p className="eyebrow">Grade {content.grade}</p>
           <h1>{greeting(now.getHours())}, {kidName}.</h1>
           {grade !== content.grade && (
             <p className="page-sub">Grade {grade} questions are on the way. Until then, you're practicing grade {content.grade} math.</p>
@@ -108,6 +112,27 @@ export function Home() {
             <li data-state="mastered">Mastered</li><li data-state="close">Almost there</li><li data-state="learning">Learning</li><li data-state="new">Not started</li>
           </ul>
         </section>
+
+        {nextSet && (
+          <section className="card card-pad reading-today" aria-labelledby="reading-title">
+            <div className="today-head">
+              <div>
+                <h2 id="reading-title">Today's reading</h2>
+                <p className="page-sub">Read a passage and answer its questions.{reading.grade !== grade ? ` (Grade ${reading.grade} reading for now.)` : ''}</p>
+              </div>
+              <Link to="/reading" className="btn btn-ghost btn-sm">All reading <ArrowRight size={16} aria-hidden /></Link>
+            </div>
+            <Link to={`/read/${nextSet.id}`} className="reading-next">
+              <span className="set-icon" aria-hidden>{nextSet.kind === 'editing' ? <PenLine size={22} /> : <BookOpen size={22} />}</span>
+              <span>
+                <b>{nextSet.title}</b>
+                <span>{nextSet.kind === 'editing' ? 'Revising and editing' : nextSet.passages.map((p) => GENRE_LABEL[p.genre]).join(' + ')} · {nextSet.items.length} questions{setsDone[nextSet.id] ? ' · read before' : ''}</span>
+              </span>
+              <ArrowRight size={20} aria-hidden />
+            </Link>
+            <MasteryStack records={reading.standards.map((s) => skills[s.code])} label={`All grade ${reading.grade} reading skills`} />
+          </section>
+        )}
 
         {/* The state test starts in grade 3 */}
         {content.grade >= 3 && (

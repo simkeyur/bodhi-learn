@@ -5,7 +5,7 @@
 //   mc          multiple choice, 1 point
 //   multiselect "Select TWO correct answers", 2 points
 //   inline      drop-down menus inside a sentence, 1 point per menu (1 or 2 points)
-//   multipart   Part A and Part B, each one of the above, 1 point each (2 points)
+//   multipart   Part A and Part B, each one of the above, 1 point each (2 points). Reading only.
 
 export type Subject = 'math' | 'rla';
 
@@ -16,7 +16,7 @@ export interface Strand {
 }
 
 export interface Standard {
-  code: string; // TEKS student expectation, e.g. '5.4F'
+  code: string; // TEKS student expectation: '5.4F' for math, 'rla:5.9D.i' for reading (see shortCode)
   strand: number;
   kind: 'readiness' | 'supporting';
   title: string; // short, student-friendly
@@ -94,6 +94,7 @@ export interface Item {
   stem: Block[];
   parts: Part[]; // one part, except multipart which has two (Part A, Part B)
   explain: string; // the worked answer, shown after checking
+  cites?: number[]; // reading: the paragraphs (or lines, or sentences) the question is about
 }
 
 // What a student has chosen: one array per part.
@@ -117,4 +118,58 @@ export interface Lesson {
   goal: string; // "You'll learn to ..."
   words: { term: string; meaning: string }[];
   ideas: LessonIdea[];
+  // Reading skills that come from passages, not generators: a short passage and a question to watch worked,
+  // then another to try (the walkthrough's last two steps)
+  samples?: [LessonSample, LessonSample];
+}
+
+export interface LessonSample { passage: Passage; item: Item }
+
+// ---------- Reading ----------
+// Reading practice is authored, not generated: a passage (or a pair of them) with questions written for it.
+// Revising and editing drafts are sets too, with numbered sentences instead of paragraphs.
+
+export type Genre =
+  | 'fiction' | 'literaryNonfiction' | 'poetry' | 'drama'
+  | 'informational' | 'argumentative' | 'persuasive' | 'correspondence';
+
+// Numbering follows the real test: paragraphs in prose, lines in poems, speeches in plays, (sentences) in drafts.
+export type PassageBlock =
+  | { kind: 'p'; text: string } // a numbered paragraph
+  | { kind: 'heading'; text: string } // a section heading (not numbered)
+  | { kind: 'line'; text: string; stanzaEnd?: boolean } // a numbered poem line; stanzaEnd leaves a gap after it
+  | { kind: 'speech'; speaker: string; text: string } // a numbered line of dialogue in a play
+  | { kind: 'direction'; text: string } // a stage direction (not numbered)
+  | { kind: 'sentences'; sentences: string[] } // a paragraph of a draft; each sentence numbered (1), (2)...
+  | { kind: 'sidebar'; title: string; text: string } // a text feature, for questions about features
+  | { kind: 'figure'; figure: Figure; alt: string; caption?: string };
+
+export interface Passage {
+  id: string;
+  title: string;
+  genre: Genre;
+  author?: string; // only for public-domain texts; our own passages have none
+  source?: string; // where a public-domain text first appeared, e.g. 'A Child's Garden of Verses, 1885'
+  blocks: PassageBlock[];
+}
+
+export interface ReadingSet {
+  id: string; // 'g5-fiction-lighthouse'
+  grade: number;
+  kind: 'reading' | 'editing';
+  title: string; // shown in lists; a paired set's shared topic
+  intro: string; // the direction line, like the test's "Read the selection and choose the best answer..."
+  passages: Passage[]; // one, or two for a paired set
+  items: Item[];
+}
+
+// One essay prompt (the 6-point extended constructed response). For now the child checks their own essay
+// against a kid-friendly version of TEA's rubric; nothing is scored automatically.
+export interface EssayPrompt {
+  id: string;
+  grade: number;
+  setId: string; // the passage set the essay is about
+  mode: 'informational' | 'argumentative' | 'correspondence';
+  prompt: string; // what to write
+  checklist: { title: string; items: string[] }[]; // the rubric as yes/no checks
 }

@@ -5,14 +5,18 @@
 import { useSyncExternalStore } from 'react';
 import { dayKey, newRecord, recordResult, type SkillRecord } from './mastery.ts';
 
+export interface EssayDraft { text: string; checked: string[]; updated: string }
+
 export interface PrepProgress {
   skills: Record<string, SkillRecord>; // by standard code
   days: Record<string, number>; // yyyy-mm-dd -> questions answered
   lessons: Record<string, string>; // standard code -> day its walkthrough was finished
+  sets: Record<string, string>; // reading set id -> day it was last finished
+  essays: Record<string, EssayDraft>; // essay prompt id -> the child's draft and self-check
 }
 
 const KEY = 'bodhi_prep_v1';
-const EMPTY: PrepProgress = { skills: {}, days: {}, lessons: {} };
+const EMPTY: PrepProgress = { skills: {}, days: {}, lessons: {}, sets: {}, essays: {} };
 
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
@@ -24,7 +28,9 @@ function load(): PrepProgress {
     const skills = isRecord(raw.skills) ? (raw.skills as Record<string, SkillRecord>) : {};
     const days = isRecord(raw.days) ? (raw.days as Record<string, number>) : {};
     const lessons = isRecord(raw.lessons) ? (raw.lessons as Record<string, string>) : {};
-    return { skills, days, lessons };
+    const sets = isRecord(raw.sets) ? (raw.sets as Record<string, string>) : {};
+    const essays = isRecord(raw.essays) ? (raw.essays as Record<string, EssayDraft>) : {};
+    return { skills, days, lessons, sets, essays };
   } catch {
     return EMPTY;
   }
@@ -58,6 +64,9 @@ export const learner = {
     if (state.lessons[standard]) return;
     set({ ...state, lessons: { ...state.lessons, [standard]: dayKey(now) } });
   },
+  setDone: (id: string, now = new Date()) => set({ ...state, sets: { ...state.sets, [id]: dayKey(now) } }),
+  saveEssay: (id: string, draft: Omit<EssayDraft, 'updated'>, now = new Date()) =>
+    set({ ...state, essays: { ...state.essays, [id]: { ...draft, updated: dayKey(now) } } }),
   resetProgress: () => set(EMPTY),
 };
 

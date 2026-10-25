@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { ArrowLeft, ArrowRight, Check, Eye, Lightbulb, RotateCcw, Trophy, X } from 'lucide-react';
-import { findLesson, findStandard, makeItem } from '../../content/registry';
+import { findLesson, findStandard, hasGenerator, makeItem, skillsPage, subjectOf } from '../../content/registry';
 import { explainSteps } from '../../content/lessons/steps';
 import { mulberry32 } from '../../content/rng';
 import { answerComplete, answerKey, emptyAnswer, score } from '../../content/scoring';
-import type { Answer, Item } from '../../content/types';
+import type { Answer, Item, LessonSample } from '../../content/types';
 import { learner } from '../../learner/store';
 import { ItemView } from '../../items/ItemView';
 import { RichText } from '../../items/Rich';
@@ -14,6 +14,7 @@ import { strandStyle } from '../../ui/strands';
 import { StrandIcon } from '../../ui/StrandIcon';
 import { NotFound } from '../../app/NotFound';
 import { IdeaDeck, WordCards } from './LessonParts';
+import { PassageView } from '../reading/PassageView';
 import '../screens.css';
 import './learn.css';
 
@@ -46,12 +47,14 @@ function Walkthrough({ code }: { code: string }) {
   const at = STEPS.findIndex((s) => s.id === step);
 
   const go = (s: Step) => { setStep(s); window.scrollTo({ top: 0 }); };
+  // Passage skills have no generator: their example and "your turn" are the walkthrough's two samples
+  const samples = hasGenerator(code) ? undefined : lesson.samples;
   const finish = () => { learner.lessonDone(code); go('done'); };
 
   return (
     <div className="page learn" style={strandStyle(standard.strand)}>
       <div className="learn-top">
-        <Link to="/math" className="btn btn-ghost btn-sm"><ArrowLeft size={16} aria-hidden /> Skills</Link>
+        <Link to={skillsPage(code)} className="btn btn-ghost btn-sm"><ArrowLeft size={16} aria-hidden /> Skills</Link>
         <ol className="learn-steps" aria-label="Walkthrough steps">
           {STEPS.map((s, i) => (
             <li key={s.id} className={step === 'done' || i < at ? 'done' : i === at ? 'now' : ''} aria-current={i === at ? 'step' : undefined}>
@@ -64,7 +67,7 @@ function Walkthrough({ code }: { code: string }) {
 
       <section className="card learn-card">
         <header className="learn-head">
-          <span className="strand-tile" aria-hidden><StrandIcon strand={standard.strand} size={22} /></span>
+          <span className="strand-tile" aria-hidden><StrandIcon strand={standard.strand} subject={subjectOf(code)} size={22} /></span>
           <div>
             <div className="skill-tags"><StandardTags standard={standard} /></div>
             <h1>{standard.title}</h1>
@@ -89,14 +92,14 @@ function Walkthrough({ code }: { code: string }) {
           </div>
         )}
 
-        {step === 'example' && <WorkedExample code={code} onDone={() => go('try')} />}
-        {step === 'try' && <YourTurn code={code} onDone={finish} />}
+        {step === 'example' && <WorkedExample code={code} sample={samples?.[0]} onDone={() => go('try')} />}
+        {step === 'try' && <YourTurn code={code} sample={samples?.[1]} onDone={finish} />}
 
         {step === 'done' && (
           <div className="learn-body learn-done">
             <span className="learn-trophy" aria-hidden><Trophy size={36} /></span>
             <h2>You're ready to practice!</h2>
-            <p className="page-sub">Ten questions that start easy and get harder as you get them right.</p>
+            <p className="page-sub">{samples ? 'Read a passage and answer its questions on this skill.' : 'Ten questions that start easy and get harder as you get them right.'}</p>
             <div className="learn-actions center">
               <button type="button" className="btn btn-ghost" onClick={() => go('intro')}><RotateCcw size={18} aria-hidden /> Go through it again</button>
               <button type="button" className="btn btn-primary btn-lg" onClick={() => navigate(`/practice/${code}`, { replace: true })}>Start practicing <ArrowRight size={20} aria-hidden /></button>
@@ -109,8 +112,8 @@ function Walkthrough({ code }: { code: string }) {
 }
 
 // A question solved in front of the child, one step at a time, then the answer
-function WorkedExample({ code, onDone }: { code: string; onDone: () => void }) {
-  const [item, setItem] = useState(() => easyItem(code));
+function WorkedExample({ code, sample, onDone }: { code: string; sample?: LessonSample; onDone: () => void }) {
+  const [item, setItem] = useState(() => sample?.item ?? easyItem(code));
   const [shown, setShown] = useState(0);
   const steps = explainSteps(item.explain);
   const solved = shown >= steps.length;
@@ -118,6 +121,7 @@ function WorkedExample({ code, onDone }: { code: string; onDone: () => void }) {
   return (
     <div className="learn-body">
       <h2 className="learn-sub"><Eye size={18} aria-hidden /> Watch it solved</h2>
+      {sample && <div className="learn-passage"><PassageView passage={sample.passage} idPrefix="sample" /></div>}
       <div className="learn-question">
         <ItemView item={item} answer={solved ? answerKey(item) : emptyAnswer(item)} onChange={() => {}} revealed={solved} showKey readOnly />
       </div>
@@ -127,7 +131,7 @@ function WorkedExample({ code, onDone }: { code: string; onDone: () => void }) {
         ))}
       </ol>
       <div className="learn-actions">
-        <button type="button" className="btn btn-ghost" onClick={() => { setItem(easyItem(code)); setShown(0); }}><RotateCcw size={18} aria-hidden /> Another example</button>
+        {!sample && <button type="button" className="btn btn-ghost" onClick={() => { setItem(easyItem(code)); setShown(0); }}><RotateCcw size={18} aria-hidden /> Another example</button>}
         {solved
           ? <button type="button" className="btn btn-primary btn-lg" onClick={onDone}>Now you try <ArrowRight size={20} aria-hidden /></button>
           : <button type="button" className="btn btn-primary btn-lg" onClick={() => setShown(shown + 1)}>{shown === 0 ? 'Show the first step' : shown === steps.length - 1 ? 'Show the answer' : 'Next step'} <ArrowRight size={20} aria-hidden /></button>}
@@ -137,8 +141,8 @@ function WorkedExample({ code, onDone }: { code: string; onDone: () => void }) {
 }
 
 // One question with a hint; checking shows the full solution. It doesn't count towards mastery.
-function YourTurn({ code, onDone }: { code: string; onDone: () => void }) {
-  const [item, setItem] = useState(() => easyItem(code));
+function YourTurn({ code, sample, onDone }: { code: string; sample?: LessonSample; onDone: () => void }) {
+  const [item, setItem] = useState(() => sample?.item ?? easyItem(code));
   const [answer, setAnswer] = useState<Answer>(() => emptyAnswer(item));
   const [hint, setHint] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -154,6 +158,7 @@ function YourTurn({ code, onDone }: { code: string; onDone: () => void }) {
   return (
     <div className="learn-body">
       <h2 className="learn-sub"><Lightbulb size={18} aria-hidden /> Your turn</h2>
+      {sample && <div className="learn-passage"><PassageView passage={sample.passage} idPrefix="sample" /></div>}
       <div className="learn-question">
         <ItemView item={item} answer={answer} onChange={setAnswer} revealed={checked} />
       </div>
@@ -168,7 +173,7 @@ function YourTurn({ code, onDone }: { code: string; onDone: () => void }) {
       )}
       <div className="learn-actions">
         {!checked && !hint && <button type="button" className="btn btn-ghost" onClick={() => setHint(true)}><Lightbulb size={18} aria-hidden /> Hint</button>}
-        {checked && <button type="button" className="btn btn-ghost" onClick={another}><RotateCcw size={18} aria-hidden /> Try another</button>}
+        {checked && !sample && <button type="button" className="btn btn-ghost" onClick={another}><RotateCcw size={18} aria-hidden /> Try another</button>}
         {checked
           ? <button type="button" className="btn btn-primary btn-lg" onClick={onDone}>I'm ready <ArrowRight size={20} aria-hidden /></button>
           : <button type="button" className="btn btn-primary btn-lg" onClick={() => setChecked(true)} disabled={!answerComplete(item, answer)}><Check size={20} aria-hidden /> Check</button>}

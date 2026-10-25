@@ -1,6 +1,7 @@
 // Small presentational pieces used on several screens.
 
 import type { Standard } from '../content/types';
+import { shortCode } from '../content/registry';
 import { MASTERY_LABEL, masteryOf, type SkillRecord } from '../learner/mastery';
 
 export const Mastery = ({ record }: { record?: SkillRecord }) => {
@@ -9,10 +10,11 @@ export const Mastery = ({ record }: { record?: SkillRecord }) => {
 };
 
 export const StandardTags = ({ standard }: { standard: Standard }) => {
-  const isEarly = standard.code.startsWith('1.') || standard.code.startsWith('2.');
+  const code = shortCode(standard.code);
+  const isEarly = code.startsWith('1.') || code.startsWith('2.');
   return (
     <>
-      <span className="tag tag-code">{standard.code}</span>
+      <span className="tag tag-code">{code}</span>
       <span className={`tag tag-${standard.kind}`} title={standard.kind === 'readiness' ? (isEarly ? 'Key skills form the foundation for later grades' : 'Readiness standards are tested more often') : undefined}>
         {standard.kind === 'readiness' ? (isEarly ? 'Key skill' : 'Readiness') : 'Supporting'}
       </span>

@@ -1,0 +1,107 @@
+/* Reading: the reader (passage + questions), the passage itself, the essay page and the passage list.
+   Laptops: passage left (scrolls on its own), questions right, like the real test. Phones: two tabs. */
+
+.prep .read { max-width: 1240px; padding-top: var(--s4); }
+.prep .read-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s4); }
+
+.prep .read-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+.prep .read-passage {
+  position: sticky; top: 84px; max-height: calc(100dvh - 104px); overflow-y: auto; overscroll-behavior: contain;
+  padding: var(--s5) var(--s6); display: grid; gap: var(--s5);
+}
+.prep .read-intro { font-size: var(--text-sm); color: var(--ink-3); font-style: italic; }
+.prep .read-questions { display: grid; gap: var(--s3); min-width: 0; }
+.prep .read-card { gap: var(--s4); }
+.prep .read-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
+.prep .read-cites { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s2); }
+.prep .read .feedback { display: grid; gap: var(--s3); padding: var(--s4); border-radius: var(--r-md); border: 2px solid var(--line); }
+
+/* Tabs and the "go to questions" button only on phones */
+.prep .read-tabs, .prep .read-to-questions { display: none; }
+
+/* Question numbers */
+.prep .q-nav { display: flex; gap: var(--s2); flex-wrap: wrap; }
+.prep .q-dot {
+  width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font: 600 var(--text-sm) var(--font-display);
+  background: var(--surface); color: var(--ink-2); border: 2px solid var(--line-strong);
+}
+.prep .q-dot.now { border-color: var(--blue-600); color: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+.prep .q-dot.right { background: var(--good-bg); border-color: var(--good-line); color: var(--good); }
+.prep .q-dot.partial { background: var(--part-bg); border-color: var(--part-line); color: var(--part); }
+.prep .q-dot.wrong { background: var(--bad-bg); border-color: var(--bad-line); color: var(--bad); }
+
+/* ---------- The passage ---------- */
+.prep .passage { display: grid; gap: var(--s4); font-size: 1.075rem; line-height: 1.7; color: var(--ink); max-width: 68ch; }
+.prep .passage-head h2 { font-size: var(--text-xl); text-align: center; }
+.prep .passage-by { text-align: center; color: var(--ink-3); font-size: var(--text-sm); margin-top: 2px; }
+.prep .passage-body, .prep .passage-poem { display: grid; gap: var(--s3); }
+.prep .passage-poem { gap: 2px; }
+.prep .passage-heading { font-size: var(--text-lg); margin-top: var(--s2); }
+.prep .passage-p, .prep .passage-line { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); align-items: baseline; border-radius: var(--r-sm); transition: background var(--med) var(--ease); }
+.prep .passage-num { font: 700 var(--text-xs) var(--font); color: var(--ink-3); text-align: right; padding-right: 0.9em; user-select: none; }
+.prep .passage-line.stanza-end { margin-bottom: var(--s4); }
+.prep .passage-direction { font-style: italic; color: var(--ink-2); padding-left: 2.2em; }
+.prep .passage-speaker { font-family: var(--font-display); font-weight: 600; }
+.prep .passage-draft { display: block; }
+.prep .passage-snum { font: 700 var(--text-xs) var(--font); color: var(--ink-3); }
+.prep .passage-sentence { border-radius: 4px; transition: background var(--med) var(--ease); }
+.prep .passage-sidebar { border: 2px solid var(--blue-200); background: var(--blue-50); border-radius: var(--r-md); padding: var(--s3) var(--s4); font-size: var(--text-md); }
+.prep .passage-sidebar h4 { font: 600 var(--text-md) var(--font-display); color: var(--blue-700); margin-bottom: 4px; }
+.prep .passage-figure { margin: 0; text-align: center; }
+.prep .passage-figure figcaption { font-size: var(--text-sm); color: var(--ink-3); }
+.prep .passage-source { font-size: var(--text-xs); color: var(--ink-3); }
+/* What a question is about, after checking */
+.prep .is-cited { background: var(--sun-100); box-shadow: 0 0 0 4px var(--sun-100); }
+
+/* ---------- Walkthrough samples ---------- */
+.prep .learn-passage { border: 2px solid var(--line); border-radius: var(--r-md); padding: var(--s4) var(--s5); background: var(--surface); }
+.prep .learn-passage .passage { font-size: 1rem; }
+
+/* ---------- Passage list (Reading page) ---------- */
+.prep .set-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
+.prep .set-row {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr) 120px auto; gap: var(--s4); align-items: center;
+  padding: var(--s3) var(--s4); border-radius: var(--r-md); background: var(--surface); border: 2px solid var(--line);
+}
+.prep .set-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--blue-50); color: var(--blue-700); }
+.prep .mastery.soon { color: var(--ink-3); }
+.prep .mastery.soon::before { background: transparent; border: 2px dashed var(--line-strong); width: 8px; height: 8px; }
+
+/* ---------- Essay ---------- */
+.prep .write-count { font-weight: 700; color: var(--ink-2); font-size: var(--text-sm); }
+.prep .write-card { display: grid; gap: var(--s4); }
+.prep .write-prompt { font: 600 var(--text-lg)/1.45 var(--font-display); }
+.prep .write-tips { margin: 0; padding-left: 1.2em; color: var(--ink-2); font-size: var(--text-sm); display: grid; gap: 4px; }
+.prep .write-box {
+  width: 100%; min-height: 320px; resize: vertical; padding: var(--s4); border-radius: var(--r-md);
+  border: 2px solid var(--line-strong); font: 400 1.05rem/1.7 var(--font); color: var(--ink); background: var(--surface);
+}
+.prep .write-box:focus { outline: none; border-color: var(--blue-500); box-shadow: 0 0 0 3px var(--blue-100); }
+.prep .write-check { display: grid; gap: var(--s3); }
+.prep .write-check h2 { font-size: var(--text-lg); }
+.prep .write-group { border: 2px solid var(--line); border-radius: var(--r-md); padding: var(--s3) var(--s4); margin: 0; display: grid; gap: var(--s2); }
+.prep .write-group legend { font-weight: 700; padding: 0 var(--s2); }
+.prep .write-item { font-weight: 400; align-items: flex-start; }
+.prep .write-item input { margin-top: 3px; flex: none; }
+.prep .write-score { font-size: var(--text-md); }
+
+/* ---------- Phones and small tablets: tabs instead of side by side ---------- */
+@media (max-width: 900px) {
+  .prep .read-layout { grid-template-columns: 1fr; }
+  .prep .read-tabs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin-bottom: var(--s3);
+    position: sticky; top: 64px; z-index: 5; background: var(--surface-2); border: 2px solid var(--line); border-radius: 999px;
+  }
+  .prep .read-tabs button {
+    display: flex; align-items: center; justify-content: center; gap: 6px; height: 40px; border: 0; border-radius: 999px; cursor: pointer;
+    background: transparent; font: 600 var(--text-md) var(--font-display); color: var(--ink-2);
+  }
+  .prep .read-tabs button[aria-selected='true'] { background: var(--blue-600); color: #fff; }
+  .prep .read-layout[data-pane='passage'] .read-questions,
+  .prep .read-layout[data-pane='questions'] .read-passage { display: none; }
+  .prep .read-passage { position: static; max-height: none; overflow: visible; padding: var(--s4); }
+  .prep .read-to-questions { display: inline-flex; justify-self: center; }
+  .prep .set-row { grid-template-columns: 40px minmax(0, 1fr); }
+  .prep .set-row .skill-state { display: none; }
+  .prep .set-row .skill-actions { grid-column: 1 / -1; justify-content: flex-end; }
+}

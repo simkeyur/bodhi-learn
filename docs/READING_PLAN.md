@@ -69,11 +69,13 @@ Poems are 12–40 lines; drama scenes are 1–2 pages.
 
 ## 3. Content model (changes to shared code)
 
-**Subject in the code.** Reading codes collide with math (5.3A exists in both), so standard IDs get a subject:
-- `math:5.3A` and `rla:5.6F` internally, while screens show `5.6F` with a Reading or Math tag.
-- The registry becomes `CONTENT[grade][subject]`, and `contentFor(grade, subject)` falls back to the nearest
-  built grade.
-- Mastery records and saved progress are keyed the new way. There are no live users, so no migration is needed.
+**Subject in the code** (built in R0). Reading codes collide with math (5.3A exists in both), so reading codes
+carry a prefix: `rla:5.6F`, `rla:5.9D.i`. Math codes are unchanged. Screens show the code without the prefix
+(`shortCode`).
+- The registry has `READING[grade]` beside the math `GRADES[grade]`. `readingFor(grade)` falls back to the
+  nearest built grade.
+- `findStandard`, `findLesson`, `makeItem` and `hasGenerator` work for either subject by code.
+- `findSet`, `setsFor(code)` and `hasPractice(code)` are for reading.
 
 **New types** (in `content/types.ts`):
 ```ts
@@ -153,7 +155,7 @@ interface EditingDraft {
 
 | Step | What | Who | Effort |
 |---|---|---|---|
-| **R0** | **Shared code and the reference grade 5.** Subject-aware registry and codes, `Passage` / `ReadingSet` / `EditingDraft` types, validators and tests, Reader screen, set and skill practice, Reading page and Today. Grade 5 standards catalog (all 52), **3 complete sets** (fiction, informational, poetry), **1 editing draft**, generators for 6 convention and vocabulary standards, and walkthroughs for those standards. Split the Prep bundle per grade and subject (it's 820 kB today; reading text would grow it). | Claude | L |
+| **R0** ✓ | **Shared code and the reference grade 5.** Subject-aware registry and codes, `Passage` / `ReadingSet` / `EditingDraft` types, validators and tests, Reader screen, set and skill practice, Reading page and Today. Grade 5 standards catalog (all 52), **3 complete sets** (fiction, informational, poetry), **1 editing draft**, generators for 6 convention and vocabulary standards, and walkthroughs for those standards. Split the Prep bundle per grade and subject (it's 820 kB today; reading text would grow it). | Claude | L |
 | R1 | **Finish grade 5:** the remaining 9 sets, 5 drafts, generators and walkthroughs. Every standard covered. | Gemini, then review | L |
 | R2 | **Grades 4 and 3**, then **6, 7 and 8:** the same files and tests per grade, from each grade's PDFs. | Gemini, one grade per branch, then review | L each |
 | R3 | **Essay:** editor, rubric self-check, 2–3 prompts per grade. | Claude (screen), Gemini (prompts) | M |
@@ -177,3 +179,62 @@ This is the slow part. Budget about an hour per grade to read, plus fixes.
 3. **Public-domain poems and fables:** allowed and credited (recommended), or originals only.
 4. **Reading progress sync:** stays on the device like math Prep progress for now. Syncing Prep progress to the
    account is its own task.
+
+---
+
+## 7. Status
+
+**R0 is done (2026-10-25).** It covers the shared code, the screens and a grade 5 reference:
+- **Shared code:** `rla:` codes, the passage, set and essay types, `setProblems` checks, and
+  `tests/prep/reading.test.mjs`.
+- **Screens:**
+  - the Reader (`/read/:id`), which is side by side on laptops and uses tabs on phones;
+  - the Reading page (`/reading`);
+  - Today's reading card;
+  - passage-skill walkthroughs with sample passages;
+  - the essay page with a self-check (`/write/:id`).
+- **Grade 5 content:**
+  - all 52 standards;
+  - 3 reading sets: fiction "Before the Storm", informational "The Bats of Bracken Cave", and Stevenson's poem
+    "My Shadow";
+  - 1 editing draft, "Our Class Garden";
+  - generators for 7 standards;
+  - 10 walkthroughs;
+  - 1 essay prompt.
+- **Coverage:** 27 of the 52 standards have practice. The rest show "Coming soon".
+
+**Not done in R0:**
+- Splitting the Prep download per grade and subject (it's 901 kB, 277 kB compressed).
+- A paired set and a drama set (the types support both).
+
+## 8. Building a grade's reading (the steps for Gemini)
+
+Copy grade 5's layout exactly. Everything a grade needs:
+
+1. **Standards:** `src/prep/data/standards/g{N}-rla.ts`, from TEA's `sst-{N}-rla-assessed-curriculum.pdf`.
+   - Codes look like `rla:{N}.9D.i`. Use the PDF's readiness/supporting labels.
+   - If the PDF's lettering looks wrong, use the real TEKS code and add a comment.
+   - Leave out the essay-only standards that carry no label.
+2. **Sets:** one file per set in `src/prep/content/rla/g{N}/`, written with the helpers in
+   `src/prep/content/rla/author.ts` (`mcq`, `msq`, `inq`, `twoq`, `makeSet`).
+   - Reading sets have 6–9 questions and editing drafts 5–7.
+   - Every multiple-choice question has 4 choices, and every multiselect has 5 with 2 right.
+   - Every wrong choice gets a short `why`.
+   - Cite the paragraphs (or sentences) a question is about. **Headings and sidebars are not numbered**: count
+     only `p`, `line` and `speech` blocks.
+   - Vary which letter is right.
+   - Passages are original, or public domain before 1930 with `author` and `source`.
+3. **Generators:** `src/prep/content/rla/g{N}/generators.ts`, for standards that work one sentence at a time:
+   spelling patterns, word parts, conventions.
+   - Each draws from a bank of at least 10 entries, so the test sees at least 8 different questions.
+4. **Walkthroughs:** `src/prep/content/lessons/g{N}-rla.ts`.
+   - Generated skills: goal, words and at least 2 ideas.
+   - Passage skills: the same, plus two `samples`, each a short passage (40–120 words) with one question.
+5. **Essays:** 1–2 prompts in the grade's `index.ts`, each tied to one of its sets, with the checklist.
+6. **Register** the grade in `READING` in `src/prep/content/registry.ts`, with the blueprint counts per strand.
+7. **Check:**
+   - Run `npm run test:prep`.
+   - Read every passage and question once in the app at `/reading`, both on a laptop and at phone width.
+
+**Done when** every standard in the grade has practice (a set question or a generator), each readiness standard
+has at least 3 questions, and the genre mix in section 2 is covered.
