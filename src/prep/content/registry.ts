@@ -29,6 +29,9 @@ import { G7_MATH_LESSONS } from './lessons/g7-math.ts';
 import { G8_MATH, G8_MATH_STRANDS } from '../data/standards/g8-math.ts';
 import { G8_GENERATORS, makeG8MathItem } from './generators/g8/index.ts';
 import { G8_MATH_LESSONS } from './lessons/g8-math.ts';
+import { G2_RLA, G2_RLA_STRANDS } from '../data/standards/g2-rla.ts';
+import { G2_RLA_ESSAYS, G2_RLA_GENERATORS, G2_RLA_SETS, makeG2RlaItem } from './rla/g2/index.ts';
+import { G2_RLA_LESSONS } from './lessons/g2-rla.ts';
 import { G3_RLA, G3_RLA_STRANDS } from '../data/standards/g3-rla.ts';
 import { G3_RLA_ESSAYS, G3_RLA_GENERATORS, G3_RLA_SETS, makeG3RlaItem } from './rla/g3/index.ts';
 import { G3_RLA_LESSONS } from './lessons/g3-rla.ts';
@@ -151,6 +154,18 @@ export interface ReadingContent {
 }
 
 export const READING: Record<number, ReadingContent> = {
+  2: {
+    grade: 2,
+    subject: 'rla',
+    strands: G2_RLA_STRANDS,
+    standards: G2_RLA,
+    sets: G2_RLA_SETS,
+    generators: G2_RLA_GENERATORS,
+    makeItem: makeG2RlaItem,
+    lessons: G2_RLA_LESSONS,
+    essays: G2_RLA_ESSAYS,
+    blueprint: { readiness: [8, 6], supporting: [26, 14] },
+  },
   3: {
     grade: 3,
     subject: 'rla',
