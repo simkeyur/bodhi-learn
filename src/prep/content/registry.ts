@@ -35,6 +35,9 @@ import { G5_RLA_LESSONS } from './lessons/g5-rla.ts';
 import { G6_RLA, G6_RLA_STRANDS } from '../data/standards/g6-rla.ts';
 import { G6_RLA_ESSAYS, G6_RLA_GENERATORS, G6_RLA_SETS, makeG6RlaItem } from './rla/g6/index.ts';
 import { G6_RLA_LESSONS } from './lessons/g6-rla.ts';
+import { G7_RLA, G7_RLA_STRANDS } from '../data/standards/g7-rla.ts';
+import { G7_RLA_ESSAYS, G7_RLA_GENERATORS, G7_RLA_SETS, makeG7RlaItem } from './rla/g7/index.ts';
+import { G7_RLA_LESSONS } from './lessons/g7-rla.ts';
 
 export interface GradeContent {
   grade: number;
@@ -170,6 +173,18 @@ export const READING: Record<number, ReadingContent> = {
     makeItem: makeG6RlaItem,
     lessons: G6_RLA_LESSONS,
     essays: G6_RLA_ESSAYS,
+    blueprint: { readiness: [10, 5], supporting: [20, 8] },
+  },
+  7: {
+    grade: 7,
+    subject: 'rla',
+    strands: G7_RLA_STRANDS,
+    standards: G7_RLA,
+    sets: G7_RLA_SETS,
+    generators: G7_RLA_GENERATORS,
+    makeItem: makeG7RlaItem,
+    lessons: G7_RLA_LESSONS,
+    essays: G7_RLA_ESSAYS,
     blueprint: { readiness: [10, 5], supporting: [20, 8] },
   },
 };
