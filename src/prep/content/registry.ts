@@ -38,6 +38,9 @@ import { G6_RLA_LESSONS } from './lessons/g6-rla.ts';
 import { G7_RLA, G7_RLA_STRANDS } from '../data/standards/g7-rla.ts';
 import { G7_RLA_ESSAYS, G7_RLA_GENERATORS, G7_RLA_SETS, makeG7RlaItem } from './rla/g7/index.ts';
 import { G7_RLA_LESSONS } from './lessons/g7-rla.ts';
+import { G8_RLA, G8_RLA_STRANDS } from '../data/standards/g8-rla.ts';
+import { G8_RLA_ESSAYS, G8_RLA_GENERATORS, G8_RLA_SETS, makeG8RlaItem } from './rla/g8/index.ts';
+import { G8_RLA_LESSONS } from './lessons/g8-rla.ts';
 
 export interface GradeContent {
   grade: number;
@@ -186,6 +189,18 @@ export const READING: Record<number, ReadingContent> = {
     lessons: G7_RLA_LESSONS,
     essays: G7_RLA_ESSAYS,
     blueprint: { readiness: [10, 5], supporting: [20, 8] },
+  },
+  8: {
+    grade: 8,
+    subject: 'rla',
+    strands: G8_RLA_STRANDS,
+    standards: G8_RLA,
+    sets: G8_RLA_SETS,
+    generators: G8_RLA_GENERATORS,
+    makeItem: makeG8RlaItem,
+    lessons: G8_RLA_LESSONS,
+    essays: G8_RLA_ESSAYS,
+    blueprint: { readiness: [10, 5], supporting: [20, 6] },
   },
 };
 
