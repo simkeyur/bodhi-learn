@@ -96,7 +96,7 @@ export const G7_RLA_ESSAYS: EssayPrompt[] = [
     setId: 'g7-bio-katherine',
     mode: 'informational',
     prompt:
-      `Read "Calculating the Heavens: Katherine Johnson." Write an informational essay explaining how Katherine Johnson's mathematical talent, determination, and meticulous accuracy were essential to early American spaceflight. Use evidence from the selection to support your response.`,
+      `Read "Orbits of Genius: Katherine Johnson." Write an informational essay explaining how Katherine Johnson's mathematical talent, determination, and meticulous accuracy were essential to early American spaceflight. Use evidence from the selection to support your response.`,
     checklist: INFO_CHECKLIST,
   },
   {
@@ -105,7 +105,7 @@ export const G7_RLA_ESSAYS: EssayPrompt[] = [
     setId: 'g7-arg-homework',
     mode: 'argumentative',
     prompt:
-      'Read "Rethinking Middle School Homework: Why Less is More." Should schools place a strict cap on nightly homework assignments for middle school students? Write an argumentative essay stating your claim and supporting it with reasons and evidence from the passage. Address what counterarguments critics might make and provide a rebuttal.',
+      'Read "Rethinking the Morning Bell: The Case for Later School Start Times." Should middle schools shift start times to 8:30 a.m. or later? Write an argumentative essay stating your claim and supporting it with reasons and evidence from the passage. Address what counterarguments critics might make and provide a rebuttal.',
     checklist: ARG_CHECKLIST,
   },
 ];
