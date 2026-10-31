@@ -16,14 +16,20 @@ const prose = (set) => (set.kind === 'reading' ? set.passages.filter((p) => !['p
 for (const grade of BUILT_READING) {
   const { sets } = READING[grade];
   describe(`grade ${grade} reading quality`, () => {
-    test('the right answer is not usually the longest choice', () => {
+    test('choice length gives nothing away: the right answer is not usually the longest or the shortest', () => {
       const parts = sets.flatMap(choiceParts);
-      const longest = parts.filter((p) => {
+      const rank = (p) => {
         const sizes = p.choices.map((c) => (c.text ?? '').length);
-        return sizes[p.correct[0]] === Math.max(...sizes);
-      }).length;
-      const share = longest / parts.length;
-      assert.ok(share <= 0.45, `the right answer is the longest choice in ${Math.round(share * 100)}% of questions (at most 45%)`);
+        const size = sizes[p.correct[0]];
+        return { longest: size === Math.max(...sizes), shortest: size === Math.min(...sizes) };
+      };
+      const share = (key) => parts.filter((p) => rank(p)[key]).length / parts.length;
+      for (const key of ['longest', 'shortest']) {
+        // By chance alone, each would be about 25%
+        const pct = Math.round(share(key) * 100);
+        assert.ok(share(key) <= 0.4, `the right answer is the ${key} choice in ${pct}% of questions (at most 40%)`);
+        assert.ok(share(key) >= 0.1, `the right answer is the ${key} choice in only ${pct}% of questions (at least 10%)`);
+      }
     });
 
     test('right answers are spread across the letters', () => {
