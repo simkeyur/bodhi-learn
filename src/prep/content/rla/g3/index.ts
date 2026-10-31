@@ -6,10 +6,10 @@ import { G3_RLA_GENERATORS } from './generators.ts';
 import { FICTION_KITE } from './fiction-kite.ts';
 import { FOLKTALE_ARMADILLO } from './folktale-armadillo.ts';
 import { FICTION_GARDEN } from './fiction-garden.ts';
-import { BIO_BESSIE } from './bio-bessie.ts';
-import { INFO_BATS } from './info-bats.ts';
+import { BIO_GARZA } from './bio-garza.ts';
+import { INFO_TURTLES } from './info-turtles.ts';
 import { INFO_BLUEBONNET } from './info-bluebonnet.ts';
-import { ARG_RECESS } from './arg-recess.ts';
+import { ARG_FIELDTRIPS } from './arg-fieldtrips.ts';
 import { PERSUADE_TREES } from './persuade-trees.ts';
 import { POEM_SWING } from './poem-swing.ts';
 import { POEM_CATERPILLAR } from './poem-caterpillar.ts';
@@ -25,8 +25,8 @@ import { EDIT_BAKING } from './edit-baking.ts';
 export { G3_RLA_GENERATORS };
 
 export const G3_RLA_SETS: ReadingSet[] = [
-  FICTION_KITE, FOLKTALE_ARMADILLO, FICTION_GARDEN, BIO_BESSIE, INFO_BATS, INFO_BLUEBONNET,
-  ARG_RECESS, PERSUADE_TREES, POEM_SWING, POEM_CATERPILLAR, DRAMA_MARKET, PAIRED_RIVERS,
+  FICTION_KITE, FOLKTALE_ARMADILLO, FICTION_GARDEN, BIO_GARZA, INFO_TURTLES, INFO_BLUEBONNET,
+  ARG_FIELDTRIPS, PERSUADE_TREES, POEM_SWING, POEM_CATERPILLAR, DRAMA_MARKET, PAIRED_RIVERS,
   EDIT_SPACE, EDIT_ZOO, EDIT_MUSEUM, EDIT_PARK, EDIT_LIBRARY, EDIT_BAKING,
 ];
 
@@ -64,19 +64,19 @@ const ARG_CHECKLIST: EssayPrompt['checklist'] = [
 
 export const G3_RLA_ESSAYS: EssayPrompt[] = [
   {
-    id: 'g3-essay-bats',
+    id: 'g3-essay-turtles',
     grade: 3,
-    setId: 'g3-info-bats',
+    setId: 'g3-info-turtles',
     mode: 'informational',
-    prompt: 'Read "Austin\'s Amazing Flying Mammals." Write an informational essay explaining how the Mexican free-tailed bats survive under the Congress Avenue Bridge and why they are beneficial to the state of Texas. Support your explanation with facts and details from the article.',
+    prompt: 'Read "Saving the Kemp\'s Ridley Sea Turtle." Write an informational essay explaining how park rangers and volunteers help protect sea turtles on Texas beaches. Support your explanation with facts and details from the article.',
     checklist: INFO_CHECKLIST,
   },
   {
-    id: 'g3-essay-recess',
+    id: 'g3-essay-fieldtrips',
     grade: 3,
-    setId: 'g3-arg-recess',
+    setId: 'g3-arg-fieldtrips',
     mode: 'argumentative',
-    prompt: 'Read "More Recess, Better Learning." Should third-grade elementary students have thirty minutes of daily outdoor recess? Write an argumentative essay stating your claim and supporting it with clear reasons and evidence from the text.',
+    prompt: 'Read "Learning on the Move: Why Field Trips Matter." Should elementary schools make sure every class goes on regular learning field trips? Write an argumentative essay stating your claim and supporting it with clear reasons and evidence from the text.',
     checklist: ARG_CHECKLIST,
   },
 ];
