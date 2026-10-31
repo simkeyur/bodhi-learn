@@ -43,6 +43,23 @@ export function wordCount(passage: Passage): number {
   }, 0);
 }
 
+// The text of a passage's numbered units, in order (a sentence per number in drafts)
+function units(passage: Passage): string[] {
+  return passage.blocks.flatMap((b) => (b.kind === 'sentences' ? b.sentences : isNumbered(b) ? [(b as { text: string }).text] : []));
+}
+
+// A rough reading level (Flesch-Kincaid grade) of a passage's numbered text. Good for comparing passages and
+// grades, not an exact grade. Syllables are estimated from vowel groups.
+export function readingLevel(passage: Passage): number {
+  const text = units(passage).join(' ');
+  const words = text.match(/[A-Za-z']+/g) ?? [];
+  const sentences = Math.max(1, (text.match(/[.!?]+(\s|$)/g) ?? []).length);
+  const syllables = words.reduce((n, w) => n + Math.max(1, (w.toLowerCase().replace(/e$/, '').match(/[aeiouy]+/g) ?? []).length), 0);
+  return 0.39 * (words.length / sentences) + 11.8 * (syllables / Math.max(1, words.length)) - 15.59;
+}
+
+const plainText = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/ +/g, ' ').trim();
+
 // Our length targets per grade (docs/READING_PLAN.md section 2). Poems count lines instead of words.
 export function lengthBand(grade: number, kind: 'prose' | 'poem' | 'draft'): [number, number] {
   if (kind === 'poem') return [8, 48];
@@ -71,14 +88,23 @@ export function setProblems(set: ReadingSet): string[] {
     if (size < lo || size > hi) out.push(`${p.id}: ${size} ${poem ? 'lines' : 'words'}, want ${lo}–${hi}`);
     if (set.kind === 'editing' && unitName(p) !== 'sentence') out.push(`${p.id}: a draft numbers sentences`);
     if (p.author && !p.source) out.push(`${p.id}: a public-domain text needs its source`);
+    // Leftovers from drafting that would show on screen
+    for (const b of p.blocks) {
+      const text = 'text' in b ? b.text : b.kind === 'sentences' ? b.sentences.join(' ') : '';
+      if (/\[(Diagram|Figure|Technical|Illustration|Image)\b|\\n|-{4,}/.test(text)) out.push(`${p.id}: placeholder text: ${text.slice(0, 50)}`);
+    }
   }
 
   // Citations point into one passage: the first, or the one named by `passage` in a paired set
-  const letters = new Set<number>();
-  let mcParts = 0;
   for (const it of set.items) {
     out.push(...itemProblems(it).map((e) => `${it.id}: ${e}`));
     if (it.subject !== 'rla' || it.grade !== set.grade) out.push(`${it.id}: wrong subject or grade`);
+    // A quotation labelled "(paragraph 4)" must really be in paragraph 4 of one of the passages
+    const words = JSON.stringify({ stem: it.stem, parts: it.parts, explain: it.explain }).replace(/\\"/g, '"');
+    for (const [, quote, n] of words.matchAll(/"([^"]{12,}?)"\s*\((?:paragraph|line|sentence) (\d+)\)/g)) {
+      const start = plainText(quote.split('...')[0]).slice(0, 40);
+      if (!set.passages.some((p) => plainText(units(p)[Number(n) - 1] ?? '').includes(start))) out.push(`${it.id}: quote isn't in unit ${n}: ${quote.slice(0, 50)}`);
+    }
     const cited = set.passages[it.passage ?? 0];
     if (!cited) out.push(`${it.id}: passage ${it.passage} doesn't exist`);
     else for (const c of it.cites ?? []) if (c < 1 || c > numberedCount(cited)) out.push(`${it.id}: cites ${c}, which doesn't exist in ${cited.id}`);
@@ -86,10 +112,7 @@ export function setProblems(set: ReadingSet): string[] {
     for (const p of it.parts) {
       if (p.type === 'mc' && p.choices.length !== 4) out.push(`${it.id}: multiple choice needs 4 choices`);
       if (p.type === 'multiselect' && (p.choices.length !== 5 || p.correct.length !== 2)) out.push(`${it.id}: multiselect needs 5 choices, 2 right`);
-      if (p.type === 'mc') { letters.add(p.correct[0]); mcParts += 1; }
     }
   }
-  // Authored answers are easy to leave all on one letter
-  if (mcParts >= 4 && letters.size < 3) out.push('right answers sit on fewer than 3 different letters');
   return out;
 }

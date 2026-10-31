@@ -32,7 +32,7 @@ export const G2_SET_FABLE_TURTLE: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.8A', cites: [1, 3],
+      standard: 'rla:2.9A', cites: [1, 3],
       stem: 'Which characteristic shows that this story is a **fable**?',
       choices: [
         'Animals talk like humans, and the story teaches a moral lesson.',
@@ -44,7 +44,7 @@ export const G2_SET_FABLE_TURTLE: ReadingSet = makeSet({
       explain: 'A fable features talking animal characters and ends with a clear moral lesson ("Slow and steady wins the race").',
     }),
     mcq({
-      standard: 'rla:2.7C', cites: [3],
+      standard: 'rla:2.8C', cites: [3],
       stem: 'How is the conflict in the race resolved at the end of the story?',
       choices: [
         ['Harry jumps over the finish line while Toby is asleep.', 'Toby won the race, not Harry.'],
@@ -80,7 +80,7 @@ export const G2_SET_FABLE_TURTLE: ReadingSet = makeSet({
       explain: 'Boasted means bragging with excessive pride about one\'s own abilities.',
     }),
     mcq({
-      standard: 'rla:2.9E', cites: [1, 2, 3],
+      standard: 'rla:2.10E', cites: [1, 2, 3],
       stem: 'From which point of view is "The Tortoise and the Hare" told?',
       choices: [
         ['First-person point of view, told directly by Harry using "I."', 'Harry does not narrate using "I."'],
@@ -92,7 +92,7 @@ export const G2_SET_FABLE_TURTLE: ReadingSet = makeSet({
       explain: 'An outside storyteller uses third-person pronouns ("he," "they") and animal names to tell the fable.',
     }),
     mcq({
-      standard: 'rla:2.9A', cites: [1, 2, 3],
+      standard: 'rla:2.10A', cites: [1, 2, 3],
       stem: 'What is the author\'s main message in this fable?',
       choices: [
         ['Running fast is the only way to succeed in life.', 'The fable shows that bragging runners can fail.'],
@@ -102,6 +102,30 @@ export const G2_SET_FABLE_TURTLE: ReadingSet = makeSet({
       ],
       answer: 2,
       explain: 'The classic message is that continuous, steady effort leads to success over careless arrogance.',
+    }),
+    mcq({
+      standard: 'rla:2.7C', cites: [2],
+      stem: 'Which sentence shows that Harry is too sure he will win?',
+      choices: [
+        ['"Toby the Tortoise smiled quietly."', 'This is about Toby.'],
+        ['"Slow and steady had won the race."', 'This tells who won.'],
+        '"\'I have plenty of time,\' Harry yawned."',
+        ['"Toby kept moving forward."', 'This is about Toby.'],
+      ],
+      answer: 2,
+      explain: 'Harry stops for a nap in the middle of a race because he thinks he cannot lose.',
+    }),
+    mcq({
+      standard: 'rla:2.8A', cites: [3],
+      stem: 'What is the theme of this story?',
+      choices: [
+        ['Hares are faster than tortoises.', 'Harry is faster, but he loses. That is not the lesson.'],
+        'If you keep trying, you can do more than others expect.',
+        ['Forests are good places to race.', 'The forest is only the setting.'],
+        ['Naps are bad for you.', 'The story is about bragging and not giving up, not about sleep.'],
+      ],
+      answer: 1,
+      explain: 'Toby is slow, but he never stops, and he wins. The story shows that steady work beats bragging.',
     }),
   ],
 });

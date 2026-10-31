@@ -12,28 +12,28 @@ export const DRAMA_TRIAL = makeSet({
     title: 'The Right to Speak: The Trial of John Peter Zenger',
     genre: 'drama',
     blocks: [
-      { kind: "p", text: "[Setting: A stifling August afternoon in 1735. The courtroom of City Hall in colonial New York. An imposing mahogany bench rises at center, behind which sits Chief Justice James De Lancey in a powdered wig and scarlet judicial robe. To the left sits John Peter Zenger, a thirty-eight-year-old printer in simple linen clothing, his hands resting calmly on the defense table. At right stands Royal Crown Prosecutor Richard Bradley, polishing his silver-rimmed spectacles with haughty confidence. In the gallery, dozens of colonists crowd together on wooden benches, listening intently.]" },
-      { kind: "p", text: "CLERK OF THE COURT: [Striking his wooden staff upon the pine floorboards.] Oyez, oyez! The Court of the Royal Colony of New York is now in session. The Crown versus John Peter Zenger, upon the charge of seditious libel against His Majesty's Royal Governor, William Cosby!" },
-      { kind: "p", text: "PROSECUTOR BRADLEY: [Striding arrogantly before the jury box, gesturing with contempt toward Zenger.] Gentlemen of the jury, the legal issue before you today is straightforward and indisputable. The defendant, John Peter Zenger, published copies of the New-York Weekly Journal containing scandalous, scathing attacks against Governor Cosby's administration. He accused the Crown's representative of tyranny, illegal confiscation of private land, and electoral corruption. Under established English common law, the law of libel does not concern itself with whether statements are true or false. In fact, the legal maxim is clear: 'The greater the truth, the greater the libel!' To expose the Crown to ridicule is treasonous sedition. You need only decide whether Mr. Zenger printed these papers!" },
-      { kind: "p", text: "CHIEF JUSTICE DE LANCEY: [Nodding sternly, leaning forward over his bench.] The Prosecutor speaks the law. Mr. Hamilton, as defense counsel, you may not present witnesses to substantiate whether these allegations are factual. The truth of a libel cannot be justified in this court." },
-      { kind: "p", text: "ANDREW HAMILTON: [Rising slowly from the defense bench. Though eighty years old and silver-haired, the famed Philadelphia attorney stands tall, his deep voice resonating with commanding authority throughout the silent chamber.] May it please the Court, and you, gentlemen of the jury. I must respectfully dissent from the learned Chief Justice and the honorable Prosecutor. If we are forbidden from proving the truth of the words printed by my client, then liberty of the press is nothing more than a hollow phantom!" },
-      { kind: "p", text: "PROSECUTOR BRADLEY: [Jumping to his feet, slamming his leather dossier onto the table.] Objection, Your Honor! Mr. Hamilton is attempting to subvert two centuries of royal judicial precedent!" },
-      { kind: "p", text: "CHIEF JUSTICE DE LANCEY: [Banging his gavel sharply.] Confine yourself to the law, Mr. Hamilton! The jury is empaneled solely to determine the fact of publication, not the truth of the words!" },
-      { kind: "p", text: "ANDREW HAMILTON: [Turning his back on the bench, walking deliberately toward the twelve jury men, making direct eye contact with each of them.] Then I appeal past this bench directly to you\u2014twelve free citizens of New York. You are not royal appointees who hold office at the governor's whim. You are our neighbors. You walk these streets, pay these taxes, and witness firsthand whether the governor's deeds are just or oppressive. Is it a crime for a free man to complain when he is injured? Is it sedition to tell the truth about an executive who abuses his sacred public trust?" },
-      { kind: "p", text: "ZENGER: [Whispering quietly to his young apprentice seated beside him.] Listen well, Nicholas. It is not my freedom alone that Mr. Hamilton defends today; it is the ink in your press and every word you will ever print." },
-      { kind: "p", text: "ANDREW HAMILTON: [His voice swelling with passionate conviction.] It is not the cause of one poor printer, nor of New York alone, which you are trying today! No! It may, in its consequences, affect every freeman that lives under a British government on the main of North America! It is the best cause; it is the cause of liberty! The question before you is whether nature and the laws of our country have given us a right\u2014the right of resisting arbitrary power by speaking and writing truth!" },
-      { kind: "p", text: "[A tense, electrified silence grips the courtroom. Chief Justice De Lancey glares furiously from the bench, but the twelve jurors sit motionless, their eyes fixed intently upon Hamilton. In the gallery, several merchants exchange solemn, hopeful glances.]" },
-      { kind: "p", text: "CHIEF JUSTICE DE LANCEY: [Clearing his throat nervously.] The jury will retire to consider its verdict according to the instructions of the Court." },
-      { kind: "p", text: "[The jurors exit. Five minutes pass\u2014an astonishingly brief deliberation. The jury files back into the box.]" },
-      { kind: "p", text: "CLERK OF THE COURT: Gentlemen of the jury, have you agreed upon a verdict? Is the defendant, John Peter Zenger, guilty of publishing a seditious libel, or not guilty?" },
-      { kind: "p", text: "JURY FOREMAN THOMAS HUNT: [Standing proud and clear-voiced.] Not guilty!" },
-      { kind: "p", text: "[Instantly, the gallery erupts into deafening cheers and applause. Citizens toss their three-cornered hats toward the timber rafters. Chief Justice De Lancey pounds his gavel in futile anger, but his threats are drowned out by the roar of triumph. Hamilton clasps Zenger's shoulder warmly as the printer steps forward into the sunlight of a new era.]" },
+      { kind: "direction", text: "[Setting: A stifling August afternoon in 1735. The courtroom of City Hall in colonial New York. An imposing mahogany bench rises at center, behind which sits Chief Justice James De Lancey in a powdered wig and scarlet judicial robe. To the left sits John Peter Zenger, a thirty-eight-year-old printer in simple linen clothing, his hands resting calmly on the defense table. At right stands Royal Crown Prosecutor Richard Bradley, polishing his silver-rimmed spectacles with haughty confidence. In the gallery, dozens of colonists crowd together on wooden benches, listening intently.]" },
+      { kind: "speech", speaker: "CLERK OF THE COURT", text: "[Striking his wooden staff upon the pine floorboards.] Oyez, oyez! The Court of the Royal Colony of New York is now in session. The Crown versus John Peter Zenger, upon the charge of seditious libel against His Majesty's Royal Governor, William Cosby!" },
+      { kind: "speech", speaker: "PROSECUTOR BRADLEY", text: "[Striding arrogantly before the jury box, gesturing with contempt toward Zenger.] Gentlemen of the jury, the legal issue before you today is straightforward and indisputable. The defendant, John Peter Zenger, published copies of the New-York Weekly Journal containing scandalous, scathing attacks against Governor Cosby's administration. He accused the Crown's representative of tyranny, illegal confiscation of private land, and electoral corruption. Under established English common law, the law of libel does not concern itself with whether statements are true or false. In fact, the legal maxim is clear: 'The greater the truth, the greater the libel!' To expose the Crown to ridicule is treasonous sedition. You need only decide whether Mr. Zenger printed these papers!" },
+      { kind: "speech", speaker: "CHIEF JUSTICE DE LANCEY", text: "[Nodding sternly, leaning forward over his bench.] The Prosecutor speaks the law. Mr. Hamilton, as defense counsel, you may not present witnesses to substantiate whether these allegations are factual. The truth of a libel cannot be justified in this court." },
+      { kind: "speech", speaker: "ANDREW HAMILTON", text: "[Rising slowly from the defense bench. Though eighty years old and silver-haired, the famed Philadelphia attorney stands tall, his deep voice resonating with commanding authority throughout the silent chamber.] May it please the Court, and you, gentlemen of the jury. I must respectfully dissent from the learned Chief Justice and the honorable Prosecutor. If we are forbidden from proving the truth of the words printed by my client, then liberty of the press is nothing more than a hollow phantom!" },
+      { kind: "speech", speaker: "PROSECUTOR BRADLEY", text: "[Jumping to his feet, slamming his leather dossier onto the table.] Objection, Your Honor! Mr. Hamilton is attempting to subvert two centuries of royal judicial precedent!" },
+      { kind: "speech", speaker: "CHIEF JUSTICE DE LANCEY", text: "[Banging his gavel sharply.] Confine yourself to the law, Mr. Hamilton! The jury is empaneled solely to determine the fact of publication, not the truth of the words!" },
+      { kind: "speech", speaker: "ANDREW HAMILTON", text: "[Turning his back on the bench, walking deliberately toward the twelve jury men, making direct eye contact with each of them.] Then I appeal past this bench directly to you\u2014twelve free citizens of New York. You are not royal appointees who hold office at the governor's whim. You are our neighbors. You walk these streets, pay these taxes, and witness firsthand whether the governor's deeds are just or oppressive. Is it a crime for a free man to complain when he is injured? Is it sedition to tell the truth about an executive who abuses his sacred public trust?" },
+      { kind: "speech", speaker: "ZENGER", text: "[Whispering quietly to his young apprentice seated beside him.] Listen well, Nicholas. It is not my freedom alone that Mr. Hamilton defends today; it is the ink in your press and every word you will ever print." },
+      { kind: "speech", speaker: "ANDREW HAMILTON", text: "[His voice swelling with passionate conviction.] It is not the cause of one poor printer, nor of New York alone, which you are trying today! No! It may, in its consequences, affect every freeman that lives under a British government on the main of North America! It is the best cause; it is the cause of liberty! The question before you is whether nature and the laws of our country have given us a right\u2014the right of resisting arbitrary power by speaking and writing truth!" },
+      { kind: "direction", text: "[A tense, electrified silence grips the courtroom. Chief Justice De Lancey glares furiously from the bench, but the twelve jurors sit motionless, their eyes fixed intently upon Hamilton. In the gallery, several merchants exchange solemn, hopeful glances.]" },
+      { kind: "speech", speaker: "CHIEF JUSTICE DE LANCEY", text: "[Clearing his throat nervously.] The jury will retire to consider its verdict according to the instructions of the Court." },
+      { kind: "direction", text: "[The jurors exit. Five minutes pass\u2014an astonishingly brief deliberation. The jury files back into the box.]" },
+      { kind: "speech", speaker: "CLERK OF THE COURT", text: "Gentlemen of the jury, have you agreed upon a verdict? Is the defendant, John Peter Zenger, guilty of publishing a seditious libel, or not guilty?" },
+      { kind: "speech", speaker: "JURY FOREMAN THOMAS HUNT", text: "[Standing proud and clear-voiced.] Not guilty!" },
+      { kind: "direction", text: "[Instantly, the gallery erupts into deafening cheers and applause. Citizens toss their three-cornered hats toward the timber rafters. Chief Justice De Lancey pounds his gavel in futile anger, but his threats are drowned out by the roar of triumph. Hamilton clasps Zenger's shoulder warmly as the printer steps forward into the sunlight of a new era.]" },
     ],
   }],
   items: [
     mcq({
-      standard: "rla:8.8C", cites: [1, 3, 4, 7, 10, 15],
-      stem: "How does the playwright develop dramatic action and build suspense through the staging and dialogue in paragraphs 7 through 10?",
+      standard: "rla:8.8C", cites: [2, 3, 6, 9, 12],
+      stem: "How does the playwright develop dramatic action and build suspense through the staging and dialogue in lines 6 through 9?",
       choices: [
         ["By having the defendant attempt to escape out of the courtroom window.", "Zenger remains calm at the defense table throughout the trial."],
         ["By having the jury request a three-week recess to review financial ledgers.", "The jury deliberates for only five minutes."],
@@ -44,7 +44,7 @@ export const DRAMA_TRIAL = makeSet({
       explain: "Hamilton turning his back on the intimidating royal bench to appeal directly to the colonial jurors creates dramatic tension and shifts the power dynamic.",
     }),
     mcq({
-      standard: "rla:8.9E", cites: [2, 4, 7],
+      standard: "rla:8.9E", cites: [1, 3, 6],
       stem: "How do the conflicting points of view of Prosecutor Bradley and Andrew Hamilton drive the central conflict of the play?",
       choices: [
         "Bradley argues that criticizing royal authority is automatically illegal regardless of truth, while Hamilton insists that citizens have a fundamental right to publish the truth to resist tyranny.",
@@ -56,7 +56,7 @@ export const DRAMA_TRIAL = makeSet({
       explain: "The central dramatic clash pits the Crown's doctrine that truth is no defense in libel against Hamilton's argument that speaking truth is an essential check on tyrannical power.",
     }),
     mcq({
-      standard: "rla:8.7B", cites: [4, 9],
+      standard: "rla:8.7B", cites: [3, 8],
       stem: "What primary motivation drives Andrew Hamilton to take up Zenger's defense?",
       choices: [
         ["He seeks to earn a massive cash reward promised by wealthy British investors.", "Hamilton volunteered to defend Zenger without a commercial fee."],
@@ -68,7 +68,7 @@ export const DRAMA_TRIAL = makeSet({
       explain: "Hamilton explicitly proclaims that he is defending the cause of liberty and the natural right of freemen to resist tyranny by speaking truth.",
     }),
     mcq({
-      standard: "rla:8.5F", cites: [10, 12],
+      standard: "rla:8.5F", cites: [9, 11],
       stem: "What can the reader infer from the fact that the jury deliberated for only five minutes before returning a verdict?",
       choices: [
         ["The jurors were bribed by Governor Cosby to return an immediate guilty verdict.", "The jury returned a verdict of NOT guilty."],
@@ -81,7 +81,7 @@ export const DRAMA_TRIAL = makeSet({
     }),
     mcq({
       standard: "rla:8.6C", cites: [8],
-      stem: "Which text evidence from paragraph 8 best supports the idea that Zenger viewed his trial as larger than his own individual welfare?",
+      stem: "Which text evidence from line 8 best supports the idea that Zenger viewed his trial as larger than his own individual welfare?",
       choices: [
         ["'...hands resting calmly on the defense table.'", "This describes physical posture."],
         ["'Gentlemen of the jury, have you agreed upon a verdict?'", "This is spoken by the Clerk of the Court."],
@@ -92,7 +92,7 @@ export const DRAMA_TRIAL = makeSet({
       explain: "Zenger's whisper to his apprentice proves he recognized the case would establish freedom of the press for all future printers.",
     }),
     mcq({
-      standard: "rla:8.7A", cites: [9, 15],
+      standard: "rla:8.7A", cites: [8, 12],
       stem: "What universal theme is explored through the resolution of the trial?",
       choices: [
         "Truth and civic courage are powerful weapons capable of overcoming unjust legal tyranny and establishing enduring civil liberties.",
@@ -104,7 +104,7 @@ export const DRAMA_TRIAL = makeSet({
       explain: "The play shows that courage, truth, and community solidarity through the jury system triumph over oppressive colonial authority.",
     }),
     mcq({
-      standard: "rla:8.6D", cites: [1, 2, 4, 7, 9, 14, 15],
+      standard: "rla:8.6D", cites: [1, 3, 6, 8, 11, 12],
       stem: "Which statement provides the best objective summary of the play?",
       choices: [
         ["Governor William Cosby arrests Chief Justice James De Lancey for publishing false rumors about the New York judicial system.", "De Lancey was the royal judge, not the defendant."],

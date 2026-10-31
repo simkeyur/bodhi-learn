@@ -17,8 +17,8 @@ export const BIO_ARMSTRONG = makeSet({
       { kind: "p", text: "At Edwards, Armstrong tested experimental rocket planes, including the formidable North American X-15. Flying at hypersonic speeds exceeding Mach 5 and soaring to altitudes above two hundred thousand feet at the very edge of space, pilots frequently faced instantaneous mechanical anomalies. Colleagues noted that while other aviators might shout over cockpit radio channels when guidance computers failed, Armstrong's heart rate barely elevated; he methodically analyzed instrument dials, calculated glide trajectories, and brought damaged aircraft safely onto the Mojave dry lake beds [2]." },
       { kind: "p", text: "This unwavering composure proved decisive during the Apollo 11 lunar landing. As the lunar module Eagle descended toward the Sea of Tranquility, blaring computer alarms (\"1202\" and \"1201\" program alarms) signaled that the radar processor was being overloaded with data. Looking out the triangular cockpit window, Armstrong noticed that the automated computer targeting system was guiding the spacecraft directly into a football-field-sized crater littered with boulders the size of automobiles." },
       { kind: "p", text: "With fuel running dangerously low and Mission Control in Houston counting down remaining seconds of propellant, Armstrong bypassed the autopilot and took manual control of the descent thrusters. Hovering mere feet above the lunar dust, he gently tilted the spacecraft forward, scouting a clear patch of level ground past the crater rim. When Eagle finally settled onto the lunar surface with less than thirty seconds of fuel remaining, Armstrong keyed his microphone and reported with characteristic calmness: \"Houston, Tranquility Base here. The Eagle has landed.\"" },
-      { kind: "p", text: "Following his historic mission, Armstrong resisted countless lucrative commercial endorsements and political campaigns, choosing instead to teach engineering at the University of Cincinnati and retire to his Ohio farm. He consistently deflected personal praise, insisting that the lunar landing was the triumph of four hundred thousand dedicated engineers, scientists, technicians, and seamstresses who had built the Apollo program. Until his passing in 2012, he remained an inspiring advocate for science education, urging young students to pursue careers in aerospace exploration and engineering innovation." },
-      { kind: "p", text: "--------------------\\nFootnotes and Citations:\\n[1] Hansen, James R. First Man: The Life of Neil A. Armstrong. Simon & Schuster, 2005, p. 45. Documentation of Armstrong's early flight certifications in rural Ohio.\\n[2] NASA Dryden Flight Research Center Historical Archives. \"Flight Log Summary: X-15 Rocket Plane Missions 1960\u20131962.\" Edwards AFB, California. Records of physiological telemetry and emergency recovery procedures during hypersonic tests." },
+      { kind: "p", text: "Following his historic mission, Armstrong resisted countless lucrative commercial endorsements and political campaigns, choosing instead to teach engineering at the University of Cincinnati and retire to his Ohio farm. He consistently deflected personal praise, insisting that the lunar landing was the triumph of four hundred thousand dedicated engineers, scientists, technicians, and seamstresses who had built the Apollo program. Until his passing in 2012, at the age of eighty-two, he remained an inspiring advocate for science education, urging young students to pursue careers in aerospace exploration and engineering innovation." },
+      { kind: "sidebar", title: "Notes", text: "[1] Hansen, James R. First Man: The Life of Neil A. Armstrong. Simon & Schuster, 2005. [2] Thompson, Milton O. At the Edge of Space: The X-15 Flight Program. Smithsonian Institution Press, 1992." },
     ],
   }],
   items: [
@@ -35,12 +35,12 @@ export const BIO_ARMSTRONG = makeSet({
       explain: "Paragraph 1 introduces the central thesis: Armstrong was defined not by celebrity bravado, but by meticulous discipline and composure under extreme crisis.",
     }),
     mcq({
-      standard: "rla:8.8D.ii", cites: [2, 7],
+      standard: "rla:8.8D.ii", cites: [2],
       stem: "How does the footnote citation [1] support the author's discussion of Armstrong's youth in paragraph 2?",
       choices: [
         "It cites a reputable biographical source that documents Armstrong earning his pilot's license before his driver's license.",
         ["It provides a transcript of Armstrong's first interview with military recruiters in Ohio.", "The citation references Hansen's biography, not a military recruitment interview."],
-        ["It explains the physics of how jet engines operated in the early 1950s.", "The note documents early flight certifications, not jet physics."],
+        ["It explains the physics of how jet engines operated in the early 1950s.", "The note names a biography, not a physics book."],
         ["It contradicts the author's claims by showing that Armstrong struggled with early pilot tests.", "The citation confirms Armstrong's early aviation accomplishments."],
       ],
       answer: 0,
@@ -83,16 +83,16 @@ export const BIO_ARMSTRONG = makeSet({
       explain: "By following Armstrong from teenage flying to naval combat, hypersonic test piloting, and Apollo 11, the author demonstrates how his discipline was built step by step.",
     }),
     mcq({
-      standard: "rla:8.8D.ii", cites: [3, 7],
+      standard: "rla:8.8D.ii", cites: [3],
       stem: "What is the primary function of footnote [2] in establishing the credibility of the text?",
       choices: [
-        ["To list the purchase price of experimental X-15 rocket engines built in California.", "The note references telemetry and recovery archives, not purchasing records."],
-        ["To question the accuracy of NASA flight controllers during hypersonic research.", "The archive data validates Armstrong's performance rather than questioning controllers."],
-        "To verify claims regarding Armstrong's physiological composure and emergency recovery procedures using official NASA archival records.",
-        ["To explain how the Mojave Desert climate affected aircraft maintenance in the 1960s.", "The archive focuses on flight telemetry and emergency procedures."],
+        ["To list the purchase price of experimental X-15 rocket engines built in California.", "The note names a history of the X-15 program, not purchasing records."],
+        ["To question the accuracy of NASA flight controllers during hypersonic research.", "The note names a source for the passage; it does not question anyone."],
+        "To show readers a published source where they can check the description of X-15 test flights.",
+        ["To explain how the Mojave Desert climate affected aircraft maintenance in the 1960s.", "The note names a history of X-15 flights, not desert weather."],
       ],
       answer: 2,
-      explain: "Footnote [2] cites official Dryden Flight Research Center historical archives to corroborate the factual description of Armstrong's calm heart rate during emergencies.",
+      explain: "Footnote [2] names a published history of the X-15 program, so readers can check the description of the test flights for themselves.",
     }),
     mcq({
       standard: "rla:8.6D", cites: [1, 2, 4, 5, 6],

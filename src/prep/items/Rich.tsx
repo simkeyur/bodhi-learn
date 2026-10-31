@@ -2,9 +2,9 @@ import { Fragment } from 'react';
 import type { Block } from '../content/types';
 import { FigureView } from './figures/Figures';
 
-// Text with {3/4} fractions (2{1/3} for mixed numbers) and **bold**.
+// Text with {3/4} fractions (2{1/3} for mixed numbers), **bold** and *italics*.
 // Fractions are drawn stacked with CSS; screen readers get "3/4".
-const TOKEN = /(\*\*[^*]+\*\*|\{\d+\/\d+\})/;
+const TOKEN = /(\*\*[^*]+\*\*|\*[^*\s][^*\n]*\*|\{\d+\/\d+\})/;
 
 export function RichText({ text }: { text: string }) {
   return (
@@ -21,6 +21,7 @@ export function RichText({ text }: { text: string }) {
           );
         }
         if (part.startsWith('**') && part.endsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>;
+        if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) return <em key={i}>{part.slice(1, -1)}</em>;
         return <Fragment key={i}>{part}</Fragment>;
       })}
     </>

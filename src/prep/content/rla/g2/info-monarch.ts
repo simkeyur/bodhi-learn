@@ -32,7 +32,7 @@ export const G2_SET_INFO_MONARCH: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.8D.i', cites: [1, 2, 3],
+      standard: 'rla:2.9D.i', cites: [1, 2, 3],
       stem: 'What is the central idea of this passage?',
       choices: [
         'Texas provides food and shelter for monarch butterflies during their long migration.',
@@ -44,7 +44,7 @@ export const G2_SET_INFO_MONARCH: ReadingSet = makeSet({
       explain: 'The entire selection explains how Texas wildflowers and milkweed support monarchs during their travels.',
     }),
     mcq({
-      standard: 'rla:2.8D.iii', cites: [1, 2, 3],
+      standard: 'rla:2.9D.iii', cites: [1, 2, 3],
       stem: 'How is the information in this passage organized?',
       choices: [
         ['By listing butterfly species from smallest to largest.', 'Only monarch butterflies are described.'],
@@ -92,7 +92,7 @@ export const G2_SET_INFO_MONARCH: ReadingSet = makeSet({
       explain: 'Combining facts about nectar and caterpillar food shows how planting gardens supports butterfly survival.',
     }),
     mcq({
-      standard: 'rla:2.9A', cites: [1, 2, 3],
+      standard: 'rla:2.10A', cites: [1, 2, 3],
       stem: 'What is the author\'s primary purpose for writing "Monarch Butterflies in Texas"?',
       choices: [
         ['To entertain readers with a silly fable about flying insects.', 'The text is factual nonfiction, not a fable.'],

@@ -32,7 +32,7 @@ export const G2_SET_PERSUADE_PLAYGROUND: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.8E.i', cites: [1],
+      standard: 'rla:2.9E.i', cites: [1],
       stem: 'What is the author\'s main claim in this letter?',
       choices: [
         'Oak Park needs more swing sets installed for neighborhood children.',
@@ -44,7 +44,7 @@ export const G2_SET_PERSUADE_PLAYGROUND: ReadingSet = makeSet({
       explain: 'Paragraph 1 clearly states the main argument: "our neighborhood Oak Park needs more swing sets."',
     }),
     mcq({
-      standard: 'rla:2.8E.ii', cites: [1],
+      standard: 'rla:2.9E.ii', cites: [1],
       stem: 'Which statement from paragraph 1 is a **fact** that can be proven true?',
       choices: [
         ['Swinging is the most exciting activity in Texas.', 'Excitement is a personal opinion.'],
@@ -56,7 +56,7 @@ export const G2_SET_PERSUADE_PLAYGROUND: ReadingSet = makeSet({
       explain: 'Counting the two physical belt swings on the playground is a verifiable fact.',
     }),
     mcq({
-      standard: 'rla:2.8E.i', cites: [2],
+      standard: 'rla:2.9E.i', cites: [2],
       stem: 'What problem does the author describe in paragraph 2 to support the claim?',
       choices: [
         ['The playground slide is covered in wet mud.', 'The slide is not discussed.'],
@@ -68,7 +68,7 @@ export const G2_SET_PERSUADE_PLAYGROUND: ReadingSet = makeSet({
       explain: 'Paragraph 2 explains that having only two swings causes long lines and arguments among children.',
     }),
     mcq({
-      standard: 'rla:2.8E.i', cites: [3],
+      standard: 'rla:2.9E.i', cites: [3],
       stem: 'What specific action does the author ask the Park Director to take?',
       choices: [
         'Add four new swings to Oak Park.',
@@ -92,7 +92,7 @@ export const G2_SET_PERSUADE_PLAYGROUND: ReadingSet = makeSet({
       explain: 'Mentioning arm strength gives a healthy reason why having swings benefits children.',
     }),
     mcq({
-      standard: 'rla:2.9A', cites: [1, 2, 3],
+      standard: 'rla:2.10A', cites: [1, 2, 3],
       stem: 'What is the author\'s main purpose in writing this letter?',
       choices: [
         ['To entertain readers with a silly story about broken swings.', 'This is a serious persuasive letter, not a fictional story.'],

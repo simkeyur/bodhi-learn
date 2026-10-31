@@ -74,7 +74,7 @@ export const FICTION_ALVAREZ = makeSet({
       b: {
         prompt: 'Part B: Which quotation from the passage best supports the inference in Part A?',
         choices: [
-          ['"Thirteen-year-old Carlos wiped dust from his forehead..." (paragraph 1)', 'This shows physical labor but not generational responsibility.'],
+          ['"Thirteen-year-old Carlos wiped beads of sweat and chalky limestone dust from his sunburnt forehead..." (paragraph 1)', 'This shows physical labor but not generational responsibility.'],
           '"History is not an expired chapter locked in a glass museum case. It lives in our hands whenever we honor the patience and wisdom of those who built before us." (paragraph 8)',
           ['"Before Carlos could reply, an unusual metallic clink echoed..." (paragraph 4)', 'This signals a physical sound, not cultural duty.'],
           ['"Carlos loved the stories Papá Mateo shared during their restoration work..." (paragraph 2)', 'This shows enjoyment of storytelling, but paragraph 8 expresses the core generational philosophy.'],

@@ -2,7 +2,7 @@
 
 import { mcq, sample } from '../rla/author.ts';
 import type { Lesson } from '../types.ts';
-import { MINI_DRAFT_DOG } from './g1-rla-passages.ts';
+import { MINI_ANT, MINI_CAT, MINI_DRAFT_DOG, MINI_FROGS, MINI_NEST } from './g1-rla-passages.ts';
 
 export const G1_RLA_LESSONS_MORE: Lesson[] = [
   {
@@ -248,6 +248,87 @@ export const G1_RLA_LESSONS_MORE: Lesson[] = [
     ideas: [
       { title: 'Check each word carefully', text: 'Read your draft slowly word by word to spot spelling errors.' },
       { title: 'Use word patterns you know', text: 'Check short vowels, silent e, and common sight words.' },
+    ],
+  },
+  {
+    code: 'rla:1.7C',
+    goal: 'You will learn to find the sentence that proves your answer.',
+    words: [
+      { term: 'evidence', meaning: 'The words in the text that show your answer is right.' },
+    ],
+    ideas: [
+      { title: 'Answer first', text: 'Think of your answer to the question.' },
+      { title: 'Find the words', text: 'Look back and find the sentence that shows your answer is right.' },
+    ],
+    samples: [
+      sample(MINI_CAT, mcq({
+        standard: 'rla:1.7C',
+        stem: 'Which sentence shows that Sam moves fast?',
+        choices: ['"Sam ran after it as fast as his little legs could carry him."', '"He tapped the ball with his tiny white paw."', '"The ball rolled under a wooden bench and stopped."', '"Sam the kitten loved playing in the sunny backyard."'],
+        answer: 0,
+        explain: 'The words "as fast as his little legs could carry him" prove that Sam moves fast.',
+      }), 1),
+      sample(MINI_NEST, mcq({
+        standard: 'rla:1.7C',
+        stem: 'Which sentence shows that both robins help build the nest?',
+        choices: ['"Finally, they line the inside of the nest with soft feathers."', '"In the springtime, mother and father robins work together to make a warm nest."', '"Now the cozy nest is ready."', '"They carry these building supplies in their beaks."'],
+        answer: 1,
+        explain: 'The words "mother and father robins work together" prove that both robins help.',
+      }), 1),
+    ],
+  },
+  {
+    code: 'rla:1.7D',
+    goal: 'You will learn to retell a story in order, using your own words.',
+    words: [
+      { term: 'retell', meaning: 'To tell what happened in a story, in order.' },
+    ],
+    ideas: [
+      { title: 'Beginning, middle, end', text: 'Tell what happens first, next, and last.' },
+      { title: 'Keep it short', text: 'Tell only the big things that happen.' },
+    ],
+    samples: [
+      sample(MINI_ANT, mcq({
+        standard: 'rla:1.7D',
+        stem: 'Which tells the story in the right order?',
+        choices: ['The ant falls in the water. The dove drops a leaf. The ant is safe.', 'The ant is safe. The ant falls in the water. The dove drops a leaf.', 'The dove falls in the water. The ant drops a leaf.', 'The ant climbs a tree. The dove flies away.'],
+        answer: 0,
+        explain: 'First the ant falls in, next the dove drops a leaf, and last the ant is safe.',
+      }), 1),
+      sample(MINI_FROGS, mcq({
+        standard: 'rla:1.7D',
+        stem: 'Which tells what happens in the right order?',
+        choices: ['A frog lays a tadpole. The tadpole grows a tail.', 'A frog turns into an egg.', 'An egg becomes a tadpole. The tadpole grows legs. It becomes a frog.', 'Legs grow first. Then the egg hatches.'],
+        answer: 2,
+        explain: 'First there is an egg, then a tadpole, then a frog.',
+      }), 1),
+    ],
+  },
+  {
+    code: 'rla:1.8A',
+    goal: 'You will learn to find the theme, or lesson, of a story.',
+    words: [
+      { term: 'theme', meaning: 'The big lesson of a story.' },
+    ],
+    ideas: [
+      { title: 'What is the lesson?', text: 'Think about what the characters learn.' },
+      { title: 'Look for proof', text: 'Find what happens in the story that shows the lesson.' },
+    ],
+    samples: [
+      sample(MINI_ANT, mcq({
+        standard: 'rla:1.8A',
+        stem: 'What can we learn from the dove?',
+        choices: ['Birds like leaves.', 'Rivers are deep.', 'We should help others in trouble.', 'Ants are small.'],
+        answer: 2,
+        explain: 'The dove helps the ant, and the ant is saved. The lesson is to help others.',
+      }), 1),
+      sample(MINI_CAT, mcq({
+        standard: 'rla:1.8A',
+        stem: 'What is this story mostly about?',
+        choices: ['a kitten having fun with a ball', 'a dog at the park', 'a bench that breaks', 'a garden with bees'],
+        answer: 0,
+        explain: 'Every part of the story is about Sam and his ball. That is the topic.',
+      }), 1),
     ],
   },
 ];

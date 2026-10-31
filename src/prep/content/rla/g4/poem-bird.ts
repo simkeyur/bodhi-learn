@@ -28,7 +28,7 @@ export const POEM_BIRD = makeSet({
       { kind: 'line', text: 'To let a Beetle pass—' , stanzaEnd: true },
 
       { kind: 'line', text: 'He glanced with rapid eyes' },
-      { kind: 'line', text: 'That hurried all around—' },
+      { kind: 'line', text: 'That hurried all abroad—' },
       { kind: 'line', text: 'They looked like frightened Beads, I thought—' },
       { kind: 'line', text: 'He stirred his Velvet Head' , stanzaEnd: true },
 

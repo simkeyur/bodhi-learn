@@ -34,7 +34,7 @@ export const G2_SET_POEM_STAR: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.8B', cites: [1, 2],
+      standard: 'rla:2.9B', cites: [1, 2],
       stem: 'Which two words at the ends of lines 1 and 2 create a rhyming pair?',
       choices: [
         'star and are',
@@ -46,7 +46,7 @@ export const G2_SET_POEM_STAR: ReadingSet = makeSet({
       explain: 'Star and are end with the same rhyming sound at the end of the first two lines.',
     }),
     mcq({
-      standard: 'rla:2.9D', cites: [4],
+      standard: 'rla:2.10D', cites: [4],
       stem: 'In line 4, what does the poet compare the star to when writing "Like a diamond in the sky"?',
       choices: [
         ['A fluffy white daytime cloud.', 'Diamonds are sparkly, not fluffy.'],
@@ -58,7 +58,7 @@ export const G2_SET_POEM_STAR: ReadingSet = makeSet({
       explain: 'The poet uses a simile comparing the glittering star to a brilliant, sparkling diamond.',
     }),
     mcq({
-      standard: 'rla:2.9F', cites: [1, 8, 12],
+      standard: 'rla:2.10F', cites: [1, 8, 12],
       stem: 'Why does the poet repeat the words "twinkle, twinkle" throughout the poem?',
       choices: [
         ['To explain how to build a space rocket.', 'Rockets are not in this 1806 nursery poem.'],
@@ -94,7 +94,7 @@ export const G2_SET_POEM_STAR: ReadingSet = makeSet({
       explain: 'Looking at stars and feeling curious wonder is a common personal experience shared with the speaker.',
     }),
     mcq({
-      standard: 'rla:2.9A', cites: [1, 2, 3, 4],
+      standard: 'rla:2.10A', cites: [1, 2, 3, 4],
       stem: 'What is the poet\'s main purpose in writing "The Star"?',
       choices: [
         ['To teach students how to calculate distances in space.', 'This is a gentle nursery poem, not astronomy math.'],

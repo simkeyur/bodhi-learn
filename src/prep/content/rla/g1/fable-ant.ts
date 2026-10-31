@@ -99,5 +99,29 @@ export const G1_SET_FABLE_ANT: ReadingSet = makeSet({
       answer: 1,
       explain: 'The story takes place by a clear river where the dove perches in a nearby tree.',
     }),
+    mcq({
+      standard: 'rla:1.7C', cites: [1],
+      stem: 'Which sentence shows that the ant needs help?',
+      choices: [
+        ['"A gentle dove perched in a nearby tree."', 'This is about the dove.'],
+        '"The ant struggled to stay afloat and cried out for help."',
+        ['"The ant thanked the kind dove."', 'By then the ant is safe.'],
+        ['"A thirsty little ant walked down to the clear river."', 'The ant is not in trouble yet.'],
+      ],
+      answer: 1,
+      explain: 'The ant is in deep water and cries for help.',
+    }),
+    mcq({
+      standard: 'rla:1.8A', cites: [2],
+      stem: 'What is the lesson of this story?',
+      choices: [
+        ['Ants should not drink water.', 'The story does not teach this.'],
+        ['Leaves can float.', 'This is true, but it is not the lesson.'],
+        'It is good to help others.',
+        ['Rivers are fun.', 'The river is scary for the ant.'],
+      ],
+      answer: 2,
+      explain: 'The theme is the lesson of a story. The dove helps the ant, and the ant is safe and thankful.',
+    }),
   ],
 });

@@ -14,7 +14,7 @@ export const G1_SET_POEM_KITTENS: ReadingSet = makeSet({
       id: 'g1-pass-kittens',
       title: 'The Three Little Kittens',
       author: 'Eliza Lee Follen',
-      source: 'Little Songs for Little Boys and Girls (1827)',
+      source: 'Traditional rhyme; this version credited to Follen in New Nursery Songs for All Good Children (1843)',
       genre: 'poetry',
       blocks: [
         { kind: 'line', text: 'Three little kittens, they lost their mittens,' },

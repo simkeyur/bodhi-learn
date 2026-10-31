@@ -225,6 +225,8 @@ This is the slow part. Budget about an hour per grade to read, plus fixes.
 - Splitting the Prep download per grade and subject (it's 901 kB, 277 kB compressed).
 - A paired set and a drama set (the types support both).
 
+**Review of grades 1–4 and 6–8 (2026-10-31).** Both branches are combined on `reading-all`. The review fixed standards codes, poems, notes, plays and rendering, and added `tests/prep/reading-quality.test.mjs`. Those tests fail until the passages are simplified and the answer choices rewritten.
+
 ## 8. Building a grade's reading (the steps for Gemini)
 
 Copy grade 5's layout exactly. Everything a grade needs:
@@ -241,7 +243,8 @@ Copy grade 5's layout exactly. Everything a grade needs:
    - Cite the paragraphs (or sentences) a question is about. **Headings, sidebars, directions and notes are not
      numbered**: count only `p`, `line` and `speech` blocks (and each sentence in a draft).
    - In a paired set, add `passage: 1` to a question whose citations are in the second passage.
-   - Vary which letter is right.
+   - Don't worry about which letter is right: `makeSet` shuffles the choices. Never refer to a choice by its letter.
+   - All four choices must be about the same length and equally believable. The right answer must not be the longest.
    - Passages are original, or public domain before 1930 with `author` and `source`.
 3. **Generators:** `src/prep/content/rla/g{N}/generators.ts`, for standards that work one sentence at a time:
    spelling patterns, word parts, conventions.

@@ -18,9 +18,9 @@ export const DRAMA_MARKET = makeSet({
     genre: 'drama',
     blocks: [
       { kind: 'heading', text: 'Characters' },
-      { kind: 'p', text: 'ELENA: A nine-year-old girl helping at her family\'s orchard booth.\nGRANDPA KLAUS: Elena\'s grandfather and peach orchard owner.\nMRS. REYES: A neighborhood customer searching for fresh produce.' },
+      { kind: 'direction', text: 'ELENA: A nine-year-old girl helping at her family\'s orchard booth.\nGRANDPA KLAUS: Elena\'s grandfather and peach orchard owner.\nMRS. REYES: A neighborhood customer searching for fresh produce.' },
       { kind: 'heading', text: 'Act I, Scene 1' },
-      { kind: 'p', text: 'Setting: Saturday morning at the open-air Fredericksburg Farmers Market. Colorful striped tents fill the town square. Crates of ripe, velvet peaches sit neatly arranged on a wooden table.' },
+      { kind: 'direction', text: 'Setting: Saturday morning at the open-air Fredericksburg Farmers Market. Colorful striped tents fill the town square. Crates of ripe, velvet peaches sit neatly arranged on a wooden table.' },
       { kind: 'speech', speaker: 'ELENA', text: '[Polishing a large, red-orange peach with a soft cloth and setting it atop a wooden crate] Look at this pyramid of fruit, Grandpa! We have the most beautiful peach display in the whole market square.' },
       { kind: 'speech', speaker: 'GRANDPA KLAUS', text: '[Chuckling warmly as he straightens a chalkboard sign] You arranged them with great care, Elena. But remember, beauty is only half the secret of a successful market day. A great farmer also greets every visitor like a welcome guest in their own home.' },
       { kind: 'speech', speaker: 'MRS. REYES', text: '[Approaching the booth with an empty wicker basket, looking puzzled] Good morning! I am hoping to bake a fresh peach cobbler for my grandson\'s birthday celebration tonight, but I never know which peaches are sweet enough for baking.' },
@@ -31,7 +31,7 @@ export const DRAMA_MARKET = makeSet({
   }],
   items: [
     mcq({
-      standard: 'rla:3.9C', cites: [3, 4],
+      standard: 'rla:3.9C', cites: [1, 2],
       stem: 'What is the purpose of the stage directions in brackets, such as *[Polishing a large, red-orange peach with a soft cloth]*?',
       choices: [
         ['They tell the audience which actors are getting paid the most.', 'Stage directions guide actors\' actions and behavior.'],
@@ -43,7 +43,7 @@ export const DRAMA_MARKET = makeSet({
       explain: 'Stage directions in brackets instruct the actors on how to move, what props to handle, and what gestures or emotions to display during a performance.',
     }),
     mcq({
-      standard: 'rla:3.8C', cites: [5, 6, 8],
+      standard: 'rla:3.8C', cites: [3, 4, 6],
       stem: 'What problem does Mrs. Reyes have when she visits the booth, and how does Elena resolve it?',
       choices: [
         ['Mrs. Reyes lost her wallet, so Grandpa gives her free fruit.', 'Mrs. Reyes has money and an empty basket to buy peaches.'],
@@ -55,7 +55,7 @@ export const DRAMA_MARKET = makeSet({
       explain: 'Mrs. Reyes explains that she does not know which peaches are sweet enough for cobbler. Elena solves her doubt by recommending freestone peaches and giving her a fresh sample.',
     }),
     mcq({
-      standard: 'rla:3.8B', cites: [4, 7],
+      standard: 'rla:3.8B', cites: [2, 5],
       stem: 'How does Grandpa Klaus support and encourage Elena during their market day?',
       choices: [
         ['He criticizes her for organizing the fruit too slowly.', 'Grandpa compliments her care in arranging the pyramid.'],
@@ -67,8 +67,8 @@ export const DRAMA_MARKET = makeSet({
       explain: 'Grandpa teaches Elena that great farmers greet visitors like guests, and nods with pride when Elena warmly assists Mrs. Reyes.',
     }),
     mcq({
-      standard: 'rla:3.6F', cites: [6, 8],
-      stem: 'What can the reader infer about Elena\'s knowledge of peaches based on speech 6?',
+      standard: 'rla:3.6F', cites: [4, 6],
+      stem: 'What can the reader infer about Elena\'s knowledge of peaches based on line 4?',
       choices: [
         'She has paid close attention to orchard work and understands the specific qualities needed for baking.',
         ['She dislikes the taste of fruit and never eats peaches.', 'She enthusiastically offers a slice of peach.'],
@@ -79,7 +79,7 @@ export const DRAMA_MARKET = makeSet({
       explain: 'Recommending freestone peaches that are soft near the stem shows that Elena possesses genuine practical knowledge about orchard produce and baking.',
     }),
     mcq({
-      standard: 'rla:3.9C', cites: [1, 2],
+      standard: 'rla:3.9C',
       stem: 'How does the playwright introduce the play before the dialogue begins?',
       choices: [
         ['By printing the entire script in a foreign language.', 'The script is in English.'],
@@ -91,13 +91,13 @@ export const DRAMA_MARKET = makeSet({
       explain: 'Plays traditionally begin with a character list (Elena, Grandpa Klaus, Mrs. Reyes) and a description of the setting and props before characters speak.',
     }),
     mcq({
-      standard: 'rla:3.7C', cites: [8],
-      stem: 'Which quotation from speech 8 shows that Mrs. Reyes thoroughly enjoyed Elena\'s sample?',
+      standard: 'rla:3.7C', cites: [6],
+      stem: 'Which quotation from line 6 shows that Mrs. Reyes thoroughly enjoyed Elena\'s sample?',
       choices: [
         '"Oh my goodness, this tastes like pure sunshine! Please pack a dozen of your sweetest peaches in my basket."',
-        ['"Look at this pyramid of fruit, Grandpa!"', 'This is Elena speaking in speech 3.'],
-        ['"I am hoping to bake a fresh peach cobbler..."', 'This is Mrs. Reyes\'s question in speech 5.'],
-        ['"A great farmer also greets every visitor like a welcome guest..."', 'This is Grandpa\'s advice in speech 4.'],
+        ['"Look at this pyramid of fruit, Grandpa!"', 'This is Elena speaking in line 1.'],
+        ['"I am hoping to bake a fresh peach cobbler..."', 'This is Mrs. Reyes\'s question in line 3.'],
+        ['"A great farmer also greets every visitor like a welcome guest..."', 'This is Grandpa\'s advice in line 2.'],
       ],
       answer: 0,
       explain: 'Calling the peach "pure sunshine" and asking for a dozen peaches proves that Mrs. Reyes was delighted with the taste.',

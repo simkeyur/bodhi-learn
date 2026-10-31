@@ -26,9 +26,9 @@ export function PassageView({ passage, highlight = [], idPrefix = 'para' }: { pa
             case 'heading':
               return <h3 key={i} className="passage-heading">{b.text}</h3>;
             case 'direction':
-              return <p key={i} className="passage-direction">{b.text}</p>;
+              return <p key={i} className="passage-direction"><RichText text={b.text} /></p>;
             case 'note':
-              return <p key={i} className="passage-note">{b.text}</p>;
+              return <p key={i} className="passage-note"><RichText text={b.text} /></p>;
             case 'sidebar':
               return <aside key={i} className="passage-sidebar"><h4>{b.title}</h4><p><RichText text={b.text} /></p></aside>;
             case 'figure':
@@ -37,14 +37,14 @@ export function PassageView({ passage, highlight = [], idPrefix = 'para' }: { pa
               return (
                 <p key={i} id={`${idPrefix}-${n}`} className={`passage-line ${b.stanzaEnd ? 'stanza-end' : ''} ${on(n) ? 'is-cited' : ''}`}>
                   <span className="passage-num" aria-label={`Line ${n}`}>{n}</span>
-                  <span>{b.text}</span>
+                  <span><RichText text={b.text} /></span>
                 </p>
               );
             case 'speech':
               return (
                 <p key={i} id={`${idPrefix}-${n}`} className={`passage-p passage-speech ${on(n) ? 'is-cited' : ''}`}>
                   <span className="passage-num" aria-label={`Line ${n}`}>{n}</span>
-                  <span><b className="passage-speaker">{b.speaker}:</b> {b.text}</span>
+                  <span><b className="passage-speaker">{b.speaker}:</b> <RichText text={b.text} /></span>
                 </p>
               );
             case 'sentences':
@@ -55,7 +55,7 @@ export function PassageView({ passage, highlight = [], idPrefix = 'para' }: { pa
                     return (
                       <Fragment key={k}>
                         <span id={`${idPrefix}-${sn}`} className={`passage-sentence ${on(sn) ? 'is-cited' : ''}`}>
-                          <span className="passage-snum">({sn})</span> {s}
+                          <span className="passage-snum">({sn})</span> <RichText text={s} />
                         </span>{' '}
                       </Fragment>
                     );

@@ -1,4 +1,4 @@
-// Grade 2 reading walkthroughs (part 1: 2.2B.i through 2.8D.iii).
+// Grade 2 reading walkthroughs (part 1: 2.2B.i through 2.9D.iii).
 
 import { mcq, sample } from '../rla/author.ts';
 import type { Lesson } from '../types.ts';
@@ -358,7 +358,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.7B',
+    code: 'rla:2.8B',
     goal: 'You will learn to describe character traits and the reasons for their actions.',
     words: [
       { term: 'character trait', meaning: 'How a character acts, thinks, or feels inside, like kind, brave, or boastful.' },
@@ -369,7 +369,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_PUPPY, mcq({
-        standard: 'rla:2.7B', cites: [2],
+        standard: 'rla:2.8B', cites: [2],
         stem: 'Which trait best describes Leo when he approaches the lost puppy?',
         choices: [
           'Gentle and patient.',
@@ -381,7 +381,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'Holding out his hand slowly to let the puppy sniff him shows Leo is gentle and patient.',
       }), 4),
       sample(MINI_TURTLE, mcq({
-        standard: 'rla:2.7B', cites: [1],
+        standard: 'rla:2.8B', cites: [1],
         stem: 'How does Harry the Hare show that he is boastful in paragraph 1?',
         choices: [
           'He brags loudly to all the forest animals that he is the fastest creature alive.',
@@ -395,7 +395,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.7C',
+    code: 'rla:2.8C',
     goal: 'You will learn to describe plot elements: main events, conflict, and resolution.',
     words: [
       { term: 'conflict', meaning: 'The main problem characters face in a story.' },
@@ -407,7 +407,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_PUPPY, mcq({
-        standard: 'rla:2.7C', cites: [2],
+        standard: 'rla:2.8C', cites: [2],
         stem: 'How is the problem in the story resolved?',
         choices: [
           'Leo calls the telephone number on the collar, and Mrs. Garcia comes to bring Buddy home.',
@@ -419,7 +419,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'Calling the collar phone number connects Leo to Mrs. Garcia, resolving the lost-pet conflict.',
       }), 4),
       sample(MINI_TURTLE, mcq({
-        standard: 'rla:2.7C', cites: [2],
+        standard: 'rla:2.8C', cites: [2],
         stem: 'How does Toby solve his problem during the race with Harry?',
         choices: [
           'Toby continues walking steadily step by step without quitting.',
@@ -433,7 +433,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.7D',
+    code: 'rla:2.8D',
     goal: 'You will learn to describe the setting of a story and explain why it is important.',
     words: [
       { term: 'setting', meaning: 'Where and when a story takes place.' },
@@ -444,7 +444,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_PUPPY, mcq({
-        standard: 'rla:2.7D', cites: [1],
+        standard: 'rla:2.8D', cites: [1],
         stem: 'Where does the opening scene of the story take place?',
         choices: [
           'In Leo\'s backyard near the wooden porch on a Saturday morning.',
@@ -456,7 +456,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'Paragraph 1 clearly states that Leo was in his backyard and looked under the wooden porch.',
       }), 4),
       sample(MINI_PICNIC, mcq({
-        standard: 'rla:2.7D', cites: [1],
+        standard: 'rla:2.8D', cites: [1],
         stem: 'How does the hot sunny setting affect Mia and Sam\'s picnic?',
         choices: [
           'The bright midday heat warms their drinks and melts their chocolate cookies.',
@@ -470,7 +470,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8A',
+    code: 'rla:2.9A',
     goal: 'You will learn the distinguishing characteristics of folktales, fables, and fairy tales.',
     words: [
       { term: 'fable', meaning: 'A short traditional tale with talking animal characters that teaches a moral lesson.' },
@@ -481,7 +481,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_TURTLE, mcq({
-        standard: 'rla:2.8A', cites: [1, 2],
+        standard: 'rla:2.9A', cites: [1, 2],
         stem: 'What makes "The Tortoise and the Hare" a classic fable?',
         choices: [
           'It features talking animals and teaches the moral that slow and steady wins the race.',
@@ -493,7 +493,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'Talking animals with human personalities and a clear moral lesson define the fable genre.',
       }), 4),
       sample(MINI_PUPPY, mcq({
-        standard: 'rla:2.8A', cites: [1, 2],
+        standard: 'rla:2.9A', cites: [1, 2],
         stem: 'How can the reader tell that "Finding Buddy" is realistic fiction rather than a fable?',
         choices: [
           'The characters are realistic humans and the puppy behaves like a real dog without talking.',
@@ -507,7 +507,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8B',
+    code: 'rla:2.9B',
     goal: 'You will learn to explain visual patterns and structures in poems (rhyme, lines, stanzas).',
     words: [
       { term: 'stanza', meaning: 'A group of lines in a poem, similar to a paragraph in a story.' },
@@ -519,7 +519,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_STAR_POEM, mcq({
-        standard: 'rla:2.8B', cites: [1, 2],
+        standard: 'rla:2.9B', cites: [1, 2],
         stem: 'Which two rhyming words appear at the ends of lines 1 and 2?',
         choices: [
           'star and are',
@@ -531,7 +531,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'Star and are end with the exact same vowel-consonant rhyming sound.',
       }), 4),
       sample(MINI_STAR_POEM, mcq({
-        standard: 'rla:2.8B', cites: [1, 4],
+        standard: 'rla:2.9B', cites: [1, 4],
         stem: 'How is "The Star" visually structured on the page?',
         choices: [
           'It is divided into four-line stanzas with short lines and rhyming endings.',
@@ -545,7 +545,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8C',
+    code: 'rla:2.9C',
     goal: 'You will learn to discuss elements of drama such as characters, dialogue, and setting.',
     words: [
       { term: 'dialogue', meaning: 'The words characters speak aloud to each other in a play.' },
@@ -557,7 +557,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_PICNIC, mcq({
-        standard: 'rla:2.8C', cites: [1],
+        standard: 'rla:2.9C', cites: [1],
         stem: 'In the play, what is the purpose of the bracketed words "[Wiping her forehead and holding a blanket]"?',
         choices: [
           'They are stage directions guiding the actor\'s physical actions on stage.',
@@ -569,7 +569,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'Stage directions tell actors how to move, react, and portray physical feelings on stage.',
       }), 4),
       sample(MINI_PICNIC, mcq({
-        standard: 'rla:2.8C', cites: [2],
+        standard: 'rla:2.9C', cites: [2],
         stem: 'How does dialogue help the audience understand the characters\' problem?',
         choices: [
           'Sam explains out loud that the hot sun is melting their cookies and warming their drinks.',
@@ -583,7 +583,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8D.i',
+    code: 'rla:2.9D.i',
     goal: 'You will learn to identify the central idea and supporting evidence in informational text.',
     words: [
       { term: 'central idea', meaning: 'The most important point the author wants you to understand about the topic.' },
@@ -594,7 +594,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_MONARCH, mcq({
-        standard: 'rla:2.8D.i', cites: [1, 2],
+        standard: 'rla:2.9D.i', cites: [1, 2],
         stem: 'What is the central idea of "Monarch Butterflies in Texas"?',
         choices: [
           'Texas provides essential food and rest for monarch butterflies during migration.',
@@ -606,7 +606,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'The entire passage explains how Texas wildflowers and milkweed support monarchs during their travels.',
       }), 4),
       sample(MINI_SUNFLOWERS, mcq({
-        standard: 'rla:2.8D.i', cites: [1, 2],
+        standard: 'rla:2.9D.i', cites: [1, 2],
         stem: 'What is the central idea of "Sunflowers in the Summer"?',
         choices: [
           'Sunflowers grow tall, follow the sun, and produce nutritious seeds for wildlife.',
@@ -620,7 +620,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8D.ii',
+    code: 'rla:2.9D.ii',
     goal: 'You will learn to use features and graphics like headings and bold words to locate information.',
     words: [
       { term: 'heading', meaning: 'A short title above a section of text previewing what you will read.' },
@@ -631,7 +631,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_SUNFLOWERS, mcq({
-        standard: 'rla:2.8D.ii', cites: [1],
+        standard: 'rla:2.9D.ii', cites: [1],
         stem: 'What does the heading "Tracking the Sunlight" tell the reader?',
         choices: [
           'The section will explain how sunflower buds turn to follow the sun across the sky.',
@@ -643,7 +643,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'The heading previews the scientific fact that sunflowers track the sun throughout the day.',
       }), 4),
       sample(MINI_SUNFLOWERS, mcq({
-        standard: 'rla:2.8D.ii', cites: [2],
+        standard: 'rla:2.9D.ii', cites: [2],
         stem: 'Which section should a reader check to learn about animals eating sunflower seeds?',
         choices: [
           'The section under the heading "A Treat for Birds."',
@@ -657,7 +657,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8D.iii',
+    code: 'rla:2.9D.iii',
     goal: 'You will learn to recognize organizational patterns such as chronological order and cause and effect.',
     words: [
       { term: 'chronological order', meaning: 'Arranging events in the order in which they happen in time.' },
@@ -669,7 +669,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
     ],
     samples: [
       sample(MINI_MONARCH, mcq({
-        standard: 'rla:2.8D.iii', cites: [1, 2],
+        standard: 'rla:2.9D.iii', cites: [1, 2],
         stem: 'How is the information in "Monarch Butterflies in Texas" organized?',
         choices: [
           'In time order, following the butterflies from autumn travel to spring return.',
@@ -681,7 +681,7 @@ const G2_RLA_LESSONS_FIRST: Lesson[] = [
         explain: 'The text uses chronological order, following the migration south in autumn and return north in spring.',
       }), 4),
       sample(MINI_SUNFLOWERS, mcq({
-        standard: 'rla:2.8D.iii', cites: [1],
+        standard: 'rla:2.9D.iii', cites: [1],
         stem: 'According to paragraph 1, what causes sunflower heads to turn west in the afternoon?',
         choices: [
           'The flower stems slowly turn to follow the sun as it moves westward.',

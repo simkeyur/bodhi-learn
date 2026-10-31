@@ -99,5 +99,29 @@ export const G1_SET_FICTION_CAT: ReadingSet = makeSet({
       answer: 0,
       explain: 'The story uses third-person words like "he" and "Sam," meaning an outside narrator is telling it.',
     }),
+    mcq({
+      standard: 'rla:1.7C', cites: [2],
+      stem: 'Which sentence shows that Sam likes the ball?',
+      choices: [
+        '"Sam squeezed under the bench and patted his favorite ball happily."',
+        ['"The ball rolled under a wooden bench and stopped."', 'This tells where the ball went, not how Sam feels.'],
+        ['"He found a shiny red rubber ball resting on the green grass."', 'This tells how Sam found the ball.'],
+        ['"Sam the kitten loved playing in the sunny backyard."', 'This is about the backyard, not the ball.'],
+      ],
+      answer: 0,
+      explain: 'The words "favorite" and "happily" show that Sam likes the ball.',
+    }),
+    mcq({
+      standard: 'rla:1.7D',
+      stem: 'Which tells what happens in the story, in the right order?',
+      choices: [
+        'Sam finds a ball. The ball rolls away. Sam gets the ball.',
+        ['Sam gets the ball. Sam finds a ball. The ball rolls away.', 'These events are out of order.'],
+        ['The ball rolls away. Sam finds a ball. Sam goes to sleep.', 'Sam does not go to sleep in the story.'],
+        ['Sam finds a bench. Sam sits on the grass. Sam runs home.', 'This is not what happens.'],
+      ],
+      answer: 0,
+      explain: 'First Sam finds the ball. Next it rolls away. Last Sam gets it under the bench.',
+    }),
   ],
 });

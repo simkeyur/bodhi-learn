@@ -30,7 +30,7 @@ export const G2_SET_POEM_WIND: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.8B', cites: [1, 4, 5, 8],
+      standard: 'rla:2.9B', cites: [1, 4, 5, 8],
       stem: 'How is this poem visually organized on the page?',
       choices: [
         ['In one giant paragraph with numbered sentences.', 'Poems are arranged in lines and stanzas, not paragraphs.'],
@@ -42,7 +42,7 @@ export const G2_SET_POEM_WIND: ReadingSet = makeSet({
       explain: 'The poem is formatted into two distinct four-line stanzas with line breaks.',
     }),
     mcq({
-      standard: 'rla:2.9D', cites: [3, 7],
+      standard: 'rla:2.10D', cites: [3, 7],
       stem: 'What descriptive image in line 7 shows how strong the wind is blowing?',
       choices: [
         'The trees bow down their heads as the gust sweeps past.',
@@ -54,7 +54,7 @@ export const G2_SET_POEM_WIND: ReadingSet = makeSet({
       explain: 'Picturing trees "bowing down their heads" vividly portrays large tree branches bending in strong wind.',
     }),
     mcq({
-      standard: 'rla:2.9F', cites: [1, 5],
+      standard: 'rla:2.10F', cites: [1, 5],
       stem: 'Why does the poet repeat the question "Who has seen the wind?" at the start of both stanzas?',
       choices: [
         ['Because the poet forgot the answer to the riddle.', 'The repetition is intentional poetry craft.'],
@@ -90,7 +90,7 @@ export const G2_SET_POEM_WIND: ReadingSet = makeSet({
       explain: 'Trembling means fluttering or quivering gently as air passes over the leaves.',
     }),
     mcq({
-      standard: 'rla:2.9A', cites: [1, 2, 3, 4, 5, 6, 7, 8],
+      standard: 'rla:2.10A', cites: [1, 2, 3, 4, 5, 6, 7, 8],
       stem: 'What is the poet\'s main purpose in writing this poem?',
       choices: [
         ['To provide safety tips for severe hurricanes.', 'The poem is a gentle nature poem, not storm safety advice.'],

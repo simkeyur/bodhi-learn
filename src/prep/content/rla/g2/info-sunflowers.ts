@@ -35,7 +35,7 @@ export const G2_SET_INFO_SUNFLOWERS: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.8D.i', cites: [1, 2, 3],
+      standard: 'rla:2.9D.i', cites: [1, 2, 3],
       stem: 'What is the central idea of "Sunflowers: Flowers of the Sun"?',
       choices: [
         ['Sunflowers only grow inside dark caves during winter.', 'Sunflowers need warm summer sunlight.'],
@@ -47,7 +47,7 @@ export const G2_SET_INFO_SUNFLOWERS: ReadingSet = makeSet({
       explain: 'The passage highlights sunflower growth height, following the sun, and producing seeds.',
     }),
     mcq({
-      standard: 'rla:2.8D.ii', cites: [1],
+      standard: 'rla:2.9D.ii', cites: [1],
       stem: 'What does the heading "Tall Garden Giants" help the reader understand?',
       choices: [
         'The section will describe how tall sunflower stalks can grow.',
@@ -59,7 +59,7 @@ export const G2_SET_INFO_SUNFLOWERS: ReadingSet = makeSet({
       explain: 'The heading prepares readers for facts about sunflowers reaching ten feet high.',
     }),
     mcq({
-      standard: 'rla:2.8D.iii', cites: [2],
+      standard: 'rla:2.9D.iii', cites: [2],
       stem: 'According to paragraph 2, what causes young sunflower buds to turn toward the west in the afternoon?',
       choices: [
         ['Strong prairie thunderstorms blow the stems down.', 'Wind does not cause the daily turning.'],
@@ -83,7 +83,7 @@ export const G2_SET_INFO_SUNFLOWERS: ReadingSet = makeSet({
       explain: 'Paragraph 3 notes that wildlife visits sunflowers to feed on the nutritious seeds.',
     }),
     mcq({
-      standard: 'rla:2.8D.i', cites: [3],
+      standard: 'rla:2.9D.i', cites: [3],
       stem: 'Which detail from paragraph 3 supports the idea that sunflowers are valuable to nature?',
       choices: [
         'The center disc fills with hundreds of nutritious seeds that feed wildlife.',
@@ -95,7 +95,7 @@ export const G2_SET_INFO_SUNFLOWERS: ReadingSet = makeSet({
       explain: 'Providing nutritious seeds for birds and squirrels supports the idea of the plant\'s ecological value.',
     }),
     mcq({
-      standard: 'rla:2.9C', cites: [2],
+      standard: 'rla:2.10C', cites: [2],
       stem: 'Why does the author use the bold term **heliotropism** in paragraph 2?',
       choices: [
         ['To tell readers the name of a famous scientist.', 'Heliotropism is a plant behavior, not a person\'s name.'],
@@ -105,6 +105,18 @@ export const G2_SET_INFO_SUNFLOWERS: ReadingSet = makeSet({
       ],
       answer: 2,
       explain: 'Bold text draws attention to an important science vocabulary word defined in the text.',
+    }),
+    mcq({
+      standard: 'rla:2.7C', cites: [1],
+      stem: 'Which sentence shows that sunflowers grow fast?',
+      choices: [
+        ['"Sunflowers are bright, cheerful plants."', 'This tells how they look.'],
+        ['"Hungry songbirds, squirrels, and people harvest these nutritious seeds."', 'This is about the seeds.'],
+        ['"The stem slowly turns westward."', 'This is about following the sun.'],
+        '"A single sunflower stalk can grow ten feet tall in just three months."',
+      ],
+      answer: 3,
+      explain: 'Ten feet in three months is very fast for a plant.',
     }),
   ],
 });

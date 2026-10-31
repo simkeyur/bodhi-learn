@@ -19,7 +19,7 @@ export const INFO_BIOLUMINESCENCE = makeSet({
       { kind: "p", text: "Other species deploy bioluminescence as an active defense mechanism. When threatened by an octopus or deep-diving shark, the deep-sea vampire squid (Vampyroteuthis infernalis) does not expel black ink, which is useless in total darkness. Instead, it squirts a glowing, bioluminescent mucus cloud packed with thousands of glowing blue spheres. The radiant cloud temporarily blinds and disorients the attacker for several minutes, allowing the squid to glide silently into the surrounding void." },
       { kind: "p", text: "Oceanographic expeditions utilizing deep-sea submersibles like Alvin have demonstrated that bioluminescence evolved independently at least forty times across diverse taxonomic branches of marine life. This remarkable evolutionary convergence proves that light production is an indispensable survival trait in the pitch-black abyss." },
       { kind: "p", text: "Understanding the mechanics of bioluminescence has revolutionized modern medical and environmental research. Geneticists frequently splice the firefly luciferase gene into human cancer cell lines, tracking how tumors respond to experimental therapies in real time under fluorescence microscopy. Meanwhile, marine ecologists monitor bioluminescent dinoflagellate blooms to assess ocean acidification and pollution levels, proving that the mysterious living light of the abyss holds the key to solving critical terrestrial scientific challenges." },
-      { kind: "p", text: "[Diagram Reference: Figure 1 illustrates the comparative penetration of light wavelengths in ocean water, demonstrating that red light attenuates within 10 meters, while blue-green light (475 nm) penetrates deepest into the water column. Callout Box A diagrams the luciferin-luciferase oxidation pathway.]" },
+      { kind: "sidebar", title: "Why Blue-Green?", text: "Seawater soaks up red light within about 10 meters of the surface, while blue-green light travels deepest. That is why most deep-sea animals glow blue-green." },
     ],
   }],
   items: [
@@ -48,16 +48,16 @@ export const INFO_BIOLUMINESCENCE = makeSet({
       explain: "Paragraph 2 details the cause-and-effect chemical reaction between luciferin and luciferase, while paragraph 3 classifies the mechanisms into intrinsic synthesis and symbiotic culture.",
     }),
     mcq({
-      standard: "rla:8.9C", cites: [7],
-      stem: "What is the primary purpose of the diagram reference and Callout Box A described in paragraph 7?",
+      standard: "rla:8.9C",
+      stem: "What is the main purpose of the sidebar \"Why Blue-Green?\"",
       choices: [
-        "To visually explain why blue-green wavelengths penetrate deepest in seawater and clarify the chemical oxidation pathway.",
-        ["To illustrate the physical dimensions of research submersibles used in the bathypelagic zone.", "The diagram focuses on light penetration and chemistry, not submersibles."],
-        ["To prove that deep-sea anglerfish are the most dangerous predators in the Atlantic Ocean.", "The graphic details wavelengths and chemical reactions, not predatory danger."],
-        ["To show the geographic distribution of deep-sea coral reefs around the world.", "The figure illustrates optical penetration in water, not coral reefs."],
+        "To explain why the glow of deep-sea animals is usually blue-green.",
+        ["To describe the research submarines used in the deep sea.", "The sidebar is about light in seawater, not submarines."],
+        ["To show that anglerfish are dangerous hunters.", "The sidebar does not mention anglerfish."],
+        ["To show where deep-sea coral reefs are found.", "The sidebar does not mention coral reefs."],
       ],
       answer: 0,
-      explain: "Figure 1 and Callout Box A visually demonstrate light wavelength attenuation in water and the biochemical oxidation process of luciferin.",
+      explain: "The sidebar explains that blue-green light travels deepest in seawater, which is why most deep-sea animals glow that color.",
     }),
     mcq({
       standard: "rla:8.5F", cites: [4],

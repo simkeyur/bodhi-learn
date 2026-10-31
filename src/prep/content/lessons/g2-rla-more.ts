@@ -1,4 +1,4 @@
-// Grade 2 reading walkthroughs (part 2: 2.8E.i through 2.11D.xi).
+// Grade 2 reading walkthroughs (part 2: 2.9E.i through 2.11D.xi).
 
 import { mcq, sample } from '../rla/author.ts';
 import type { Lesson } from '../types.ts';
@@ -8,7 +8,7 @@ import {
 
 export const G2_RLA_LESSONS_MORE: Lesson[] = [
   {
-    code: 'rla:2.8E.i',
+    code: 'rla:2.9E.i',
     goal: 'You will learn to identify the author\'s claim and what the author wants you to think or do.',
     words: [
       { term: 'claim', meaning: 'The main idea or opinion that the author wants readers to agree with.' },
@@ -19,7 +19,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_SWINGS, mcq({
-        standard: 'rla:2.8E.i', cites: [1],
+        standard: 'rla:2.9E.i', cites: [1],
         stem: 'What is the author\'s main claim in "More Swings for Oak Park"?',
         choices: [
           'Oak Park needs more swing sets installed for neighborhood children.',
@@ -31,7 +31,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'Paragraph 1 clearly states the central claim: "our neighborhood park needs more swing sets."',
       }), 4),
       sample(MINI_SWINGS, mcq({
-        standard: 'rla:2.8E.i', cites: [2],
+        standard: 'rla:2.9E.i', cites: [2],
         stem: 'What action does the writer want the Park Director to take?',
         choices: [
           'Add four new belt swings to Oak Park.',
@@ -45,7 +45,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.8E.ii',
+    code: 'rla:2.9E.ii',
     goal: 'You will learn to distinguish facts from opinions in persuasive texts.',
     words: [
       { term: 'fact', meaning: 'A statement that can be proven true with evidence or counting.' },
@@ -57,7 +57,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_SWINGS, mcq({
-        standard: 'rla:2.8E.ii', cites: [1],
+        standard: 'rla:2.9E.ii', cites: [1],
         stem: 'Which statement from paragraph 1 is a **fact**?',
         choices: [
           'There are only two swings on the playground.',
@@ -69,7 +69,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'Counting the two physical swings on the playground is a verifiable fact.',
       }), 4),
       sample(MINI_SWINGS, mcq({
-        standard: 'rla:2.8E.ii', cites: [2],
+        standard: 'rla:2.9E.ii', cites: [2],
         stem: 'Which statement from paragraph 2 expresses an **opinion**?',
         choices: [
           'Swinging provides wonderful exercise.',
@@ -83,7 +83,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.9A',
+    code: 'rla:2.10A',
     goal: 'You will learn to explain the author\'s purpose: to entertain, inform, or persuade.',
     words: [
       { term: 'author\'s purpose', meaning: 'The main reason an author writes: to entertain, inform, or persuade.' },
@@ -94,7 +94,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_PUPPY, mcq({
-        standard: 'rla:2.9A', cites: [1, 2],
+        standard: 'rla:2.10A', cites: [1, 2],
         stem: 'What was the author\'s main purpose in writing "Finding Buddy"?',
         choices: [
           'To entertain readers with a story about a boy helping a lost puppy get home.',
@@ -106,7 +106,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'The author wrote an entertaining narrative about kindness and helping a lost pet.',
       }), 4),
       sample(MINI_MONARCH, mcq({
-        standard: 'rla:2.9A', cites: [1, 2],
+        standard: 'rla:2.10A', cites: [1, 2],
         stem: 'What was the author\'s main purpose in writing "Monarch Butterflies in Texas"?',
         choices: [
           'To inform readers about how monarchs migrate and how people can help them.',
@@ -120,7 +120,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.9B',
+    code: 'rla:2.10B',
     goal: 'You will learn to discuss how text structure contributes to the author\'s purpose.',
     words: [
       { term: 'text structure', meaning: 'How a piece of writing is organized, like a script, story, or article.' },
@@ -131,7 +131,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_PICNIC, mcq({
-        standard: 'rla:2.9B', cites: [1, 2, 3],
+        standard: 'rla:2.10B', cites: [1, 2, 3],
         stem: 'How does formatting the text as a play with dialogue support the author\'s purpose?',
         choices: [
           'It allows actors to perform the scene and speak the characters\' feelings out loud.',
@@ -143,7 +143,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'Formatting the text as dramatic dialogue allows characters to express feelings through spoken lines.',
       }), 4),
       sample(MINI_MONARCH, mcq({
-        standard: 'rla:2.9B', cites: [1, 2],
+        standard: 'rla:2.10B', cites: [1, 2],
         stem: 'How does the chronological order in "Monarch Butterflies in Texas" support the author\'s purpose?',
         choices: [
           'It traces the butterflies\' seasonal journey from autumn travel south to spring return.',
@@ -157,7 +157,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.9C',
+    code: 'rla:2.10C',
     goal: 'You will learn to explain how authors use print and graphic features to help readers.',
     words: [
       { term: 'print feature', meaning: 'Special text elements like headings, bold words, and bullet points.' },
@@ -168,7 +168,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_SUNFLOWERS, mcq({
-        standard: 'rla:2.9C', cites: [1],
+        standard: 'rla:2.10C', cites: [1],
         stem: 'Why did the author include the heading "Tracking the Sunlight"?',
         choices: [
           'To preview the section that explains how flowers turn toward the sun.',
@@ -180,7 +180,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'The heading prepares the reader for facts about sunflowers following the sun across the sky.',
       }), 4),
       sample(MINI_SUNFLOWERS, mcq({
-        standard: 'rla:2.9C', cites: [2],
+        standard: 'rla:2.10C', cites: [2],
         stem: 'How does the heading "A Treat for Birds" help the reader?',
         choices: [
           'It signals that the paragraph will explain how sunflower seeds feed wildlife.',
@@ -194,7 +194,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.9D',
+    code: 'rla:2.10D',
     goal: 'You will learn to discuss descriptive, literal, and figurative language in texts.',
     words: [
       { term: 'simile', meaning: 'A comparison between two unlike things using the words like or as.' },
@@ -206,7 +206,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_STAR_POEM, mcq({
-        standard: 'rla:2.9D', cites: [4],
+        standard: 'rla:2.10D', cites: [4],
         stem: 'In line 4, what does the poet compare the star to when writing "Like a diamond in the sky"?',
         choices: [
           'A sparkling, glittering gemstone.',
@@ -218,7 +218,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'The simile compares the glittering star in the dark sky to a sparkling diamond.',
       }), 4),
       sample(MINI_STAR_POEM, mcq({
-        standard: 'rla:2.9D', cites: [5],
+        standard: 'rla:2.10D', cites: [5],
         stem: 'What does the descriptive phrase "blazing sun" help the reader picture in line 5?',
         choices: [
           'A bright, burning hot sun in the daytime sky.',
@@ -232,7 +232,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.9E',
+    code: 'rla:2.10E',
     goal: 'You will learn to identify first-person and third-person points of view in texts.',
     words: [
       { term: 'first-person', meaning: 'Told by a character inside the story using I, me, and my.' },
@@ -244,7 +244,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_TURTLE, mcq({
-        standard: 'rla:2.9E', cites: [1, 2],
+        standard: 'rla:2.10E', cites: [1, 2],
         stem: 'How can the reader tell that "The Tortoise and the Hare" is told in the third-person point of view?',
         choices: [
           'An outside storyteller refers to the characters by name and uses pronouns like "he."',
@@ -256,7 +256,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'An outside narrator tells about Harry and Toby using third-person pronouns ("he," "him").',
       }), 4),
       sample(MINI_PUPPY, mcq({
-        standard: 'rla:2.9E', cites: [1, 2],
+        standard: 'rla:2.10E', cites: [1, 2],
         stem: 'From which point of view is "Finding Buddy" told?',
         choices: [
           'Third-person point of view, told by an outside narrator who describes Leo and Buddy.',
@@ -270,7 +270,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
   },
   {
-    code: 'rla:2.9F',
+    code: 'rla:2.10F',
     goal: 'You will learn to identify and explain the use of repetition in poems and texts.',
     words: [
       { term: 'repetition', meaning: 'Repeating words, lines, or sounds for emphasis, rhythm, or musical effect.' },
@@ -281,7 +281,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ],
     samples: [
       sample(MINI_STAR_POEM, mcq({
-        standard: 'rla:2.9F', cites: [1, 8],
+        standard: 'rla:2.10F', cites: [1, 8],
         stem: 'Why does the poet repeat the words "twinkle, twinkle" in lines 1 and 8?',
         choices: [
           'To create a pleasant musical rhythm that mimics flickering starlight.',
@@ -293,7 +293,7 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
         explain: 'Repeating the words creates a soothing beat that mirrors the twinkling effect of starlight.',
       }), 4),
       sample(MINI_STAR_POEM, mcq({
-        standard: 'rla:2.9F', cites: [5, 6],
+        standard: 'rla:2.10F', cites: [5, 6],
         stem: 'Why does the poet start lines 5 and 6 with the word "When"?',
         choices: [
           'To build a rhythmic pattern that describes what happens after sunset.',
@@ -597,6 +597,89 @@ export const G2_RLA_LESSONS_MORE: Lesson[] = [
     ideas: [
       { title: 'Remember tricky spelling tricks', text: 'Big Elephants Can Always Understand Small Elephants spells BECAUSE.' },
       { title: 'Remember silent letters', text: 'Watch for the silent w in answer and i before e in friend.' },
+    ],
+  },
+  {
+    code: 'rla:2.7C',
+    goal: 'You will learn to use text evidence to prove your answer.',
+    words: [
+      { term: 'text evidence', meaning: 'Words from the text that show your answer is right.' },
+    ],
+    ideas: [
+      { title: 'Answer first', text: 'Think of your answer to the question.' },
+      { title: 'Find the words', text: 'Look back and find the sentence that shows your answer is right.' },
+    ],
+    samples: [
+      sample(MINI_PUPPY, mcq({
+        standard: 'rla:2.7C',
+        stem: 'Which sentence shows that the puppy trusts Leo?',
+        choices: ['"The friendly puppy wore a blue collar with a shiny tag."', '"Leo gently offered his hand, and the puppy wagged its tail happily."', '"On Saturday morning, Leo heard a soft whimpering sound."', '"Soon, their neighbor Mrs. Garcia arrived."'],
+        answer: 1,
+        explain: 'A wagging tail shows that the puppy feels safe with Leo.',
+      }), 2),
+      sample(MINI_MONARCH, mcq({
+        standard: 'rla:2.7C',
+        stem: 'Which sentence shows why monarchs need milkweed?',
+        choices: ['"Texas is a vital rest stop."', '"Every autumn, millions of orange monarch butterflies fly across Texas."', '"In spring, monarchs return north."', '"Milkweed is the only food monarch caterpillars can eat."'],
+        answer: 3,
+        explain: 'If milkweed is the only food caterpillars can eat, monarchs need it.',
+      }), 2),
+    ],
+  },
+  {
+    code: 'rla:2.7D',
+    goal: 'You will learn to retell a text in order and in your own words.',
+    words: [
+      { term: 'retell', meaning: 'To tell the main events in order.' },
+      { term: 'paraphrase', meaning: 'To say something in your own words without changing the meaning.' },
+    ],
+    ideas: [
+      { title: 'Keep the order', text: 'Tell the events in the order they happened.' },
+      { title: 'Use your own words', text: 'Say it your way, but keep the meaning the same.' },
+    ],
+    samples: [
+      sample(MINI_TURTLE, mcq({
+        standard: 'rla:2.7D',
+        stem: 'Which is the best retelling?',
+        choices: ['Harry naps under a tree.', 'Harry brags and races Toby. Harry takes a nap, so Toby keeps walking and wins.', 'Toby brags and wins a race.', 'Harry and Toby go for a walk in the woods.'],
+        answer: 1,
+        explain: 'This keeps the main events in order and does not change what happened.',
+      }), 2),
+      sample(MINI_SWINGS, mcq({
+        standard: 'rla:2.7D',
+        stem: 'Which sentence best says the letter in your own words?',
+        choices: ['The park has too many swings.', 'Kids should stop swinging.', 'The park needs more swings because kids wait too long.', 'Oak Park is closed.'],
+        answer: 2,
+        explain: 'The letter says only two swings means long lines, so the park needs more.',
+      }), 2),
+    ],
+  },
+  {
+    code: 'rla:2.8A',
+    goal: 'You will learn to find the theme of a story and use evidence to support it.',
+    words: [
+      { term: 'theme', meaning: 'The big message or lesson of a story.' },
+      { term: 'topic', meaning: 'What a story is about, in a word or two.' },
+    ],
+    ideas: [
+      { title: 'What is the lesson?', text: 'Think about what the characters learn.' },
+      { title: 'Look for proof', text: 'Find what happens in the story that shows the lesson.' },
+    ],
+    samples: [
+      sample(MINI_PUPPY, mcq({
+        standard: 'rla:2.8A',
+        stem: 'What is the theme of the story?',
+        choices: ['Puppies like porches.', 'Helping others is the right thing to do.', 'Phones are useful.', 'Saturday is a fun day.'],
+        answer: 1,
+        explain: 'Leo helps a lost puppy get home, and everyone is happy.',
+      }), 2),
+      sample(MINI_TURTLE, mcq({
+        standard: 'rla:2.8A',
+        stem: 'What is the topic of the story?',
+        choices: ['a race between two animals', 'a trip to the beach', 'a family of birds', 'how to grow pine trees'],
+        answer: 0,
+        explain: 'The story is about Harry and Toby racing. The topic is what a story is about.',
+      }), 2),
     ],
   },
 ];

@@ -176,7 +176,7 @@ export const READING: Record<number, ReadingContent> = {
     makeItem: makeG1RlaItem,
     lessons: G1_RLA_LESSONS,
     essays: G1_RLA_ESSAYS,
-    blueprint: { readiness: [8, 5], supporting: [24, 12] },
+    blueprint: { readiness: [9, 5], supporting: [26, 12] },
   },
   2: {
     grade: 2,
@@ -188,7 +188,7 @@ export const READING: Record<number, ReadingContent> = {
     makeItem: makeG2RlaItem,
     lessons: G2_RLA_LESSONS,
     essays: G2_RLA_ESSAYS,
-    blueprint: { readiness: [8, 6], supporting: [26, 14] },
+    blueprint: { readiness: [9, 6], supporting: [28, 14] },
   },
   3: {
     grade: 3,

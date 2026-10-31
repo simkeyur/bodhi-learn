@@ -32,7 +32,7 @@ export const G2_SET_FICTION_PUPPY: ReadingSet = makeSet({
   ],
   items: [
     mcq({
-      standard: 'rla:2.7C', cites: [1],
+      standard: 'rla:2.8C', cites: [1],
       stem: 'What problem does Leo discover at the beginning of the story?',
       choices: [
         ['His bicycle has a flat tire in the driveway.', 'The story is about finding a puppy, not a bicycle.'],
@@ -44,7 +44,7 @@ export const G2_SET_FICTION_PUPPY: ReadingSet = makeSet({
       explain: 'Paragraph 1 explains that Leo heard whimpering and found a lost, shivering puppy under his porch.',
     }),
     mcq({
-      standard: 'rla:2.7B', cites: [2],
+      standard: 'rla:2.8B', cites: [2],
       stem: 'How does Leo show that he is patient and gentle with animals?',
       choices: [
         'He holds out his hand to let the puppy sniff his fingers first.',
@@ -80,7 +80,7 @@ export const G2_SET_FICTION_PUPPY: ReadingSet = makeSet({
       explain: 'When the puppy sniffed Leo\'s outstretched hand, wagging its tail showed it felt safe and friendly.',
     }),
     mcq({
-      standard: 'rla:2.7D', cites: [1],
+      standard: 'rla:2.8D', cites: [1],
       stem: 'Where does the setting of this story take place?',
       choices: [
         'In Leo\'s backyard porch and neighborhood street.',
@@ -92,7 +92,7 @@ export const G2_SET_FICTION_PUPPY: ReadingSet = makeSet({
       explain: 'The story takes place on a Saturday morning in Leo\'s backyard and street.',
     }),
     mcq({
-      standard: 'rla:2.9A', cites: [1, 2, 3],
+      standard: 'rla:2.10A', cites: [1, 2, 3],
       stem: 'What is the author\'s main purpose for writing this story?',
       choices: [
         ['To explain how veterinarians treat sick puppies.', 'This is a story about finding a lost pet, not vet medicine.'],
@@ -114,6 +114,30 @@ export const G2_SET_FICTION_PUPPY: ReadingSet = makeSet({
       ],
       answer: 0,
       explain: 'Finding the owner\'s phone number allows the reader to predict that Leo will call the number to return the lost puppy.',
+    }),
+    mcq({
+      standard: 'rla:2.7C', cites: [2],
+      stem: 'Which sentence shows that Leo is gentle with the puppy?',
+      choices: [
+        '"Leo gently held out his hand so the puppy could sniff his fingers."',
+        ['"Leo called the number with his mom."', 'This shows he is helpful, not gentle.'],
+        ['"Buddy barked with joy as he ran home."', 'This is about Buddy.'],
+        ['"He peeked under the wooden porch."', 'This shows he is curious.'],
+      ],
+      answer: 0,
+      explain: 'Leo moves slowly and lets the puppy sniff him, so he does not scare it.',
+    }),
+    mcq({
+      standard: 'rla:2.7D',
+      stem: 'Which is the best retelling of the story?',
+      choices: [
+        ['Leo has a porch. Mrs. Garcia lives down the street.', 'This leaves out the problem and how it is solved.'],
+        'Leo finds a lost puppy under his porch. He calls the number on its tag, and its owner comes to take it home.',
+        ['A puppy named Buddy runs home and barks.', 'This tells only the end.'],
+        ['Mrs. Garcia finds a puppy and calls Leo.', 'Leo finds the puppy, not Mrs. Garcia.'],
+      ],
+      answer: 1,
+      explain: 'A good retelling keeps the main events in order: the problem, what Leo does, and how it ends.',
     }),
   ],
 });

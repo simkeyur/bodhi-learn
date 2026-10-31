@@ -1,4 +1,4 @@
-// Grade 7 poetry: Paul Laurence Dunbar ("Sympathy", 1899). Public domain.
+// Grade 7 poetry: Paul Laurence Dunbar ("Sympathy", 1899). Public domain. Text checked against Project Gutenberg's The Complete Poems of Paul Laurence Dunbar.
 import { makeSet, mcq } from '../author.ts';
 
 export const POEM_DUNBAR = makeSet({
@@ -19,21 +19,21 @@ export const POEM_DUNBAR = makeSet({
       { kind: 'line', text: 'When the wind stirs soft through the springing grass,' },
       { kind: 'line', text: 'And the river flows like a stream of glass;' },
       { kind: 'line', text: 'When the first bird sings and the first bud opes,' },
-      { kind: 'line', text: 'And the faint perfume from its chalice steals -' },
-      { kind: 'line', text: 'I know what the caged bird feels!' },
+      { kind: 'line', text: 'And the faint perfume from its chalice steals—' },
+      { kind: 'line', text: 'I know what the caged bird feels!', stanzaEnd: true },
       { kind: 'line', text: 'I know why the caged bird beats his wing' },
       { kind: 'line', text: 'Till its blood is red on the cruel bars;' },
-      { kind: 'line', text: 'For he must be fly and be free to swing' },
-      { kind: 'line', text: 'On the bough when the sun begins to spring' },
-      { kind: 'line', text: 'And the budding twig swings out to the stars;' },
-      { kind: 'line', text: 'And the old old scars and the pain throbs new,' },
-      { kind: 'line', text: 'And he fain would be upon the bough;' },
+      { kind: 'line', text: 'For he must fly back to his perch and cling' },
+      { kind: 'line', text: 'When he fain would be on the bough a-swing;' },
+      { kind: 'line', text: 'And a pain still throbs in the old, old scars' },
+      { kind: 'line', text: 'And they pulse again with a keener sting—' },
+      { kind: 'line', text: 'I know why he beats his wing!', stanzaEnd: true },
       { kind: 'line', text: 'I know why the caged bird sings, ah me,' },
-      { kind: 'line', text: 'When his wing is bruised and his bosom sore,' },
+      { kind: 'line', text: 'When his wing is bruised and his bosom sore,—' },
       { kind: 'line', text: 'When he beats his bars and he would be free;' },
       { kind: 'line', text: 'It is not a carol of joy or glee,' },
       { kind: 'line', text: 'But a prayer that he sends from his heart\'s deep core,' },
-      { kind: 'line', text: 'But a plea, that upward to Heaven he flings -' },
+      { kind: 'line', text: 'But a plea, that upward to Heaven he flings—' },
       { kind: 'line', text: 'I know why the caged bird sings!' },
     ],
   }],

@@ -33,7 +33,7 @@ export const EDIT_LETTER = makeSet({
         "By investing in this cutting-edge scientific facility today, our school district will establish an enduring educational landmark that will inspire scientific inquiry, foster community engagement, and empower students to reach for the stars for decades to come.",
       ] },
       { kind: 'sentences', sentences: [
-        "Respectfully submitted,\\\\nElena Morales\\\\nScience Club President",
+        "Respectfully submitted,\nElena Morales\nScience Club President",
       ] },
     ],
   }],

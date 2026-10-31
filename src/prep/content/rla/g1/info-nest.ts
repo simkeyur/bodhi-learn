@@ -99,5 +99,17 @@ export const G1_SET_INFO_NEST: ReadingSet = makeSet({
       answer: 0,
       explain: 'Words like Next and Finally show the chronological order of how the nest is constructed.',
     }),
+    mcq({
+      standard: 'rla:1.7C', cites: [2],
+      stem: 'Which sentence shows that the nest is soft inside?',
+      choices: [
+        ['"They carry these building supplies in their beaks."', 'This tells how robins carry things.'],
+        ['"They search the garden for small twigs."', 'Twigs are not soft.'],
+        '"Finally, they line the inside of the nest with soft feathers."',
+        ['"Next, the robins use wet mud."', 'Mud holds the nest together.'],
+      ],
+      answer: 2,
+      explain: 'The sentence says the inside of the nest has soft feathers.',
+    }),
   ],
 });

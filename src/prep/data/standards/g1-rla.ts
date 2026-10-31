@@ -1,6 +1,6 @@
 // Grade 1 Reading Language Arts (RLA) standards, adapted from 19 TAC §110.3.
-// Two strands: 1 Reading (8 readiness, 24 supporting = 32), 2 Writing (5 readiness, 12 supporting = 17).
-// Blueprint: readiness [8, 5], supporting [24, 12]. Total: 49 standards.
+// Two strands: 1 Reading (9 readiness, 26 supporting = 35), 2 Writing (5 readiness, 12 supporting = 17).
+// TEA gives no labels below grade 3: 'readiness' here marks the key skills grade 3 builds on. Total: 52 standards.
 // Audio/oral-only expectations (listening, speaking, oral phonological awareness, oral retelling) are excluded.
 
 import type { Standard, Strand } from '../../content/types.ts';
@@ -240,6 +240,27 @@ export const G1_RLA: Standard[] = [
     text: 'Listen to and experience first- and third-person texts.',
   },
 
+  {
+    code: 'rla:1.7C',
+    strand: 1,
+    kind: R,
+    title: 'Use text evidence',
+    text: 'Use text evidence to support an appropriate response.',
+  },
+  {
+    code: 'rla:1.7D',
+    strand: 1,
+    kind: S,
+    title: 'Retell a text',
+    text: 'Retell texts in ways that maintain meaning.',
+  },
+  {
+    code: 'rla:1.8A',
+    strand: 1,
+    kind: S,
+    title: 'Find the theme',
+    text: 'Discuss topics and determine theme using text evidence with adult assistance.',
+  },
   // Strand 2: Writing
   {
     code: 'rla:1.2C.i',

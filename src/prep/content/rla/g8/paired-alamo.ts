@@ -54,7 +54,7 @@ export const PAIRED_ALAMO = makeSet({
         ["It explains how Santa Anna successfully breached the postern gate.", "The scene takes place days before the final assault, focusing on courier dispatch."],
       ],
       answer: 0,
-      explain: "The flashback in paragraph 6 explains Jesse's mission, the critical importance of the dispatch, and Travis's awareness of their peril.",
+      explain: "The flashback in paragraph 2 explains Jesse's mission, the critical importance of the dispatch, and Travis's awareness of their peril.",
     }),
     mcq({
       standard: "rla:8.6C", cites: [3], passage: 0,

@@ -76,7 +76,7 @@ export const ARG_HOMEWORK = makeSet({
           ['"The academic consequences of chronic adolescent sleep deprivation are staggering."', 'This introduces the severity, but does not detail the cognitive function.'],
           '"REM sleep is the cognitive engine of memory consolidation, mathematical problem-solving, and emotional regulation."',
           ['"When middle school students are compelled to wake at 6:00 a.m..."', 'This describes the schedule, not the neurological function.'],
-          ['"...experience heightened rates of daytime anxiety and depression."', 'This lists negative symptoms, whereas the quotation in choice B defines the cognitive engine.'],
+          ['"...experience heightened rates of daytime anxiety and depression."', 'This lists negative symptoms, whereas the correct quotation defines the cognitive engine.'],
         ],
         answer: 1,
       },

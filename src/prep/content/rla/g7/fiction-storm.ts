@@ -74,7 +74,7 @@ export const FICTION_STORM = makeSet({
       b: {
         prompt: 'Part B: Which quotation best illustrates the internal transformation identified in Part A?',
         choices: [
-          ['"Marcus checked the magnetic compass resting in the palm of his hand..." (paragraph 1)', 'This describes a routine physical action at the start.'],
+          ['"Twelve-year-old Marcus checked the dampened..." (paragraph 1)', 'This describes a routine physical action at the start.'],
           '"He had not merely survived an unexpected wilderness challenge; by mastering his fear and trusting his knowledge, he had unlocked the ancient confidence of a true navigator." (paragraph 8)',
           ['"Marcus concealed his own mounting anxiety behind a confident, steady demeanor." (paragraph 3)', 'This describes his early insecurity and pretense of confidence.'],
           ['"\'Step by step,\' Marcus coached, pointing toward the undergrowth." (paragraph 6)', 'This shows him guiding Hannah, but paragraph 8 expresses his internal transformation.'],
