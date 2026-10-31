@@ -47,7 +47,7 @@ export const EDIT_RECYCLE = makeSet({
       stem: 'Which conjunctive adverb is used correctly in sentence 6 to add an additional supporting benefit?',
       choices: [
         'furthermore,',
-        ['instead,', 'Instead implies replacing the first benefit rather than adding a second one.'],
+        ['as a consequence,', 'As a consequence implies a direct result rather than adding a second related benefit.'],
         ['otherwise,', 'Otherwise indicates a penalty or negative consequence.'],
         ['however,', 'However signals a contradiction, whereas donating soil complements using it in school gardens.'],
       ],
@@ -58,10 +58,10 @@ export const EDIT_RECYCLE = makeSet({
       standard: 'rla:6.10D.vi', cites: [5],
       stem: 'What is the function of the subordinating phrase in sentence 5?',
       choices: [
-        'It explains how and where student volunteers will collect the organic scraps.',
-        ['It lists the scientific names of Texas native trees.', 'The phrase discusses cafeteria tray return stations, not trees.'],
+        'It tells how student volunteers will collect food scraps.',
+        ['It lists the scientific Latin names of trees native to Central Texas.', 'The phrase discusses cafeteria tray return stations, not trees.'],
         ['It asks the principal to cancel afternoon classes.', 'No class cancellations are requested.'],
-        ['It argues that plastic wrappers should be buried in the garden.', 'The sentence specifically says to separate food scraps from plastic.'],
+        ['It argues that plastic wrappers and utensils should be buried in raised beds.', 'The sentence specifically says to separate food scraps from plastic.'],
       ],
       answer: 0,
       explain: 'The introductory phrase "By placing green collection buckets..." establishes the method and location for separating food scraps.',
@@ -71,7 +71,7 @@ export const EDIT_RECYCLE = makeSet({
       stem: 'What is the most effective way to combine sentences 9 and 10 to improve sentence flow?',
       choices: [
         ['Modern enclosed tumbling bins prevent pests from entering, regularly rotating the bin keeps the decomposing matter well-aerated.', 'This creates a comma splice between two independent clauses.'],
-        'Modern enclosed tumbling bins prevent pests from entering, while regular rotation keeps the decomposing matter aerated and odor-free.',
+        'Modern enclosed bins block pests, while regular rotation keeps the compost aerated and odor-free.',
         ['Because modern enclosed tumbling bins prevent pests, but rotating keeps matter aerated.', 'Using because and but together creates an ungrammatical structure.'],
         ['Modern enclosed tumbling bins prevent pests from entering although rotating the bin keeps it sweet-smelling.', 'Although incorrectly suggests that aeration opposes pest prevention.'],
       ],

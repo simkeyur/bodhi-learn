@@ -105,7 +105,7 @@ export const G8_RLA_ESSAYS: EssayPrompt[] = [
     setId: 'g8-arg-screen-time',
     mode: 'argumentative',
     prompt:
-      'Read "The Case for Mindful Tech: Reclaiming Adolescence." Should middle schools implement bell-to-bell bans on student smartphone use? Write an argumentative essay stating your claim and supporting it with reasons and evidence from the passage. Address what counterarguments critics might make and provide a thoughtful rebuttal.',
+      'Read "Beyond the Single Sport: Why Early Specialization Harms Young Athletes." Should young athletes focus on a single sport year-round or play multiple sports? Write an argumentative essay stating your claim and supporting it with reasons and evidence from the passage. Address what counterarguments critics might make and provide a thoughtful rebuttal.',
     checklist: ARG_CHECKLIST,
   },
 ];
