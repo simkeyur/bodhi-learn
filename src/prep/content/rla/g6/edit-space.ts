@@ -61,7 +61,7 @@ export const EDIT_SPACE = makeSet({
       choices: [
         ['Change **lunar** to **loonar**', 'Lunar is spelled correctly.'],
         'Change **marvelled** to **marveled**',
-        ['Change **sleek** to **sleke**', 'Sleek is spelled correctly with the vowel team ee.'],
+        ['Change **authentic** to **authentik**', 'Authentic is spelled correctly.'],
         ['Make no change', 'The American English spelling marveled uses one l.'],
       ],
       answer: 1,
@@ -71,9 +71,9 @@ export const EDIT_SPACE = makeSet({
       standard: 'rla:6.10D.i', cites: [7],
       stem: 'What is the best way to correct sentence 7 if it lacks a conjunction?',
       choices: [
-        ['Old computer consoles lined the floor, rotary phones, green-screen monitors on desks.', 'This creates a confusing fragment.'],
+        ['Old computer consoles lined the floor, rotary phones, and green-screen monitors on desks.', 'This creates a confusing fragment.'],
         ['Old computer consoles lined the floor they had rotary phones and monitors on desks.', 'This is a run-on sentence without punctuation or conjunctions.'],
-        'Old computer consoles lined the floor, complete with rotary phones, green-screen monitors, and retro coffee mugs on the desks.',
+        'Old computer consoles lined the floor, complete with rotary phones and green monitors.',
         ['Because old computer consoles lined the floor with rotary phones on desks.', 'This turns the sentence into an incomplete dependent clause fragment.'],
       ],
       answer: 2,
@@ -84,19 +84,19 @@ export const EDIT_SPACE = makeSet({
       stem: 'What is the most effective way to combine sentences 9 and 10?',
       choices: [
         ['The rocket was laying on its side, it stretched longer than a football field from engine nozzles to escape tower.', 'This creates a comma splice joining two independent clauses with only a comma.'],
-        'Lying on its side, the massive rocket stretched longer than a football field from its engine nozzles to the escape tower.',
+        'Lying on its side, the rocket stretched longer than a football field from engines to tower.',
         ['Because the rocket was laying on its side, so it stretched longer than a football field.', 'Using both because and so is grammatically incorrect.'],
         ['The rocket stretched longer than a football field, but it lay on its side.', 'The conjunction but incorrectly implies a contrast between length and orientation.'],
       ],
       answer: 1,
       explain: 'Beginning with the participial phrase "Lying on its side..." eliminates the repetitive subject "The rocket" and correctly uses the participle "lying" instead of "laying."',
     }),
-        mcq({
+    mcq({
       standard: 'rla:6.10B.ii', cites: [11],
       stem: 'Marcus wants to add a specific fact to sentence 11 to develop the description of the Saturn V rocket. Which sentence best achieves this goal?',
       choices: [
-        'Together, those five massive engines produced an astonishing 7.5 million pounds of thrust to lift the Apollo spacecraft into orbit.',
-        ['The rocket building was painted light gray on the outside.', 'Exterior paint color does not develop the description of rocket power.'],
+        'Together, those five engines produced 7.5 million pounds of thrust to lift the Apollo spacecraft.',
+        ['The rocket display building was painted light gray on the outside to reflect harsh summer sunlight.', 'Exterior paint color does not develop the description of rocket power.'],
         ['Astronauts usually eat freeze-dried ice cream during flights.', 'Snack food details are irrelevant to the engine description.'],
         ['I bought a plastic model rocket at the gift shop before leaving.', 'Personal souvenirs do not describe the historic Saturn V rocket.'],
       ],
