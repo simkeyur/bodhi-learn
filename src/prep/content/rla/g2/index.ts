@@ -8,7 +8,7 @@ import { G2_SET_FABLE_TURTLE } from './fable-turtle.ts';
 import { G2_SET_INFO_MONARCH } from './info-monarch.ts';
 import { G2_SET_INFO_SUNFLOWERS } from './info-sunflowers.ts';
 import { G2_SET_POEM_STAR } from './poem-star.ts';
-import { G2_SET_POEM_WIND } from './poem-wind.ts';
+import { G2_SET_POEM_COW } from './poem-cow.ts';
 import { G2_SET_DRAMA_PICNIC } from './drama-picnic.ts';
 import { G2_SET_PERSUADE_PLAYGROUND } from './persuade-playground.ts';
 import { G2_SET_EDIT_GARDEN } from './edit-garden.ts';
@@ -21,7 +21,7 @@ export const G2_RLA_SETS: ReadingSet[] = [
   G2_SET_INFO_MONARCH,
   G2_SET_INFO_SUNFLOWERS,
   G2_SET_POEM_STAR,
-  G2_SET_POEM_WIND,
+  G2_SET_POEM_COW,
   G2_SET_DRAMA_PICNIC,
   G2_SET_PERSUADE_PLAYGROUND,
   G2_SET_EDIT_GARDEN,
