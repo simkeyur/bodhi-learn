@@ -41,10 +41,10 @@ export const EDIT_SWIM = makeSet({
       standard: 'rla:5.11B.i', cites: [1],
       stem: 'Nadia wants to replace sentence 1 with a stronger introduction. Which sentence would best do this?',
       choices: [
-        ['Swimming is something people do.', 'This is as vague as sentence 1.'],
-        'Swimming is one of the most important skills a person can learn.',
-        ['My favorite color is blue, like the water in a pool.', 'This is off topic.'],
-        ['In conclusion, swimming is good.', '"In conclusion" belongs at the end, not the beginning.'],
+        ['Swimming is an ordinary activity that people do outside.', 'This is as vague as sentence 1.'],
+        'Swimming is an essential lifelong skill.',
+        ['My favorite outdoor color is blue like pool water.', 'This is off topic.'],
+        ['In conclusion, swimming is good exercise for kids.', '"In conclusion" belongs at the end, not the beginning.'],
       ],
       answer: 1,
       explain: 'A strong introduction tells the reader what the paper is about and why it matters. The second choice sets up Nadia\'s opinion clearly.',
@@ -99,7 +99,7 @@ export const EDIT_SWIM = makeSet({
         { options: ['pools', 'pool\'s', 'pools\'s', 'pool'], answer: 1 },
         ' lifeguards are already trained to teach.',
       ],
-      explain: 'The lifeguards belong to the pool, so the word needs an apostrophe and s: pool\'s.',
+      explain: 'The sentence needs the singular possessive: the pool\'s lifeguards.',
     }),
   ],
 });
