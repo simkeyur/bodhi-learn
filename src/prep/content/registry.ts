@@ -44,6 +44,15 @@ import { G4_RLA_LESSONS } from './lessons/g4-rla.ts';
 import { G5_RLA, G5_RLA_STRANDS } from '../data/standards/g5-rla.ts';
 import { G5_RLA_ESSAYS, G5_RLA_GENERATORS, G5_RLA_SETS, makeG5RlaItem } from './rla/g5/index.ts';
 import { G5_RLA_LESSONS } from './lessons/g5-rla.ts';
+import { G6_RLA, G6_RLA_STRANDS } from '../data/standards/g6-rla.ts';
+import { G6_RLA_ESSAYS, G6_RLA_GENERATORS, G6_RLA_SETS, makeG6RlaItem } from './rla/g6/index.ts';
+import { G6_RLA_LESSONS } from './lessons/g6-rla.ts';
+import { G7_RLA, G7_RLA_STRANDS } from '../data/standards/g7-rla.ts';
+import { G7_RLA_ESSAYS, G7_RLA_GENERATORS, G7_RLA_SETS, makeG7RlaItem } from './rla/g7/index.ts';
+import { G7_RLA_LESSONS } from './lessons/g7-rla.ts';
+import { G8_RLA, G8_RLA_STRANDS } from '../data/standards/g8-rla.ts';
+import { G8_RLA_ESSAYS, G8_RLA_GENERATORS, G8_RLA_SETS, makeG8RlaItem } from './rla/g8/index.ts';
+import { G8_RLA_LESSONS } from './lessons/g8-rla.ts';
 
 export interface GradeContent {
   grade: number;
@@ -216,6 +225,42 @@ export const READING: Record<number, ReadingContent> = {
     lessons: G5_RLA_LESSONS,
     essays: G5_RLA_ESSAYS,
     blueprint: { readiness: [9, 5], supporting: [22, 16] },
+  },
+  6: {
+    grade: 6,
+    subject: 'rla',
+    strands: G6_RLA_STRANDS,
+    standards: G6_RLA,
+    sets: G6_RLA_SETS,
+    generators: G6_RLA_GENERATORS,
+    makeItem: makeG6RlaItem,
+    lessons: G6_RLA_LESSONS,
+    essays: G6_RLA_ESSAYS,
+    blueprint: { readiness: [10, 5], supporting: [20, 8] },
+  },
+  7: {
+    grade: 7,
+    subject: 'rla',
+    strands: G7_RLA_STRANDS,
+    standards: G7_RLA,
+    sets: G7_RLA_SETS,
+    generators: G7_RLA_GENERATORS,
+    makeItem: makeG7RlaItem,
+    lessons: G7_RLA_LESSONS,
+    essays: G7_RLA_ESSAYS,
+    blueprint: { readiness: [10, 5], supporting: [20, 8] },
+  },
+  8: {
+    grade: 8,
+    subject: 'rla',
+    strands: G8_RLA_STRANDS,
+    standards: G8_RLA,
+    sets: G8_RLA_SETS,
+    generators: G8_RLA_GENERATORS,
+    makeItem: makeG8RlaItem,
+    lessons: G8_RLA_LESSONS,
+    essays: G8_RLA_ESSAYS,
+    blueprint: { readiness: [10, 5], supporting: [20, 6] },
   },
 };
 
