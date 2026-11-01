@@ -34,12 +34,12 @@ export const G2_SET_EDIT_GARDEN: ReadingSet = makeSet({
       standard: 'rla:2.11D.i', cites: [3],
       stem: 'What change, if any, should be made to sentence 3?',
       choices: [
-        ['Change sprouts to sprout.', 'Sprouts is plural, matching the plural subject.'],
         'Make no change.',
+        ['Change sprouts to sprout.', 'Sprouts is plural, matching the plural subject.'],
         ['Change grow to grows.', 'Plural subject sprouts requires plural verb grow.'],
         ['Change warm to warmly.', 'Warm describes the noun sunlight.'],
       ],
-      answer: 1,
+      answer: 0,
       explain: 'Sentence 3 is correct as written: plural subject "sprouts" agrees with plural verb "grow."',
     }),
     mcq({
@@ -47,9 +47,9 @@ export const G2_SET_EDIT_GARDEN: ReadingSet = makeSet({
       stem: 'What change should be made in sentence 4?',
       choices: [
         'Change water to watered',
+        ['Change with to by', 'With correctly shows the tool used to water the plants.'],
         ['Change carefully to careful', 'Carefully is the correct adverb modifying the verb.'],
-        ['Change the preposition with to from', 'With is the correct preposition showing the tool used.'],
-        ['Change the adjective small to smaller', 'Small is the correct descriptive adjective.'],
+        ['Change small to smaller', 'Small is the correct descriptive adjective.'],
       ],
       answer: 0,
       explain: 'Yesterday afternoon signals a past event, so the verb must be past tense: watered.',
@@ -58,12 +58,12 @@ export const G2_SET_EDIT_GARDEN: ReadingSet = makeSet({
       standard: 'rla:2.11D.ix', cites: [5],
       stem: 'What change should be made in sentence 5?',
       choices: [
+        'Change the day friday to capitalized Friday',
         ['Change measured to measure', 'Measured is the correct past tense.'],
         ['Change the word bean to Bean', 'Bean is a common noun and should be lowercase.'],
-        'Change friday to Friday',
-        ['Change the adjective wooden to wood', 'Wooden is the proper adjective describing rulers.'],
+        ['Change wooden to wood', 'Wooden is the proper adjective describing rulers.'],
       ],
-      answer: 2,
+      answer: 0,
       explain: 'Days of the week must always begin with a capital letter: Friday.',
     }),
     mcq({
@@ -71,7 +71,7 @@ export const G2_SET_EDIT_GARDEN: ReadingSet = makeSet({
       stem: 'What is the correct punctuation mark to place at the end of sentence 6?',
       choices: [
         ['A question mark (?)', 'Sentence 6 is a statement, not an asking question.'],
-        'A period (.)',
+        'A period mark (.)',
         ['An exclamation point (!)', 'Sentence 6 is a calm statement of fact.'],
         ['A comma mark (,)', 'Sentences never end with a comma.'],
       ],
