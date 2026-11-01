@@ -68,7 +68,7 @@ export const G3_RLA_ESSAYS: EssayPrompt[] = [
     grade: 3,
     setId: 'g3-info-turtles',
     mode: 'informational',
-    prompt: 'Read "Saving the Kemp\'s Ridley Sea Turtle." Write an informational essay explaining how park rangers and volunteers help protect sea turtles on Texas beaches. Support your explanation with facts and details from the article.',
+    prompt: 'Read "Saving the Texas Horned Lizard." Write an informational essay explaining how scientists and zookeepers help protect horned lizards in Texas. Support your explanation with facts and details from the article.',
     checklist: INFO_CHECKLIST,
   },
   {
