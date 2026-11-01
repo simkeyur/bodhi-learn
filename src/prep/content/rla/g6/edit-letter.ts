@@ -13,21 +13,27 @@ export const EDIT_LETTER = makeSet({
     genre: 'correspondence',
     blocks: [
       { kind: 'note', text: 'Dear Director Alvarez,' },
-      { kind: 'sentences', sentences: [
-        'I am writing this formal letter on behalf of the student council at Oak Creek Middle School to urgently request the installation of a protected, bollard-separated bicycle lane along Elm Street.',
-        'Over two hundred middle school students currently walk, skate, or ride their bicycles to and from school each morning along this busy route.',
-        'However, Elm Street has no dedicated bicycle shoulder, and speeding motor vehicles creates dangerous conditions for young riders navigating morning traffic.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Last month, our student council conducted a comprehensive campus-wide neighborhood transportation survey among local families and teachers.',
-        'Over seventy percent of surveyed parents said they would enthusiastically encourage their children to bike to school if a safe, barrier-separated lane existed along Elm Street.',
-        'Furthermore, increasing daily bicycle ridership would significantly reduce morning vehicle congestion, noise pollution, and exhaust emissions around our campus drop-off zones.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'The city of Austin recently received a federal infrastructure grant from the Safe Routes to School Program to upgrade local school neighborhoods.',
-        'Using a small portion of these designated municipal funds for Elm Street would improve pedestrian and cyclist safety for generations of future middle school students.',
-        'Thank you for your tireless dedication to public safety, and thank you for taking the time to carefully consider our student proposal.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'I am writing this formal letter on behalf of the student council at Oak Creek Middle School to urgently request the installation of a protected, bollard-separated bicycle lane along Elm Street.',
+          'Over two hundred middle school students currently walk, skate, or ride their bicycles to and from school each morning along this busy route.',
+          'However, Elm Street has no dedicated bicycle shoulder, and speeding motor vehicles creates dangerous conditions for young riders navigating morning traffic.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Last month, our student council conducted a comprehensive campus-wide neighborhood transportation survey among local families and teachers.',
+          'Over seventy percent of surveyed parents said they would enthusiastically encourage their children to bike to school if a safe, barrier-separated lane existed along Elm Street.',
+          'Furthermore, increasing daily bicycle ridership would significantly reduce morning vehicle congestion, noise pollution, and exhaust emissions around our campus drop-off zones.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'The city of Austin recently received a federal infrastructure grant from the Safe Routes to School Program to upgrade local school neighborhoods.',
+          'Using a small portion of these designated municipal funds for Elm Street would improve pedestrian and cyclist safety for generations of future middle school students.',
+          'Thank you for your tireless dedication to public safety, and thank you for taking the time to carefully consider our student proposal.',
+        ]
+      },
       { kind: 'note', text: 'Sincerely,\nSophia Chen\nStudent Council President' },
     ],
   }],

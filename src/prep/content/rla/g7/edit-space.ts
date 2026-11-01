@@ -12,25 +12,31 @@ export const EDIT_SPACE = makeSet({
     title: 'Unfolding the Golden Eye',
     genre: 'literaryNonfiction',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'On Christmas morning in 2021, an Ariane 5 rocket roared into the skies above French Guiana carrying the James Webb Space Telescope.',
-        'Astronomers across the globe watched the launch with held breath.',
-        'Webb was not just an ordinary orbital observatory; it was the most intricate and daring scientific machine humans had ever built.',
-        'Unlike the Hubble Space Telescope, which orbits close to Earth, Webb traveled one million miles away to a gravitationally stable orbit called L2.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'To detect the faint infrared glow from ancient galaxies born near the beginning of time, the telescope required an enormous primary mirror.',
-        'Engineers constructed the twenty-one-foot mirror out of eighteen hexagonal segments forged from lightweight beryllium.',
-        'Each segment was coated with a microscopic film of pure gold.',
-        'Gold is an exceptional reflector of infrared light.',
-        'Because the massive mirror was too wide to fit inside any existing rocket fairing, engineers designed it to fold like origami during launch and unfold autonomously in deep space.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Deploying the telescope involved over three hundred separate single-point failure operations.',
-        'If even one motor jammed or one tension cable snapped, the entire ten-billion-dollar mission would fail completely.',
-        'Day after day, the mission team held their breath as the tennis-court-sized sunshield unfurled, cooling the delicate instruments to nearly absolute zero.',
-        'Today, Webb continues to transmit breathtaking images of cosmic star nurseries, providing humanity with unprecedented glimpses of the cosmos.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'On Christmas morning in 2021, an Ariane 5 rocket roared into the skies above French Guiana carrying the James Webb Space Telescope.',
+          'Astronomers across the globe watched the launch with held breath.',
+          'Webb was not just an ordinary orbital observatory; it was the most intricate and daring scientific machine humans had ever built.',
+          'Unlike the Hubble Space Telescope, which orbits close to Earth, Webb traveled one million miles away to a gravitationally stable orbit called L2.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'To detect the faint infrared glow from ancient galaxies born near the beginning of time, the telescope required an enormous primary mirror.',
+          'Engineers constructed the twenty-one-foot mirror out of eighteen hexagonal segments forged from lightweight beryllium.',
+          'Each segment was coated with a microscopic film of pure gold.',
+          'Gold is an exceptional reflector of infrared light.',
+          'Because the massive mirror was too wide to fit inside any existing rocket fairing, engineers designed it to fold like origami during launch and unfold autonomously in deep space.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Deploying the telescope involved over three hundred separate single-point failure operations.',
+          'If even one motor jammed or one tension cable snapped, the entire ten-billion-dollar mission would fail completely.',
+          'Day after day, the mission team held their breath as the tennis-court-sized sunshield unfurled, cooling the delicate instruments to nearly absolute zero.',
+          'Today, Webb continues to transmit breathtaking images of cosmic star nurseries, providing humanity with unprecedented glimpses of the cosmos.',
+        ]
+      },
     ],
   }],
   items: [

@@ -12,24 +12,30 @@ export const EDIT_SOLAR = makeSet({
     title: 'Shadow Across the Hill Country',
     genre: 'literaryNonfiction',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'On April 8, 2024, hundreds of thousands of enthusiastic skygazers and scientists gathered across the scenic Texas Hill Country to witness a rare celestial spectacle.',
-        'Kerrville sat squarely in the path of totality.',
-        'As the Moon gradually crept across the disk of the Sun, the afternoon light shifted to an eerie, metallic silver.',
-        'The ambient air temperature dropped more than ten degrees in less than twenty minutes, sending a noticeable chill through the crowd.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Songbirds suddenly ceased their chirping and roosted in oak branches, mistaking the creeping gloom for premature twilight.',
-        'Crickets began their nocturnal symphony in the tall prairie grass.',
-        'My little brother ate an entire bag of roasted peanuts while waiting for the shadow.',
-        'Then, the final bead of sunlight vanished behind rugged lunar mountains, instantly plunging the countryside into eerie midday darkness.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Around the black silhouette of the Moon, the Sun\'s corona blazed like pearlescent white ribbons fluttering in space.',
-        'Solar prominences glowed ruby-red along the celestial rim.',
-        'For four unforgettable minutes, total strangers stood side by side in awe, united by the cosmic majesty of the universe.',
-        'As the radiant diamond ring flashed and totality concluded, cheers echoed across the hills, celebrating an experience that would remain etched in our memories forever.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'On April 8, 2024, hundreds of thousands of enthusiastic skygazers and scientists gathered across the scenic Texas Hill Country to witness a rare celestial spectacle.',
+          'Kerrville sat squarely in the path of totality.',
+          'As the Moon gradually crept across the disk of the Sun, the afternoon light shifted to an eerie, metallic silver.',
+          'The ambient air temperature dropped more than ten degrees in less than twenty minutes, sending a noticeable chill through the crowd.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Songbirds suddenly ceased their chirping and roosted in oak branches, mistaking the creeping gloom for premature twilight.',
+          'Crickets began their nocturnal symphony in the tall prairie grass.',
+          'My little brother ate an entire bag of roasted peanuts while waiting for the shadow.',
+          'Then, the final bead of sunlight vanished behind rugged lunar mountains, instantly plunging the countryside into eerie midday darkness.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Around the black silhouette of the Moon, the Sun\'s corona blazed like pearlescent white ribbons fluttering in space.',
+          'Solar prominences glowed ruby-red along the celestial rim.',
+          'For four unforgettable minutes, total strangers stood side by side in awe, united by the cosmic majesty of the universe.',
+          'As the radiant diamond ring flashed and totality concluded, cheers echoed across the hills, celebrating an experience that would remain etched in our memories forever.',
+        ]
+      },
     ],
   }],
   items: [

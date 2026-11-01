@@ -12,24 +12,30 @@ export const EDIT_GARDEN = makeSet({
     title: 'Harvesting the Clouds',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Last spring, the dedicated environmental science club transformed a barren, neglected strip of asphalt behind the school cafeteria into a thriving native wildflower sanctuary.',
-        'Our primary objective was to provide essential nourishment and protective habitat for migrating monarch butterflies and native Texas bumblebees.',
-        'During prolonged summer heat waves and severe droughts in Central Texas, municipal water restrictions often make supplemental irrigation exceptionally difficult.',
-        'To overcome this ecological challenge, our club engineered and constructed an innovative campus rainwater harvesting system.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'We installed high-capacity gutters along the entire gymnasium roofline to divert precipitation into two durable one-thousand-gallon poly storage tanks.',
-        'The collected rainwater passes through multi-stage mesh filters to remove rooftop dirt, leaves, and organic debris.',
-        'A solar-powered drip irrigation system delivers moisture directly to the root zones of drought-tolerant perennial plants.',
-        'Our garden proudly showcases purple coneflower, Texas lantana, goldenrod, and fragrant autumn sage.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Within months of completion, visiting wildlife biologists recorded over twenty unique pollinator species foraging in our courtyard.',
-        'Students across multiple grade levels now use the outdoor space as a living laboratory for biology, ecology, and environmental data collection.',
-        'Our garden demonstrates that sustainable conservation practices can flourish even in paved urban school environments.',
-        'We hope our success inspires neighboring schools to embrace sustainable landscaping and habitat restoration.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Last spring, the dedicated environmental science club transformed a barren, neglected strip of asphalt behind the school cafeteria into a thriving native wildflower sanctuary.',
+          'Our primary objective was to provide essential nourishment and protective habitat for migrating monarch butterflies and native Texas bumblebees.',
+          'During prolonged summer heat waves and severe droughts in Central Texas, municipal water restrictions often make supplemental irrigation exceptionally difficult.',
+          'To overcome this ecological challenge, our club engineered and constructed an innovative campus rainwater harvesting system.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'We installed high-capacity gutters along the entire gymnasium roofline to divert precipitation into two durable one-thousand-gallon poly storage tanks.',
+          'The collected rainwater passes through multi-stage mesh filters to remove rooftop dirt, leaves, and organic debris.',
+          'A solar-powered drip irrigation system delivers moisture directly to the root zones of drought-tolerant perennial plants.',
+          'Our garden proudly showcases purple coneflower, Texas lantana, goldenrod, and fragrant autumn sage.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Within months of completion, visiting wildlife biologists recorded over twenty unique pollinator species foraging in our courtyard.',
+          'Students across multiple grade levels now use the outdoor space as a living laboratory for biology, ecology, and environmental data collection.',
+          'Our garden demonstrates that sustainable conservation practices can flourish even in paved urban school environments.',
+          'We hope our success inspires neighboring schools to embrace sustainable landscaping and habitat restoration.',
+        ]
+      },
     ],
   }],
   items: [

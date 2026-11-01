@@ -12,22 +12,28 @@ export const EDIT_ROBOTICS = makeSet({
     title: 'Gears, Code, and Teamwork',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Designing and programming a competitive autonomous robot requires technical knowledge, creative ingenuity, teamwork, and immense patience.',
-        'This season, our enthusiastic six-member middle school robotics team built an agile robot to complete ten simulated disaster-relief missions on a four-by-eight-foot game field.',
-        'The robot had to navigate across loose sand pits, lift fallen debris beams, and accurately deliver essential emergency medical supplies within a strict two-and-a-half-minute time limit.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'The collection of gears and motors on our robot were carefully calibrated after dozens of test runs.',
-        'During our first practice tournament, our robot\'s color sensor failed to detect the black boundary line; therefore, the machine rolled off the table.',
-        'We realized that ambient gym lighting was interfering with the sensor readings.',
-        'Our dedicated lead programmer quickly rewrote the optical calibration code, while our mechanical builder constructed a small cardboard light shield around the sensitive sensor.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Students who want to join our team must demonstrate either strong problem-solving skills nor a willingness to learn from repeated design failures.',
-        'At the crowded regional championship tournament in San Antonio, our robot scored 340 points and proudly earned the prestigious Innovation Project Award.',
-        'Our team learned that success in engineering comes from testing ideas, listening to teammates, and never giving up.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Designing and programming a competitive autonomous robot requires technical knowledge, creative ingenuity, teamwork, and immense patience.',
+          'This season, our enthusiastic six-member middle school robotics team built an agile robot to complete ten simulated disaster-relief missions on a four-by-eight-foot game field.',
+          'The robot had to navigate across loose sand pits, lift fallen debris beams, and accurately deliver essential emergency medical supplies within a strict two-and-a-half-minute time limit.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'The collection of gears and motors on our robot were carefully calibrated after dozens of test runs.',
+          'During our first practice tournament, our robot\'s color sensor failed to detect the black boundary line; therefore, the machine rolled off the table.',
+          'We realized that ambient gym lighting was interfering with the sensor readings.',
+          'Our dedicated lead programmer quickly rewrote the optical calibration code, while our mechanical builder constructed a small cardboard light shield around the sensitive sensor.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Students who want to join our team must demonstrate either strong problem-solving skills nor a willingness to learn from repeated design failures.',
+          'At the crowded regional championship tournament in San Antonio, our robot scored 340 points and proudly earned the prestigious Innovation Project Award.',
+          'Our team learned that success in engineering comes from testing ideas, listening to teammates, and never giving up.',
+        ]
+      },
     ],
   }],
   items: [

@@ -12,24 +12,30 @@ export const EDIT_ROBOTICS = makeSet({
     title: 'Engineering the Rover',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'For six grueling months, the Oakridge Middle School robotics squad spent countless after-school hours preparing intensely for the regional FIRST Lego League championship tournament.',
-        'Our engineering challenge was to design and construct an autonomous rover capable of navigating treacherous simulated planetary terrain.',
-        'The rigorous competition arena featured jagged inclines, loose sand pits, and scattered rocky obstacles.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Initially, our prototype rover struggled severely with mechanical traction on steep wooden ramps.',
-        'Its smooth rubber tires slipped continuously against the polished plywood surface.',
-        'The team redesigned the entire drivetrain by installing high-torque planetary gearboxes and heavy-duty knobby treaded tracks.',
-        'We also mounted sensitive ultrasonic rangefinders and dual high-resolution optical cameras to detect unexpected arena obstacles.',
-        'Our lead programmer, Lucas, wrote over four hundred lines of Python code to calibrate real-time navigation algorithms.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'During the decisive championship round, our rover executed its complex navigation tasks with absolute precision.',
-        'The machine successfully retrieved all geological specimen canisters and returned safely to home base with two seconds remaining.',
-        'Winning the championship trophy taught us that perseverance, technical collaboration, and rigorous iterative testing are the true hallmarks of engineering excellence.',
-        'Our team looks forward to representing our school district at the upcoming state robotics championship in Dallas.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'For six grueling months, the Oakridge Middle School robotics squad spent countless after-school hours preparing intensely for the regional FIRST Lego League championship tournament.',
+          'Our engineering challenge was to design and construct an autonomous rover capable of navigating treacherous simulated planetary terrain.',
+          'The rigorous competition arena featured jagged inclines, loose sand pits, and scattered rocky obstacles.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Initially, our prototype rover struggled severely with mechanical traction on steep wooden ramps.',
+          'Its smooth rubber tires slipped continuously against the polished plywood surface.',
+          'The team redesigned the entire drivetrain by installing high-torque planetary gearboxes and heavy-duty knobby treaded tracks.',
+          'We also mounted sensitive ultrasonic rangefinders and dual high-resolution optical cameras to detect unexpected arena obstacles.',
+          'Our lead programmer, Lucas, wrote over four hundred lines of Python code to calibrate real-time navigation algorithms.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'During the decisive championship round, our rover executed its complex navigation tasks with absolute precision.',
+          'The machine successfully retrieved all geological specimen canisters and returned safely to home base with two seconds remaining.',
+          'Winning the championship trophy taught us that perseverance, technical collaboration, and rigorous iterative testing are the true hallmarks of engineering excellence.',
+          'Our team looks forward to representing our school district at the upcoming state robotics championship in Dallas.',
+        ]
+      },
     ],
   }],
   items: [

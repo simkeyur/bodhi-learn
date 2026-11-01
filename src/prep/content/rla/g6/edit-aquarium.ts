@@ -12,22 +12,28 @@ export const EDIT_AQUARIUM = makeSet({
     title: 'Sleeping with the Sharks',
     genre: 'literaryNonfiction',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Last October, our entire sixth-grade science class had the thrilling opportunity to spend an unforgettable night at the Texas State Aquarium in Corpus Christi.',
-        'After the general public left for the evening, an enthusiastic marine educator led our small group behind the scenes to view the massive saltwater filtration systems and holding tanks.',
-        'We watched professional biologists prepare feeding buckets of fresh diced squid, Gulf shrimp, and small capelin fish for the hungry stingrays and bonnethead sharks.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Around nine o\'clock, we rolled out our sleeping bags right in front of the Caribbean Sea exhibit, a massive sixty-eight-foot acrylic viewing window.',
-        'Watching sandbar sharks and green sea turtles glide through the illuminated blue water had a calming affect on all of us.',
-        'The gentle, steady sound of bubbling water from the giant filtration and aeration pumps was remarkably soothing.',
-        'Whenever a nurse shark rested near the glass, we could see its gills pulsing rhythmically.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'The row of sleeping bags on the carpet were quiet long before midnight.',
-        'At sunrise, a giant grouper swam right up to the glass and seemed to stare directly into my eyes.',
-        'Sleeping peacefully beside the magnificent marine habitat gave me an enduring, deep appreciation for the fragile beauty and underwater mystery of Gulf Coast sea life.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Last October, our entire sixth-grade science class had the thrilling opportunity to spend an unforgettable night at the Texas State Aquarium in Corpus Christi.',
+          'After the general public left for the evening, an enthusiastic marine educator led our small group behind the scenes to view the massive saltwater filtration systems and holding tanks.',
+          'We watched professional biologists prepare feeding buckets of fresh diced squid, Gulf shrimp, and small capelin fish for the hungry stingrays and bonnethead sharks.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Around nine o\'clock, we rolled out our sleeping bags right in front of the Caribbean Sea exhibit, a massive sixty-eight-foot acrylic viewing window.',
+          'Watching sandbar sharks and green sea turtles glide through the illuminated blue water had a calming affect on all of us.',
+          'The gentle, steady sound of bubbling water from the giant filtration and aeration pumps was remarkably soothing.',
+          'Whenever a nurse shark rested near the glass, we could see its gills pulsing rhythmically.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'The row of sleeping bags on the carpet were quiet long before midnight.',
+          'At sunrise, a giant grouper swam right up to the glass and seemed to stare directly into my eyes.',
+          'Sleeping peacefully beside the magnificent marine habitat gave me an enduring, deep appreciation for the fragile beauty and underwater mystery of Gulf Coast sea life.',
+        ]
+      },
     ],
   }],
   items: [

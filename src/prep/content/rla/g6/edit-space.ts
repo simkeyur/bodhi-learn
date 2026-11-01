@@ -12,24 +12,30 @@ export const EDIT_SPACE = makeSet({
     title: 'A Giant Leap for Our Science Club',
     genre: 'literaryNonfiction',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Last Friday, twenty members of the Travis Middle School science club boarded a bus for a field trip to space center houston.',
-        'We had been raising funds all semester by selling commemorative solar system bookmarks and washing cars on Saturday mornings.',
-        'Our excitement grew as we approached the visitor center and saw the massive shuttle replica mounted on top of a historic Boeing 747 aircraft.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'First, we visited the Astronaut Gallery, where authentic spacesuits from the Mercury, Gemini, and Apollo programs were displayed behind glass.',
-        'I marvelled at how bulky the lunar moonwalking suit appeared compared to the sleek suits astronauts wear today.',
-        'Next, our tour guide led us into the historic Apollo Mission Control Center, which was recently restored to look exactly as it did during the 1969 moon landing.',
-        'Old computer consoles lined the floor with rotary phones, green-screen monitors, and retro coffee mugs on the desks.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'In the afternoon, our group walked through the massive Saturn V rocket building.',
-        'The rocket was laying on its side.',
-        'The rocket stretched longer than a football field from engine nozzles to escape tower.',
-        'Standing beneath the five giant F-1 engines, the sheer scale of human ingenuity made everyone speak in quiet whispers.',
-        'Our visit to the center showed us that space exploration requires immense teamwork and courage.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Last Friday, twenty members of the Travis Middle School science club boarded a bus for a field trip to space center houston.',
+          'We had been raising funds all semester by selling commemorative solar system bookmarks and washing cars on Saturday mornings.',
+          'Our excitement grew as we approached the visitor center and saw the massive shuttle replica mounted on top of a historic Boeing 747 aircraft.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'First, we visited the Astronaut Gallery, where authentic spacesuits from the Mercury, Gemini, and Apollo programs were displayed behind glass.',
+          'I marvelled at how bulky the lunar moonwalking suit appeared compared to the sleek suits astronauts wear today.',
+          'Next, our tour guide led us into the historic Apollo Mission Control Center, which was recently restored to look exactly as it did during the 1969 moon landing.',
+          'Old computer consoles lined the floor with rotary phones, green-screen monitors, and retro coffee mugs on the desks.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'In the afternoon, our group walked through the massive Saturn V rocket building.',
+          'The rocket was laying on its side.',
+          'The rocket stretched longer than a football field from engine nozzles to escape tower.',
+          'Standing beneath the five giant F-1 engines, the sheer scale of human ingenuity made everyone speak in quiet whispers.',
+          'Our visit to the center showed us that space exploration requires immense teamwork and courage.',
+        ]
+      },
     ],
   }],
   items: [

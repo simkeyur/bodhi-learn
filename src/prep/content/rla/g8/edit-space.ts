@@ -12,26 +12,34 @@ export const EDIT_SPACE = makeSet({
     title: 'Voyager: The Golden Record into Deep Space',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'In 1977, NASA launched twin robotic probes named Voyager 1 and Voyager 2 to explore the outer gas giant planets of our solar system.',
-        'Scientists recognized that after completing their planetary flybys, the spacecraft would eventually drift into interstellar space forever.',
-        'Astronomer Carl Sagan chaired a committee to assemble a cultural time capsule for any extraterrestrial civilization that might discover the probes.',
-      ] },
-      { kind: 'sentences', sentences: [
-        "The result was the Golden Record, a twelve-inch gold-plated copper phonograph disc mounted to each probe's exterior.",
-        'Encrypted on the record are 115 analog images depicting terrestrial life, mathematical formulas, and scientific diagrams.',
-        'The audio track contains greetings spoken in fifty-five human languages, natural sounds such as thunder and whale songs, and ninety minutes of diverse musical compositions.',
-        'Because space is a near-perfect vacuum, the records will remain readable for over a billion years.',
-      ] },
-      { kind: 'sentences', sentences: [
-        "The team wanted to represent humanity's collective spirit, they included works by Bach, Beethoven, and Blind Willie Johnson.",
-        'A message was also inscribed by President Jimmy Carter expressing our hope to join a galactic community.',
-        'Voyager 1 crossed into interstellar space in 2012; its golden messenger carries our story quietly across the cosmic ocean.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'As it travels past the heliosphere, the Golden Record serves as an eternal monument to human curiosity, creativity, and the yearning for cosmic fellowship.',
-        'Future generations can look up at the night sky knowing that our voice echoes among the distant stars.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'In 1977, NASA launched twin robotic probes named Voyager 1 and Voyager 2 to explore the outer gas giant planets of our solar system.',
+          'Scientists recognized that after completing their planetary flybys, the spacecraft would eventually drift into interstellar space forever.',
+          'Astronomer Carl Sagan chaired a committee to assemble a cultural time capsule for any extraterrestrial civilization that might discover the probes.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "The result was the Golden Record, a twelve-inch gold-plated copper phonograph disc mounted to each probe's exterior.",
+          'Encrypted on the record are 115 analog images depicting terrestrial life, mathematical formulas, and scientific diagrams.',
+          'The audio track contains greetings spoken in fifty-five human languages, natural sounds such as thunder and whale songs, and ninety minutes of diverse musical compositions.',
+          'Because space is a near-perfect vacuum, the records will remain readable for over a billion years.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "The team wanted to represent humanity's collective spirit, they included works by Bach, Beethoven, and Blind Willie Johnson.",
+          'A message was also inscribed by President Jimmy Carter expressing our hope to join a galactic community.',
+          'Voyager 1 crossed into interstellar space in 2012; its golden messenger carries our story quietly across the cosmic ocean.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'As it travels past the heliosphere, the Golden Record serves as an eternal monument to human curiosity, creativity, and the yearning for cosmic fellowship.',
+          'Future generations can look up at the night sky knowing that our voice echoes among the distant stars.',
+        ]
+      },
     ],
   }],
   items: [
