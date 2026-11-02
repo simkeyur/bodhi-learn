@@ -134,7 +134,6 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
       <div style={{
         background: '#FFFFFF',
         borderRadius: 'var(--radius-lg)',
-        border: `5px solid ${currentItem.color}`,
         boxShadow: 'var(--shadow-floating)',
         padding: 12,
       }}>
@@ -175,8 +174,7 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
             position: 'relative',
             borderRadius: 'var(--radius-md)',
             overflow: 'hidden',
-            boxShadow: 'inset 0 4px 14px rgba(0, 0, 0, 0.08)',
-            border: '4px solid #E2E8F0',
+            boxShadow: 'var(--clay-sunk)',
             background: '#FFFFFF',
             touchAction: 'none',
           }}
@@ -212,7 +210,7 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
             }}>
               <span style={{
                 background: '#DCFCE7',
-                border: '3px solid #16A34A',
+                boxShadow: 'var(--clay-raised-sm)',
                 color: '#15803D',
                 padding: '4px 16px',
                 borderRadius: 999,
@@ -248,14 +246,14 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
                 style={{
                   background: b.swatch,
                   border: selectedBrush === b.value ? '3px solid #1E293B' : '3px solid #FFFFFF',
-                  boxShadow: selectedBrush === b.value ? '0 0 0 2px #38BDF8' : '0 2px 4px rgba(0,0,0,0.15)',
+                  boxShadow: selectedBrush === b.value ? '0 0 0 2px #38BDF8' : 'var(--clay-lift-sm), var(--clay-puff-color)',
                   transform: selectedBrush === b.value ? 'scale(1.12)' : 'none',
                 }}
               />
             ))}
           </div>
 
-          <div className="seg" style={{ flex: '0 0 auto', boxShadow: 'none', border: '2px solid #E2E8F0' }}>
+          <div className="seg" style={{ flex: '0 0 auto' }}>
             <button
               onClick={() => { sound.playPop(); setIsUppercase(true); }}
               className={`kid-btn ${isUppercase ? 'btn-sky' : 'btn-white'}`}

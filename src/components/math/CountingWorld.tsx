@@ -156,7 +156,6 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
         <div style={{
           background: 'linear-gradient(180deg, #ECFDF5 0%, #D1FAE5 100%)',
           borderRadius: 'var(--radius-lg)',
-          border: '6px solid #4ADE80',
           boxShadow: 'var(--shadow-floating)',
           padding: '16px 12px',
           textAlign: 'center',
@@ -171,7 +170,6 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
               alignItems: 'center',
               gap: 10,
               background: '#FFFFFF',
-              border: '3px solid #86EFAC',
               padding: '4px 6px 4px 20px',
               borderRadius: 999,
               boxShadow: 'var(--clay-raised-sm)',
@@ -214,8 +212,8 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                   padding: 0,
                   borderRadius: '50%',
                   background: item.counted ? '#FEF08A' : '#FFFFFF',
-                  border: item.counted ? '4px solid #F59E0B' : '4px solid #34D399',
-                  boxShadow: item.counted ? 'var(--clay-tint) color-mix(in srgb, #D97706 55%, transparent), var(--clay-puff-color)' : 'var(--clay-tint) color-mix(in srgb, #059669 55%, transparent), var(--clay-puff-color)',
+                  border: 'none',
+                  boxShadow: item.counted ? 'var(--clay-tint) color-mix(in srgb, #D97706 55%, transparent), var(--clay-puff-color)' : 'var(--clay-raised-sm)',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -245,7 +243,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+                    boxShadow: 'var(--clay-lift-sm), var(--clay-puff-color)',
                   }}>
                     {item.countNumber}
                   </span>
@@ -291,7 +289,6 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
         <div style={{
           background: '#FFFFFF',
           borderRadius: 'var(--radius-lg)',
-          border: '6px solid #F59E0B',
           boxShadow: 'var(--shadow-floating)',
           padding: '18px 12px',
           textAlign: 'center',
@@ -368,15 +365,15 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                     height: 'clamp(80px, 24vw, 96px)',
                     borderRadius: 'var(--radius-md)',
                     background: isRight ? '#DCFCE7' : '#FFFFFF',
-                    border: `4px solid ${isRight ? '#16A34A' : '#F59E0B'}`,
-                    boxShadow: isWrong ? 'none' : 'var(--clay-tint) color-mix(in srgb, #D97706 55%, transparent), var(--clay-puff-color)',
+                    border: 'none',
+                    boxShadow: isRight ? 'var(--clay-press-sm), inset 0 0 0 3px #4ADE80' : isWrong ? 'var(--clay-press-sm)' : 'var(--clay-raised-sm)',
                     fontFamily: 'var(--font-display)',
                     fontSize: '2.8rem',
                     fontWeight: 700,
                     color: '#92400E',
                     cursor: isWrong ? 'default' : 'pointer',
                     opacity: isWrong ? 0.35 : 1,
-                    transform: isWrong ? 'translateY(5px)' : 'none',
+                    transform: isWrong ? 'translateY(2px)' : 'none',
                     transition: 'all 0.12s ease',
                   }}
                   className={isRight ? 'animate-pop' : undefined}

@@ -187,7 +187,6 @@ export const SlideReadWorld: React.FC<SlideReadWorldProps> = ({ onBack }) => {
       <div style={{
         background: 'linear-gradient(180deg, #F0F9FF 0%, #E0F2FE 100%)',
         borderRadius: 'var(--radius-lg)',
-        border: '5px solid #1E3A8A',
         boxShadow: 'var(--shadow-floating)',
         padding: '14px 14px 18px',
       }}>

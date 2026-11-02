@@ -99,7 +99,6 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
           <div style={{
             background: 'linear-gradient(135deg, #FFFFFF, #F0F9FF)',
             borderRadius: 'var(--radius-lg)',
-            border: `5px solid ${selectedLetter.color}`,
             boxShadow: 'var(--shadow-floating)',
             padding: '14px 14px',
             marginBottom: 16,
@@ -176,8 +175,8 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
                     background: isSelected ? item.color : '#FFFFFF',
                     color: isSelected ? '#FFFFFF' : '#1E293B',
                     borderRadius: 'var(--radius-md)',
-                    border: `3px solid ${item.color}`,
-                    boxShadow: isSelected ? 'var(--clay-raised-sm)' : 'var(--clay-raised-sm)',
+                    border: 'none',
+                    boxShadow: isSelected ? `var(--clay-tint) color-mix(in srgb, ${item.color} 55%, transparent), var(--clay-puff-color)` : 'var(--clay-raised-sm)',
                     padding: '8px 4px',
                     textAlign: 'center',
                     cursor: 'pointer',
@@ -202,7 +201,6 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
         <div style={{
           background: '#FFFFFF',
           borderRadius: 'var(--radius-lg)',
-          border: '5px solid #F59E0B',
           padding: '24px 16px',
           textAlign: 'center',
           boxShadow: 'var(--shadow-floating)',
@@ -265,16 +263,16 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
                   style={{
                     height: 104,
                     borderRadius: 'var(--radius-lg)',
-                    border: `4px solid ${isRight ? '#16A34A' : opt.color}`,
-                    background: isRight ? '#DCFCE7' : '#F8FAFC',
+                    border: 'none',
+                    background: isRight ? '#DCFCE7' : '#FFFFFF',
                     fontSize: '3.4rem',
                     fontFamily: 'var(--font-display)',
                     fontWeight: 700,
                     color: opt.color,
-                    boxShadow: isWrong ? 'none' : 'var(--clay-raised-sm)',
+                    boxShadow: isRight ? 'var(--clay-press-sm), inset 0 0 0 3px #4ADE80' : isWrong ? 'var(--clay-press-sm)' : 'var(--clay-raised-sm)',
                     cursor: isWrong ? 'default' : 'pointer',
                     opacity: isWrong ? 0.35 : 1,
-                    transform: isWrong ? 'translateY(5px)' : 'none',
+                    transform: isWrong ? 'translateY(2px)' : 'none',
                     transition: 'all 0.12s ease',
                   }}
                   className={isRight ? 'animate-pop' : undefined}

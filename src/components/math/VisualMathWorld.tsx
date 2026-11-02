@@ -117,7 +117,6 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
       <div style={{
         background: '#FFFFFF',
         borderRadius: 'var(--radius-lg)',
-        border: '5px solid #FB7185',
         boxShadow: 'var(--shadow-floating)',
         padding: '16px 12px 20px',
         textAlign: 'center',
@@ -202,15 +201,15 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
                   height: 'clamp(80px, 24vw, 96px)',
                   borderRadius: 'var(--radius-md)',
                   background: isRight ? '#DCFCE7' : '#FFFFFF',
-                  border: `4px solid ${isRight ? '#16A34A' : '#FB7185'}`,
-                  boxShadow: isWrong ? 'none' : 'var(--clay-tint) color-mix(in srgb, #E11D48 55%, transparent), var(--clay-puff-color)',
+                  border: 'none',
+                  boxShadow: isRight ? 'var(--clay-press-sm), inset 0 0 0 3px #4ADE80' : isWrong ? 'var(--clay-press-sm)' : 'var(--clay-raised-sm)',
                   fontFamily: 'var(--font-display)',
                   fontSize: '2.8rem',
                   fontWeight: 700,
                   color: '#BE123C',
                   cursor: isWrong ? 'default' : 'pointer',
                   opacity: isWrong ? 0.35 : 1,
-                  transform: isWrong ? 'translateY(5px)' : 'none',
+                  transform: isWrong ? 'translateY(2px)' : 'none',
                   transition: 'all 0.12s ease',
                 }}
                 className={isRight ? 'animate-pop' : undefined}

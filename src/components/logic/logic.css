@@ -5,7 +5,7 @@
   background: #FFFFFF;
   border-radius: var(--radius-lg);
   border: none;
-  box-shadow: var(--clay-raised-lg), inset 0 0 0 4px color-mix(in srgb, var(--lab-color) 28%, #fff);
+  box-shadow: var(--clay-raised-lg);
   padding: 14px 12px 18px;
   max-width: 560px;
   margin: 0 auto;
@@ -77,7 +77,7 @@
   border-radius: var(--radius-md);
   background: #FFFFFF;
   border: none;
-  box-shadow: var(--clay-raised-sm), inset 0 0 0 4px color-mix(in srgb, var(--lab-color) 45%, #fff);
+  box-shadow: var(--clay-raised-sm);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(2rem, 9vw, 2.8rem);
@@ -91,7 +91,7 @@
 
 .opt-btn:active:not(:disabled) { transform: translateY(3px) scale(0.97); box-shadow: var(--clay-press); }
 .opt-btn:disabled { cursor: default; }
-.opt-btn.wrong { opacity: 0.35; transform: translateY(5px); box-shadow: none; }
+.opt-btn.wrong { opacity: 0.35; transform: translateY(2px); box-shadow: var(--clay-press-sm); }
 .opt-btn.right { background: #DCFCE7; box-shadow: var(--clay-press-sm), inset 0 0 0 4px #4ADE80; }
 
 /* ---------- Code the Bot ---------- */
@@ -132,7 +132,7 @@
   aspect-ratio: var(--cols) / var(--rows);
   border-radius: 18px;
   overflow: hidden;
-  border: 4px solid #5EEAD4;
+  box-shadow: var(--clay-lift);
   background: #CCFBF1;
 }
 
@@ -187,8 +187,8 @@
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 16px;
-  background: #F0FDFA;
-  border: 3px dashed #5EEAD4;
+  background: #E3F7F3;
+  box-shadow: var(--clay-sunk);
 }
 
 /* A Repeat container is taller than a single block; reserve it so the buttons below don't jump */
@@ -229,10 +229,10 @@
   padding: 6px 8px;
   border-radius: 16px;
   background: #EDE9FE;
-  border: 3px solid #8B5CF6;
+  box-shadow: var(--clay-raised-sm);
 }
 
-.blk-repeat.open { border-style: dashed; box-shadow: 0 0 0 3px #DDD6FE; }
+.blk-repeat.open { box-shadow: var(--clay-press-sm), inset 0 0 0 3px #A78BFA; }
 
 .repeat-chip {
   min-width: 56px;
@@ -324,7 +324,7 @@
   aspect-ratio: 1;
   border-radius: 12px;
   background: #FDF2F8;
-  border: 3px solid #F9A8D4;
+  box-shadow: var(--clay-raised-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -335,8 +335,8 @@
   line-height: 1;
 }
 
-.pat-tile.hole { background: #FFFFFF; border-style: dashed; color: #BE185D; }
-.pat-tile.filled { background: #DCFCE7; border-color: #4ADE80; }
+.pat-tile.hole { background: #FBE7F1; box-shadow: var(--clay-press-sm); color: #BE185D; }
+.pat-tile.filled { background: #DCFCE7; box-shadow: var(--clay-raised-sm), inset 0 0 0 3px #4ADE80; }
 
 /* ---------- Magic Machine ---------- */
 
@@ -354,14 +354,15 @@
   gap: clamp(4px, 2vw, 10px);
   padding: 8px 10px;
   border-radius: 16px;
-  background: #ECFEFF;
-  border: 3px solid #A5F3FC;
+  background: #E4F8FC;
+  border: none;
+  box-shadow: var(--clay-press-sm);
   width: 100%;
   cursor: pointer;
   font: inherit;
 }
 
-.mach-row.q { background: #FFFFFF; border-color: #0891B2; border-style: dashed; cursor: default; }
+.mach-row.q { background: #FFFFFF; box-shadow: var(--clay-raised-sm); cursor: default; }
 
 .mach-num {
   min-width: 56px;
@@ -369,7 +370,7 @@
   padding: 0 6px;
   border-radius: 14px;
   background: #FFFFFF;
-  border: 3px solid #22D3EE;
+  box-shadow: var(--clay-raised-sm);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.8rem;
@@ -379,8 +380,8 @@
   justify-content: center;
 }
 
-.mach-num.ask { border-style: dashed; color: #0891B2; }
-.mach-num.solved { background: #DCFCE7; border-color: #16A34A; color: #15803D; }
+.mach-num.ask { background: #E4F8FC; box-shadow: var(--clay-press-sm); color: #0891B2; }
+.mach-num.solved { background: #DCFCE7; box-shadow: var(--clay-raised-sm), inset 0 0 0 3px #4ADE80; color: #15803D; }
 
 .mach-arrow { color: #0891B2; flex-shrink: 0; }
 
@@ -389,7 +390,7 @@
   height: 54px;
   border-radius: 14px;
   background: linear-gradient(160deg, #67E8F9, #0891B2);
-  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: var(--clay-lift-sm), var(--clay-puff-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -406,7 +407,7 @@
   padding: 6px 16px;
   border-radius: 999px;
   background: #CFFAFE;
-  border: 3px solid #0891B2;
+  box-shadow: var(--clay-raised-sm);
   color: #155E75;
 }
 

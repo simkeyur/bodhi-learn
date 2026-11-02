@@ -180,8 +180,20 @@
   .prep .skill-state { grid-row: 3; }
 }
 @media (max-width: 860px) {
-  .prep .home-grid { grid-template-columns: 1fr; }
+  .prep .home-grid { grid-template-columns: minmax(0, 1fr); }
   .prep .today { grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .prep .plan-list li { flex-wrap: wrap; row-gap: var(--s1); }
+  .prep .plan-list li > span:nth-child(2) { flex-basis: 55%; }
+  /* A skill's name gets the whole width; its two buttons share a row underneath */
+  .prep .skill-row { grid-template-columns: minmax(0, 1fr); gap: var(--s2); }
+  .prep .skill-state { grid-row: auto; }
+  .prep .skill-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .prep .skill-actions .btn { width: 100%; }
+  .prep .set-row .skill-actions { grid-template-columns: 1fr; }
+  .prep .practice-skill { flex: 1 0 100%; order: 1; }
+  .prep .practice-points { margin-left: auto; }
 }
 @media (max-width: 560px) {
   .prep .practice-card { padding: var(--s4); }

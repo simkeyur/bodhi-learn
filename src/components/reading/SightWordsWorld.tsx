@@ -137,7 +137,6 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
       <div style={{
         background: '#FFFFFF',
         borderRadius: 'var(--radius-lg)',
-        border: '6px solid #C084FC',
         boxShadow: 'var(--shadow-floating)',
         padding: '16px 14px 20px',
         textAlign: 'center',
@@ -189,7 +188,6 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                 alignItems: 'center',
                 gap: 14,
                 background: '#FAF5FF',
-                border: '3px solid #E9D5FF',
                 padding: '8px 16px 8px 24px',
                 borderRadius: 999,
                 marginBottom: 10,
@@ -257,10 +255,10 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
 
         {/* Puzzle: Tap Letters to Build Word */}
         <div style={{
-          background: '#F8FAFC',
+          background: '#EEF4FC',
           borderRadius: 'var(--radius-md)',
           padding: '16px 10px',
-          border: '3px dashed #CBD5E1',
+          boxShadow: 'var(--clay-sunk)',
           maxWidth: 620,
           margin: '0 auto',
         }}>
@@ -300,7 +298,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                     height: 68,
                     padding: 0,
                     borderRadius: 16,
-                    border: placed ? '3px solid #9333EA' : '3px dashed #94A3B8',
+                    border: 'none',
                     background: placed ? '#FAF5FF' : '#FFFFFF',
                     color: '#6B21A8',
                     fontFamily: 'var(--font-display)',
@@ -310,7 +308,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: placed ? 'pointer' : 'default',
-                    boxShadow: placed ? 'var(--clay-raised-sm)' : 'none',
+                    boxShadow: placed ? 'var(--clay-raised-sm)' : 'var(--clay-press-sm)',
                   }}
                   className={placed ? 'animate-pop' : ''}
                 >

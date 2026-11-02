@@ -143,7 +143,6 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
                 style={{
                   background: '#FFFFFF',
                   borderRadius: 'var(--radius-lg)',
-                  border: '5px solid #38BDF8',
                   padding: '22px 16px',
                   textAlign: 'center',
                   boxShadow: 'var(--clay-raised-sm)',
@@ -172,7 +171,6 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
         <div style={{
           background: '#FFFFFF',
           borderRadius: 'var(--radius-lg)',
-          border: '5px solid #38BDF8',
           boxShadow: 'var(--shadow-floating)',
           overflow: 'hidden',
         }}>
