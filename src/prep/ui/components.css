@@ -33,7 +33,8 @@
 .prep .btn-ghost:hover { background: rgb(255 255 255 / 70%); color: var(--ink); }
 .prep .btn-danger { color: var(--bad); }
 .prep .btn-danger:hover:not(:disabled) { background: var(--bad-bg); }
-.prep .btn-lg { min-height: 56px; font-size: var(--text-lg); padding: 0 var(--s6); border-radius: 24px; }
+/* The main action on a screen: slim and centered. In a row with other buttons, the row centers them (see .learn-actions) */
+.prep .btn-lg { display: flex; width: fit-content; min-height: 48px; margin-inline: auto; font-size: var(--text-md); padding: 0 var(--s6); border-radius: 20px; }
 .prep .btn-sm { min-height: 40px; padding: 0 var(--s4); font-size: var(--text-sm); border-radius: 16px; }
 
 /* ---------- Surfaces ---------- */

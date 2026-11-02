@@ -100,7 +100,7 @@ function Walkthrough({ code }: { code: string }) {
             <span className="learn-trophy" aria-hidden><Trophy size={36} /></span>
             <h2>You're ready to practice!</h2>
             <p className="page-sub">{samples ? 'Read a passage and answer its questions on this skill.' : 'Ten questions that start easy and get harder as you get them right.'}</p>
-            <div className="learn-actions center">
+            <div className="learn-actions">
               <button type="button" className="btn btn-ghost" onClick={() => go('intro')}><RotateCcw size={18} aria-hidden /> Go through it again</button>
               <button type="button" className="btn btn-primary btn-lg" onClick={() => navigate(`/practice/${code}`, { replace: true })}>Start practicing <ArrowRight size={20} aria-hidden /></button>
             </div>

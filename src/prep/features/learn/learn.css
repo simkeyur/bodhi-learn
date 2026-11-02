@@ -19,8 +19,8 @@
 @keyframes learn-in { from { opacity: 0; transform: translateY(6px); } }
 .prep .learn-goal { font-size: var(--text-xl); line-height: 1.45; color: var(--ink); max-width: 56ch; }
 .prep .learn-sub { display: flex; align-items: center; gap: var(--s2); font-size: var(--text-lg); color: var(--sd); }
-.prep .learn-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
-.prep .learn-actions.center { justify-content: center; }
+.prep .learn-actions { display: flex; align-items: center; justify-content: center; gap: var(--s3); flex-wrap: wrap; }
+.prep .learn-actions .btn-lg { margin-inline: 0; }
 
 /* Words: tap to flip */
 .prep .word-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s3); }
@@ -83,7 +83,6 @@
   .prep .learn-goal { font-size: var(--text-lg); }
   .prep .idea-card { padding: var(--s4); }
   .prep .idea-card p { font-size: var(--text-md); }
-  .prep .learn-actions .btn-lg { flex: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .prep .learn-body, .prep .idea-card, .prep .solve-steps li { animation: none; }

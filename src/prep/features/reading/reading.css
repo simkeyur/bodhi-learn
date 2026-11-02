@@ -12,7 +12,7 @@
 .prep .read-intro { font-size: var(--text-sm); color: var(--ink-3); font-style: italic; }
 .prep .read-questions { display: grid; gap: var(--s3); min-width: 0; }
 .prep .read-card { gap: var(--s4); }
-.prep .read-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
+.prep .read-actions { display: flex; align-items: center; justify-content: center; gap: var(--s3); flex-wrap: wrap; }
 .prep .read-cites { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s2); }
 .prep .read .feedback { display: grid; gap: var(--s3); padding: var(--s4); border-radius: var(--r-md); border: 2px solid var(--line); }
 
