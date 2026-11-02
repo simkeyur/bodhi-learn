@@ -12,29 +12,41 @@ export const EDIT_LETTER = makeSet({
     title: "Proposal for a Student Astronomy Observatory",
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        "Dear Members of the Oak Ridge ISD School Board,",
-      ] },
-      { kind: 'sentences', sentences: [
-        "I am writing on behalf of the Oak Ridge Middle School Science Club to propose the construction of a rooftop student astronomy observatory atop our new STEM wing.",
-        "Our school campus currently lacks dedicated astronomical observation equipment, forcing students to rely solely on two-dimensional textbook photographs and computer simulations.",
-        "Constructing an on-campus observatory would revolutionize our district's physical science curriculum and inspire the next generation of aerospace innovators.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "The proposed facility would feature an eight-foot motorized fiberglass dome, an automated fourteen-inch Schmidt-Cassegrain telescope, and a cooled digital astrophotography camera.",
-        "With this equipment, eighth-grade earth and space science classes could track sunspot migrations, photograph lunar craters, and measure the orbital periods of Jupiter's Galilean moons.",
-        "The science club had raised $4,500 through community car washes and bake sales, and we have applied for a matching educational grant from the Texas Space Grant Consortium.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "Each of the participating students have agreed to volunteer for weekend community stargazing open houses.",
-        "Thank you for your leadership, your dedication to educational excellence, and your thoughtful consideration of our proposal.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "By investing in this cutting-edge scientific facility today, our school district will establish an enduring educational landmark that will inspire scientific inquiry, foster community engagement, and empower students to reach for the stars for decades to come.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "Respectfully submitted,\nElena Morales\nScience Club President",
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          "Dear Members of the Oak Ridge ISD School Board,",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "I am writing on behalf of the Oak Ridge Middle School Science Club to propose the construction of a rooftop student astronomy observatory atop our new STEM wing.",
+          "Our school campus currently lacks dedicated astronomical observation equipment, forcing students to rely solely on two-dimensional textbook photographs and computer simulations.",
+          "Constructing an on-campus observatory would revolutionize our district's physical science curriculum and inspire the next generation of aerospace innovators.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "The proposed facility would feature an eight-foot motorized fiberglass dome, an automated fourteen-inch Schmidt-Cassegrain telescope, and a cooled digital astrophotography camera.",
+          "With this equipment, eighth-grade earth and space science classes could track sunspot migrations, photograph lunar craters, and measure the orbital periods of Jupiter's Galilean moons.",
+          "The science club had raised $4,500 through community car washes and bake sales, and we have applied for a matching educational grant from the Texas Space Grant Consortium.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "Each of the participating students have agreed to volunteer for weekend community stargazing open houses.",
+          "Thank you for your leadership, your dedication to educational excellence, and your thoughtful consideration of our proposal.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "By investing in this cutting-edge scientific facility today, our school district will establish an enduring educational landmark that will inspire scientific inquiry, foster community engagement, and empower students to reach for the stars for decades to come.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "Respectfully submitted,\nElena Morales\nScience Club President",
+        ]
+      },
     ],
   }],
   items: [

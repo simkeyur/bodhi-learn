@@ -12,24 +12,32 @@ export const EDIT_SOLAR = makeSet({
     title: 'Next-Generation Solar Windows',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Modern commercial skyscrapers feature thousands of square feet of exterior glass windows that let in daylight while regulating heat.',
-        'Materials scientists at leading Texas research universities have developed transparent luminescent solar concentrators that convert ordinary architectural glass into functional photovoltaic generators.',
-        'These innovative windows generate clean electricity without obstructing scenic outdoor views.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Unlike opaque silicon rooftop panels, solar windows utilize organic salts that absorb invisible wavelengths of ultraviolet and near-infrared light.',
-        'Specialized light guides channel this captured electromagnetic radiation to microscopic photovoltaic cells embedded in the window frame.',
-        'The combination of transparent quantum dots with high-efficiency edge cells produce clean renewable electricity throughout the business day.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'If commercial office towers in downtown Austin and Dallas installed these windows, they could generate up to forty percent of their internal electrical needs on-site.',
-        'The adoption of this technology promises to transform urban glass architecture into decentralized clean power plants.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'In addition to generating clean electrical power, solar window coatings reduce indoor solar heat gain by over fifty percent, significantly lowering air conditioning costs during blistering Texas summers.',
-        'By combining energy conservation with localized power generation, this green technology accelerates the transition toward carbon-neutral urban architecture that reduces dependence on fossil fuels across modern metropolitan centers.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Modern commercial skyscrapers feature thousands of square feet of exterior glass windows that let in daylight while regulating heat.',
+          'Materials scientists at leading Texas research universities have developed transparent luminescent solar concentrators that convert ordinary architectural glass into functional photovoltaic generators.',
+          'These innovative windows generate clean electricity without obstructing scenic outdoor views.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Unlike opaque silicon rooftop panels, solar windows utilize organic salts that absorb invisible wavelengths of ultraviolet and near-infrared light.',
+          'Specialized light guides channel this captured electromagnetic radiation to microscopic photovoltaic cells embedded in the window frame.',
+          'The combination of transparent quantum dots with high-efficiency edge cells produce clean renewable electricity throughout the business day.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'If commercial office towers in downtown Austin and Dallas installed these windows, they could generate up to forty percent of their internal electrical needs on-site.',
+          'The adoption of this technology promises to transform urban glass architecture into decentralized clean power plants.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'In addition to generating clean electrical power, solar window coatings reduce indoor solar heat gain by over fifty percent, significantly lowering air conditioning costs during blistering Texas summers.',
+          'By combining energy conservation with localized power generation, this green technology accelerates the transition toward carbon-neutral urban architecture that reduces dependence on fossil fuels across modern metropolitan centers.',
+        ]
+      },
     ],
   }],
   items: [

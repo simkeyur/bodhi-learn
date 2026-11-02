@@ -12,25 +12,31 @@ export const EDIT_OCEAN = makeSet({
     title: 'Journey to the Abyss',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Nearly seven miles beneath the turbulent rolling surface of the western Pacific Ocean lies the Mariana Trench, the deepest and most enigmatic geological chasm on planet Earth.',
-        'The water pressure at the bottom exceeds one thousand times the atmospheric pressure at sea level.',
-        'This crushing force is equivalent to balancing fifty jumbo jets on top of a single human being.',
-        'For decades, marine scientists assumed that such an inhospitable, sunless environment was completely barren, silent, and devoid of living creatures.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'In recent years, innovative robotic submersibles and manned deep-sea vessels have penetrated the perpetual darkness.',
-        'Specialized titanium hulls are engineered to withstand the colossal pressures of the hadal zone.',
-        'Powerful floodlights illuminate a ghostly underwater landscape inhabited by translucent snailfish, giant amphipods, and carpet-like microbial mats.',
-        'These resilient organisms do not rely on sunlight for energy.',
-        'Instead, they draw nourishment from chemical chemosynthesis driven by deep hydrothermal vents.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Exploring the Mariana Trench provides invaluable scientific insights into tectonic plate subduction, marine geology, and the very origins of planetary life.',
-        'Studying hardy extremophile microbes in this deep ocean rift may even yield breakthrough biochemical enzymes for revolutionary modern medical treatments.',
-        'The ocean depths remain one of the last mysterious and uncharted frontiers on Earth.',
-        'Future deep-sea expeditions will continue to illuminate these remote abyssal depths, expanding our understanding of marine biology and extreme planetary habitats.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Nearly seven miles beneath the turbulent rolling surface of the western Pacific Ocean lies the Mariana Trench, the deepest and most enigmatic geological chasm on planet Earth.',
+          'The water pressure at the bottom exceeds one thousand times the atmospheric pressure at sea level.',
+          'This crushing force is equivalent to balancing fifty jumbo jets on top of a single human being.',
+          'For decades, marine scientists assumed that such an inhospitable, sunless environment was completely barren, silent, and devoid of living creatures.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'In recent years, innovative robotic submersibles and manned deep-sea vessels have penetrated the perpetual darkness.',
+          'Specialized titanium hulls are engineered to withstand the colossal pressures of the hadal zone.',
+          'Powerful floodlights illuminate a ghostly underwater landscape inhabited by translucent snailfish, giant amphipods, and carpet-like microbial mats.',
+          'These resilient organisms do not rely on sunlight for energy.',
+          'Instead, they draw nourishment from chemical chemosynthesis driven by deep hydrothermal vents.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Exploring the Mariana Trench provides invaluable scientific insights into tectonic plate subduction, marine geology, and the very origins of planetary life.',
+          'Studying hardy extremophile microbes in this deep ocean rift may even yield breakthrough biochemical enzymes for revolutionary modern medical treatments.',
+          'The ocean depths remain one of the last mysterious and uncharted frontiers on Earth.',
+          'Future deep-sea expeditions will continue to illuminate these remote abyssal depths, expanding our understanding of marine biology and extreme planetary habitats.',
+        ]
+      },
     ],
   }],
   items: [

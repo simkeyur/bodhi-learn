@@ -12,25 +12,33 @@ export const EDIT_ROBOTICS = makeSet({
     title: "Biomimetic Drones in Search and Rescue",
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        "Traditional search-and-rescue quadcopters struggle to navigate dense collapsed buildings and forest canopy debris following natural disasters.",
-        "Roboticists at Texas engineering laboratories are designing biomimetic drones inspired by the aerodynamic flight mechanics of birds and bats.",
-        "These nature-inspired machines promise to navigate hazardous obstacle courses that would destroy conventional rigid drones.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "Peregrine falcons can fold their wings during high-speed dives to slip through narrow openings.",
-        "Engineers have developed robotic drones with articulating carbon-fiber joints that tuck their wings inward when entering tight crevices.",
-        "Micro-sonar sensors allow the drone to map its surroundings in real time.",
-        "When disaster strikes, the rescue robotics team deploys their swarm of bio-drones into the rubble.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "The drone can squeeze through a six-inch hole, it can transmit thermal infrared video of trapped survivors to emergency responders.",
-        "Biomimetic robotics demonstrate that millions of years of natural evolutionary engineering offer the ultimate inspiration for saving human lives.",
-      ] },
-      { kind: 'sentences', sentences: [
-        "Texas disaster response agencies are partnering with aerospace university labs to field-test these biomimetic drones during simulated earthquake and hurricane emergencies.",
-        "As micro-processors and artificial intelligence continue to advance, these agile bio-drones will become indispensable lifelines during municipal search-and-rescue missions worldwide, safeguarding both human survivors and first responders during catastrophic civil emergencies.",
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          "Traditional search-and-rescue quadcopters struggle to navigate dense collapsed buildings and forest canopy debris following natural disasters.",
+          "Roboticists at Texas engineering laboratories are designing biomimetic drones inspired by the aerodynamic flight mechanics of birds and bats.",
+          "These nature-inspired machines promise to navigate hazardous obstacle courses that would destroy conventional rigid drones.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "Peregrine falcons can fold their wings during high-speed dives to slip through narrow openings.",
+          "Engineers have developed robotic drones with articulating carbon-fiber joints that tuck their wings inward when entering tight crevices.",
+          "Micro-sonar sensors allow the drone to map its surroundings in real time.",
+          "When disaster strikes, the rescue robotics team deploys their swarm of bio-drones into the rubble.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "The drone can squeeze through a six-inch hole, it can transmit thermal infrared video of trapped survivors to emergency responders.",
+          "Biomimetic robotics demonstrate that millions of years of natural evolutionary engineering offer the ultimate inspiration for saving human lives.",
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          "Texas disaster response agencies are partnering with aerospace university labs to field-test these biomimetic drones during simulated earthquake and hurricane emergencies.",
+          "As micro-processors and artificial intelligence continue to advance, these agile bio-drones will become indispensable lifelines during municipal search-and-rescue missions worldwide, safeguarding both human survivors and first responders during catastrophic civil emergencies.",
+        ]
+      },
     ],
   }],
   items: [

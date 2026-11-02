@@ -12,23 +12,29 @@ export const EDIT_WILDFLOWER = makeSet({
     title: 'Ribbons of Color along Texas Roads',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Every spring, millions of enthusiastic motorists driving across Texas highways are greeted by brilliant, colorful blankets of native bluebonnets, Indian paintbrushes, and pink evening primroses.',
-        'These stunning floral displays along state rights-of-way did not appear by sheer accident or good fortune.',
-        'They are the living legacy of former First Lady Claudia "Lady Bird" Johnson, who dedicated much of her life to environmental conservation.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Growing up in East Texas, Lady Bird developed a lifelong love for native plants and open woodlands.',
-        'During the 1960s, she championed the Highway Beautification Act, which encouraged states to plant native wildflowers and clean up roadside junkyards.',
-        'She deeply believed that natural beauty fed the human spirit and that tidy, scenic roadsides made highway travel far safer and more enjoyable for traveling families.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'In 1982, Lady Bird founded the National Wildflower Research Center in Austin on her seventieth birthday.',
-        'The center conducts scientific research on drought-tolerant prairie grasses, it preserves endangered native plant species.',
-        'Today, the Texas Department of Transportation sows more than thirty thousand pounds of wildflower seeds each year.',
-        'Because native plants require less mowing and watering than imported turfgrass.',
-        'These hardy native blooms save millions of taxpayer dollars every single year while providing vital seasonal nectar for native bees, birds, and migrating monarch butterflies.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Every spring, millions of enthusiastic motorists driving across Texas highways are greeted by brilliant, colorful blankets of native bluebonnets, Indian paintbrushes, and pink evening primroses.',
+          'These stunning floral displays along state rights-of-way did not appear by sheer accident or good fortune.',
+          'They are the living legacy of former First Lady Claudia "Lady Bird" Johnson, who dedicated much of her life to environmental conservation.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Growing up in East Texas, Lady Bird developed a lifelong love for native plants and open woodlands.',
+          'During the 1960s, she championed the Highway Beautification Act, which encouraged states to plant native wildflowers and clean up roadside junkyards.',
+          'She deeply believed that natural beauty fed the human spirit and that tidy, scenic roadsides made highway travel far safer and more enjoyable for traveling families.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'In 1982, Lady Bird founded the National Wildflower Research Center in Austin on her seventieth birthday.',
+          'The center conducts scientific research on drought-tolerant prairie grasses, it preserves endangered native plant species.',
+          'Today, the Texas Department of Transportation sows more than thirty thousand pounds of wildflower seeds each year.',
+          'Because native plants require less mowing and watering than imported turfgrass.',
+          'These hardy native blooms save millions of taxpayer dollars every single year while providing vital seasonal nectar for native bees, birds, and migrating monarch butterflies.',
+        ]
+      },
     ],
   }],
   items: [

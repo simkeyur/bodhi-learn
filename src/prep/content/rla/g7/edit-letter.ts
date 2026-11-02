@@ -12,23 +12,29 @@ export const EDIT_LETTER = makeSet({
     title: 'A Modern Commons for Oak Creek',
     genre: 'persuasive',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Dear Principal Martinez,',
-        'On behalf of the Oak Creek Middle School student council, I am writing to propose a vital and transformative enhancement to our campus library facility.',
-        'Over the past decade, student academic research habits, digital technology requirements, and collaborative learning methods have evolved dramatically.',
-        'However, our current library space remains configured almost exclusively for individual, silent reading with rigid rows of heavy wooden carrels.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'To meet the diverse academic needs of modern twenty-first-century learners, we recommend converting the underutilized west wing of the library into a dynamic digital commons.',
-        'This modern flexible space would feature modular desks on wheels, ergonomic seating, and interactive digital display screens for group presentations.',
-        'Students could actively collaborate on multimedia history documentaries, scientific research posters, and peer tutoring sessions without disturbing students studying quietly nearby.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Furthermore, our student council recently conducted a comprehensive, school-wide survey regarding student library usage.',
-        'Eighty-four percent of surveyed students indicated that they would enthusiastically utilize the library after school hours if collaborative group study rooms were available.',
-        'By investing in this modern collaborative commons, Oak Creek Middle School can foster essential skills of technological literacy, teamwork, and creative problem-solving.',
-        'Thank you for your continued dedication to empowering students and enhancing academic opportunities on our campus.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Dear Principal Martinez,',
+          'On behalf of the Oak Creek Middle School student council, I am writing to propose a vital and transformative enhancement to our campus library facility.',
+          'Over the past decade, student academic research habits, digital technology requirements, and collaborative learning methods have evolved dramatically.',
+          'However, our current library space remains configured almost exclusively for individual, silent reading with rigid rows of heavy wooden carrels.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'To meet the diverse academic needs of modern twenty-first-century learners, we recommend converting the underutilized west wing of the library into a dynamic digital commons.',
+          'This modern flexible space would feature modular desks on wheels, ergonomic seating, and interactive digital display screens for group presentations.',
+          'Students could actively collaborate on multimedia history documentaries, scientific research posters, and peer tutoring sessions without disturbing students studying quietly nearby.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Furthermore, our student council recently conducted a comprehensive, school-wide survey regarding student library usage.',
+          'Eighty-four percent of surveyed students indicated that they would enthusiastically utilize the library after school hours if collaborative group study rooms were available.',
+          'By investing in this modern collaborative commons, Oak Creek Middle School can foster essential skills of technological literacy, teamwork, and creative problem-solving.',
+          'Thank you for your continued dedication to empowering students and enhancing academic opportunities on our campus.',
+        ]
+      },
     ],
   }],
   items: [

@@ -12,25 +12,33 @@ export const EDIT_GARDEN = makeSet({
     title: 'Urban Micro-Farming and Pollinators',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Across metropolitan areas in Texas, barren concrete rooftops and vacant asphalt lots are being transformed into thriving urban micro-farms.',
-        'These community agricultural spaces provide fresh organic produce to urban neighborhoods that frequently lack access to full-service grocery supermarkets.',
-        'In addition, urban micro-farms provide critical sanctuary corridors for native pollinator populations threatened by suburban habitat fragmentation.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Cultivating indigenous flowering flora like Texas bluebonnets, purple coneflowers, and desert willows attract native bees, monarch butterflies, and hummingbirds.',
-        'Volunteers construct raised wooden cedar planter beds filled with rich composted organic soil, rainwater catchment barrels, and drip irrigation hoses.',
-        'The urban micro-farm produces fresh vegetables, it also creates an outdoor environmental classroom where students learn sustainable biology.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Because soil contamination from historic industrial runoff can pose health risks in inner cities, cultivators use elevated cedar garden beds lined with impermeable geotextile fabric.',
-        "It's roots absorb moisture while remaining protected from subterranean heavy metals.",
-        'Participating in urban farming fosters civic pride, restores biodiversity, and reconnects urban residents with the natural agricultural rhythms of the earth.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Local schools collaborate with community garden managers to offer hands-on workshops where youth learn about soil microbiology, composting, and water conservation.',
-        'These grassroots environmental initiatives demonstrate that sustainable agriculture can flourish even in the heart of our most densely populated urban centers.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Across metropolitan areas in Texas, barren concrete rooftops and vacant asphalt lots are being transformed into thriving urban micro-farms.',
+          'These community agricultural spaces provide fresh organic produce to urban neighborhoods that frequently lack access to full-service grocery supermarkets.',
+          'In addition, urban micro-farms provide critical sanctuary corridors for native pollinator populations threatened by suburban habitat fragmentation.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Cultivating indigenous flowering flora like Texas bluebonnets, purple coneflowers, and desert willows attract native bees, monarch butterflies, and hummingbirds.',
+          'Volunteers construct raised wooden cedar planter beds filled with rich composted organic soil, rainwater catchment barrels, and drip irrigation hoses.',
+          'The urban micro-farm produces fresh vegetables, it also creates an outdoor environmental classroom where students learn sustainable biology.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Because soil contamination from historic industrial runoff can pose health risks in inner cities, cultivators use elevated cedar garden beds lined with impermeable geotextile fabric.',
+          "It's roots absorb moisture while remaining protected from subterranean heavy metals.",
+          'Participating in urban farming fosters civic pride, restores biodiversity, and reconnects urban residents with the natural agricultural rhythms of the earth.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Local schools collaborate with community garden managers to offer hands-on workshops where youth learn about soil microbiology, composting, and water conservation.',
+          'These grassroots environmental initiatives demonstrate that sustainable agriculture can flourish even in the heart of our most densely populated urban centers.',
+        ]
+      },
     ],
   }],
   items: [

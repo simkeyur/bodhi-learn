@@ -12,23 +12,29 @@ export const EDIT_RECYCLE = makeSet({
     title: 'Turn Scraps into Soil',
     genre: 'persuasive',
     blocks: [
-      { kind: 'sentences', sentences: [
-        'Every single day at lunchtime, busy students at Lamar Middle School discard hundreds of pounds of uneaten food scraps into heavy landfill trash cans.',
-        'Apple cores, banana peels, and crusts from sandwich bread are hauled away to city dumps, where they decompose without oxygen and release potent greenhouse gases.',
-        'Instead of burying organic waste, our school should implement a cafeteria composting program.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Composting is an efficient, natural biological process that rapidly converts kitchen and garden organic waste into rich, dark, nutrient-dense soil conditioner.',
-        'By placing green collection buckets beside the cafeteria tray return stations, student volunteers can easily separate fruit and vegetable scraps from plastic wrappers.',
-        'The science department could use the resulting compost in our campus raised-bed gardens; furthermore, excess soil could be donated to the community park.',
-        'The environmental club, in partnership with the national junior honor society, has already agreed to supervise the collection bins each week.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Some administrators worry that outdoor compost tumblers will attract insects or unpleasant odors.',
-        'Modern enclosed tumbling bins prevent pests from entering.',
-        'Regularly rotating the bin keeps the decomposing matter well-aerated and sweet-smelling.',
-        'Adopting a schoolwide composting program will teach our middle school students practical environmental responsibility and save our school district substantial money on monthly commercial waste disposal fees.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          'Every single day at lunchtime, busy students at Lamar Middle School discard hundreds of pounds of uneaten food scraps into heavy landfill trash cans.',
+          'Apple cores, banana peels, and crusts from sandwich bread are hauled away to city dumps, where they decompose without oxygen and release potent greenhouse gases.',
+          'Instead of burying organic waste, our school should implement a cafeteria composting program.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Composting is an efficient, natural biological process that rapidly converts kitchen and garden organic waste into rich, dark, nutrient-dense soil conditioner.',
+          'By placing green collection buckets beside the cafeteria tray return stations, student volunteers can easily separate fruit and vegetable scraps from plastic wrappers.',
+          'The science department could use the resulting compost in our campus raised-bed gardens; furthermore, excess soil could be donated to the community park.',
+          'The environmental club, in partnership with the national junior honor society, has already agreed to supervise the collection bins each week.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Some administrators worry that outdoor compost tumblers will attract insects or unpleasant odors.',
+          'Modern enclosed tumbling bins prevent pests from entering.',
+          'Regularly rotating the bin keeps the decomposing matter well-aerated and sweet-smelling.',
+          'Adopting a schoolwide composting program will teach our middle school students practical environmental responsibility and save our school district substantial money on monthly commercial waste disposal fees.',
+        ]
+      },
     ],
   }],
   items: [

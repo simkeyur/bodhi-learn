@@ -12,26 +12,34 @@ export const EDIT_OCEAN = makeSet({
     title: 'The Mariana Trench Expedition',
     genre: 'informational',
     blocks: [
-      { kind: 'sentences', sentences: [
-        "Located in the western Pacific Ocean, the Mariana Trench plunges nearly 36,000 feet into the Earth's crust at the Challenger Deep.",
-        'At the bottom of this abyssal chasm, hydrostatic water pressure exceeds one thousand times the atmospheric pressure at sea level.',
-        'Exploring this extreme frontier requires cutting-edge submarine engineering and fearless human determination.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'In 2012, explorer and filmmaker James Cameron piloted the Deepsea Challenger, a revolutionary vertical submersible that he spent seven years designing.',
-        'Engineers constructed the cockpit from a solid sphere of forged micro-alloy steel with walls nearly three inches thick.',
-        'The pressure hull prevented the occupant from being crushed by the tremendous weight of the water column.',
-        'Furthermore syntactic foam, a composite material containing microscopic hollow glass spheres, provided buoyancy while resisting immense compression.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'When Cameron reached the ocean floor, he observed bizarre sea cucumbers, amphipods, and gelatinous microorganisms.',
-        'The expedition collected valuable sediment core samples that scientists still analyze today.',
-        'Extreme deep-sea exploration has a profound affect on our understanding of how life thrives in alien environments.',
-      ] },
-      { kind: 'sentences', sentences: [
-        'Hydrothermal vents and abyssal trenches provide critical clues regarding the prebiotic chemical conditions where life first emerged on Earth billions of years ago.',
-        'Oceanographers believe that unlocking the secrets of the deep will guide our exploration of subsurface oceans on icy moons like Europa and Enceladus.',
-      ] },
+      {
+        kind: 'sentences', sentences: [
+          "Located in the western Pacific Ocean, the Mariana Trench plunges nearly 36,000 feet into the Earth's crust at the Challenger Deep.",
+          'At the bottom of this abyssal chasm, hydrostatic water pressure exceeds one thousand times the atmospheric pressure at sea level.',
+          'Exploring this extreme frontier requires cutting-edge submarine engineering and fearless human determination.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'In 2012, explorer and filmmaker James Cameron piloted the Deepsea Challenger, a revolutionary vertical submersible that he spent seven years designing.',
+          'Engineers constructed the cockpit from a solid sphere of forged micro-alloy steel with walls nearly three inches thick.',
+          'The pressure hull prevented the occupant from being crushed by the tremendous weight of the water column.',
+          'Furthermore syntactic foam, a composite material containing microscopic hollow glass spheres, provided buoyancy while resisting immense compression.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'When Cameron reached the ocean floor, he observed bizarre sea cucumbers, amphipods, and gelatinous microorganisms.',
+          'The expedition collected valuable sediment core samples that scientists still analyze today.',
+          'Extreme deep-sea exploration has a profound affect on our understanding of how life thrives in alien environments.',
+        ]
+      },
+      {
+        kind: 'sentences', sentences: [
+          'Hydrothermal vents and abyssal trenches provide critical clues regarding the prebiotic chemical conditions where life first emerged on Earth billions of years ago.',
+          'Oceanographers believe that unlocking the secrets of the deep will guide our exploration of subsurface oceans on icy moons like Europa and Enceladus.',
+        ]
+      },
     ],
   }],
   items: [
