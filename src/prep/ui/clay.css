@@ -2,6 +2,11 @@
    Loaded after every screen's own stylesheet (see PrepApp.tsx), so it wins ties. Shadows come from src/styles/clay.css.
    Raised = something you can press or read on: cards, rows, choices. Sunk = a tray or a field the raised things sit in. */
 
+/* ---------- Small text buttons ("Skills", "All reading") are raised pills, not plain text ---------- */
+.prep .btn-ghost.btn-sm { background: var(--surface); color: var(--blue-700); box-shadow: var(--clay-raised-sm); }
+.prep .btn-ghost.btn-sm:hover { background: var(--blue-50); color: var(--blue-700); }
+.prep .btn-ghost.btn-sm:active { box-shadow: var(--clay-press); }
+
 /* ---------- Raised: panels and rows ---------- */
 .prep .hero { border: none; box-shadow: var(--clay-raised-lg); background: linear-gradient(145deg, #FFFFFF 0%, #EAF4FE 100%); }
 .prep .countdown, .prep .stat { border: none; box-shadow: var(--clay-raised-sm); }

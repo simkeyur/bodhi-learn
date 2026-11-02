@@ -303,6 +303,17 @@ h1, h2, h3, h4, .font-display {
   flex-shrink: 0;
 }
 
+/* The way home: a sky-blue clay button, so it stands out from the plain white ones */
+.kid-btn.back-btn {
+  --clay-c: var(--color-sky-dark);
+  background: linear-gradient(160deg, #7DD3FC 0%, var(--color-sky) 100%);
+  color: #FFFFFF;
+  box-shadow: var(--clay-tint) color-mix(in srgb, var(--clay-c) 55%, transparent), var(--clay-puff-color);
+}
+.kid-btn.back-btn:active:not(:disabled) {
+  box-shadow: 0 3px 6px -2px color-mix(in srgb, var(--clay-c) 45%, transparent), var(--clay-press-color);
+}
+
 /* Segmented control (e.g. Alphabet Board / Letter Quest) */
 .seg {
   display: flex;

@@ -14,14 +14,22 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 44px;
-  padding: 0 16px 0 12px;
+  --clay-c: #0284C7;
+  min-height: 48px;
+  padding: 0 20px 0 14px;
   border-radius: 999px;
-  border: 1.5px solid #E2E8F0;
-  background: #fff;
-  color: #334155;
-  font: 700 0.95rem var(--font-body);
+  border: none;
+  background: linear-gradient(160deg, #7DD3FC 0%, #38BDF8 100%);
+  color: #fff;
+  box-shadow: var(--clay-tint) color-mix(in srgb, var(--clay-c) 55%, transparent), var(--clay-puff-color);
+  font: 700 1rem var(--font-display);
   cursor: pointer;
+  transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease, filter 0.18s ease;
+}
+.quiz-back:hover { filter: brightness(1.04); }
+.quiz-back:active {
+  transform: translateY(2px) scale(0.985);
+  box-shadow: 0 3px 6px -2px color-mix(in srgb, var(--clay-c) 45%, transparent), var(--clay-press-color);
 }
 
 .quiz-level-chip {
