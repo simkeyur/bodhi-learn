@@ -7,7 +7,7 @@
   line-height: 1.5;
   color: var(--ink);
   /* Bodhi's sky-to-sunshine background, lighter */
-  background: linear-gradient(180deg, #E8F6FE 0%, #F3FBF6 55%, #FFF8E6 100%) fixed;
+  background: linear-gradient(180deg, #DCEBFB 0%, #E9F5EE 55%, #FBF0D4 100%) fixed;
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -webkit-user-select: text;

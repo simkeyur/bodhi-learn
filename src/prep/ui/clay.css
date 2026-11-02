@@ -1,0 +1,78 @@
+/* The clay skin for Bodhi Prep's screens: no hard borders, raised surfaces, pressed-in trays.
+   Loaded after every screen's own stylesheet (see PrepApp.tsx), so it wins ties. Shadows come from src/styles/clay.css.
+   Raised = something you can press or read on: cards, rows, choices. Sunk = a tray or a field the raised things sit in. */
+
+/* ---------- Raised: panels and rows ---------- */
+.prep .hero { border: none; box-shadow: var(--clay-raised-lg); background: linear-gradient(145deg, #FFFFFF 0%, #EAF4FE 100%); }
+.prep .countdown, .prep .stat { border: none; box-shadow: var(--clay-raised-sm); }
+.prep .stat { background: var(--sun-100); }
+.prep .plan-list li, .prep .skill-row, .prep .set-row, .prep .reading-next, .prep .solve-steps li, .prep .word-card,
+.prep .learn-passage, .prep .summary-score > div, .prep .idea-card, .prep .learn-feedback {
+  border: none; box-shadow: var(--clay-raised-sm);
+}
+.prep .skill-row, .prep .plan-list li { background: linear-gradient(155deg, #FFFFFF 30%, var(--st, #F4F8FD) 100%); }
+.prep .reading-next { background: var(--blue-50); transition: transform 0.2s var(--clay-spring), box-shadow 0.2s ease; }
+.prep .reading-next:hover { transform: translateY(-2px); box-shadow: var(--clay-raised); }
+.prep .strand-icon, .prep .set-icon, .prep .strand-tile { border: none; box-shadow: var(--clay-raised-sm); }
+.prep .learn-card { border: none; box-shadow: var(--clay-raised-lg); }
+.prep .learn-head { border-bottom: none; }
+.prep .passage-sidebar { border: none; box-shadow: var(--clay-raised-sm); }
+
+/* ---------- Sunk: trays and fields ---------- */
+.prep .strand { border: none; background: color-mix(in srgb, var(--sc) 11%, #F4F8FD); box-shadow: var(--clay-sunk); border-radius: 34px; }
+.prep .learn-question { border: none; background: #EEF4FC; box-shadow: var(--clay-sunk); }
+.prep .write-group { border: none; background: #EEF4FC; box-shadow: var(--clay-press-sm); }
+.prep .write-box { border: none; background: #F3F7FD; box-shadow: var(--clay-sunk); }
+.prep .write-box:focus { border: none; box-shadow: var(--clay-sunk), 0 0 0 3px var(--blue-200); }
+.prep .read-tabs { border: none; background: #E3ECF8; box-shadow: var(--clay-sunk); }
+.prep .read-tabs button[aria-selected='true'] { box-shadow: var(--clay-tint) color-mix(in srgb, var(--blue-700) 55%, transparent), var(--clay-puff-color); }
+
+/* ---------- Progress dots, steps and chips ---------- */
+.prep .learn-steps li { border: none; box-shadow: var(--clay-raised-sm); }
+.prep .learn-steps li.now { background: var(--st); box-shadow: var(--clay-press-sm); }
+.prep .learn-step-dot, .prep .choice-letter, .prep .solve-num { border: none; box-shadow: var(--clay-puff-color); }
+.prep .learn-step-dot { background: #DCE8F6; }
+.prep .learn-trophy { border: none; box-shadow: var(--clay-raised); }
+.prep .new-skill-badge, .prep .item-part-name { border: none; box-shadow: var(--clay-raised-sm); }
+.prep .q-dot { border: none; box-shadow: var(--clay-raised-sm); transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease; }
+.prep .q-dot:active { transform: translateY(2px) scale(0.95); box-shadow: var(--clay-press); }
+.prep .q-dot.now { box-shadow: var(--clay-press-sm), inset 0 0 0 3px var(--blue-500); }
+.prep .q-dot.right { box-shadow: var(--clay-raised-sm), inset 0 0 0 3px var(--good-line); }
+.prep .q-dot.partial { box-shadow: var(--clay-raised-sm), inset 0 0 0 3px var(--part-line); }
+.prep .q-dot.wrong { box-shadow: var(--clay-raised-sm), inset 0 0 0 3px var(--bad-line); }
+
+/* ---------- Answer feedback ---------- */
+.prep .feedback-right { box-shadow: var(--clay-raised), inset 0 0 0 3px var(--good-line); }
+.prep .feedback-partial { box-shadow: var(--clay-raised), inset 0 0 0 3px var(--part-line); }
+.prep .feedback-wrong { box-shadow: var(--clay-raised), inset 0 0 0 3px var(--bad-line); }
+.prep .feedback-explain { border: none; box-shadow: var(--clay-press-sm); background: #F3F7FD; }
+.prep .read .feedback { border: none; }
+.prep .learn-feedback.right { background: var(--good-bg); box-shadow: var(--clay-raised-sm), inset 0 0 0 3px var(--good-line); }
+
+/* ---------- Choices and drop-downs ---------- */
+.prep .choice {
+  border: none; box-shadow: var(--clay-raised-sm);
+  transition: transform 0.2s var(--clay-spring), box-shadow 0.2s ease, background var(--fast) var(--ease);
+}
+.prep .choice:hover { background: var(--blue-50); transform: translateY(-1px); }
+.prep .choice:active { transform: translateY(2px) scale(0.99); }
+.prep .choice[data-locked='true']:hover { background: var(--surface); transform: none; }
+.prep .choice.picked { background: var(--blue-50); box-shadow: var(--clay-press-sm), inset 0 0 0 3px var(--blue-500); }
+.prep .choice.picked .choice-letter { background: var(--blue-600); }
+.prep .choice.right, .prep .choice.right:hover { background: var(--good-bg); transform: none; box-shadow: var(--clay-press-sm), inset 0 0 0 3px var(--good); }
+.prep .choice.right .choice-letter { background: var(--good); }
+.prep .choice.missed, .prep .choice.missed:hover { background: var(--surface); transform: none; box-shadow: var(--clay-raised-sm), inset 0 0 0 3px var(--good-line); }
+.prep .choice.wrong, .prep .choice.wrong:hover { background: var(--bad-bg); transform: none; box-shadow: var(--clay-press-sm), inset 0 0 0 3px var(--bad); }
+.prep .choice.wrong .choice-letter { background: var(--bad); }
+.prep .choice-letter { background: #EEF4FC; box-shadow: var(--clay-puff-sm); }
+.prep .choice.picked .choice-letter, .prep .choice.right .choice-letter, .prep .choice.wrong .choice-letter { box-shadow: var(--clay-puff-color); }
+
+.prep .inline-blank select { border: none; background-color: #EEF4FC; box-shadow: var(--clay-sunk); border-radius: 16px; }
+.prep .inline-blank select:hover:not(:disabled) { box-shadow: var(--clay-sunk), 0 0 0 3px var(--blue-200); }
+.prep .inline-blank.right select { border: none; box-shadow: var(--clay-sunk), 0 0 0 3px var(--good-line); }
+.prep .inline-blank.wrong select { border: none; box-shadow: var(--clay-sunk), 0 0 0 3px var(--bad-line); }
+
+/* ---------- Small screens: the fixed action bar becomes a raised tray ---------- */
+@media (max-width: 1000px) {
+  .prep .action-bar { border-top: none; border-radius: 28px 28px 0 0; box-shadow: var(--clay-raised-lg); }
+}

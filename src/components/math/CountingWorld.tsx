@@ -174,7 +174,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
               border: '3px solid #86EFAC',
               padding: '4px 6px 4px 20px',
               borderRadius: 999,
-              boxShadow: '0 4px 0 #BBF7D0',
+              boxShadow: 'var(--clay-raised-sm)',
             }}>
               <span style={{
                 fontFamily: 'var(--font-display)',
@@ -215,7 +215,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                   borderRadius: '50%',
                   background: item.counted ? '#FEF08A' : '#FFFFFF',
                   border: item.counted ? '4px solid #F59E0B' : '4px solid #34D399',
-                  boxShadow: item.counted ? '0 4px 0 #D97706' : '0 8px 0 #059669',
+                  boxShadow: item.counted ? 'var(--clay-tint) color-mix(in srgb, #D97706 55%, transparent), var(--clay-puff-color)' : 'var(--clay-tint) color-mix(in srgb, #059669 55%, transparent), var(--clay-puff-color)',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -369,7 +369,7 @@ export const CountingWorld: React.FC<CountingWorldProps> = ({ onBack }) => {
                     borderRadius: 'var(--radius-md)',
                     background: isRight ? '#DCFCE7' : '#FFFFFF',
                     border: `4px solid ${isRight ? '#16A34A' : '#F59E0B'}`,
-                    boxShadow: isWrong ? 'none' : '0 7px 0 #D97706',
+                    boxShadow: isWrong ? 'none' : 'var(--clay-tint) color-mix(in srgb, #D97706 55%, transparent), var(--clay-puff-color)',
                     fontFamily: 'var(--font-display)',
                     fontSize: '2.8rem',
                     fontWeight: 700,

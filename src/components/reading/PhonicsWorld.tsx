@@ -122,7 +122,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 6px 0 rgba(0, 0, 0, 0.15)',
+                boxShadow: 'var(--clay-tint) color-mix(in srgb, rgba(0, 0, 0, 0.15) 55%, transparent), var(--clay-puff-color)',
               }}
               className="animate-pop"
             >
@@ -177,7 +177,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
                     color: isSelected ? '#FFFFFF' : '#1E293B',
                     borderRadius: 'var(--radius-md)',
                     border: `3px solid ${item.color}`,
-                    boxShadow: isSelected ? '0 3px 0 #CBD5E1' : '0 5px 0 #E2E8F0',
+                    boxShadow: isSelected ? 'var(--clay-raised-sm)' : 'var(--clay-raised-sm)',
                     padding: '8px 4px',
                     textAlign: 'center',
                     cursor: 'pointer',
@@ -271,7 +271,7 @@ export const PhonicsWorld: React.FC<PhonicsWorldProps> = ({ onBack }) => {
                     fontFamily: 'var(--font-display)',
                     fontWeight: 700,
                     color: opt.color,
-                    boxShadow: isWrong ? 'none' : '0 7px 0 #CBD5E1',
+                    boxShadow: isWrong ? 'none' : 'var(--clay-raised-sm)',
                     cursor: isWrong ? 'default' : 'pointer',
                     opacity: isWrong ? 0.35 : 1,
                     transform: isWrong ? 'translateY(5px)' : 'none',

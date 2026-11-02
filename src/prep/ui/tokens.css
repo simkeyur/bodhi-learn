@@ -1,5 +1,5 @@
 /* Design tokens for Bodhi Prep: the Bodhi Play palette (sky, sun, grass, coral, grape) and fonts, a step
-   more grown-up: thinner borders, smaller chunky shadows, calmer type. The only place raw colors live. */
+   more grown-up: calmer type and a softer clay. Shadows and depth come from src/styles/clay.css. */
 .prep {
   /* Sky: Bodhi's main blue (token names kept as blue-* so components don't care which blue it is) */
   --blue-50: #F0F9FF;
@@ -28,7 +28,7 @@
   --line-strong: #CBD5E1;
   --surface: #FFFFFF;
   --surface-2: #F8FAFC;
-  --page: #F0F9FF;
+  --page: #EAF3FC;
 
   /* Feedback */
   --good: #15803D;
@@ -59,7 +59,7 @@
   --text-2xl: 1.75rem;
   --text-3xl: 2.25rem;
 
-  /* Space, shape, depth: Bodhi's rounded shapes and "chunky" bottom shadows, toned down */
+  /* Space, shape, depth: big soft radii and clay shadows */
   --s1: 4px;
   --s2: 8px;
   --s3: 12px;
@@ -67,11 +67,11 @@
   --s5: 24px;
   --s6: 32px;
   --s7: 48px;
-  --r-sm: 8px;
-  --r-md: 14px;
-  --r-lg: 20px;
-  --shadow-1: 0 3px 0 rgb(15 23 42 / 5%), 0 8px 20px -8px rgb(15 23 42 / 8%);
-  --shadow-2: 0 4px 0 rgb(15 23 42 / 6%), 0 16px 32px -10px rgb(2 132 199 / 22%);
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 30px;
+  --shadow-1: var(--clay-raised);
+  --shadow-2: var(--clay-raised-lg);
   --focus: 0 0 0 3px var(--surface), 0 0 0 6px var(--blue-500);
 
   --content: 1120px;

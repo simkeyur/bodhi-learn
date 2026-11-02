@@ -1,0 +1,53 @@
+/* Claymorphism for Bodhi Play and Bodhi Prep: soft, puffy shapes that look like molded clay.
+   Every raised surface gets three layers of light:
+     1. a diffuse drop shadow underneath (the lift),
+     2. a bright inner highlight on the top-left edge, and
+     3. a darker inner shade on the bottom-right edge (together, the puff).
+   A pressed surface flips the inner light, so it looks pushed into the page. Trays and inputs are pressed.
+   Use the tokens; don't write raw shadows in a component. */
+
+:root {
+  --clay-ink: 40 52 110; /* the shadow tint (an indigo), as "r g b" so it can take its own opacity */
+
+  /* Drop shadows */
+  --clay-lift: 0 14px 26px -10px rgb(var(--clay-ink) / 32%), 0 4px 10px -3px rgb(var(--clay-ink) / 12%);
+  --clay-lift-sm: 0 8px 16px -7px rgb(var(--clay-ink) / 30%), 0 2px 5px -1px rgb(var(--clay-ink) / 10%);
+  --clay-lift-lg: 0 24px 44px -14px rgb(var(--clay-ink) / 38%), 0 6px 14px -4px rgb(var(--clay-ink) / 14%);
+
+  /* Inner light. `puff` is for light surfaces, `puff-color` for colored ones (a white highlight, a black shade) */
+  --clay-puff: inset 4px 5px 9px rgb(255 255 255 / 95%), inset -5px -7px 12px rgb(var(--clay-ink) / 11%);
+  --clay-puff-sm: inset 2px 3px 5px rgb(255 255 255 / 95%), inset -3px -4px 7px rgb(var(--clay-ink) / 11%);
+  --clay-puff-color: inset 4px 5px 9px rgb(255 255 255 / 48%), inset -6px -8px 12px rgb(0 0 0 / 17%);
+
+  /* Pressed in: a darker top-left inner shadow and a light bottom-right rim */
+  --clay-press: inset 5px 6px 11px rgb(var(--clay-ink) / 20%), inset -4px -4px 8px rgb(255 255 255 / 90%);
+  --clay-press-sm: inset 3px 4px 7px rgb(var(--clay-ink) / 20%), inset -2px -2px 5px rgb(255 255 255 / 85%);
+  --clay-press-color: inset 5px 6px 11px rgb(0 0 0 / 24%), inset -3px -3px 7px rgb(255 255 255 / 28%);
+
+  /* The usual combinations */
+  --clay-raised: var(--clay-lift), var(--clay-puff);
+  --clay-raised-sm: var(--clay-lift-sm), var(--clay-puff-sm);
+  --clay-raised-lg: var(--clay-lift-lg), var(--clay-puff);
+  --clay-sunk: var(--clay-press);
+  --clay-tint: 0 12px 20px -8px; /* a colored drop shadow takes its color from the surface: see .clay-color below */
+
+  /* Older shadow tokens now mean clay, so every screen that still uses them softens at once */
+  --shadow-playful: var(--clay-raised);
+  --shadow-floating: var(--clay-raised-lg);
+  --shadow-btn: var(--clay-raised-sm);
+  --shadow-btn-pressed: var(--clay-press-color);
+
+  --clay-spring: cubic-bezier(0.34, 1.4, 0.64, 1); /* a slight overshoot, like pressing soft clay */
+}
+
+/* A colored clay surface (buttons, chips, discs): set --clay-c to its color and the shadow follows */
+.clay-color {
+  box-shadow: var(--clay-tint) color-mix(in srgb, var(--clay-c, #475569) 55%, transparent), var(--clay-puff-color);
+}
+.clay-color:active:not(:disabled) {
+  box-shadow: 0 3px 6px -2px color-mix(in srgb, var(--clay-c, #475569) 45%, transparent), var(--clay-press-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --clay-spring: ease; }
+}

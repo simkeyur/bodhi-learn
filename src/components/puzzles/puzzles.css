@@ -42,15 +42,16 @@
 .order-card {
   min-height: 52px;
   padding: 8px 16px;
-  border-radius: 16px;
-  border: 2.5px solid var(--q-color);
+  border-radius: 22px;
+  border: none;
   background: #fff;
-  box-shadow: 0 3px 0 var(--q-dark);
+  box-shadow: var(--clay-raised-sm), inset 0 0 0 3px color-mix(in srgb, var(--q-color) 55%, #fff);
   color: #0F172A;
   font: 700 1.05rem var(--font-body);
   cursor: pointer;
 }
-.order-card:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--q-dark); }
+.order-card { transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease; }
+.order-card:active { transform: translateY(2px) scale(0.985); box-shadow: var(--clay-press); }
 
 .order-msg { text-align: center; font-weight: 700; color: #B45309; margin: 8px 0 0; }
 .order-explain { text-align: center; color: #475569; font-weight: 600; margin-top: 8px; }
@@ -63,10 +64,10 @@
 .hanoi-levels { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
 .hanoi-level {
   min-height: 40px; min-width: 52px; padding: 0 12px; border-radius: 999px;
-  border: 2px solid #E2E8F0; background: #fff; color: #334155;
-  font: 700 0.95rem var(--font-display); cursor: pointer;
+  border: none; background: #fff; color: #334155; box-shadow: var(--clay-raised-sm);
+  font: 700 0.95rem var(--font-display); cursor: pointer; transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease;
 }
-.hanoi-level.on { background: var(--q-color); border-color: var(--q-dark); color: #fff; }
+.hanoi-level.on { background: var(--q-color); color: #fff; box-shadow: var(--clay-tint) color-mix(in srgb, var(--q-dark) 55%, transparent), var(--clay-puff-color); }
 .hanoi-rules { color: #64748B; font-weight: 600; margin: -8px 0 12px; }
 
 .hanoi-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -94,7 +95,7 @@
 .hanoi-base { position: absolute; bottom: 4px; left: 8%; right: 8%; height: 8px; border-radius: 6px; background: #94A3B8; }
 
 .hanoi-stack { position: relative; width: 100%; display: flex; flex-direction: column-reverse; align-items: center; gap: 3px; margin-bottom: 14px; }
-.hanoi-disc { height: 24px; border-radius: 12px; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18); transition: transform 0.12s ease; }
+.hanoi-disc { height: 24px; border-radius: 12px; box-shadow: var(--clay-press-color); transition: transform 0.12s ease; }
 .hanoi-disc.lifted { transform: translateY(-14px); }
 
 .hanoi-status { display: flex; justify-content: space-between; margin: 12px 4px 4px; color: #475569; font-weight: 700; }

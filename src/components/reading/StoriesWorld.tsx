@@ -146,7 +146,7 @@ export const StoriesWorld: React.FC<StoriesWorldProps> = ({ onBack }) => {
                   border: '5px solid #38BDF8',
                   padding: '22px 16px',
                   textAlign: 'center',
-                  boxShadow: '0 6px 0 #BAE6FD, var(--shadow-playful)',
+                  boxShadow: 'var(--clay-raised-sm)',
                 }}
               >
                 <div style={{ fontSize: '4rem', marginBottom: 8 }} aria-hidden>{story.coverEmoji}</div>

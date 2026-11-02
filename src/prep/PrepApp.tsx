@@ -4,6 +4,7 @@ import './ui/tokens.css';
 import './ui/base.css';
 import './ui/components.css';
 import { routes } from './app/router';
+import './ui/clay.css'; // last, so the clay skin wins over each screen's own styles
 
 // Test prep for grade 4 and up, shown by App.tsx instead of the Bodhi games.
 // Loaded on demand, so younger children never download it.

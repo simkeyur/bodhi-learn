@@ -245,7 +245,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                 padding: '12px 28px',
                 fontSize: '1.25rem',
                 borderRadius: 999,
-                boxShadow: '0 6px 0 #7E22CE',
+                boxShadow: 'var(--clay-tint) color-mix(in srgb, #7E22CE 55%, transparent), var(--clay-puff-color)',
               }}
               aria-label="Hear the word to spell"
             >
@@ -310,7 +310,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: placed ? 'pointer' : 'default',
-                    boxShadow: placed ? '0 4px 0 #D8B4FE' : 'none',
+                    boxShadow: placed ? 'var(--clay-raised-sm)' : 'none',
                   }}
                   className={placed ? 'animate-pop' : ''}
                 >
@@ -342,7 +342,7 @@ export const SightWordsWorld: React.FC<SightWordsWorldProps> = ({ onBack }) => {
                   fontFamily: 'var(--font-display)',
                   fontSize: '2.3rem',
                   fontWeight: 700,
-                  boxShadow: l.used ? 'none' : '0 6px 0 #9333EA',
+                  boxShadow: l.used ? 'none' : 'var(--clay-tint) color-mix(in srgb, #9333EA 55%, transparent), var(--clay-puff-color)',
                   cursor: l.used || isCompleted ? 'default' : 'pointer',
                   transform: l.used ? 'scale(0.92)' : 'none',
                   opacity: l.used ? 0.4 : 1,

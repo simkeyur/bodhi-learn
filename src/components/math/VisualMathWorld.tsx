@@ -203,7 +203,7 @@ export const VisualMathWorld: React.FC<VisualMathWorldProps> = ({ onBack }) => {
                   borderRadius: 'var(--radius-md)',
                   background: isRight ? '#DCFCE7' : '#FFFFFF',
                   border: `4px solid ${isRight ? '#16A34A' : '#FB7185'}`,
-                  boxShadow: isWrong ? 'none' : '0 7px 0 #E11D48',
+                  boxShadow: isWrong ? 'none' : 'var(--clay-tint) color-mix(in srgb, #E11D48 55%, transparent), var(--clay-puff-color)',
                   fontFamily: 'var(--font-display)',
                   fontSize: '2.8rem',
                   fontWeight: 700,

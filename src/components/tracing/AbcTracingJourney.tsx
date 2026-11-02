@@ -121,7 +121,7 @@ export const AbcTracingJourney: React.FC<AbcTracingJourneyProps> = ({ onBack, on
                 fontWeight: 700,
                 fontSize: '1.3rem',
                 cursor: 'pointer',
-                boxShadow: isActive ? '0 4px 0 rgba(0,0,0,0.15)' : '0 3px 0 #E2E8F0',
+                boxShadow: isActive ? 'var(--clay-tint) color-mix(in srgb, rgba(0,0,0,0.15) 55%, transparent), var(--clay-puff-color)' : 'var(--clay-raised-sm)',
                 flexShrink: 0,
               }}
             >

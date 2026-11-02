@@ -1,3 +1,5 @@
+@import './styles/clay.css';
+
 :root {
   --font-display: 'Fredoka', cursive, sans-serif;
   --font-body: 'Quicksand', sans-serif;
@@ -21,15 +23,11 @@
   --color-text-main: #1E293B;
   --color-text-muted: #64748B;
 
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 28px;
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 34px;
   --radius-full: 9999px;
 
-  --shadow-playful: 0 8px 0px rgba(0, 0, 0, 0.08), 0 14px 20px -4px rgba(0, 0, 0, 0.06);
-  --shadow-floating: 0 16px 32px -6px rgba(56, 189, 248, 0.25);
-  --shadow-btn: 0 6px 0;
-  --shadow-btn-pressed: 0 2px 0;
 }
 
 * {
@@ -59,7 +57,7 @@ button:focus-visible {
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(180deg, #E0F2FE 0%, #F0FDF4 50%, #FEF3C7 100%);
+  background: linear-gradient(180deg, #DCEBFB 0%, #E9F5EE 50%, #FBF0D4 100%);
   color: var(--color-text-main);
   min-height: 100vh;
   min-height: 100dvh;
@@ -124,8 +122,9 @@ h1, h2, h3, h4, .font-display {
   100% { transform: translateX(calc(100vw + 300px)); }
 }
 
-/* 3D Tactile Kid Buttons */
+/* Clay buttons: puffy, tinted by their own color, and they squash when pressed */
 .kid-btn {
+  --clay-c: #94A3B8;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -134,78 +133,39 @@ h1, h2, h3, h4, .font-display {
   font-weight: 600;
   font-size: 1.2rem;
   border-radius: var(--radius-md);
-  padding: 14px 24px;
-  min-height: 48px;
+  padding: 14px 26px;
+  min-height: 52px;
   border: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.12s ease-in-out;
+  box-shadow: var(--clay-tint) color-mix(in srgb, var(--clay-c) 55%, transparent), var(--clay-puff-color);
+  transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease, filter 0.18s ease;
   touch-action: manipulation;
 }
 
+@media (hover: hover) {
+  .kid-btn:hover:not(:disabled) { filter: brightness(1.04); transform: translateY(-1px); }
+}
+
 .kid-btn:disabled {
-  opacity: 0.45;
+  opacity: 0.5;
   cursor: default;
   transform: none;
+  box-shadow: var(--clay-press-sm);
 }
 
 .kid-btn:active:not(:disabled) {
-  transform: translateY(4px);
+  transform: translateY(2px) scale(0.985);
+  box-shadow: 0 3px 6px -2px color-mix(in srgb, var(--clay-c) 45%, transparent), var(--clay-press-color);
 }
 
-.btn-sky {
-  background: var(--color-sky);
-  color: #FFFFFF;
-  box-shadow: 0 6px 0 var(--color-sky-dark);
-}
-.btn-sky:active {
-  box-shadow: 0 2px 0 var(--color-sky-dark);
-}
-
-.btn-sun {
-  background: var(--color-sun);
-  color: #78350F;
-  box-shadow: 0 6px 0 var(--color-sun-dark);
-}
-.btn-sun:active {
-  box-shadow: 0 2px 0 var(--color-sun-dark);
-}
-
-.btn-grass {
-  background: var(--color-grass);
-  color: #064E3B;
-  box-shadow: 0 6px 0 var(--color-grass-dark);
-}
-.btn-grass:active {
-  box-shadow: 0 2px 0 var(--color-grass-dark);
-}
-
-.btn-coral {
-  background: var(--color-coral);
-  color: #FFFFFF;
-  box-shadow: 0 6px 0 var(--color-coral-dark);
-}
-.btn-coral:active {
-  box-shadow: 0 2px 0 var(--color-coral-dark);
-}
-
-.btn-grape {
-  background: var(--color-grape);
-  color: #FFFFFF;
-  box-shadow: 0 6px 0 var(--color-grape-dark);
-}
-.btn-grape:active {
-  box-shadow: 0 2px 0 var(--color-grape-dark);
-}
-
-.btn-white {
-  background: #FFFFFF;
-  color: var(--color-text-main);
-  box-shadow: 0 6px 0 #CBD5E1;
-}
-.btn-white:active {
-  box-shadow: 0 2px 0 #CBD5E1;
-}
+.btn-sky { background: var(--color-sky); color: #FFFFFF; --clay-c: var(--color-sky-dark); }
+.btn-sun { background: var(--color-sun); color: #78350F; --clay-c: var(--color-sun-dark); }
+.btn-grass { background: var(--color-grass); color: #064E3B; --clay-c: var(--color-grass-dark); }
+.btn-coral { background: var(--color-coral); color: #FFFFFF; --clay-c: var(--color-coral-dark); }
+.btn-grape { background: var(--color-grape); color: #FFFFFF; --clay-c: var(--color-grape-dark); }
+.btn-white { background: #FFFFFF; color: var(--color-text-main); box-shadow: var(--clay-raised-sm); }
+.btn-white:active:not(:disabled) { box-shadow: var(--clay-press); }
 
 /* Playful Animations */
 @keyframes wiggle {
@@ -243,40 +203,40 @@ h1, h2, h3, h4, .font-display {
 .kid-card {
   background: #FFFFFF;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-playful);
-  border: 4px solid #F1F5F9;
+  box-shadow: var(--clay-raised);
+  border: none;
   position: relative;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.2s var(--clay-spring), box-shadow 0.2s ease;
 }
 
 @media (hover: hover) {
   .kid-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 28px -6px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--clay-raised-lg);
   }
 }
 
 /* Audio icon speech button */
 .speaker-bubble {
-  width: 52px;
-  height: 52px;
+  --clay-c: #D97706;
+  width: 56px;
+  height: 56px;
   flex-shrink: 0;
   padding: 0;
   border-radius: 50%;
-  background: #FEF08A;
-  border: 3px solid #F59E0B;
+  background: #FDE68A;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #B45309;
+  color: #92400E;
   cursor: pointer;
-  transition: transform 0.1s ease;
-  box-shadow: 0 4px 0 #D97706;
+  transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease;
+  box-shadow: var(--clay-tint) color-mix(in srgb, var(--clay-c) 50%, transparent), var(--clay-puff-color);
 }
-
 .speaker-bubble:active {
-  transform: scale(0.92) translateY(2px);
-  box-shadow: 0 1px 0 #D97706;
+  transform: scale(0.94) translateY(2px);
+  box-shadow: 0 3px 6px -2px color-mix(in srgb, var(--clay-c) 45%, transparent), var(--clay-press-color);
 }
 
 /* Modal Overlay */
@@ -347,10 +307,10 @@ h1, h2, h3, h4, .font-display {
 .seg {
   display: flex;
   gap: 6px;
-  background: #FFFFFF;
-  padding: 5px;
+  background: #E7EEF8;
+  padding: 6px;
   border-radius: 999px;
-  box-shadow: var(--shadow-playful);
+  box-shadow: var(--clay-sunk);
   min-width: 0;
 }
 

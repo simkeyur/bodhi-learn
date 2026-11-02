@@ -21,9 +21,9 @@ export const ModeSwitch: React.FC<{ compact?: boolean }> = ({ compact }) => {
           display: 'inline-flex', alignItems: 'center', gap: 6, height: 36, padding: compact ? '0 10px' : '0 14px',
           border: 'none', borderRadius: 999, cursor: on ? 'default' : 'pointer',
           background: on ? '#0284C7' : 'transparent', color: on ? '#FFFFFF' : '#475569',
-          boxShadow: on ? '0 2px 0 #0C4A6E' : 'none',
+          boxShadow: on ? '0 6px 10px -4px rgb(2 132 199 / 55%), var(--clay-puff-color)' : 'none',
           font: '600 0.95rem Fredoka, system-ui, sans-serif', whiteSpace: 'nowrap',
-          transition: 'background 120ms ease, color 120ms ease',
+          transition: 'background 160ms ease, color 160ms ease, box-shadow 160ms ease',
         }}
       >
         <Icon size={18} aria-hidden />
@@ -36,7 +36,7 @@ export const ModeSwitch: React.FC<{ compact?: boolean }> = ({ compact }) => {
     <div
       role="group"
       aria-label="Switch between Bodhi Play and Bodhi Prep"
-      style={{ display: 'inline-flex', gap: 2, padding: 3, borderRadius: 999, background: '#F1F5F9', border: '2px solid #E2E8F0', flexShrink: 0 }}
+      style={{ display: 'inline-flex', gap: 2, padding: 3, borderRadius: 999, background: '#E7EEF8', boxShadow: 'var(--clay-sunk)', flexShrink: 0 }}
     >
       {option('play', 'Play', Gamepad2)}
       {option('prep', 'Prep', GraduationCap)}

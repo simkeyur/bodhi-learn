@@ -12,10 +12,10 @@
   width: 100%;
   max-width: 560px;
   text-align: center;
-  background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
-  border: 5px solid #38BDF8;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-floating);
+  background: linear-gradient(145deg, #FFFFFF 0%, #EAF4FE 100%);
+  border: none;
+  border-radius: 40px;
+  box-shadow: var(--clay-raised-lg);
   padding: 22px 22px 20px;
   display: flex;
   flex-direction: column;
@@ -41,16 +41,16 @@
 .welcome-age {
   min-height: 68px;
   border: none;
-  border-radius: 20px;
+  border-radius: 26px;
   background: var(--c);
   color: #fff;
   font: 700 2rem var(--font-display);
   cursor: pointer;
-  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-shadow: var(--clay-tint) color-mix(in srgb, rgba(0, 0, 0, 0.18) 55%, transparent), var(--clay-puff-color);
+  transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease;
 }
 
-.welcome-age:active { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18); }
+.welcome-age:active { transform: translateY(2px) scale(0.97); box-shadow: var(--clay-press-color); }
 /* The usual grade for the chosen age */
 .welcome-age.suggested { outline: 4px solid #0F172A; outline-offset: 3px; }
 
@@ -60,8 +60,10 @@
   width: 100%;
   max-width: 340px;
   min-height: 60px;
-  border-radius: 18px;
-  border: 3px solid #BAE6FD;
+  border-radius: 22px;
+  border: none;
+  background: #EEF4FC;
+  box-shadow: var(--clay-sunk);
   padding: 0 16px;
   text-align: center;
   font: 700 1.6rem var(--font-display);
@@ -69,33 +71,36 @@
   outline: none;
 }
 
-.welcome-input:focus { border-color: #38BDF8; }
+.welcome-input:focus { box-shadow: var(--clay-sunk), 0 0 0 3px #7DD3FC; }
 
 .welcome-primary,
 .welcome-secondary {
   width: 100%;
   max-width: 340px;
-  min-height: 56px;
-  border-radius: 18px;
+  min-height: 58px;
+  border-radius: 22px;
   font: 700 1.2rem var(--font-display);
   cursor: pointer;
+  transition: transform 0.18s var(--clay-spring), box-shadow 0.18s ease;
 }
 
 .welcome-primary {
   border: none;
   background: #0EA5E9;
   color: #fff;
-  box-shadow: 0 5px 0 #0369A1;
+  box-shadow: var(--clay-tint) color-mix(in srgb, #0369A1 55%, transparent), var(--clay-puff-color);
 }
 
-.welcome-primary:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 #0369A1; }
+.welcome-primary:active:not(:disabled) { transform: translateY(2px) scale(0.985); box-shadow: var(--clay-press-color); }
 .welcome-primary:disabled { opacity: 0.7; cursor: default; }
 
 .welcome-secondary {
-  border: 3px solid #CBD5E1;
+  border: none;
   background: #fff;
   color: #334155;
+  box-shadow: var(--clay-raised-sm);
 }
+.welcome-secondary:active:not(:disabled) { transform: translateY(2px) scale(0.985); box-shadow: var(--clay-press); }
 
 .welcome-secondary:disabled { opacity: 0.5; cursor: default; }
 
@@ -112,12 +117,10 @@
   cursor: pointer;
 }
 
-/* Ages 9 and up, after the age question: calmer, closer to Bodhi Prep's look */
+/* Ages 9 and up, after the age question: the same clay, calmer, in Bodhi Prep's type and indigo */
 .welcome-card.plain {
   background: #FFFFFF;
-  border: 1px solid #DCE0EA;
-  box-shadow: 0 4px 16px rgb(22 27 46 / 8%), 0 1px 3px rgb(22 27 46 / 6%);
-  border-radius: 16px;
+  border-radius: 32px;
   padding: 32px 28px 24px;
   gap: 14px;
   font-family: 'Lexend', 'Atkinson Hyperlegible', system-ui, sans-serif;
@@ -125,22 +128,23 @@
 .welcome-card.plain h1 { font-family: inherit; font-size: 1.6rem; letter-spacing: -0.01em; color: #161B2E; }
 .welcome-card.plain .welcome-sub, .welcome-card.plain .welcome-note { font-weight: 400; color: #6A718C; }
 .welcome-card.plain .welcome-age {
-  background: #FFFFFF; color: #161B2E; border: 1.5px solid #B8BED0; box-shadow: none;
-  font: 700 1.5rem 'Lexend', 'Atkinson Hyperlegible', system-ui, sans-serif; min-height: 56px; border-radius: 10px;
+  background: #FFFFFF; color: #161B2E; box-shadow: var(--clay-raised-sm);
+  font: 700 1.5rem 'Lexend', 'Atkinson Hyperlegible', system-ui, sans-serif; min-height: 58px; border-radius: 20px;
 }
-.welcome-card.plain .welcome-age:hover { border-color: #3D55CC; background: #EEF1FD; }
-.welcome-card.plain .welcome-age.suggested { outline: none; border-color: #2F44B5; box-shadow: inset 0 0 0 1px #2F44B5; background: #EEF1FD; }
-.welcome-card.plain .welcome-age:active { transform: translateY(1px); box-shadow: none; }
+.welcome-card.plain .welcome-age:hover { background: #EEF1FD; }
+.welcome-card.plain .welcome-age.suggested { outline: none; background: #E6EBFC; color: #2F44B5; box-shadow: var(--clay-press); }
+.welcome-card.plain .welcome-age:active { transform: translateY(2px) scale(0.97); box-shadow: var(--clay-press); }
 .welcome-card.plain .welcome-primary {
-  background: #2F44B5; box-shadow: none; border-radius: 10px; font-family: inherit; min-height: 52px;
+  background: #4057C9; border-radius: 20px; font-family: inherit; min-height: 54px;
+  box-shadow: 0 12px 20px -8px rgb(47 68 181 / 55%), var(--clay-puff-color);
 }
-.welcome-card.plain .welcome-primary:active:not(:disabled) { transform: translateY(1px); box-shadow: none; }
-.welcome-card.plain .welcome-secondary { border: 1.5px solid #B8BED0; border-radius: 10px; font-family: inherit; box-shadow: none; }
-.welcome-card.plain .welcome-input { border-radius: 10px; font-family: inherit; }
+.welcome-card.plain .welcome-primary:active:not(:disabled) { transform: translateY(2px) scale(0.985); box-shadow: var(--clay-press-color); }
+.welcome-card.plain .welcome-secondary { border-radius: 20px; font-family: inherit; }
+.welcome-card.plain .welcome-input { border-radius: 20px; font-family: inherit; }
 .welcome-card.plain .welcome-ages { grid-template-columns: repeat(6, 1fr); }
 
 @media (max-width: 480px) {
-  .welcome-card { padding: 16px 14px; border-width: 4px; }
+  .welcome-card { padding: 18px 14px; }
   .welcome-card h1 { font-size: 1.6rem; }
   .welcome-ages { grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .welcome-age { min-height: 60px; font-size: 1.7rem; }
