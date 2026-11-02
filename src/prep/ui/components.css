@@ -62,7 +62,7 @@
 .prep .bar-good > span { background: linear-gradient(90deg, #4ADE80, var(--grass-600)); }
 
 /* A bar split into the four mastery states */
-.prep .stack { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: #D5E0EE; box-shadow: var(--clay-press-sm); }
+.prep .stack { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: #E1EBF7; box-shadow: var(--clay-press-sm); }
 .prep .stack > span { height: 100%; }
 .prep .stack .s-learning { background: var(--m-learning); }
 .prep .stack .s-close { background: var(--m-close); }

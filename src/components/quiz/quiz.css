@@ -33,7 +33,8 @@
   background: var(--q-tint);
   color: var(--q-dark);
   font: 700 0.9rem var(--font-body);
-  border: 1.5px solid var(--q-color);
+  border: none;
+  box-shadow: var(--clay-raised-sm);
 }
 
 .quiz-dots {
@@ -46,14 +47,15 @@
 .quiz-dots span {
   width: 100%;
   max-width: 28px;
-  height: 8px;
+  height: 12px;
   border-radius: 999px;
-  background: #E2E8F0;
+  background: #DCE6F3;
+  box-shadow: var(--clay-press-sm);
   transition: background 0.2s ease;
 }
 
-.quiz-dots span.done { background: var(--q-color); }
-.quiz-dots span.now { background: var(--q-color); opacity: 0.45; }
+.quiz-dots span.done { background: var(--q-color); box-shadow: var(--clay-puff-color); }
+.quiz-dots span.now { background: var(--q-color); opacity: 0.55; box-shadow: var(--clay-puff-color); }
 
 .quiz-card {
   background: #fff;
