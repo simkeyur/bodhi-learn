@@ -227,6 +227,8 @@ This is the slow part. Budget about an hour per grade to read, plus fixes.
 
 **Review of grades 1–4 and 6–8 (2026-10-31).** Both branches are combined on `reading-all`. The review fixed standards codes, poems, notes, plays and rendering, and added `tests/prep/reading-quality.test.mjs`. Those tests fail until the passages are simplified and the answer choices rewritten.
 
+**Known issue, grades 5–8:** the right answer is too often the shortest choice (about 60% in grade 5, 90% or more in grades 7–8; about 25% would be chance). The choices need rewriting; the length test in `tests/prep/reading-quality.test.mjs` is skipped for these grades until then.
+
 ## 8. Building a grade's reading (the steps for Gemini)
 
 Copy grade 5's layout exactly. Everything a grade needs:
